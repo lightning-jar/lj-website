@@ -6,6 +6,10 @@ const config = {
 	plugins: [sveltekit()],
 	resolve: {
 		alias: {
+			$a: path.resolve("./src/lib/components/atoms"),
+			$m: path.resolve("./src/lib/components/molecules"),
+			$o: path.resolve("./src/lib/components/organisms"),
+			$s: path.resolve("./src/lib/components/special"),
 			$components: path.resolve("./src/lib/components"),
 			$functions: path.resolve("./src/lib/functions"),
 			$lib: path.resolve("./src/lib"),
