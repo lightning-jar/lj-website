@@ -33,6 +33,7 @@
   // import components
   import WindowUpdater from "$m/WindowStoreUpdater.svelte";
   import GlobalNav from "$components/organisms/GlobalNav.svelte";
+  import MediaPlayer from "$o/MediaPlayer.svelte";
 
 
   //import GlobalFooter from "$components/GlobalFooter.svelte";
@@ -57,6 +58,8 @@
 <template lang="pug">
 
   WindowUpdater
+  MediaPlayer
+
 
   GlobalNav(
     bind:globalNav!="{globalNavEl}"

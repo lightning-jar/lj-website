@@ -20,8 +20,12 @@ module.exports = {
       }
     },
   },
+  corePlugins: {
+    aspectRatio:false,
+  },
   plugins: [
     require('@tailwindcss/forms'),
-    require('@tailwindcss/typography')
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio')
   ],
 }

@@ -1,11 +1,30 @@
 <script lang='ts'>
 
+  // stores
+  import { mediaPlayer, youTubeCode } from "$lib/stores/mediaPlayerStore";
+
+  // functions
+  function launchPlayer(e) {
+    $youTubeCode = youTube;
+    $mediaPlayer = true;
+
+  }
+
+  export let youTube = '2a45UBCIbJc';
+
 </script>
 
 <template lang='pug'>
 
+
+
   .relative.w-full
 
+    //- button
+    .absolute.inset-0.flex.justify-center.items-center
+      button.bg-titaniumYellow.px-4.py-2(on:click|stopPropagation!="{launchPlayer}") Watch Me
+
+    //- thumbnail
     picture
       source(
         type="image/avif"
