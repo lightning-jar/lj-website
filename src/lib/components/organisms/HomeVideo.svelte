@@ -13,12 +13,14 @@
 
 <template lang='pug'>
 
-SectionLight
+SectionLight(classes!="{'-translate-y-24 !pt-0 -mt-4'}")
 
   //- video player
-  .relative.z-20.flex.justify-center
+  .relative.z-20.flex.justify-center.text-white.translate-y-24
     div(class="lg:max-w-[70vw]")
       VideoEmbed("{youTube}")
+      div.italic.mt-3 What we're watching this week:
+      div.italic "100 Years of Bauhuas | Walter Gropius - BBC Documentary"
 
 
   //- transition shape

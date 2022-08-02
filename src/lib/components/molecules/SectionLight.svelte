@@ -4,7 +4,7 @@
   import { pageXPadding } from "$lib/settings/paddingSettings";
 
   // props
-  export let classes = "bg-transparent";
+  export let classes = "";
 
 </script>
 

@@ -1,0 +1,16 @@
+<script lang='ts'>
+
+</script>
+
+<template lang='pug'>
+svg(
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 8 11"
+  class="w-full h-auto"
+  )
+  path(
+    fill="currentColor"
+    d="M0 9.63V1.19C0 .683.567.38.988.664l6.455 4.334A.634.634 0 017.43 6.06L.975 10.166A.635.635 0 010 9.631z"
+    )
+</template>

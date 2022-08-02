@@ -8,7 +8,6 @@
     'font-serif',
     'font-bold',
     'mb-4',
-    'text-darkCornflowerBlue',
   ]
 
   const attributes = {

@@ -1,24 +1,16 @@
 <script lang='ts'>
 
-  // stores
-  import { mediaPlayer, youTubeCode } from "$lib/stores/mediaPlayerStore";
-
   // components
   import PictureStack from "$a/PictureStack.svelte";
+  import ButtonVideo from "$a/ButtonVideo.svelte";
 
   // settings
   import { imagesFolder } from "$settings/mediaSettings";
 
-  // functions
-  function launchPlayer() {
-    $youTubeCode = youTube;
-    $mediaPlayer = true;
-  }
-
+  // props
   export let youTube = '';
 
-
-
+  // variables
   const videoThumbnail = {
     alt:"Bauhaus Documentary - Thumbnail",
     breakpoints: [
@@ -41,20 +33,12 @@
 </script>
 
 <template lang='pug'>
-
-
-
   .relative.w-full
 
-    //- video play button
+    //- button
     .absolute.inset-0.flex.justify-center.items-center
-      button.bg-titaniumYellow.px-5.py-2(
-        on:click|stopPropagation!="{launchPlayer}"
-        ) Watch Me
+      ButtonVideo("{youTube}") Watch Me
 
     //- video thumbnail
-    PictureStack(
-      "{...videoThumbnail}"
-    )
-
+    PictureStack("{ ...videoThumbnail }")
 </template>

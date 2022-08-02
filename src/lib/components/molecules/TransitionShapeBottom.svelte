@@ -1,5 +1,5 @@
 <template lang='pug'>
-.absolute.bottom-0.left-0.right-0.w-full.first-letter(class="h-[12vw] ")
+.absolute.left-0.right-0.w-full.first-letter(class="h-[12vw] -bottom-[1px]")
   svg(
     viewBox="0 0 500 500"
     preserveAspectRatio="none"
