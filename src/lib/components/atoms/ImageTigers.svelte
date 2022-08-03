@@ -1,31 +1,25 @@
+<script lang="ts">
+
+  // components
+  import PictureStack from "$a/PictureStack.svelte"
+
+  const image = {
+    alt:"two tigers circle each other",
+    breakpoints: [
+      // unique slug, [rule 1], [rule 2]
+      ['-348', ['max-width', '420.99px']],
+      ['-493', ['min-width', '578px']]
+    ],
+    classes:"block rounded-lg",
+    folder: "images",
+    height:"966",
+    width:"912",
+    fallback: "lj-tigers-opaque-493.jpg",
+    slugCommon: "lj-tigers-transparent",
+  }
+
+</script>
+
 <template lang='pug'>
-picture
-  source(
-    type="image/avif"
-    srcset="images/lj-tigers-transparent-348.avif"
-    media="(max-width: 420px)"
-    )
-  source(
-    type="image/webp"
-    srcset="images/lj-tigers-transparent-348.webp"
-    media="(max-width: 420px)"
-    )
-  source(
-    type="image/avif"
-    srcset="images/lj-tigers-transparent-493.avif"
-    media="(min-width: 578px)"
-    )
-  source(
-    type="image/webp"
-    srcset="images/lj-tigers-transparent-493.webp"
-    media="(max-width: 578px)"
-    )
-  img.w-full.h-auto.select-none(
-    height="966"
-    width="912"
-    title="I'm going to bite your tail. No, I'm going to bite YOUR tail."
-    draggable="false"
-    alt="two tigers"
-    src="images/lj-tigers-opaque-493.jpg"
-    )
+PictureStack("{...image}")
 </template>

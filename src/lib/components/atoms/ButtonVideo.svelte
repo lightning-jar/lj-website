@@ -4,7 +4,7 @@
   import { mediaPlayer, youTubeCode } from "$lib/stores/mediaPlayerStore";
 
   // components
-  import IconTriangleRight from "./iconTriangleRight.svelte";
+  import IconTriangleRight from "./IconTriangleRight.svelte";
 
   // props
   export let youTube = '';

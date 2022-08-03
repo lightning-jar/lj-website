@@ -36,11 +36,13 @@
   }
   function media(breakpoint: (string | string[])[] ) {
     let media: string = '';
+    const hasContent: boolean = (breakpoint.length > 0);
+    const hasRules:boolean = (breakpoint[1] && breakpoint[1][0]);
 
     // add 'only screen' if true
-    media += (onlyScreen) ? 'only screen and ' : '';
+    media += (onlyScreen && hasContent && hasRules) ? 'only screen and ' : '';
 
-    // rules
+    // iterate media rules
     breakpoint.forEach(datum => {
       const index = breakpoint.indexOf(datum);
 
@@ -50,11 +52,13 @@
         if (index > 1) media += ' and ';
 
         // all rules
-        media += `(${breakpoint[index][0]}: ${breakpoint[index][1]})`
+        if (breakpoint[index][0]) {
+          media += `(${breakpoint[index][0]}: ${breakpoint[index][1]})`
+        }
       }
     })
 
-    return media;
+    return (media) ? media : null;
 
   }
 
@@ -63,6 +67,7 @@
     alt: alt,
     classes: classes,
     filename: fallback,
+    folder: folder,
     height: height,
     width: width,
     style: style

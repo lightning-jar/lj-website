@@ -1,5 +1,4 @@
 <script lang="ts">
-  import LogoLight from "$a/LogoLight.svelte";
   import LogoDark from "$a/LogoDark.svelte";
 </script>
 
@@ -12,8 +11,7 @@
     draggable="false"
     )
     span.sr-only Lightning Jar
-    .absolute.w-full.h-full
+    .w-full.h-full
       LogoDark
-    .relative.opacity-0
-      LogoLight
+
 </template>

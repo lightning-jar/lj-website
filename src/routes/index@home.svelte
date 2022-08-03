@@ -38,6 +38,7 @@
   import HeadMeta from '$m/HeadMetadata.svelte';
   import HomeVideo from '$o/HomeVideo.svelte';
   import HomeServices from '$o/HomeServices.svelte';
+  import HomeTestimonials from "$o/HomeTestimonials.svelte";
 
   //import GlobalNav from '$components/GlobalNav.svelte';
   //import HomeOverview from '$components/HomeOverview.svelte';
@@ -104,8 +105,8 @@
   div
     HomeVideo
 
-  div.text-white
-    HomeServices
+  HomeServices
+  HomeTestimonials
 
   HeadMeta("{metaKeywords}" "{metaSection}" "{metaDescription}")
   //HomeOverview("{overviewContent}" "{terminalsData}" "{clustersData}")

@@ -1,0 +1,20 @@
+{
+  "name": "\u26a1\ufe0f Jar",
+  "short_name": "\u26a1\ufe0f Jar",
+  "icons": [
+      {
+          "src": "lj-android-chrome-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+      },
+      {
+          "src": "lj-android-chrome-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+      }
+  ],
+  "theme_color": "#ebf92f",
+  "background_color": "#ebf92f",
+  "start_url": "https://lightningjar.com",
+  "display": "standalone"
+}

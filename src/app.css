@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .underline-heading {
+    @apply underline underline-offset-4 decoration-maximumYellow/40 decoration-8
+  }
+}
