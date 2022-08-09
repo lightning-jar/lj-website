@@ -57,6 +57,6 @@ div.text-center(class="md:max-w-3xl xl:max-w-4xl")
     h4 {name}
     // Position
     p.text-sm
-      | {title},
-      a.text-body-light(href!="{companyUrl}") {companyName}
+      | {title},&nbsp;
+      a.text-body-light(href!="{companyUrl}") {@html companyName}
 </template>

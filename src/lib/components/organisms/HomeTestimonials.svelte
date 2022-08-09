@@ -25,6 +25,42 @@
       title: "Sr. Manager Marketing & Content",
       companyName: "Beam Suntory",
       companyUrl: "https://www.beamsuntory.com/"
+    },
+    {
+      category: "Sales Tools, PIM, Ecommerce, Mobile Apps",
+      quote: 'Their technology team was my <span class="underline-heading">secret weapon</span> ...they helped me execute big ideas.',
+      imageSlug: "frank-r-testimonial",
+      name: "Frank Roth",
+      title: "Former CMO",
+      companyName: "United Rentals / BlueLine",
+      companyUrl: "https://unitedrentals.com/"
+    },
+    {
+      category: "Marketing Strategy & Brand Strategy",
+      quote: 'LJ helped us <span class="underline-heading">focus and clarify</span> our brand vision during exponential growth.',
+      imageSlug: "elizabeth-g-testimonial",
+      name: "Elizabeth Grojean",
+      title: "CEO & Founder",
+      companyName: "Baloo Living",
+      companyUrl: "https://balooliving.com/"
+    },
+    {
+      category: "SAAS / Remote Solutions",
+      quote: 'They helped us <span class="underline-heading">speed to launch</span> with our flagship remote SaaS soluton.',
+      imageSlug: "duane-v-testimonial",
+      name: "Dr. Duane Varan",
+      title: "CEO & Founder",
+      companyName: "Media Science / Hark",
+      companyUrl: "https://harkconnect.com/"
+    },
+    {
+      category: "In-Store Experience / Kiosks / Tablet Apps",
+      quote: 'Our in-store app project was foundering... until LJ <span class="underline-heading">saved the day</span>.',
+      imageSlug: "mubashir-m-testimonial",
+      name: "Mubashir Memon",
+      title: "Senior Product Manager",
+      companyName: "Northgate Markets / Prospera",
+      companyUrl: "https://prospera.northgatemarket.com/"
     }
   ]
 

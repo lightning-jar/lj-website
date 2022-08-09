@@ -8,7 +8,7 @@
 
   // attributes
   const button = {
-    class: `absolute bg-maximumYellow h-16 w-16 justify-center items-center inset-y-1/2 -translate-y-8 ${direction}-0 hidden md:flex`,
+    class: `absolute bg-maximumYellow h-16 w-16 justify-center items-center inset-y-1/2 -translate-y-8 ${direction}-0 hidden md:flex transition-colors hover:bg-opacity-40 text-oxfordBlue hover:text-maximumYellow`,
   }
 
 </script>

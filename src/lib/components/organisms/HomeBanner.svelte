@@ -14,7 +14,7 @@
     staticBegin: 'The world is <br>getting more',
     staticEnd: 'digital.'
   }
-  const bannerText = 'Since 2002, Lightning Jar digital has been helping businesses thrive in a world that is more digital & mobile every day.'
+  const bannerText = 'Since 2004, Lightning Jar digital has been helping businesses thrive in a world that is more digital & mobile every day.'
 
 </script>
 

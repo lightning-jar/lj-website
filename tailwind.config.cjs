@@ -4,7 +4,8 @@ module.exports = {
   safelist: [
     'left-0',
     'right-0',
-    'rotate-180'
+    'rotate-180',
+    'bg-maximumYellow'
   ],
   theme: {
     fontFamily: {

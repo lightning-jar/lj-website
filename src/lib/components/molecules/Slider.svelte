@@ -1,5 +1,10 @@
 <script lang='ts'>
 
+  //- svelte
+  import { fade } from "svelte/transition";
+
+  //- stores
+
   //- components
   import SliderButton from "$m/SliderButton.svelte";
 
@@ -20,6 +25,14 @@
     else currentPanel = panels.length - 1;
   }
 
+  function jumpTo(panelIndex: number) {
+    //currentPanel = panelIndex
+    console.log(panelIndex)
+    console.log('clicked')
+  }
+
+  let i: number;
+
 </script>
 
 <template lang='pug'>
@@ -28,16 +41,30 @@
 
   //- content container
   .flex.justify-center.items-center.w-100.px-4(class="md:px-24")
-    .relative.w-full.flex.justify-center.items-center &nbsp;
+    .relative.w-full.flex.justify-center.items-center.select-none &nbsp;
       +each('panels as panel, index')
-        div(class!="{(currentPanel == index) ? '' : 'hidden'}")
-          slot( name="panel" "{panel}")
+        +if('currentPanel == index')
+          div(
+            draggable="true"
+            in:fade!="{{delay:100, duration:500}}"
+            on:dragstart!="{()=> {currentPanel = (currentPanel < panels.length - 1) ? currentPanel + 1 : 0}}"
+            )
+            slot(name="panel" "{panel}")
 
   //- buttons
   div(on:click="{previous}")
     SliderButton(direction!="{'left'}")
   div(on:click="{next}")
     SliderButton(direction!="{'right'}")
+
+  //- counter
+  .justify-center.flex(class="sm:hidden")
+    +each('panels as panel, i')
+      button.px-1.mt-16(
+        on:mousedown!="{()=> {currentPanel = i}}"
+        class="cursor-pointer"
+        )
+        .rounded-full.h-2.w-2.pointer-events-none(class!="{(currentPanel == i) ? 'bg-maximumYellow' : 'bg-white'}")
 
 
 

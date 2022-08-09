@@ -16,11 +16,11 @@
   .w-12(class="mr-6 flex-none")
     IconServices("{slug}")
   div
-    h3.text-2xl.mb-3.font-serif
+    h3.text-2xl.mb-3.font-serif.font-semibold
       | {@html heading}
       span
         slot(name="heading")
-    p.prose-lg.text-white.mb-8
+    p.prose-lg.mb-8(class="text-white/90")
       | {@html text}
       span
         slot(name="text")
