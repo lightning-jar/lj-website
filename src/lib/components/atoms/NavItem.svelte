@@ -15,7 +15,7 @@ const slug = navItem.slug;
 
 </script>
 <template lang="pug">
-a.font-serif.block.text-white.text-opacity-95.ml-10.group.transition-all(
+a.font-serif.block.text-white.text-opacity-95.ml-10.group.transition-colors(
   class="lg:text-lg xl:text-xl hover:text-opacity-100 hover:text-maximumYellow !outline-none"
   href="/{slug}"
   )

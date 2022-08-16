@@ -13,7 +13,7 @@
 
 <template lang="pug">
   nav#mainNav.hidden(
-    class="md:flex md:pt-[.35rem] min-h-[3.75rem] items-center xl:text-sub xl:min-h-[3.5rem]"
+    class="lg:flex md:pt-[.35rem] min-h-[3.75rem] items-center xl:text-sub xl:min-h-[3.5rem]"
     class!="{(section == 'home') ? 'navbar-bg-home' : ''}"
     bind:this!="{mainNav}"
     )

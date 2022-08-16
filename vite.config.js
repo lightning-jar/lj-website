@@ -12,7 +12,7 @@ const config = {
 			$s: path.resolve("./src/lib/components/special"),
 			$components: path.resolve("./src/lib/components"),
 			$functions: path.resolve("./src/lib/functions"),
-			$lib: path.resolve("./src/lib"),
+			//$lib: path.resolve("./src/lib"),
 			$settings: path.resolve("./src/lib/settings"),
 			$stores: path.resolve("./src/lib/stores"),
 			$types: path.resolve("./src/lib/types"),

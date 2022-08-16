@@ -13,7 +13,7 @@
 
 <template lang='pug'>
 
-SectionLight(classes!="{'-translate-y-24 !pt-0 -mt-4'}")
+SectionLight(classes!="{'-translate-y-24 !pt-0 -mt-4 -z-10'}")
 
   //- video player
   .relative.z-20.flex.justify-center.text-white.translate-y-24

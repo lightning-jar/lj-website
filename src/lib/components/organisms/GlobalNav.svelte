@@ -86,7 +86,7 @@ function hamburgerClick(e:MouseEvent) {
 <template lang="pug">
 
 //- !!! fix nav background
-header#gobalNav.relative.z-50.py-4(
+header.relative.z-50.py-5(
   bind:this!="{globalNav}"
   )
 

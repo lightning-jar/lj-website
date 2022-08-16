@@ -67,7 +67,7 @@
 </script>
 
 <template lang="pug">
-SectionFullBleed
+SectionFullBleed(id!="{'testimonials'}")
 
   //- horizontal rule
   .flex.w-100.justify-center
@@ -89,8 +89,4 @@ SectionFullBleed
 
 
 
-  //- single testimonial: test
-  //-.flex.w-100.justify-center.items-center.pb-96
-   // +each("testimonials as testimonial")
-      //Testimonial("{...testimonial}")
 </template>

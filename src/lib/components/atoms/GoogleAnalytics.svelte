@@ -8,7 +8,7 @@
   $: { analytics = (process.env.NODE_ENV != "development") }
 
 
-  // UA-62594120-1
+  // UA-60455091-1
 
 
 </script>
@@ -21,5 +21,5 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments) }
         gtag("js", new Date());
-        gtag("config", "UA-62594120-1");
+        gtag("config", "UA-60455091-1");
 </template>

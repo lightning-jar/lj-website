@@ -1,1 +1,1 @@
-export const googleAnalyticsId = 'UA-62594120-1';
+export const googleAnalyticsId = 'UA-60455091-1';

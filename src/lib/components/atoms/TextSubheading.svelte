@@ -5,10 +5,12 @@
 
   const defaultClasses = [
     'text-xl',
+    'lg: text-xl',
     'font-sans',
     'font-semibold',
     'mb-4',
     'text-darkCornflowerBlue',
+    'italic'
   ]
 
   const attributes = {

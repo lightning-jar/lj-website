@@ -1,5 +1,9 @@
 <script lang="ts">
 
+  // props
+  export let loading: string | null = 'lazy';
+  export let preload: string[] = [];
+
   // components
   import PictureStack from "$a/PictureStack.svelte";
 
@@ -11,8 +15,10 @@
     fallback: "lightning-jar-logo.png",
     folder: "images",
     height:"64",
+    loading: loading,
     slugCommon: "lightning-jar-logo",
     sourceFormats: ['svg', 'webp'],
+    preload: preload,
     width:"432",
   }
 

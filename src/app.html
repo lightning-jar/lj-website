@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html lang="en"  class="scroll-smooth">
+<html lang="en" class="scroll-smooth 2xl:text-[.96vw]">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="%sveltekit.assets%/lj-favicon.svg" as="image" type="image/svg+xml" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/lj-favicon.png">
-		<link rel="apple-touch-icon" sizes="180x180" href="/lj-apple-touch-icon.png">
-		<link rel="manifest" href="/site.webmanifest">
-		<link rel="mask-icon" href="/lj-safari-pinned-tab.svg" color="#142239">
-		<meta name="msapplication-TileColor" content="#2b5797">
-		<meta name="theme-color" content="#ebf92f">
-
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="favicon.ico" sizes="any">
+		<link rel="icon" href="/icon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		<link rel="manifest" href="/site.webmanifest">
 		%sveltekit.head%
+
 	</head>
-	<body class="bg-oxfordBlue">
-		<div>%sveltekit.body%</div>
+	<body class="flex justify-center  bg-oxfordBlue">
+		<div class="relative">%sveltekit.body%</div>
 	</body>
 </html>

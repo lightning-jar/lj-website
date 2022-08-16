@@ -7,9 +7,10 @@
   export let filename = '';
   export let folder = 'images'
   export let height: string | null = null;
-  export let loading = 'lazy';
+  export let loading: string | null = 'lazy';
   export let width: string | null = null;
   export let style: string | null = null;
+  export let title: string | null = null;
 
   const attributes = {
     alt: alt,
@@ -19,8 +20,12 @@
     loading: loading,
     width: width,
     src: `${folder}/${filename}`,
-    style: style
+    style: style,
+    title: title
   }
+
+
+
 
 </script>
 

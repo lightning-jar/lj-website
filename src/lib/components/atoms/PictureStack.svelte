@@ -11,15 +11,19 @@
 
   // props
   export let alt: string = '';
-  export let breakpoints: (string | string[])[] = [];
+  export let breakpoints: (string | string[])[] = [['']];
   export let classes: string = '';
+  export let draggable = false;
   export let fallback: string = '';
   export let folder: string = 'images';
   export let height: string | null = null;
+  export let loading: string | null = 'lazy';
   export let onlyScreen: boolean = true;
+  export let preload: string[] = [];
   export let sourceFormats: string[] = ['avif', 'webp'];
   export let slugCommon: string = '';
   export let style: string | null = null;
+  export let title: string | null = null;
   export let width: string | null = null;
 
 
@@ -66,11 +70,14 @@
   const fallbackImage = {
     alt: alt,
     classes: classes,
+    draggable: draggable,
     filename: fallback,
     folder: folder,
     height: height,
+    loading: loading,
     width: width,
-    style: style
+    style: style,
+    title: title
   }
 
 
@@ -81,9 +88,10 @@ picture
   +each('breakpoints as breakpoint')
     +each('sourceFormats as format')
       PictureStackSource(
-        media="{media(breakpoint)}"
-        srcset="{srcset(breakpoint, format)}"
-        type="{type(format)}"
+        media!="{media(breakpoint)}"
+        "{preload}"
+        srcset!="{srcset(breakpoint, format)}"
+        type!="{type(format)}"
         )
   PictureStackFallback("{...fallbackImage}")
 </template>

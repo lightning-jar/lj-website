@@ -8,6 +8,7 @@
     'text-4xl',
     'md:text-5xl',
     'xl:text-6xl',
+    '2x:text-8xl',
     'font-serif',
     'font-bold',
     'mb-4',
