@@ -1,15 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{html,pug,js,svelte,ts}'],
-  safelist: [
-    'left-0',
-    'right-0',
-    'rotate-180',
-    'bg-maximumYellow',
-    'opacity-100',
-  ],
   theme: {
-
     extend: {
       colors: {
         oxfordBlue: 'hsl(217, 48%, 15%)',
@@ -29,19 +21,53 @@ module.exports = {
         cultured: 'hsl(220, 20%, 97%)',
         offWhite: 'hsl(240, 33%, 99%)'
       },
-      fontFamily: {
-        'sans': ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
-        'serif': ['New York Medium', '-apple-system-ui-serif', 'ui-serif', 'DM Serif Display', 'serif']
-      },
+      fontSize: {
+        6: "6px",
+				7: "7px",
+				8: "8px",
+				9: "9px",
+				10: "10px",
+				11: "11px",
+				12: "12px",
+				13: "13px",
+				14: "14px",
+				15: "15px",
+				16: "16px",
+				17: "17px",
+				18: "18px",
+				19: "19px",
+				20: "20px",
+				21: "21px",
+				22: "22px",
+				23: "23px",
+				24: "24px",
+				25: "25px",
+				26: "26px",
+				27: "27px",
+				28: "28px",
+				29: "29px",
+				30: "30px",
+				31: "31px",
+				32: "32px",
+				33: "33px",
+				34: "34px",
+				35: "35px",
+				36: "36px",
+				37: "37px",
+				38: "38px",
+				39: "39px",
+				40: "40px",
+				41: "41px",
+				42: "42px",
+				43: "43px",
+				44: "44px",
+				45: "45px",
+				46: "46px",
+				47: "47px",
+				48: "48px",
+				49: "49px",
+				50: "50px",
+      }
     },
   },
-  corePlugins: {
-    aspectRatio:false,
-  },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/line-clamp')
-  ],
 }
