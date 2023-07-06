@@ -1,34 +1,7 @@
-<script context="module">
 
-
-  /*
-  // graphQl
-  import { GraphQLClient, gql} from 'graphql-request';
-
-  // settings
-  import { graphCMSEndpoint } from '$settings/apiSettings';
-  import { terminalsQuery, clustersQuery, homeQuery } from '$settings/querySettings';
-
-  export async function load() {
-    const graphcms = new GraphQLClient(graphCMSEndpoint, { headers: {} });
-    const homePageData = await graphcms.request(homeQuery);
-    const terminalsData = await graphcms.request(terminalsQuery);
-    const clustersData = await graphcms.request(clustersQuery);
-
-    return {
-      props: {
-        homePageData,
-        terminalsData,
-        clustersData,
-      }
-    }
-  } */
-</script>
 
 <script lang="ts">
 
-  // Svelte & Plugins
-  //import { fade } from "svelte/transition";
 
   // stores
   import { page } from "$app/stores";
@@ -43,6 +16,10 @@
   import HomeServices from '$o/HomeServices.svelte';
   import HomeTestimonials from "$o/HomeTestimonials.svelte";
   import HomeContact from "$o/HomeContact.svelte";
+  import MediaPlayer from "$o/MediaPlayer.svelte";
+  import OpenGraph from "$a/OpenGraph.svelte";
+  import StructuredData from "$a/StructuredData.svelte";
+  import WindowUpdater from "$m/WindowStoreUpdater.svelte";
 
   // variables for head
   const headAttributes = {
@@ -60,10 +37,30 @@
   additionalLinkTags: []
   }
 
+  // content for open graph
+  const og = {
+    type:'website',
+    url: 'https://lightningjar.com',
+    title: 'Lightning Jar',
+    description: 'Lightning Jar is a technology studio & digital agency helping businesses thrive in a world that is more digital &amp; mobile every day',
+    images: [
+      {
+        src: 'https://lightningjar.com/images/lightning-jar-og.jpg',
+        alt: 'Lightning Jar Logo',
+        width: '800',
+        height: '600',
+      }
+    ]
+  }
+
 
 </script>
 
 <template lang="pug">
+  WindowUpdater
+  OpenGraph("{...og}")
+  StructuredData
+  MediaPlayer
 
   HomeBanner
   HomeOverview
@@ -74,6 +71,7 @@
   HomeContact
 
   HeadMeta("{...headAttributes}")
+
   //HomeOverview("{overviewContent}" "{terminalsData}" "{clustersData}")
   //HomeAboutTiles("{tilesData}")
 

@@ -10,7 +10,7 @@
 </script>
 
 <template lang='pug'>
-section.pt-4.text-white.relative(
+section.text-white.relative(
   class!="{pageXPadding + ' ' + classes }"
   "{id}"
   )

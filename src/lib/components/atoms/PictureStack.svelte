@@ -36,7 +36,7 @@
     return type
   }
   function srcset(breakpoint: (string | string[])[], format:string) {
-    return `${folder}/${slugCommon}${breakpoint[0]}.${format}`;
+    return `/${folder}/${slugCommon}${breakpoint[0]}.${format}`;
   }
   function media(breakpoint: (string | string[])[] ) {
     let media: string = '';

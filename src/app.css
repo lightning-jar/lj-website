@@ -4,6 +4,6 @@
 
 @layer utilities {
   .underline-heading {
-    @apply underline underline-offset-4 decoration-maximumYellow/40 decoration-8
+    @apply underline underline-offset-4 decoration-maximumYellow/40 decoration-4 sm:decoration-[6px] md:decoration-8
   }
 }

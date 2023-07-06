@@ -93,7 +93,10 @@ header.relative.z-50.py-5(
   //- Desktop
   .mx-auto(class!="{pageXPadding}")
     .flex.justify-between.items-center.text-white(class="md:space-x-10 min-h-[3.75rem] xl:min-h-[3.5rem]")
-      NavLogoBlock
+      div
+        div.mb-2
+          NavLogoBlock
+        div.italic.text-sm A digital design, build, & brand studio.
 
       HamburgerButton(
         "{mobileMenuOpen}"

@@ -4,38 +4,71 @@
   import TextHeading from "$a/TextHeading.svelte";
   import SectionDark from "$m/SectionDark.svelte";
   import TileCustomer from "$m/TileCustomer.svelte";
+  import Slider from "$m/Slider.svelte";
 
   const customers = [
     {
-      imageAlt: 'Old Fashioned cocktail',
-      imageSlug: 'beam-alt',
-      logoAlt: 'Beam Suntory logo',
-      logoSlug: 'beam-logo',
-      text: 'Beam Suntory found a single source of truth for marketing data with Pimcore.',
-      url: 'https://pimcore.com/en/customers/suntory-group_c132768'
+      category: 'Customer Story',
+      color: '#56CAD9',
+      customer: 'SecureLogix',
+      imageAlt: 'Doctor on phone',
+      imageSlug: 'securelogix',
+      logoAlt: 'SecureLogix logo',
+      logoSlug: 'securelogix-logo',
+      tags: ['website','knowledgebase', 'partnerportal', 'brandstrategy', 'productnaming',  'videos', 'saasui'],
+      text: 'Anim esse mollit commodo non sunt excepteur adipisicing esse proident quis qui eiusmod veniam nostrud eiusmod culpa nostrud irure proident minim non est culpa reprehenderit id excepteur adipisicing enim.',
+      url: 'https://petroskills.com'
       },
     {
+      category: 'Customer Story',
+      color: '#EBC500',
+      customer: 'PetroSkills',
+      imageAlt: 'Hardhat',
+      imageSlug: 'petroskills',
+      logoAlt: 'Petroskills logo',
+      logoSlug: 'petroskills-logo',
+      tags: ['Pimcore', 'PIM', 'eCommerce', 'Pardot'],
+      text: 'Petroskills is the global leader for remote, on-demand, and on-site training for energy industry workers. We helped Petroskills architect, design and deploy a custom WCM, PIM, and eCommerce solution powered by Pimcore.',
+      url: 'https://petroskills.com'
+      },
+    {
+      category: 'Customer Story',
+      color: '#53C1D8',
+      customer: 'Beam Suntory',
+      imageAlt: 'Old Fashioned cocktail',
+      imageSlug: 'beam',
+      logoAlt: 'Beam Suntory logo',
+      logoSlug: 'beam-logo',
+      tags: ['Pimcore', 'PIM', 'MDM', 'Web-to-Print'],
+      text: 'Beam Suntory found a single source of truth for marketing data with Pimcore. Do nisi laborum cillum magna officia ullamco excepteur ullamco labore ad culpa dolor cupidatat exercitation amet duis consequat consectetur ea pariatur. ',
+      url: 'https://pimcore.com/en/customers/suntory-group_c132768'
+      },
+    /*{
       imageAlt: 'Construction superintendent',
       imageSlug: 'blueline-tile',
       logoAlt: 'Blueline Rental Logo',
       logoSlug: 'blueline-logo',
       text: 'Blueline Rental transforms customer experience and product data management with the power of Pimcore.',
       url: 'https://pimcore.com/en/customers/united-rentals-inc_c7709'
-      },
+      },*/
     {
+      category: 'Customer Story',
+      color: '#E6E0F3',
       imageAlt: 'Woman wrapped in weighted blanket',
-      imageSlug: 'baloo-blankets',
+      imageSlug: 'baloo',
       logoAlt: 'Baloo Living Logo',
       logoSlug: 'baloo-logo',
-      text: 'We helped Baloo Living founder Elizabeth Grojean find her brand voice and refine her brand strategy.',
+      tags: ['Brand Strategy', 'Identity'],
+      text: 'We helped Baloo Living founder Elizabeth Grojean find her brand voice and refine her brand strategy. Do nisi laborum cillum magna officia ullamco excepteur ullamco labore ad culpa dolor cupidatat exercitation.',
       url: 'https://www.thestartupstory.co/episodes/elizabeth-grojean-founder-of-baloo-living'
       },
     {
+      category: 'Customer Story',
       imageAlt: 'Couple working on home improvement project',
-      imageSlug: 'build-direct-tile',
+      imageSlug: 'builddirect',
       logoAlt: 'Build Direct logo',
-      logoSlug: 'build-direct-logo',
-      text: 'BuildDirect automates product data and creates a supplier-side portal for manufacturers.',
+      logoSlug: 'builddirect-logo',
+      text: 'BuildDirect automates product data and creates a supplier-side portal for manufacturers. Do nisi laborum cillum magna officia ullamco excepteur ullamco labore ad culpa dolor cupidatat exercitation amet duis consequat consectetur ea pariatur.',
       url: 'https://pimcore.com/en/customers/builddirect_c666'
       }
     ]
@@ -63,23 +96,30 @@
 
 SectionDark(
   id!="{'clients'}"
-  classes!="{'py-24'}"
+  classes!="{'py-24 bg-gradient-to-b from-oxfordDark via-oxford to-oxfordDark border-t border-t-titaniumYellow '}"
   )
 
   //- heading
-  .text-center.mt-20.mb-20.grid-cols-5.gap-8(class="md:grid md:text-left lg:grid-cols-9")
+  .text-center.mt-20.mb-20.grid-cols-5.gap-8(class="hidden md:grid md:text-left lg:grid-cols-9")
     .col-span-2.mb-4(class="md:mb-0 lg:col-span-4")
-      TextHeading(classes!="{'mb-0'}") Every client has unique challenges to solve.
+      TextHeading(classes!="{'mb-0 inline'}") Every client has unique challenges to solve
+      span.inline-block.ml-8 ( that's our jam )
     .col-span-3.flex(class="lg:col-span-5 items-end")
-      p.prose-lg Doing what we do, we get to meet a lot of different people from very different industries. Each day we get to learn something new, think about something we've never considered before. There's true pleasure for us in confronting and solving novel problems.
+      p.prose-lg.hidden Doing what we do, we get to meet a lot of different people from very different industries. Each day we get to learn something new, think about something we've never considered before. There's true pleasure for us in confronting and solving novel problems.
 
   //- tiles grid
-  .gap-8.grid-cols-2.mb-20(class="sm:grid md:grid-cols-3 lg:grid-cols-4")
+  .gap-8.grid-cols-2.mb-20(class="hidden sm:grid md:grid-cols-3 lg:grid-cols-3")
     +each('customers as customer')
-      div(
+      .rounded.outline.px-0.py-6(
+        class="sm:bg-white/5 outline-white/10"
         on:mouseenter|stopPropagation!="{hoverOnTile}"
         on:mouseleave|stopPropagation!="{hoverOffTile}"
         )
         TileCustomer("{...customer}")
 
+  //- slider
+  div(class="sm:hidden")
+    Slider( panels!="{customers}" classes!="{''}" )
+      div(class="" slot="panel" let:panel)
+        TileCustomer("{...panel}")
 </template>

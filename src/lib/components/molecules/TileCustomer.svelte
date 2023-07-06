@@ -6,20 +6,24 @@
   import ShapeTriangle from "$a/ShapeTriangle.svelte";
 
   // props
+  export let category = 'test category';
+  export let color = '#EAF81D';
+  export let customer = '';
   export let imageAlt = '';
   export let imageSlug = '';
   export let logoAlt = '';
   export let logoSlug = '';
   export let text = '';
+  export let tags: string[] = [];
   export let url = ''
 
   // variables
   const image = {
     alt: imageAlt,
-    classes: '',
+    classes: 'opacity-full',
     draggable: 'false',
     height: '648',
-    fallback: `${imageSlug}.jpg`,
+    fallback: `${imageSlug}.png`,
     folder: 'images',
     loading: 'lazy',
     width: '810',
@@ -42,26 +46,47 @@
 </script>
 
 <template lang='pug'>
-a.w-full.bg-white.text-oxfordBlue.block(
-  class="rounded-tl-3xl rounded-br-3xl overflow-hidden transition-opacity"
+
+.font-sans.uppercase.tracking-widest.px-16.leading-normal.mb-4.text-center(class="text-white/60 text-[.825rem] h-[1rem] sm:hidden") {@html category}
+//-.font-sans.font-xl.tracking-widest.px-16.leading-normal.mb-16.text-center(class="text-white/90 h-[1rem] ") {@html customer}
+
+a.w-full.text-oxfordBlue.block.outline-white.outline.outline-0(
+  class="rounded-t-lg overflow-hidden transition-opacity "
   data-customerTile
   href!="{url}"
   )
 
+  //- logo
+  .flex.justify-center.w-full
+    .h-auto(class="w-72 sm:hidden").border-y-0.border-white.py-4.border-opacity-60
+      PictureStack("{...logo}")
+
+
   //- tile header
-  .relative.overflow-hidden
+  .relative.overflow-hidden.mb-6.rounded-lg(class="bg-white/0")
     PictureStack("{...image}")
-    span.text-white.absolute.left-0.bottom-0.w-full.h-8.rotate-180
-      ShapeTriangle
+
+
+  //- logo position two
+  .hidden.justify-center.w-full.bottom-0.z-10.mb-4(class="sm:flex bg-oxford/20")
+    div(class="w-3/4")
+      PictureStack("{...logo}")
+
 
   //- tile body
-  .px-8.py-8
-    .flex.items-center.justify-between.mb-8
-      .w-full(class="h-[30px] grow ")
+  .px-0.pb-8.relative(class="")
+    //-.flex.items-center.justify-center.mb-4.w-full
+      .h-auto(class="w-72").border-y-0.border-white.py-4.border-opacity-60
         PictureStack("{...logo}")
-      .mr-0.w-5.shrink-0.translate-x-2
-        IconArrowRight
+
+
     div
-      p.prose-md.mb-8(class="h-48")
-        | {@html text}
+      p.prose-md.mb-2.line-clamp-6(class="text-cultured/90 font-light md:text-oxford text-center sm:hidden")
+        | {text}
+      div.flex.justify-center.flex-wrap
+        +each('tags as tag')
+          span.text-maximumYellow.text-sm.inline-block.mr-2.opacity-80.transition-opacity(
+            class="hover:opacity-100"
+            style!="{'color:' + color}"
+            ) {'#' + tag}
 </template>

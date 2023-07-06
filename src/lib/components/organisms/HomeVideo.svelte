@@ -2,7 +2,7 @@
 
   // components
   import VideoEmbed from "$m/VideoEmbed.svelte";
-  import SectionLight from "$m/SectionLight.svelte";
+  import SectionDark from "$m/SectionDark.svelte";
   import TransitionShapeBottom from "$m/TransitionShapeBottom.svelte";
 
   // variables
@@ -13,7 +13,7 @@
 
 <template lang='pug'>
 
-SectionLight(classes!="{'-translate-y-24 !pt-0 -mt-4 -z-10'}")
+SectionDark(classes!="{'-translate-y-24 !pt-0 -mt-4 -z-10'}")
 
   //- video player
   .relative.z-20.flex.justify-center.text-white.translate-y-24

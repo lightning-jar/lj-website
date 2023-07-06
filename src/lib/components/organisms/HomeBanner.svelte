@@ -13,11 +13,12 @@
 
   //- variables
   const headlineText = {
-    animatedWords:  ['digital.', 'mobile.', 'remote.', 'competitive.'],
+    // ['LEO', 'digital.', 'mobile.', 'remote.', 'competitive.']
+    animatedWords:  ['LEO', 'Mommy', 'Daddy', 'NANA'],
     staticBegin: 'The world is <br>getting more',
     staticEnd: 'digital.'
   }
-  const bannerText = 'Since 2004, Lightning Jar digital has been helping businesses thrive in a world that is more digital & mobile every day.'
+  const bannerText = 'Since 2004, Lightning Jar digital agency has been helping businesses thrive in a world that is more digital & mobile every day.'
 
 
   let imageContent: HTMLDivElement | null = null;
@@ -36,6 +37,7 @@ SectionDark(classes!="{'bg-gradient-to-tr from-oxford via-oxfordDark to-oxford !
   .items-center(class="md:flex md:h-full")
     ColumnsTwo(classes!="{'py-8 w-full'}")
 
+
       //- column 1 -- text content
       .flex.text-center.select-none.items-center(
         slot="column-1"
@@ -49,6 +51,7 @@ SectionDark(classes!="{'bg-gradient-to-tr from-oxford via-oxfordDark to-oxford !
             BannerHomeText {bannerText}
 
       //-column 2 -- image content
+      //-div.bg-white.w-full.h-24
       .opacity-0.transition-opacity.w-full(
         bind:this!="{imageContent}"
         slot="column-2"
@@ -56,6 +59,7 @@ SectionDark(classes!="{'bg-gradient-to-tr from-oxford via-oxfordDark to-oxford !
         style=""
         )
         //- col inner
+        input.h-8.text-oxford
         .relative(
           class="max-w-sm lg:max-w-sm xl:max-w-lg"
           style=""

@@ -7,10 +7,12 @@
 
   import IconArrowLeftAlt from "$a/IconArrowLeftAlt.svelte";
 
+  const testimonialsHeading = `<span class='!text-white opacity-60'>Testimonials:&nbsp;&nbsp;</span>`
+
   const panels = [
     {
-      category: "Strategy + Execution",
-      quote: `No other vendor delivers the <span class="underline-heading">depth of strategy</span> that Lightning Jar does.`,
+      category: `${testimonialsHeading}Brand & Technology`,
+      quote: `No other vendor delivers the <span class="underline-heading">depth of strategy</span> that Lightning&nbsp;Jar does.`,
       imageSlug: "david-h-testimonial",
       name: "David Heard",
       title: "CMO",
@@ -18,7 +20,7 @@
       companyUrl: "https://securelogix.com"
     },
     {
-      category: "Pimcore Expertise",
+      category: `${testimonialsHeading}Pimcore Expertise`,
       quote: "Lightning Jar gave us a single source of truth for marketing data via Pimcore.",
       imageSlug: "liz-s-testimonial",
       name: "Liz Sterret",
@@ -27,7 +29,7 @@
       companyUrl: "https://www.beamsuntory.com/"
     },
     {
-      category: "Sales Tools, PIM, Ecommerce, Mobile Apps",
+      category: `${testimonialsHeading}PIM, Ecommerce, Mobile Apps`,
       quote: 'Their technology team was my <span class="underline-heading">secret weapon</span> ...they helped me execute big ideas.',
       imageSlug: "frank-r-testimonial",
       name: "Frank Roth",
@@ -36,7 +38,7 @@
       companyUrl: "https://unitedrentals.com/"
     },
     {
-      category: "Marketing Strategy & Brand Strategy",
+      category: `${testimonialsHeading}Marketing & Brand Strategy`,
       quote: 'LJ helped us <span class="underline-heading">focus and clarify</span> our brand vision during exponential growth.',
       imageSlug: "elizabeth-g-testimonial",
       name: "Elizabeth Grojean",
@@ -45,8 +47,8 @@
       companyUrl: "https://balooliving.com/"
     },
     {
-      category: "SAAS / Remote Solutions",
-      quote: 'They helped us <span class="underline-heading">speed to launch</span> with our flagship remote SaaS soluton.',
+      category: `${testimonialsHeading}SAAS & Remote Solutions`,
+      quote: 'They helped us <span class="underline-heading">speed to launch</span> with our flagship remote SaaS solution.',
       imageSlug: "duane-v-testimonial",
       name: "Dr. Duane Varan",
       title: "CEO & Founder",
@@ -54,12 +56,12 @@
       companyUrl: "https://harkconnect.com/"
     },
     {
-      category: "In-Store Experience / Kiosks / Tablet Apps",
+      category: `${testimonialsHeading}Kiosks / POS / Tablet Apps`,
       quote: 'Our in-store app project was foundering... until LJ <span class="underline-heading">saved the day</span>.',
       imageSlug: "mubashir-m-testimonial",
       name: "Mubashir Memon",
-      title: "Senior Product Manager",
-      companyName: "Northgate Markets / Prospera",
+      title: "Product Manager",
+      companyName: "Northgate Markets",
       companyUrl: "https://prospera.northgatemarket.com/"
     }
   ]
@@ -67,14 +69,14 @@
 </script>
 
 <template lang="pug">
-SectionFullBleed(id!="{'testimonials'}")
+SectionFullBleed(id!="{'testimonials'}" classes="flex items-center justify-center h-screen max-h-[896px] sm:block sm:h-auto sm:max-h-[60rem] sm:py-32 md:py-36 lg:py-40 xl:py-40 border-b border-white/20 bg-gradient-to-b from-oxfordDark via-oxford to-oxfordDark")
 
   //- horizontal rule
-  .flex.w-100.justify-center
-    div.border-maximumYellow.w-20.border-t-8.mb-24 &nbsp;
+  //-.flex.w-100.justify-center
+    div.border-maximumYellow.w-20.border-t-3.mb-8 &nbsp;
 
-  Slider( "{panels}" )
-    div(slot="panel" let:panel)
+  Slider( "{panels}" classes!="{''}" )
+    div(class="" slot="panel" let:panel)
       Testimonial(
         category!="{panel.category}"
         quote!="{panel.quote}"

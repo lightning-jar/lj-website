@@ -17,9 +17,9 @@
   export let companyUrl = '';
 
   // variables
-  const headingAttributes = {
+  const quoteAttributes = {
     tag: 'q',
-    classes: 'block !leading-tight'
+    classes: 'block !leading-normal !text-3xl md:!leading-tight'
   }
 
   const image = {
@@ -37,26 +37,26 @@
 
 
 <template lang='pug'>
-div.text-center(class="md:max-w-3xl xl:max-w-4xl")
+div.text-center(class="max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl")
 
-  //- Category
-  .mb-3.text-maximumYellow.uppercase.font-semibold.tracking-widest.text-sm {category}
+  //- Categories
+  .font-sans.uppercase.mb-6.text-maximumYellow.tracking-widest.px-16.leading-normal(class="text-[.825rem] h-[2.5rem] ") {@html category}
 
-  //- Heading
-  .mb-5
-    TextHeading("{...headingAttributes}") {@html quote}
+  //- Quote
+  .mb-8
+    q.block.font-serif.font-semibold(class="text-[2rem] sm:text-[2.25rem] md:text-[2.75rem] lg:text-[3.25rem] xl:text-[3.5rem leading-[1.33] h-[12rem] sm:h-[13rem] md:h-[20rem] lg:h-[23rem] xl:h-[25rem] overflow-hidden") {@html quote}
 
   //- Footer
-
-  div
-    // Avatar
-    .flex.w-100.justify-center
-      .mb-4.w-16
-        PictureStack("{...image}")
-    // Heading
-    h4 {name}
-    // Position
-    p.text-sm
-      | {title},&nbsp;
-      a.text-body-light(href!="{companyUrl}") {@html companyName}
+  div.flex.justify-center(class="h-[12rem]")
+    div(class="max-w-[65%] font-serif")
+      // Avatar
+      .flex.w-100.justify-center
+        .mb-4.w-16
+          PictureStack("{...image}")
+      // Name
+      h4.mb-1.font-sans.text-md.opacity-90.font-semibold {name}
+      // Position
+      p.text-md.opacity-90.font-sans
+        | {title},&nbsp;
+        a.text-body-light(href!="{companyUrl}") {@html companyName}
 </template>

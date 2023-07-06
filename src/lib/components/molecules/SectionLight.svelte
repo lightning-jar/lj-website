@@ -9,7 +9,7 @@
 </script>
 
 <template lang='pug'>
-section.pt-4.bg-white.text-OxfordBlue.relative(
+section.bg-white.text-OxfordBlue.relative(
   class!="{pageXPadding + ' ' + classes }"
   )
   slot

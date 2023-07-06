@@ -12,15 +12,15 @@
 </script>
 
 <template lang='pug'>
-.flex.w-full.h-auto
-  .w-12(class="mr-6 flex-none")
+.w-full.h-auto(class="md:flex xl:block 2xl:block")
+  .w-full(class="flex-none mb-4 opacity-90 hover:opacity-100 transition-opacity flex justify-center md:w-14 md:mr-8 xl:mr-auto")
     IconServices("{slug}")
-  div
-    h3.text-2xl.mb-4.font-serif.font-semibold
+  div.mb-16(class="sm:mb-0 max-w-sm")
+    h3.text-center.mb-5.font-serif.font-bold(class="md:text-left text-2xl text-cultured")
       | {@html heading}
       span
         slot(name="heading")
-    p.prose-lg.mb-8(class="text-white/90")
+    p(class="text-center md:text-left text-[1.2rem] leading-normal text-cultured/90 font-serif font-light md:pr-0")
       | {@html text}
       span
         slot(name="text")

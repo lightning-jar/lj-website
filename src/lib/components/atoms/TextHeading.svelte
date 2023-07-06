@@ -6,12 +6,12 @@
 
   const defaultClasses = [
     'text-4xl',
+    'sm:text-[2.5rem]',
     'md:text-5xl',
-    'xl:text-6xl',
-    '2x:text-8xl',
+    'xl:text-[3.25rem]',
     'font-serif',
     'font-bold',
-    'mb-4',
+    '',
   ]
 
   const attributes = {

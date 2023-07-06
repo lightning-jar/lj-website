@@ -9,10 +9,7 @@ module.exports = {
     'opacity-100',
   ],
   theme: {
-    fontFamily: {
-      'sans': ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
-      'serif': ['New York Medium', '-apple-system-ui-serif', 'ui-serif', 'DM Serif Display', 'serif']
-    },
+
     extend: {
       colors: {
         oxfordBlue: 'hsl(217, 48%, 15%)',
@@ -21,6 +18,7 @@ module.exports = {
         oxfordDark: 'hsla(217, 48%, 12%, 1.0)',
         oxfordBlueLight: '#21355B',
         darkCornflowerBlue: 'hsl(217, 45%, 30%)',
+        cornflower: this.darkCornflowerBlue,
         cornflowerDark: 'hsl(217, 45%, 30%)',
         middleBlue: 'hsl(188, 55%, 64%)',
         androidGreen: 'hsla(71, 82%, 43%, 1.0)',
@@ -30,7 +28,11 @@ module.exports = {
         culturedGray: 'hsl(220, 20%, 97%)',
         cultured: 'hsl(220, 20%, 97%)',
         offWhite: 'hsl(240, 33%, 99%)'
-      }
+      },
+      fontFamily: {
+        'sans': ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
+        'serif': ['New York Medium', '-apple-system-ui-serif', 'ui-serif', 'DM Serif Display', 'serif']
+      },
     },
   },
   corePlugins: {
@@ -39,6 +41,7 @@ module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
-    require('@tailwindcss/aspect-ratio')
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/line-clamp')
   ],
 }
