@@ -1,1 +1,1 @@
-export const imagesFolder = '/images'
+export const imagesFolder = "/images";

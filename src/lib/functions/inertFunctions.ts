@@ -1,10 +1,10 @@
 export function inertElements(array: HTMLElement[]) {
-  array.forEach((link: HTMLElement) => {
-    link.setAttribute("inert", "");
-  });
+	array.forEach((link: HTMLElement) => {
+		link.setAttribute("inert", "");
+	});
 }
 export function unInertElements(array: HTMLElement[]) {
-  array.forEach((link: HTMLElement) => {
-    link.removeAttribute("inert");
-  });
+	array.forEach((link: HTMLElement) => {
+		link.removeAttribute("inert");
+	});
 }

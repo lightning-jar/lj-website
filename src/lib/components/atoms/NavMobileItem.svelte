@@ -1,44 +1,39 @@
-
 <script lang="ts">
-  // components
-  import IconArrowRight from "$a/IconArrowRight.svelte";
+	// components
+	import IconArrowRight from "$atoms/IconArrowRight.svelte";
 
-  // types
-  import type { NavMenuItem } from "$types/navTypes";
+	// types
+	import type { NavMenuItem } from "$types/navTypes";
 
-  // functions
-  import { slugify } from "$functions/helperFunctions";
+	// functions
+	import { slugify } from "$functions/helperFunctions";
 
+	// svelte functions
+	import { createEventDispatcher } from "svelte";
 
-  // svelte functions
-  import { createEventDispatcher } from 'svelte';
+	// props
+	export let navMenuItem: NavMenuItem;
 
-  // props
-  export let navMenuItem: NavMenuItem
+	// variables
+	const dispatch = createEventDispatcher();
 
-  // variables
-  const dispatch = createEventDispatcher();
-
-  // local functions
-  const navItemClick = () => {
-    dispatch('navItemClick', navMenuItem, {});
-  }
-
+	// local functions
+	const navItemClick = () => {
+		dispatch("navItemClick", navMenuItem, {});
+	};
 </script>
 
 <template lang="pug">
-.flex.justify-center.items-center.mb-0
-  a.flex.justify-center.items-center(
-    data-handle!="{slugify(navMenuItem.label)}"
-    class="border-b border-transparent focus:border-slate-600 !outline-none"
-    href!="{(navMenuItem.slug) ? '/' + navMenuItem.slug : '/#'}"
-    on:click!="{navItemClick}"
-    )
-    .text-center.p-3.text-3xl.text-white.font-normal(
-      class="hover:text-maximumYellow"
-      )
-      | {navMenuItem.label}
-    +if('!navMenuItem.slug')
-      div.ml-3.w-5.h-5.pointer-events-none
-        IconArrowRight
+	.flex.justify-center.items-center.mb-0
+		a.flex.justify-center.items-center(
+			class="border-b border-transparent focus:border-slate-600 !outline-none",
+			data-handle!="{ slugify(navMenuItem.label) }",
+			href!="{ navMenuItem.slug ? '/' + navMenuItem.slug : '/#' }",
+			on:click!="{ navItemClick }"
+		)
+			.text-center.p-3.text-3xl.text-white.font-normal(class="hover:text-maximumYellow")
+				| { navMenuItem.label }
+			+if('!navMenuItem.slug')
+				.ml-3.w-5.h-5.pointer-events-none
+					IconArrowRight
 </template>

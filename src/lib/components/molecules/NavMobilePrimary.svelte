@@ -1,39 +1,34 @@
-
-
 <script lang="ts">
+	// components
+	import MobileMenuItem from "$atoms/NavMobileItem.svelte";
 
-  // components
-  import MobileMenuItem from "$a/NavMobileItem.svelte";
+	// types
+	import type { NavDataItem } from "$types/navTypes";
 
-  // types
-  import type { NavDataItem } from "$types/navTypes";
+	// props
+	export let navData: NavDataItem[];
+	export let primaryMobileNav: HTMLElement;
 
-  // props
-  export let navData: NavDataItem[];
-  export let primaryMobileNav: HTMLElement;
+	// variables
+	//const dispatch = createEventDispatcher();
 
-  // variables
-  //const dispatch = createEventDispatcher();
+	//const setPrimaryMobileNav = () => {
+	//    dispatch('setPrimaryMobileNav', primaryMobileNav, {});
+	//  }
 
-
-  //const setPrimaryMobileNav = () => {
-  //    dispatch('setPrimaryMobileNav', primaryMobileNav, {});
-  //  }
-
-  //onMount(() => {
-  //  setPrimaryMobileNav();
-  //});
-
+	//onMount(() => {
+	//  setPrimaryMobileNav();
+	//});
 </script>
 
 <template lang="pug">
-nav.absolute.w-full.transition-transform(
-  id="primaryMobileNav"
-  bind:this!="{primaryMobileNav}"
-  )
-  +each('navData as navMenuItem')
-    MobileMenuItem(
-      navMenuItem!="{navMenuItem}"
-      on:navItemClick
-    )
+	nav.absolute.w-full.transition-transform(
+		bind:this!="{ primaryMobileNav }",
+		id="primaryMobileNav"
+	)
+		+each('navData as navMenuItem')
+			MobileMenuItem(
+				navMenuItem!="{ navMenuItem }",
+				on:navItemClick
+			)
 </template>

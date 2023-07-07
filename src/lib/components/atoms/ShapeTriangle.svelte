@@ -1,15 +1,11 @@
-<script lang='ts'>
-
+<script lang="ts">
 </script>
 
-<template lang='pug'>
-svg(
-    viewBox="0 0 500 500"
-    preserveAspectRatio="none"
-    class="w-full h-full"
-    )
-    polygon(
-      points="0,0 0,500 500,0"
-      class="fill-current"
-      )
+<template lang="pug">
+	svg(
+		class="w-full h-full",
+		preserveAspectRatio="none",
+		viewBox="0 0 500 500"
+	)
+		polygon(class="fill-current", points="0,0 0,500 500,0")
 </template>

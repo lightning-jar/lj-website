@@ -1,6 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 
 export const mediaPlayer = writable(false);
-export const youTubeCode = writable('');
-
-
+export const youTubeCode = writable("");

@@ -1,4 +1,3 @@
-
 <!-- <script context="module">
 
   // graphQl
@@ -21,29 +20,26 @@
 </script> -->
 
 <script lang="ts">
+	// components
 
-  // components
+	//import AboutHeader from "$components/AboutHeader.svelte";
+	//import GlobalNav from "$components/GlobalNav.svelte";
+	//import GlobalFooterStatic from "$components/GlobalFooterStatic.svelte";
 
-  //import AboutHeader from "$components/AboutHeader.svelte";
-  //import GlobalNav from "$components/GlobalNav.svelte";
-  //import GlobalFooterStatic from "$components/GlobalFooterStatic.svelte";
-
-  // variables
-  //export let globalNavEl: HTMLHeadElement | null = null;
-  //export let mainNav: HTMLDivElement | null = null;
-
+	// variables
+	//export let globalNavEl: HTMLHeadElement | null = null;
+	//export let mainNav: HTMLDivElement | null = null;
 </script>
 
 <template lang="pug">
-  div error
-  //GlobalNav(
-    bind:globalNav!="{globalNavEl}"
-    bind:mainNav!="{mainNav}"
-    )
+	div error
+	//GlobalNav(
+		bind:globalNav!="{globalNavEl}"
+		bind:mainNav!="{mainNav}"
+		)
 
-  //AboutHeader {'404 Error'}
-    svelte:fragment(slot="subheading") The page you requested could not be found.
+	//AboutHeader {'404 Error'}
+		svelte:fragment(slot="subheading") The page you requested could not be found.
 
-  //GlobalFooterStatic
-
+	//GlobalFooterStatic
 </template>

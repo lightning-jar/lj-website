@@ -1,28 +1,28 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{html,pug,js,svelte,ts}'],
-  theme: {
-    extend: {
-      colors: {
-        oxfordBlue: 'hsl(217, 48%, 15%)',
-        oxford: 'hsl(217, 48%, 15%)',
-        oxfordLight: '#21355B',
-        oxfordDark: 'hsla(217, 48%, 12%, 1.0)',
-        oxfordBlueLight: '#21355B',
-        darkCornflowerBlue: 'hsl(217, 45%, 30%)',
-        cornflower: this.darkCornflowerBlue,
-        cornflowerDark: 'hsl(217, 45%, 30%)',
-        middleBlue: 'hsl(188, 55%, 64%)',
-        androidGreen: 'hsla(71, 82%, 43%, 1.0)',
-        yellowGreen: 'hsl(71, 69%, 70%)',
-        titaniumYellow: 'hsl(58, 100%, 47%)',
-        maximumYellow: 'hsl(64, 94%, 58%)',
-        culturedGray: 'hsl(220, 20%, 97%)',
-        cultured: 'hsl(220, 20%, 97%)',
-        offWhite: 'hsl(240, 33%, 99%)'
-      },
-      fontSize: {
-        6: "6px",
+	content: ["./src/**/*.{html,pug,js,svelte,ts}"],
+	theme: {
+		extend: {
+			colors: {
+				oxfordBlue: "hsl(217, 48%, 15%)",
+				oxford: "hsl(217, 48%, 15%)",
+				oxfordLight: "#21355B",
+				oxfordDark: "hsla(217, 48%, 12%, 1.0)",
+				oxfordBlueLight: "#21355B",
+				darkCornflowerBlue: "hsl(217, 45%, 30%)",
+				cornflower: this.darkCornflowerBlue,
+				cornflowerDark: "hsl(217, 45%, 30%)",
+				middleBlue: "hsl(188, 55%, 64%)",
+				androidGreen: "hsla(71, 82%, 43%, 1.0)",
+				yellowGreen: "hsl(71, 69%, 70%)",
+				titaniumYellow: "hsl(58, 100%, 47%)",
+				maximumYellow: "hsl(64, 94%, 58%)",
+				culturedGray: "hsl(220, 20%, 97%)",
+				cultured: "hsl(220, 20%, 97%)",
+				offWhite: "hsl(240, 33%, 99%)",
+			},
+			fontSize: {
+				6: "6px",
 				7: "7px",
 				8: "8px",
 				9: "9px",
@@ -67,7 +67,7 @@ module.exports = {
 				48: "48px",
 				49: "49px",
 				50: "50px",
-      }
-    },
-  },
-}
+			},
+		},
+	},
+};
