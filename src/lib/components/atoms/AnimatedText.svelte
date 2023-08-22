@@ -2,7 +2,7 @@
 	//- local functions
 	function typewriter(
 		node: { childNodes: string | any[]; textContent: string },
-		{ speed = 1 }: any,
+		{ speed = 1 },
 	) {
 		const valid =
 			node.childNodes.length === 1 &&

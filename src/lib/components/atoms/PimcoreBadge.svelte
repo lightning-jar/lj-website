@@ -3,7 +3,7 @@
 	import PictureStack from "$atoms/PictureStack.svelte";
 
 	// props
-	export let href: string = "https://www.pimcore.com";
+	export let href = "https://www.pimcore.com";
 
 	// variables
 	const image = {
