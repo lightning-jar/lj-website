@@ -29,6 +29,10 @@
 <template lang="pug">
 	header#top(
 		class=`
+			bg-gradient-to-r
+			from-oxford
+			via-oxfordDark
+			to-oxford
 			flex
 			items-center
 			justify-between
@@ -39,7 +43,7 @@
 			relative
 			text-neutral-50
 			xl:min-h-[3.5rem]
-			z-50`
+			z-0`
 	)
 		//- Logo
 		a(
@@ -110,7 +114,7 @@
 						block
 						decoration-current
 						font-serif
-						opacity-90
+						opacity-[.95]
 						!outline-none
 						text-18
 						transition-opacity
