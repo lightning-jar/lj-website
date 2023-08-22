@@ -18,21 +18,23 @@
 <template lang="pug">
 	//- headline
 	.font-serif.font-bold(
-		class="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-5xl xl:text-[3.25rem] !leading-[1.125]"
+		class="text-[2rem] sm:text-[2.25rem] md:text-[3rem] lg:text-5xl xl:text-[3.25rem] !leading-[1.125]"
 	)
-		span(class="md:block") { staticBegin }&nbsp;
+		span(class="md:block") {  @html staticBegin  }&nbsp;
 		span.text-maximumYellow.underline.underline-offset-8.ml-2.inline-block(
 			class="sm:hidden"
 		) { staticEnd }
 
 		span(class="md:block leading-[1.2em]")
 			//- animated text
-			+if('$width > 640 && animatedWords[0]')
-				AnimatedText({animatedWords})
+			+if('animatedWords[0]')
+				span.hidden(class="sm:inline-block")
+					AnimatedText(animatedWords!="{ animatedWords }")
 
 			//- fake cursor
-			+if('$width > 640')
-				BlinkingCursor
+			+if('animatedWords[0]')
+				span.hidden(class="sm:inline-block")
+					BlinkingCursor
 
 			| &nbsp;
 </template>

@@ -12,7 +12,7 @@
 
 	//- variables
 	const headlineText = {
-		animatedWords: ["LEO", "digital.", "mobile.", "remote.", "competitive."],
+		animatedWords: ["digital.", "mobile.", "remote.", "crazy."],
 		staticBegin: "The world is <br>getting more",
 		staticEnd: "digital.",
 	};
@@ -29,7 +29,7 @@
 
 <template lang="pug">
 	SectionDark(
-		classes!="{ 'bg-gradient-to-tr from-oxford via-oxfordDark to-oxford pt-24 pb-[12vw]' }"
+		classes="w-full top-0 bg-gradient-to-r from-oxford via-oxfordDark to-oxford pt-24 pb-[12vw]"
 	)
 		.items-center(class="md:flex md:h-full")
 			ColumnsTwo(classes!="{ 'py-8 w-full' }")
@@ -57,7 +57,7 @@
 					style=""
 				)
 					//- col inner
-					input.h-8.text-oxford
+					.h-8.text-oxford
 					.relative.flex(
 						class="max-w-sm lg:max-w-sm xl:max-w-lg",
 						style=""

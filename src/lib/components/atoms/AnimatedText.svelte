@@ -46,6 +46,8 @@
 	//- variables
 	let headlineText = "digital.";
 	let headlineIndex = 0;
+
+	// props
 	export let animatedWords: string[] = [""];
 
 	//- run
