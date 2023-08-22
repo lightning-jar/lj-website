@@ -12,10 +12,6 @@
 	export let title: string | null = null;
 </script>
 
-<!-- svelte-ignore a11y-missing-attribute -->
-<!-- svelte-ignore a11y-missing-attribute -->
-<!-- svelte-ignore a11y-missing-attribute -->
-<!-- svelte-ignore a11y-missing-attribute -->
 <template lang="pug">
 	img(
 		class="w-full h-auto select-none {classes}",
