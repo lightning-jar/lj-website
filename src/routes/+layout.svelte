@@ -10,6 +10,7 @@
 
 	// import components
 	import GlobalNav from "$organisms/GlobalNav.svelte";
+	import MediaPlayer from "$organisms/MediaPlayer.svelte";
 
 	// local types
 	import type { LayoutData } from "./$types";
@@ -44,6 +45,7 @@
 		isHome!="{ data.isHome }",
 		nav!="{ data.nav }"
 	)
+	MediaPlayer
 	slot
 	//- GlobalFooter
 

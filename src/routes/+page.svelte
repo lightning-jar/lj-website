@@ -40,8 +40,6 @@
 </script>
 
 <template lang="pug">
-	div test
-	//- WindowUpdater
 	//- OpenGraph(
 	//- 	description!="{ og.description }",
 	//- 	images!="{ og.images }",
@@ -52,9 +50,9 @@
 	//- StructuredData
 	//- MediaPlayer
 
-	//- HomeBanner
-	//- HomeOverview
-	//- HomeVideo
+	HomeBanner
+	HomeOverview
+	HomeVideo
 	//- HomeServices
 	//- HomeTestimonials
 	//- HomeCustomers
