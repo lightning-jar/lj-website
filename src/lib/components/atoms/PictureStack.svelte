@@ -9,18 +9,18 @@
 	import PictureStackSource from "$atoms/PictureStackSource.svelte";
 
 	// props
-	export let alt: string = "";
+	export let alt = "";
 	export let breakpoints: (string | string[])[] = [[""]];
-	export let classes: string = "";
+	export let classes = "";
 	export let draggable = false;
-	export let fallback: string = "";
-	export let folder: string = "images";
+	export let fallback = "";
+	export let folder = "images";
 	export let height: string | null = null;
 	export let loading: string | null = "lazy";
-	export let onlyScreen: boolean = true;
+	export let onlyScreen = true;
 	export let preload: string[] = [];
 	export let sourceFormats: string[] = ["avif", "webp"];
-	export let slugCommon: string = "";
+	export let slugCommon = "";
 	export let style: string | null = null;
 	export let title: string | null = null;
 	export let width: string | null = null;
@@ -37,7 +37,7 @@
 		return `/${folder}/${slugCommon}${breakpoint[0]}.${format}`;
 	}
 	function media(breakpoint: (string | string[])[]) {
-		let media: string = "";
+		let media = "";
 		const hasContent: boolean = breakpoint.length > 0;
 		const hasRules: boolean = breakpoint[1] && breakpoint[1][0] ? true : false;
 

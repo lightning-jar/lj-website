@@ -6,7 +6,7 @@
 	import { deslugify } from "$functions/helperFunctions";
 
 	// props
-	export let slug: string = "";
+	export let slug = "";
 
 	const noBreakpoint = [[""]];
 	$: alt = deslugify(slug);
