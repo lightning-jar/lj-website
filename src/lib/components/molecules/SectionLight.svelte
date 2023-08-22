@@ -1,6 +1,6 @@
 <script lang="ts">
 	// settings
-	import { pageXPadding } from "$lib/settings/paddingSettings";
+	import { pageXPadding } from "$settings/layoutSettings";
 
 	// props
 	export let classes = "";

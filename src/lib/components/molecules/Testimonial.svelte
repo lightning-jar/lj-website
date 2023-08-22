@@ -37,19 +37,21 @@
 	.text-center(class="max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl")
 		//- Categories
 		.font-sans.uppercase.mb-6.text-maximumYellow.tracking-widest.px-16.leading-normal(
-			class="text-[.825rem] h-[2.5rem] "
-		) {  @html category  }
+			class="text-[.825rem] h-[2.5rem]"
+		)
+			+html('category')
 
 		//- Quote
 		.mb-8
 			q.block.font-serif.font-semibold(
 				class="text-[2rem] sm:text-[2.25rem] md:text-[2.75rem] lg:text-[3.25rem] xl:text-[3.5rem leading-[1.33] h-[12rem] sm:h-[13rem] md:h-[20rem] lg:h-[23rem] xl:h-[25rem] overflow-hidden"
-			) {  @html quote  }
+			)
+				+html("quote")
 
 		//- Footer
 		.flex.justify-center(class="h-[12rem]")
 			div(class="max-w-[65%] font-serif")
-				// Avatar
+				//- Avatar
 				.flex.w-100.justify-center
 					.mb-4.w-16
 						PictureStack(
@@ -62,10 +64,11 @@
 							slugCommon!="{ image.slugCommon }",
 							width!="{ image.width }"
 						)
-				// Name
+				//- Name
 				h4.mb-1.font-sans.text-md.opacity-90.font-semibold { name }
-				// Position
+				//- Position
 				p.text-md.opacity-90.font-sans
 					| { title },&nbsp;
-					a.text-body-light(href!="{ companyUrl }") {  @html companyName  }
+					a.text-body-light(href!="{ companyUrl }")
+						+html('companyName')
 </template>

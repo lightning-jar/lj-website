@@ -3,7 +3,7 @@
 	import IconArrowLeftAlt from "$atoms/IconArrowLeftAlt.svelte";
 
 	// props
-	export let direction: string = "left";
+	export let direction = "left";
 	const rounded =
 		direction == "left"
 			? "rounded-tr rounded-br translate-x-8 sm:translate-x-0"

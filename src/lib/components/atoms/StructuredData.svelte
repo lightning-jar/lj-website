@@ -3,12 +3,13 @@
 	// this work-around for injecting structured data is inspired by:
 	// https://navillus.dev/blog/json-ld-in-sveltekit
 
-	// note: there is a bug in sveltekit, which is why we're not putting this inside svelte:head
-	//https://github.com/sveltejs/svelte/issues/7444
-
 	import { LjSchema, serializeSchema } from "$settings/structuredData";
+
+	// const schema = serializeSchema(LjSchema);
 </script>
 
 <template lang="pug">
-	| {  @html serializeSchema(LjSchema)  }
+	span
+	//- 		+html(schema)
+	//-
 </template>

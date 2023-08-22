@@ -46,7 +46,7 @@
 <template lang="pug">
 	.font-sans.uppercase.tracking-widest.px-16.leading-normal.mb-4.text-center(
 		class="text-white/60 text-[.825rem] h-[1rem] sm:hidden"
-	) {  @html category  }
+	) { category }
 	//-.font-sans.font-xl.tracking-widest.px-16.leading-normal.mb-16.text-center(class="text-white/90 h-[1rem] ") {@html customer}
 
 	a.w-full.text-oxfordBlue.block.outline-white.outline.outline-0(

@@ -5,11 +5,11 @@
 	// props
 	export let additionalMetaTags: MetaTag[] = [];
 	export let additionalLinkTags: MetaTag[] = [];
-	export let canonical: string = "https://lightningjar.com";
+	export let canonical = "https://lightningjar.com";
 	export let metaKeywords: string[];
 	export let metaSection: string;
-	export let metaNoindex: boolean = false;
-	export let metaNofollow: boolean = false;
+	export let metaNoindex = false;
+	export let metaNofollow = false;
 	export let metaDescription: string | null;
 
 	// imported functions

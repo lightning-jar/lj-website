@@ -28,7 +28,7 @@
 	};
 
 	// settings
-	import { pageXPadding } from "$settings/paddingSettings";
+	import { pageXPadding } from "$settings/layoutSettings";
 </script>
 
 <template lang="pug">
@@ -59,11 +59,19 @@
 					FooterLink(href!="{ 'mailto:hey@lightningjar.com' }") hey@lightningjar.com
 
 				.mb-8
-					FooterHeading Headquarters
-					FooterText 230 S Broad Street
-					FooterText Philadelphia, PA 19102
+					//- FooterHeading Headquarters
+					//- //- FooterText 230 S Broad Street
+					//- FooterText Philadelphia, PA
 
-				.mb-24
+				.mb-8
+					FooterHeading Locations
+					//- FooterText 230 S Broad Street
+					FooterText
+						| Philadelphia &CenterDot; New York &CenterDot; Texas
+						br
+						| Proudly remote and distributed since 2018.
+
+				//-.mb-24
 					FooterHeading More
 					FooterLink(href!="{ 'https://pugify.dev/' }") HTML to Pug Converter
 

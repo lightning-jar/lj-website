@@ -20,7 +20,7 @@
 	.font-serif.font-bold(
 		class="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-5xl xl:text-[3.25rem] !leading-[1.125]"
 	)
-		span(class="md:block") {  @html staticBegin  }&nbsp;
+		span(class="md:block") { staticBegin }&nbsp;
 		span.text-maximumYellow.underline.underline-offset-8.ml-2.inline-block(
 			class="sm:hidden"
 		) { staticEnd }

@@ -1,6 +1,6 @@
 <script lang="ts">
 	//- svelte
-	import { onMount } from "svelte";
+	// import { onMount } from "svelte";
 
 	//- components
 	import AnimatedHeadline from "$molecules/AnimatedHeadline.svelte";
@@ -17,7 +17,7 @@
 		staticEnd: "digital.",
 	};
 	const bannerText =
-		"Since 2004, Lightning Jar digital agency has been helping businesses thrive in a world that is more digital & mobile every day.";
+		"Since 2002, Lightning Jar digital agency has been helping businesses thrive in a world that is more digital & more competitive every day.";
 
 	let imageContent: HTMLDivElement | null = null;
 
@@ -29,7 +29,7 @@
 
 <template lang="pug">
 	SectionDark(
-		classes!="{ 'bg-gradient-to-tr from-oxford via-oxfordDark to-oxford !pt-24 pb-[12vw]' }"
+		classes!="{ 'bg-gradient-to-tr from-oxford via-oxfordDark to-oxford pt-24 pb-[12vw]' }"
 	)
 		.items-center(class="md:flex md:h-full")
 			ColumnsTwo(classes!="{ 'py-8 w-full' }")
@@ -50,7 +50,6 @@
 							BannerHomeText { bannerText }
 
 				//-column 2 -- image content
-				//-div.bg-white.w-full.h-24
 				.opacity-0.transition-opacity.w-full(
 					class="h-full w-full py-8 md:p-0 flex justify-center xl:justify-start",
 					bind:this!="{ imageContent }",
@@ -59,12 +58,12 @@
 				)
 					//- col inner
 					input.h-8.text-oxford
-					.relative(
+					.relative.flex(
 						class="max-w-sm lg:max-w-sm xl:max-w-lg",
 						style=""
 					)
-						.absolute(class="bottom-0 right-0 w-2/5 h-1/3 -z-10")
+						.absolute(class="bottom-0 right-0 w-2/5 h-1/3")
 							ImageDotGrid
-						.static
+						.z-10
 							ImageTigers
 </template>

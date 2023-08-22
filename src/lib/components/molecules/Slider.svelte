@@ -13,6 +13,8 @@
 
 	$: currentPanel = 0;
 
+	const fadeOptions = { delay: 100, duration: 500 };
+
 	function next() {
 		if (panels.length > currentPanel + 1) currentPanel = currentPanel + 1;
 		else currentPanel = 0;
@@ -35,7 +37,7 @@
 					+if('currentPanel == index')
 						div(
 							draggable="true",
-							in:fade!="{{ delay:100, duration:500 }}",
+							in:fade!="{ fadeOptions }",
 							on:dragstart!="{()=> {currentPanel = (currentPanel < panels.length - 1) ? currentPanel + 1 : 0}}",
 							on:touchstart!="{()=> {currentPanel = (currentPanel < panels.length - 1) ? currentPanel + 1 : 0}}"
 						)

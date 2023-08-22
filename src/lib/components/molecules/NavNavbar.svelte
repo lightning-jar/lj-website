@@ -1,23 +1,26 @@
 <script lang="ts">
 	// components
-	import NavItem from "$atoms/NavItem.svelte";
+	import NavItemComponent from "$atoms/NavItem.svelte";
 	import NavMenu from "$molecules/NavMenu.svelte";
 
+	// types
+	import type { NavItem } from "$types/types";
+
 	// props
-	export let navData;
-	export let mainNav: HTMLElement | null = null;
-	export let section: string = "";
+	export let nav: NavItem[] = [];
+
+	// variables
+	let item: NavItem;
 </script>
 
 <template lang="pug">
+	svelte:options(immutable!="{ true }")
 	nav#mainNav.hidden(
-		class="lg:flex md:pt-[.35rem] min-h-[3.75rem] items-center xl:text-sub xl:min-h-[3.5rem]",
-		class!="{ section == 'home' ? 'navbar-bg-home' : '' }",
-		bind:this!="{ mainNav }"
+		class="lg:flex lg:gap-x-6 lg:pt-[.35rem] min-h-[3.75em] items-center xl:min-h-[3.5rem]"
 	)
-		+each('navData as navItem')
-			+if('navItem.type == "Menu"')
-				NavMenu(navItem!="{ navItem }")
+		+each('nav as item')
+			+if('item?.menu')
+				NavMenu(navItem!="{ item }")
 				+else
-					NavItem(navItem!="{ navItem }")
+					NavItemComponent(navItem!="{ item }")
 </template>

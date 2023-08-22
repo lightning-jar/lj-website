@@ -19,13 +19,13 @@
 			IconServices({slug})
 		.mb-16(class="sm:mb-0 max-w-sm")
 			h3.text-center.mb-5.font-serif.font-bold(class="md:text-left text-2xl text-cultured")
-				| {  @html heading  }
+				| { heading }
 				span
 					slot(name="heading")
 			p(
 				class="text-center md:text-left text-[1.2rem] leading-normal text-cultured/90 font-serif font-light md:pr-0"
 			)
-				| {  @html text  }
+				| { text }
 				span
 					slot(name="text")
 </template>
