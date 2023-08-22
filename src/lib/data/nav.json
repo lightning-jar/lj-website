@@ -1,0 +1,26 @@
+[
+	{
+		"label": "Services",
+		"rel": null,
+		"href": "/#services",
+		"title": "go to Services section"
+	},
+	{
+		"label": "Testimonials",
+		"rel": null,
+		"href": "/#testimonials",
+		"title": "go to Clients section"
+	},
+	{
+		"label": "Clients",
+		"rel": null,
+		"href": "/#clients",
+		"title": "go to Clients section"
+	},
+	{
+		"label": "Contact",
+		"rel": null,
+		"href": "/#contact",
+		"title": "go to Clients section"
+	}
+]
