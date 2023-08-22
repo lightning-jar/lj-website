@@ -1,6 +1,5 @@
 <script lang="ts">
 	// settings
-	import { pageXPadding } from "$settings/layoutSettings";
 
 	// props
 	export let classes = "bg-transparent";
@@ -8,6 +7,6 @@
 </script>
 
 <template lang="pug">
-	section.text-white.relative(class!="{ pageXPadding + ' ' + classes }", {id})
+	section.text-white.relative.page-x-padding(class!="{ classes }", {id})
 		slot
 </template>
