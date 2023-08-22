@@ -1,123 +1,133 @@
 <script lang="ts">
-	// import store
-	import { width } from "$stores/windowStore";
+	// store api
+	import { writable, type Writable } from "svelte/store";
+
+	// context api
+	import { setContext } from "svelte";
 
 	// import components
-	import NavLogoBlock from "$molecules/NavLogoBlock.svelte";
-	import HamburgerButton from "$atoms/ButtonHamburger.svelte";
-	import MainNavbar from "$molecules/NavNavbar.svelte";
-	import MobileMenu from "$molecules/NavMobileMenu.svelte";
+	import ButtonHamburger from "$atoms/ButtonHamburger.svelte";
 
-	// functions
-	import { slugify } from "$functions/helperFunctions";
-	import { inertElements, unInertElements } from "$functions/inertFunctions";
+	// import stores
+	import { mobileNavOpen } from "$stores/navStore";
 
-	// svelte functions
-	import { onMount } from "svelte";
+	// import assets
+	import { default as logoSVG } from "$assets/lightning-jar-logo.svg";
 
 	// import types
-	import type { NavDataItem, NavMenuItem } from "$types/navTypes";
+	import type { NavItem } from "$types/types";
 
-	// settings
-	import { pageXPadding } from "$settings/paddingSettings";
-	import { navData } from "$settings/navSettings";
-
-	// variables
-	export let hamburger: HTMLButtonElement | null = null;
-	let mobileNav: HTMLDivElement | null = null;
+	// local store
+	type BrandLinkStore = Writable<HTMLAnchorElement | null>;
+	export const brandLinkStore: BrandLinkStore = writable(null);
+	$: setContext("brandLinkStore", brandLinkStore);
 
 	// props
-	export let globalNav: HTMLHeadElement;
-	export let mainNav: HTMLDivElement | null = null;
-	export let section: string = "";
-	export let allMobileNavLinks: HTMLAnchorElement[] = [];
-	export let allMainNavLinks: HTMLAnchorElement[] = [];
-	export let windowWidth: number;
-
-	// on Mount
-	onMount(() => {
-		allMobileNavLinks = Array.from(document.querySelectorAll("#mobileNav a"));
-		allMainNavLinks = Array.from(
-			document.querySelectorAll("#mainNav a, #mainNav button"),
-		);
-		inertElements(allMobileNavLinks);
-	});
-
-	//- Reactive Props
-	$: mobileMenuOpen = false;
-	$: {
-		windowWidth = $width;
-	}
-
-	//- Reactive Expressions
-	//- Make main nav links inert (not focusable) when hidden
-	$: {
-		if (windowWidth >= 768 && !mobileMenuOpen) {
-			unInertElements(allMainNavLinks);
-		}
-		if (allMainNavLinks && windowWidth < 768 && !mobileMenuOpen) {
-			inertElements(allMainNavLinks);
-		}
-	}
-
-	// local functions
-	function closeMobileMenu() {
-		const query = document.querySelector("#svelte");
-		const svelteDiv: HTMLDivElement | null =
-			query instanceof HTMLDivElement ? query : null;
-		mobileMenuOpen = false;
-		document.body.style.overflowY = "scroll";
-		document.documentElement.style.overflowY = "scroll";
-		if (svelteDiv) svelteDiv.style.overflowY = "scroll";
-		if (svelteDiv) svelteDiv.style.position = "relative";
-		inertElements(allMobileNavLinks);
-	}
-	function openMobileMenu() {
-		const query = document.querySelector("#svelte");
-		const svelteDiv: HTMLDivElement | null =
-			query instanceof HTMLDivElement ? query : null;
-		mobileMenuOpen = true;
-		document.body.style.overflowY = "hidden";
-		document.documentElement.style.overflowY = "hidden";
-		if (svelteDiv) svelteDiv.style.overflowY = "hidden";
-		if (svelteDiv) svelteDiv.style.position = "fixed";
-		unInertElements(allMobileNavLinks);
-	}
-	function hamburgerClick(e: MouseEvent) {
-		mobileMenuOpen != true ? openMobileMenu() : closeMobileMenu();
-	}
+	export let nav: NavItem[];
 </script>
 
 <template lang="pug">
-	//- !!! fix nav background
-	header.relative.z-50.py-5(bind:this!="{ globalNav }")
-		//- Desktop
-		.mx-auto(class!="{ pageXPadding }")
-			.flex.justify-between.items-center.text-white(
-				class="md:space-x-10 min-h-[3.75rem] xl:min-h-[3.5rem]"
-			)
-				div
-					.mb-2
-						NavLogoBlock
-					.italic.text-sm A digital design, build, & brand studio.
-
-				HamburgerButton(
-					bind:hamburger!="{ hamburger }",
-					on:hamburgerClick!="{ hamburgerClick }",
-					{mobileMenuOpen}
-				)
-
-				MainNavbar(
-					bind:mainNav!="{ mainNav }",
-					{navData},
-					{section}
-				)
-
-		MobileMenu(
-			bind:mobileNav!="{ mobileNav }",
-			on:closeMobileMenu!="{ hamburgerClick }",
-			{hamburger},
-			{mobileMenuOpen},
-			{navData}
+	header#top(
+		class=`
+			flex
+			items-center
+			justify-between
+			md:space-x-10
+			min-h-[3.75rem]
+			page-x-padding
+			pt-4
+			relative
+			text-neutral-50
+			xl:min-h-[3.5rem]
+			z-50`
+	)
+		//- Logo
+		a(
+			class=`
+			block
+			group
+			h-auto
+			lg:w-[12.5rem]
+			!outline-none
+			relative
+			text-maximumYellow
+			w-48
+			underline-offset-8
+			xl:w-[13rem]
+			hover:after:opacity-100
+			focus:after:opacity-100
+			after:pointer-events-none
+			after:opacity-0
+			after:absolute
+			after:inset-0
+			after:border-b
+			after:border-b-2
+			after:border-current
+			after:translate-y-2
+			after:z-0`,
+			draggable="false",
+			href="/",
+			tile="Go to homepage"
 		)
+			span.sr-only Lightning Jar
+			picture.w-full.h-full.flex
+				source(
+					srcset!="{ logoSVG }",
+					type="image/svg+xml"
+				)
+				img(
+					class=`
+					block
+					pointer-events-none
+					`,
+					alt="Lightning Jar Logo",
+					draggable="false",
+					height=30,
+					src!="/images/lightning-jar-logo.png",
+					width=200
+				)
+				//-.italic.text-sm Technology &amp; brand studio.
+
+		ButtonHamburger
+
+		//- main nav
+		nav(
+			class=`
+			hidden
+			min-h-[3.75em]
+			text-neutral-50
+			--
+			lg:flex
+			lg:items-center
+			lg:gap-x-12
+			lg:pt-[.35rem]
+			xl:min-h-[3.5rem]
+			`
+		)
+			+each('nav as item')
+				a(
+					class=`
+						block
+						decoration-current
+						font-serif
+						opacity-90
+						!outline-none
+						text-18
+						transition-opacity
+						underline-offset-8
+						--
+						hover: opacity-100
+						hover:text-maximumYellow
+						hover:underline
+						--
+						focus: opacity-100
+						focus:text-maximumYellow
+						focus:underline
+						--
+						lg:text-19
+						xl:text-20
+						`,
+					href!="{ item.href }",
+					title!="{ item.title }"
+				) { item.label }
 </template>
