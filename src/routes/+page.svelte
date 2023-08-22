@@ -16,70 +16,57 @@
 	import StructuredData from "$atoms/StructuredData.svelte";
 	import WindowUpdater from "$molecules/WindowStoreUpdater.svelte";
 
-	// variables for head
-	const headAttributes = {
-		metaKeywords: ["Lightning Jar | Web Studio"],
-		metaDescription:
-			"Lightning Jar is a technology studio & digital agency helping businesses thrive in a world that is more digital & mobile every day",
-		metaSection: "home",
-		metaNofollow: false,
-		metaNoindex: false,
-		additionalMetaTags: [],
-		additionalLinkTags: [],
-	};
+	// types
+	import type { PageData } from "./$types";
+
+	export let data: PageData;
 
 	// content for open graph
-	const og = {
-		type: "website",
-		url: "https://lightningjar.com",
-		title: "Lightning Jar",
-		description:
-			"Lightning Jar is a technology studio & digital agency helping businesses thrive in a world that is more digital &amp; mobile every day",
-		images: [
-			{
-				src: "https://lightningjar.com/images/lightning-jar-og.jpg",
-				alt: "Lightning Jar Logo",
-				width: "800",
-				height: "600",
-			},
-		],
-	};
+	// const og = {
+	// 	type: "website",
+	// 	url: "https://lightningjar.com",
+	// 	title: "Lightning Jar",
+	// 	description:
+	// 		"Lightning Jar is a technology studio & digital agency helping businesses thrive in a world that is more digital &amp; mobile every day",
+	// 	images: [
+	// 		{
+	// 			src: "https://lightningjar.com/images/lightning-jar-og.jpg",
+	// 			alt: "Lightning Jar Logo",
+	// 			width: "800",
+	// 			height: "600",
+	// 		},
+	// 	],
+	// };
 </script>
 
 <template lang="pug">
+	div test
 	//- WindowUpdater
-	OpenGraph(
-		description!="{ og.description }",
-		images!="{ og.images }",
-		title!="{ og.title }",
-		type!="{ og.type }",
-		url!="{ og.url }"
-	)
-	StructuredData
-	MediaPlayer
-
-	HomeBanner
-	HomeOverview
-	HomeVideo
-	HomeServices
-	HomeTestimonials
-	HomeCustomers
-	HomeContact
-
-	HeadMeta(
-		additionalLinkTags!="{ headAttributes.additionalLinkTags }",
-		additionalMetaTags!="{ headAttributes.additionalMetaTags }",
-		metaDescription!="{ headAttributes.metaDescription }",
-		metaKeywords!="{ headAttributes.metaKeywords }",
-		metaNofollow!="{ headAttributes.metaNofollow }",
-		metaNoindex!="{ headAttributes.metaNoindex }",
-		metaSection!="{ headAttributes.metaSection }"
-	)
-
-	//- HomeOverview(
-	//- 	overviewContent!="{ overviewContent }",
-	//- 	terminalsData!="{ terminalsData }",
-	//- 	clustersData!="{clustersData}"
+	//- OpenGraph(
+	//- 	description!="{ og.description }",
+	//- 	images!="{ og.images }",
+	//- 	title!="{ og.title }",
+	//- 	type!="{ og.type }",
+	//- 	url!="{ og.url }"
 	//- )
-	//- //HomeAboutTiles("{tilesData}")
+	//- StructuredData
+	//- MediaPlayer
+
+	//- HomeBanner
+	//- HomeOverview
+	//- HomeVideo
+	//- HomeServices
+	//- HomeTestimonials
+	//- HomeCustomers
+	//- HomeContact
+
+	//- HeadMeta(
+	//- 	additionalLinkTags!="{ headAttributes.additionalLinkTags }",
+	//- 	additionalMetaTags!="{ headAttributes.additionalMetaTags }",
+	//- 	metaDescription!="{ headAttributes.metaDescription }",
+	//- 	metaKeywords!="{ headAttributes.metaKeywords }",
+	//- 	metaNofollow!="{ headAttributes.metaNofollow }",
+	//- 	metaNoindex!="{ headAttributes.metaNoindex }",
+	//- 	metaSection!="{ headAttributes.metaSection }"
+	//- )
 </template>
