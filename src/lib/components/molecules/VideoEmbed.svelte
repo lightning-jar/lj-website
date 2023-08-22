@@ -4,7 +4,7 @@
 	import ButtonVideo from "$atoms/ButtonVideo.svelte";
 
 	// settings
-	import { imagesFolder } from "$settings/mediaSettings";
+	const imagesFolder = "images";
 
 	// props
 	export let youTube = "";
@@ -33,7 +33,7 @@
 	.relative.w-full
 		//- button
 		.absolute.inset-0.flex.justify-center.items-center
-			ButtonVideo({youTube}) Watch Me
+			ButtonVideo(youTube!="{ youTube }") Watch Me
 
 		//- video thumbnail
 		PictureStack(
