@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer utilities {
+	.page-x-padding {
+		@apply px-4 sm:px-10 lg:px-16 xl:px-20;
+	}
+	.main-y-padding {
+		@apply py-12 sm:py-16;
+	}
 	.underline-heading {
 		@apply underline underline-offset-4 decoration-maximumYellow/40 decoration-4 sm:decoration-[6px] md:decoration-8;
 	}
