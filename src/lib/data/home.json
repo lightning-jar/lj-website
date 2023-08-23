@@ -1,0 +1,64 @@
+{
+	"banner": {
+		"animatedHeadline": {
+			"staticBegin": "The world is <br>getting more",
+			"animatedWords": ["digital.", "mobile.", "remote.", "crazy."],
+			"staticEnd": "digital."
+		},
+		"staticHeadline": "Whe word is getting more digital every day.",
+		"text": "Since 2002, Lightning Jar digital agency has been helping businesses thrive in a world that is more digital & more competitive every day."
+	},
+	"servicesSection": {
+		"heading": "<span>Technology, Design &amp; Brand:&nbsp;&nbsp;</span><span class=\"text-neutral-50\">Services</span>",
+		"tiles": [
+			{
+				"heading": "Web&nbsp;Design &<br> Development",
+				"iconSlug": "icon-web-design",
+				"text": "Our user-focused approach to web design and development is engineered to help your organization quickly strategize, prioritize, and execute digital experiences that matter to customers."
+			},
+			{
+				"heading": "Custom&nbsp;Software<br> & Mobile Apps",
+				"iconSlug": "icon-custom-software",
+				"text": "Companies with great ideas on how to digitize their services or solutions, or solve a business challenge through custom software often need help turning their vision into reality. That's where we come in."
+			},
+			{
+				"heading": "eCommerce,&nbsp;PIM<br> DAM, MDM",
+				"iconSlug": "icon-ecommerce",
+				"text": "Our technology studio specializes in PIM, DAM, MDM implementations and eCommerce transformations leveraging the <a href=\"/blog/what-is-pimcore\" class=\"text-underline\">power of Pimcore</a> -- the world's most flexible and powerful unified digital platform."
+			},
+			{
+				"heading": "Brand&nbsp;Identity&nbsp;&<br> Naming",
+				"iconSlug": "icon-kiosk",
+				"text": "New company? New Product? Let our branding and naming team help you uncover the perfect name, graphics and messaging to help your brand thrive in both digital and analog worlds."
+			},
+			{
+				"heading": "Sales & Pricing Tools",
+				"iconSlug": "icon-sales-tools",
+				"text": "What are the challenges and friction points slowing down your sales team or agents in the call center? Too often the sales organization is the last to benefit from digital transformations -- ask yourself what happens if you turn that equation around?"
+			},
+			{
+				"heading": "UX Optimization",
+				"iconSlug": "icon-ux",
+				"text": "There's a big gap between usability and great user experience. Our user experience team can help you push beyond interfaces that simply work to best-in-class experiences that increase affinity, encourage sales and encourage customer loyalty."
+			}
+		]
+	},
+	"videoSection": {
+		"thumbnailSrc": "https://res.cloudinary.com/dn0pqjjbq/image/upload/e_auto_contrast,f_auto,q_59/v1692798395/svelte-thumb_cziiar.avif",
+		"youTubeCode": "kMlkCYL9qo0"
+	},
+	"overviewSection": {
+		"touts": [
+			{
+				"heading": "Technology",
+				"subheading": "We specialize in web-based technology transformations that give our clients an edge.",
+				"text": "Whether you need to upgrade your eCommerce, build a mobile app, SaaS product, or best-in-class website, our strategists, designers and technologists can help you fully articulate & execute your vision."
+			},
+			{
+				"heading": "Design",
+				"subheading": "Our rigorous design process ensures happy customers one user experience at a time.",
+				"text": "Our strategists, designers, copywriters and multimedia creators work together to find the content solutions and user experiences your customers want and execute them in ways that make them compelling, on-brand & effective."
+			}
+		]
+	}
+}
