@@ -1,5 +1,5 @@
 {
-	"cSpell.words": [],
+	"cSpell.words": ["nbsp"],
 	"cSpell.ignoreWords": [],
 	"editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
 	"editor.formatOnPaste": false, // required
