@@ -1,6 +1,9 @@
 // types
 import type { PageServerLoadEvent } from "./$types";
 
+// data
+import { default as content } from "$data/home.json";
+
 export async function load(event: PageServerLoadEvent) {
 	// const path = event.url.pathname;
 
@@ -12,9 +15,8 @@ export async function load(event: PageServerLoadEvent) {
 	const metaTitle = `Lightning Jar | Technology Studio & Digital Agency`;
 
 	return {
-		props: {
-			metaDescription,
-			metaTitle,
-		},
+		content,
+		metaDescription,
+		metaTitle,
 	};
 }

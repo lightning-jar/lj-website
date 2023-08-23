@@ -22,51 +22,52 @@
 </script>
 
 <template lang="pug">
-	.bg-neutral-100.text-OxfordBlue.relative.page-x-padding.w-full.flex.justify-center
-		//- transition shape
-		TransitionShapeTop(
-			classes!="{ 'text-neutral-100 rotate-180 -translate-y-[12vw]' }"
-		)
+	//- .bg-neutral-100.text-OxfordBlue.relative.page-x-padding.w-full.flex.justify-center
+	//- transition shape
+	//- div
+	//- 	TransitionShapeTop(
+	//- 		classes!="{ 'text-neutral-100 rotate-180 -translate-y-[12vw]' }"
+	//- 	)
 
-		.pb-20(class="py-20 pb-20")
-			.relative.text-oxfordBlue(class="md:grid grid-cols-3")
-				+each('content as item, index')
+	.pb-20(class="py-20 pb-20")
+		.relative.text-oxfordBlue(class="md:grid grid-cols-3")
+			+each('content as item, index')
+				div(
+					class!="max-w-md lg:max-w-lg font-serif { index === 0 ? 'lg:pl-8' : 'text-right lg:pr-8' }"
+				)
+					//- heading
+					h2(
+						class=`
+						mb-4
+						sm:text-[2.25rem]
+						lg:text-[2.5rem]
+						xl:text-[3rem]
+						font-bold
+						text-4xl
+						`
+					) { item.heading }
+
+					//- subheading
 					div(
-						class!="max-w-md lg:max-w-lg font-serif { index === 0 ? 'lg:pl-8' : 'text-right lg:pr-8' }"
+						class=`
+						italic
+						text-18
+						sm:text-16
+						lg:text-17
+						text-oxfordDark
+						font-bold
+						font-sans
+						mb-4
+						opacity-90
+						`
 					)
-						//- heading
-						h2(
-							class=`
-							mb-4
-							sm:text-[2.25rem]
-							lg:text-[2.5rem]
-							xl:text-[3rem]
-							font-bold
-							text-4xl
-							`
-						) { item.heading }
+						| { item.subheading }
 
-						//- subheading
-						div(
-							class=`
-							italic
-							text-18
-							sm:text-16
-							lg:text-17
-							text-oxfordDark
-							font-bold
-							font-sans
-							mb-4
-							opacity-90
-							`
-						)
-							| { item.subheading }
+					//- paragraph
+					p.text-18.opacity-90(class="sm:text-16") { item.paragraph }
 
-						//- paragraph
-						p.text-18.opacity-90(class="sm:text-16") { item.paragraph }
-
-					//- plus
-					+if('index === 0')
-						.flex.w-full.h-full.justify-center.items-center
-							div(class="font-normal text-[50px] text-androidGreen") +
+				//- plus
+				+if('index === 0')
+					.flex.w-full.h-full.justify-center.items-center
+						div(class="font-normal text-[50px] text-androidGreen") +
 </template>
