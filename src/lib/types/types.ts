@@ -7,3 +7,10 @@ export interface NavItem {
 	type?: string;
 	menu?: NavItem[];
 }
+
+export interface Tile {
+	[key: string]: string | undefined;
+	iconSlug?: string;
+	heading?: string;
+	text?: string;
+}
