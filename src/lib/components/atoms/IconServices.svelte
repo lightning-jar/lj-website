@@ -1,6 +1,20 @@
 <script lang="ts">
-	// components
-	import PictureStack from "$atoms/PictureStack.svelte";
+	// assets
+	import { default as iconCustomSoftware } from "$assets/icon-custom-software.svg";
+	import { default as iconEcommerce } from "$assets/icon-ecommerce.svg";
+	import { default as iconKiosk } from "$assets/icon-kiosk.svg";
+	import { default as iconUX } from "$assets/icon-ux.svg";
+	import { default as iconWebDesign } from "$assets/icon-web-design.svg";
+	import { default as iconSalesTools } from "$assets/icon-sales-tools.svg";
+
+	const icons: { [key: string]: unknown } = {
+		"icon-custom-software": iconCustomSoftware,
+		"icon-ecommerce": iconEcommerce,
+		"icon-kiosk": iconKiosk,
+		"icon-ux": iconUX,
+		"icon-web-design": iconWebDesign,
+		"icon-sales-tools": iconSalesTools,
+	};
 
 	// global functions
 	import { deslugify } from "$functions/helperFunctions";
@@ -13,15 +27,12 @@
 </script>
 
 <template lang="pug">
-	PictureStack(
-		classes="block",
+	img(
+		class="w-full h-auto block",
 		alt!="{ alt }",
-		breakpoints!="{ noBreakpoint }",
-		fallback!="{slug}.png",
-		folder="icons",
 		height="48",
-		slugCommon!="{ slug }",
-		sourceFormats!="{ ['svg'] }",
+		loading="lazy",
+		src!="{ icons[slug] }",
 		width="48"
 	)
 </template>
