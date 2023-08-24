@@ -53,14 +53,14 @@
 			text: "Beam Suntory found a single source of truth for marketing data with Pimcore. Do nisi laborum cillum magna officia ullamco excepteur ullamco labore ad culpa dolor cupidatat exercitation amet duis consequat consectetur ea pariatur. ",
 			url: "https://pimcore.com/en/customers/suntory-group_c132768",
 		},
-		/*{
-			imageAlt: 'Construction superintendent',
-			imageSlug: 'blueline-tile',
-			logoAlt: 'Blueline Rental Logo',
-			logoSlug: 'blueline-logo',
-			text: 'Blueline Rental transforms customer experience and product data management with the power of Pimcore.',
-			url: 'https://pimcore.com/en/customers/united-rentals-inc_c7709'
-			},*/
+		{
+			imageAlt: "Construction superintendent",
+			imageSlug: "blueline-tile",
+			logoAlt: "Blueline Rental Logo",
+			logoSlug: "blueline-logo",
+			text: "Blueline Rental transforms customer experience and product data management with the power of Pimcore.",
+			url: "https://pimcore.com/en/customers/united-rentals-inc_c7709",
+		},
 		{
 			category: "Customer Story",
 			color: "#E6E0F3",
@@ -101,43 +101,22 @@
 </script>
 
 <template lang="pug">
-	SectionDark(
-		classes!="{ 'py-24 bg-gradient-to-b from-oxfordDark via-oxford to-oxfordDark border-t border-t-titaniumYellow ' }",
-		id!="{ 'clients' }"
-	)
-		//- heading
-		.text-center.mt-20.mb-20.grid-cols-5.gap-8(
-			class="hidden md:grid md:text-left lg:grid-cols-9"
-		)
-			.col-span-2.mb-4(class="md:mb-0 lg:col-span-4")
-				TextHeading(classes!="{ 'mb-0 inline' }") Every client has unique challenges to solve
-				span.inline-block.ml-8 ( that's our jam )
-			.col-span-3.flex(class="lg:col-span-5 items-end")
-				p.prose-lg.hidden Doing what we do, we get to meet a lot of different people from very different industries. Each day we get to learn something new, think about something we've never considered before. There's true pleasure for us in confronting and solving novel problems.
+	section#customers(class!="page-x-padding py-16 border-t-1 border-t-neutral-50/10")
+		//- heading -- lg and above
+		h2.hidden.mb-12.font-bold.max-w-sm(class="lg:block text-[2em]") Every client has unique challenges to solve.
 
 		//- tiles grid
-		.gap-8.grid-cols-2.mb-20(class="hidden sm:grid md:grid-cols-3 lg:grid-cols-3")
-			+each('customers as customer')
-				.rounded.outline.px-0.py-6(
-					class="sm:bg-white/5 outline-white/10",
+		div(class="hidden lg:grid lg:grid-cols-3 lg:gap-8")
+			+each('customers as tile')
+				.rounded.outline.px-0.pb-6.text-neutral-50(
+					class="sm:bg-neutral-50/[3%] outline-neutral-50/[1%]",
 					on:mouseenter|stopPropagation!="{ hoverOnTile }",
 					on:mouseleave|stopPropagation!="{ hoverOffTile }"
 				)
-					TileCustomer(
-						category!="{ customer.category }",
-						color!="{ customer.color }",
-						customer!="{ customer.customer }",
-						imageAlt!="{ customer.imageAlt }",
-						imageSlug!="{ customer.imageSlug }",
-						logoAlt!="{ customer.logoAlt }",
-						logoSlug!="{ customer.logoSlug }",
-						tags!="{ customer.tags }",
-						text!="{ customer.text }",
-						url!="{ customer.url }"
-					)
+					TileCustomer(tile!="{ tile }")
 
 		//- slider
-		div(class="sm:hidden")
+		div(class="lg:hidden")
 			Slider(
 				classes!="{ '' }",
 				panels!="{ customers }"
@@ -147,16 +126,5 @@
 					let:panel,
 					slot="panel"
 				)
-					TileCustomer(
-						category!="{ panel.category }",
-						color!="{ panel.color }",
-						customer!="{ panel.customer }",
-						imageAlt!="{ panel.imageAlt }",
-						imageSlug!="{ panel.imageSlug }",
-						logoAlt!="{ panel.logoAlt }",
-						logoSlug!="{ panel.logoSlug }",
-						tags!="{ panel.tags }",
-						text!="{ panel.text }",
-						url!="{ panel.url }"
-					)
+					TileCustomer(tile!="{ panel }")
 </template>

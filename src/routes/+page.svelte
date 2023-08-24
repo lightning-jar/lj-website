@@ -180,8 +180,9 @@
 					items-center
 					page-x-padding
 					py-20
-					lg:gap-x-8
+					lg:gap-x-10
 					lg:grid-cols-[1fr,24px,1fr]
+					lg:place-items-start
 					xl:pt-8
 					xl:pb-16
 					`
@@ -193,7 +194,7 @@
 							items-top
 							justify-self-center
 							text-center
-							lg:max-w-sm
+							xl:max-w-[30vw]
 							{ index === 0 ? 'lg:justify-self-start lg:text-left' : 'lg:text-right lg:justify-self-end' }`
 					)
 						//- heading
@@ -204,6 +205,7 @@
 								mb-2
 								text-32
 								sm:text-[2em]
+								md:text-[1.65em]
 								`
 						) { item.heading }
 
@@ -218,6 +220,7 @@
 								mb-4
 								opacity-90
 								sm:px-0
+								lg:text-[1em]
 								`
 						) {  @html item.subheading  }
 
@@ -226,7 +229,7 @@
 
 					//- plus
 					+if('index === 0')
-						.justify-self-center(class="md:block text-[2.5em] w-fit") +
+						.justify-self-center(class="md:block text-[2.5em] w-fit lg:place-self-center") +
 
 	//- Video Section
 	+if('data?.content?.videoSection')
@@ -353,6 +356,7 @@
 			class=`
 			border-y
 			border-neutral-100/10
+			bg-neutral-100/[1%]
 			flex
 			h-screen
 			items-center
@@ -379,6 +383,6 @@
 				)
 					Testimonial(panel!="{ panel }")
 
-	//- HomeCustomers
+	HomeCustomers
 	//- HomeContact
 </template>

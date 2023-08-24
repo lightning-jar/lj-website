@@ -47,9 +47,10 @@
 						)
 		.relative.grid.grid-cols-1(
 			class=`
-				lg:absolute
-				lg:inset-0
-				lg:place-content-center
+				sm:absolute
+				sm:inset-0
+				sm:place-content-end
+				md:place-content-center
 		`
 		)
 			//- buttons
@@ -67,7 +68,7 @@
 							sm:py-2
 							sm:bg-neutral-100/5
 							sm:hover:bg-neutral-100/20
-							lg:h-[3em]
+							sm:h-[3em]
 							{ rotation }
 							`,
 						on:click!="{ previous }"

@@ -4,20 +4,37 @@
 	import IconArrowRight from "$atoms/IconArrowRight.svelte";
 	import ShapeTriangle from "$atoms/ShapeTriangle.svelte";
 
+	// types
+	interface Tile {
+		category: string;
+		color: string;
+		customer: string;
+		imageAlt: string;
+		imageSlug: string;
+		logoAlt: string;
+		logoSlug: string;
+		tags: string[];
+		text: string;
+		url: string;
+	}
+
 	// props
-	export let category = "test category";
-	export let color = "#EAF81D";
-	// export let customer = "";
-	export let imageAlt = "";
-	export let imageSlug = "";
-	export let logoAlt = "";
-	export let logoSlug = "";
-	export let text = "";
-	export let tags: string[] = [];
-	export let url = "";
+	export let tile: Tile;
+
+	// reactive variables
+	$: category = tile.category ?? "";
+	$: color = tile.color ?? "";
+	$: customer = tile.customer ?? "";
+	$: imageAlt = tile.imageAlt ?? "";
+	$: imageSlug = tile.imageSlug ?? "";
+	$: logoAlt = tile.logoAlt ?? "";
+	$: logoSlug = tile.logoSlug ?? "";
+	$: text = tile.text ?? "";
+	$: tags = tile.tags ?? [];
+	$: url = tile.url ?? "";
 
 	// variables
-	const image = {
+	$: image = {
 		alt: imageAlt,
 		classes: "opacity-full",
 		draggable: "false",
@@ -27,18 +44,6 @@
 		loading: "lazy",
 		width: "810",
 		slugCommon: imageSlug,
-		style: null,
-	};
-	const logo = {
-		alt: logoAlt,
-		classes: "!w-auto !h-full",
-		draggable: "false",
-		height: "32",
-		fallback: `${logoSlug}.png`,
-		folder: "images",
-		loading: "lazy",
-		width: "178",
-		slugCommon: logoSlug,
 		style: null,
 	};
 </script>
@@ -57,48 +62,40 @@
 		//- logo
 		.flex.justify-center.w-full
 			.h-auto.border-y-0.border-white.py-4.border-opacity-60(class="w-72 sm:hidden")
-				PictureStack(
-					classes!="{ logo.classes }",
-					alt!="{ logo.alt }",
-					breakpoints!="{ logo.breakpoints }",
-					fallback!="{ logo.fallback }",
-					folder!="{ logo.folder }",
-					height!="{ logo.height }",
-					loading!="{ logo.loading }",
-					slugCommon!="{ logo.slugCommon }",
-					style!="{ logo.style }",
-					width!="{ logo.width }"
+				img(
+					class="w-auto h-full",
+					alt!="{ logoAlt }",
+					height=32,
+					loading="lazy",
+					src!="{ `/images/${logoSlug}.avif` }",
+					width=178
 				)
 
 		//- tile header
-		.relative.overflow-hidden.mb-6.rounded-lg(class="bg-white/0")
-			PictureStack(
-				classes!="{ image.classes }",
-				alt!="{ image.alt }",
-				breakpoints!="{ image.breakpoints }",
-				fallback!="{ image.fallback }",
-				folder!="{ image.folder }",
-				height!="{ image.height }",
-				loading!="{ image.loading }",
-				slugCommon!="{ image.slugCommon }",
-				style!="{ image.style }",
-				width!="{ image.width }"
-			)
+		.relative.overflow-hidden.mb-6.rounded-t-lg(class="bg-white/0")
+			.w-full.relative(class="pt-[70%]")
+				picture.flex.absolute.inset-0(class="bg-neutral-100/5")
+					source(srcset!="{ `/images/${imageSlug}.avif` }")
+					source(srcset!="{ `/images/${imageSlug}.webp` }")
+					img(
+						class="min-w-full min-h-full object-cover object-center",
+						alt!="{ imageAlt }",
+						height=648,
+						loading="lazy",
+						src!="{ `/images/${imageSlug}.png` }",
+						width=810
+					)
 
 		//- logo position two
 		.hidden.justify-center.w-full.bottom-0.z-10.mb-4(class="sm:flex bg-oxford/20")
 			div(class="w-3/4")
-				PictureStack(
-					classes!="{ logo.classes }",
-					alt!="{ logo.alt }",
-					breakpoints!="{ logo.breakpoints }",
-					fallback!="{ logo.fallback }",
-					folder!="{ logo.folder }",
-					height!="{ logo.height }",
-					loading!="{ logo.loading }",
-					slugCommon!="{ logo.slugCommon }",
-					style!="{ logo.style }",
-					width!="{ logo.width }"
+				img(
+					class="w-auto h-full",
+					alt!="{ logoAlt }",
+					height=32,
+					loading="lazy",
+					src!="{ `/images/${logoSlug}.avif` }",
+					width=178
 				)
 
 		//- tile body
