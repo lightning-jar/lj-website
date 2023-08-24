@@ -7,7 +7,7 @@
 		@apply bg-gradient-to-r from-oxford to-oxford via-oxfordDark;
 	}
 	.page-x-padding {
-		@apply px-4 sm:px-10 lg:px-16 xl:px-20;
+		@apply px-4 sm:px-10 lg:px-16 xl:px-20 2xl:px-[10vw];
 	}
 	.main-y-padding {
 		@apply py-12 sm:py-16;
