@@ -80,7 +80,7 @@
 </script>
 
 <template lang="pug">
-	.flex.items-center.text-neutral-100(class="md:hidden")
+	.flex.items-center.text-neutral-100(class="xl:hidden")
 		button.group(
 			class!="{btnBaseClasses} {btnFocusClasses} {btnFocusVisibleClasses} {btnHoverClasses}",
 			active!="{ $mobileNavOpen }",
