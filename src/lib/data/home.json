@@ -1,12 +1,12 @@
 {
 	"banner": {
 		"animatedHeadline": {
-			"staticBegin": "The world is <br>getting more",
+			"staticBegin": "The world is getting more",
 			"animatedWords": ["digital.", "mobile.", "remote.", "crazy."],
 			"staticEnd": "digital."
 		},
-		"staticHeadline": "Whe word is getting more digital every day.",
-		"text": "Since 2002, Lightning Jar digital agency has been helping businesses thrive in a world that is more digital & more competitive every day."
+		"staticHeadline": "The world is getting<br>more digital every day.",
+		"text": "Since 2002, Lightning Jar has been helping businesses thrive in a world that is more digital every day."
 	},
 	"servicesSection": {
 		"heading": "<span>Technology, Design &amp; Brand:&nbsp;&nbsp;</span><span class=\"text-neutral-50\">Services</span>",
@@ -51,13 +51,71 @@
 		"touts": [
 			{
 				"heading": "Technology",
-				"subheading": "Technology transformations that make a difference.",
+				"subheading": "Technology transformations that&nbsp;make&nbsp;a&nbsp;difference.",
 				"text": "Whether you need to upgrade your eCommerce, build a mobile app, SaaS product, or best-in-class website, our strategists, designers and technologists can help you fully articulate & execute your vision."
 			},
 			{
 				"heading": "Design",
-				"subheading": "Happy customers one experience at a time.",
+				"subheading": "Happy customers one design experience&nbsp;at&nbsp;a&nbsp;time.",
 				"text": "Our strategists, designers, copywriters and multimedia creators work together to find the content solutions and user experiences your customers want and execute them in ways that make them compelling, on-brand & effective."
+			}
+		]
+	},
+	"testimonialsSection": {
+		"testimonials": [
+			{
+				"category": "Brand & Technology",
+				"quote": "No other vendor delivers the <span class=\"underline-heading\">depth of strategy</span> that Lightning&nbsp;Jar does.",
+				"imageSlug": "david-h-testimonial",
+				"name": "David Heard",
+				"title": "CMO",
+				"companyName": "SecureLogix",
+				"companyUrl": "https://securelogix.com"
+			},
+			{
+				"category": "Pimcore Expertise",
+				"quote": "Lightning Jar gave us a single source of truth for marketing data via Pimcore.",
+				"imageSlug": "liz-s-testimonial",
+				"name": "Liz Sterret",
+				"title": "Sr. Manager Marketing & Content",
+				"companyName": "Beam Suntory",
+				"companyUrl": "https://www.beamsuntory.com/"
+			},
+			{
+				"category": "PIM, Ecommerce, Mobile Apps",
+				"quote": "Their technology team was my <span class=\"underline-heading\">secret weapon</span> ...they helped me execute big ideas.",
+				"imageSlug": "frank-r-testimonial",
+				"name": "Frank Roth",
+				"title": "Former CMO",
+				"companyName": "United Rentals / BlueLine",
+				"companyUrl": "https://unitedrentals.com/"
+			},
+			{
+				"category": "Marketing & Brand Strategy",
+				"quote": "LJ helped us <span class=\"underline-heading\">focus and clarify</span> our brand vision during exponential growth.",
+				"imageSlug": "elizabeth-g-testimonial",
+				"name": "Elizabeth Grojean",
+				"title": "CEO & Founder",
+				"companyName": "Baloo Living",
+				"companyUrl": "https://balooliving.com/"
+			},
+			{
+				"category": "SAAS & Remote Solutions",
+				"quote": "They helped us <span class=\"underline-heading\">speed to launch</span> with our flagship remote SaaS solution.",
+				"imageSlug": "duane-v-testimonial",
+				"name": "Dr. Duane Varan",
+				"title": "CEO & Founder",
+				"companyName": "Media Science / Hark",
+				"companyUrl": "https://harkconnect.com/"
+			},
+			{
+				"category": "Kiosks / POS / Tablet Apps",
+				"quote": "Our in-store app project was foundering... until LJ <span class=\"underline-heading\">saved the day</span>.",
+				"imageSlug": "mubashir-m-testimonial",
+				"name": "Mubashir Memon",
+				"title": "Product Manager",
+				"companyName": "Northgate Markets",
+				"companyUrl": "https://prospera.northgatemarket.com/"
 			}
 		]
 	}
