@@ -60,22 +60,19 @@
 	+if('data?.content?.banner')
 		section#banner(
 			class=`
-				bg-gradient-to-r
-				font-serif
-				from-oxford
+				grid
+				grid-cols-1
 				page-x-padding
-				pb-[14vw]
-				pt-24
+				pb-[10vw]
+				pt-10
 				relative
 				text-neutral-100
 				text-18
-				to-oxford
-				top-0
-				via-oxfordDark
-				w-full
-				md:grid
+				sm:pt-16
 				md:grid-cols-2
-				md:items-center`
+				md:items-center
+				md:pt-20
+				xl:pt-24`
 		)
 			//- column 1
 			div(
@@ -95,15 +92,16 @@
 			)
 				//- animated headline
 				+if('data?.content?.banner?.animatedHeadline?.animatedWords[0]')
-					+const('animatedHeadline = data.content.banner.animatedHeadline')
-					AnimatedHeadline(animatedHeadline!="{ animatedHeadline }")
+					AnimatedHeadline(
+						animatedHeadline!="{ data.content.banner.animatedHeadline }"
+					)
 
 				//- banner text
 				+if('data?.content?.banner?.text')
-					h1.leading-normal(class="xl:text-20") { data.content.banner.text }
+					h1.hidden.leading-relaxed(class="sm:block text-19 xl:text-20 opacity-90") { data.content.banner.text }
 
 			//-column 2 -- image content
-			div(
+			.px-6(
 				class=`
 					flex
 					h-full
@@ -113,6 +111,7 @@
 					py-8
 					relative
 					w-full
+					sm:px-0
 					lg:max-w-sm
 					xl:justify-start
 					xl:max-w-lg`
@@ -120,70 +119,79 @@
 				GraphicDots
 				ImageTigers
 
+			//- mobile p
+			+if('data?.content?.banner?.text')
+				h1.mt-8.text-center.leading-relaxed(class="sm:hidden text-19 xl:text-20 opacity-90") { data.content.banner.text }
+
 	//- Overview Section
 	+if('data?.content?.overviewSection')
-		section#overview(
-			class=`
-			bg-neutral-100
-			flex
+		section#overview(class=`
 			justify-center
-			page-x-padding
 			relative
-			text-oxford
+			text-neutral-100
 			w-full
-		`
-		)
+		`)
 			//- transition shape
-			TransitionShapeTop(classes="text-neutral-100 rotate-180 -translate-y-[12vw]")
+			//- TransitionShapeTop(
+			//- 	classes="!text-maximumYellow/40 rotate-180 //-translate-y-[12vw]"
+			//- )
+			//- transition shape
+			div(class!="h-[12vw] background-gradient-oxford"): svg(
+				class="h-full w-full fill-neutral-50/[1%] rotate-180",
+				preserveAspectRatio="none",
+				viewBox="0 0 500 500"
+			): polygon(
+				points="0,0 0,500 500,0"
+			)
 
 			//- touts
-			.pb-20(class="py-20 pb-20")
-				.relative.text-oxfordBlue(class="grid-cols-3 md:grid pb-20 py-20 ")
-					+each('data?.content?.overviewSection?.touts as item, index')
-						div(
-							class!="max-w-md lg:max-w-lg font-serif { index === 0 ? 'lg:pl-8' : 'text-right lg:pr-8' }"
-						)
-							//- heading
-							h2(
-								class=`
-								mb-4
+			div(
+				class="bg-neutral-50/[1%] w-full grid grid-cols-1 sm:grid-cols-3 page-x-padding md:grid pb-20 py-20 items-center"
+			)
+				+each('data?.content?.overviewSection?.touts as item, index')
+					div(
+						class!="text-center max-w-md lg:max-w-md { index === 0 ? 'justify-self-start sm:text-left' : 'sm:text-right justify-self-end' }"
+					)
+						//- heading
+						h2(
+							class=`
+								mb-2
 								sm:text-[2.25rem]
 								lg:text-[2.5rem]
 								xl:text-[3rem]
+								leading-relaxed
 								font-bold
-								text-4xl
+								text-32
 								`
-							) { item.heading }
+						) { item.heading }
 
-							//- subheading
-							div(
-								class=`
+						//- subheading
+						.px-6(
+							class=`
 								italic
-								text-18
+								text-19
 								sm:text-16
 								lg:text-17
-								text-oxfordDark
+								text-maximumYellow
 								font-bold
 								font-sans
 								mb-4
 								opacity-90
 								`
-							)
-								| { item.subheading }
+						) { item.subheading }
 
-							//- paragraph
-							p.text-18.opacity-90(class="sm:text-16") { item.text }
+						//- paragraph
+						p.text-19.opacity-90.leading-relaxed(class="sm:text-16 opacity-90") { item.text }
 
-						//- plus
-						+if('index === 0')
-							.flex.w-full.h-full.justify-center.items-center
-								div(class="font-normal text-[50px] text-androidGreen") +
+					//- plus
+					+if('index === 0')
+						.justify-self-center.text-neutral-100(class="py-4 text-40 sm:text-50") +
 
 	//- Video Section
 	+if('data?.content?.videoSection')
 		section#video-section(
 			class=`
-				bg-neutral-100
+				bg-neutral-100/[1%]
 				grid
 				grid-cols-1
 				pb-16
@@ -197,7 +205,6 @@
 			VideoEmbed(
 				classes=`
 						border-primary
-						border-t
 						flex
 						justify-center
 						lg:border-none
@@ -212,7 +219,6 @@
 	+if('data?.content?.servicesSection')
 		section#services(
 			class=`
-				bg-gradient-to-b
 				border-b
 				border-white/20
 				from-oxfordDark
@@ -220,8 +226,6 @@
 				py-24
 				relative
 				text-neutral-100
-				to-oxfordDark
-				via-oxford
 				sm:py-24
 				md:py-36`
 		)

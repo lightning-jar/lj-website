@@ -32,9 +32,7 @@
 	.pb-20(class="py-20 pb-20")
 		.relative.text-oxfordBlue(class="md:grid grid-cols-3")
 			+each('content as item, index')
-				div(
-					class!="max-w-md lg:max-w-lg font-serif { index === 0 ? 'lg:pl-8' : 'text-right lg:pr-8' }"
-				)
+				div(class!="max-w-md lg:max-w-lg { index === 0 ? 'lg:pl-8' : 'text-right lg:pr-8' }")
 					//- heading
 					h2(
 						class=`
