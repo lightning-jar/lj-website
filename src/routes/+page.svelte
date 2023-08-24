@@ -13,11 +13,14 @@
 	import HomeServices from "$organisms/HomeServices.svelte";
 	import HomeTestimonials from "$organisms/HomeTestimonials.svelte";
 	import HomeContact from "$organisms/HomeContact.svelte";
+	import IconServices from "$atoms/IconServices.svelte";
 	import MediaPlayer from "$organisms/MediaPlayer.svelte";
 	import OpenGraph from "$atoms/OpenGraph.svelte";
 	import StructuredData from "$atoms/StructuredData.svelte";
 	import WindowUpdater from "$molecules/WindowStoreUpdater.svelte";
 	import VideoEmbed from "$molecules/VideoEmbed.svelte";
+	import Slider from "$molecules/Slider.svelte";
+	import Testimonial from "$molecules/Testimonial.svelte";
 	import TileServices from "$molecules/TileServices.svelte";
 	// import TransitionShapeBottom from "$molecules/TransitionShapeBottom.svelte";
 	import TransitionShapeTop from "$molecules/TransitionShapeTop.svelte";
@@ -64,15 +67,16 @@
 				grid-cols-1
 				page-x-padding
 				pb-[10vw]
-				pt-10
+				pt-0
 				relative
 				text-neutral-100
-				text-18
 				sm:pt-16
-				md:grid-cols-2
-				md:items-center
-				md:pt-20
-				xl:pt-24`
+				lg:grid-cols-2
+				lg:items-center
+				lg:pt-20
+				lg:gap-x-6
+				xl:gap-x-8
+				xl:pb-[8vw]`
 		)
 			//- column 1
 			div(
@@ -84,44 +88,71 @@
 					items-center
 					text-center
 					w-full
-					sm:max-w-md
+					sm:max-w-sm
 					sm:pr-20
 					sm:text-left
+					md:max-w-sm
 					md:pr-8
-					lg:gap-y-10`
+					lg:max-w-md
+					xl:place-self-start
+					xl:pt-12
+					xl:gap-y-8`
 			)
 				//- animated headline
 				+if('data?.content?.banner?.animatedHeadline?.animatedWords[0]')
 					AnimatedHeadline(
+						classes=`
+						font-bold
+						hidden
+						leading-snug
+						sm:block
+						text-[2em]`,
 						animatedHeadline!="{ data.content.banner.animatedHeadline }"
 					)
 
 				//- banner text
 				+if('data?.content?.banner?.text')
-					h1.hidden.leading-relaxed(class="sm:block text-19 xl:text-20 opacity-90") { data.content.banner.text }
+					h1(
+						class=`
+						hidden
+						leading-relaxed
+						tracking-wide
+						opacity-90
+						sm:block
+						md:text-19
+						xl:text-20`
+					)
+						| { data.content.banner.text }
 
 			//-column 2 -- image content
-			.px-6(
+			div(
 				class=`
 					flex
 					h-full
 					justify-center
-					max-w-sm
-					md:p-0
-					py-8
+					py-4
+					px-8
 					relative
 					w-full
 					sm:px-0
-					lg:max-w-sm
-					xl:justify-start
-					xl:max-w-lg`
+					sm:max-w-[320px]
+					sm:translate-x-[200px]
+					md:max-w-[360px]
+					md:translate-x-[300px]
+					lg:translate-x-0
+					xl:place-self-center
+					xl:max-w-xs`,
+				aria-hidden="true"
 			)
 				GraphicDots
 				ImageTigers
 
+			//- mobile banner text
+			div(class="mt-8 text-maximumYellow text-[1.4em] font-bold text-center mb-3 sm:hidden") {  @html data.content.banner.staticHeadline  }
+
 			//- mobile p
 			+if('data?.content?.banner?.text')
-				h1.mt-8.text-center.leading-relaxed(class="sm:hidden text-19 xl:text-20 opacity-90") { data.content.banner.text }
+				h1.text-center.leading-relaxed(class="sm:hidden xl:text-20 opacity-90") { data.content.banner.text }
 
 	//- Overview Section
 	+if('data?.content?.overviewSection')
@@ -131,37 +162,48 @@
 			text-neutral-100
 			w-full
 		`)
-			//- transition shape
-			//- TransitionShapeTop(
-			//- 	classes="!text-maximumYellow/40 rotate-180 //-translate-y-[12vw]"
-			//- )
-			//- transition shape
-			div(class!="h-[12vw] background-gradient-oxford"): svg(
+			//- overview -- top transition shape
+			.background-gradient-oxford(class!="h-[12vw]"): svg(
 				class="h-full w-full fill-neutral-50/[1%] rotate-180",
 				preserveAspectRatio="none",
 				viewBox="0 0 500 500"
 			): polygon(
 				points="0,0 0,500 500,0"
 			)
-
-			//- touts
+			//- overview -- touts
 			div(
-				class="bg-neutral-50/[1%] w-full grid grid-cols-1 sm:grid-cols-3 page-x-padding md:grid pb-20 py-20 items-center"
+				class=`
+					bg-neutral-50/[1%]
+					grid
+					grid-cols-1
+					gap-y-8
+					items-center
+					page-x-padding
+					py-20
+					lg:gap-x-8
+					lg:grid-cols-[1fr,24px,1fr]
+					xl:pt-8
+					xl:pb-16
+					`
 			)
 				+each('data?.content?.overviewSection?.touts as item, index')
 					div(
-						class!="text-center max-w-md lg:max-w-md { index === 0 ? 'justify-self-start sm:text-left' : 'sm:text-right justify-self-end' }"
+						class!=`
+							max-w-md
+							items-top
+							justify-self-center
+							text-center
+							lg:max-w-sm
+							{ index === 0 ? 'lg:justify-self-start lg:text-left' : 'lg:text-right lg:justify-self-end' }`
 					)
 						//- heading
 						h2(
 							class=`
-								mb-2
-								sm:text-[2.25rem]
-								lg:text-[2.5rem]
-								xl:text-[3rem]
-								leading-relaxed
 								font-bold
+								leading-relaxed
+								mb-2
 								text-32
+								sm:text-[2em]
 								`
 						) { item.heading }
 
@@ -169,23 +211,22 @@
 						.px-6(
 							class=`
 								italic
-								text-19
-								sm:text-16
-								lg:text-17
+								text-[1.125em]
 								text-maximumYellow
-								font-bold
+								font-semibold
 								font-sans
 								mb-4
 								opacity-90
+								sm:px-0
 								`
-						) { item.subheading }
+						) {  @html item.subheading  }
 
 						//- paragraph
-						p.text-19.opacity-90.leading-relaxed(class="sm:text-16 opacity-90") { item.text }
+						p.opacity-90.leading-relaxed(class="opacity-90") { item.text }
 
 					//- plus
 					+if('index === 0')
-						.justify-self-center.text-neutral-100(class="py-4 text-40 sm:text-50") +
+						.justify-self-center(class="md:block text-[2.5em] w-fit") +
 
 	//- Video Section
 	+if('data?.content?.videoSection')
@@ -204,7 +245,6 @@
 		)
 			VideoEmbed(
 				classes=`
-						border-primary
 						flex
 						justify-center
 						lg:border-none
@@ -215,49 +255,78 @@
 				thumbnailSrc!="{ data?.content?.videoSection?.thumbnailSrc }",
 				youTube!="{ data?.content?.videoSection?.youTubeCode }"
 			)
+
+			//- video player caption
+			.text-center
+				.mb-2.font-sans.opacity-80(class="text-[0.8em]") What we're watching this week:
+				.italic.font-medium "Svelte Origins: A Javascript Documentary"
+
 	//- Services Section
 	+if('data?.content?.servicesSection')
 		section#services(
 			class=`
-				border-b
-				border-white/20
-				from-oxfordDark
 				page-x-padding
-				py-24
+				py-20
 				relative
-				text-neutral-100
 				sm:py-24
 				md:py-36`
 		)
 			//- services heading
 			h2(
 				class=`
-					pb-10
 					font-sans
-					text-18
+					mb-20
 					text-center
 					text-maximumYellow
+					text-[1.125em]
 					tracking-widest
-					uppercase
-					sm:pb-12
-					sm:text-17
-					md:mb-10
-					md:text-18
-					md:text-left
-					lg:text-19
-					xl:text-20
-					2xl:text-24`
+					lg:mb-28
+					xl:mb-24
+					uppercase`
 			) {  @html data?.content?.servicesSection?.heading ?? ''  }
 
 			//- services tiles grid
 			+if('data?.content?.servicesSection?.tiles[0]')
 				+const('tiles = data.content.servicesSection.tiles')
-				.hidden.gap-12.grid-cols-2.mb-20(class="md:grid lg:gap-16 xl:grid-cols-3")
+				div(
+					class=`
+						gap-y-20
+						grid
+						grid-cols-1
+						items-start
+						text-center
+						lg:grid-cols-2
+						lg:gap-16
+						xl:grid-cols-3`
+				)
 					+each('tiles as tile')
-						TileServices(
-							outerClasses="mb-8 sm:mb-16 md:mb-0",
-							tile!="{ tile }"
-						)
+						//- tile
+						div(class="grid grid-cols-1 gap-y-4 place-items-center items-start xl:gap-y-6")
+							//- icon
+							+if('tile.iconSlug')
+								IconServices(
+									classes=`
+										opacity-90
+										hover:opacity-100
+										transition-opacity
+										w-[4em]`,
+									slug!="{ tile.iconSlug }"
+								)
+							+if('tile.heading || tile.text')
+								div(class="max-w-sm xl:max-w-none")
+									//- heading
+									+if('tile.heading')
+										h3(
+											class=`
+											font-bold
+											mb-4
+											text-[1.65em]
+											xl:text-[1.25em]`
+										) {  @html tile.heading  }
+
+									//- text
+									+if('tile.text')
+										p(class="opacity-90") {  @html tile.text  }
 
 			//- services tiles slider
 			+if('data?.content?.servicesSection?.tiles[0]')
@@ -278,17 +347,38 @@
 				//- 				text!="{ panel.text }"
 				//- 			)
 
-	//- HomeTestimonials
+	//- Testimonials Section
+	+if('data?.content?.testimonialsSection')
+		section#testimonials(
+			class=`
+			border-y
+			border-neutral-100/10
+			flex
+			h-screen
+			items-center
+			justify-center
+			page-x-padding
+			relative
+			sm:block
+			sm:h-screen
+			sm:py-20
+			sm:max-h-[860px]
+			md:max-h-[900px]
+			lg:max-h-[960px]
+			xl:max-h-[1040px]
+			2xl:max-h-[1080px]
+			xl:h-auto`
+		)
+			Slider(
+				classes!="",
+				panels!="{ data?.content?.testimonialsSection?.testimonials }"
+			)
+				svelte:fragment(
+					let:panel,
+					slot="panel"
+				)
+					Testimonial(panel!="{ panel }")
+
 	//- HomeCustomers
 	//- HomeContact
-
-	//- HeadMeta(
-	//- 	additionalLinkTags!="{ headAttributes.additionalLinkTags }",
-	//- 	additionalMetaTags!="{ headAttributes.additionalMetaTags }",
-	//- 	metaDescription!="{ headAttributes.metaDescription }",
-	//- 	metaKeywords!="{ headAttributes.metaKeywords }",
-	//- 	metaNofollow!="{ headAttributes.metaNofollow }",
-	//- 	metaNoindex!="{ headAttributes.metaNoindex }",
-	//- 	metaSection!="{ headAttributes.metaSection }"
-	//- )
 </template>

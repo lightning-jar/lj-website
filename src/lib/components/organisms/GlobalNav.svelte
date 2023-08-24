@@ -51,13 +51,14 @@
 			block
 			group
 			h-auto
-			lg:w-[12.5rem]
 			!outline-none
 			relative
 			text-maximumYellow
-			w-48
 			underline-offset-8
-			xl:w-[13rem]
+			w-[9em]
+			sm:w-[10em]
+			lg:w-[12.5em]
+			xl:w-[13em]
 			hover:after:opacity-100
 			focus:after:opacity-100
 			after:pointer-events-none
@@ -98,13 +99,11 @@
 		nav(
 			class=`
 			hidden
-			min-h-[3.75em]
-			text-neutral-50
 			--
-			lg:flex
-			lg:items-center
-			lg:gap-x-12
-			lg:pt-[.35rem]
+			xl:flex
+			xl:items-center
+			xl:gap-x-12
+			xl:pt-[.35rem]
 			xl:min-h-[3.5rem]
 			`
 		)
@@ -113,10 +112,8 @@
 					class=`
 						block
 						decoration-current
-						font-serif
 						opacity-[.95]
 						!outline-none
-						text-18
 						transition-opacity
 						underline-offset-8
 						--
@@ -128,8 +125,6 @@
 						focus:text-maximumYellow
 						focus:underline
 						--
-						lg:text-19
-						xl:text-20
 						`,
 					href!="{ item.href }",
 					title!="{ item.title }"

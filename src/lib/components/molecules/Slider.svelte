@@ -4,6 +4,7 @@
 
 	//- components
 	import SliderButton from "$molecules/SliderButton.svelte";
+	import IconArrowLeftAlt from "$atoms/IconArrowLeftAlt.svelte";
 
 	//- data
 	export let panels;
@@ -29,34 +30,56 @@
 </script>
 
 <template lang="pug">
-	.relative.w-full.mb-24.overflow-visible
-		//- content container
-		.flex.justify-center.items-center.w-100.px-4(class!="{ 'md:px-24' + classes }")
-			.relative.w-full.flex.justify-center.items-center.select-none &nbsp;
-				+each('panels as panel, index')
-					+if('currentPanel == index')
-						div(
-							draggable="true",
-							in:fade!="{ fadeOptions }",
-							on:dragstart!="{()=> {currentPanel = (currentPanel < panels.length - 1) ? currentPanel + 1 : 0}}",
-							on:touchstart!="{()=> {currentPanel = (currentPanel < panels.length - 1) ? currentPanel + 1 : 0}}"
+	.relative.grid.grid-cols-1.gap-y-10(class!="{ classes }")
+		//- panels
+		.grid.grid-cols-1.place-content-center.place-items-center
+			+each('panels as panel, index')
+				+if('currentPanel == index')
+					div(
+						draggable="true",
+						in:fade!="{ fadeOptions }",
+						on:dragstart!="{()=> {currentPanel = (currentPanel < panels.length - 1) ? currentPanel + 1 : 0}}",
+						on:touchstart!="{()=> {currentPanel = (currentPanel < panels.length - 1) ? currentPanel + 1 : 0}}"
+					)
+						slot(
+							name="panel",
+							panel!="{ panel }"
 						)
-							slot(
-								name="panel",
-								panel!="{ panel }"
-							)
+		.relative.grid.grid-cols-1(
+			class=`
+				lg:absolute
+				lg:inset-0
+				lg:place-content-center
+		`
+		)
+			//- buttons
+			.flex.place-content-between.z-10
+				+each('["left", "right"] as direction')
+					+const('rotation = direction === "left" ? "" : "rotate-180"')
+					button(
+						class!=`
+							cursor-pointer
+							w-[1.5em]
+							hover:text-maximumYellow
+							sm:w-auto
+							sm:rounded
+							sm:px-2
+							sm:py-2
+							sm:bg-neutral-100/5
+							sm:hover:bg-neutral-100/20
+							lg:h-[3em]
+							{ rotation }
+							`,
+						on:click!="{ previous }"
+					): IconArrowLeftAlt(
+						classes="w-[1.5em] h-[1.5em]"
+					)
 
-		//- buttons
-		div(on:click!="{ previous }")
-			SliderButton(direction!="{ 'left' }")
-		div(on:click!="{ next }")
-			SliderButton(direction!="{ 'right' }")
-
-		//- counter
-		.justify-center.flex(class="sm:hidden")
-			+each('panels as panel, i')
-				button.px-1.mt-24(class="cursor-pointer", on:mousedown!="{()=> {currentPanel = i}}")
-					.rounded-full.h-2.w-2.pointer-events-none(
-						class!="{ currentPanel == i ? 'bg-maximumYellow' : 'bg-white/20' }"
+			//- counter
+			.absolute.inset-0.flex.items-center.justify-center.gap-x-2(class="sm:hidden")
+				+each('panels as panel, i')
+					button.rounded-full.h-2.w-2.cursor-pointer(
+						class!="{ currentPanel == i ? 'bg-maximumYellow' : 'bg-white/20' }",
+						on:mousedown!="{()=> {currentPanel = i}}"
 					)
 </template>

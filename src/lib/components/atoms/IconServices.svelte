@@ -21,6 +21,7 @@
 
 	// props
 	export let slug = "";
+	export let classes = "";
 
 	const noBreakpoint = [[""]];
 	$: alt = deslugify(slug);
@@ -28,7 +29,7 @@
 
 <template lang="pug">
 	img(
-		class="w-full h-auto block",
+		class="w-full h-auto block {classes}",
 		alt!="{ alt }",
 		height="48",
 		loading="lazy",

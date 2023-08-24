@@ -1,74 +1,97 @@
 <script lang="ts">
 	// components
-	import TextHeading from "$atoms/TextHeading.svelte";
+	//import TextHeading from "$atoms/TextHeading.svelte";
 	import PictureStack from "$atoms/PictureStack.svelte";
 
 	// global functions
 	import { deslugify } from "$functions/helperFunctions";
 
+	interface Panel {
+		category: string;
+		quote: string;
+		imageSlug: string;
+		name: string;
+		title: string;
+		companyName: string;
+		companyUrl: string;
+	}
+
 	// props
-	export let category = "";
-	export let quote = "";
-	export let imageSlug = "";
-	export let name = "";
-	export let title = "";
-	export let companyName = "";
-	export let companyUrl = "";
+	export let panel: Panel;
 
 	// variables
+	const alt = deslugify(panel.imageSlug).replace("testimonial", "").trim();
 	const quoteAttributes = {
 		tag: "q",
 		classes: "block !leading-normal !text-3xl md:!leading-tight",
 	};
-
-	const image = {
-		alt: deslugify(imageSlug).replace("testimonial", "").trim(),
-		breakpoints: [[""]],
-		classes: "block rounded-full",
-		folder: "images",
-		height: "64",
-		width: "64",
-		fallback: `${imageSlug}.jpg`,
-		slugCommon: imageSlug,
-	};
 </script>
 
 <template lang="pug">
-	.text-center(class="max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl")
-		//- Categories
-		.font-sans.uppercase.mb-6.text-maximumYellow.tracking-widest.px-16.leading-normal(
-			class="text-[.825rem] h-[2.5rem]"
+	.text-center(class=`
+			sm:max-w-sm
+			md:max-w-md
+			lg:max-w-lg
+			xl:max-w-xl`)
+		//- category
+		h3(
+			class=`
+				font-sans
+				leading-normal
+				mb-8
+				text-[.85em]
+				text-maximumYellow
+				tracking-widest
+				uppercase
+				sm:mb-20
+				sm:text-[1em]`
 		)
-			+html('category')
+			.block.text-neutral-100.opacity-60.mb-2(
+				class="text-[.9em] lg:inline-block lg:text-[1em] lg:mb-0"
+			) Testimonials
+			span.hidden(class="lg:inline-block") :&nbsp;&nbsp;
+			span.block(class="lg:inline-block")
+				+html('panel.category')
 
-		//- Quote
+		//- quote
 		.mb-8
 			q.block.font-serif.font-semibold(
-				class="text-[2rem] sm:text-[2.25rem] md:text-[2.75rem] lg:text-[3.25rem] xl:text-[3.5rem leading-[1.33] h-[12rem] sm:h-[13rem] md:h-[20rem] lg:h-[23rem] xl:h-[25rem] overflow-hidden"
+				class=`
+				h-[12rem]
+				text-[1.5em]
+				sm:text-[2.25em]
+				md:text-[2.75em]
+				lg:text-[3em]
+				leading-tight
+				sm:h-[7em]
+				md:h-[8em]
+				xl:h-[7em]`
 			)
-				+html("quote")
+				+html("panel.quote")
 
 		//- Footer
-		.flex.justify-center(class="h-[12rem]")
-			div(class="max-w-[65%] font-serif")
-				//- Avatar
-				.flex.w-100.justify-center
-					.mb-4.w-16
-						PictureStack(
-							classes!="{ image.classes }",
-							alt!="{ image.alt }",
-							breakpoints!="{ image.breakpoints }",
-							fallback!="{ image.fallback }",
-							folder!="{ image.folder }",
-							height!="{ image.height }",
-							slugCommon!="{ image.slugCommon }",
-							width!="{ image.width }"
-						)
-				//- Name
-				h4.mb-1.font-sans.text-md.opacity-90.font-semibold { name }
-				//- Position
-				p.text-md.opacity-90.font-sans
-					| { title },&nbsp;
-					a.text-body-light(href!="{ companyUrl }")
-						+html('companyName')
+		.grid.grid-cols-1.gap-y-2.place-content-end.justify-items-center.leading-none(
+			class="min-h-[8em]"
+		)
+			//- Avatar
+			img(
+				class="aspect-square rounded-full w-[3.5em] h-auto mb-3",
+				alt!="{ alt }",
+				aria-hidden="true",
+				height=78,
+				src="/images/{panel.imageSlug}.avif",
+				width=78
+			)
+
+			//- Name
+			h4.opacity-90.font-medium { panel.name }
+
+			//- Title & Company
+			div
+				| { panel.title },&nbsp;&nbsp;
+				a.opacity-90.inline.underline.underline-offset-4(
+					class="decoration-neutral-50/40 transition-opacity hover:opacity-100 hover:text-maximumYellow hover:decoration-current",
+					href!="{ panel.companyUrl }",
+					title!="visit { panel.companyName } website"
+				) { panel.companyName }
 </template>
