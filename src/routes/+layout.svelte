@@ -1,62 +1,66 @@
 <script lang="ts">
 	// import css file
-	import "/src/app.css";
+	import "uno.css"
 
-	// import stores
-	import { mobileNavOpen } from "$stores/navStore";
+	// import context api
+	import { setContext } from "svelte";
 
 	// import analytics component
-	import PlausibleAnalytics from "$atoms/PlausibleAnalytics.svelte";
+	// import PlausibleAnalytics from "$atoms/PlausibleAnalytics.svelte";
 
 	// import components
-	import GlobalNav from "$organisms/GlobalNav.svelte";
-	import MediaPlayer from "$organisms/MediaPlayer.svelte";
+	import GlobalNav from "$components/GlobalNav.svelte";
+	import GlobalFooter from "$components/GlobalFooter.svelte";
+	// import MediaPlayer from "$organisms/MediaPlayer.svelte";
 
-	// local types
-	import type { LayoutData } from "./$types";
 
 	// import child page data
-	import { page } from "$app/stores";
+	import { page } from "$app/state";
 
 	// props
-	export let data: LayoutData;
+	let { children, data } = $props();
 
 	// variables
-	let mobileNavContainerClasses: string;
-	$: mobileNavContainerClasses = $mobileNavOpen
+	let mobileNavState = $state({value:'closed'});
+	setContext("mobileNavState", mobileNavState);
+
+	let activeMobileMenu = $state({value:'Main'});
+	setContext("activeMobileMenu", activeMobileMenu);
+
+	let brandLink = $state({value:null});
+	setContext("brandLink", brandLink);
+
+	let youTubeCode = $state({value:""});
+	setContext("youTubeCode", youTubeCode);
+
+	let mediaPlayer = $state({value:"hide"});
+	setContext("mediaPlayer", mediaPlayer);
+
+
+	let mobileNavContainerClasses = $derived(mobileNavState.value === 'open'
 		? "translate-x-0 pointer-events-auto transition-transform"
-		: "translate-x-[-100vw] pointer-events-none";
+		: "translate-x-[-100vw] pointer-events-none");
 </script>
 
-<template lang="pug">
-	//- analytics
-	PlausibleAnalytics
+<svelte:head>
+	<title> {page.data.metaTitle ?? "Lightning Jar"}</title>
+	{#if page.data.metaDescription}
+		<meta
+			content="{page.data.metaDescription}"
+			name="description"
+		>
+	{/if}
+</svelte:head>
 
-	//- head metadata
-	svelte:head
-		title { $page.data.metaTitle ?? "Sage Energy" }
-		+if('$page.data.metaDescription')
-			meta(
-				content!="{ $page.data.metaDescription }",
-				name="description"
-			)
+	<GlobalNav
+		isHome={ data.isHome }
+		nav={ data.nav }
+	/>
+	<!-- MediaPlayer -->
+	<div class="bg-blue-500 relative w-full max-w-screen overflow-x-hidden place-self-stretch">
+		{@render children?.()}
+	</div>
 
-	GlobalNav(
-		isHome!="{ data.isHome }",
-		nav!="{ data.nav }"
-	)
-	MediaPlayer
-	slot
-	//- GlobalFooter
+	<GlobalFooter />
 
-	//- //- mobile nav
-	//- .fixed.top-0.left-0.z-30.h-screen.w-screen(
-	//- 	class!="{mobileNavContainerClasses} md:hidden"
-	//- )
-	//- 	//- spacer for header
-	//- 	.w-full.bg-oxford(class="h-[60px]")
 
-	//- 	//- mobile nav inner container
-	//- 	.relative.w-full.h-full.pt-8.bg-neutral-100.shadow-xl
-	//- 		//-MobileMenu(nav!="{ data.nav }")
-</template>

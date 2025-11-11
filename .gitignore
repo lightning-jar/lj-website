@@ -1,50 +1,23 @@
-# build folder
-dist/
-build/
+node_modules
 
-# logs
-logs/
-.cache
-npm-debug.log
-yarn-debug.log
-yarn-error.log
-pnpm-debug.log
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
 
-# Dependency folder
-node_modules/
-
-# lock files
-bun.lockb
-.lockb
-yarn.lock
-package-lock.json
-# pnpm-lock.yaml
-
-# mac
-._*
+# OS
 .DS_Store
+Thumbs.db
 
-# env files
+# Env
 .env
 .env.*
 !.env.example
+!.env.test
 
-# Sveltekit files
-.svelte-kit
-# generated/
-# output/
-# /.svelte-kit/types
-
-# Editor files
-.vscode
-.code-workspace
-
-# hosting providers
-.vercel
-
-# vite
+# Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
-
-# Sentry
-.sentryclirc

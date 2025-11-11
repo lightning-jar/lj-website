@@ -1,10 +1,9 @@
-// types
-import type { PageServerLoadEvent } from "./$types";
+
 
 // data
-import { default as content } from "$data/home.json";
+import content from "$data/home.json";
 
-export async function load(event: PageServerLoadEvent) {
+export async function load() {
 	// const path = event.url.pathname;
 
 	// // is home

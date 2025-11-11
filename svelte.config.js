@@ -1,50 +1,41 @@
-import vercel from "@sveltejs/adapter-vercel";
-import preprocess from "svelte-preprocess";
+// preprocessor
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+
+// vercel adapter
+import { default as vercel } from "@sveltejs/adapter-vercel";
+
+const aliasList = {
+	$assets: "./src/lib/assets",
+	$components: "./src/lib/components",
+	$config: "./src/lib/config",
+	$content: "./src/lib/content",
+	$data: "./src/lib/data",
+	$lib: "./src/lib",
+	$handlers: "./src/handlers",
+	$routes: "./src/routes",
+	$settings: "./src/lib/settings",
+	$server: "./src/server",
+	$stores: "./src/stores",
+	$types: "./src/lib/types",
+	$utils: "./src/lib/utils",
+};
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://github.com/sveltejs/svelte-preprocess
+	// Consult https://svelte.dev/docs/kit/integrations
 	// for more information about preprocessors
-	preprocess: preprocess(),
+	preprocess: vitePreprocess(),
+
 	kit: {
-		adapter: vercel({
-			// make explicit -- vercel does not yet support later node versions
-			runtime: "nodejs18.x",
-		}),
-		alias: {
-			$atoms: "./src/lib/components/atoms",
-			$assets: "./src/lib/assets",
-			$molecules: "./src/lib/components/molecules",
-			$organisms: "./src/lib/components/organisms",
-			$components: "./src/lib/components",
-			$data: "./src/lib/data",
-			$functions: "./src/lib/functions",
-			$settings: "./src/lib/settings",
-			$stores: "./src/lib/stores",
-			$types: "./src/lib/types",
-			$utils: "./src/lib/utils",
-		},
-		csp: {
-			directives: {
-				"script-src": [
-					"self",
-					"*.youtube.com",
-					"*.vimeo.com",
-					"*.jotform.com",
-					"plausible.io", // 3rd party analytics -- replaces Google Analytics
-					"*.sentry.io", // error tracking
-				],
-				"style-src": ["self", "unsafe-inline"],
-				"worker-src": ["self", "blob:"],
-				"child-src": [
-					"self",
-					"blob:",
-					"*.jotform.com",
-					"*.vimeo.com",
-					"*.youtube.com",
-				],
-			},
-		},
+		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
+		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
+		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
+		adapter: vercel(),
+		alias: aliasList,
+	},
+	compilerOptions: {
+		discloseVersion: false,
+		runes: true,
 	},
 };
 

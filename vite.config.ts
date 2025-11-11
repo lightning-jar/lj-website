@@ -1,15 +1,8 @@
 import { sveltekit } from "@sveltejs/kit/vite";
-import { sentrySvelteKit } from "@sentry/sveltekit";
-import { defineConfig } from "vitest/config";
+import UnoCSS from "unocss/vite";
+import { defineConfig } from "vite";
 
 export default defineConfig({
-	plugins: [
-		sentrySvelteKit({
-			adapter: "vercel",
-		}),
-		sveltekit(),
-	],
-	test: {
-		include: ["src/**/*.{test,spec}.{js,ts}"],
-	},
+	plugins: [UnoCSS(), sveltekit()],
+	assetsInclude: ["**/*.svg", "**/*.txt"],
 });
