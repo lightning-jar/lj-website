@@ -1,0 +1,46 @@
+{
+	"heading": "Helping business thrive in a world that is more relentlessly digital every day.",
+	"text": [
+		"Lightning Jar provides premium digital design and technology services to national and international business clients. Portfolio and references available upon request."
+	],
+	"callouts": [
+		{
+			"heading": "Contact",
+			"content": [
+				{
+					"title": "Contact Us",
+					"href": "mailto:hey@lightningjar.com",
+					"data-text": "info@lightningjar.com"
+				}
+			],
+			"footnotes": ["Solicitations not accepted and will be reported as spam."]
+		},
+		{
+			"heading": "Hubs",
+			"content": [
+				{
+					"data-text": "Philadelphia",
+					"href": "https://www.visitphilly.com/articles/philadelphia/phillys-hidden-gems/",
+					"title": "You should visit Philadelphia"
+				},
+				{
+					"data-text": "New York",
+					"href": "https://www.atlasobscura.com/things-to-do/new-york",
+					"title": "You should visit New York"
+				},
+				{
+					"data-text": "South Texas",
+					"href": "https://www.atlasobscura.com/things-to-do/san-antonio-texas",
+					"title": "You should visit South Texas"
+				}
+			],
+			"footnotes": ["Proudly remote since 2018."]
+		}
+	],
+	"legalLinks": [
+		{
+			"href": "/terms",
+			"data-text": "Privacy & Terms"
+		}
+	]
+}

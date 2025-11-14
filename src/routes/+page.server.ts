@@ -1,7 +1,5 @@
-
-
 // data
-import content from "$data/home.json";
+import home from "$data/home.json";
 
 export async function load() {
 	// const path = event.url.pathname;
@@ -10,12 +8,13 @@ export async function load() {
 	// const isHome = path === "/";
 
 	// set page metadata
-	const metaDescription = `Lightning Jar is a technology studio & digital agency helping businesses thrive in a world that is more digital &amp; mobile every day`;
-	const metaTitle = `Lightning Jar | Technology Studio & Digital Agency`;
+	const meta = {
+		description: `Lightning Jar is a digital design and build studio hand crafting websites and custom applications for businesses and organizations.`,
+		title: `Lightning Jar | Web Studio | Since 2002`,
+	};
 
 	return {
-		content,
-		metaDescription,
-		metaTitle,
+		...home,
+		meta,
 	};
 }

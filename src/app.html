@@ -5,6 +5,12 @@
 	<head>
 		<meta charset="utf-8" />
 
+		<!-- dns prefetch -->
+		<link rel="dns-prefetch" href="https://lj-01.nyc3.cdn.digitaloceanspaces.com">
+
+		<!-- csp -->
+		<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; frame-src 'self' https://peertube.tv https://www.youtube.com; img-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; style-src 'unsafe-inline' 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; script-src 'self' 'sha256-YXOoinyatmABOduEfvaFA6G330E20K7l6OY8MBuERxw='; worker-src 'self' blob:"> -->
+
 		<!-- viewport -->
 		<meta
 			name="viewport"
@@ -15,12 +21,12 @@
 		<link
 			rel="icon"
 			type="image/svg+xml"
-			href="%sveltekit.assets%/ccrta-favicon.svg"
+			href="%sveltekit.assets%/icon.svg"
 		>
 
 		%sveltekit.head%
 	</head>
-	<body class="flex font-sans bg-oxford text-neutral-100 max-w-screen overflow-x-hidden relative">
-		<div class="contents grid grid-cols-1 grid-rows-[auto_1fr_auto] min-h-screen w-full">%sveltekit.body%</div>
+	<body class="flex font-serif bg-oxford text-neutral-100 max-w-screen overflow-x-hidden relative">
+		<div class="grid grid-cols-1 grid-rows-[auto_1fr_auto] min-h-screen w-full">%sveltekit.body%</div>
 	</body>
 </html>

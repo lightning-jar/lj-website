@@ -1,0 +1,196 @@
+{
+	"banner": {
+		"animatedHeadline": {
+			"staticBegin": "The world is getting more",
+			"animatedWords": ["digital.", "mobile.", "remote.", "crazy."],
+			"staticEnd": "digital."
+		},
+		"staticHeadline": "The world is getting<br>more digital every day.",
+		"text": "Since 2002, Lightning Jar has been helping businesses thrive in a world that is more digital every day."
+	},
+	"servicesSection": {
+		"heading": "<span>Technology, Design &amp; Brand:&nbsp;&nbsp;</span><span class=\"text-neutral-50\">Services</span>",
+		"tiles": [
+			{
+				"heading": "Web&nbsp;Design &<br> Development",
+				"iconSlug": "icon-web-design",
+				"text": "Our user-focused approach to web design and development is engineered to help your organization quickly strategize, prioritize, and execute digital experiences that matter to customers."
+			},
+			{
+				"heading": "Custom&nbsp;Software<br> & Mobile Apps",
+				"iconSlug": "icon-custom-software",
+				"text": "Companies with great ideas on how to digitize their services or solutions, or solve a business challenge through custom software often need help turning their vision into reality. That's where we come in."
+			},
+			{
+				"heading": "eCommerce,&nbsp;PIM<br> DAM, MDM",
+				"iconSlug": "icon-ecommerce",
+				"text": "Our technology studio specializes in PIM, DAM, MDM implementations and eCommerce transformations leveraging the <a href=\"/blog/what-is-pimcore\" class=\"text-underline\">power of Pimcore</a> -- the world's most flexible and powerful unified digital platform."
+			},
+			{
+				"heading": "Brand&nbsp;Identity&nbsp;&<br> Naming",
+				"iconSlug": "icon-kiosk",
+				"text": "New company? New Product? Let our branding and naming team help you uncover the perfect name, graphics and messaging to help your brand thrive in both digital and analog worlds."
+			},
+			{
+				"heading": "Sales & Pricing Tools",
+				"iconSlug": "icon-sales-tools",
+				"text": "What are the challenges and friction points slowing down your sales team or agents in the call center? Too often the sales organization is the last to benefit from digital transformations -- ask yourself what happens if you turn that equation around?"
+			},
+			{
+				"heading": "UX Optimization",
+				"iconSlug": "icon-ux",
+				"text": "There's a big gap between usability and great user experience. Our user experience team can help you push beyond interfaces that simply work to best-in-class experiences that increase affinity, encourage sales and encourage customer loyalty."
+			}
+		]
+	},
+	"videoSection": {
+		"thumbnailSrc": "https://res.cloudinary.com/dn0pqjjbq/image/upload/e_auto_contrast,f_auto,q_59/v1692798395/svelte-thumb_cziiar.avif",
+		"youTubeCode": "kMlkCYL9qo0"
+	},
+	"overviewSection": {
+		"touts": [
+			{
+				"heading": "Technology",
+				"subheading": "Technology transformations that&nbsp;make&nbsp;a&nbsp;difference.",
+				"text": "Whether you need to upgrade your eCommerce, build a mobile app, SaaS product, or best-in-class website, our strategists, designers and technologists can help you fully articulate & execute your vision."
+			},
+			{
+				"heading": "Design",
+				"subheading": "Happy customers one design experience&nbsp;at&nbsp;a&nbsp;time.",
+				"text": "Our strategists, designers, copywriters and multimedia creators work together to find the content solutions and user experiences your customers want and execute them in ways that make them compelling, on-brand & effective."
+			}
+		]
+	},
+	"testimonialsSection": {
+		"testimonials": [
+			{
+				"category": "Brand & Technology",
+				"quote": "No other vendor delivers the <span class=\"underline-heading\">depth of strategy</span> that Lightning&nbsp;Jar does.",
+				"imageSlug": "david-h-testimonial",
+				"name": "David Heard",
+				"title": "CMO",
+				"companyName": "SecureLogix",
+				"companyUrl": "https://securelogix.com"
+			},
+			{
+				"category": "Pimcore Expertise",
+				"quote": "Lightning Jar gave us a single source of truth for marketing data via Pimcore.",
+				"imageSlug": "liz-s-testimonial",
+				"name": "Liz Sterret",
+				"title": "Sr. Manager Marketing & Content",
+				"companyName": "Beam Suntory",
+				"companyUrl": "https://www.beamsuntory.com/"
+			},
+			{
+				"category": "PIM, Ecommerce, Mobile Apps",
+				"quote": "Their technology team was my <span class=\"underline-heading\">secret weapon</span> ...they helped me execute big ideas.",
+				"imageSlug": "frank-r-testimonial",
+				"name": "Frank Roth",
+				"title": "Former CMO",
+				"companyName": "United Rentals / BlueLine",
+				"companyUrl": "https://unitedrentals.com/"
+			},
+			{
+				"category": "Marketing & Brand Strategy",
+				"quote": "LJ helped us <span class=\"underline-heading\">focus and clarify</span> our brand vision during exponential growth.",
+				"imageSlug": "elizabeth-g-testimonial",
+				"name": "Elizabeth Grojean",
+				"title": "CEO & Founder",
+				"companyName": "Baloo Living",
+				"companyUrl": "https://balooliving.com/"
+			},
+			{
+				"category": "SAAS & Remote Solutions",
+				"quote": "They helped us <span class=\"underline-heading\">speed to launch</span> with our flagship remote SaaS solution.",
+				"imageSlug": "duane-v-testimonial",
+				"name": "Dr. Duane Varan",
+				"title": "CEO & Founder",
+				"companyName": "Media Science / Hark",
+				"companyUrl": "https://harkconnect.com/"
+			},
+			{
+				"category": "Kiosks / POS / Tablet Apps",
+				"quote": "Our in-store app project was foundering... until LJ <span class=\"underline-heading\">saved the day</span>.",
+				"imageSlug": "mubashir-m-testimonial",
+				"name": "Mubashir Memon",
+				"title": "Product Manager",
+				"companyName": "Northgate Markets",
+				"companyUrl": "https://prospera.northgatemarket.com/"
+			}
+		]
+	},
+	"customers": [
+		{
+			"category": "Customer Story",
+			"color": "#56CAD9",
+			"customer": "SecureLogix",
+			"imageAlt": "Doctor on phone",
+			"imageSlug": "securelogix",
+			"logoAlt": "SecureLogix logo",
+			"logoSlug": "securelogix-logo",
+			"tags": [
+				"website",
+				"knowledge-base",
+				"partner-portal",
+				"brand-strategy",
+				"product-naming",
+				"videos",
+				"saas-ui"
+			],
+			"text": "Anim esse mollit commodo non sunt excepteur adipisicing esse proident quis qui eiusmod veniam nostrud eiusmod culpa nostrud irure proident minim non est culpa reprehenderit id excepteur adipisicing enim.",
+			"url": "https://petroskills.com"
+		},
+		{
+			"category": "Customer Story",
+			"color": "#EBC500",
+			"customer": "PetroSkills",
+			"imageAlt": "Hardhat",
+			"imageSlug": "petroskills",
+			"logoAlt": "Petroskills logo",
+			"logoSlug": "petroskills-logo",
+			"tags": ["Pimcore", "PIM", "eCommerce", "Pardot"],
+			"text": "Petroskills is the global leader for remote, on-demand, and on-site training for energy industry workers. We helped Petroskills architect, design and deploy a custom WCM, PIM, and eCommerce solution powered by Pimcore.",
+			"url": "https://petroskills.com"
+		},
+		{
+			"category": "Customer Story",
+			"color": "#53C1D8",
+			"customer": "Beam Suntory",
+			"imageAlt": "Old Fashioned cocktail",
+			"imageSlug": "beam",
+			"logoAlt": "Beam Suntory logo",
+			"logoSlug": "beam-logo",
+			"tags": ["Pimcore", "PIM", "MDM", "Web-to-Print"],
+			"text": "Beam Suntory found a single source of truth for marketing data with Pimcore. Do nisi laborum cillum magna officia ullamco excepteur ullamco labore ad culpa dolor cupidatat exercitation amet duis consequat consectetur ea pariatur. ",
+			"url": "https://pimcore.com/en/customers/suntory-group_c132768"
+		},
+		{
+			"imageAlt": "Construction superintendent",
+			"imageSlug": "blueline-tile",
+			"logoAlt": "Blueline Rental Logo",
+			"logoSlug": "blueline-logo",
+			"text": "Blueline Rental transforms customer experience and product data management with the power of Pimcore.",
+			"url": "https://pimcore.com/en/customers/united-rentals-inc_c7709"
+		},
+		{
+			"category": "Customer Story",
+			"color": "#E6E0F3",
+			"imageAlt": "Woman wrapped in weighted blanket",
+			"imageSlug": "baloo",
+			"logoAlt": "Baloo Living Logo",
+			"logoSlug": "baloo-logo",
+			"tags": ["Brand Strategy", "Identity"],
+			"text": "We helped Baloo Living founder Elizabeth Grojean find her brand voice and refine her brand strategy. Do nisi laborum cillum magna officia ullamco excepteur ullamco labore ad culpa dolor cupidatat exercitation.",
+			"url": "https://www.thestartupstory.co/episodes/elizabeth-grojean-founder-of-baloo-living"
+		},
+		{
+			"category": "Customer Story",
+			"imageAlt": "Couple working on home improvement project",
+			"imageSlug": "builddirect",
+			"logoAlt": "Build Direct logo",
+			"logoSlug": "builddirect-logo",
+			"text": "BuildDirect automates product data and creates a supplier-side portal for manufacturers. Do nisi laborum cillum magna officia ullamco excepteur ullamco labore ad culpa dolor cupidatat exercitation amet duis consequat consectetur ea pariatur.",
+			"url": "https://pimcore.com/en/customers/builddirect_c666"
+		}
+	]
+}

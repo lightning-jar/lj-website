@@ -1,25 +1,18 @@
 <script lang="ts">
-	// components
-	import ButtonHamburger from "$components/ButtonHamburger.svelte";
-	import NavLogoBlock from "$components/NavLogoBlock.svelte";
+  // components
+  // import ButtonHamburger from "$components/ButtonHamburger.svelte";
+  import NavLogoBlock from "$components/NavLogoBlock.svelte";
 
-	// types
-	import type { NavItem } from "$types/types";
+  // types
+  import type { NavItem } from "$types/types";
 
-	// assets
-	import { default as logoSVG } from "$assets/lightning-jar-logo.svg";
-
-	// props
-	let {isHome, nav}: {isHome: boolean; nav: NavItem[]} = $props();
+  // props
+  let { nav }: { nav: NavItem[] } = $props();
 </script>
 
-	<header
-		id="top"
-		class="
-			bg-gradient-to-r
-			from-oxford
-			via-oxfordDark
-			to-oxford
+<header
+  id="top"
+  class="
 			flex
 			items-center
 			justify-between
@@ -32,13 +25,12 @@
 			w-full
 			xl:min-h-[3.5rem]
 			z-0"
-	>
+>
+  <NavLogoBlock />
 
-		<NavLogoBlock />
+  <!-- <ButtonHamburger /> -->
 
-		<ButtonHamburger />
-
-		<nav
+  <!-- <nav
 			class="
 			hidden
 			xl:flex
@@ -47,7 +39,6 @@
 			xl:pt-[.35rem]
 			xl:min-h-[3.5rem]
 			">
-
 			{#each nav as item}
 				<a
 					class="
@@ -67,6 +58,5 @@
 					title={ item.title }
 				>{ item.label }</a>
 			{/each}
-		</nav>
-	</header>
-
+		</nav> -->
+</header>

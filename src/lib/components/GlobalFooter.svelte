@@ -1,84 +1,117 @@
 <script lang="ts">
-	// components
-	import NavLogoBlock from "$components/NavLogoBlock.svelte";
+  // components
+  import NavLogoBlock from "$components/NavLogoBlock.svelte";
 
-	// variables
-	const image = {
-		alt: "Lightning Jar logo",
-		breakpoints: [[""]],
-		classes: "block",
-		fallback: "pimcore-gold-partner.png",
-		folder: "images",
-		height: "120",
-		loading: "lazy",
-		slugCommon: "pimcore-gold-partner",
-		sourceFormats: ["svg"],
-		preload: [],
-		width: "100",
-	};
+  // imported types
+  import type { HTMLLinkAttributes } from "svelte/elements";
+
+  // local types
+  interface Props {
+    heading: string;
+    text: string[];
+    callouts: {
+      heading?: string;
+      content?: HTMLLinkAttributes[];
+      footnotes?: string[];
+    }[];
+    legalLinks: HTMLLinkAttributes[];
+  }
+
+  let {
+    heading = "",
+    text = [],
+    callouts = [],
+    legalLinks = [],
+  }: Props = $props();
 </script>
 
+<footer
+  class="page-x-padding main-y-padding text-white font-serif bg-oxfordDark h-screen"
+>
+  <!-- upper -->
+  <div class="mt-16 md:grid grid-cols-2 gap-16">
+    <!-- col 1: logo & messaging -->
+    <div class="grid grid-cols-1 place-content-start gap-0 max-w-sm">
+      <!-- logo -->
+      <div class="mb-8">
+        <NavLogoBlock />
+      </div>
 
-	<footer class="page-x-padding main-y-padding text-white font-serif bg-oxford">
-		<!-- upper -->
-		<div class="mt-16 md:grid grid-cols-2 gap-16">
+      <!-- heading -->
+      <h3 class="text-18px font-semibold mb-4 text-maximumYellow">
+        {heading}
+      </h3>
 
-			<!-- col 1: logo & messaging -->
-			<div class="grid grid-cols-1 gap-6 max-w-sm">
+      <!-- text -->
+      <div class="mb-16 opacity-80">
+        {#each text as paragraph}
+          <p>{paragraph}</p>
+        {/each}
+      </div>
+    </div>
 
-				<!-- logo -->
-				<NavLogoBlock />
+    <!-- col:2 callouts -->
+    <div class="mt-14 grid grid-cols-1 gap-8">
+      {#each callouts as callout}
+        <!-- contact -->
+        <div>
+          <!-- callout heading -->
+          {#if callout.heading}
+            <h3 class="text-xl font-semibold mb-3 text-slate-100 opacity-95">
+              {callout.heading}
+            </h3>
+          {/if}
 
-				<!-- heading -->
-				<h3 class="text-xl font-semibold mb-2 text-maximumYellow">Helping business thrive in a world that is more digital &amp; mobile every day.</h3>
+          <!-- callout content -->
+          {#each callout?.content ?? [] as calloutItem, index}
+            {#if calloutItem?.href}
+              <a
+                class="text-maximumYellow opacity-90 hover:opacity-100 transition-all hover:underline underline-offset-4"
+                title={calloutItem?.title}
+                href={calloutItem.href}>{calloutItem?.["data-text"]}</a
+              >
+            {:else if calloutItem?.["data-text"]}
+              <span class="opacity-90">{calloutItem["data-text"]}</span>
+            {/if}
+            {#if index !== (callout?.content?.length ?? 0) - 1}
+              <span class="opacity-90">・&nbsp;</span>
+            {/if}
+          {/each}
 
-				<!-- text -->
-				<div class="mb-16 font-sans opacity-80">
-					For over 20 years Lightning Jar has provided premium digital strategy, design and technology services to national and international business clients.
-				</div>
-			</div>
+          <!-- callout footnotes -->
+          {#if callout?.footnotes?.[0]}
+            <i class="opacity-80 block text-15px mt-4">
+              {#each callout.footnotes ?? [] as footnote, index}
+                {#if footnote}
+                  <span>{"*".repeat(index + 1)}&nbsp;</span><span
+                    >{footnote}</span
+                  >
+                {/if}
+              {/each}
+            </i>
+          {/if}
+        </div>
+      {/each}
+    </div>
+  </div>
 
-			<!-- col:2 links -->
-			<div class="mt-14 grid grid-cols-1 gap-8">
+  <!-- legal links -->
+  <div class="mb-4 flex gap-4">
+    {#each legalLinks ?? [] as link}
+      {#if link.href && link["data-text"]}
+        <a
+          class="font-sans inline-block text-xs opacity-80 hover:text-maximumYellow underline underline-offset-4 decoration-slate-500"
+          href={link.href}
+        >
+          {link["data-text"]}
+        </a>
+      {/if}
+    {/each}
+  </div>
 
-				<!-- contact -->
-				<div>
-					<h3 class="text-xl font-semibold mb-2 text-maximumYellow">Contact</h3>
-					<a
-						class="hover:text-maximumYellow hover:opacity-100 transition-all underline underline-offset-4 decoration-slate-500"
-						href="mailto:hey@lightningjar.com"
-					>hey@lightningjar.com</a>
-				</div>
-
-				<div class="mb-8">
-					<h3 class="text-xl font-semibold mb-2 text-maximumYellow">Locations</h3>
-					<div class="mb-16 font-sans opacity-80">
-						Philadelphia &CenterDot; New York &CenterDot; Texas
-						<br />
-						Proudly remote and distributed since 2018.
-					</div>
-				</div>
-
-				<!-- More -->
-				<!-- <div class="mb-24">
-					<h3 class="text-xl font-semibold mb-2 text-maximumYellow">More</h3>
-				</div> -->
-			</div>
-		</div>
-
-		<!-- legal links -->
-		<div class="mb-4 flex gap-4">
-
-			{#each [{href: '/legal/privacy', text: 'Privacy Policy'}, {href: '/legal/terms', text: 'Terms'}] as {href, text} }
-				<a
-					class="font-sans inline-block text-xs opacity-80 hover:text-maximumYellow underline underline-offset-4 decoration-slate-500"
-					{href}>
-					{text}
-				</a>
-			{/each}
-		</div>
-
-		<!-- copyright text-->
-		<div class="font-sans text-xs opacity-80 mb-36"> &copy; Copyright { new Date().getFullYear() } SiiTE Interactive LLC dba Lightning Jar.</div>
-	</footer>
-
+  <!-- copyright text-->
+  <div class="font-sans text-xs opacity-80 mb-36">
+    &copy; Copyright 2002 - {new Date().getFullYear()} SiiTE Interactive LLC dba
+    Lightning Jar.
+  </div>
+</footer>

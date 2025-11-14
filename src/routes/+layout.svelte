@@ -1,66 +1,59 @@
 <script lang="ts">
-	// import css file
-	import "uno.css"
+  // import child page data
+  import { page } from "$app/state";
 
-	// import context api
-	import { setContext } from "svelte";
+  // import context api
+  import { setContext } from "svelte";
 
-	// import analytics component
-	// import PlausibleAnalytics from "$atoms/PlausibleAnalytics.svelte";
+  // import css file
+  import "uno.css";
 
-	// import components
-	import GlobalNav from "$components/GlobalNav.svelte";
-	import GlobalFooter from "$components/GlobalFooter.svelte";
-	// import MediaPlayer from "$organisms/MediaPlayer.svelte";
+  // import components
+  import GlobalFooter from "$components/GlobalFooter.svelte";
+  import GlobalNav from "$components/GlobalNav.svelte";
+  import SvelteAnnounceFix from "$components/SvelteAnnounceFix.svelte";
+  import LightningBolt from "$components/LightningBolt.svelte";
 
+  // props
+  let { children, data } = $props();
 
-	// import child page data
-	import { page } from "$app/state";
+  // nav State
+  const navState = $state({
+    mobileNavOpenState: "closed",
+    activeMobileMenu: "Main",
+    brandLink: null,
+  });
+  setContext("navState", { value: navState });
 
-	// props
-	let { children, data } = $props();
-
-	// variables
-	let mobileNavState = $state({value:'closed'});
-	setContext("mobileNavState", mobileNavState);
-
-	let activeMobileMenu = $state({value:'Main'});
-	setContext("activeMobileMenu", activeMobileMenu);
-
-	let brandLink = $state({value:null});
-	setContext("brandLink", brandLink);
-
-	let youTubeCode = $state({value:""});
-	setContext("youTubeCode", youTubeCode);
-
-	let mediaPlayer = $state({value:"hide"});
-	setContext("mediaPlayer", mediaPlayer);
-
-
-	let mobileNavContainerClasses = $derived(mobileNavState.value === 'open'
-		? "translate-x-0 pointer-events-auto transition-transform"
-		: "translate-x-[-100vw] pointer-events-none");
+  // lightning count
+  const lightningCount = $state({ value: 0 });
+  setContext("lightningCount", lightningCount);
 </script>
 
 <svelte:head>
-	<title> {page.data.metaTitle ?? "Lightning Jar"}</title>
-	{#if page.data.metaDescription}
-		<meta
-			content="{page.data.metaDescription}"
-			name="description"
-		>
-	{/if}
+  <title>{page.data.meta.title ?? "Lightning Jar"}</title>
+  {#if page.data.meta.description}
+    <meta content={page.data.meta.description} name="description" />
+  {/if}
 </svelte:head>
 
-	<GlobalNav
-		isHome={ data.isHome }
-		nav={ data.nav }
-	/>
-	<!-- MediaPlayer -->
-	<div class="bg-blue-500 relative w-full max-w-screen overflow-x-hidden place-self-stretch">
-		{@render children?.()}
-	</div>
+<SvelteAnnounceFix />
 
-	<GlobalFooter />
+<GlobalNav nav={data.nav} />
 
+<!-- MediaPlayer -->
+<!-- <button popovertarget="mediaPlayer">Open / Close</button> -->
+<!-- <div popover="auto" id="mediaPlayer" class=" bg-oxfordDark relative page-x-padding main-y-padding w-full text-white">
+		<div class="w-full flex items-start justify-center">
+			<MediaPlayer classes="max-w-800px"/>
+		</div>
+	</div> -->
 
+<!-- body -->
+<div class="relative w-full max-w-screen overflow-x-hidden place-self-stretch">
+  {@render children?.()}
+</div>
+
+{#if data.footer}
+  <GlobalFooter {...data.footer} />
+{/if}

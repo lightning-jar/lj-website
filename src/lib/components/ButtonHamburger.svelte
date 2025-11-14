@@ -2,19 +2,8 @@
 	// context api
 	import { getContext } from "svelte";
 
-	// types
-	import type { Writable } from "svelte/store";
-	type BrandLinkStore = Writable<HTMLAnchorElement | null>;
-
-	// mobile nav state
-	const mobileNavState = getContext("mobileNavState") as {value: string};
-	let mobileNavOpen = $derived(mobileNavState.value === 'open');
-
-	// mobile active menu
-	const activeMobileMenu = getContext("activeMobileMenu") as {value: string};
-
-	//get the brand link store from context api
-	const brandLinkStore = getContext("brandLinkStore") as BrandLinkStore;
+	// get nav state
+	const navState = getContext("navState") as {value: {mobileNavState: string, activeMobileMenu: string, brandLink: HTMLAnchorElement | null}};
 
 	// functions
 	function getFirstItemInActiveMobileMenu():
@@ -22,7 +11,7 @@
 		| HTMLButtonElement {
 		// get the active mobile menu i
 		const menu = document.querySelector(
-			`[data-mobile-menu="${activeMobileMenu.value}"]`,
+			`[data-mobile-menu="${navState.value.activeMobileMenu}"]`,
 		);
 		const container = menu?.firstElementChild as HTMLDivElement;
 		const activeMobileMenuFirstItem = container?.firstElementChild as
@@ -34,25 +23,12 @@
 	}
 	function toggleMobileMenu() {
 		// if closed, open the menu, and put focus on the first menu item
-		if (!mobileNavOpen) {
-			// open the menu
-			mobileNavOpen = true;
-			// stop page from scrolling
-			// disableScroll();
-			// focus first mobile menu item
-			// focusFirstMobileMenuItem();
-		} else {
-			// close the menu
-			mobileNavOpen = false;
-			// allow page to scroll
-			// enableScroll();
-			// reset active mobile menu
-			activeMobileMenu.value = "Main";
-		}
+		navState.value.mobileNavState = navState.value.mobileNavState === 'open' ? 'closed' : 'open';
+		console.log(navState.value.mobileNavState);
 	}
 	function handleKeydown(event: KeyboardEvent) {
 		// if the menu is open
-		if (mobileNavOpen) {
+		if (navState.value.mobileNavState === 'open') {
 			// if the escape key is pressed
 			if (event.key === "Escape") {
 				// close the menu
@@ -65,8 +41,7 @@
 			// focus on the brand link
 			else if (event.key === "Tab" && event.shiftKey) {
 				event.preventDefault();
-				const brandLink = $brandLinkStore;
-				brandLink?.focus();
+				navState.value.brandLink?.focus();
 			}
 
 			// focus on first mobile menu item in the active menu
@@ -86,14 +61,14 @@
 	<div class="flex items-center text-neutral-100 xl:hidden">
 		<button
 			class="group {btnBaseClasses} {btnFocusClasses} {btnFocusVisibleClasses} {btnHoverClasses}"
-			aria-expanded={ mobileNavState.value === 'open' }
+			aria-expanded={ navState.value.mobileNavState === 'open' }
 			onclick={ toggleMobileMenu }
 			onkeydown={ handleKeydown } >
 
 			<span class="sr-only">Open menu</span>
 			<div class="pointer-events-none select-none py-1">
-				<div class="border-b border-white w-8 h-0 transition-transform origin-center mb-2 {mobileNavState.value === 'open' ? 'rotate-45 translate-y-1' : ''} group-hover:border-neutral-50"></div>
-				<div class="border-b border-white w-8 h-0 transition-transform origin-center {mobileNavState.value === 'open' ? '-rotate-45 -translate-y-1' : ''} group-hover:border-neutral-50"></div>
+				<div class="border-b border-white w-8 h-0 transition-transform origin-center mb-2 {navState.value.mobileNavState === 'open' ? 'rotate-45 translate-y-1' : ''} group-hover:border-neutral-50"></div>
+				<div class="border-b border-white w-8 h-0 transition-transform origin-center {navState.value.mobileNavState === 'open' ? '-rotate-45 -translate-y-1' : ''} group-hover:border-neutral-50"></div>
 			</div>
 		</button>
 </div>

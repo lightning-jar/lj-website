@@ -25,9 +25,6 @@ export const handleError = handleErrorWithSentry();
 // handle function
 import type { Handle } from "@sveltejs/kit";
 
-// local data & settings
-import { default as nav } from "$data/nav.json";
-
 // types
 
 export const handle: Handle = sequence(
@@ -35,9 +32,7 @@ export const handle: Handle = sequence(
 	Sentry.sentryHandle(),
 
 	async ({ event, resolve }) => {
-		event.locals = {
-			nav: nav,
-		};
+		event.locals = {};
 
 		const response = await resolve(event);
 		return response;
