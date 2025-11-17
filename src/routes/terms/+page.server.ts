@@ -1,8 +1,10 @@
 // data
 import { default as content } from "$data/terms.json";
 
-export async function load() {
+const contentTyped = content as typeof content;
+
+export function load() {
 	return {
-		...content,
+		...contentTyped,
 	};
 }

@@ -5,7 +5,9 @@
 </script>
 
 <div class="page-x-padding main-y-padding !pb-6">
-  <h1 class="text-32px mb-2 text-maximumYellow font-700">{data?.heading}</h1>
+  <h1 class="display">
+    {data?.heading}
+  </h1>
   <p>{data?.subheading}</p>
 </div>
 

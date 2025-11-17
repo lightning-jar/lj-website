@@ -1,0 +1,105 @@
+{
+	"banner": {
+		"heading": "Customer Stories",
+		"subheading": "Here's how we helped some folks."
+	},
+	"meta": {
+		"title": "Customer Stories",
+		"description": "Welcome to our customer stories page. Here, you'll find real-wold examples of how our soluitions have helped companies reach their goals."
+	},
+	"stories": [
+		{
+			"banner": {
+				"tag": {
+					"data-text": "Beam Suntory + Open Source PIM",
+					"href": "https://pimcore.com/en/customers/suntory-group_c132768"
+				},
+				"heading": "The Perfect Cocktail for Marketing Data",
+				"subheading": "Lightning Jar helped the Suntory Group architect and deploy a Pimcore MDM / PIM / DAM solution to manage products, product data, images, labels, recipes, and marketing content for hundreds of products and thousands of product variations across languages and regions"
+			},
+			"meta": {
+				"title": "Premium Liquor Brand | Customer Story",
+				"description": "Lightning Jar deploys a Pimcore MDM / PIM / DAM platform to manage products, product data, images, labels, recipes, and marketing content."
+			},
+			"customer": {
+				"category": "Food & Beverage",
+				"solutions": ["PIM", "MDM"],
+				"technologies": ["Pimcore"],
+				"name": "Beam Suntory",
+				"logo": "/images/customer-logo-beam-suntory.png",
+				"thumb": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/beam-suntory-espirits-01.webp"
+			},
+			"excerpt": "We helped the Suntory Group architect and deploy a Pimcore MDM / PIM / DAM solution to manage products, product data, images, labels, recipes, and marketing content for hundreds of products and thousands of product variations across languages and regions.",
+			"title": "Beam Suntory Mixes the Perfect Cocktail of Unified Marketing & Product Data",
+			"slug": "beam-suntory-mdm",
+			"image": "/images/customer-story-1.jpg",
+			"content": [
+				{
+					"heading": "Customer",
+					"text": [
+						"Beam Suntory is the world's third-largest premium spirits company. Home to iconic brands such as Jim Beam, Maker’s Mark, Courvoisier, Suntory, Knob Creek, Laphroaig, Bowmore, Canadian Club, Hornitos, Sauza, Roku, and many more."
+					]
+				},
+				{
+					"heading": "Challenge",
+					"text": [
+						"Beam Suntory manages hundreds of products, and thousands of bottle variations (including sizes, label variations, etc) across dozens of brands. Managing product images, approved language, product SKUs, labels, recipes, and cut sheets was a massive and inefficient ongoing effort. Beam wanted a unified solution that could be the source of all truth for marketing and product data, that everyone from marketing teams to sales reps, retailers, and distributors could access and easily get information from."
+					]
+				},
+				{
+					"heading": "Solution",
+					"subheading": "Unified Data Goes Down Easy",
+					"text": [
+						"The client needed a product information and data asset management platform with interfaces that were extensible, flexible, and easily customizable. Pimcore was a natural fit. We started by helping the client build a proof of concept with some test data -- stakeholders were thrilled at the results. From there we implemented a full PIM / MDM / DAM solution with many integration points to other systems.",
+						"On the front end we created multiple experiences for multiple user types. One of the outputs was a web portal for online retailers with easy access to brand logos, bottle photos, descriptions, bottle size info, etc. Again, with Pimcore that was easy. We also created interfaces for easily creating, customizing and accessing learning guides, portfolio guides and sell-sheets for sales reps and marketing teams. The solution continues to expand as we migrate in more data from additional brands and regions, and as we customize output for additional audiences."
+					]
+				},
+				{
+					"heading": "Results",
+					"subheading": "A Single Malt of Truth",
+					"text": [
+						"The final result was a single source of information for each brand, and each brand’s products. No matter where this data is being disseminated, whether to the brand website, or to a distributor sales sheet, retail site, or a brochure, it all comes from the same place; it all comes from Pimcore. Everybody knows where to find it. It’s there, it’s consistent and it’s dynamically distributed through all the different output channels."
+					]
+				}
+			],
+			"testimonials": [
+				{
+					"quote": [
+						"The open source PIM + marketing data management solution architected by Lightning Jar has been a huge factor in driving product data and marketing content to internal and external partners."
+					],
+					"attribution": {
+						"name": "Liz Sterret",
+						"title": "Sr. Manager eCustomer Marketing & Content",
+						"organization": "Beam Suntory"
+					}
+				}
+			],
+			"images": [
+				{
+					"alt": "Laptop displaying product data inside the Beam Suntory eSpirits portal",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/beam-suntory-espirits-01.webp",
+					"width": "1300",
+					"height": "731"
+				}
+			],
+			"perspectives": [
+				{
+					"quote": [
+						"From the first moment that project stakeholders saw the proof of concept -- Pimcore and its interface --they were excited by the endless possibilities and couldn't wait to move forward."
+					],
+					"attribution": {
+						"name": "Alex Cantu",
+						"title": "Director of Technology",
+						"organization": "Lightning Jar",
+						"image": {
+							"alt": "Alex Cantu",
+							"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/alex.webp",
+							"width": "63",
+							"height": "63"
+						}
+					}
+				}
+			]
+		}
+	]
+}

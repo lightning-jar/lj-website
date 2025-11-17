@@ -1,29 +1,45 @@
 {
+	"meta": {
+		"description": "Lightning Jar is a digital design and build studio hand crafting websites and custom applications for businesses and organizations.",
+		"title": "Lightning Jar"
+	},
 	"topics": [
-	  {
-		 "heading": "Design & Build Web Studio" ,
-			"text": ["For nearly 25 years, we've been too busy designing and building websites and custom applications to put the proper time and attention into our own damn marketing. That's not just an excuse. It is also a point of pride."]
+		{
+			"heading": "Design & Build Web Studio",
+			"text": [
+				"For nearly 25 years, we've been too busy designing and building websites and custom applications to put the proper time and attention into our own damn marketing. That's not just an excuse. It is also a point of pride."
+			]
 		},
 		{
-		  "heading": "Digital From the Beginning",
-			"text": ["We first launched in 2002, the same year the \"digital information age\" was said to have officially begun, when the total amount of digitized information in the world exceeded traditional analog information."],
+			"heading": "Digital From the Beginning",
+			"text": [
+				"We first launched in 2002, the same year the \"digital information age\" was said to have officially begun, when the total amount of digitized information in the world exceeded traditional analog information."
+			],
 			"bullets": []
 		},
 		{
-		"heading":"Moving at the Speed of Good",
-		"text": ["There's a word for people who move fast and break things: 'toddlers'. We believe good design and great technology solutions require time, intention, and process."]
+			"heading": "Moving at the Speed of Good",
+			"text": [
+				"There's a word for people who move fast and break things: 'toddlers'. We believe good design and great technology solutions require time, intention, and process."
+			]
 		},
 		{
-		"heading":"Skeptical of Easy Answers",
-		"text": ["We believe great strategy is the process of asking tough questions. Great design is the process of making tough decisions. Great implementation is the process of making tough compromises."]
+			"heading": "Skeptical of Easy Answers",
+			"text": [
+				"We believe great strategy is the process of asking tough questions. Great design is the process of making tough decisions. Great implementation is the process of making tough compromises."
+			]
 		},
 		{
-		"heading":"We Love Open Source",
-		"text": ["Open Source is an open, collaborative, and community-driven approach to software development. It promotes transparency, innovation, and cost-effectiveness. Whatever your technology challenge, there is probably an open source solution that is the best choice to solve it. "]
+			"heading": "We Love Open Source",
+			"text": [
+				"Open Source is an open, collaborative, and community-driven approach to software development. It promotes transparency, innovation, and cost-effectiveness. Whatever your technology challenge, there is probably an open source solution that is the best choice to solve it. "
+			]
 		},
 		{
-		"heading":"Saying No is a Super Power",
-		"text": ["It took us a long time to learn how to say no. Now we say it all the time. We don't take on all clients or project requests. We only take the ones that are a good fit for our team, our availability, and our working culture. When the timeline and goals are realistic and when we are certain we can deliver real value."]
+			"heading": "Saying No is a Super Power",
+			"text": [
+				"It took us a long time to learn how to say no. Now we say it all the time. We don't take on all clients or project requests. We only take the ones that are a good fit for our team, our availability, and our working culture. When the timeline and goals are realistic and when we are certain we can deliver real value."
+			]
 		}
 	],
 	"ticker": [
@@ -39,7 +55,7 @@
 		"Kind of disappointing, right?.",
 		"Well, it is what it is.",
 		"Not to ruin the surprise, but...",
-	  "Nothing special happens if you keep clicking.",
+		"Nothing special happens if you keep clicking.",
 		"Seriously.",
 		"Not a thing.",
 		"Nada.",

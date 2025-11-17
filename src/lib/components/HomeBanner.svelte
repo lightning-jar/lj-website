@@ -169,16 +169,21 @@
       {/if}
     {/each}
 
-    <div
-      class="flex justify-left absolute top-18 right-0 lg:right-4 scale-[0.85]"
-    >
-      <LightningButton
-        onclick={() => {
-          clickLightningButton();
-          incrementCounter("topic", topics.length);
-        }}
-        classes="flex"
-      />
+    <div class=" absolute top-18 right-0 lg:right-4 group">
+      <div class="scale-[0.85] flex justify-left">
+        <LightningButton
+          onclick={() => {
+            clickLightningButton();
+            incrementCounter("topic", topics.length);
+          }}
+          classes="flex"
+        />
+      </div>
+      <!-- <div
+        class="hidden group-hover:block text-center text-accent mt-1px text-14px opacity-80"
+      >
+        Zap
+      </div> -->
     </div>
   </div>
 

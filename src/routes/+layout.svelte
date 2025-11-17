@@ -27,7 +27,7 @@
 
 <svelte:head>
   {#if page.data.meta?.title}
-    <title>{page.data.meta?.title ?? "Lightning Jar"}</title>
+    <title>{page.data.meta?.title ?? "Lightning Jar"} ⚡️</title>
   {/if}
   {#if page.data.meta?.description}
     <meta content={page.data.meta.description} name="description" />
@@ -44,7 +44,8 @@
 		<div class="w-full flex items-start justify-center">
 			<MediaPlayer classes="max-w-800px"/>
 		</div>
-	</div> -->
+	</div> --
+
 
 <!-- body -->
 <div class="relative w-full max-w-screen overflow-x-hidden place-self-stretch">

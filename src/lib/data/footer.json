@@ -39,6 +39,10 @@
 	],
 	"legalLinks": [
 		{
+			"href": "/archive",
+			"data-text": "Archive"
+		},
+		{
 			"href": "/terms",
 			"data-text": "Privacy & Terms"
 		}
