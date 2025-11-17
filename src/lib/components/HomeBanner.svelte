@@ -1,47 +1,69 @@
 <script lang="ts">
-  // svelte context browserApiErrorsIntegration
-  import { getContext } from "svelte";
-  //
   // components
-  import GraphicDots from "./GraphicDots.svelte";
+
+  import LightningBolt from "$components/LightningBolt.svelte";
+  import LightningButton from "$components/LightningButton.svelte";
+
+  // types
+  interface Topic {
+    heading: string;
+    text: string[];
+    bullets?: string[];
+  }
+  interface Props {
+    topics?: Topic[];
+    ticker?: string[];
+  }
 
   // props
-  let {
-    headline = [],
-    text = [],
-    ticker = [],
-  }: {
-    headline?: string[];
-    text?: string[];
-    ticker?: string[];
-  } = $props();
+  let { topics = [], ticker = [] }: Props = $props();
 
-  const lightningCount = getContext("lightningCount") as { value: number };
-
-  let headlineIndex = $derived(
-    lightningCount.value > -1 ? lightningCount.value : 0,
-  );
-  $effect(() => {
-    if (lightningCount.value > headline.length - 1) {
-      lightningCount.value = 0;
-    }
+  // local state
+  let counters: Record<string, number> = $state({
+    topic: 0,
+    ticker: 0,
   });
-  let textState = $state(text[0]);
-  let TickerClickCount = $state(0);
 
-  // functions
-  function advanceTickerClick() {
-    TickerClickCount++;
-    if (TickerClickCount === ticker.length) {
-      TickerClickCount = 0;
-    }
+  // helpers
+  function clickLightningButton() {
+    const lightningButton = document.querySelector(
+      "[data-lightning-button]",
+    ) as HTMLButtonElement;
+    lightningButton?.click();
   }
-  function reverseTickerClick() {
-    TickerClickCount--;
-    if (TickerClickCount < 0) {
-      TickerClickCount = ticker.length - 1;
+
+  function incrementCounter(counterName: string, counterLength: number): void {
+    // return if arguments are invalid
+    if (counters?.[counterName] === undefined || !counterLength) return;
+
+    // reset counter if it approaches or exceeds limit
+    if (counters[counterName] + 1 >= counterLength) {
+      counters[counterName] = 0;
+      return;
     }
+
+    // increment counter
+    counters[counterName] = counters[counterName] + 1;
   }
+
+  function decrementCounter(counterName: string, counterLength: number): void {
+    // return if arguments are invalid
+    if (counters?.[counterName] === undefined || !counterLength) return;
+
+    // reset counter if it approaches zero
+    if (counters[counterName] - 1 < 0) {
+      if (counterName === "topic") {
+        counters[counterName] = topics.length - 1;
+      } else if (counterName === "ticker") {
+        counters[counterName] = ticker.length - 1;
+      }
+      return;
+    }
+
+    // increment counter
+    counters[counterName] = counters[counterName] - 1;
+  }
+
   function handleKeyDown(event: KeyboardEvent) {
     if (
       event.key === "Enter" ||
@@ -49,10 +71,13 @@
       event.key === "ArrowDown"
     ) {
       event.preventDefault();
-      advanceTickerClick();
+      clickLightningButton();
+      incrementCounter("topic", topics.length);
     }
     if (event.key === "ArrowLeft") {
-      reverseTickerClick();
+      event.preventDefault();
+      clickLightningButton();
+      decrementCounter("topic", topics.length);
     }
   }
 </script>
@@ -60,80 +85,174 @@
 <svelte:body onkeydown={handleKeyDown} />
 
 <div
-  class="page-x-padding py-8 w-full md:grid md:grid-cols-2 md:h-full md:items-start min-h-[calc(100vh-6rem)] relative"
+  class="border-b
+  border-white/10 page-x-padding pb-4 w-full grid grid-cols-[minmax(0,460px)_1fr] h-full items-start min-h-[calc(100vh-6rem)] relative lg:py-8 selector-[body.lightning]:[animation:shake_0.3s_ease-in-out_infinite]"
 >
-  <!-- column 1 -->
+  <!-- primary content area -->
   <div
     class="
-				gap-y-6
 				grid
 				grid-cols-1
 				h-auto
 				items-center
-				sm:pr-20
-				sm:text-left
-				text-center
+				relative
 				w-full
 				sm:max-w-lg
-				md:pr-8
-				lg:gap-y-6
 				pt-12"
   >
-    <div class="flex items-end gap-">
-      <h1
-        title="If you don't like this headline, feel free to edit it."
-        class="text-30px lg:text-44px font-serif font-semibold leading-tight text-maximumYellow text-balance text-pretty max-w-fit"
-      >
-        {headline[headlineIndex]}
-      </h1>
-    </div>
-    <p
-      class="
-					text-17px
-					text-accent
-					leading-7"
+    {#each topics as topic, index}
+      {@const headingTag = index === 0 ? "h1" : "h2"}
+      {#if index > -1}
+        <!-- heading -->
+
+        <svelte:element
+          this={headingTag}
+          title="If you don't like this headline, feel free to edit it."
+          class="{counters.topic === index ? 'flex' : 'hidden'}
+          font-display
+          text-34px
+          font-400
+          leading-tight
+          mb-7
+          text-maximumYellow
+          text-balance
+          text-pretty
+          border-y
+          border-transparent
+          [border-image:linear-gradient(90deg,_hsla(64,94%,58%,0.6),_hsla(64,94%,58%,0.6),_hsla(64,94%,58%,0.6))_1]
+          //border-white/30
+          p-[20px_0px_24px_0px]
+          //border-none
+          uppercase
+          text-shadow
+          text-shadow-oxfordDark
+          sm:text-48px"
+        >
+          <span class="block max-w-400px">{topic.heading}</span>
+        </svelte:element>
+
+        <!-- text -->
+        {#each topic.text as text}
+          <div
+            class="{counters.topic === index ? 'block' : 'hidden'}
+					font-sans
+          text-17px
+					leading-[1.65]
+					text-yellow-50
+					mb-6
+					pl-0
+					//opacity-95
+					"
+          >
+            {@html text}
+          </div>
+        {/each}
+
+        <!-- bullets -->
+        {#if topic?.bullets?.[0]}
+          <ul
+            class="{counters.topic === index ? 'grid' : 'hidden'}
+            gap-3
+  					text-17px
+  					text-accent
+  					leading-7
+  					list-disc
+       	    list-outside
+            grid-cols-1
+  					pl-3"
+          >
+            {#each topic.bullets as bullet}
+              <li class="leading-snug">{bullet}</li>
+            {/each}
+          </ul>
+        {/if}
+      {/if}
+    {/each}
+
+    <div
+      class="flex justify-left absolute top-18 right-0 lg:right-4 scale-[0.85]"
     >
-      {@html textState}
-    </p>
+      <LightningButton
+        onclick={() => {
+          clickLightningButton();
+          incrementCounter("topic", topics.length);
+        }}
+        classes="flex"
+      />
+    </div>
   </div>
 
-  <!-- column 2 -- image content -->
+  <!-- column 2 -->
   <div
     class="
 				flex
-				h-auto
-				justify-center
-				max-w-sm
-				pointer-events-none
-				py-8
-				relative
-				w-full
-				md:p-0
-				lg:max-w-sm
-				xl:justify-start
-				xl:max-w-lg"
-  >
-    <!-- <GraphicDots /> -->
-    <GraphicDots />
-  </div>
+				h-full
+				justify-end
+				items-start"
+  ></div>
+
+  <!-- ticker -->
   <div
-    class="absolute bottom-8 w-screen page-x-padding grid grid-cols-1 place-items-center"
+    class="
+      absolute
+      bottom-8
+      gap-4
+      grid-cols-1
+      hidden
+      h-48px
+      page-x-padding
+      place-content-start
+      place-items-center
+      w-screen
+      sm:flex"
   >
-    {#if ticker[TickerClickCount]}
-      <div
-        class="text-center font-serif text-balance text-pretty text-maximumYellow mb-5 w-full bg-blue-200/5 rounded p-4"
+    <div
+      class="
+        flex
+        items-center
+        justify-center
+        w-full
+        sm:w-auto"
+    >
+      <button
+        title="Click me."
+        class="
+          text-maximumYellow
+          hover:bg-maximumYellow
+          hover:text-oxford
+          rounded-full
+          border
+          flex
+          items-center
+          justify-center
+          aspect-square
+          w-8
+          h-8
+          p-10px
+          leading-none
+          font-mono"
+        onclick={() => incrementCounter("ticker", ticker.length)}
+        ><LightningBolt classes={"hover:text-oxford"} /></button
       >
-        {ticker[TickerClickCount].replace(
+    </div>
+
+    {#if ticker[counters.ticker]}
+      <div
+        class="
+          bg-transparent
+          px-2
+          py-3
+          rounded
+          text-balance
+          text-maximumYellow
+          text-pretty
+          w-auto"
+      >
+        {ticker[counters.ticker].replace(
           "{{count}}",
-          TickerClickCount.toString(),
+          counters.ticker.toString(),
         )}
       </div>
     {/if}
-    <div class="flex items-center justify-center w-full">
-      <button
-        class=" text-maximumYellow hover:bg-maximumYellow hover:text-oxford rounded-full border flex items-center justify-center aspect-square w-12 h-12 leading-none font-mono"
-        onclick={advanceTickerClick}>{TickerClickCount}</button
-      >
-    </div>
   </div>
 </div>

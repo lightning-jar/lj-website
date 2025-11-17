@@ -1,32 +1,183 @@
-<!DOCTYPE html>
-<html
-	lang="en"
->
-	<head>
-		<meta charset="utf-8" />
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
 
-		<!-- dns prefetch -->
-		<link rel="dns-prefetch" href="https://lj-01.nyc3.cdn.digitaloceanspaces.com">
+    <!-- DNS prefetch -->
+    <link
+      rel="dns-prefetch"
+      href="https://lj-01.nyc3.cdn.digitaloceanspaces.com"
+    />
 
-		<!-- csp -->
-		<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; frame-src 'self' https://peertube.tv https://www.youtube.com; img-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; style-src 'unsafe-inline' 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; script-src 'self' 'sha256-YXOoinyatmABOduEfvaFA6G330E20K7l6OY8MBuERxw='; worker-src 'self' blob:"> -->
+    <!-- CSP -->
+    <!--<meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; frame-src 'self'; font-src 'self' https://fonts.bunny.net; img-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; media-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; style-src 'unsafe-inline' 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; script-src 'self' 'sha256-YXOoinyatmABOduEfvaFA6G330E20K7l6OY8MBuERxw=' 'sha256-YXOoinyatmABOduEfvaFA6G330E20K7l6OY8MBuERxw=' 'sha256-NoqqQBFMr/TstJFNyv5+bfNEnPLEFhisISsVbIcl25E='; worker-src 'self' blob:"
+    />-->
 
-		<!-- viewport -->
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1"
-		/>
+    <!-- viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		<!-- favicons -->
-		<link
-			rel="icon"
-			type="image/svg+xml"
-			href="%sveltekit.assets%/icon.svg"
-		>
+    <!-- favicons -->
+    <link rel="icon" type="image/svg+xml" href="%sveltekit.assets%/icon.svg" />
 
-		%sveltekit.head%
-	</head>
-	<body class="flex font-serif bg-oxford text-neutral-100 max-w-screen overflow-x-hidden relative">
-		<div class="grid grid-cols-1 grid-rows-[auto_1fr_auto] min-h-screen w-full">%sveltekit.body%</div>
-	</body>
+    %sveltekit.head%
+
+    <!-- structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Lightning Jar",
+        "disambiguatingDescription": "Web Studio",
+        "description": "A design + build web studio that builds websites, apps, custom-software and eCommerce solutions for national and international business clients.",
+        "knowsAbout": "Pimcore",
+        "logo": "https://lightningjar.com/icon.svg",
+        "url": "https://lightningjar.com",
+        "email": "inquiries@lightningjar.com",
+        "telephone": "(215) 995-6628",
+        "location": {
+          "@type": "Place",
+          "address": {
+            "addressLocality": "Philadelphia",
+            "addressRegion": "PA"
+          }
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name:": "United States"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Digital Agency Services",
+          "itemListElement": [
+            {
+              "@type": "OfferCatalog",
+              "name": "Web Technology Services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Website Development"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Mobile App Development"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "eCommerce Development"
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "OfferCatalog",
+              "name": "Svelte and SvelteKit Development",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Sveltekit Project Consulting"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Svelte Development"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Svelte Support"
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "OfferCatalog",
+              "name": "Pimcore Services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Pimcore Consulting"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Pimcore Development"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Pimcore Support"
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "OfferCatalog",
+              "name": "Digital Design",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "UX Optimization"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "UI Design"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Digital Content"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "foundingDate": "12/30/2002",
+        "foundingLocation": "New York",
+        "naics": "541511",
+        "duns": "191355317",
+        "slogan": "The world is more digital & more mobile every day.",
+        "memberOf": "Pimcore Gold Partner Program",
+        "legalName": "SiiTE Interactive LLC dba Lightning Jar",
+        "alternateName": "SiiTE Interactive",
+        "numberOfEmployees": 12
+      }
+    </script>
+  </head>
+  <body
+    class="flex font-sans bg-oxford bg-gradient-to-br from-oxfordDark to-oxford text-neutral-100 max-w-screen overflow-x-hidden relative"
+  >
+    <div class="grid grid-cols-1 grid-rows-[auto_1fr_auto] min-h-screen w-full">
+      %sveltekit.body%
+    </div>
+  </body>
 </html>

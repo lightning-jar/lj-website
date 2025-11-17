@@ -5,4 +5,4 @@
   let { data } = $props();
 </script>
 
-<HomeBanner headline={data.headline} text={data.text} ticker={data.ticker} />
+<HomeBanner topics={data.topics} ticker={data.ticker} />

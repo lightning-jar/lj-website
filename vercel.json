@@ -9,7 +9,7 @@
 			"headers": [
 				{
 					"key": "Content-Security-Policy",
-					"value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: https://cdn.securelogix.dev; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; block-all-mixed-content; upgrade-insecure-requests"
+					"value": "default-src 'self'; font-src 'self' https://fonts.bunny.net; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: https://cdn.securelogix.dev; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; block-all-mixed-content; upgrade-insecure-requests"
 				},
 				{
 					"key": "X-Frame-Options",
@@ -33,9 +33,26 @@
 				},
 				{
 					"key": "Permissions-Policy",
-					"value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+					"value": "accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), speaker-selection=(), usb=(), web-share=(), xr-spatial-tracking=(), window-placement=(), hid=(), idle-detection=(), sync-xhr=(), interest-cohort=()"
 				}
 			]
+		}
+	],
+	"redirects": [
+		{
+			"source": "/privacy-policy",
+			"destination": "/terms",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/introduction-to-pimcore",
+			"destination": "/archive/introduction-to-pimcore",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/what-is-pimcore",
+			"destination": "/archive/introduction-to-pimcore",
+			"statusCode": 301
 		}
 	]
 }

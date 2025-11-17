@@ -1,6 +1,7 @@
 import extractorSvelte from "@unocss/extractor-svelte";
 import presetWind4 from "@unocss/preset-wind4";
 import { defineConfig, transformerDirectives, transformerVariantGroup } from "unocss";
+import { presetWebFonts } from 'unocss'
 
 // just a little hack for disappearing comments
 const disappearingComment = (_str: string) => "";
@@ -51,10 +52,27 @@ export default defineConfig({
         70% { transform: translateX(-3px) rotate(-1deg); }
         80% { transform: translateX(3px) rotate(0.5deg); }
         90% { transform: translateX(-2px) rotate(-0.5deg); }
+        100% { transform: translateX(0) rotate(0deg); }
+    }
+    @keyframes bolt {
+        0%, 100% { scale:1; }
+        50% { scale:1.2; }
     }`
 		}
 	],
-	presets: [presetWind4({preflights: {reset: true}})],
+	presets: [
+	  presetWind4({preflights: {reset: true}}),
+	presetWebFonts({
+      provider: 'bunny',
+      fonts: {
+        // display: 'Aboreto',
+        // display: 'Monoton',
+        // display: 'Bevan',
+        // display: 'Bigshot',
+        display: 'Bungee Shade',
+        sans: 'Atkinson Hyperlegible',
+      }
+    })],
 	theme: {
 		colors: {
 			oxfordBlue: "hsl(217, 48%, 15%)",
@@ -89,6 +107,7 @@ export default defineConfig({
 			"text-neutral-100",
 			"max-w-screen",
 			"overflow-x-hidden",
+			"overflow-y-scroll",
 			"relative",
 			"grid",
 			"grid-cols-1",

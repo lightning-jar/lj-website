@@ -12,7 +12,6 @@
   import GlobalFooter from "$components/GlobalFooter.svelte";
   import GlobalNav from "$components/GlobalNav.svelte";
   import SvelteAnnounceFix from "$components/SvelteAnnounceFix.svelte";
-  import LightningBolt from "$components/LightningBolt.svelte";
 
   // props
   let { children, data } = $props();
@@ -24,15 +23,13 @@
     brandLink: null,
   });
   setContext("navState", { value: navState });
-
-  // lightning count
-  const lightningCount = $state({ value: 0 });
-  setContext("lightningCount", lightningCount);
 </script>
 
 <svelte:head>
-  <title>{page.data.meta.title ?? "Lightning Jar"}</title>
-  {#if page.data.meta.description}
+  {#if page.data.meta?.title}
+    <title>{page.data.meta?.title ?? "Lightning Jar"}</title>
+  {/if}
+  {#if page.data.meta?.description}
     <meta content={page.data.meta.description} name="description" />
   {/if}
 </svelte:head>

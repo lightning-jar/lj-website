@@ -23,8 +23,10 @@
 			relative
 			text-neutral-50
 			w-full
+			lg:pt-6
+			xl:pt-8
 			xl:min-h-[3.5rem]
-			z-0"
+			z-1"
 >
   <NavLogoBlock />
 
