@@ -1,7 +1,5 @@
 <script lang="ts">
 let { data } = $props();
-
-console.log(data.content);
 </script>
 
 <div class="page-x-padding main-y-padding !pb-6">

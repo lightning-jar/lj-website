@@ -114,7 +114,7 @@ const notes = [
       <audio
         class="bg-slate-100 border-oxford border rounded"
         preload="metadata"
-        controls=""
+        controls={undefined}
       >
         <source
           src="https://lj-01.nyc3.cdn.digitaloceanspaces.com/audio/01-introduction-to-pimcore.mp3"

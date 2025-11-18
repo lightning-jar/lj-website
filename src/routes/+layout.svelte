@@ -39,7 +39,7 @@ setContext("navState", { value: navState });
 
 <SvelteAnnounceFix />
 
-<GlobalNav nav={data.nav} />
+<GlobalNav />
 
 <!-- MediaPlayer -->
 <!-- <button popovertarget="mediaPlayer">Open / Close</button> -->

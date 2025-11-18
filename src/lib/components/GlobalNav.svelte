@@ -3,11 +3,8 @@
 // import ButtonHamburger from "$components/ButtonHamburger.svelte";
 import NavLogoBlock from "$components/NavLogoBlock.svelte";
 
-// types
-import type { NavItem } from "$types/types";
-
 // props
-let { nav }: { nav: NavItem[] } = $props();
+// let { nav }: { nav: NavItem[] } = $props();
 
 // refs
 let contextMenuButton: HTMLButtonElement | null = $state(null);
