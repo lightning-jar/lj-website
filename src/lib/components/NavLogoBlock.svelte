@@ -88,4 +88,7 @@ function lightningStrike() {
       ></path>
     </svg>
   </button>
+  <!-- <div class="hidden group-hover:flex absolute left-0 top-100% pt-1 text-12px">
+    Since 2002
+  </div> -->
 </div>

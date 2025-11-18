@@ -1,5 +1,5 @@
 {
-	"name": "slx-doc-editor",
+	"name": "lj-website",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -23,6 +23,7 @@
 		"@unocss/extractor-svelte": "^66.5.6",
 		"@unocss/preset-web-fonts": "^66.5.6",
 		"@unocss/preset-wind4": "^66.5.6",
+		"baseline-browser-mapping": "^2.8.29",
 		"nanoid": "^5.1.6",
 		"svelte": "^5.43.11",
 		"svelte-check": "^4.3.4",
