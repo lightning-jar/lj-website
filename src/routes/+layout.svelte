@@ -29,7 +29,7 @@
   {#if page.data.meta?.title}
     <title
       >{page.data.meta?.title ?? "Lightning Jar"}
-      {data.isHome ? "" : "LJ"}</title
+      {data.isHome ? "" : "- LJ"}</title
     >
   {/if}
   {#if page.data.meta?.description}
