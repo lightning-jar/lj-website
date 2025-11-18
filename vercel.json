@@ -83,5 +83,6 @@
 			"destination": "/archive",
 			"statusCode": 301
 		}
-	]
+	],
+	"trailingSlash": false
 }
