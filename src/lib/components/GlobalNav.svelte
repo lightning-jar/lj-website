@@ -1,29 +1,29 @@
 <script lang="ts">
-  // components
-  // import ButtonHamburger from "$components/ButtonHamburger.svelte";
-  import NavLogoBlock from "$components/NavLogoBlock.svelte";
+// components
+// import ButtonHamburger from "$components/ButtonHamburger.svelte";
+import NavLogoBlock from "$components/NavLogoBlock.svelte";
 
-  // types
-  import type { NavItem } from "$types/types";
+// types
+import type { NavItem } from "$types/types";
 
-  // props
-  let { nav }: { nav: NavItem[] } = $props();
+// props
+let { nav }: { nav: NavItem[] } = $props();
 
-  // refs
-  let contextMenuButton: HTMLButtonElement | null = $state(null);
+// refs
+let contextMenuButton: HTMLButtonElement | null = $state(null);
 
-  // content
-  const navItems = [
-    { label: "Home", href: "/" },
-    { label: "Services", href: "/services" },
-    { label: "Customer Stories", href: "/customer-stories" },
-    { label: "Testimonials", href: "/testimonials" },
-  ];
+// content
+const navItems = [
+	{ label: "Home", href: "/" },
+	{ label: "Services", href: "/services" },
+	{ label: "Customer Stories", href: "/customer-stories" },
+	{ label: "Testimonials", href: "/testimonials" },
+];
 
-  // function
-  function toggleContextMenu() {
-    contextMenuButton?.click();
-  }
+// function
+function toggleContextMenu() {
+	contextMenuButton?.click();
+}
 </script>
 
 <header
