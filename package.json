@@ -31,7 +31,7 @@
 		"vite": "^7.2.2"
 	},
 	"dependencies": {
-		"@sentry/sveltekit": "^10.25.0",
+		"@sentry/sveltekit": "^10",
 		"biome": "^0.3.3"
 	},
 	"trustedDependencies": [

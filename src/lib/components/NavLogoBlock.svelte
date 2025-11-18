@@ -1,20 +1,20 @@
 <script lang="ts">
-  // props
-  let { id, classes }: { id?: string; classes?: string } = $props();
+// props
+let { id, classes }: { id?: string; classes?: string } = $props();
 
-  let lightningState = $state("inactive"); // default | active
+let lightningState = $state("inactive"); // default | active
 
-  function lightningStrike() {
-    document.body.classList.add("lightning");
-    lightningState = "active";
-    // after 1 x seconds revert to inactive using timeout
-    setTimeout(() => {
-      lightningState = "inactive";
-    }, 100);
-    setTimeout(() => {
-      document.body.classList.remove("lightning");
-    }, 300);
-  }
+function lightningStrike() {
+	document.body.classList.add("lightning");
+	lightningState = "active";
+	// after 1 x seconds revert to inactive using timeout
+	setTimeout(() => {
+		lightningState = "inactive";
+	}, 100);
+	setTimeout(() => {
+		document.body.classList.remove("lightning");
+	}, 300);
+}
 </script>
 
 <div

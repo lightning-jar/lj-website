@@ -1,12 +1,13 @@
 <script lang="ts">
-	// components
-	import IconServices from "$components/IconServices.svelte";
+// components
+import IconServices from "$components/IconServices.svelte";
 
-	// types
-	import type { Tile } from "$types/types";
+// types
+import type { Tile } from "$types/types";
 
-	// props
-	let { outerClasses = "", tile }: { outerClasses: string; tile: Tile } = $props();
+// props
+let { outerClasses = "", tile }: { outerClasses: string; tile: Tile } =
+	$props();
 </script>
 
 <div class="w-full h-auto md:flex xl:block 2xl:block { outerClasses }">

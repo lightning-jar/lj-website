@@ -1,23 +1,23 @@
 <script lang="ts">
-	// context api
-	import { getContext } from "svelte";
+// context api
+import { getContext } from "svelte";
 
-	// components
-	import IconTriangleRight from "$components/IconTriangleRight.svelte";
+// components
+import IconTriangleRight from "$components/IconTriangleRight.svelte";
 
-	// props
-	let {children, youTube = ""} = $props();
+// props
+let { children, youTube = "" } = $props();
 
-	// context
-	let mediaPlayer = getContext("mediaPlayer") as {value: string};
-	let youTubeCode = getContext("youTubeCode") as {value: string};
+// context
+let mediaPlayer = getContext("mediaPlayer") as { value: string };
+let youTubeCode = getContext("youTubeCode") as { value: string };
 
-	// local functions
-	function launchPlayer(e: MouseEvent) {
-		youTubeCode.value = youTube;
-		mediaPlayer.value = 'show';
-		e.stopPropagation();
-	}
+// local functions
+function launchPlayer(e: MouseEvent) {
+	youTubeCode.value = youTube;
+	mediaPlayer.value = "show";
+	e.stopPropagation();
+}
 </script>
 
 <button

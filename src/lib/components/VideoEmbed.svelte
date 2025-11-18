@@ -1,9 +1,17 @@
 <script lang="ts">
-	// components
-	import ButtonVideo from "$components/ButtonVideo.svelte";
+// components
+import ButtonVideo from "$components/ButtonVideo.svelte";
 
-	// props
-	let { buttonText = "Watch Me", children, classes = "", imageClasses = "", youTube = "", thumbnailSrc = "", thumbnailAlt = "" } = $props();
+// props
+let {
+	buttonText = "Watch Me",
+	children,
+	classes = "",
+	imageClasses = "",
+	youTube = "",
+	thumbnailSrc = "",
+	thumbnailAlt = "",
+} = $props();
 </script>
 
 <div class="relative { classes }">

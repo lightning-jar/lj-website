@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { nanoid } from "nanoid";
-  let { classes = "" } = $props();
+import { nanoid } from "nanoid";
+let { classes = "" } = $props();
 
-  const a = nanoid();
-  const b = nanoid();
+const a = nanoid();
+const b = nanoid();
 </script>
 
 <svg

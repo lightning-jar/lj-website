@@ -1,30 +1,29 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
+	<head>
+		<meta charset="utf-8">
 
-    <!-- DNS prefetch -->
-    <link
-      rel="dns-prefetch"
-      href="https://lj-01.nyc3.cdn.digitaloceanspaces.com"
-    />
+		<!-- DNS prefetch -->
+		<link
+			rel="dns-prefetch"
+			href="https://lj-01.nyc3.cdn.digitaloceanspaces.com"
+		>
 
-    <!-- CSP -->
-    <!--<meta
+		<!-- CSP -->
+		<!--<meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; frame-src 'self'; font-src 'self' https://fonts.bunny.net; img-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; media-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; style-src 'unsafe-inline' 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; script-src 'self' 'sha256-YXOoinyatmABOduEfvaFA6G330E20K7l6OY8MBuERxw=' 'sha256-YXOoinyatmABOduEfvaFA6G330E20K7l6OY8MBuERxw=' 'sha256-NoqqQBFMr/TstJFNyv5+bfNEnPLEFhisISsVbIcl25E='; worker-src 'self' blob:"
     />-->
 
-    <!-- viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- favicons -->
-    <link rel="icon" type="image/svg+xml" href="%sveltekit.assets%/icon.svg" />
+		<!-- favicons -->
+		<link rel="icon" type="image/svg+xml" href="%sveltekit.assets%/icon.svg">
+		%sveltekit.head%
 
-    %sveltekit.head%
-
-    <!-- structured data -->
-    <script type="application/ld+json">
+		<!-- structured data -->
+		<script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
@@ -172,12 +171,12 @@
         "numberOfEmployees": 12
       }
     </script>
-  </head>
-  <body
-    class="flex font-sans bg-oxford bg-gradient-to-br from-oxfordDark to-oxford text-neutral-100 max-w-screen overflow-x-hidden relative"
-  >
-    <div class="grid grid-cols-1 grid-rows-[auto_1fr_auto] min-h-screen w-full">
-      %sveltekit.body%
-    </div>
-  </body>
+	</head>
+	<body
+		class="flex font-sans bg-oxford bg-gradient-to-br from-oxfordDark to-oxford text-neutral-100 max-w-screen overflow-x-hidden relative"
+	>
+		<div class="grid grid-cols-1 grid-rows-[auto_1fr_auto] min-h-screen w-full">
+			%sveltekit.body%
+		</div>
+	</body>
 </html>

@@ -7,9 +7,6 @@ import {
 	transformerVariantGroup,
 } from "unocss";
 
-// just a little hack for disappearing comments
-const disappearingComment = (_str: string) => "";
-
 export default defineConfig({
 	content: {
 		pipeline: {

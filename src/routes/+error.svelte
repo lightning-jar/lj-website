@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { page } from "$app/state";
+import { page } from "$app/state";
 
-  let message = $derived.by(() => {
-    const m = page?.error?.message;
-    if (m == "Not Found") {
-      return "It seems we were unable to locate the page you were looking for page.";
-    } else if (m) {
-      return m;
-    } else return "Not a Gonk";
-  });
+let message = $derived.by(() => {
+	const m = page?.error?.message;
+	if (m === "Not Found") {
+		return "It seems we were unable to locate the page you were looking for page.";
+	} else if (m) {
+		return m;
+	} else return "Not a Gonk";
+});
 </script>
 
 <div class="page-x-padding min-h-screen pt-8">

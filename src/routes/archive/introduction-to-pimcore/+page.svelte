@@ -1,84 +1,84 @@
 <script lang="ts">
-  const info = [
-    {
-      heading: "Title",
-      text: "An Introduction to Pimcore",
-    },
-    {
-      heading: "Date",
-      text: "4.22.2018",
-    },
-    {
-      heading: "Length",
-      text: "00:43:03",
-    },
-  ];
+const info = [
+	{
+		heading: "Title",
+		text: "An Introduction to Pimcore",
+	},
+	{
+		heading: "Date",
+		text: "4.22.2018",
+	},
+	{
+		heading: "Length",
+		text: "00:43:03",
+	},
+];
 
-  const notes = [
-    {
-      heading: "01:20",
-      text: "History of the need for Product Information Management",
-    },
-    { heading: "02:36", text: "Origination and the philosophy of Pimcore" },
-    { heading: "03:25", text: "Definition of (DAM) Digital Asset Management" },
-    { heading: "04:18", text: "Definition of (CMS) Content Management" },
-    { heading: "05:00", text: "Who should be interested in Pimcore" },
-    { heading: "06:30", text: "Why Pimcore isn't a turnkey solution" },
-    { heading: "07:30", text: "The value of a unified data approach" },
-    {
-      heading: "10:30",
-      text: "Why it makes sense to have an integrated PIM / DAM / CMS solution",
-    },
-    { heading: "11:40", text: "API distribution of data from Pimcore" },
-    { heading: "13:10", text: "Why should companies consider Pimcore?" },
-    { heading: "14:20", text: "What are the advantages of open source?" },
-    { heading: "15:50", text: "Centralized code control for Pimcore releases" },
-    {
-      heading: "16:48",
-      text: "History and duration of Pimcore project + releases",
-    },
-    { heading: "17:14", text: "Workflow management with Pimcore" },
-    { heading: "18:47", text: "Localization and multi-language support" },
-    {
-      heading: "20:00",
-      text: "Why companies are unhappy with current solutions",
-    },
-    {
-      heading: "20:33",
-      text: "This first Pimcore project in the United States",
-    },
-    { heading: "21:35", text: "How Lightning Jar discovered Pimcore" },
-    {
-      heading: "24:24",
-      text: "How eCommerce is an iceberg (in terms of complexity)",
-    },
-    {
-      heading: "25:00",
-      text: "How well Pimcore integrates with other systems",
-    },
-    {
-      heading: "26:00",
-      text: "Product data architecture as a common pain point",
-    },
-    { heading: "28:43", text: "How to get started with Pimcore" },
-    {
-      heading: "30:14",
-      text: "Getting started, the next steps after installation",
-    },
-    {
-      heading: "31:16",
-      text: "Typical scenario for new Pimcore user, seeking guidance & help",
-    },
-    {
-      heading: "32:20",
-      text: "Why Pimcore is exciting for data architects and system architects",
-    },
-    { heading: "33:10", text: "What content managers say about Pimcore" },
-    { heading: "34:02", text: "Why designers like Pimcore" },
-    { heading: "35:19", text: "Getting support for a Pimcore project" },
-    { heading: "35:45", text: "What to look for in a Pimcore partner" },
-    { heading: "39:30", text: "How to learn more about Pimcore" },
-  ];
+const notes = [
+	{
+		heading: "01:20",
+		text: "History of the need for Product Information Management",
+	},
+	{ heading: "02:36", text: "Origination and the philosophy of Pimcore" },
+	{ heading: "03:25", text: "Definition of (DAM) Digital Asset Management" },
+	{ heading: "04:18", text: "Definition of (CMS) Content Management" },
+	{ heading: "05:00", text: "Who should be interested in Pimcore" },
+	{ heading: "06:30", text: "Why Pimcore isn't a turnkey solution" },
+	{ heading: "07:30", text: "The value of a unified data approach" },
+	{
+		heading: "10:30",
+		text: "Why it makes sense to have an integrated PIM / DAM / CMS solution",
+	},
+	{ heading: "11:40", text: "API distribution of data from Pimcore" },
+	{ heading: "13:10", text: "Why should companies consider Pimcore?" },
+	{ heading: "14:20", text: "What are the advantages of open source?" },
+	{ heading: "15:50", text: "Centralized code control for Pimcore releases" },
+	{
+		heading: "16:48",
+		text: "History and duration of Pimcore project + releases",
+	},
+	{ heading: "17:14", text: "Workflow management with Pimcore" },
+	{ heading: "18:47", text: "Localization and multi-language support" },
+	{
+		heading: "20:00",
+		text: "Why companies are unhappy with current solutions",
+	},
+	{
+		heading: "20:33",
+		text: "This first Pimcore project in the United States",
+	},
+	{ heading: "21:35", text: "How Lightning Jar discovered Pimcore" },
+	{
+		heading: "24:24",
+		text: "How eCommerce is an iceberg (in terms of complexity)",
+	},
+	{
+		heading: "25:00",
+		text: "How well Pimcore integrates with other systems",
+	},
+	{
+		heading: "26:00",
+		text: "Product data architecture as a common pain point",
+	},
+	{ heading: "28:43", text: "How to get started with Pimcore" },
+	{
+		heading: "30:14",
+		text: "Getting started, the next steps after installation",
+	},
+	{
+		heading: "31:16",
+		text: "Typical scenario for new Pimcore user, seeking guidance & help",
+	},
+	{
+		heading: "32:20",
+		text: "Why Pimcore is exciting for data architects and system architects",
+	},
+	{ heading: "33:10", text: "What content managers say about Pimcore" },
+	{ heading: "34:02", text: "Why designers like Pimcore" },
+	{ heading: "35:19", text: "Getting support for a Pimcore project" },
+	{ heading: "35:45", text: "What to look for in a Pimcore partner" },
+	{ heading: "39:30", text: "How to learn more about Pimcore" },
+];
 </script>
 
 <div class="page-x-padding main-y-padding pb-6">

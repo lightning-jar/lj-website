@@ -1,12 +1,10 @@
 <script lang="ts">
-
-	// props
-	let {
-			classes = "",
-			host = "peertube",
-			src = "https://peertube.tv/videos/embed/0f5601f5-520c-427d-9a27-f90ee30a2d87",
-		} = $props();
-
+// props
+let {
+	classes = "",
+	host = "peertube",
+	src = "https://peertube.tv/videos/embed/0f5601f5-520c-427d-9a27-f90ee30a2d87",
+} = $props();
 </script>
 
 <button popovertarget="mediaPlayer" title="Close" class="absolute top-4 right-8 text-24px">✕</button>

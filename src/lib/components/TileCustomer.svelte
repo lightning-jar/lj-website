@@ -1,34 +1,34 @@
 <script lang="ts">
-  // types
-  interface Tile {
-    category?: string | null;
-    color?: string | null;
-    customer?: string | null;
-    imageAlt?: string | null;
-    imageSlug?: string | null;
-    logoAlt?: string | null;
-    logoSlug?: string | null;
-    tags?: string[] | null;
-    text?: string | null;
-    url?: string | null;
-  }
+// types
+interface Tile {
+	category?: string | null;
+	color?: string | null;
+	customer?: string | null;
+	imageAlt?: string | null;
+	imageSlug?: string | null;
+	logoAlt?: string | null;
+	logoSlug?: string | null;
+	tags?: string[] | null;
+	text?: string | null;
+	url?: string | null;
+}
 
-  // props
-  let { tile, text = "" }: { tile: Tile; text: string } = $props();
+// props
+let { tile, text = "" }: { tile: Tile; text: string } = $props();
 
-  // variables
-  let image = $derived({
-    alt: tile.imageAlt ?? "",
-    classes: "opacity-full",
-    draggable: "false",
-    height: "648",
-    fallback: `${tile.imageSlug}.webp`,
-    folder: "images",
-    loading: "lazy",
-    width: "810",
-    slugCommon: tile.imageSlug ?? "",
-    style: null,
-  });
+// variables
+let image = $derived({
+	alt: tile.imageAlt ?? "",
+	classes: "opacity-full",
+	draggable: "false",
+	height: "648",
+	fallback: `${tile.imageSlug}.webp`,
+	folder: "images",
+	loading: "lazy",
+	width: "810",
+	slugCommon: tile.imageSlug ?? "",
+	style: null,
+});
 </script>
 
 <div

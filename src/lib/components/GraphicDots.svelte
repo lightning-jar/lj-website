@@ -1,5 +1,5 @@
 <script lang="ts">
-  let { classes = "" } = $props();
+let { classes = "" } = $props();
 </script>
 
 <div

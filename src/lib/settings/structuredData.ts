@@ -10,125 +10,125 @@ export type Schema = Organization | WithContext<Organization>;
 export const LjSchema = {
 	"@context": "https://schema.org",
 	"@type": "Organization",
-	"name": "Lightning Jar",
-	"disambiguatingDescription": "Digital Agency",
-	"description":
+	name: "Lightning Jar",
+	disambiguatingDescription: "Digital Agency",
+	description:
 		"A digital agency that builds websites, apps, custom-software and eCommerce solutions for national and international business clients.",
-	"knowsAbout": "Pimcore",
-	"logo": "https://lightningjar.com/lj-favicon.svg",
-	"url": "https://lightningjar.com",
-	"email": "hey@lightningjar.com",
-	"telephone": "(215) 995-6628",
-	"location": {
+	knowsAbout: "Pimcore",
+	logo: "https://lightningjar.com/lj-favicon.svg",
+	url: "https://lightningjar.com",
+	email: "hey@lightningjar.com",
+	telephone: "(215) 995-6628",
+	location: {
 		"@type": "Place",
-		"address": {
+		address: {
 			"@type": "PostalAddress",
-			"streetAddress": "230 S Broad St",
-			"addressLocality": "Philadelphia",
-			"addressRegion": "PA",
-			"postalCode": "19102",
+			streetAddress: "230 S Broad St",
+			addressLocality: "Philadelphia",
+			addressRegion: "PA",
+			postalCode: "19102",
 		},
 	},
-	"areaServed": {
+	areaServed: {
 		"@type": "Country",
 		"name:": "United States",
 	},
-	"hasOfferCatalog": {
+	hasOfferCatalog: {
 		"@type": "OfferCatalog",
-		"name": "Digital Agency Services",
-		"itemListElement": [
+		name: "Digital Agency Services",
+		itemListElement: [
 			{
 				"@type": "OfferCatalog",
-				"name": "Web Technology Services",
-				"itemListElement": [
+				name: "Web Technology Services",
+				itemListElement: [
 					{
 						"@type": "Offer",
-						"itemOffered": {
+						itemOffered: {
 							"@type": "Service",
-							"name": "Website Development",
+							name: "Website Development",
 						},
 					},
 					{
 						"@type": "Offer",
-						"itemOffered": {
+						itemOffered: {
 							"@type": "Service",
-							"name": "Mobile App Development",
+							name: "Mobile App Development",
 						},
 					},
 					{
 						"@type": "Offer",
-						"itemOffered": {
+						itemOffered: {
 							"@type": "Service",
-							"name": "eCommerce Development",
+							name: "eCommerce Development",
 						},
 					},
 				],
 			},
 			{
 				"@type": "OfferCatalog",
-				"name": "Pimcore Services",
-				"itemListElement": [
+				name: "Pimcore Services",
+				itemListElement: [
 					{
 						"@type": "Offer",
-						"itemOffered": {
+						itemOffered: {
 							"@type": "Service",
-							"name": "Pimcore Consulting",
+							name: "Pimcore Consulting",
 						},
 					},
 					{
 						"@type": "Offer",
-						"itemOffered": {
+						itemOffered: {
 							"@type": "Service",
-							"name": "Pimcore Development",
+							name: "Pimcore Development",
 						},
 					},
 					{
 						"@type": "Offer",
-						"itemOffered": {
+						itemOffered: {
 							"@type": "Service",
-							"name": "Pimcore Support",
+							name: "Pimcore Support",
 						},
 					},
 				],
 			},
 			{
 				"@type": "OfferCatalog",
-				"name": "Digital Design",
-				"itemListElement": [
+				name: "Digital Design",
+				itemListElement: [
 					{
 						"@type": "Offer",
-						"itemOffered": {
+						itemOffered: {
 							"@type": "Service",
-							"name": "UX Optimization",
+							name: "UX Optimization",
 						},
 					},
 					{
 						"@type": "Offer",
-						"itemOffered": {
+						itemOffered: {
 							"@type": "Service",
-							"name": "UI Design",
+							name: "UI Design",
 						},
 					},
 					{
 						"@type": "Offer",
-						"itemOffered": {
+						itemOffered: {
 							"@type": "Service",
-							"name": "Digital Content",
+							name: "Digital Content",
 						},
 					},
 				],
 			},
 		],
 	},
-	"foundingDate": "12/30/2002",
-	"foundingLocation": "New York",
-	"naics": "541511",
-	"duns": "191355317",
-	"slogan": "The world is more digital & more mobile every day.",
-	"memberOf": "Pimcore Gold Partner Program",
-	"legalName": "SiiTE Interactive LLC dba Lightning Jar",
-	"alternateName": "SiiTE Interactive",
-	"numberOfEmployees": 12,
+	foundingDate: "12/30/2002",
+	foundingLocation: "New York",
+	naics: "541511",
+	duns: "191355317",
+	slogan: "The world is more digital & more mobile every day.",
+	memberOf: "Pimcore Gold Partner Program",
+	legalName: "SiiTE Interactive LLC dba Lightning Jar",
+	alternateName: "SiiTE Interactive",
+	numberOfEmployees: 12,
 };
 
 // function to render structured data on the page -- see 'StructuredData.svelte' component

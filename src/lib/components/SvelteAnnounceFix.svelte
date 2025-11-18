@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { Attachment } from 'svelte/attachments';
+import type { Attachment } from "svelte/attachments";
 
 const onLoad: Attachment = (_el) => {
 	// intercept innerHTML invocation
@@ -27,10 +27,8 @@ const onLoad: Attachment = (_el) => {
 		},
 	});
 
-		return () => {
-
-		};
-	};
-	</script>
+	return () => {};
+};
+</script>
 
 	<div id="hack" {@attach onLoad} class="hidden">hack</div>

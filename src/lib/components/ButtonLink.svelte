@@ -1,6 +1,6 @@
 <script lang="ts">
-	// props
-	let {children, href = "", label = ""} = $props();
+// props
+let { children, href = "", label = "" } = $props();
 </script>
 
 <a

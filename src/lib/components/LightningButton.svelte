@@ -1,9 +1,9 @@
 <script lang="ts">
-  // components
-  import LightningBolt from "$components/LightningBolt.svelte";
+// components
+import LightningBolt from "$components/LightningBolt.svelte";
 
-  // props
-  let { classes = "", onclick = () => {} } = $props();
+// props
+let { classes = "", onclick = () => {} } = $props();
 </script>
 
 <button

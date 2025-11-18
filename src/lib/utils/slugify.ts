@@ -687,5 +687,5 @@ export function slugify(
 		n = !options?.def ? "none" : options.def;
 	}
 	return n;
-};
+}
 export default slugify;

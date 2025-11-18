@@ -1,8 +1,8 @@
 <script lang="ts">
-  import HomeBanner from "$components/HomeBanner.svelte";
+import HomeBanner from "$components/HomeBanner.svelte";
 
-  // props
-  let { data } = $props();
+// props
+let { data } = $props();
 </script>
 
 <HomeBanner topics={data.topics} ticker={data.ticker} />

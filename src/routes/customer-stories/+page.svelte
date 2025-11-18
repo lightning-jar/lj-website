@@ -1,5 +1,5 @@
 <script lang="ts">
-  let { data } = $props();
+let { data } = $props();
 </script>
 
 <div
@@ -23,7 +23,7 @@
           {story?.banner.heading}
         </h3>
 
-        <p class="mb-5">
+        <div class="mb-5">
           {story?.excerpt ?? "No excerpt available."}
 
           {#if story.customer.solutions?.[0] || story.customer.technologies?.[0]}
@@ -33,7 +33,7 @@
               {/each}
             </div>
           {/if}
-        </p>
+        </div>
 
         {#if story.slug}
           <a
