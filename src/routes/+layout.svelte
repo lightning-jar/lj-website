@@ -1,35 +1,35 @@
 <script lang="ts">
-// import child page data
-import { page } from "$app/state";
+  // import child page data
+  import { page } from "$app/state";
 
-// import context api
-import { setContext } from "svelte";
+  // import context api
+  import { setContext } from "svelte";
 
-// import css file
-import "uno.css";
+  // import css file
+  import "uno.css";
 
-// import components
-import GlobalFooter from "$components/GlobalFooter.svelte";
-import GlobalNav from "$components/GlobalNav.svelte";
-import SvelteAnnounceFix from "$components/SvelteAnnounceFix.svelte";
+  // import components
+  import GlobalFooter from "$components/GlobalFooter.svelte";
+  import GlobalNav from "$components/GlobalNav.svelte";
+  import SvelteAnnounceFix from "$components/SvelteAnnounceFix.svelte";
 
-// props
-let { children, data } = $props();
+  // props
+  let { children, data } = $props();
 
-// nav State
-const navState = $state({
-	mobileNavOpenState: "closed",
-	activeMobileMenu: "Main",
-	brandLink: null,
-});
-setContext("navState", { value: navState });
+  // nav State
+  const navState = $state({
+    mobileNavOpenState: "closed",
+    activeMobileMenu: "Main",
+    brandLink: null,
+  });
+  setContext("navState", { value: navState });
 </script>
 
 <svelte:head>
   {#if page.data.meta?.title}
     <title
       >{page.data.meta?.title ?? "Lightning Jar"}
-      {data.isHome ? "" : "⚡️"}</title
+      {data.isHome ? "" : "LJ"}</title
     >
   {/if}
   {#if page.data.meta?.description}
