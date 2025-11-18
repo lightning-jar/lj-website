@@ -69,13 +69,18 @@
 			"statusCode": 301
 		},
 		{
-			"source": "/assets/favicon/lj-favicon.svg",
-			"destination": "/icon.svg",
+			"source": "/assets/img/lightning-jar-logo-04.png",
+			"destination": "/lightning-jar-logo.svg",
 			"statusCode": 301
 		},
 		{
 			"source": "/favicon.ico",
 			"destination": "/icon.svg",
+			"statusCode": 301
+		},
+		{
+			"source": "/podcast/thunderclap",
+			"destination": "/archive",
 			"statusCode": 301
 		}
 	]
