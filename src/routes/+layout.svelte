@@ -27,7 +27,10 @@
 
 <svelte:head>
   {#if page.data.meta?.title}
-    <title>{page.data.meta?.title ?? "Lightning Jar"} ⚡️</title>
+    <title
+      >{page.data.meta?.title ?? "Lightning Jar"}
+      {data.isHome ? "" : "⚡️"}</title
+    >
   {/if}
   {#if page.data.meta?.description}
     <meta content={page.data.meta.description} name="description" />
