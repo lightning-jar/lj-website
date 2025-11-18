@@ -66,7 +66,7 @@
           {#each callout?.content ?? [] as calloutItem, index}
             {#if calloutItem?.href}
               <a
-                class="text-maximumYellow opacity-90 hover:opacity-100 transition-all hover:underline underline-offset-4"
+                class="text-maximumYellow opacity-90 hover:opacity-100 transition-all underline underline-offset-4 decoration-maximumYellow/30 hover:decoration-maximumYellow"
                 title={calloutItem?.title}
                 href={calloutItem.href}>{calloutItem?.["data-text"]}</a
               >
