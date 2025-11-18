@@ -45,6 +45,10 @@
 		{
 			"href": "/terms",
 			"data-text": "Privacy & Terms"
+		},
+		{
+			"href": "https://svelte.dev/",
+			"data-text": "Built w/ Sveltekit"
 		}
 	]
 }
