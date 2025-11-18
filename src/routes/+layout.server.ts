@@ -9,6 +9,5 @@ export async function load({ url }) {
 	return {
 		footer,
 		isHome: url.pathname === "/",
-		nav: [],
 	};
 }

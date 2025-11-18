@@ -2,9 +2,6 @@
 // import child page data
 import { page } from "$app/state";
 
-// import context api
-import { setContext } from "svelte";
-
 // import css file
 import "uno.css";
 
@@ -15,14 +12,6 @@ import SvelteAnnounceFix from "$components/SvelteAnnounceFix.svelte";
 
 // props
 let { children, data } = $props();
-
-// nav State
-const navState = $state({
-	mobileNavOpenState: "closed",
-	activeMobileMenu: "Main",
-	brandLink: null,
-});
-setContext("navState", { value: navState });
 </script>
 
 <svelte:head>
@@ -40,15 +29,6 @@ setContext("navState", { value: navState });
 <SvelteAnnounceFix />
 
 <GlobalNav />
-
-<!-- MediaPlayer -->
-<!-- <button popovertarget="mediaPlayer">Open / Close</button> -->
-<!-- <div popover="auto" id="mediaPlayer" class=" bg-oxfordDark relative page-x-padding main-y-padding w-full text-white">
-		<div class="w-full flex items-start justify-center">
-			<MediaPlayer classes="max-w-800px"/>
-		</div>
-	</div> --
-
 
 <!-- body -->
 <div class="relative w-full max-w-screen overflow-x-hidden place-self-stretch">
