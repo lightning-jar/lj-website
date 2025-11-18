@@ -1,28 +1,28 @@
 <script lang="ts">
-// components
-import NavLogoBlock from "$components/NavLogoBlock.svelte";
+  // components
+  import NavLogoBlock from "$components/NavLogoBlock.svelte";
 
-// imported types
-import type { HTMLLinkAttributes } from "svelte/elements";
+  // imported types
+  import type { HTMLLinkAttributes } from "svelte/elements";
 
-// local types
-interface Props {
-	heading: string;
-	text: string[];
-	callouts: {
-		heading?: string;
-		content?: HTMLLinkAttributes[];
-		footnotes?: string[];
-	}[];
-	legalLinks: HTMLLinkAttributes[];
-}
+  // local types
+  interface Props {
+    heading: string;
+    text: string[];
+    callouts: {
+      heading?: string;
+      content?: HTMLLinkAttributes[];
+      footnotes?: string[];
+    }[];
+    legalLinks: HTMLLinkAttributes[];
+  }
 
-let {
-	heading = "",
-	text = [],
-	callouts = [],
-	legalLinks = [],
-}: Props = $props();
+  let {
+    heading = "",
+    text = [],
+    callouts = [],
+    legalLinks = [],
+  }: Props = $props();
 </script>
 
 <footer
@@ -38,9 +38,9 @@ let {
       </div>
 
       <!-- heading -->
-      <h3 class="text-18px font-semibold mb-4 text-maximumYellow">
+      <h2 class="text-18px font-semibold mb-4 text-maximumYellow">
         {heading}
-      </h3>
+      </h2>
 
       <!-- text -->
       <div class="mb-16 opacity-80">
