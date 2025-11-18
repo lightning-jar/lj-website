@@ -54,8 +54,23 @@
 			"statusCode": 301
 		},
 		{
+			"source": "/podcast/thunderclap/01-introduction-to-pimcore",
+			"destination": "/archive/introduction-to-pimcore",
+			"statusCode": 301
+		},
+		{
 			"source": "/blog/what-is-pimcore",
 			"destination": "/archive/introduction-to-pimcore",
+			"statusCode": 301
+		},
+		{
+			"source": "/assets/favicon/lj-favicon.svg ",
+			"destination": "/icon.svg",
+			"statusCode": 301
+		},
+		{
+			"source": "/assets/favicon/lj-favicon.svg",
+			"destination": "/icon.svg",
 			"statusCode": 301
 		}
 	]
