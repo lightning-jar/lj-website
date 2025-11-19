@@ -1,85 +1,85 @@
 <script lang="ts">
-// components
+  // components
 
-import LightningBolt from "$components/LightningBolt.svelte";
-import LightningButton from "$components/LightningButton.svelte";
+  import LightningBolt from "$components/LightningBolt.svelte";
+  import LightningButton from "$components/LightningButton.svelte";
 
-// types
-interface Topic {
-	heading: string;
-	text: string[];
-	bullets?: string[];
-}
-interface Props {
-	topics?: Topic[];
-	ticker?: string[];
-}
+  // types
+  interface Topic {
+    heading: string;
+    text: string[];
+    bullets?: string[];
+  }
+  interface Props {
+    topics?: Topic[];
+    ticker?: string[];
+  }
 
-// props
-let { topics = [], ticker = [] }: Props = $props();
+  // props
+  let { topics = [], ticker = [] }: Props = $props();
 
-// local state
-let counters: Record<string, number> = $state({
-	topic: 0,
-	ticker: 0,
-});
+  // local state
+  let counters: Record<string, number> = $state({
+    topic: 0,
+    ticker: 0,
+  });
 
-// helpers
-function clickLightningButton() {
-	const lightningButton = document.querySelector(
-		"[data-lightning-button]",
-	) as HTMLButtonElement;
-	lightningButton?.click();
-}
+  // helpers
+  function clickLightningButton() {
+    const lightningButton = document.querySelector(
+      "[data-lightning-button]",
+    ) as HTMLButtonElement;
+    lightningButton?.click();
+  }
 
-function incrementCounter(counterName: string, counterLength: number): void {
-	// return if arguments are invalid
-	if (counters?.[counterName] === undefined || !counterLength) return;
+  function incrementCounter(counterName: string, counterLength: number): void {
+    // return if arguments are invalid
+    if (counters?.[counterName] === undefined || !counterLength) return;
 
-	// reset counter if it approaches or exceeds limit
-	if (counters[counterName] + 1 >= counterLength) {
-		counters[counterName] = 0;
-		return;
-	}
+    // reset counter if it approaches or exceeds limit
+    if (counters[counterName] + 1 >= counterLength) {
+      counters[counterName] = 0;
+      return;
+    }
 
-	// increment counter
-	counters[counterName] = counters[counterName] + 1;
-}
+    // increment counter
+    counters[counterName] = counters[counterName] + 1;
+  }
 
-function decrementCounter(counterName: string, counterLength: number): void {
-	// return if arguments are invalid
-	if (counters?.[counterName] === undefined || !counterLength) return;
+  function decrementCounter(counterName: string, counterLength: number): void {
+    // return if arguments are invalid
+    if (counters?.[counterName] === undefined || !counterLength) return;
 
-	// reset counter if it approaches zero
-	if (counters[counterName] - 1 < 0) {
-		if (counterName === "topic") {
-			counters[counterName] = topics.length - 1;
-		} else if (counterName === "ticker") {
-			counters[counterName] = ticker.length - 1;
-		}
-		return;
-	}
+    // reset counter if it approaches zero
+    if (counters[counterName] - 1 < 0) {
+      if (counterName === "topic") {
+        counters[counterName] = topics.length - 1;
+      } else if (counterName === "ticker") {
+        counters[counterName] = ticker.length - 1;
+      }
+      return;
+    }
 
-	// increment counter
-	counters[counterName] = counters[counterName] - 1;
-}
+    // increment counter
+    counters[counterName] = counters[counterName] - 1;
+  }
 
-function handleKeyDown(event: KeyboardEvent) {
-	if (
-		event.key === "Enter" ||
-		event.key === "ArrowRight" ||
-		event.key === "ArrowDown"
-	) {
-		event.preventDefault();
-		clickLightningButton();
-		incrementCounter("topic", topics.length);
-	}
-	if (event.key === "ArrowLeft") {
-		event.preventDefault();
-		clickLightningButton();
-		decrementCounter("topic", topics.length);
-	}
-}
+  function handleKeyDown(event: KeyboardEvent) {
+    if (
+      event.key === "Enter" ||
+      event.key === "ArrowRight" ||
+      event.key === "ArrowDown"
+    ) {
+      event.preventDefault();
+      clickLightningButton();
+      incrementCounter("topic", topics.length);
+    }
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      clickLightningButton();
+      decrementCounter("topic", topics.length);
+    }
+  }
 </script>
 
 <svelte:body onkeydown={handleKeyDown} />
@@ -169,7 +169,7 @@ function handleKeyDown(event: KeyboardEvent) {
       {/if}
     {/each}
 
-    <div class=" absolute top-18 right-0 lg:right-4 group">
+    <div class="absolute top-32 sm:top-18 right-0 lg:right-4 group">
       <div class="scale-[0.85] flex justify-left">
         <LightningButton
           onclick={() => {
