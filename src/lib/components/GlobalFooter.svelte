@@ -1,32 +1,32 @@
 <script lang="ts">
-// components
-import NavLogoBlock from "$components/NavLogoBlock.svelte";
+  // components
+  import NavLogoBlock from "$components/NavLogoBlock.svelte";
 
-// imported types
-import type { HTMLLinkAttributes } from "svelte/elements";
+  // imported types
+  import type { HTMLLinkAttributes } from "svelte/elements";
 
-// local types
-interface Props {
-	heading: string;
-	text: string[];
-	callouts: {
-		heading?: string;
-		content?: HTMLLinkAttributes[];
-		footnotes?: string[];
-	}[];
-	legalLinks: HTMLLinkAttributes[];
-}
+  // local types
+  interface Props {
+    heading: string;
+    text: string[];
+    callouts: {
+      heading?: string;
+      content?: HTMLLinkAttributes[];
+      footnotes?: string[];
+    }[];
+    legalLinks: HTMLLinkAttributes[];
+  }
 
-let {
-	heading = "",
-	text = [],
-	callouts = [],
-	legalLinks = [],
-}: Props = $props();
+  let {
+    heading = "",
+    text = [],
+    callouts = [],
+    legalLinks = [],
+  }: Props = $props();
 </script>
 
 <footer
-  class="page-x-padding main-y-padding text-white font-serif bg-oxfordDark h-screen"
+  class="page-x-padding main-y-padding text-white font-serif bg-oxfordDark min-h-screen"
 >
   <!-- upper -->
   <div class="mt-16 md:grid grid-cols-2 gap-16">
@@ -51,7 +51,7 @@ let {
     </div>
 
     <!-- col:2 callouts -->
-    <div class="mt-14 grid grid-cols-1 gap-8">
+    <div class="my-14 grid grid-cols-1 gap-8">
       {#each callouts as callout}
         <!-- contact -->
         <div>

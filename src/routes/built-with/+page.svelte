@@ -1,5 +1,5 @@
 <script lang="ts">
-let { data } = $props();
+  let { data } = $props();
 </script>
 
 <div class="page-x-padding main-y-padding !pb-8">
@@ -13,8 +13,10 @@ let { data } = $props();
   <div class="list-decimal grid grid-cols-1 gap-5 opacity-90 max-w-article">
     {#each data?.technologies ?? [] as item}
       <article>
-        <div class="flex gap-3 items-baseline">
-          <h2 class="text-22px font-serif text-maximumYellow font-700">
+        <div class="sm:flex gap-3 items-baseline">
+          <h2
+            class="text-22px font-serif text-maximumYellow font-700 mb-3 sm:mb-0"
+          >
             <a
               href={item.link.href}
               rel="external"
@@ -24,7 +26,7 @@ let { data } = $props();
               {item.name}
             </a>
           </h2>
-          <div class="opacity-90 italic">
+          <div class="opacity-90 italic mb-4 sm:mb-0">
             [{item.license}] - {item.category}
           </div>
         </div>
