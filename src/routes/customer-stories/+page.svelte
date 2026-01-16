@@ -1,5 +1,5 @@
 <script lang="ts">
-let { data } = $props();
+  let { data } = $props();
 </script>
 
 <div
@@ -27,7 +27,7 @@ let { data } = $props();
           {story?.excerpt ?? "No excerpt available."}
 
           {#if story.customer.solutions?.[0] || story.customer.technologies?.[0]}
-            <div class="ml-3 inline-flex gap-2 text-0.9em text-accent">
+            <div class="mt-2 inline-flex gap-2 text-0.9em text-accent">
               {#each [...story.customer.solutions, ...story.customer.technologies] as solution}
                 <span>#{solution}</span>
               {/each}

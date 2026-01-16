@@ -1,23 +1,36 @@
 <script lang="ts">
-// components
-import HamburgerButton from "$components/HamburgerButton.svelte";
-import NavLogoBlock from "$components/NavLogoBlock.svelte";
+  import { goto } from "$app/navigation";
 
-// refs
-let contextMenuButton: HTMLButtonElement | null = $state(null);
+  // components
+  import HamburgerButton from "$components/HamburgerButton.svelte";
+  import NavLogoBlock from "$components/NavLogoBlock.svelte";
 
-// content
-const navItems = [
-	{ label: "Home", href: "/" },
-	{ label: "Services", href: "/services" },
-	{ label: "Customer Stories", href: "/customer-stories" },
-	{ label: "Testimonials", href: "/testimonials" },
-];
+  // refs
+  let contextMenuButton: HTMLButtonElement | null = $state(null);
 
-// function
-function toggleContextMenu() {
-	contextMenuButton?.click();
-}
+  // content
+  const navItems = [
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services" },
+    { label: "Customer Stories", href: "/customer-stories" },
+    { label: "Testimonials", href: "/testimonials" },
+  ];
+
+  // function
+  function toggleContextMenu() {
+    button?.click();
+  }
+
+  function handleClick(e: MouseEvent) {
+    console.log("Clicked");
+    e.preventDefault();
+    toggleContextMenu();
+    const target = e.target as HTMLElement;
+    const href = target.getAttribute("href");
+    if (href) goto(href);
+  }
+
+  let button: HTMLButtonElement | null = $state(null);
 </script>
 
 <header
@@ -41,7 +54,7 @@ function toggleContextMenu() {
   <NavLogoBlock />
 
   <div>
-    <HamburgerButton></HamburgerButton>
+    <HamburgerButton bind:button id="hamburger-menu-button-1"></HamburgerButton>
 
     <div
       popover="auto"
@@ -50,7 +63,8 @@ function toggleContextMenu() {
 			xl:pt-8"
     >
       <div class="flex relative pt-0 justify-end">
-        <HamburgerButton classes="rotate-45"></HamburgerButton>
+        <HamburgerButton classes="rotate-45" id="hamburger-menu-button-2"
+        ></HamburgerButton>
       </div>
       <div
         class="grid grid-cols-1 gap-5 place-content-center place-items-center font-serif font-700 text-22px sm:text-30px lg:text-48px sm:gap-6 text-accent pt-5"
@@ -59,7 +73,7 @@ function toggleContextMenu() {
           <a
             href={item.href}
             class="opacity-90 underline-offset-4 decoration-accent/30 hover:opacity-100 hover:underline hover:decoration-accent underline-offset-8 font-display"
-            onclick={toggleContextMenu}>{item.label}</a
+            onclick={handleClick}>{item.label}</a
           >
         {/each}
       </div>
