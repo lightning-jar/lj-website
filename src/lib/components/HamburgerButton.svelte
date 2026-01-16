@@ -1,17 +1,17 @@
 <script lang="ts">
-  import { default as hamburgerIcon } from "$assets/hamburger.svg?raw";
+import { default as hamburgerIcon } from "$assets/hamburger.svg?raw";
 
-  let {
-    classes = "",
-    popovertarget = "hamburger-menu",
-    title = "toggle the hamburger menu",
-    id = "hamburger-menu-button",
-  }: {
-    classes?: string;
-    popovertarget?: string | null;
-    title?: string | null;
-    id?: string | null;
-  } = $props();
+let {
+	classes = "",
+	popovertarget = "hamburger-menu",
+	title = "toggle the hamburger menu",
+	id = "hamburger-menu-button",
+}: {
+	classes?: string;
+	popovertarget?: string | null;
+	title?: string | null;
+	id?: string | null;
+} = $props();
 </script>
 
 <button

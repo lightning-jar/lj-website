@@ -1,23 +1,23 @@
 <script lang="ts">
-  // components
-  import HamburgerButton from "$components/HamburgerButton.svelte";
-  import NavLogoBlock from "$components/NavLogoBlock.svelte";
+// components
+import HamburgerButton from "$components/HamburgerButton.svelte";
+import NavLogoBlock from "$components/NavLogoBlock.svelte";
 
-  // refs
-  let contextMenuButton: HTMLButtonElement | null = $state(null);
+// refs
+let contextMenuButton: HTMLButtonElement | null = $state(null);
 
-  // content
-  const navItems = [
-    { label: "Home", href: "/" },
-    { label: "Services", href: "/services" },
-    { label: "Customer Stories", href: "/customer-stories" },
-    { label: "Testimonials", href: "/testimonials" },
-  ];
+// content
+const navItems = [
+	{ label: "Home", href: "/" },
+	{ label: "Services", href: "/services" },
+	{ label: "Customer Stories", href: "/customer-stories" },
+	{ label: "Testimonials", href: "/testimonials" },
+];
 
-  // function
-  function toggleContextMenu() {
-    contextMenuButton?.click();
-  }
+// function
+function toggleContextMenu() {
+	contextMenuButton?.click();
+}
 </script>
 
 <header
