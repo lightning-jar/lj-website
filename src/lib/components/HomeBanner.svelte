@@ -1,6 +1,5 @@
 <script lang="ts">
 // components
-
 import LightningBolt from "$components/LightningBolt.svelte";
 import LightningButton from "$components/LightningButton.svelte";
 
@@ -179,11 +178,6 @@ function handleKeyDown(event: KeyboardEvent) {
           classes="flex"
         />
       </div>
-      <!-- <div
-        class="hidden group-hover:block text-center text-accent mt-1px text-14px opacity-80"
-      >
-        Zap
-      </div> -->
     </div>
   </div>
 

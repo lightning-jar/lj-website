@@ -1,36 +1,36 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
+import { goto } from "$app/navigation";
 
-  // components
-  import HamburgerButton from "$components/HamburgerButton.svelte";
-  import NavLogoBlock from "$components/NavLogoBlock.svelte";
+// components
+import HamburgerButton from "$components/HamburgerButton.svelte";
+import NavLogoBlock from "$components/NavLogoBlock.svelte";
 
-  // refs
-  let contextMenuButton: HTMLButtonElement | null = $state(null);
+// refs
+let contextMenuButton: HTMLButtonElement | null = $state(null);
 
-  // content
-  const navItems = [
-    { label: "Home", href: "/" },
-    { label: "Services", href: "/services" },
-    { label: "Customer Stories", href: "/customer-stories" },
-    { label: "Testimonials", href: "/testimonials" },
-  ];
+// content
+const navItems = [
+	{ label: "Home", href: "/" },
+	{ label: "Services", href: "/services" },
+	{ label: "Customer Stories", href: "/customer-stories" },
+	{ label: "Testimonials", href: "/testimonials" },
+];
 
-  // function
-  function toggleContextMenu() {
-    button?.click();
-  }
+// function
+function toggleContextMenu() {
+	button?.click();
+}
 
-  function handleClick(e: MouseEvent) {
-    console.log("Clicked");
-    e.preventDefault();
-    toggleContextMenu();
-    const target = e.target as HTMLElement;
-    const href = target.getAttribute("href");
-    if (href) goto(href);
-  }
+function handleClick(e: MouseEvent) {
+	console.log("Clicked");
+	e.preventDefault();
+	toggleContextMenu();
+	const target = e.target as HTMLElement;
+	const href = target.getAttribute("href");
+	if (href) goto(href);
+}
 
-  let button: HTMLButtonElement | null = $state(null);
+let button: HTMLButtonElement | null = $state(null);
 </script>
 
 <header

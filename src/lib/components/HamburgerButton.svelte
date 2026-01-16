@@ -1,19 +1,19 @@
 <script lang="ts">
-  import { default as hamburgerIcon } from "$assets/hamburger.svg?raw";
+import { default as hamburgerIcon } from "$assets/hamburger.svg?raw";
 
-  let {
-    button = $bindable(null),
-    classes = "",
-    popovertarget = "hamburger-menu",
-    title = "toggle the hamburger menu",
-    id = "hamburger-menu-button",
-  }: {
-    classes?: string;
-    button?: HTMLButtonElement | null;
-    popovertarget?: string | null;
-    title?: string | null;
-    id?: string | null;
-  } = $props();
+let {
+	button = $bindable(null),
+	classes = "",
+	popovertarget = "hamburger-menu",
+	title = "toggle the hamburger menu",
+	id = "hamburger-menu-button",
+}: {
+	classes?: string;
+	button?: HTMLButtonElement | null;
+	popovertarget?: string | null;
+	title?: string | null;
+	id?: string | null;
+} = $props();
 </script>
 
 <button
@@ -36,8 +36,9 @@
     lg:w-8
     p-5px
     overflow-hidden
+    opacity-90
     text-slate-100
-    hover:text-accent
+    hover:(text-accent opacity-100)
     {classes}"
   {popovertarget}
   {title}
