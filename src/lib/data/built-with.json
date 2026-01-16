@@ -1,82 +1,27 @@
 {
 	"heading": "Built With",
-	"subheading": "A list of top-level technologies we used to build this website. Because it's nice to know how the sausage is made, but it's even more important to know what's in it.",
+	"subheading": "An alphabetical list of top-level technologies and tools we used to design, build, and / or maintain this website. Because it's nice to know how the sausage is made, but it's even more important to know what's in it.",
 	"technologies": [
 		{
-			"name": "Svelte / SvelteKit",
-			"category": "Frontend Framework",
+			"name": "Atkinson Hyperlegible",
+			"category": "Typeface",
 			"description": [
-				"Our favorite open-source JavaScript framework at present, SvelteKit is the backbone of most of our new and upcoming projects. SvelteKit is the rare framework that truly reduces complexity and unpredictability rather than adding more limitations, complexity, or unnecessary boilerplate."
+				"Atkinson Hyperlegible is a highly readable sans-serif typeface developed for improved character recognition, originally created in partnership with the Braille Institute. It features distinctive letterforms and generous spacing to reduce ambiguity between commonly confused characters (such as I/l/1 and O/0), enhancing accessibility for readers with low vision. We use Atkinson Hyperlegible for body text to prioritize legibility and inclusive design across our content."
 			],
-			"license": "Open Source",
+			"license": "Open Font License",
 			"link": {
-				"href": "https://svelte.dev/"
+				"href": "https://brailleinstitute.org/freefont"
 			}
 		},
 		{
-			"name": "UnoCSS",
-			"category": "CSS Framework",
+			"name": "Babel",
+			"category": "Build Tooling",
 			"description": [
-				"Our favorite utility-based, open-source CSS framework. It's fast, powerful, endlessly customizable, and easy to use. We support this project—and you should too."
+				"Babel is a JavaScript compiler used transitively by our tooling (e.g., Sentry bundler plugin). It helps transform modern syntax and annotate source for better debugging."
 			],
-			"license": "Open Source",
+			"license": "Open Source / MIT",
 			"link": {
-				"href": "https://unocss.dev/"
-			}
-		},
-		{
-			"name": "TypeScript",
-			"category": "Programming Language",
-			"description": [
-				"There isn't much of the internet that isn't powered by TypeScript these days. It's a powerful, fast, and easy-to-use superset of JavaScript that helps developers write better code."
-			],
-			"license": "Open Source",
-			"link": {
-				"href": "https://typescriptlang.org/"
-			}
-		},
-		{
-			"name": "HTML",
-			"category": "Markup Language",
-			"description": [
-				"This one should go without saying, but we'll say it anyway. Modern HTML is not only essential for building web pages, but it also plays a crucial role in creating responsive and accessible user interfaces. Not to mention, it's pretty dope."
-			],
-			"license": "Open Source",
-			"link": {
-				"href": "https://www.w3.org/"
-			}
-		},
-		{
-			"name": "Vite",
-			"category": "Build Tool",
-			"description": [
-				"Vite is a blazing-fast frontend build tool. That's what it says on the Vite website, and we're not about to improve on that. We heart Vite."
-			],
-			"license": "Open Source",
-			"link": {
-				"href": "https://vite.dev/"
-			}
-		},
-		{
-			"name": "Bun",
-			"category": "Runtime Environment & Package Manager",
-			"description": [
-				"Bun is a fast, incrementally adoptable, all-in-one JavaScript, TypeScript, and JSX toolkit. We use it as our primary development runtime environment and package manager."
-			],
-			"license": "Open Source",
-			"link": {
-				"href": "https://bun.sh/"
-			}
-		},
-		{
-			"name": "Node.js",
-			"category": "Runtime Environment",
-			"description": [
-				"Node.js is a free, open-source, cross-platform JavaScript runtime environment that lets developers create servers, web apps, command-line tools, and scripts. We use it as our primary production runtime environment."
-			],
-			"license": "Open Source",
-			"link": {
-				"href": "https://nodejs.org/en"
+				"href": "https://babeljs.io/"
 			}
 		},
 		{
@@ -91,36 +36,91 @@
 			}
 		},
 		{
-			"name": "Sentry",
-			"category": "Error Tracking & Monitoring",
+			"name": "Bun",
+			"category": "Runtime Environment & Package Manager",
 			"description": [
-				"Sentry is a real-time error tracking and performance monitoring tool that helps developers identify and fix issues in their applications."
+				"Bun is a fast, incrementally adoptable, all-in-one JavaScript, TypeScript, and JSX toolkit. We use it as our primary development runtime environment and package manager."
 			],
-			"license": "Open Core SaaS",
+			"license": "Open Source",
 			"link": {
-				"href": "https://sentry.io"
+				"href": "https://bun.sh/"
 			}
 		},
 		{
-			"name": "Plausible",
-			"category": "Analytics",
+			"name": "Bungee Shade",
+			"category": "Display Typeface",
 			"description": [
-				"Plausible Analytics is an open-source project dedicated to making web analytics more privacy-friendly. Their mission is to reduce corporate surveillance by providing an alternative web analytics tool that doesn’t come from the AdTech world."
+				"Bungee Shade is a bold, decorative display font designed by David Jonathan Ross, featuring a dimensional 'shade' effect ideal for standout headings and signage. Part of the Bungee superfamily, it supports Latin scripts and is optimized for large sizes where its playful, high-impact forms enhance personality and brand recognition. We use Bungee Shade for display headings to create strong visual hierarchy and memorable typographic moments."
 			],
-			"license": "Open Source SaaS",
+			"license": "Open Font License",
 			"link": {
-				"href": "https://plausible.io/about"
+				"href": "https://djr.com/bungee"
 			}
 		},
 		{
-			"name": "Vercel",
-			"category": "Cloud Hosting",
+			"name": "Bunny Fonts",
+			"category": "Font Hosting CDN",
 			"description": [
-				"Vercel is a cloud platform for static and serverless hosting. It provides a fast and reliable way to deploy and host web applications with an emphasis on developer experience and CI/CD."
+				"Bunny Fonts is a privacy-friendly, GDPR-compliant, and high-performance font delivery service provided by Bunny.net. It offers a drop-in, open alternative to Google Fonts with global CDN caching, subsetting, and fast TLS, helping reduce layout shifts and improving Core Web Vitals. We use Bunny Fonts to serve web fonts reliably without leaking user IPs to third-party ad networks."
+			],
+			"license": "Free Tier / Proprietary CDN",
+			"link": {
+				"href": "https://fonts.bunny.net/"
+			}
+		},
+		{
+			"name": "CSS",
+			"category": "Stylesheet Language",
+			"description": [
+				"Cascading Style Sheets define the presentation layer of our site. We pair native CSS with UnoCSS utilities, using modern features like custom properties, container queries, cascade layers, and media queries for dark mode and reduced motion. This balance keeps styles predictable, accessible, and performant."
+			],
+			"license": "Open Standard",
+			"link": {
+				"href": "https://www.w3.org/Style/CSS/"
+			}
+		},
+		{
+			"name": "Codebook Spell Checker",
+			"category": "Zed Extension",
+			"description": [
+				"Codebook Spell Checker is a Zed extension that provides fast, in-editor spell checking with dictionaries and inline suggestions. We use it to catch typos in code comments, markdown docs, commit messages, and strings, helping maintain clear and professional developer and user-facing text."
+			],
+			"license": "Free Tier / Proprietary",
+			"link": {
+				"href": "https://zed.dev/extensions"
+			}
+		},
+		{
+			"name": "Coolors",
+			"category": "Color Palette Tool",
+			"description": [
+				"Coolors is a palette generator for creating, exploring, and sharing color schemes. We use it to quickly iterate on accessible, consistent palettes for UI, data viz, and branding."
+			],
+			"license": "Free Tier / Proprietary",
+			"link": {
+				"href": "https://coolors.co/"
+			}
+		},
+		{
+			"name": "DigitalOcean Spaces",
+			"category": "Object Storage CDN",
+			"description": [
+				"DigitalOcean Spaces is an S3-compatible object storage service with built-in CDN integration. We use Spaces to serve static assets and media via a global edge cache, reducing latency and offloading bandwidth from our app servers. Its simple bucket-based permissions, presigned URL support, and predictable pricing make it a good fit for asset pipelines and backups."
 			],
 			"license": "Proprietary",
 			"link": {
-				"href": "https://vercel.com"
+				"href": "https://www.digitalocean.com/products/spaces"
+			}
+		},
+		{
+			"name": "esbuild",
+			"category": "Bundler",
+			"description": [
+				"esbuild is a fast bundler/minifier used by our toolchain (Vite, SvelteKit adapter) for speedy builds and transform steps."
+			],
+			"license": "Open Source / MIT",
+			"link": {
+				"href": "https://esbuild.github.io/"
 			}
 		},
 		{
@@ -143,6 +143,260 @@
 			"license": "Proprietary",
 			"link": {
 				"href": "https://github.com"
+			}
+		},
+		{
+			"name": "HTML",
+			"category": "Markup Language",
+			"description": [
+				"This one should go without saying, but we'll say it anyway. Modern HTML is not only essential for building web pages, but it also plays a crucial role in creating responsive and accessible user interfaces. Not to mention, it's pretty dope."
+			],
+			"license": "Open Source",
+			"link": {
+				"href": "https://www.w3.org/"
+			}
+		},
+		{
+			"name": "JavaScript",
+			"category": "Programming Language",
+			"description": [
+				"JavaScript powers our application runtime in the browser and on the server (Node.js). Paired with TypeScript for static types, we use modern JS features (modules, async/await, Intl APIs) and performance-minded patterns to build responsive, accessible interfaces and services."
+			],
+			"license": "Open Standard (ECMAScript)",
+			"link": {
+				"href": "https://developer.mozilla.org/docs/Web/JavaScript"
+			}
+		},
+		{
+			"name": "macOS",
+			"category": "Operating System",
+			"description": [
+				"macOS is our primary development environment. We use it for native tooling and workflows (Zed, Sketch, Zsh/Starship) and for reliable local parity with our Node.js toolchain and containerized services."
+			],
+			"license": "Proprietary",
+			"link": {
+				"href": "https://www.apple.com/macos/"
+			}
+		},
+		{
+			"name": "NanoID",
+			"category": "Unique ID Generator",
+			"description": [
+				"NanoID is a tiny, secure, URL-friendly unique string ID generator for JavaScript, designed as a modern alternative to UUID. It uses a cryptographically strong random API when available and produces shorter IDs with comparable collision resistance. We use NanoID for generating stable, human-friendly identifiers in URLs, database keys, and client-side state."
+			],
+			"license": "Open Source / MIT",
+			"link": {
+				"href": "https://github.com/ai/nanoid"
+			}
+		},
+		{
+			"name": "Node.js",
+			"category": "Runtime Environment",
+			"description": [
+				"Node.js is a free, open-source, cross-platform JavaScript runtime environment that lets developers create servers, web apps, command-line tools, and scripts. We use it as our primary production runtime environment."
+			],
+			"license": "Open Source",
+			"link": {
+				"href": "https://nodejs.org/en"
+			}
+		},
+		{
+			"name": "Noun Project",
+			"category": "Icon Library",
+			"description": [
+				"Noun Project offers millions of curated, royalty-free icons and photos from a global creator community, covering virtually any concept. It provides consistent, scalable SVGs with style filters and collections, making it easy to maintain visual cohesion across UI and marketing. We use Noun Project for accessible, on-brand iconography and quick illustration needs."
+			],
+			"license": "Subscription / Royalty-free with attribution options",
+			"link": {
+				"href": "https://thenounproject.com/"
+			}
+		},
+		{
+			"name": "Plausible",
+			"category": "Analytics",
+			"description": [
+				"Plausible Analytics is an open-source project dedicated to making web analytics more privacy-friendly. Their mission is to reduce corporate surveillance by providing an alternative web analytics tool that doesn’t come from the AdTech world."
+			],
+			"license": "Open Source SaaS",
+			"link": {
+				"href": "https://plausible.io/about"
+			}
+		},
+		{
+			"name": "Polypane",
+			"category": "Browser & Responsive Testing",
+			"description": [
+				"Polypane is a developer-focused browser for building and testing responsive, accessible websites. We use it to view multiple synchronized viewports, audit accessibility (landmarks, contrast, headings), simulate devices and user preferences, and debug layout and performance issues faster than with standard devtools."
+			],
+			"license": "Proprietary (free trial available)",
+			"link": {
+				"href": "https://polypane.app/"
+			}
+		},
+		{
+			"name": "Raycast",
+			"category": "Productivity & Launcher",
+			"description": [
+				"Raycast is a fast macOS launcher with extensions for development workflows. We use it to trigger scripts, search docs, manage GitHub issues/PRs, launch projects, and streamline routine tasks with custom commands."
+			],
+			"license": "Proprietary (free tier available)",
+			"link": {
+				"href": "https://www.raycast.com/"
+			}
+		},
+		{
+			"name": "Rollup",
+			"category": "Bundler",
+			"description": [
+				"Rollup is part of Vite’s build pipeline and plugin ecosystem. We rely on it for code splitting and optimized production bundles."
+			],
+			"license": "Open Source / MIT",
+			"link": {
+				"href": "https://rollupjs.org/"
+			}
+		},
+		{
+			"name": "Sentry",
+			"category": "Error Tracking & Monitoring",
+			"description": [
+				"Sentry is a real-time error tracking and performance monitoring tool that helps developers identify and fix issues in their applications."
+			],
+			"license": "Open Core SaaS",
+			"link": {
+				"href": "https://sentry.io"
+			}
+		},
+		{
+			"name": "Sketch",
+			"category": "Design Tool",
+			"description": [
+				"Sketch is a macOS design app for UI, icon, and prototyping work. We use it to produce components, design systems, and handoff-ready assets for implementation."
+			],
+			"license": "Proprietary",
+			"link": {
+				"href": "https://www.sketch.com/"
+			}
+		},
+		{
+			"name": "Squoosh",
+			"category": "Image Optimization",
+			"description": [
+				"Squoosh is a web app and CLI for compressing and converting images (AVIF, WebP, MozJPEG, OxiPNG and more) with fine-grained controls. We use it to reduce asset sizes while preserving visual quality."
+			],
+			"license": "Open Source / Apache-2.0",
+			"link": {
+				"href": "https://squoosh.app/"
+			}
+		},
+		{
+			"name": "Svelte / SvelteKit",
+			"category": "Frontend Framework",
+			"description": [
+				"Our favorite open-source JavaScript framework at present, SvelteKit is the backbone of most of our new and upcoming projects. SvelteKit is the rare framework that truly reduces complexity and unpredictability rather than adding more limitations, complexity, or unnecessary boilerplate."
+			],
+			"license": "Open Source",
+			"link": {
+				"href": "https://svelte.dev/"
+			}
+		},
+		{
+			"name": "Svelte Check",
+			"category": "Static Analysis",
+			"description": [
+				"svelte-check adds type checking and diagnostics for Svelte components. We use it in CI to catch issues early and maintain code quality."
+			],
+			"license": "Open Source / MIT",
+			"link": {
+				"href": "https://github.com/sveltejs/language-tools"
+			}
+		},
+
+		{
+			"name": "TypeScript",
+			"category": "Programming Language",
+			"description": [
+				"There isn't much of the internet that isn't powered by TypeScript these days. It's a powerful, fast, and easy-to-use superset of JavaScript that helps developers write better code."
+			],
+			"license": "Open Source",
+			"link": {
+				"href": "https://typescriptlang.org/"
+			}
+		},
+		{
+			"name": "UnoCSS",
+			"category": "CSS Framework",
+			"description": [
+				"Our favorite utility-based, open-source CSS framework. It's fast, powerful, endlessly customizable, and easy to use. We support this project—and you should too."
+			],
+			"license": "Open Source",
+			"link": {
+				"href": "https://unocss.dev/"
+			}
+		},
+		{
+			"name": "Vecta Nano",
+			"category": "SVG Optimizer",
+			"description": [
+				"Vecta Nano is an SVG optimization tool that cleans and compresses vector graphics by removing redundant data and minifying paths. We use it to ship leaner, faster-loading SVG assets."
+			],
+			"license": "Free Tier / Proprietary",
+			"link": {
+				"href": "https://vecta.io/nano"
+			}
+		},
+		{
+			"name": "Vercel",
+			"category": "Cloud Hosting",
+			"description": [
+				"Vercel is a cloud platform for static and serverless hosting. It provides a fast and reliable way to deploy and host web applications with an emphasis on developer experience and CI/CD."
+			],
+			"license": "Proprietary",
+			"link": {
+				"href": "https://vercel.com"
+			}
+		},
+		{
+			"name": "Vite",
+			"category": "Build Tool",
+			"description": [
+				"Vite is a blazing-fast frontend build tool. That's what it says on the Vite website, and we're not about to improve on that. We heart Vite."
+			],
+			"license": "Open Source",
+			"link": {
+				"href": "https://vite.dev/"
+			}
+		},
+		{
+			"name": "Warp",
+			"category": "Terminal / Console",
+			"description": [
+				"Warp is a modern, GPU-accelerated terminal that treats your command line as a productivity app with blocks, input history, and rich UI. It includes AI command search and explanations, workflows, and collaborative sharing of commands, snippets, and sessions. We use Warp for faster iteration, readable command outputs, and built-in tools that streamline everyday CLI tasks."
+			],
+			"license": "Proprietary (free tier available)",
+			"link": {
+				"href": "https://www.warp.dev/"
+			}
+		},
+		{
+			"name": "Zed",
+			"category": "IDE / Code Editor",
+			"description": [
+				"Zed is a fast, multiplayer-capable code editor built in Rust with a native UI, designed for low-latency editing and collaboration. We use Zed for its snappy editing experience, built-in pair programming, and thoughtful developer ergonomics."
+			],
+			"license": "Source-available (Zed Public License)",
+			"link": {
+				"href": "https://zed.dev/"
+			}
+		},
+		{
+			"name": "Zsh + Starship",
+			"category": "Shell & Prompt",
+			"description": [
+				"Zsh is our interactive shell, offering powerful completion, globbing, and scripting. Starship is a fast, cross-shell prompt that displays contextual git/status info and tool versions. Together they provide a productive, consistent CLI experience across machines."
+			],
+			"license": "Open Source",
+			"link": {
+				"href": "https://www.starship.rs/"
 			}
 		}
 	],

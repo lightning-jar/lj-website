@@ -6,6 +6,7 @@ words = [
     "codebook",
     "favicons",
     "rustc",
+    "popovertarget"
 ]
 flag_words = [
     "todo",
