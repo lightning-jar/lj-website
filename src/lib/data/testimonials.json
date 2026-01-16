@@ -5,8 +5,23 @@
 	},
 	"testimonials": [
 		{
+			"category": "Strategy & Execution",
+			"quote": "No other vendor delivers the depth of strategy, design, and technical execution that Lightning Jar does.",
+			"attribution": {
+				"name": "David Heard",
+				"title": "CMO",
+				"company": "SecureLogix",
+				"image": {
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/david-h-testimonial.webp",
+					"alt": "D. Heard",
+					"width": "64",
+					"height": "64"
+				}
+			}
+		},
+		{
 			"category": "SaaS / Remote Solutions",
-			"quote": "They helped us speed to launch with our flagship remote SaaS solution.",
+			"quote": "They helped us accelerate our launch of the flagship remote SaaS solution.",
 			"attribution": {
 				"name": "Duane Varan",
 				"title": "CEO & Founder",
@@ -21,7 +36,7 @@
 		},
 		{
 			"category": "In-Store Experience / Kiosks / Tablet Apps",
-			"quote": "Our in-store app project was foundering... until LJ saved the day.",
+			"quote": "Our in-store app project was foundering—until LJ saved the day.",
 			"attribution": {
 				"name": "Mubashir Memon",
 				"title": "Senior Project Manager",
@@ -35,30 +50,15 @@
 			}
 		},
 		{
-			"category": "Strategy & Execution",
-			"quote": "No other vendor delivers the depth of strategy and executiong that Lightning Jar does.",
-			"attribution": {
-				"name": "David Heard",
-				"title": "CMO",
-				"company": "SecureLogix",
-				"image": {
-					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/david-h-testimonial.webp",
-					"alt": "D. Heard",
-					"width": "64",
-					"height": "64"
-				}
-			}
-		},
-		{
 			"category": "PIM / MDM",
 			"quote": "Lightning Jar gave us a single source of truth for our marketing data.",
 			"attribution": {
-				"name": "Liz Sterret",
-				"title": "Sr. Manager Marketing & Content",
+				"name": "Liz Sterrett",
+				"title": "Sr. Manager, Marketing & Content",
 				"company": "Beam Suntory",
 				"image": {
 					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/liz-s-testimonial.webp",
-					"alt": "L. Sterret",
+					"alt": "L. Sterrett",
 					"width": "64",
 					"height": "64"
 				}
@@ -66,7 +66,7 @@
 		},
 		{
 			"category": "Sales Tools, PIM, eCommerce, Mobile Apps",
-			"quote": "Their technology team was my secret weapon... they helped me execute big ideas.",
+			"quote": "Their technology team was my secret weapon—they helped me execute big ideas.",
 			"attribution": {
 				"name": "Frank Roth",
 				"title": "Former CMO",
@@ -81,7 +81,7 @@
 		},
 		{
 			"category": "Marketing Strategy & Brand Strategy",
-			"quote": "LJ helped us focus and clarify our brand vision during exponential growth.",
+			"quote": "LJ helped us focus and clarify our brand vision during a period of exponential growth.",
 			"attribution": {
 				"name": "Elizabeth Grojean",
 				"title": "CEO & Founder",

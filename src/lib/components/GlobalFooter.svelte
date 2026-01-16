@@ -1,28 +1,28 @@
 <script lang="ts">
-  // components
-  import NavLogoBlock from "$components/NavLogoBlock.svelte";
+// components
+import NavLogoBlock from "$components/NavLogoBlock.svelte";
 
-  // imported types
-  import type { HTMLLinkAttributes } from "svelte/elements";
+// imported types
+import type { HTMLLinkAttributes } from "svelte/elements";
 
-  // local types
-  interface Props {
-    heading: string;
-    text: string[];
-    callouts: {
-      heading?: string;
-      content?: HTMLLinkAttributes[];
-      footnotes?: string[];
-    }[];
-    legalLinks: HTMLLinkAttributes[];
-  }
+// local types
+interface Props {
+	heading: string;
+	text: string[];
+	callouts: {
+		heading?: string;
+		content?: HTMLLinkAttributes[];
+		footnotes?: string[];
+	}[];
+	legalLinks: HTMLLinkAttributes[];
+}
 
-  let {
-    heading = "",
-    text = [],
-    callouts = [],
-    legalLinks = [],
-  }: Props = $props();
+let {
+	heading = "",
+	text = [],
+	callouts = [],
+	legalLinks = [],
+}: Props = $props();
 </script>
 
 <footer
@@ -111,7 +111,7 @@
 
   <!-- copyright text-->
   <div class="font-sans text-xs opacity-80 mb-36">
-    &copy; Copyright 2002 - {new Date().getFullYear()} SiiTE Interactive LLC dba
-    Lightning Jar.
+    &copy; Copyright {new Date().getFullYear()} SiiTE Interactive LLC dba Lightning
+    Jar.
   </div>
 </footer>

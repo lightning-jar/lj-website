@@ -6,7 +6,7 @@
 			"name": "Svelte / SvelteKit",
 			"category": "Frontend Framework",
 			"description": [
-				"Our favorite open source javascript framework at present, Sveltekit is the backbone of most of our new and upcoming project works. Sveltekit is the rare framework that truly reduces complexity and predictability rather than adding more limitations, complexity or unnecessary boilerplate."
+				"Our favorite open-source JavaScript framework at present, SvelteKit is the backbone of most of our new and upcoming projects. SvelteKit is the rare framework that truly reduces complexity and unpredictability rather than adding more limitations, complexity, or unnecessary boilerplate."
 			],
 			"license": "Open Source",
 			"link": {
@@ -17,7 +17,7 @@
 			"name": "UnoCSS",
 			"category": "CSS Framework",
 			"description": [
-				"Our favorite utility-based open source css framework. It's fast, powerful, endlessly customizable and easy to use. We support this project and you should too."
+				"Our favorite utility-based, open-source CSS framework. It's fast, powerful, endlessly customizable, and easy to use. We support this project—and you should too."
 			],
 			"license": "Open Source",
 			"link": {
@@ -25,10 +25,10 @@
 			}
 		},
 		{
-			"name": "Typescript",
+			"name": "TypeScript",
 			"category": "Programming Language",
 			"description": [
-				"There isn't much of the internet that isn't powered by Typescript these days. It's a powerful, fast, and easy to use superset of JavaScript that helps developers write better code."
+				"There isn't much of the internet that isn't powered by TypeScript these days. It's a powerful, fast, and easy-to-use superset of JavaScript that helps developers write better code."
 			],
 			"license": "Open Source",
 			"link": {
@@ -39,7 +39,7 @@
 			"name": "HTML",
 			"category": "Markup Language",
 			"description": [
-				"This one shoud go without saying, but we'll say it anyway. Modern HTML is not only essential for building web pages, but it also plays a crucial role in creating responsive and accessible user interfaces. Not to mention it's pretty dope."
+				"This one should go without saying, but we'll say it anyway. Modern HTML is not only essential for building web pages, but it also plays a crucial role in creating responsive and accessible user interfaces. Not to mention, it's pretty dope."
 			],
 			"license": "Open Source",
 			"link": {
@@ -50,7 +50,7 @@
 			"name": "Vite",
 			"category": "Build Tool",
 			"description": [
-				"Vite is a blazing fast frontend build tool. That's what it says on the Vite website, and we're not about to improve on that. We heart Vite."
+				"Vite is a blazing-fast frontend build tool. That's what it says on the Vite website, and we're not about to improve on that. We heart Vite."
 			],
 			"license": "Open Source",
 			"link": {
@@ -61,7 +61,7 @@
 			"name": "Bun",
 			"category": "Runtime Environment & Package Manager",
 			"description": [
-				"Bun is a fast, incrementally adoptable all-in-one JavaScript, TypeScript & JSX toolkit. We use it as our primary development runtime environment and package manager."
+				"Bun is a fast, incrementally adoptable, all-in-one JavaScript, TypeScript, and JSX toolkit. We use it as our primary development runtime environment and package manager."
 			],
 			"license": "Open Source",
 			"link": {
@@ -72,7 +72,7 @@
 			"name": "Node.js",
 			"category": "Runtime Environment",
 			"description": [
-				"Node.js® is a free, open-source, cross-platform JavaScript runtime environment that lets developers create servers, web apps, command line tools and scripts. We use it as our primary production runtime environment."
+				"Node.js is a free, open-source, cross-platform JavaScript runtime environment that lets developers create servers, web apps, command-line tools, and scripts. We use it as our primary production runtime environment."
 			],
 			"license": "Open Source",
 			"link": {
@@ -83,7 +83,7 @@
 			"name": "Biome",
 			"category": "Code Formatting & Linting",
 			"description": [
-				"Biome is a fast formatter for JavaScript, TypeScript, JSX, TSX, JSON, HTML, CSS and GraphQL that scores 97% compatibility with Prettier, saving CI and developer time."
+				"Biome is a fast formatter for JavaScript, TypeScript, JSX, TSX, JSON, HTML, CSS, and GraphQL that scores 97% compatibility with Prettier, saving CI and developer time."
 			],
 			"license": "Open Source",
 			"link": {
@@ -105,7 +105,7 @@
 			"name": "Plausible",
 			"category": "Analytics",
 			"description": [
-				"Plausible Analytics is an open source project dedicated to making web analytics more privacy-friendly. Thier mission is to reduce corporate surveillance by providing an alternative web analytics tool which doesn’t come from the AdTech world."
+				"Plausible Analytics is an open-source project dedicated to making web analytics more privacy-friendly. Their mission is to reduce corporate surveillance by providing an alternative web analytics tool that doesn’t come from the AdTech world."
 			],
 			"license": "Open Source SaaS",
 			"link": {
@@ -127,7 +127,7 @@
 			"name": "Git",
 			"category": "Version Control",
 			"description": [
-				"Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. One recent survey found that 96% of professional developers use Git."
+				"Git is a free and open-source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. One recent survey found that 96% of professional developers use Git."
 			],
 			"license": "Open Source",
 			"link": {
@@ -135,7 +135,7 @@
 			}
 		},
 		{
-			"name": "Github",
+			"name": "GitHub",
 			"category": "Code Repository and CI/CD Platform",
 			"description": [
 				"GitHub is a cloud-based platform for hosting and collaborating on code using Git. It offers repositories, pull requests, code reviews, issues, CI/CD workflows (GitHub Actions), and project management tools, enabling teams and open-source communities to build, review, and ship software together."
@@ -148,6 +148,6 @@
 	],
 	"meta": {
 		"title": "Built With",
-		"description": "A list of technologies we used to build this website. "
+		"description": "A list of technologies we used to build this website."
 	}
 }

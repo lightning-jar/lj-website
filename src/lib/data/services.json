@@ -6,7 +6,7 @@
 	"services": [
 		{
 			"heading": "Web Design & Development",
-			"text": "Our process-driven approach to web design and development is engineered to help your organization quickly strategize & execute digital experiences that matter to customers.",
+			"text": "Our process-driven approach to web design and development is engineered to help your organization quickly strategize and execute digital experiences that matter to customers.",
 			"icon": {
 				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-web-design.svg",
 				"alt": "stylized block drawing of a web page",
@@ -16,7 +16,7 @@
 		},
 		{
 			"heading": "Custom Software & Apps",
-			"text": "Non-software companies with great ideas on how to digitize their services or solutions, or solve a business challenge through custom software often need help turning their vision into reality. That's where we come in.",
+			"text": "Non-software companies with great ideas on how to digitize their services or solutions, or solve a business challenge through custom software, often need help turning their vision into reality. That’s where we come in.",
 			"icon": {
 				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-custom-software.svg",
 				"alt": "stylized icon of a grid of app tiles",
@@ -26,7 +26,7 @@
 		},
 		{
 			"heading": "eCommerce & PIM",
-			"text": "Our technology studio specializes in PIM, DAM, MDM implementations and eCommerce transformations leveraging the power of Pimcore -- the world's most flexible and powerful unified digital platform.",
+			"text": "Our technology studio specializes in PIM, DAM, and MDM implementations and eCommerce transformations leveraging the power of Pimcore—the world’s most flexible and powerful unified digital platform.",
 			"icon": {
 				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-ecommerce.svg",
 				"alt": "stylized icon of a grid of app tiles",
@@ -36,7 +36,7 @@
 		},
 		{
 			"heading": "Kiosks & In-Store Experiences",
-			"text": "Customer experience and user experience intersect at the in-store Kiosk. Whether it's an in-room directory at a four star hotel, or a food-ordering system for a cafe, these projects demand excellence in user interface design and execution -- that's what we do.",
+			"text": "Customer experience and user experience intersect at the in-store kiosk. Whether it’s an in-room directory at a four-star hotel or a food-ordering system for a café, these projects demand excellence in user interface design and execution—that’s what we do.",
 			"icon": {
 				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-kiosk.svg",
 				"alt": "stylized icon of a digital kiosk",
@@ -46,20 +46,20 @@
 		},
 		{
 			"heading": "Sales & Pricing Tools",
-			"text": "What are the challenges and friction points slowing down your sales team or agents in the call center? Too often the sales organization is the last to benefit from digital transformations -- ask yourself what happens if you turn that equation around?",
+			"text": "What are the challenges and friction points slowing down your sales team or agents in the call center? Too often, the sales organization is the last to benefit from digital transformation—ask yourself what happens if you turn that equation around.",
 			"icon": {
 				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-sales-tools.svg",
-				"alt": "stylized icon of a digital kiosk",
+				"alt": "stylized icon of sales and pricing tools",
 				"width": "24",
 				"height": "24"
 			}
 		},
 		{
 			"heading": "UX Optimization",
-			"text": "There's a big gap between usability and great user experience. Our user experience team can help you push beyond interfaces that simply work to best-in-class experiences that increase affinity, encourage sales and encourage customer loyalty.",
+			"text": "There’s a big gap between usability and great user experience. Our user experience team can help you push beyond interfaces that simply work to best-in-class experiences that increase affinity, drive sales, and build customer loyalty.",
 			"icon": {
 				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-ux.svg",
-				"alt": "stylized icon of a digital kiosk",
+				"alt": "stylized icon representing user experience optimization",
 				"width": "24",
 				"height": "24"
 			}
@@ -67,6 +67,6 @@
 	],
 	"meta": {
 		"title": "Services",
-		"description": "These are things we find it hard to come to terms with."
+		"description": "These are things we find hard to come to terms with."
 	}
 }

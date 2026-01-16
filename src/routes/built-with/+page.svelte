@@ -1,5 +1,5 @@
 <script lang="ts">
-  let { data } = $props();
+let { data } = $props();
 </script>
 
 <div class="page-x-padding main-y-padding !pb-8">

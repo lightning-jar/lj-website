@@ -12,7 +12,7 @@ export default defineConfig({
 		pipeline: {
 			include: [/\.(svelte|md|json|html|md)($|\?)/],
 		},
-		filesystem: ["./app.html"],
+		filesystem: ["./src/app.html"],
 	},
 	extractors: [extractorSvelte()],
 	layers: {
