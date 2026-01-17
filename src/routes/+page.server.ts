@@ -1,5 +1,5 @@
 // data
-import home from "$data/home.json";
+import home from "$content/home.json";
 
 export function load() {
 	return {

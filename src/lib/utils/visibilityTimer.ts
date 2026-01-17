@@ -4,27 +4,20 @@ type VisibilityTimerOptions = {
 	threshold?: number | number[];
 	debug?: boolean;
 };
-
 type StartVisibilityTimerArgs = {
 	target: Element;
 	durationMs: number;
 	onEnter?: () => void; // called on every re-entry (first frame of new visible period)
+	onExit?: () => void; // called on every exit (last frame of current visible period)
 	onFinish: () => void; // called when visible time reaches duration of the current entry
 	options?: VisibilityTimerOptions;
 };
 
-/**
- * Auto-resetting visibility timer:
- * - Each time the element becomes visible (after being not visible), a new cycle starts:
- *   - remaining time resets to durationMs
- *   - onEnter fires
- * - If the element stays visible long enough, onFinish fires for that cycle
- * - If it hides before finishing, that cycle is canceled; the next re-entry starts a fresh cycle
- */
 export function startVisibilityTimer({
 	target,
 	durationMs,
 	onEnter,
+	onExit,
 	onFinish,
 	options = {},
 }: StartVisibilityTimerArgs) {
@@ -35,6 +28,8 @@ export function startVisibilityTimer({
 		throw new Error("onFinish must be function");
 	if (onEnter && typeof onEnter !== "function")
 		throw new Error("onEnter must be function");
+	if (onExit && typeof onExit !== "function")
+		throw new Error("onExit must be function");
 
 	const debug = !!options.debug;
 	const log = (...args: unknown[]) =>
@@ -97,20 +92,30 @@ export function startVisibilityTimer({
 		remaining -= elapsed;
 		visibleSince = null;
 		log("hidden -> cancel/pause", { elapsed, remaining });
-		// If it re-enters later, we start a completely new cycle (auto-reset),
-		// so we discard any partial remaining and restore on next enter.
+		// Auto-reset semantics: next re-entry starts a fresh cycle, so partial progress is discarded.
 	};
 
 	const setVisible = (nextVisible: boolean) => {
 		if (isVisible === nextVisible) return;
+		const prevVisible = isVisible;
 		isVisible = nextVisible;
+
 		const now = performance.now();
+
 		if (isVisible) {
-			// Auto-reset: a fresh cycle starts on every re-entry
+			// Transition: hidden -> visible
 			startNewCycle(now);
 		} else {
-			// End current cycle without finishing, discard partial progress
+			// Transition: visible -> hidden
 			pauseCurrentCycle(now);
+			if (prevVisible) {
+				// Fire onExit exactly once on the transition to hidden
+				try {
+					onExit?.();
+				} catch (e) {
+					console.error("onExit error", e);
+				}
+			}
 		}
 	};
 
@@ -134,7 +139,11 @@ export function startVisibilityTimer({
 
 	ensureRAF();
 
-	const destroy = () => {
+	const destroy = (opts?: { fireExitIfVisible?: boolean }) => {
+		// Optionally signal exit when tearing down while visible
+		if (opts?.fireExitIfVisible && isVisible) {
+			setVisible(false);
+		}
 		stopRAF();
 		observer?.disconnect();
 		observer = null;

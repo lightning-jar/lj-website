@@ -2,7 +2,7 @@
 
 import { error } from "@sveltejs/kit";
 
-import { default as content } from "$data/customer-stories.json";
+import { default as content } from "$content/customer-stories.json";
 
 export function load({ params }) {
 	const { slug } = params;

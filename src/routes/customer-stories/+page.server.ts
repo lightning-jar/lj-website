@@ -1,5 +1,5 @@
 // data
-import { default as content } from "$data/customer-stories.json";
+import { default as content } from "$content/customer-stories.json";
 
 export function load() {
 	return {

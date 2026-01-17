@@ -1,7 +1,9 @@
 {
 	"meta": {
-		"description": "Lightning Jar is a digital design and build studio handcrafting websites and custom applications for businesses and organizations.",
-		"title": "Lightning Jar"
+		"description": "Lightning Jar is a digital design and build studio handcrafting websites, toolsm and custom AI applications for businesses and organizations.",
+		"title": "Lightning Jar",
+		"robotsFollow": true,
+		"analyticsOn": true
 	},
 	"topics": [
 		{

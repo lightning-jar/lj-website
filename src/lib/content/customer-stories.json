@@ -5,7 +5,9 @@
 	},
 	"meta": {
 		"title": "Customer Stories",
-		"description": "Welcome to our customer stories page. Here, you'll find real-world examples of how our solutions have helped companies reach their goals."
+		"description": "Welcome to our customer stories page. Here, you'll find real-world examples of how our solutions have helped companies reach their goals.",
+		"robotsFollow": true,
+		"analyticsOn": true
 	},
 	"stories": [
 		{

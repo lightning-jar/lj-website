@@ -15,6 +15,16 @@
 			}
 		},
 		{
+			"heading": "Custom AI Solutions",
+			"text": "We architect custom AI tools for internal team use, as well as user-facing chatbots and other bespoke AI applications.",
+			"icon": {
+				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-web-design.svg",
+				"alt": "stylized block drawing of a web page",
+				"width": "24",
+				"height": "24"
+			}
+		},
+		{
 			"heading": "Custom Software & Apps",
 			"text": "Non-software companies with great ideas on how to digitize their services or solutions, or solve a business challenge through custom software, often need help turning their vision into reality. That’s where we come in.",
 			"icon": {
@@ -67,6 +77,8 @@
 	],
 	"meta": {
 		"title": "Services",
-		"description": "These are things we find hard to come to terms with."
+		"description": "These are things we find hard to come to terms with.",
+		"robotsFollow": true,
+		"analyticsOn": true
 	}
 }

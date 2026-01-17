@@ -132,6 +132,32 @@ export default defineConfig({
 			"display",
 			"font-700 font-display text-maximumYellow mb-3 text-32px lg:text-42px",
 		],
+		[
+			"heading-2",
+			"font-700 text-maximumYellow mb-3 text-20px lg:text-24px font-serif",
+		],
+		[
+			"body-article",
+			`
+			[&_h2]:(font-700 text-1.05em mt-5)
+			[&_h3]:(font-600 mt-4)
+		  [&_p]:mb-3
+			[&_ul]:(mb-4 list-disc decoration-white list-outside ml-3)
+			[&_li]:(mb-3 mt-2 leading-tight)
+			[&_strong]:font-600
+		`,
+		],
+		[
+			"blog-article",
+			`
+			[&_h2]:(font-700 font-serif text-maximumYellow text-1.05em mt-5 opacity-98)
+			[&_h3]:(font-600 mt-4)
+		  [&_p]:(mb-3 mt-2 opacity-90)
+			[&_ul]:(mb-4 mt-2 list-disc decoration-white list-outside ml-3)
+			[&_li]:(mb-3 mt-2 leading-tight opacity-90)
+			[&_strong]:font-600
+		`,
+		],
 	],
 	transformers: [transformerDirectives(), transformerVariantGroup()],
 });

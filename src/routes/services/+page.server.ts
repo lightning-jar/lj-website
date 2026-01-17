@@ -1,5 +1,5 @@
 // data
-import { default as content } from "$data/services.json";
+import { default as content } from "$content/services.json";
 
 const typedContent = content;
 

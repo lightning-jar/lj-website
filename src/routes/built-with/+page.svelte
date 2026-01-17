@@ -1,10 +1,10 @@
 <script lang="ts">
-let { data } = $props();
+  let { data } = $props();
 </script>
 
 <div class="page-x-padding main-y-padding !pb-8">
   <h1 class="display max-w-article">
-    {data?.heading}
+    {data?.title}
   </h1>
   <p class="max-w-article">{data?.subheading}</p>
 </div>
