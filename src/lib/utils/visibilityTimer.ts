@@ -143,7 +143,19 @@ export function startVisibilityTimer({
 		// Optionally signal exit when tearing down while visible
 		if (opts?.fireExitIfVisible && isVisible) {
 			setVisible(false);
+		} else {
+			// Freeze internal timing so remaining no longer depends on performance.now()
+			if (visibleSince !== null) {
+				// Capture elapsed into remaining, then null out visibleSince
+				const now = performance.now();
+				const elapsed = now - visibleSince;
+				remaining = Math.max(0, remaining - elapsed);
+				visibleSince = null;
+			}
+			// Mark not visible so the getter returns the stored remaining
+			isVisible = false;
 		}
+
 		stopRAF();
 		observer?.disconnect();
 		observer = null;

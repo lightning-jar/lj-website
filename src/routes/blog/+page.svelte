@@ -1,5 +1,5 @@
 <script lang="ts">
-let { data } = $props();
+  let { data } = $props();
 </script>
 
 <div class="page-x-padding min-h-screen pt-8 pb-8">
@@ -16,13 +16,13 @@ let { data } = $props();
       <a
         aria-labelledby="title-{article.slug}"
         href="blog/{article.slug}"
-        class="group/article border border-current rounded-lg overflow-hidden bg-oxfordDark relative"
+        class="aspect-[4/3] w-full border border-current rounded-lg overflow-hidden relative"
       >
         <img
           aria-hidden="true"
           src={article.image}
           alt=""
-          class="w-full aspect-4/3 object-cover"
+          class="w-full !h-full object-cover"
           loading="lazy"
         />
         <h3

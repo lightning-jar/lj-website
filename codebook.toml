@@ -11,7 +11,11 @@ words = [
     "noarchive",
     "nosnippet",
     "notranslate",
-    "noimageindex"
+    "noimageindex",
+    "Kagi",
+    "LLM",
+    "LLMs",
+    "Googlebot"
 ]
 flag_words = [
     "todo",

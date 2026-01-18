@@ -1,4 +1,4 @@
-interface SlugifyOptions {
+export interface SlugifyOptions {
 	[key: string]: unknown;
 	separator?: string;
 	def?: string | null;
@@ -10,12 +10,18 @@ export function slugify(
 	options?: SlugifyOptions,
 ): string {
 	const defVal = options?.def ?? "";
-	// Check if the input is null or empty string
 	if (s == null || s === "") return defVal;
 
 	const sep = options?.separator ?? "-";
 	const limit = options?.maxLength ?? 255;
-	const str = String(s).slice(0, limit).toLowerCase();
+
+	// Slice before processing as required by tests
+	// Normalize to NFD and strip combining marks to handle accents
+	const raw = String(s).slice(0, limit);
+	const str = raw
+		.normalize("NFD")
+		.replace(/[\u0300-\u036f]/g, "")
+		.toLowerCase();
 
 	const out: string[] = [];
 	let lastWasSep = true;
@@ -25,15 +31,25 @@ export function slugify(
 		const okAscii =
 			(code >= 0x30 && code <= 0x39) || (code >= 0x61 && code <= 0x7a);
 		const ch = str[i];
-		const ok = okAscii;
-		if (ok) {
-			out.push(ch);
-			lastWasSep = false;
+
+		if (okAscii) {
+			if (out.length < limit) {
+				out.push(ch);
+				lastWasSep = false;
+			} else {
+				break;
+			}
 		} else if (!lastWasSep) {
-			out.push(sep);
-			lastWasSep = true;
+			// add separator only if we still have room and last wasn't a separator
+			if (out.length < limit) {
+				out.push(sep);
+				lastWasSep = true;
+			} else {
+				break;
+			}
 		}
 	}
+
 	if (lastWasSep && out.length) out.pop();
 
 	let n = out.join("");

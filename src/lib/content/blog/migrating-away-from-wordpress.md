@@ -3,7 +3,7 @@ title: Why We Left WordPress Behind
 metaTitle: Leaving Wordpress
 slug: leaving-wordpress
 description: This article looks at the reasons why Lightning Jar is leaving the WordPress platform.
-date: 2026-01-17
+date: 2025-12-01
 draft: true
 tags: [wordpress, sveltekit, serverless]
 image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/investigation.webp
