@@ -1,18 +1,18 @@
 <script lang="ts">
-  // utils
-  import { slugify } from "$utils/slugify";
+// utils
+import { slugify } from "$utils/slugify";
 
-  let { data } = $props();
+let { data } = $props();
 
-  let names = $derived.by(() => {
-    const names = [];
-    for (const section of data?.sections ?? []) {
-      for (const item of section.list ?? []) {
-        names.push(item.name);
-      }
-    }
-    return names.sort();
-  });
+let names = $derived.by(() => {
+	const names = [];
+	for (const section of data?.sections ?? []) {
+		for (const item of section.list ?? []) {
+			names.push(item.name);
+		}
+	}
+	return names.sort();
+});
 </script>
 
 <div class="page-x-padding main-y-padding !pb-8">

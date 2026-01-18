@@ -43,12 +43,16 @@
 			"data-text": "Archive"
 		},
 		{
-			"href": "/terms",
-			"data-text": "Privacy & Terms"
+			"href": "/blog",
+			"data-text": "Blog"
 		},
 		{
 			"href": "/built-with",
 			"data-text": "Built With"
+		},
+		{
+			"href": "/terms",
+			"data-text": "Privacy & Terms"
 		}
 	]
 }

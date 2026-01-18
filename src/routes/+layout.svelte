@@ -1,24 +1,24 @@
 <script lang="ts">
-  // import child page data
-  import { page } from "$app/state";
+// import child page data
+import { page } from "$app/state";
 
-  // import css file
-  import "uno.css";
+// import css file
+import "uno.css";
 
-  // import components
-  import GlobalFooter from "$components/GlobalFooter.svelte";
-  import GlobalNav from "$components/GlobalNav.svelte";
-  import SvelteAnnounceFix from "$components/SvelteAnnounceFix.svelte";
-  import BackToTop from "$components/BackToTop.svelte";
+// import components
+import GlobalFooter from "$components/GlobalFooter.svelte";
+import GlobalNav from "$components/GlobalNav.svelte";
+import SvelteAnnounceFix from "$components/SvelteAnnounceFix.svelte";
+import BackToTop from "$components/BackToTop.svelte";
 
-  // types
-  import type { PageMeta } from "$types/pageMeta";
+// types
+import type { PageMeta } from "$types/pageMeta";
 
-  // props
-  let { children, data } = $props();
+// props
+let { children, data } = $props();
 
-  // derive page metadata from $page
-  let pageMeta = $derived((page.data?.meta as PageMeta) ?? {});
+// derive page metadata from $page
+let pageMeta = $derived((page.data?.meta as PageMeta) ?? {});
 </script>
 
 <svelte:head>

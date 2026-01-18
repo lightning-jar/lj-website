@@ -11,6 +11,6 @@ export interface PageMeta {
 	url?: string | null;
 	robotsFollow?: boolean | null;
 	analyticsOn?: boolean | null;
-	frequency?: SitemapXMLFrequency | null; 	// for sitemap.xml
+	frequency?: SitemapXMLFrequency | null; // for sitemap.xml
 	priority?: number | string | null; // for sitemap.xml
 }

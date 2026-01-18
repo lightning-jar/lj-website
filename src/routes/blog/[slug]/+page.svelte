@@ -1,9 +1,9 @@
 <script>
-  let { data } = $props();
+let { data } = $props();
 
-  let formattedDate = $derived(
-    data.date ? new Date(data?.date).toLocaleDateString() : "",
-  );
+let formattedDate = $derived(
+	data.meta?.date ? new Date(data?.meta.date).toLocaleDateString() : "",
+);
 </script>
 
 <div class="page-x-padding min-h-screen pt-8 pb-8">

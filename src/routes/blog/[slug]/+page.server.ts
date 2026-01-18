@@ -1,17 +1,21 @@
+import { error } from "@sveltejs/kit";
+
 // utils
-import { parseMarkdown } from "$utils/parseMarkdown";
+import { allBlogArticleSlugs, allBlogArticles } from "$routes/blog/getArticles";
 
-// types
-import type { PageMeta } from "$types/PageMeta";
+export async function load({ params }) {
+	const slug = params.slug;
 
-import { default as article } from "$content/blog/migrating-away-from-wordpress.md?raw";
+	const index = allBlogArticleSlugs.indexOf(slug);
+	const article = allBlogArticles[index];
 
-export function load() {
-	// console.log(getFrontMatter(article));
-	const { frontMatter, html } = parseMarkdown(article);
-	console.log(html);
+	if (!article) {
+		return error(404, `Page not found`);
+	}
 
-	const meta: PageMeta = {
+	const { html, frontMatter } = article;
+
+	const meta = {
 		title: frontMatter?.metaTitle ?? "",
 		description: frontMatter?.description ?? "",
 		author: frontMatter.author,
@@ -21,7 +25,6 @@ export function load() {
 
 	return {
 		meta,
-		date: frontMatter?.date ?? "",
 		title: frontMatter?.title ?? "",
 		html,
 	};

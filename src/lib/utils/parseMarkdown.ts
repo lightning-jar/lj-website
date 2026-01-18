@@ -11,8 +11,10 @@ export function getFrontMatter(markdown: string): Record<string, string> {
 
 		if (!inFrontMatter) break;
 
-		const [key, value] = line.split(":").map((s) => s.trim());
-		frontMatter[key] = value;
+		const keyRegex = /^[a-z0-9_]*?: /i;
+		const key = line.match(keyRegex)?.[0].trim().replace(/:/, "");
+		const value = line.replace(keyRegex, "");
+		if (key && value) frontMatter[key] = value;
 	}
 
 	return frontMatter;
@@ -20,6 +22,7 @@ export function getFrontMatter(markdown: string): Record<string, string> {
 
 type ParseMarkdownOptions = {
 	sanitize?: boolean;
+	lazyImages?: boolean;
 };
 
 export function parseMarkdownTextToHtml({
@@ -75,7 +78,7 @@ export function parseMarkdownTextToHtml({
 			const imageRegex = /!\[([^\]]+)\]\(([^)]+)\)/g;
 			const image = italicized.replace(
 				imageRegex,
-				'<img loading="lazy" class="w-full h-auto rounded overflow-hidden mb-5" src="$2" alt="$1">',
+				`<img loading="${options?.lazyImages ? "lazy" : "auto"}" class="w-full h-auto rounded overflow-hidden mb-5" src="$2" alt="$1">`,
 			);
 
 			// replace any links with <a> tags

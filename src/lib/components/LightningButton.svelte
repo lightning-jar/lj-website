@@ -1,47 +1,47 @@
 <script lang="ts">
-  // components
-  import LightningBolt from "$components/LightningBolt.svelte";
+// components
+import LightningBolt from "$components/LightningBolt.svelte";
 
-  import { createAttachmentKey } from "svelte/attachments";
+import { createAttachmentKey } from "svelte/attachments";
 
-  // utils
-  import { startVisibilityTimer } from "$utils/visibilityTimer";
+// utils
+import { startVisibilityTimer } from "$utils/visibilityTimer";
 
-  // types
-  import type { Attachment } from "svelte/attachments";
+// types
+import type { Attachment } from "svelte/attachments";
 
-  // props
-  let { classes = "", onclick = () => {}, character = "→" } = $props();
+// props
+let { classes = "", onclick = () => {}, character = "→" } = $props();
 
-  // state
-  let clickMe: HTMLDivElement | null = $state(null);
+// state
+let clickMe: HTMLDivElement | null = $state(null);
 
-  // functions
-  function hideClickMe() {
-    if (clickMe) clickMe.classList.add("opacity-0");
-  }
+// functions
+function hideClickMe() {
+	if (clickMe) clickMe.classList.add("opacity-0");
+}
 
-  function showClickMe() {
-    if (clickMe) clickMe.classList.remove("opacity-0");
-  }
+function showClickMe() {
+	if (clickMe) clickMe.classList.remove("opacity-0");
+}
 
-  const clickMeAttachment: Attachment = (element) => {
-    // console.log(element.nodeName); // 'DIV'
+const clickMeAttachment: Attachment = (element) => {
+	// console.log(element.nodeName); // 'DIV'
 
-    startVisibilityTimer({
-      target: element,
-      durationMs: 1000,
-      onEnter: showClickMe,
-      onFinish: hideClickMe,
-      options: { threshold: 0.25, debug: false },
-    });
+	startVisibilityTimer({
+		target: element,
+		durationMs: 1000,
+		onEnter: showClickMe,
+		onFinish: hideClickMe,
+		options: { threshold: 0.25, debug: false },
+	});
 
-    return () => {};
-  };
+	return () => {};
+};
 
-  const clickMeProps = {
-    [createAttachmentKey()]: clickMeAttachment,
-  };
+const clickMeProps = {
+	[createAttachmentKey()]: clickMeAttachment,
+};
 </script>
 
 <div class="relative">

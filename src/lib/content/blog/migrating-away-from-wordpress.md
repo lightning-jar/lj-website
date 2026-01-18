@@ -1,21 +1,23 @@
 ---
-title: Why We're Leaving WordPress Behind
+title: Why We Left WordPress Behind
 metaTitle: Leaving Wordpress
+slug: leaving-wordpress
 description: This article looks at the reasons why Lightning Jar is leaving the WordPress platform.
 date: 2026-01-17
 draft: true
 tags: [wordpress, sveltekit, serverless]
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/investigation.webp
+imageDescription: hands holding spectacles against a digital screen
 author: Kevin Peckham
 ---
-![alt hands holding spectacles in front of a digital screen, the background is blurry but the image in the glasses is sharp](https://fypqozx5ulkwvv6l.public.blob.vercel-storage.com/investigation-xU7tj3axdkMna4f9EBxBSmIRvYUmMN.webp)
 
-Over the past 2-3 years, Lightning Jar has migrated roughly 90% of our formerly WP client websites away from WordPress. We still support a handful of WP sites, but the trend is clear: for most of our national and international clients in technology, energy, public transit, and education, modern Jamstack architectures deliver better security, performance, governance, and developer velocity.
+Over the past 2-3 years, Lightning Jar has migrated roughly 90% of our formerly WP client websites away from WordPress. We still support a handful of WP sites, but the trend is clear: for most of our national and international clients in technology, energy, public transit, liquor, and manufacturing, modern Jamstack architectures deliver better security, performance, governance, and developer velocity.
 
-This is a conscious uncoupling of our clients from the WordPress ecosystem, for reasons outlined below.To be clear, there are a lot of talented people in the WP ecosystem doing good work, but our concerns are less about any one theme or plugin and more about the broader ecosystem dynamics around WordPress. Here’s what led us to change course.
+This is a conscious uncoupling of our clients from the WordPress ecosystem, for reasons outlined below. To be clear, there are a lot of talented people in the WP ecosystem doing good work, but our concerns are less about any one theme or plugin and more about broader ecosystem dynamics around WordPress. Here’s what led us to change course.
 
 ## Security: Reducing Blast Radius and Attack Surface
 
-* WordPress is a high-profile target for automated attacks, which increases risk and operational noise for our clients, especially those in regulated or sensitive industries like cybersecurity.
+* WordPress is a high-profile target for automated attacks, which increases risk and operational noise for our clients, especially those in regulated or sensitive industries like cybersecurity and finance.
 * Enforcing robust security controls such as strict Content Security Policies—often collides with legacy assumptions in the WP stack.
 * Moving to serverless and framework-driven architectures has reduced surface area, simplified hardening, and improved baseline posture.
 
@@ -68,17 +70,15 @@ Our approach now:
 * Server-side rendering in frameworks like SvelteKit narrows historical PHP advantages.
 * The talent market also leans in our favor—finding great JS engineers is generally easier than sourcing senior PHP talent with the flexibility agencies require.
 
-We’ve also sunset our formal partnership with Pimcore; our team moves faster and delivers cleaner outcomes on modern JS-based stacks.
-
 ## User Experience: The Paradigm Has Shifted
 
 * WordPress was once the clearest path to self-serve content. Today, its authoring model often feels clunky for non-technical marketers.
-* Many teams reach for platforms like HubSpot or Pardot for fast landing pages and integrated workflows, even when we’re not fans of their walled gardens.
+* Many teams reach for platforms like HubSpot or Pardot for fast landing pages and integrated workflows, although admittedly, we’re not big fans of their walled gardens and enormous price tags.
 * The notion that marketing teams should directly manage security-sensitive plugins is increasingly untenable. Clear boundaries and purpose-built tooling lead to better outcomes.
 
 ## Where We Still Use WordPress
 
-There are still scenarios—especially complex, authenticated, content-heavy platforms—where WordPress paired with excellent theme frameworks (like HeroicThemes) remains a defensible choice. We support those instances thoughtfully and continue to value the partners and tools that do it right.
+There are still some scenarios especially complex, authenticated, content-heavy platforms— where WordPress paired with excellent theme frameworks remains a defensible choice. We support those instances thoughtfully and continue to value the partners and tools that do it right.
 
 ## The Lightning Jar Approach Going Forward
 
@@ -90,5 +90,3 @@ There are still scenarios—especially complex, authenticated, content-heavy pla
 WordPress helped define an era. For our clients’ needs today—security, speed, sustainability, and maintainability we find modern JS frameworks and serverless platforms are the better fit.
 
 If you’re navigating similar trade-offs, we’re happy to share what we’ve learned and help you choose the right path for your team and your roadmap.
-
-— Kevin, Lightning Jar

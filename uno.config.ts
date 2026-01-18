@@ -150,7 +150,7 @@ export default defineConfig({
 		[
 			"blog-article",
 			`
-			[&_h2]:(font-700 font-serif text-maximumYellow text-1.05em mt-5 opacity-98)
+			[&_h2]:(font-700 font-serif text-maximumYellow text-1.1em mt-5 opacity-98)
 			[&_h3]:(font-600 mt-4)
 		  [&_p]:(mb-3 mt-2 opacity-90)
 			[&_ul]:(mb-4 mt-2 list-disc decoration-white list-outside ml-3)

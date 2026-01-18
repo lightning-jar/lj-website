@@ -1,46 +1,45 @@
 <script lang="ts">
-  import { createAttachmentKey } from "svelte/attachments";
+import { createAttachmentKey } from "svelte/attachments";
 
-  // utils
-  import { startVisibilityTimer } from "$utils/visibilityTimer";
+// utils
+import { startVisibilityTimer } from "$utils/visibilityTimer";
 
-  // types
-  import type { Attachment } from "svelte/attachments";
+// types
+import type { Attachment } from "svelte/attachments";
 
-  // state
-  let button: HTMLButtonElement | null = $state(null);
+// state
+let button: HTMLButtonElement | null = $state(null);
 
-  // functions
-  function hide() {
-    if (button) button.classList.add("opacity-0");
-  }
+// functions
+function hide() {
+	if (button) button.classList.add("opacity-0");
+}
 
-  function show() {
-    if (button) button.classList.remove("opacity-0");
-  }
+function show() {
+	if (button) button.classList.remove("opacity-0");
+}
 
-  const buttonAttachment: Attachment = (element) => {
-    // console.log(element.nodeName); // 'DIV'
-    //
-    const top = document.getElementById("top");
+const buttonAttachment: Attachment = (_element) => {
+	//
+	const top = document.getElementById("top");
 
-    if (!top) return;
+	if (!top) return;
 
-    startVisibilityTimer({
-      target: top,
-      durationMs: 1000,
-      onEnter: hide,
-      onExit: show,
-      onFinish: () => {},
-      options: { threshold: 0.25, debug: false },
-    });
+	startVisibilityTimer({
+		target: top,
+		durationMs: 1000,
+		onEnter: hide,
+		onExit: show,
+		onFinish: () => {},
+		options: { threshold: 0.25, debug: false },
+	});
 
-    return () => {};
-  };
+	return () => {};
+};
 
-  const buttonProps = {
-    [createAttachmentKey()]: buttonAttachment,
-  };
+const buttonProps = {
+	[createAttachmentKey()]: buttonAttachment,
+};
 </script>
 
 <!-- back to top -->
