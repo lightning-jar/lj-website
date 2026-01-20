@@ -44,6 +44,14 @@ let panelsCount: number = $derived(data.testimonials?.length ?? 0);
             <span>, {testimonial.attribution.title}</span>
             <span>- {testimonial.attribution.company}</span>
           </div>
+
+          {#if testimonial.caseStudy}
+            <a
+              href={testimonial.caseStudy}
+              class="mt-8 text-accent inline-flex rounded px-3 py-2 border"
+              >Customer Story</a
+            >
+          {/if}
         </article>
       {/if}
     {/each}

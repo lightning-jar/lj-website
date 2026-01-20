@@ -18,7 +18,7 @@ let { data } = $props();
 
   <section>
     {#each data?.stories ?? [] as story}
-      <article class="max-w-article">
+      <article class="max-w-article mb-8">
         <h3 class="text-24px font-700 font-serif text-maximumYellow mb-3">
           {story?.banner.heading}
         </h3>

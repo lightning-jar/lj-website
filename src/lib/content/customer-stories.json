@@ -13,6 +13,113 @@
 		{
 			"banner": {
 				"tag": {
+					"data-text": "SecureLogix + Integrated Digital Program",
+					"href": "https://www.securelogix.com/"
+				},
+				"heading": "Ten Years and One Unified Stack for SecureLogix",
+				"subheading": "Lightning Jar serves as SecureLogix’s long‑term digital partner, delivering an integrated web, content, and AI platform that powers a small team to compete with industry giants."
+			},
+			"meta": {
+				"title": "Cybersecurity | Customer Story",
+				"description": "Lightning Jar powers SecureLogix’s marketing with an integrated website, partner portal, knowledge base, and an LLM-powered brand operating system."
+			},
+			"customer": {
+				"category": "Cybersecurity",
+				"solutions": ["Websites", "Portals", "Applications", "AI"],
+				"technologies": ["Sveltekit"],
+				"name": "SecureLogix",
+				"logo": "/images/customer-logo-securelogix.png",
+				"thumb": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/replicator-01.webp"
+			},
+			"excerpt": "For more than a decade, Lightning Jar has been the primary digital agency of record for SecureLogix, delivering a unified stack: marketing site, partner portal, knowledge base, and a custom LLM-powered brand operating system that helps a lean team outperform larger competitors.",
+			"title": "SecureLogix Amplifies Voice Network Security Marketing With an AI-Enabled Digital Stack",
+			"slug": "securelogix-digital-stack",
+			"image": "/images/customer-story-securelogix-hero.jpg",
+			"content": [
+				{
+					"heading": "Customer",
+					"text": [
+						"<a href=\"https://www.securelogix.com\">SecureLogix</a> is a leader in voice network security and call trust. Their universal platform provides comprehensive protection for inbound and outbound calls, helping enterprises raise answer rates while defending against fraud, spam, abuse, and other threats. SecureLogix protects 300+ enterprise customers and blocks over 200 million fraudulent or abusive calls every year."
+					]
+				},
+				{
+					"heading": "Challenge",
+					"text": [
+						"With a modestly sized marketing team competing against the world’s largest IT vendors, SecureLogix needed a unified digital foundation to scale content creation, brand governance, and go‑to‑market execution. The team required cohesive web and content systems, strong brand assets, and efficient workflows across internal and external partners without adding headcount."
+					]
+				},
+				{
+					"heading": "Solution",
+					"subheading": "One Integrated Stack for Brand, Content, and Channels",
+					"text": [
+						"Lightning Jar became SecureLogix’s primary digital agency of record, providing full‑stack design, engineering, and ongoing support across web, partner enablement, content, and brand. The program spans:",
+						"• Technology: Marketing website design/build/support; Sales Partner Customer Portal; Customer Knowledge Base; and a custom AI application for internal marketing use.",
+						"• Design, Strategy & Content: Logo/branding; brochures and flyers; video; tradeshow booth interactive experiences; brand voice and style guidelines; photography; and presentation templates.",
+						"• Vendor Orchestration: Day‑to‑day oversight and integration with third‑party partners including video production, SEO optimization, and content vendors.",
+						"Integrations: Salesforce and Pardot for lead capture, nurturing, and campaign analytics."
+					]
+				},
+				{
+					"heading": "Featured Project",
+					"subheading": "AI Brand Operating System",
+					"text": [
+						"SecureLogix was the first client to pilot Lightning Jar’s LLM‑powered Brand Operating System—a turnkey platform that combines a centralized marketing repository (brand collateral, image libraries, logos, and style guidelines) with a custom collateral editor.",
+						"The system enables the team to generate on‑brand flyers, landing pages, presentations, emails, and more with the help of a private LLM assistant pre‑trained on SecureLogix products, solutions, brand voice, and style rules using preset templates. The result is faster time‑to‑market, consistent brand execution, and reduced reliance on manual production cycles."
+					]
+				},
+				{
+					"heading": "Results",
+					"subheading": "Enterprise‑Grade Presence, Startup‑Speed Execution",
+					"text": [
+						"• Unified digital foundation that scales a lean team’s output across web, partner enablement, and content.",
+						"• Consistent brand governance across all channels and vendors.",
+						"• Faster creation of sales and marketing assets using the AI Brand OS while maintaining compliance with voice and visual guidelines.",
+						"• Streamlined integrations with Salesforce and Pardot for measurable, repeatable campaign execution."
+					]
+				}
+			],
+			"testimonials": [
+				{
+					"quote": [
+						"No other vendor delivers the depth of strategy, design, and technical execution that Lightning Jar does."
+					],
+					"attribution": {
+						"name": "David Heard",
+						"title": "Chief Marketing Officer",
+						"organization": "SecureLogix"
+					}
+				}
+			],
+			"images": [
+				{
+					"alt": "Marketing website and AI Brand OS interface for SecureLogix",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/replicator-01.webp",
+					"width": "1300",
+					"height": "731"
+				}
+			],
+			"perspectives": [
+				{
+					"quote": [
+						"The first time I met David (CMO of SecureLogix), was at an event we were hosting at SXSW in 2016. We clicked immediately and have been working together ever since. David has great ideas and a clear vision and is always helping us help him. He helped us concieve and refine the LLM-powered Replicator Brand Operating System, which is a powerful tool for authoring, managing and optimizing brand assets."
+					],
+					"attribution": {
+						"name": "Kevin Peckham",
+						"title": "Principal",
+						"organization": "Lightning Jar",
+						"image": {
+							"alt": "REPLACE_WITH_NAME",
+							"src": "/images/team-member.webp",
+							"width": "63",
+							"height": "63"
+						}
+					}
+				}
+			]
+		},
+		{
+			"banner": {
+				"tag": {
 					"data-text": "Beam Suntory + Open Source PIM",
 					"href": "https://pimcore.com/en/customers/suntory-group_c132768"
 				},

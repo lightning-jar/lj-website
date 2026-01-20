@@ -32,7 +32,7 @@ let { data } = $props();
           </h2>
 
           {#each item.text ?? [] as text}
-            <p class="mb-5">{text}</p>
+            <p class="mb-5">{@html text}</p>
           {/each}
         </section>
       {/each}

@@ -71,7 +71,9 @@ let names = $derived.by(() => {
               </p>
               <!-- use cases -->
               <div class="opacity-90">
-                <h4 class="font-700 mb-2 leading-none">Use Cases:</h4>
+                <h4 class="font-700 mb-2 leading-none text-maximumYellow">
+                  Use Cases:
+                </h4>
                 <ul class="grid grid-cols-1 gap-1 pl-0 ml-0">
                   {#each item.useCases ?? [] as useCase}
                     <li class="leading-tight list-disc list-inside ml-0">
@@ -100,7 +102,7 @@ let names = $derived.by(() => {
         {#each data?.sections ?? [] as section, sectionIndex}
           <a
             href={`#${slugify(section.heading)}`}
-            class="text-maximumYellow px-3 py-2 rounded border border-current leading-none text-14px"
+            class="text-maximumYellow px-3 py-2 rounded border border-current leading-none text-14px opacity-95 hover:opacity-100"
           >
             {section?.handle || section?.heading}
           </a>
@@ -108,7 +110,7 @@ let names = $derived.by(() => {
       </nav>
 
       <!-- list by name  -->
-      <nav class="border px-3 pt-4 pb-5 rounded border-current max-h-fit">
+      <nav class="border px-3 pt-4 pb-5 rounded border-slate-100/60 max-h-fit">
         <h2
           class="text-22px font-serif text-maximumYellow font-700 sm:mb-0 mb-3 sr-only"
         >
