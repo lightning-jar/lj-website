@@ -1,32 +1,35 @@
 <script lang="ts">
-import { default as hamburgerIcon } from "$assets/hamburger.svg?raw";
+  import { default as hamburgerIcon } from "$assets/hamburger.svg?raw";
 
-let {
-	button = $bindable(null),
-	classes = "",
-	popovertarget = "hamburger-menu",
-	title = "toggle the hamburger menu",
-	id = "hamburger-menu-button",
-}: {
-	classes?: string;
-	button?: HTMLButtonElement | null;
-	popovertarget?: string | null;
-	title?: string | null;
-	id?: string | null;
-} = $props();
+  let {
+    button = $bindable(null),
+    classes = "",
+    onclick = () => {},
+    popovertarget = "hamburger-menu",
+    title = "toggle the hamburger menu",
+    id = "hamburger-menu-button",
+  }: {
+    classes?: string;
+    button?: HTMLButtonElement | null;
+    onclick?: (e: MouseEvent) => void;
+    popovertarget?: string | null;
+    title?: string | null;
+    id?: string | null;
+  } = $props();
 </script>
 
 <button
   aria-label="toggle menu"
   bind:this={button}
+  onclick={onclick ?? null}
   class="
   border
-  border-current
+  border-slate-100/40
+    bg-slate-100/5
     w-7
     h-7
     flex
     group
-    hover:bg-maximumYellow-100/10
     justify-end
     items-center
     max-fit-w
@@ -36,9 +39,9 @@ let {
     lg:w-8
     p-5px
     overflow-hidden
-    opacity-60
+    opacity-40
     text-slate-100
-    hover:(text-accent opacity-100)
+    hover:(text-accent opacity-100 border-accent)
     {classes}"
   {popovertarget}
   {title}

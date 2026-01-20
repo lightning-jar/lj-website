@@ -15,7 +15,12 @@ words = [
     "Kagi",
     "LLM",
     "LLMs",
-    "Googlebot"
+    "Googlebot",
+    "misattribution",
+    "roundtables",
+    "ROI",
+    "incrementality",
+    "MMM"
 ]
 flag_words = [
     "todo",

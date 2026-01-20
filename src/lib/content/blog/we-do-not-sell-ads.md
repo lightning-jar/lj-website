@@ -19,7 +19,7 @@ Digital advertising is everywhere. On every platform, in every feed, and in most
 
 * Ad markets swing with platform changes, auction volatility, tracking updates, and shrinking attribution windows.
 * Budget-to-results consistency is rare. The same spend can produce wildly different outcomes month to month, and the levers you can control (creative, landing pages, offer) often can’t overcome what you can’t (platform policy, inventory, CPM inflation).
-* Reliability matters to our clients and to us. We’d rather stand behind durable assets—site performance, conversion architecture, content systems—than short-term arbitrage.
+* Reliability matters to our clients and to us. We’d rather stand behind durable assets—site like performance, conversion architecture, and content systems than short-term arbitrage.
 
 ## The Space Is Unserious—With Serious Gaps Between Science
 
@@ -30,7 +30,7 @@ Digital advertising is everywhere. On every platform, in every feed, and in most
 ## The Margins Are Paper Thin
 
 * Media takes the lion’s share. What remains is squeezed by creative production, testing, and management.
-* Agencies often rely on opaque fees or platform kickbacks to make the unit economics work—models we’re not interested in.
+* Agencies often rely on opaque fees or platform kickbacks to make the unit economics work; we’re not interested in those models.
 
 ## There’s Too Much Smoke and Mirrors
 
@@ -52,8 +52,8 @@ Digital advertising is everywhere. On every platform, in every feed, and in most
 ## Our Clients Are Mostly B2B—And Ads Rarely Pencil Out
 
 * B2B buying cycles are long and committee-driven. One ad click rarely equals pipeline.
-* The channels that move B2B deals—trust, expertise, referrals, events, partner ecosystems—don’t scale well through ad auctions.
-* When we do see ads work in B2B, it’s usually highly targeted, high-intent capture (e.g., branded search) layered on top of strong brand fundamentals—not spray-and-pray campaigns.
+* The channels that move B2B deals like trust, expertise, referrals, events, and partner ecosystems, don’t scale well through ad auctions.
+* When we do see ads work in B2B, it’s usually highly targeted, high-intent capture (e.g., branded search) layered on top of strong brand fundamentals and not spray-and-pray campaigns.
 
 ## Fraud Is a Real Cost
 
@@ -72,7 +72,7 @@ We recommend investing in assets and activities with compounding ROI:
     * Authoritative case studies with outcomes, not fluff.  
     * Problem-solution architectures, industry playbooks, technical deep-dives, ROI calculators, comparison pages.
 * Events and communities  
-    * Industry tradeshows, hosted roundtables, workshops, user groups.  
+    * Industry trade shows, hosted roundtables, workshops, user groups.  
     * Capture content from events (talks, panels) and repurpose across channels.
 * Owned audience building  
     * Email newsletters with real insights, not promotions.  
@@ -98,7 +98,7 @@ We’re not dogmatic. There are narrow cases where ads are rational:
 * Account-based re-targeting to accelerate known deals already in pipeline.
 * Limited, well-instrumented experiments with clear holdouts, pre-defined stop criteria, and honest incrementality measurement.
 
-If a client needs that, we’ll refer to specialists who operate transparently and test scientifically—but we won’t run it in-house.
+If a client needs that, we’ll refer to specialists who operate transparently and test scientifically, but we won’t run it in-house.
 
 ## What We Do Instead
 
@@ -112,4 +112,4 @@ We design and build web systems that compound:
 
 ## Our Promise
 
-We focus on durable value rather than rented attention. If it isn’t measurable, compounding, and aligned with your sales reality, we won’t sell it. That’s why we don’t offer digital advertising—and why our clients rely on us to build the foundation that makes every other channel work better.
+We focus on durable value rather than rented attention. If it isn’t measurable, compounding, and aligned with your sales reality, we won’t sell it. That’s why we don’t offer digital advertising and why our clients rely on us to build the foundation that makes every other channel work better.

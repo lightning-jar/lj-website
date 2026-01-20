@@ -12,6 +12,12 @@ const articles: FrontMatter[] = rawArticles.map((article) => {
 	return article.frontMatter || {};
 });
 
+const sortedArticles = articles.sort((a, b) => {
+	const dateA = new Date(a.date);
+	const dateB = new Date(b.date);
+	return dateB.getTime() - dateA.getTime();
+});
+
 export function load() {
 	const meta = {
 		title: "Blog",
@@ -19,7 +25,7 @@ export function load() {
 	};
 
 	return {
+		articles: sortedArticles,
 		meta,
-		articles,
 	};
 }

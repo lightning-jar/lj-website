@@ -1,5 +1,5 @@
 ---
-title: SEO In The Age of LLMs: What’s Changing, What Still Matters, and How To Adapt
+title: SEO In The Age of LLMs
 metaTitle: SEO Is Changing
 slug: seo-is-changing
 description: This article looks at the reasons why Lightning Jar is leaving the WordPress platform.

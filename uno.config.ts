@@ -143,6 +143,7 @@ export default defineConfig({
 			[&_h3]:(font-600 mt-4)
 		  [&_p]:mb-3
 			[&_ul]:(mb-4 list-disc decoration-white list-outside ml-3)
+
 			[&_li]:(mb-3 mt-2 leading-tight)
 			[&_strong]:font-600
 		`,
@@ -151,11 +152,12 @@ export default defineConfig({
 			"blog-article",
 			`
 			[&_h2]:(font-700 font-serif text-maximumYellow text-1.1em mt-5 opacity-98)
-			[&_h3]:(font-600 mt-4)
+			[&_h3]:(font-600 mt-4 text-maximumYellow)
 		  [&_p]:(mb-3 mt-2 opacity-90)
 			[&_ul]:(mb-4 mt-2 list-disc decoration-white list-outside ml-3)
+			[&_ol]:(mb-4 list-decimal decoration-white list-outside ml-4)
 			[&_li]:(mb-3 mt-2 leading-tight opacity-90)
-			[&_strong]:font-600
+			[&_strong]:font-700
 		`,
 		],
 	],
