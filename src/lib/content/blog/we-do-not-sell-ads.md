@@ -6,7 +6,7 @@ description: This article looks at the reasons why Lightning Jar doesn't offer d
 date: 2026-01-10
 draft: true
 tags: [wordpress, sveltekit, serverless]
-image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/digital-wall.webp
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/bananas.webp
 imageDescription: hands holding spectacles against a digital screen
 author: Kevin Peckham
 ---

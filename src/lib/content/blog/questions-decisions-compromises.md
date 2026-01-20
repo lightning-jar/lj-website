@@ -6,7 +6,7 @@ description: This article proposes some thoughts on strategy, design, and implem
 date: 2026-01-19
 draft: true
 tags: [strategy, design, implementation]
-image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/question.webp
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/avocados.webp
 imageDescription: 
 author: Kevin Peckham
 ---

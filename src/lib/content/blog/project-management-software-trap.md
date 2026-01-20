@@ -6,7 +6,7 @@ description: This is a blog post about the pitfalls of project management softwa
 date: 2025-11-01
 draft: true
 tags: [project-management, software, productivity]
-image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/trap.webp
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/violin.webp
 imageDescription:
 author: Kevin Peckham
 ---

@@ -6,7 +6,7 @@ description: This article looks at the reasons why Lightning Jar is leaving the 
 date: 2026-01-03
 draft: true
 tags: [wordpress, sveltekit, serverless]
-image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/search-01.webp
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/vintage-bike.webp
 imageDescription: hands holding spectacles against a digital screen
 author: Kevin Peckham
 ---
