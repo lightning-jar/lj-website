@@ -1,96 +1,96 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
+import { goto } from "$app/navigation";
 
-  // components
-  import HamburgerButton from "$components/HamburgerButton.svelte";
-  import NavLogoBlock from "$components/NavLogoBlock.svelte";
+// components
+import HamburgerButton from "$components/HamburgerButton.svelte";
+import NavLogoBlock from "$components/NavLogoBlock.svelte";
 
-  // content
-  const navItems = [
-    { label: "Home", href: "/" },
-    { label: "Services", href: "/services" },
-    { label: "Testimonials", href: "/testimonials" },
-    { label: "Customer Stories", href: "/customer-stories" },
-    { label: "Technologies", href: "/technologies" },
-    { label: "Blog", href: "/blog" },
-  ];
+// content
+const navItems = [
+	{ label: "Home", href: "/" },
+	{ label: "Services", href: "/services" },
+	{ label: "Testimonials", href: "/testimonials" },
+	{ label: "Customer Stories", href: "/customer-stories" },
+	{ label: "Technologies", href: "/technologies" },
+	{ label: "Blog", href: "/blog" },
+];
 
-  // state
-  let popover: HTMLDivElement | null = $state(null);
-  let nav: HTMLDivElement | null = $state(null);
-  let navHamburgerButton: HTMLButtonElement | null = $state(null);
+// state
+let popover: HTMLDivElement | null = $state(null);
+let nav: HTMLElement | null = $state(null);
+let navHamburgerButton: HTMLButtonElement | null = $state(null);
 
-  let popoverState: "closed" | "open" = $state("closed");
-  $inspect("popoverState", popoverState);
+let popoverState: "closed" | "open" = $state("closed");
+$inspect("popoverState", popoverState);
 
-  // effects
-  // prevent body scroll when popover is open
-  $effect(() => {
-    if (popoverState === "open") {
-      preventBodyScroll();
-    } else {
-      allowBodyScroll();
-    }
-  });
+// effects
+// prevent body scroll when popover is open
+$effect(() => {
+	if (popoverState === "open") {
+		preventBodyScroll();
+	} else {
+		allowBodyScroll();
+	}
+});
 
-  // helper functions
+// helper functions
 
-  function updatePopoverState() {
-    popoverState = popover?.matches(":popover-open") ? "open" : "closed";
-  }
+function updatePopoverState() {
+	popoverState = popover?.matches(":popover-open") ? "open" : "closed";
+}
 
-  function togglePopover() {
-    popover?.togglePopover();
-    updatePopoverState();
-    if (popoverState === "closed") {
-      focusOnNavHamburger();
-    } else {
-      focusOnFirstNavItem();
-    }
-  }
+function togglePopover() {
+	popover?.togglePopover();
+	updatePopoverState();
+	if (popoverState === "closed") {
+		focusOnNavHamburger();
+	} else {
+		focusOnFirstNavItem();
+	}
+}
 
-  function handleHamburgerClick(e: MouseEvent) {
-    e.preventDefault();
-    togglePopover();
-  }
+function handleHamburgerClick(e: MouseEvent) {
+	e.preventDefault();
+	togglePopover();
+}
 
-  function handleNavItemClick(e: MouseEvent) {
-    e.preventDefault();
-    togglePopover();
-    const target = e.target as HTMLElement;
-    const href = target.getAttribute("href");
-    if (href) goto(href);
-  }
+function handleNavItemClick(e: MouseEvent) {
+	e.preventDefault();
+	togglePopover();
+	const target = e.target as HTMLElement;
+	const href = target.getAttribute("href");
+	if (href) goto(href);
+}
 
-  function preventBodyScroll() {
-    if (!document) return;
-    document.body.style.overflow = "hidden";
-  }
+function preventBodyScroll() {
+	if (!document) return;
+	document.body.style.overflow = "hidden";
+}
 
-  function allowBodyScroll() {
-    if (!document) return;
-    document.body.style.overflow = "auto";
-  }
+function allowBodyScroll() {
+	if (!document) return;
+	document.body.style.overflow = "auto";
+}
 
-  function focusOnNavHamburger() {
-    if (navHamburgerButton) {
-      navHamburgerButton.focus();
-    }
-  }
+function focusOnNavHamburger() {
+	if (navHamburgerButton) {
+		navHamburgerButton.focus();
+	}
+}
 
-  function focusOnFirstNavItem() {
-    const firstNavItem = getFirstNavItem();
-    if (firstNavItem) {
-      firstNavItem.focus();
-    }
-  }
+function focusOnFirstNavItem() {
+	const firstNavItem = getFirstNavItem();
+	if (firstNavItem) {
+		firstNavItem.focus();
+	}
+}
 
-  function getFirstNavItem(): HTMLAnchorElement | null {
-    if (!nav) return null;
-    // const firstNavItem = nav.querySelector("li:first-child a");
-    const firstNavItem = nav.firstElementChild as HTMLElement | null;
-    return firstNavItem instanceof HTMLAnchorElement ? firstNavItem : null;
-  }
+function getFirstNavItem(): HTMLAnchorElement | null {
+	if (!nav) return null;
+	// const firstNavItem = nav.querySelector("li:first-child a");
+	const firstNavItem = nav?.firstElementChild as HTMLElement | null;
+	return firstNavItem instanceof HTMLAnchorElement ? firstNavItem : null;
+}
 </script>
 
 <!-- <svelte:document bind:documentElement /> -->
