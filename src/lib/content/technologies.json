@@ -303,6 +303,39 @@
 						"QStash background jobs and event pipelines",
 						"Lightweight vector storage for RAG"
 					]
+				},
+				{
+					"description": [
+						"Drizzle ORM is a TypeScript ORM for PostgreSQL, SQLite, MySQL, and CockroachDB"
+					],
+					"license": "MIT",
+					"name": "Drizzle ORM",
+					"category": "Database ORM",
+					"link": {
+						"href": "https://orm.drizzle.team/"
+					},
+					"useCases": [
+						"Type-safe database queries",
+						"Automatic migrations",
+						"Support for multiple databases"
+					]
+				},
+				{
+					"link": {
+						"href": "https://sharp.pixelplumbing.com/"
+					},
+					"license": "Open Source (Apache-2.0)",
+					"useCases": [
+						"Server-side image resizing, cropping, and format conversion",
+						"Automatic optimization to WebP/AVIF with quality/size trade-offs",
+						"Generating thumbnails and responsive image variants on upload or on-demand"
+					],
+					"description": [
+						"A high-performance Node.js image processing library powered by libvips—faster and more memory-efficient than ImageMagick/GD for common operations.",
+						"We use Sharp to generate responsive variants, optimize to modern formats (WebP/AVIF), strip metadata, and enforce size constraints in upload pipelines and edge/serverless functions."
+					],
+					"name": "Sharp",
+					"category": "Media Processing (Images)"
 				}
 			]
 		},
@@ -442,6 +475,23 @@
 					"link": {
 						"href": "https://vercel.com/"
 					}
+				},
+				{
+					"link": {
+						"href": "https://www.docker.com/"
+					},
+					"license": "Commercial / Open Source (Docker Engine: Apache-2.0; Desktop subscription terms apply)",
+					"useCases": [
+						"Reproducible local environments and parity with CI/production",
+						"Containerized services and dependencies for development (DBs, queues, caches)",
+						"Portable deployment artifacts for servers, Kubernetes, and CI pipelines"
+					],
+					"description": [
+						"Standard container tooling for packaging apps and dependencies into immutable images, ensuring consistent behavior across dev, CI, and production.",
+						"We use Docker for local service orchestration (Compose), hermetic builds, and CI pipelines; images can be deployed to managed platforms or orchestrators when serverless isn’t a fit."
+					],
+					"name": "Docker",
+					"category": "Containers & Dev Environments"
 				}
 			]
 		},
@@ -531,6 +581,23 @@
 					"link": {
 						"href": "https://zod.dev/"
 					}
+				},
+				{
+					"link": {
+						"href": "https://github.com/ai/nanoid"
+					},
+					"license": "Open Source (MIT)",
+					"useCases": [
+						"URL-safe, short IDs for public resources and links",
+						"Idempotency keys, request deduplication, and correlation IDs",
+						"Client-side identifier generation without central coordination"
+					],
+					"description": [
+						"A tiny, fast library for generating cryptographically strong, URL-friendly unique IDs with customizable alphabets and lengths.",
+						"We use NanoID for public-facing identifiers, idempotency keys, and correlation IDs where short, non-sequential, collision-resistant tokens improve UX and security compared to UUID v4."
+					],
+					"name": "NanoID",
+					"category": "Identifier Generation (IDs, Tokens)"
 				}
 			]
 		},
@@ -586,6 +653,23 @@
 					"link": {
 						"href": "https://webauthn.guide/"
 					}
+				},
+				{
+					"link": {
+						"href": "https://github.com/cure53/DOMPurify"
+					},
+					"license": "Open Source (Apache-2.0)",
+					"useCases": [
+						"Sanitizing user-generated HTML/markdown output to prevent XSS",
+						"Rendering rich text safely in SPAs/SSR without trusting input",
+						"Enforcing allowlists for attributes, tags, and URL protocols"
+					],
+					"description": [
+						"A fast, well-audited library to sanitize HTML and SVG against XSS attacks in browsers and Node.js.",
+						"We run DOMPurify at render time or on ingestion to neutralize scripts, event handlers, and dangerous URLs—paired with strict CSP and escaping for defense-in-depth."
+					],
+					"name": "DOMPurify",
+					"category": "Content Sanitization (XSS Protection)"
 				}
 			]
 		},
@@ -734,6 +818,28 @@
 					"category": "Release Safety",
 					"link": {
 						"href": "https://launchdarkly.com/"
+					}
+				},
+				{
+					"description": [
+						"Plausible is a lightweight web analytics tool that provides insights into website traffic and user behavior."
+					],
+					"license": "",
+					"name": "Plausible",
+					"category": "Analytics",
+					"link": {
+						"href": "https://plausible.io/"
+					}
+				},
+				{
+					"description": [
+						"UptimeRobot is a free uptime monitoring service that checks your website or service every minute and alerts you if it goes down."
+					],
+					"license": "",
+					"name": "UptimeRobot",
+					"category": "Uptime Monitoring",
+					"link": {
+						"href": "https://uptimerobot.com/"
 					}
 				}
 			]

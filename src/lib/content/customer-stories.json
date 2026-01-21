@@ -92,7 +92,7 @@
 			],
 			"images": [
 				{
-					"alt": "Marketing website and AI Brand OS interface for SecureLogix",
+					"alt": "Screen shot of replicator Brand Operating System for SecureLogix",
 					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/replicator-01.webp",
 					"width": "1300",
 					"height": "731"
@@ -101,7 +101,7 @@
 			"perspectives": [
 				{
 					"quote": [
-						"The first time I met David (CMO of SecureLogix), was at an event we were hosting at SXSW in 2016. We clicked immediately and have been working together ever since. David has great ideas and a clear vision and is always helping us help him. He helped us concieve and refine the LLM-powered Replicator Brand Operating System, which is a powerful tool for authoring, managing and optimizing brand assets."
+						"The first time I met David (CMO of SecureLogix), was at an event we were hosting at SXSW in 2016. We clicked immediately and have been working together ever since. David has great ideas and a clear vision and is always helping us help him. He helped us concieve and refine the LLM-powered Replicator Brand Operating System, which is a powerful tool for authoring, managing and optimizing brand assets and marketing content."
 					],
 					"attribution": {
 						"name": "Kevin Peckham",
@@ -114,6 +114,138 @@
 							"height": "63"
 						}
 					}
+				}
+			],
+			"technologies": [
+				{
+					"name": "Sveltekit",
+					"logo": {
+						"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/logos/logo-svelte.svg"
+					},
+					"link": "https://svelte.dev",
+					"description": "A modern web framework for building user interfaces."
+				},
+				{
+					"name": "Typescript",
+					"logo": {
+						"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/logos/logo-typescript.svg",
+						"class": "w-full h-auto rounded scale-50"
+					},
+					"link": "https://www.typescriptlang.org/",
+					"description": "A typed superset of JavaScript that compiles to plain JavaScript."
+				},
+				{
+					"name": "LJX",
+					"logo": {},
+					"link": "/ljx",
+					"description": "LJ custom CMS solution, designed to allow content editors to edit text in place"
+				},
+				{
+					"name": "Sentry",
+					"logo": {},
+					"link": "https://sentry.io/",
+					"description": "A cloud platform for error tracking and monitoring."
+				},
+				{
+					"name": "Turso",
+					"logo": {
+						"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/logos/logo-turso.svg"
+					},
+					"link": "https://turso.tech/",
+					"description": "A serverless database for building scalable web applications."
+				},
+				{
+					"name": "Anthropic / Claude",
+					"logo": {
+						"class": "w-full h-auto filter-invert",
+						"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/logos/logo-anthropic.svg"
+					},
+					"link": "https://anthropic.com/",
+					"description": "A large language model for building conversational AI applications."
+				},
+				{
+					"name": "UnoCSS",
+					"logo": {
+						"class": "w-full h-auto rounded scale-50",
+						"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/logos/logo-uno.svg"
+					},
+					"link": "https://unocss.dev/",
+					"description": "A utility-first CSS framework for building user interfaces."
+				},
+				{
+					"name": "Vercel",
+					"logo": {},
+					"link": "https://vercel.com/",
+					"description": "A cloud platform for deploying and hosting web applications."
+				},
+				{
+					"name": "AI SDK",
+					"logo": {},
+					"link": "https://ai-sdk.dev/",
+					"description": "A JavaScript SDK for building AI applications on Vercel."
+				},
+				{
+					"name": "Bun",
+					"logo": {
+						"class": "w-full h-auto rounded scale-60",
+						"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/logos/logo-bun.svg"
+					},
+					"link": "https://bun.sh/",
+					"description": "A fast, all-in-one JavaScript runtime."
+				},
+				{
+					"name": "Playwright",
+					"logo": {},
+					"link": "https://playwright.dev/",
+					"description": "A Node library to automate web browsers."
+				},
+				{
+					"name": "Salesforce / Pardot",
+					"logo": {},
+					"link": "https://pardot.com/",
+					"description": "A marketing automation platform for B2B companies."
+				},
+				{
+					"name": "Plausible",
+					"logo": {},
+					"link": "https://plausible.io/",
+					"description": "A lightweight and privacy-focused web analytics tool that provides insights into website traffic & user behavior."
+				},
+				{
+					"name": "BetterAuth",
+					"logo": {},
+					"link": "https://betterauth.com/",
+					"description": "A JavaScript library for building authentication and authorization systems."
+				},
+				{
+					"name": "Upstash",
+					"logo": {},
+					"link": "https://upstash.com/",
+					"description": "A cloud-native Redis database for serverless applications."
+				},
+				{
+					"name": "Valibot",
+					"logo": {},
+					"link": "https://valibot.dev/",
+					"description": "A TypeScript library for building validation schemas."
+				},
+				{
+					"name": "Vite",
+					"logo": {},
+					"link": "https://vitejs.dev/",
+					"description": "A fast, modern build tool for modern web development."
+				},
+				{
+					"name": "Node.js",
+					"logo": {},
+					"link": "https://nodejs.org/",
+					"description": "A JavaScript runtime built on Chrome's V8 JavaScript engine."
+				},
+				{
+					"name": "Digital Ocean Spaces",
+					"logo": {},
+					"link": "https://www.digitalocean.com/products/spaces/",
+					"description": "A scalable, high-performance object storage service for developers."
 				}
 			]
 		},

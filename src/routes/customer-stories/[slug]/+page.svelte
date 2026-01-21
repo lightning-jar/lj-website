@@ -50,7 +50,7 @@ let { data } = $props();
           </p>
 
           {#if item?.attribution}
-            <p class="mb-5">
+            <p class="mb-5 text-15px opacity-90">
               - {item.attribution.name}, {item.attribution.title}
             </p>
           {/if}
@@ -66,19 +66,47 @@ let { data } = $props();
 
       <!-- perspectives -->
       {#each data.perspectives ?? [] as item}
-        <section class="max-w-420px bg-slate-500/40 rounded px-4 pt-4 pb-5">
+        <section
+          class="max-w-420px bg-slate-500/40 rounded px-4 pt-4 pb-5 mb-8"
+        >
           <p class="text-16px font-600 mb-3 italic">
             "{item.quote}
           </p>
 
           {#if item?.attribution}
-            <div>
+            <div class="text-15px opacity-90">
               - {item.attribution.name}, {item.attribution.title}, {item
                 .attribution.organization}
             </div>
           {/if}
         </section>
       {/each}
+
+      <!-- featured technologies -->
+      {#if data.technologies?.[0]}
+        <section class="w-full max-w-420px">
+          <h3 class="mb-3 text-maximumYellow">Featured Technologies</h3>
+          <div
+            class="px-4 pt-5 pb-6 w-full grid grid-cols-3 place-items-center place-content-center overflow-hidden gap-4 border rounded border-slate-100/40"
+          >
+            {#each data.technologies ?? [] as item}
+              {#if item.logo.src}
+                <a
+                  aria-label={item.name}
+                  href={item.link}
+                  class="w-full overflow-hidden aspect-4/3 flex justify-center items-center rounded bg-slate-100/10 p-3"
+                >
+                  <img
+                    class="w-full h-auto rounded"
+                    {...item.logo}
+                    title={item.name}
+                  />
+                </a>
+              {/if}
+            {/each}
+          </div>
+        </section>
+      {/if}
     </div>
   </div>
 </div>
