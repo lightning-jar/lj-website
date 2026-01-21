@@ -21,7 +21,6 @@ let nav: HTMLElement | null = $state(null);
 let navHamburgerButton: HTMLButtonElement | null = $state(null);
 
 let popoverState: "closed" | "open" = $state("closed");
-$inspect("popoverState", popoverState);
 
 // effects
 // prevent body scroll when popover is open

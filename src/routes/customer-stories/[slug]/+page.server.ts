@@ -1,13 +1,14 @@
-// data
+// types
+import type { CustomerStory } from "$types/CustomerStory";
 
 import { error } from "@sveltejs/kit";
 
-import { default as content } from "$content/customer-stories.json";
+import { getCustomerStoryBySlug } from "$content/getters/getCustomerStories";
 
 export function load({ params }) {
 	const { slug } = params;
 
-	const story = content.stories.find((story) => story.slug === slug);
+	const story: CustomerStory | undefined = getCustomerStoryBySlug(slug);
 
 	if (!story) {
 		return error(404, "Story not found");

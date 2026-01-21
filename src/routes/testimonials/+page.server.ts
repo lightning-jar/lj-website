@@ -1,10 +1,8 @@
 // data
-import { default as content } from "$content/testimonials.json";
-
-const typedContent = content;
+import { testimonialsContent } from "$content/getters/getTestimonialsContent";
 
 export function load() {
 	return {
-		...typedContent,
+		...testimonialsContent,
 	};
 }

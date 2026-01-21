@@ -1,5 +1,5 @@
 // utils
-import { allBlogArticles } from "./getArticles";
+import { allBlogArticles } from "$content/getters/getBlogArticles";
 
 // types
 type FrontMatter = Record<string, string>;

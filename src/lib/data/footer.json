@@ -51,6 +51,10 @@
 			"data-text": "Built With"
 		},
 		{
+			"href": "/sitemap",
+			"data-text": "Sitemap"
+		},
+		{
 			"href": "/terms",
 			"data-text": "Privacy & Terms"
 		}

@@ -26,10 +26,10 @@ let { data } = $props();
         <div class="mb-5">
           {story?.excerpt ?? "No excerpt available."}
 
-          {#if story.customer.solutions?.[0] || story.customer.technologies?.[0]}
+          {#if story.customer.tags?.[0]}
             <div class="mt-2 inline-flex gap-2 text-0.9em text-accent">
-              {#each [...story.customer.solutions, ...story.customer.technologies] as solution}
-                <span>#{solution}</span>
+              {#each story.customer.tags as tag}
+                <span>#{tag}</span>
               {/each}
             </div>
           {/if}

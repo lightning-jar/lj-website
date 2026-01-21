@@ -1,7 +1,10 @@
 import { error } from "@sveltejs/kit";
 
 // utils
-import { allBlogArticleSlugs, allBlogArticles } from "$routes/blog/getArticles";
+import {
+	allBlogArticleSlugs,
+	allBlogArticles,
+} from "$content/getters/getBlogArticles";
 
 export async function load({ params }) {
 	const slug = params.slug;

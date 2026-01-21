@@ -12,7 +12,7 @@ import SvelteAnnounceFix from "$components/SvelteAnnounceFix.svelte";
 import BackToTop from "$components/BackToTop.svelte";
 
 // types
-import type { PageMeta } from "$types/pageMeta";
+import type { PageMeta } from "$types/PageMeta";
 
 // props
 let { children, data } = $props();

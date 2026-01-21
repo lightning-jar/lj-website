@@ -1,10 +1,8 @@
 // data
-import { default as content } from "$content/built-with.json";
-
-const contentTyped = content as typeof content;
+import { builtWithContent } from "$content/getters/getBuiltWithContent";
 
 export function load() {
 	return {
-		...contentTyped,
+		...builtWithContent,
 	};
 }

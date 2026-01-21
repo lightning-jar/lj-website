@@ -1,8 +1,7 @@
 // data
-import home from "$content/home.json";
-
+import { homeContent } from "$content/getters/getHomeContent";
 export function load() {
 	return {
-		...home,
+		...homeContent,
 	};
 }

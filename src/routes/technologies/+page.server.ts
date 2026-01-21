@@ -1,10 +1,8 @@
 // data
-import { default as content } from "$content/technologies.json";
-
-const contentTyped = content as typeof content;
+import { technologiesContent } from "$content/getters/getTechnologiesContent";
 
 export function load() {
 	return {
-		...contentTyped,
+		...technologiesContent,
 	};
 }

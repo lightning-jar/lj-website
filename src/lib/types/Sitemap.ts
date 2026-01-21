@@ -1,7 +1,8 @@
 export interface SitemapPage {
-	href?: string | null;
-	label?: string | null;
-	date?: string | null;
+	href?: string;
+	title?: string;
+	description?: string;
+	date?: string;
 }
 export interface SitemapSection {
 	name: string;

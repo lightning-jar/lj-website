@@ -20,7 +20,11 @@ words = [
     "roundtables",
     "ROI",
     "incrementality",
-    "MMM"
+    "MMM",
+    "lastmod",
+    "changefreq",
+    "urlset",
+    "securelogix"
 ]
 flag_words = [
     "todo",
