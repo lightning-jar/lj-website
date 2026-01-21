@@ -10,7 +10,7 @@ import {
 export default defineConfig({
 	content: {
 		pipeline: {
-			include: [/\.(svelte|md|json|html|md)($|\?)/],
+			include: [/\.(svelte|md|json|html)($|\?)/],
 		},
 		filesystem: ["./src/app.html"],
 	},
@@ -98,6 +98,7 @@ export default defineConfig({
 	safelist: [
 		"contents",
 		"bg-oxford",
+		"filter-invert",
 		"flex",
 		"flex-col",
 		"font-serif",

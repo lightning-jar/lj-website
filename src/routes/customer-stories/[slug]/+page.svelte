@@ -1,5 +1,7 @@
 <script lang="ts">
 let { data } = $props();
+
+const safe = "scale-50 scale-60"; // for unocss
 </script>
 
 <div
