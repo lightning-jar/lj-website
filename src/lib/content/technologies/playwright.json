@@ -1,0 +1,20 @@
+{
+	"id": "playwright",
+	"name": "Playwright",
+	"shortDescription": "Cross-browser E2E testing framework with powerful auto-waiting and test isolation.",
+	"description": [
+		"Reliable cross-browser E2E tests with powerful auto-waiting, tracing, and test isolation. Works well in CI with parallelization and flakes control.",
+		"We use Playwright for user-journey and regression tests, plus accessibility assertions and visual comparisons when needed."
+	],
+	"useCases": [
+		"Cross-browser end-to-end testing",
+		"Visual regression testing with screenshots",
+		"Automated user journey validation"
+	],
+	"license": "Open Source (Apache-2.0)",
+	"category": "End-to-End (E2E) Testing",
+	"link": {
+		"href": "https://playwright.dev/"
+	},
+	"supercategory": "monitoring-testing"
+}

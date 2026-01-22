@@ -1,0 +1,23 @@
+{
+	"id": "anthropic-claude",
+	"name": "Anthropic (Claude)",
+	"shortDescription": "AI model provider known for strong reasoning, long context windows, and safety-focused design.",
+	"description": [
+		"Provider of the Claude family of models, known for strong reasoning, long context windows, and helpfulness with a focus on safety. Excellent for analytical tasks, documentation-heavy workflows, complex tool use, and structured outputs. We choose Claude when we need high-quality reasoning, longer contexts, and nuanced instruction-following for chat, agents, and knowledge-heavy assistants."
+	],
+	"license": "Commercial API",
+	"category": "Model Provider",
+	"link": {
+		"href": "https://www.anthropic.com/claude"
+	},
+	"logo": {
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/logos/logo-anthropic.svg",
+		"alt": "Anthropic Logo"
+	},
+	"useCases": [
+		"Knowledge-dense assistants and agents",
+		"Long-context analysis and summarization",
+		"Structured outputs for integrations"
+	],
+	"supercategory": "ai-llm"
+}

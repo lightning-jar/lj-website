@@ -1,0 +1,20 @@
+{
+	"id": "vercel",
+	"name": "Vercel",
+	"shortDescription": "Hosting platform with preview environments, instant rollbacks, and Edge Runtime.",
+	"description": [
+		"We frequently host on Vercel for its excellent developer experience, preview environments, instant rollbacks, built-in firewall capabilities, and Edge Runtime.",
+		"Vercel’s serverless and edge primitives pair well with our frameworks (SvelteKit, Vue/Nuxt, Astro) for globally fast delivery."
+	],
+	"useCases": [
+		"Preview deployments for every pull request",
+		"Edge functions and serverless APIs",
+		"Global CDN delivery with instant rollbacks"
+	],
+	"license": "Commercial",
+	"category": "Hosting & Edge",
+	"link": {
+		"href": "https://vercel.com/"
+	},
+	"supercategory": "backend-runtime"
+}

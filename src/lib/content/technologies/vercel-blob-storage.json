@@ -1,0 +1,20 @@
+{
+	"id": "vercel-blob-storage",
+	"name": "Vercel Blob Storage",
+	"shortDescription": "Simple, durable blob storage integrated with Vercel projects and Edge Middleware.",
+	"description": [
+		"Simple, durable blob/object storage tightly integrated with Vercel projects and Edge Middleware. Great for uploads, public/private files, and serving media with minimal configuration.",
+		"We use it for straightforward file storage in Vercel-hosted apps, leveraging built-in upload APIs, signed URLs, and region-aware performance."
+	],
+	"license": "Commercial (Vercel service)",
+	"category": "Object Storage (Edge-integrated)",
+	"link": {
+		"href": "https://vercel.com/storage/blob"
+	},
+	"useCases": [
+		"User uploads and media libraries",
+		"Public/private file delivery with signed URLs",
+		"Edge-aligned assets for low-latency access"
+	],
+	"supercategory": "databases-storage"
+}

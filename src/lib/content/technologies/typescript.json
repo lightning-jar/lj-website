@@ -1,0 +1,24 @@
+{
+	"id": "typescript",
+	"name": "TypeScript",
+	"shortDescription": "Typed superset of JavaScript enabling safer refactors and reliable API contracts.",
+	"description": [
+		"We default to TypeScript with strict mode wherever possible to enforce robust types, safer refactors, and reliable API contracts across services and clients.",
+		"Our approach includes strict null checks, noImplicitAny, and type-safe schemas to reduce runtime errors and improve long-term maintainability."
+	],
+	"license": "Open Source (Apache-2.0)",
+	"category": "Language",
+	"link": {
+		"href": "https://www.typescriptlang.org/"
+	},
+	"logo": {
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/logos/logo-typescript.svg",
+		"alt": "TypeScript Logo"
+	},
+	"useCases": [
+		"Safer refactors and shared contracts across services",
+		"API client generation and schema-driven development",
+		"Large codebases requiring maintainability"
+	],
+	"supercategory": "core-web-foundations"
+}

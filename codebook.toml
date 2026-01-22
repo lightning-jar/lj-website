@@ -24,7 +24,9 @@ words = [
     "lastmod",
     "changefreq",
     "urlset",
-    "securelogix"
+    "securelogix",
+    "supercategory",
+    "supercategories"
 ]
 flag_words = [
     "todo",

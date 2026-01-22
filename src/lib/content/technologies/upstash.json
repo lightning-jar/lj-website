@@ -1,0 +1,20 @@
+{
+	"id": "upstash",
+	"name": "Upstash",
+	"shortDescription": "Serverless data platform offering Redis, Kafka, queues, and vector storage.",
+	"description": [
+		"Pay-per-request, serverless data platform offering Redis, Kafka, QStash (HTTP-based queues), and vector storage with global latency optimization.",
+		"We adopt Upstash for event streams, caching, queues, and lightweight vector/RAG needs in serverless and edge environments with minimal cold start overhead."
+	],
+	"license": "Commercial",
+	"category": "Serverless Data Services (Redis, Kafka, QStash, Vector)",
+	"link": {
+		"href": "https://upstash.com/"
+	},
+	"useCases": [
+		"Serverless Redis caching and rate limiting",
+		"QStash background jobs and event pipelines",
+		"Lightweight vector storage for RAG"
+	],
+	"supercategory": "databases-storage"
+}

@@ -1,0 +1,20 @@
+{
+	"id": "runtime-validation-schemas-at-the-edges",
+	"name": "Runtime Validation (Schemas at the Edges)",
+	"shortDescription": "Schema-based validation for API inputs/outputs using libraries like Zod and Valibot.",
+	"description": [
+		"We validate API inputs/outputs and webhook payloads with schema libraries (e.g., Zod, Valibot) to stop bad data at boundaries.",
+		"Schemas double as client contracts and improve testability. See “API & Integration → Schema Definition & Validation” for our defaults."
+	],
+	"useCases": [
+		"API input/output validation at boundaries",
+		"Type-safe webhook payload parsing",
+		"Form data validation with detailed errors"
+	],
+	"license": "Open Source (MIT)",
+	"category": "Runtime Validation",
+	"link": {
+		"href": "https://zod.dev/"
+	},
+	"supercategory": "monitoring-testing"
+}

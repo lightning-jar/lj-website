@@ -1,0 +1,20 @@
+{
+	"id": "two-factor-authentication-2fa",
+	"name": "Two-Factor Authentication (2FA)",
+	"shortDescription": "Account protection using TOTP apps, WebAuthn/passkeys, and backup codes.",
+	"description": [
+		"2FA is a requirement for client logins. We support TOTP apps, WebAuthn/passkeys, and backup codes for resilience.",
+		"We design secure enrollment, device management, and recovery to minimize lockouts while maintaining strong posture."
+	],
+	"useCases": [
+		"Enhanced account security for user logins",
+		"TOTP and WebAuthn/passkey support",
+		"Secure backup code and recovery flows"
+	],
+	"license": "Open Standards (FIDO2/WebAuthn, TOTP)",
+	"category": "Account Protection",
+	"link": {
+		"href": "https://webauthn.guide/"
+	},
+	"supercategory": "auth-security"
+}

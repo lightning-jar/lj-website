@@ -1,0 +1,20 @@
+{
+	"id": "graphql",
+	"name": "GraphQL",
+	"shortDescription": "Query language enabling strongly-typed schemas and precise data fetching for APIs.",
+	"description": [
+		"Our preferred choice for complex domains, enabling strongly-typed schemas, precise data fetching, and powerful tooling like code generation and caching.",
+		"We implement schema governance, persisted queries, and performance-aware resolvers to keep APIs fast and predictable."
+	],
+	"license": "Open Standard (GraphQL Foundation)",
+	"category": "API Protocol",
+	"link": {
+		"href": "https://graphql.org/"
+	},
+	"useCases": [
+		"Complex product/content domains with many clients",
+		"Client-optimized queries and reduced over-fetching",
+		"Schema-driven development and codegen"
+	],
+	"supercategory": "api-integration"
+}

@@ -15,7 +15,6 @@
 	"customer": {
 		"id": "beam-suntory",
 		"category": "Food & Beverage",
-		"tags": ["Pimcore", "PIM", "MDM"],
 		"name": "Beam Suntory",
 		"logo": "/images/customer-logo-beam-suntory.png",
 		"thumb": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/beam-suntory-espirits-01.webp"
@@ -90,5 +89,6 @@
 				}
 			}
 		}
-	]
+	],
+	"tags": ["Pimcore", "PIM", "MDM"]
 }

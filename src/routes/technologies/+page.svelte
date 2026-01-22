@@ -1,73 +1,48 @@
 <script lang="ts">
-// utils
-import { slugify } from "$utils/slugify";
-
 let { data } = $props();
-
-let names = $derived.by(() => {
-	const names = [];
-	for (const section of data?.sections ?? []) {
-		for (const item of section.list ?? []) {
-			names.push(item.name);
-		}
-	}
-	return names.sort();
-});
 </script>
 
 <div class="page-x-padding main-y-padding !pb-8">
   <h1 class="display max-w-article">
-    {data?.heading}
+    {data?.banner.heading}
   </h1>
-  <p class="max-w-article">{data?.subheading}</p>
+  <p class="max-w-article">{data?.banner.subheading}</p>
 </div>
 
 <div
   class="page-x-padding pb-24 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8"
 >
   <div class="list-decimal grid grid-cols-1 gap-8 opacity-90 max-w-article">
-    <!-- nav -->
-    <!-- <nav class="flex gap-4 flex-wrap">
-      {#each data?.sections ?? [] as section, sectionIndex}
-        <a
-          href={`#${slugify(section.heading)}`}
-          class="text-maximumYellow px-3 py-2 rounded border border-current leading-none text-14px"
-        >
-          {section?.handle || section?.heading}
-        </a>
-      {/each}
-    </nav> -->
-
-    {#each data?.sections ?? [] as section, sectionIndex}
+    {#each data?.supercategories ?? [] as section, sectionIndex}
       <section class="grid grid-cols-1">
-        <h2 class="heading-2" id={slugify(section.heading)}>
-          {sectionIndex + 1}. {section.heading}
+        <h2 class="heading-2" id={section.id}>
+          {sectionIndex + 1}. {section.name}
         </h2>
         <p class="mb-5">{section.description}</p>
-        <div class="grid gird-cols-1 gap-5">
-          {#each section.list ?? [] as item}
+        <div class="grid grid-cols-1 gap-5">
+          {#each data.technologies.filter((tech) => tech.supercategory === section.id) ?? [] as technology}
             <article>
               <div class="flex gap-3 items-baseline mb-3">
                 <h3
-                  class="text-22px font-serif text-maximumYellow font-700 sm:mb-0"
+                  class="text-19px font-serif text-maximumYellow font-700 sm:mb-0"
                 >
                   <a
-                    href={item.link.href}
-                    id={slugify(item.name)}
+                    href={technology?.link?.href || "./"}
+                    id={technology.id}
                     rel="external"
-                    title="go to {item.name} website"
-                    class="opacity-90 underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4"
+                    title="go to {technology.name} website"
+                    class="opacity-95 underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4"
                   >
-                    {item.name}
+                    {technology.name}
                   </a>
                 </h3>
                 <div class="opacity-90 italic mb-4 sm:mb-0">
-                  {item.category}
+                  {technology.category}
                 </div>
               </div>
               <!--description -->
               <p class="opacity-90 mb-3">
-                {item.description.join(" ")}
+                {(technology.description ?? []).join(" ")}
               </p>
               <!-- use cases -->
               <div class="opacity-90">
@@ -75,7 +50,7 @@ let names = $derived.by(() => {
                   Use Cases:
                 </h4>
                 <ul class="grid grid-cols-1 gap-1 pl-0 ml-0">
-                  {#each item.useCases ?? [] as useCase}
+                  {#each technology.useCases ?? [] as useCase}
                     <li class="leading-tight list-disc list-inside ml-0">
                       {useCase}
                     </li>
@@ -99,12 +74,12 @@ let names = $derived.by(() => {
         >
           Technologies Topics
         </h2>
-        {#each data?.sections ?? [] as section, sectionIndex}
+        {#each data?.supercategories ?? [] as supercategory}
           <a
-            href={`#${slugify(section.heading)}`}
+            href={`#${supercategory.id}`}
             class="text-maximumYellow px-3 py-2 rounded border border-current leading-none text-14px opacity-95 hover:opacity-100"
           >
-            {section?.handle || section?.heading}
+            {supercategory?.shortName || supercategory?.name}
           </a>
         {/each}
       </nav>
@@ -117,14 +92,14 @@ let names = $derived.by(() => {
           Technologies by Name
         </h2>
 
-        <ul class="grid grid-cols-1 gap-2 pl-0 ml-0">
-          {#each names as name}
+        <ul class="grid grid-cols-1 gap-3 pl-0 ml-0">
+          {#each data.technologies as technology}
             <li class="leading-tight">
               <a
-                href="#{slugify(name)}"
+                href="#{technology.id}"
                 class="opacity-90 underline decoration-current hover:(text-maximumYellow opacity-100) underline-offset-4"
               >
-                {name}
+                {technology.name}
               </a>
             </li>
           {/each}

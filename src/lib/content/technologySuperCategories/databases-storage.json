@@ -1,0 +1,6 @@
+{
+	"name": "Databases & Storage",
+	"shortName": "Storage",
+	"id": "databases-storage",
+	"description": "Why this matters: A reliable data layer is the backbone of performance, data integrity, and scale—without heavy ops overhead. Reliable data layers underpin fast, scalable web apps. We select managed, developer-friendly databases and storage that pair well with serverless/edge architectures, reduce ops overhead, and provide clear scaling paths. Preferred defaults: PlanetScale for MySQL workloads; Turso for edge-first SQLite; Upstash for Redis/queues; Vercel Blob for simple storage."
+}

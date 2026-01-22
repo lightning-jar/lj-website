@@ -1,0 +1,19 @@
+{
+	"id": "sentry-performance-profiling",
+	"name": "Sentry Performance + Profiling",
+	"shortDescription": "APM solution for transaction tracing, N+1 detection, and frontend-to-backend correlation.",
+	"description": [
+		"Transaction tracing, N+1 detection, slow endpoint surfacing, and frontend interaction-to-backend correlation. We use sampling strategies to control costs while preserving actionable signal."
+	],
+	"useCases": [
+		"Identifying slow database queries and N+1s",
+		"Frontend interaction-to-backend correlation",
+		"Performance regression detection"
+	],
+	"license": "Commercial (SaaS)",
+	"category": "APM & Frontend Performance",
+	"link": {
+		"href": "https://docs.sentry.io/product/performance/"
+	},
+	"supercategory": "monitoring-testing"
+}

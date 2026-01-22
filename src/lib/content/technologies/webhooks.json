@@ -1,0 +1,20 @@
+{
+	"id": "webhooks",
+	"name": "Webhooks",
+	"shortDescription": "Event-driven integration pattern for connecting systems and automating workflows.",
+	"description": [
+		"We integrate and expose webhooks to connect systems and automate workflows across services.",
+		"We focus on signature verification, retries with exponential backoff, idempotency keys, and audit logging for reliability."
+	],
+	"useCases": [
+		"Real-time event notifications between services",
+		"Automated workflow triggers",
+		"Third-party integrations and sync"
+	],
+	"license": "Open Pattern",
+	"category": "Event-driven Integration",
+	"link": {
+		"href": "https://webhooks.fyi/"
+	},
+	"supercategory": "api-integration"
+}

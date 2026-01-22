@@ -1,0 +1,19 @@
+{
+	"id": "astro",
+	"name": "Astro",
+	"shortDescription": "Web framework delivering zero-JS by default with Island Architecture for content-rich sites.",
+	"description": [
+		"A modern web framework focused on delivering zero-JS by default to the browser, Astro excels at content-rich sites with outstanding performance and supports Island Architecture so you can hydrate only what you need. Its seamless integration with React, Vue, Svelte, and others plus first-class MDX/content tooling make it a great fit for fast marketing sites, blogs, and documentation."
+	],
+	"license": "Open Source",
+	"category": "Frontend Framework",
+	"link": {
+		"href": "https://astro.build/"
+	},
+	"useCases": [
+		"Blogs, docs, and marketing sites with best-in-class performance",
+		"Multi-framework islands (React/Vue/Svelte components)",
+		"Content-heavy pages with minimal client JS"
+	],
+	"supercategory": "frontend-frameworks"
+}

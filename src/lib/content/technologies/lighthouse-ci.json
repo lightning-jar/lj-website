@@ -1,0 +1,20 @@
+{
+	"id": "lighthouse-ci",
+	"name": "Lighthouse CI",
+	"shortDescription": "Automated audits for Core Web Vitals, accessibility, and SEO with performance budgets.",
+	"description": [
+		"Automated audits for Core Web Vitals, accessibility, SEO, and best practices in CI with historical tracking and budgets.",
+		"We set performance budgets and fail builds when regressions exceed thresholds."
+	],
+	"useCases": [
+		"Performance budget enforcement in CI",
+		"Tracking Core Web Vitals over time",
+		"Automated accessibility and SEO audits"
+	],
+	"license": "Open Source (Apache-2.0)",
+	"category": "Performance & Accessibility Audits",
+	"link": {
+		"href": "https://github.com/GoogleChrome/lighthouse-ci"
+	},
+	"supercategory": "monitoring-testing"
+}

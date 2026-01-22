@@ -1,0 +1,19 @@
+{
+	"id": "drizzle-orm",
+	"name": "Drizzle ORM",
+	"shortDescription": "TypeScript ORM supporting PostgreSQL, SQLite, MySQL, and CockroachDB with type-safe queries.",
+	"description": [
+		"Drizzle ORM is a TypeScript ORM for PostgreSQL, SQLite, MySQL, and CockroachDB"
+	],
+	"license": "MIT",
+	"category": "Database ORM",
+	"link": {
+		"href": "https://orm.drizzle.team/"
+	},
+	"useCases": [
+		"Type-safe database queries",
+		"Automatic migrations",
+		"Support for multiple databases"
+	],
+	"supercategory": "databases-storage"
+}

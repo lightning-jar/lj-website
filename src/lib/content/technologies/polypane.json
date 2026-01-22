@@ -1,0 +1,20 @@
+{
+	"id": "polypane",
+	"name": "Polypane",
+	"shortDescription": "Developer browser for responsive design, accessibility audits, and performance testing.",
+	"description": [
+		"A developer-focused browser for multi-view responsive design, accessibility audits, and performance insights—all side by side.",
+		"We use Polypane to validate layouts across breakpoints simultaneously, run a11y checks, visualize landmarks/headings, and preview meta/OG cards efficiently."
+	],
+	"useCases": [
+		"Simultaneous responsive design testing",
+		"Accessibility audits and landmark visualization",
+		"Performance profiling and meta tag preview"
+	],
+	"license": "Commercial (free trial)",
+	"category": "Browser for Dev, A11y, and Responsive Testing",
+	"link": {
+		"href": "https://polypane.app/"
+	},
+	"supercategory": "monitoring-testing"
+}

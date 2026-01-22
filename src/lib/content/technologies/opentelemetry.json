@@ -1,0 +1,20 @@
+{
+	"id": "opentelemetry",
+	"name": "OpenTelemetry",
+	"shortDescription": "Vendor-neutral standard for tracing, metrics, and logging instrumentation.",
+	"description": [
+		"Vendor-neutral tracing, metrics, and logging instrumentation to unify observability across services and runtimes.",
+		"We emit spans from serverless and edge functions to correlate logs, errors, and performance throughout a request."
+	],
+	"useCases": [
+		"Distributed tracing across services",
+		"Unified metrics and logging collection",
+		"Vendor-agnostic observability instrumentation"
+	],
+	"license": "Open Source (Apache-2.0)",
+	"category": "Tracing & Metrics Standard",
+	"link": {
+		"href": "https://opentelemetry.io/"
+	},
+	"supercategory": "monitoring-testing"
+}

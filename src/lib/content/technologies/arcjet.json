@@ -1,0 +1,20 @@
+{
+	"id": "arcjet",
+	"name": "Arcjet",
+	"shortDescription": "Edge security platform protecting against bots, abuse, and credential stuffing.",
+	"description": [
+		"We use Arcjet to enhance security at the application edge—protecting against bots, abuse, credential stuffing, and anomalous traffic.",
+		"Arcjet pairs well with serverless/edge stacks, adding risk-based controls and observability to critical endpoints."
+	],
+	"useCases": [
+		"Bot protection and abuse prevention at the edge",
+		"Rate limiting and credential stuffing defense",
+		"Risk-based access controls for critical endpoints"
+	],
+	"license": "Commercial",
+	"category": "App Security",
+	"link": {
+		"href": "https://arcjet.com/"
+	},
+	"supercategory": "auth-security"
+}

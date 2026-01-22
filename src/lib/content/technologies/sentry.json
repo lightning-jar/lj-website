@@ -1,0 +1,20 @@
+{
+	"id": "sentry",
+	"name": "Sentry",
+	"shortDescription": "Real-time error tracking and performance monitoring with source maps and session replay.",
+	"description": [
+		"Real-time error tracking, performance monitoring, and release health with source maps and stack traces across frontend, backend, and edge.",
+		"We use Sentry for alerts, session replay, and tracing to quickly diagnose issues and correlate them to releases and commits."
+	],
+	"useCases": [
+		"Real-time error tracking and alerting",
+		"Release health monitoring with stack traces",
+		"Session replay for debugging user issues"
+	],
+	"license": "Commercial (SaaS), Self-hosted available",
+	"category": "Error Monitoring & Performance",
+	"link": {
+		"href": "https://sentry.io/"
+	},
+	"supercategory": "monitoring-testing"
+}

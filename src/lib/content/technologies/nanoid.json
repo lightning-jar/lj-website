@@ -1,0 +1,20 @@
+{
+	"id": "nanoid",
+	"name": "NanoID",
+	"shortDescription": "Tiny library for generating cryptographically strong, URL-friendly unique IDs.",
+	"link": {
+		"href": "https://github.com/ai/nanoid"
+	},
+	"license": "Open Source (MIT)",
+	"useCases": [
+		"URL-safe, short IDs for public resources and links",
+		"Idempotency keys, request deduplication, and correlation IDs",
+		"Client-side identifier generation without central coordination"
+	],
+	"description": [
+		"A tiny, fast library for generating cryptographically strong, URL-friendly unique IDs with customizable alphabets and lengths.",
+		"We use NanoID for public-facing identifiers, idempotency keys, and correlation IDs where short, non-sequential, collision-resistant tokens improve UX and security compared to UUID v4."
+	],
+	"category": "Identifier Generation (IDs, Tokens)",
+	"supercategory": "api-integration"
+}

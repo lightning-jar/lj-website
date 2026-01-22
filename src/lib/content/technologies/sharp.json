@@ -1,0 +1,20 @@
+{
+	"id": "sharp",
+	"name": "Sharp",
+	"shortDescription": "High-performance Node.js image processing library for resizing, optimization, and format conversion.",
+	"link": {
+		"href": "https://sharp.pixelplumbing.com/"
+	},
+	"license": "Open Source (Apache-2.0)",
+	"useCases": [
+		"Server-side image resizing, cropping, and format conversion",
+		"Automatic optimization to WebP/AVIF with quality/size trade-offs",
+		"Generating thumbnails and responsive image variants on upload or on-demand"
+	],
+	"description": [
+		"A high-performance Node.js image processing library powered by libvips—faster and more memory-efficient than ImageMagick/GD for common operations.",
+		"We use Sharp to generate responsive variants, optimize to modern formats (WebP/AVIF), strip metadata, and enforce size constraints in upload pipelines and edge/serverless functions."
+	],
+	"category": "Media Processing (Images)",
+	"supercategory": "databases-storage"
+}

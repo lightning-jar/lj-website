@@ -1,0 +1,19 @@
+{
+	"id": "uptimerobot",
+	"name": "UptimeRobot",
+	"shortDescription": "Free uptime monitoring service checking websites every minute with alerts.",
+	"description": [
+		"UptimeRobot is a free uptime monitoring service that checks your website or service every minute and alerts you if it goes down."
+	],
+	"useCases": [
+		"Website and API uptime monitoring",
+		"Instant downtime alerts via email/SMS",
+		"Status page generation for users"
+	],
+	"license": "",
+	"category": "Uptime Monitoring",
+	"link": {
+		"href": "https://uptimerobot.com/"
+	},
+	"supercategory": "monitoring-testing"
+}

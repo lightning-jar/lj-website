@@ -1,0 +1,20 @@
+{
+	"id": "token-based-authentication",
+	"name": "Token-based Authentication",
+	"shortDescription": "Auth strategy using short-lived access tokens with refresh rotation for stateless scaling.",
+	"description": [
+		"We favor token-based auth (short-lived access tokens with refresh rotation) for stateless scaling across serverless and edge environments.",
+		"Our implementations emphasize secure storage, rotation, and scoping with least-privilege principles."
+	],
+	"useCases": [
+		"Stateless authentication for serverless apps",
+		"Secure API access with refresh token rotation",
+		"Cross-service authentication in microservices"
+	],
+	"license": "Open Pattern",
+	"category": "Auth Strategy",
+	"link": {
+		"href": "https://oauth.net/2/"
+	},
+	"supercategory": "auth-security"
+}

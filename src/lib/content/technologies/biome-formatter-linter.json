@@ -1,0 +1,20 @@
+{
+	"id": "biome-formatter-linter",
+	"name": "Biome",
+	"shortDescription": "Fast, all-in-one formatter and linter replacing ESLint and Prettier.",
+	"description": [
+		"All-in-one formatter, linter, and code actions replacement for ESLint/Prettier with native TypeScript support and very fast performance.",
+		"We enforce strict TypeScript rules, import/order hygiene, and consistent formatting via Biome in CI for healthy, maintainable codebases."
+	],
+	"useCases": [
+		"Fast code formatting and linting in CI",
+		"Enforcing consistent code style across teams",
+		"Replacing ESLint and Prettier with a single tool"
+	],
+	"license": "Open Source (MIT)",
+	"category": "Static Analysis & Formatting",
+	"link": {
+		"href": "https://biomejs.dev/"
+	},
+	"supercategory": "monitoring-testing"
+}

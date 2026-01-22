@@ -1,0 +1,24 @@
+{
+	"id": "turso-sqlite",
+	"name": "Turso (SQLite)",
+	"shortDescription": "Distributed, edge-optimized SQLite database with global replicas for low-latency reads.",
+	"description": [
+		"A distributed, edge-optimized SQLite database built on libSQL with global replicas for low-latency reads and serverless-friendly connections.",
+		"We choose Turso for edge-first apps, multi-region reads, and lightweight relational workloads that benefit from SQLite ergonomics with cloud scale."
+	],
+	"license": "Commercial (open-source libSQL core)",
+	"category": "Distributed SQLite (Edge DB)",
+	"link": {
+		"href": "https://turso.tech/"
+	},
+	"logo": {
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/logos/logo-turso.svg",
+		"alt": "Turso Logo"
+	},
+	"useCases": [
+		"Edge-first apps needing global read performance",
+		"Lightweight relational data with serverless",
+		"Caches and feature storage near the user"
+	],
+	"supercategory": "databases-storage"
+}

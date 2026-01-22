@@ -1,0 +1,20 @@
+{
+	"id": "hygraph",
+	"name": "Hygraph",
+	"shortDescription": "GraphQL-native headless CMS for content federation and multi-site delivery.",
+	"description": [
+		"A GraphQL-native, headless content platform designed for federating content across sources and delivering it to any frontend. Hygraph excels at structured content modeling, schema stitching via Remote Sources, and performant queries with granular permissions.",
+		"We use Hygraph when teams want a modern editorial UI, strong GraphQL ergonomics, and easy integration with other services through content federation—ideal for omnichannel content and multi-site setups."
+	],
+	"license": "Commercial (free tier available)",
+	"category": "Headless CMS (GraphQL-first)",
+	"link": {
+		"href": "https://hygraph.com/"
+	},
+	"useCases": [
+		"GraphQL-first content delivery across web/app surfaces",
+		"Content federation from multiple backends",
+		"Multi-site and white-label content models"
+	],
+	"supercategory": "content-management-pim"
+}

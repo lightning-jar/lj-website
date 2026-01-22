@@ -1,0 +1,20 @@
+{
+	"id": "openai-chatgpt-gpt-models",
+	"name": "OpenAI (ChatGPT / GPT models)",
+	"shortDescription": "State-of-the-art language and multimodal models for chat, content generation, and code tasks.",
+	"description": [
+		"State-of-the-art language and multimodal models used for chat, content generation, extraction, and code-focused tasks. Broad ecosystem support, tools/function calling, and strong multimodal capabilities make it a versatile default.",
+		"We reach for OpenAI when we need wide capability coverage, robust tooling, and predictable performance across chat, embeddings, and function/tool workflows."
+	],
+	"license": "Commercial API",
+	"category": "Model Provider",
+	"link": {
+		"href": "https://platform.openai.com/"
+	},
+	"useCases": [
+		"General-purpose chat and content creation",
+		"Embeddings and similarity for search/RAG",
+		"Code-focused assistants and refactoring"
+	],
+	"supercategory": "ai-llm"
+}

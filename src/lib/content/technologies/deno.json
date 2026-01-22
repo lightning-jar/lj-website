@@ -1,0 +1,20 @@
+{
+	"id": "deno",
+	"name": "Deno",
+	"shortDescription": "Secure-by-default JavaScript runtime with native TypeScript support and web-standard APIs.",
+	"description": [
+		"An increasingly important part of our stack due to secure-by-default permissions, native TypeScript support, and web-standard APIs.",
+		"We consider Deno for apps where sandboxing, permission scoping, and edge deployment are priorities."
+	],
+	"useCases": [
+		"Secure scripts with granular permissions",
+		"Edge functions and serverless deployments",
+		"TypeScript-first CLI tools and utilities"
+	],
+	"license": "Open Source (MIT)",
+	"category": "Runtime (Security-focused)",
+	"link": {
+		"href": "https://deno.com/"
+	},
+	"supercategory": "backend-runtime"
+}

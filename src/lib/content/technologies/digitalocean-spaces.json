@@ -1,0 +1,20 @@
+{
+	"id": "digitalocean-spaces",
+	"name": "DigitalOcean Spaces",
+	"shortDescription": "S3-compatible object storage with global CDN and predictable pricing.",
+	"description": [
+		"Scalable, S3-compatible object storage with a global CDN option and predictable pricing. Fits well when you need portable storage outside a specific hosting platform.",
+		"We reach for Spaces for asset storage, backups, and static media distribution with familiar S3 tooling and lifecycle management."
+	],
+	"license": "Commercial",
+	"category": "Object Storage (S3-compatible)",
+	"link": {
+		"href": "https://www.digitalocean.com/products/spaces"
+	},
+	"useCases": [
+		"Asset storage decoupled from hosting provider",
+		"Static site asset delivery with CDN",
+		"Backups and lifecycle-managed archives"
+	],
+	"supercategory": "databases-storage"
+}

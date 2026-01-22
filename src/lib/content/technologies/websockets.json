@@ -1,0 +1,20 @@
+{
+	"id": "websockets",
+	"name": "WebSockets",
+	"shortDescription": "Protocol for low-latency, bidirectional communication in real-time applications.",
+	"description": [
+		"We make extensive use of WebSockets for low-latency, bidirectional communication—ideal for collaborative UIs, live dashboards, and streaming interactions.",
+		"Our implementations emphasize backpressure, reconnection strategies, and secure auth handshakes."
+	],
+	"useCases": [
+		"Real-time collaborative features",
+		"Live dashboards and notifications",
+		"Chat and messaging applications"
+	],
+	"license": "Open Standard",
+	"category": "Real-time Transport",
+	"link": {
+		"href": "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API"
+	},
+	"supercategory": "api-integration"
+}

@@ -1,0 +1,20 @@
+{
+	"id": "tailwind-css",
+	"name": "Tailwind CSS",
+	"shortDescription": "Utility-first CSS framework enabling consistent design systems and rapid iteration.",
+	"description": [
+		"Our close second for utility-first styling. Tailwind enables consistent design systems, rapid iteration, and predictable theming with excellent tooling and ecosystem support.",
+		"We pair Tailwind with component-driven UIs and design tokens for scalable, reusable patterns."
+	],
+	"useCases": [
+		"Rapid UI prototyping with utility classes",
+		"Design system implementation with tokens",
+		"Consistent styling across component libraries"
+	],
+	"license": "Open Source (MIT)",
+	"category": "CSS Framework",
+	"link": {
+		"href": "https://tailwindcss.com/"
+	},
+	"supercategory": "core-web-foundations"
+}

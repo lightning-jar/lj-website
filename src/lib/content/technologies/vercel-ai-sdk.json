@@ -1,0 +1,20 @@
+{
+	"id": "vercel-ai-sdk",
+	"name": "Vercel AI SDK",
+	"shortDescription": "TypeScript toolkit for building AI features with streaming UI and multi-provider support.",
+	"description": [
+		"A TypeScript-first toolkit for building AI features into web apps with streaming UI, multi-provider support, and server/client utilities. It simplifies chat, tool-calling, RAG, and function invocation with first-class React/Svelte adapters and edge-friendly primitives.",
+		"We use it to prototype quickly, support multiple model vendors without rewriting app logic, and ship reliable, streaming conversational UIs with minimal boilerplate."
+	],
+	"license": "Open Source (MIT)",
+	"category": "AI SDK",
+	"link": {
+		"href": "https://sdk.vercel.ai/"
+	},
+	"useCases": [
+		"Conversational UIs with streaming responses",
+		"Multi-provider resilience without app rewrites",
+		"Tool calling and function execution from the UI"
+	],
+	"supercategory": "ai-llm"
+}

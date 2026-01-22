@@ -1,0 +1,21 @@
+{
+	"id": "planetscale",
+	"name": "PlanetScale",
+	"shortDescription": "MySQL-compatible serverless database with non-blocking schema changes and branching workflows.",
+	"description": [
+		"MySQL-compatible database built on Vitess, offering non-blocking schema changes, horizontal scaling, and branch-based workflows for safe migrations.",
+		"We use PlanetScale for production-grade relational workloads that need MySQL semantics, strong reliability, and developer-friendly branching.",
+		"Licensing notes: Managed MySQL (Vitess). Data export and branching facilitate migration when needed."
+	],
+	"license": "Commercial",
+	"category": "Serverless MySQL (Vitess)",
+	"link": {
+		"href": "https://planetscale.com/"
+	},
+	"useCases": [
+		"Production relational workloads on MySQL",
+		"Zero-downtime schema changes and branching",
+		"Horizontally scalable multi-tenant apps"
+	],
+	"supercategory": "databases-storage"
+}

@@ -1,0 +1,20 @@
+{
+	"id": "trpc",
+	"name": "tRPC",
+	"shortDescription": "Type-safe RPC framework for full-stack TypeScript apps with end-to-end type inference.",
+	"description": [
+		"A great fit for full-stack TypeScript apps where end-to-end type safety and developer velocity are paramount.",
+		"We choose tRPC when teams benefit from shared types without the overhead of an additional query language."
+	],
+	"license": "Open Source (MIT)",
+	"category": "Type-safe RPC",
+	"link": {
+		"href": "https://trpc.io/"
+	},
+	"useCases": [
+		"Monorepos with shared types",
+		"Rapid prototyping of internal tools",
+		"Type-safe server/client contracts without GraphQL"
+	],
+	"supercategory": "api-integration"
+}

@@ -1,0 +1,6 @@
+{
+	"name": "Content Management / PIM",
+	"shoreName": "CMS / PIM",
+	"id": "content-management-pim",
+	"description": "Why this matters: Centralizing content and product data shortens time-to-publish, lowers error rates, and keeps every channel consistent. Platforms that centralize product data, digital assets, and content, enabling omnichannel delivery, governance, and a single source of truth across websites, apps, and commerce. Preferred defaults: Pimcore for data-heavy catalogs; Sanity for bespoke editorial workflows; Hygraph for GraphQL-first federation."
+}

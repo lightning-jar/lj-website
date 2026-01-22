@@ -1,0 +1,20 @@
+{
+	"id": "docker",
+	"name": "Docker",
+	"shortDescription": "Container platform for packaging apps into immutable images with consistent behavior.",
+	"link": {
+		"href": "https://www.docker.com/"
+	},
+	"license": "Commercial / Open Source (Docker Engine: Apache-2.0; Desktop subscription terms apply)",
+	"useCases": [
+		"Reproducible local environments and parity with CI/production",
+		"Containerized services and dependencies for development (DBs, queues, caches)",
+		"Portable deployment artifacts for servers, Kubernetes, and CI pipelines"
+	],
+	"description": [
+		"Standard container tooling for packaging apps and dependencies into immutable images, ensuring consistent behavior across dev, CI, and production.",
+		"We use Docker for local service orchestration (Compose), hermetic builds, and CI pipelines; images can be deployed to managed platforms or orchestrators when serverless isn’t a fit."
+	],
+	"category": "Containers & Dev Environments",
+	"supercategory": "backend-runtime"
+}

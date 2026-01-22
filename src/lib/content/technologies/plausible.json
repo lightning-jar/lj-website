@@ -1,0 +1,19 @@
+{
+	"id": "plausible",
+	"name": "Plausible",
+	"shortDescription": "Lightweight, privacy-friendly web analytics for traffic and user behavior insights.",
+	"description": [
+		"Plausible is a lightweight web analytics tool that provides insights into website traffic and user behavior."
+	],
+	"useCases": [
+		"Privacy-friendly website analytics",
+		"GDPR-compliant traffic monitoring",
+		"Lightweight alternative to Google Analytics"
+	],
+	"license": "",
+	"category": "Analytics",
+	"link": {
+		"href": "https://plausible.io/"
+	},
+	"supercategory": "monitoring-testing"
+}

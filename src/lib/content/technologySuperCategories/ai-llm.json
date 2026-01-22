@@ -1,0 +1,6 @@
+{
+	"name": "AI / LLM",
+	"shortName": "AI / LLM",
+	"id": "ai-llm",
+	"description": "Why this matters: Controversial, misunderstood, and overhyped though they may be, AI and LLMs are transforming industries and society. Used carefully and responsibly, they are still a valuable tool for innovation and progress. We design and deploy LLM-powered features with a focus on safety, performance, and maintainability, leveraging managed model providers and an SDK-first approach for rapid iteration. Preferred defaults: Vercel AI SDK + AI Gateway for multi-model orchestration; Anthropic and OpenAI as primary model providers."
+}

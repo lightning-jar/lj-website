@@ -1,0 +1,20 @@
+{
+	"id": "css-modern-layouts",
+	"name": "CSS (Modern Layouts)",
+	"shortDescription": "Modern CSS techniques including Grid, Flexbox, custom properties, and container queries.",
+	"description": [
+		"We leverage CSS Grid, Flexbox, custom properties, container queries, and cascade layers to build resilient layouts that adapt across devices.",
+		"Our CSS approach centers performance, accessibility, and maintainability—minimizing specificity wars and dead code."
+	],
+	"useCases": [
+		"Responsive layouts with Grid and Flexbox",
+		"Component-scoped styles with custom properties",
+		"Adaptive designs using container queries"
+	],
+	"license": "Open Standard (W3C)",
+	"category": "Styles",
+	"link": {
+		"href": "https://www.w3.org/TR/CSS/"
+	},
+	"supercategory": "core-web-foundations"
+}

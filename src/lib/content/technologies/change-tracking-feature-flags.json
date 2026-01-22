@@ -1,0 +1,19 @@
+{
+	"id": "change-tracking-feature-flags",
+	"name": "Change Tracking & Feature Flags",
+	"shortDescription": "Feature flag tools enabling gradual rollouts and safe experimentation.",
+	"description": [
+		"We recommend feature flags and gradual rollouts to mitigate risk and enable safe experimentation. Tools like LaunchDarkly or Unleash pair with observability to quickly roll back or dial traffic."
+	],
+	"useCases": [
+		"Gradual rollouts and A/B testing",
+		"Quick rollback of problematic features",
+		"Environment-specific feature configuration"
+	],
+	"license": "Commercial / Open Source",
+	"category": "Release Safety",
+	"link": {
+		"href": "https://launchdarkly.com/"
+	},
+	"supercategory": "monitoring-testing"
+}

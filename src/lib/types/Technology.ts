@@ -1,8 +1,15 @@
 import type { Image } from "$types/Image";
+import type { Link } from "$types/Link";
 
 export interface Technology {
 	name: string;
-	logo: Image;
-	link: string;
-	description: string;
+	id: string;
+	category: string;
+	description: string[];
+	shortDescription?: string;
+	license?: string;
+	logo?: Image;
+	link?: Link;
+	supercategory?: string;
+	useCases?: string[];
 }

@@ -1,0 +1,6 @@
+{
+	"name": "Frontend Frameworks",
+	"shortName": "Frameworks",
+	"id": "frontend-frameworks",
+	"description": "Why this matters: The right framework reduces complexity and improves Core Web Vitals, which translates directly into better UX and SEO outcomes. Frontend frameworks are essential for building interactive and dynamic user interfaces. They provide a structured approach to organizing code, managing state, and handling user interactions. Preferred defaults: SvelteKit for app-first builds; Astro for content-heavy sites; Nuxt when teams prefer Vue."
+}

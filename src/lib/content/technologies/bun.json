@@ -1,0 +1,24 @@
+{
+	"id": "bun",
+	"name": "Bun",
+	"shortDescription": "High-performance JavaScript runtime with fast install, test, and dev server capabilities.",
+	"description": [
+		"Our preferred development runtime for its fast install, test, and dev server performance. Bun streamlines local DX with speedy tooling and modern APIs.",
+		"We use Bun to accelerate feedback loops during development while keeping parity with production targets."
+	],
+	"useCases": [
+		"Fast local development with instant installs",
+		"Running scripts and dev servers with minimal latency",
+		"Prototyping and tooling scripts"
+	],
+	"license": "Open Source (MIT)",
+	"category": "Runtime (Development)",
+	"link": {
+		"href": "https://bun.sh/"
+	},
+	"logo": {
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/logos/logo-bun.svg",
+		"alt": "Bun Logo"
+	},
+	"supercategory": "backend-runtime"
+}

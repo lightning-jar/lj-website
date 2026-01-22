@@ -1,0 +1,19 @@
+{
+	"id": "vue-nuxt",
+	"name": "Vue / Nuxt",
+	"shortDescription": "Progressive JavaScript framework with Nuxt adding routing, SSR, and file-based conventions.",
+	"description": [
+		"A progressive, approachable framework for building rich interfaces, with a gentle learning curve and excellent developer experience. Nuxt adds first-class routing, server rendering, API routes, and file-based conventions—ideal for content-driven sites, SSR/SSG, and hybrid apps. We reach for Vue/Nuxt when teams value clear component patterns, robust ecosystem support, and strong performance with minimal configuration."
+	],
+	"license": "Open Source",
+	"useCases": [
+		"Content-led marketing sites with editorial workflows",
+		"Multi-site, SSR/SSG, and hybrid apps",
+		"Teams standardized on Vue"
+	],
+	"category": "Frontend Framework",
+	"link": {
+		"href": "https://vuejs.org/"
+	},
+	"supercategory": "frontend-frameworks"
+}

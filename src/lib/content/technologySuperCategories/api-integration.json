@@ -1,0 +1,6 @@
+{
+	"name": "API & Integration",
+	"shortName": "API",
+	"id": "api-integration",
+	"description": "Why this matters: Clear, type-safe APIs prevent integration drift, reduce incidents, and make feature delivery predictable. We design APIs for clarity, performance, and safety—favoring type-safe schemas, real-time capabilities, and standards-based integrations. Preferred defaults: GraphQL for complex domains, tRPC for TS monorepos, Webhooks for eventing, Zod/Valibot for schemas."
+}

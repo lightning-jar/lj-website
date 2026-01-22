@@ -1,0 +1,20 @@
+{
+	"id": "javascript-esnext",
+	"name": "JavaScript (ESNext)",
+	"shortDescription": "Modern JavaScript with modules, async/await, and optimized build tooling.",
+	"description": [
+		"Modern JavaScript features—modules, async/await, generators—paired with build tooling deliver lean bundles and clear, maintainable code.",
+		"We emphasize performance practices like code-splitting, tree-shaking, and lazy-loading to optimize Core Web Vitals."
+	],
+	"useCases": [
+		"Modern async/await patterns for data fetching",
+		"Tree-shakeable ES modules for smaller bundles",
+		"Clean, maintainable application logic"
+	],
+	"license": "Open Standard (ECMA-262)",
+	"category": "Language",
+	"link": {
+		"href": "https://tc39.es/ecma262/"
+	},
+	"supercategory": "core-web-foundations"
+}

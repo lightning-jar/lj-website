@@ -1,0 +1,24 @@
+{
+	"id": "unocss",
+	"name": "UnoCSS",
+	"shortDescription": "On-demand atomic CSS engine with instant compile and flexible presets.",
+	"description": [
+		"Our preferred atomic CSS engine for on-demand utilities, instant compile, and flexible presets. UnoCSS keeps CSS minimal and maintainable while supporting design tokens and variants.",
+		"We use it to balance developer velocity with runtime performance, avoiding unused styles and heavy bundles."
+	],
+	"useCases": [
+		"On-demand atomic CSS generation",
+		"Custom utility shortcuts and presets",
+		"Minimal CSS bundles with tree-shaking"
+	],
+	"license": "Open Source (MIT)",
+	"category": "CSS Framework",
+	"link": {
+		"href": "https://unocss.dev/"
+	},
+	"logo": {
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/logos/logo-unocss.svg",
+		"alt": "UnoCSS Logo"
+	},
+	"supercategory": "core-web-foundations"
+}

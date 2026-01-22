@@ -1,0 +1,20 @@
+{
+	"id": "node-js",
+	"name": "Node.js",
+	"shortDescription": "Mature production runtime with deep ecosystem support for serverless and containerized workloads.",
+	"description": [
+		"Our preferred production runtime thanks to its maturity, ecosystem depth, and predictable operational model across serverless and containerized workloads.",
+		"We optimize Node for cold starts, streaming responses, and observability in modern hosting environments."
+	],
+	"useCases": [
+		"Production server-side applications",
+		"API servers and microservices",
+		"Build tools and CLI applications"
+	],
+	"license": "Open Source (MIT-like)",
+	"category": "Runtime (Production)",
+	"link": {
+		"href": "https://nodejs.org/"
+	},
+	"supercategory": "backend-runtime"
+}

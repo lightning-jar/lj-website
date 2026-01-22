@@ -1,0 +1,21 @@
+{
+	"id": "sanity",
+	"name": "Sanity",
+	"shortDescription": "Customizable headless CMS with real-time collaboration and GROQ query language.",
+	"description": [
+		"A highly customizable, schema-driven content platform with the Sanity Studio, real-time collaboration, and a powerful GROQ query language. Sanity’s Portable Text and content graph features enable flexible, structured content at scale.",
+		"We choose Sanity when editorial workflows, real-time collaboration, and deep customization are priorities—especially for bespoke content models, multi-environment governance, and performant headless delivery.",
+		"Licensing notes: SaaS with exportable content and APIs; bring-your-own CDN for assets if required."
+	],
+	"license": "Commercial (generous free tier)",
+	"category": "Headless CMS",
+	"link": {
+		"href": "https://www.sanity.io/"
+	},
+	"useCases": [
+		"Bespoke editorial CMS with real-time collaboration",
+		"Rich block content (Portable Text) at scale",
+		"Multi-environment governance and review flows"
+	],
+	"supercategory": "content-management-pim"
+}

@@ -1,0 +1,20 @@
+{
+	"id": "bun-test",
+	"name": "Bun Test",
+	"shortDescription": "Bun's built-in test runner with extremely fast execution and watch mode.",
+	"description": [
+		"Bun’s built-in test runner delivers extremely fast execution, snapshots, and watch mode—great for local DX and monorepos.",
+		"We use Bun test where projects already target Bun for dev to get near-instant feedback loops."
+	],
+	"useCases": [
+		"Fast unit testing for Bun-based projects",
+		"Watch mode for rapid test-driven development",
+		"Snapshot testing and assertions"
+	],
+	"license": "Open Source (MIT)",
+	"category": "Unit Testing (Runtime-native)",
+	"link": {
+		"href": "https://bun.sh/docs/test"
+	},
+	"supercategory": "monitoring-testing"
+}

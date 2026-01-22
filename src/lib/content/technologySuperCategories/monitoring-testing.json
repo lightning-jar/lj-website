@@ -1,0 +1,6 @@
+{
+	"name": "Monitoring & Testing",
+	"shortName": "Monitoring",
+	"id": "monitoring-testing",
+	"description": "Why this matters: Observability and tests catch regressions early, reduce MTTR, and enable confident, frequent releases. We ship with confidence by instrumenting apps end-to-end: unit and integration tests, accessibility checks, and production observability. Our approach emphasizes fast feedback loops, clear failure signals, and actionable telemetry. Preferred defaults: Sentry for errors/perf, Playwright for E2E, Vitest or Bun Test for unit, OpenTelemetry for tracing, Lighthouse CI for budgets."
+}

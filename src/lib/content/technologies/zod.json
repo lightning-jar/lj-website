@@ -1,0 +1,20 @@
+{
+	"id": "zod",
+	"name": "Zod",
+	"shortDescription": "Popular schema validator with excellent developer experience and ecosystem integrations.",
+	"description": [
+		"A popular, ergonomic schema validator with excellent DX and ecosystem integrations.",
+		"We use Zod where broad community support and familiar patterns speed up delivery."
+	],
+	"useCases": [
+		"TypeScript-first schema validation",
+		"API request/response type safety",
+		"Form validation with error messages"
+	],
+	"license": "Open Source (MIT)",
+	"category": "Schema Definition & Validation",
+	"link": {
+		"href": "https://zod.dev/"
+	},
+	"supercategory": "api-integration"
+}

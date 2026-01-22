@@ -1,0 +1,20 @@
+{
+	"id": "html",
+	"name": "HTML",
+	"shortDescription": "Semantic markup foundation for accessibility, SEO, and progressive enhancement.",
+	"description": [
+		"Semantic HTML is non-negotiable for accessibility, SEO, and performance. We prioritize ARIA correctness, keyboard navigability, and progressive enhancement.",
+		"We follow best practices for metadata, link relations, preloading, and structured data to improve discoverability and UX."
+	],
+	"useCases": [
+		"Accessible, semantic page structure",
+		"SEO-optimized markup with structured data",
+		"Progressive enhancement foundations"
+	],
+	"license": "Open Standard (WHATWG)",
+	"category": "Markup",
+	"link": {
+		"href": "https://html.spec.whatwg.org/"
+	},
+	"supercategory": "core-web-foundations"
+}

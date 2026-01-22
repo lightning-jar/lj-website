@@ -1,0 +1,20 @@
+{
+	"id": "vitest",
+	"name": "Vitest",
+	"shortDescription": "Fast, Vite-native test runner with first-class TypeScript and ESM support.",
+	"description": [
+		"A fast, Vite-native test runner with first-class TypeScript and ESM support. Ideal for component/unit tests and server logic with speedy watch mode.",
+		"We pair Vitest with Testing Library for DOM tests and use coverage thresholds to protect critical paths."
+	],
+	"useCases": [
+		"Fast unit and integration testing",
+		"Component testing with DOM simulation",
+		"Watch mode with instant feedback"
+	],
+	"license": "Open Source (MIT)",
+	"category": "Unit & Integration Testing",
+	"link": {
+		"href": "https://vitest.dev/"
+	},
+	"supercategory": "monitoring-testing"
+}

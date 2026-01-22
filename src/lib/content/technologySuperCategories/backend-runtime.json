@@ -1,0 +1,6 @@
+{
+	"name": "Backend & Runtime",
+	"shortName": "Runtime",
+	"id": "backend-runtime",
+	"description": "Why this matters: Choosing the right runtime and hosting improves reliability, security, and developer velocity from day one. We choose runtimes and hosting that balance security, developer experience, and performance. Our defaults favor fast iteration locally and reliability in production, with growing adoption of secure-by-default platforms. Preferred defaults: Bun for local dev, Node.js for production, Vercel for hosting and edge."
+}

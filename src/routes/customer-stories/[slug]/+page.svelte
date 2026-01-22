@@ -5,10 +5,15 @@ const safe = "scale-50 scale-60"; // for unocss
 </script>
 
 <div
-  class="page-x-padding main-y-padding pb-6 grid grid-cols-1 gap-8 min-h-screen place-content-start"
+  class="page-x-padding pt-8 sm:pt-2 pb-6 grid grid-cols-1 min-h-screen place-content-start"
 >
+  <a
+    class="hidden sm:flex justify-end mb-0 sm:text-12px text-maximumYellow opacity-80 underline underline-offset-4 mb-6"
+    href="/customer-stories"
+    title="browse all customer stories">Back to Customer Stories</a
+  >
   {#if data?.banner}
-    <section class="max-w-prose">
+    <section class="max-w-prose mb-6">
       <div class="uppercase">
         {data.banner?.tag?.["data-text"]}
       </div>
@@ -18,6 +23,11 @@ const safe = "scale-50 scale-60"; // for unocss
       <p class="max-w-prose mb-5 empty:hidden">
         {data.banner?.subheading ?? ""}
       </p>
+      <div class="text-maximumYellow opacity-95">
+        {#each data.tags ?? [] as tag}
+          <span>#{tag}&nbsp;</span>
+        {/each}
+      </div>
     </section>
   {/if}
 
@@ -92,11 +102,11 @@ const safe = "scale-50 scale-60"; // for unocss
             class="px-4 pt-5 pb-6 w-full grid grid-cols-3 place-items-center place-content-center overflow-hidden gap-4 border rounded border-slate-100/40"
           >
             {#each data.technologies ?? [] as item}
-              {#if item.logo.src}
+              {#if item?.logo?.src && item?.link?.href}
                 <a
                   aria-label={item.name}
-                  href={item.link}
-                  class="w-full overflow-hidden aspect-4/3 flex justify-center items-center rounded bg-slate-100/10 p-3"
+                  href={item.link.href}
+                  class="w-full overflow-hidden aspect-4/3 flex justify-center items-center rounded bg-slate-100/10"
                 >
                   <img
                     class="w-full h-auto rounded"
@@ -110,5 +120,16 @@ const safe = "scale-50 scale-60"; // for unocss
         </section>
       {/if}
     </div>
+  </div>
+
+  <!-- prefooter  -->
+  <div class="my-4">
+    <a
+      class="px-3 py-2 rounded border inline-flex justify-center items-center leading-none text-15px opacity-80"
+      href="/customer-stories"
+      title="browse all customer stories"
+    >
+      All Customer Stories
+    </a>
   </div>
 </div>

@@ -1,0 +1,21 @@
+{
+	"id": "vercel-ai-gateway",
+	"name": "Vercel AI Gateway",
+	"shortDescription": "Managed gateway unifying access to multiple AI model providers with observability.",
+	"description": [
+		"A managed gateway that unifies access to multiple model providers with a single endpoint, centralizing API keys, rate limiting, caching, and observability. It provides request analytics, cost controls, retry/backoff strategies, and prompt/version governance.",
+		"We adopt Gateway to de-risk vendor lock-in, improve reliability at scale, and gain visibility into latency, token usage, and cost across providers and environments.",
+		"Licensing notes: SaaS gateway; models remain provider-side. We can route traffic to alternative gateways or direct APIs to avoid lock-in."
+	],
+	"license": "Commercial (Vercel service)",
+	"category": "AI Gateway / Observability",
+	"link": {
+		"href": "https://vercel.com/ai/gateway"
+	},
+	"useCases": [
+		"Centralized model access across vendors",
+		"Cost and latency management for production AI",
+		"Prompt/version governance and analytics"
+	],
+	"supercategory": "ai-llm"
+}

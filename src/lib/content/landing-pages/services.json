@@ -5,7 +5,7 @@
 	},
 	"services": [
 		{
-			"heading": "Web Design & Development",
+			"heading": "Web ApplicationDesign & Development",
 			"text": "Our process-driven approach to web design and development is engineered to help your organization quickly strategize and execute digital experiences that matter to customers.",
 			"icon": {
 				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-web-design.svg",
@@ -40,16 +40,6 @@
 			"icon": {
 				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-ecommerce.svg",
 				"alt": "stylized icon of a grid of app tiles",
-				"width": "24",
-				"height": "24"
-			}
-		},
-		{
-			"heading": "Kiosks & In-Store Experiences",
-			"text": "Customer experience and user experience intersect at the in-store kiosk. Whether it’s an in-room directory at a four-star hotel or a food-ordering system for a café, these projects demand excellence in user interface design and execution—that’s what we do.",
-			"icon": {
-				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-kiosk.svg",
-				"alt": "stylized icon of a digital kiosk",
 				"width": "24",
 				"height": "24"
 			}

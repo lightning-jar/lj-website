@@ -1,0 +1,23 @@
+{
+	"id": "svelte-sveltekit",
+	"name": "Svelte / SvelteKit",
+	"shortDescription": "Reactive JavaScript framework reducing complexity with compiler-first approach and full-stack capabilities.",
+	"description": [
+		"Our favorite open-source JavaScript framework at present, SvelteKit is the backbone of most of our new and upcoming projects. SvelteKit is the rare framework that truly reduces complexity and unpredictability rather than adding more limitations, complexity, or unnecessary boilerplate."
+	],
+	"license": "Open Source",
+	"useCases": [
+		"High-performance apps and sites with SSR/SSG and streaming",
+		"Product dashboards and internal tools",
+		"Greenfield builds prioritizing low complexity and fast iteration"
+	],
+	"category": "Frontend Framework",
+	"link": {
+		"href": "https://svelte.dev/"
+	},
+	"logo": {
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/logos/logo-svelte.svg",
+		"alt": "Svelte / SvelteKit Logo"
+	},
+	"supercategory": "frontend-frameworks"
+}

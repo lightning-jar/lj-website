@@ -1,0 +1,20 @@
+{
+	"id": "valibot",
+	"name": "Valibot",
+	"shortDescription": "Lean, fast schema library for parsing and validation with strong TypeScript inference.",
+	"description": [
+		"A lean, fast schema library for parsing and validation with strong TypeScript inference.",
+		"We use Valibot to validate inputs at the edge and server boundaries, ensuring trustworthy data pipelines."
+	],
+	"useCases": [
+		"Lightweight schema validation in edge functions",
+		"Type-safe form and API input parsing",
+		"Bundle-size conscious validation"
+	],
+	"license": "Open Source (MIT)",
+	"category": "Schema Definition & Validation",
+	"link": {
+		"href": "https://valibot.dev/"
+	},
+	"supercategory": "api-integration"
+}

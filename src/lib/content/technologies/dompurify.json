@@ -1,0 +1,20 @@
+{
+	"id": "dompurify",
+	"name": "DOMPurify",
+	"shortDescription": "Fast, well-audited library for sanitizing HTML and SVG against XSS attacks.",
+	"link": {
+		"href": "https://github.com/cure53/DOMPurify"
+	},
+	"license": "Open Source (Apache-2.0)",
+	"useCases": [
+		"Sanitizing user-generated HTML/markdown output to prevent XSS",
+		"Rendering rich text safely in SPAs/SSR without trusting input",
+		"Enforcing allowlists for attributes, tags, and URL protocols"
+	],
+	"description": [
+		"A fast, well-audited library to sanitize HTML and SVG against XSS attacks in browsers and Node.js.",
+		"We run DOMPurify at render time or on ingestion to neutralize scripts, event handlers, and dangerous URLs—paired with strict CSP and escaping for defense-in-depth."
+	],
+	"category": "Content Sanitization (XSS Protection)",
+	"supercategory": "auth-security"
+}

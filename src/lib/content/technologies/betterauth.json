@@ -1,0 +1,20 @@
+{
+	"id": "betterauth",
+	"name": "BetterAuth",
+	"shortDescription": "Modern authentication solution with clean APIs and strong multi-tenant support.",
+	"description": [
+		"Our preferred authentication solution for modern web apps—clean APIs, strong multi-tenant support, and integration-friendly flows.",
+		"We insist on two-factor authentication (2FA) for client logins and design enrollment/recovery flows that balance security with usability."
+	],
+	"useCases": [
+		"User authentication for modern web applications",
+		"Multi-tenant apps with SSO and social login",
+		"Secure session management with 2FA support"
+	],
+	"license": "Commercial / Open Source (varies by plan)",
+	"category": "Authentication",
+	"link": {
+		"href": "https://www.better-auth.com/"
+	},
+	"supercategory": "auth-security"
+}

@@ -1,0 +1,6 @@
+{
+	"name": "Core Web Foundations",
+	"shortName": "Core",
+	"id": "core-web-foundations",
+	"description": "Why this matters: Strong platform fundamentals (HTML, CSS, JS/TS) make apps faster, more accessible, and significantly easier to maintain. We ground every build in platform-native best practices: type-safe JavaScript, accessible HTML, and modern CSS. This foundation enables maintainable codebases, reliable refactors, and fast, inclusive user experiences. Preferred defaults: TypeScript strict mode; UnoCSS or Tailwind; semantic HTML with ARIA and WCAG 2.2 targets."
+}

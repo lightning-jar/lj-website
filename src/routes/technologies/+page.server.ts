@@ -1,8 +1,14 @@
 // data
-import { technologiesContent } from "$content/getters/getTechnologiesContent";
+import {
+	allTechnologies,
+	allTechnologySupercategories,
+	technologiesLandingPageContent,
+} from "$content/getters/getTechnologiesContent";
 
 export function load() {
 	return {
-		...technologiesContent,
+		technologies: allTechnologies,
+		supercategories: allTechnologySupercategories,
+		...technologiesLandingPageContent,
 	};
 }

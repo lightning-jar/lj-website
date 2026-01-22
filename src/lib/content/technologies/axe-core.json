@@ -1,0 +1,20 @@
+{
+	"id": "axe-core",
+	"name": "axe-core",
+	"shortDescription": "Automated accessibility testing library for catching WCAG issues early in development.",
+	"description": [
+		"Automated accessibility checks integrated into unit/E2E tests and CI to catch common WCAG issues early.",
+		"We combine automated checks with manual screen reader and keyboard testing for comprehensive coverage."
+	],
+	"useCases": [
+		"Automated WCAG accessibility testing in CI pipelines",
+		"Integration with unit and E2E test suites",
+		"Early detection of accessibility regressions"
+	],
+	"license": "Open Source (MPL-2.0)",
+	"category": "Accessibility Testing",
+	"link": {
+		"href": "https://www.deque.com/axe/"
+	},
+	"supercategory": "monitoring-testing"
+}

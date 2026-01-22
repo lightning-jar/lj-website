@@ -1,0 +1,6 @@
+{
+	"name": "Auth & Security",
+	"shortName": "Security",
+	"id": "auth-security",
+	"description": "Why this matters: Security is trust—modern auth and session practices protect users and keep compliance teams comfortable. Security is foundational. We standardize on modern auth, strong session management, and defense-in-depth controls to protect users and systems. Preferred defaults: BetterAuth for app auth, token-based sessions with rotation, 2FA (TOTP + WebAuthn), Arcjet for edge protection."
+}
