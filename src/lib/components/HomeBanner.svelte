@@ -88,7 +88,7 @@ function handleKeyDown(event: KeyboardEvent) {
   border-white/10 page-x-padding pb-4 w-full grid grid-cols-[minmax(0,460px)_1fr] h-full items-start min-h-[calc(100vh-6rem)] relative lg:py-8 selector-[body.lightning]:[animation:shake_0.3s_ease-in-out_infinite]"
 >
   <!-- primary content area -->
-  <div
+  <main
     class="
 				grid
 				grid-cols-1
@@ -179,7 +179,7 @@ function handleKeyDown(event: KeyboardEvent) {
         />
       </div>
     </div>
-  </div>
+  </main>
 
   <!-- column 2 -->
   <div
@@ -191,7 +191,7 @@ function handleKeyDown(event: KeyboardEvent) {
   ></div>
 
   <!-- ticker -->
-  <div
+  <aside
     class="
       absolute
       bottom-8
@@ -253,5 +253,5 @@ function handleKeyDown(event: KeyboardEvent) {
         )}
       </div>
     {/if}
-  </div>
+  </aside>
 </div>
