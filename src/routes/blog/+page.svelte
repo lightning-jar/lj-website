@@ -2,7 +2,9 @@
 let { data } = $props();
 </script>
 
-<div class="page-x-padding min-h-screen pt-8 pb-8">
+<div
+  class="page-x-padding min-h-screen pt-8 pb-8 grid gird-cols-1 min-h-screen place-content-start"
+>
   <header class="max-w-prose mb-8">
     <h1 class="display">{data?.meta?.title || "Blog"}</h1>
     <p>

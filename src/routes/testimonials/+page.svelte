@@ -56,13 +56,24 @@ let panelsCount: number = $derived(data.testimonials?.length ?? 0);
       {/if}
     {/each}
 
-    <div class=" absolute bottom-0 right-0 lg:right-4 group flex justify-left">
+    <div
+      class="lg:absolute top-100px left-110% lg:right-4 group flex justify-left w-9 h-9"
+    >
       <LightningButton
+        character="→"
+        classes="
+          border
+          border-maximumYellow
+          bg-maximumYellow
+          p-10px
+          text-oxford
+          hover:text-oxford
+          hover:bg-transparent
+          hover:text-maximumYellow"
         onclick={() => {
           clickLightningButton();
           incrementPanel();
         }}
-        classes="flex scale-[0.85]"
       />
     </div>
   </div>

@@ -84,8 +84,19 @@ function handleKeyDown(event: KeyboardEvent) {
 <svelte:body onkeydown={handleKeyDown} />
 
 <div
-  class="border-b
-  border-white/10 page-x-padding pb-4 w-full grid grid-cols-[minmax(0,460px)_1fr] h-full items-start min-h-[calc(100vh-6rem)] relative lg:py-8 selector-[body.lightning]:[animation:shake_0.3s_ease-in-out_infinite]"
+  class="
+  border-b
+  border-white/10
+  page-x-padding
+  pb-4
+  w-full
+  grid
+  grid-cols-[minmax(0,460px)_1fr]
+  h-full
+  items-start
+  min-h-[calc(100vh-6rem)]
+  relative
+  lg:py-8"
 >
   <!-- primary content area -->
   <main
@@ -119,7 +130,6 @@ function handleKeyDown(event: KeyboardEvent) {
           border-y
           border-transparent
           [border-image:linear-gradient(90deg,_hsla(64,94%,58%,0.6),_hsla(64,94%,58%,0.6),_hsla(64,94%,58%,0.6))_1]
-          //border-white/30
           p-[20px_0px_24px_0px]
           //border-none
           uppercase
@@ -169,13 +179,22 @@ function handleKeyDown(event: KeyboardEvent) {
     {/each}
 
     <div class="absolute top-32 sm:top-18 right-0 lg:right-4 group">
-      <div class="scale-[0.85] flex justify-left">
+      <div class="flex justify-left w-8 h-8 items-center justify-center">
         <LightningButton
+          character="→"
+          classes="
+            border
+            border-maximumYellow
+            bg-maximumYellow
+            p-10px
+            text-oxford
+            hover:text-oxford
+            hover:bg-transparent
+            hover:text-maximumYellow"
+          enableClickMe={true}
           onclick={() => {
-            clickLightningButton();
             incrementCounter("topic", topics.length);
           }}
-          classes="flex"
         />
       </div>
     </div>

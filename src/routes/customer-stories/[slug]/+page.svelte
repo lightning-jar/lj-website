@@ -4,6 +4,7 @@ let { data } = $props();
 const safe = "scale-50 scale-60"; // for unocss
 </script>
 
+<a class="sr-only" href="#main">Skip to main content</a>
 <div
   class="page-x-padding pt-8 sm:pt-2 pb-6 grid grid-cols-1 min-h-screen place-content-start"
 >
@@ -13,7 +14,7 @@ const safe = "scale-50 scale-60"; // for unocss
     title="browse all customer stories">Back to Customer Stories</a
   >
   {#if data?.banner}
-    <section class="max-w-prose mb-6">
+    <header class="max-w-prose mb-6">
       <div class="uppercase">
         {data.banner?.tag?.["data-text"]}
       </div>
@@ -28,7 +29,7 @@ const safe = "scale-50 scale-60"; // for unocss
           <span>#{tag}&nbsp;</span>
         {/each}
       </div>
-    </section>
+    </header>
   {/if}
 
   <!-- main content -->
@@ -36,7 +37,7 @@ const safe = "scale-50 scale-60"; // for unocss
     class="gap-x-8 gap-y-12 grid grid-cols-1 md:grid-cols-2 xl:gap-x-24 xl:flex border-t pt-12"
   >
     <!-- col 1 -->
-    <div class="lg:max-w-article">
+    <main id="main" class="lg:max-w-article">
       {#each data.content ?? [] as item}
         <section class="max-w-article">
           <h2 class="text-24px font-700 font-serif text-maximumYellow mb-3">
@@ -48,51 +49,59 @@ const safe = "scale-50 scale-60"; // for unocss
           {/each}
         </section>
       {/each}
-    </div>
+    </main>
 
     <!-- col 2 -->
-    <div class="grid grid-cols-1 gap-y-5 place-content-start">
+    <aside class="grid grid-cols-1 gap-y-5 place-content-start">
+      <h2 class="sr-only">Sidebar</h2>
       <!-- testimonials -->
-      {#each data.testimonials ?? [] as item}
-        <section class="max-w-420px">
-          <p
-            class="text-22px font-500 font-serif text-maximumYellow mb-3 italic"
-          >
-            "{item.quote}
-          </p>
-
-          {#if item?.attribution}
-            <p class="mb-5 text-15px opacity-90">
-              - {item.attribution.name}, {item.attribution.title}
+      <section>
+        <h3 class="sr-only">Testimonials</h3>
+        {#each data.testimonials ?? [] as item}
+          <div class="max-w-420px">
+            <p
+              class="text-22px font-500 font-serif text-maximumYellow mb-3 italic"
+            >
+              "{item.quote}
             </p>
-          {/if}
-        </section>
-      {/each}
+
+            {#if item?.attribution}
+              <p class="mb-5 text-15px opacity-90">
+                - {item.attribution.name}, {item.attribution.title}
+              </p>
+            {/if}
+          </div>
+        {/each}
+      </section>
 
       <!-- images -->
-      {#each data.images ?? [] as item}
-        <section class="max-w-420px">
-          <img class="bg-slate-500/40 rounded w-full h-auto" {...item} />
-        </section>
-      {/each}
+      <section>
+        <h3 class="sr-only">Images</h3>
+        {#each data.images ?? [] as item}
+          <div class="max-w-420px">
+            <img class="bg-slate-500/40 rounded w-full h-auto" {...item} />
+          </div>
+        {/each}
+      </section>
 
       <!-- perspectives -->
-      {#each data.perspectives ?? [] as item}
-        <section
-          class="max-w-420px bg-slate-500/40 rounded px-4 pt-4 pb-5 mb-8"
-        >
-          <p class="text-16px font-600 mb-3 italic">
-            "{item.quote}
-          </p>
+      <section>
+        <h3 class="sr-only">Perspectives</h3>
+        {#each data.perspectives ?? [] as item}
+          <div class="max-w-420px bg-slate-500/40 rounded px-4 pt-4 pb-5 mb-8">
+            <p class="text-16px font-600 mb-3 italic">
+              "{item.quote}
+            </p>
 
-          {#if item?.attribution}
-            <div class="text-15px opacity-90">
-              - {item.attribution.name}, {item.attribution.title}, {item
-                .attribution.organization}
-            </div>
-          {/if}
-        </section>
-      {/each}
+            {#if item?.attribution}
+              <div class="text-15px opacity-90">
+                - {item.attribution.name}, {item.attribution.title}, {item
+                  .attribution.organization}
+              </div>
+            {/if}
+          </div>
+        {/each}
+      </section>
 
       <!-- featured technologies -->
       {#if data.technologies?.[0]}
@@ -119,7 +128,7 @@ const safe = "scale-50 scale-60"; // for unocss
           </div>
         </section>
       {/if}
-    </div>
+    </aside>
   </div>
 
   <!-- prefooter  -->

@@ -1,4 +1,6 @@
 <script lang="ts">
+import { createAttachmentKey } from "svelte/attachments";
+
 // import child page data
 import { page } from "$app/state";
 
@@ -99,7 +101,7 @@ let pageMeta = $derived((page.data?.meta as PageMeta) ?? {});
 
 <GlobalNav />
 
-<!-- body -->
+<!-- children -->
 <div class="relative w-full max-w-screen overflow-x-hidden place-self-stretch">
   {@render children?.()}
 </div>

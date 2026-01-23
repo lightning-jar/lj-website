@@ -26,7 +26,11 @@ words = [
     "urlset",
     "securelogix",
     "supercategory",
-    "supercategories"
+    "supercategories",
+    "contentinfo",
+    "focusable",
+    "FX",
+    "sfx"
 ]
 flag_words = [
     "todo",

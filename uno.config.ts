@@ -42,24 +42,27 @@ export default defineConfig({
 		{
 			layer: "preflights",
 			getCSS: () =>
-				`@keyframes shake {
+				`@keyframes rumble {
         0%, 100% { transform: translateX(0) rotate(0deg); }
-        10% { transform: translateX(-2px) rotate(-1deg); }
+        10% { transform: translateX(-2px) rotate(-0.75deg); }
         20% { transform: translateX(2px) rotate(1deg); }
-        30% { transform: translateX(-3px) rotate(-0.5deg); }
-        40% { transform: translateX(3px) rotate(0.5deg); }
+        30% { transform: translateX(-1px) rotate(-0.5deg); }
+        40% { transform: translateX(1px) rotate(0.5deg); }
         50% { transform: translateX(-2px) rotate(0deg); }
-        60% { transform: translateX(2px) rotate(1deg); }
-        70% { transform: translateX(-3px) rotate(-1deg); }
-        80% { transform: translateX(3px) rotate(0.5deg); }
+        60% { transform: translateX(2px) rotate(0.75deg); }
+        70% { transform: translateX(-3px) rotate(-0.5deg); }
+        80% { transform: translateX(3px) rotate(0.75deg); }
         90% { transform: translateX(-2px) rotate(-0.5deg); }
         100% { transform: translateX(0) rotate(0deg); }
       }
-      @keyframes bolt {
-          0%, 100% { scale:1; }
-          50% { scale:1.2; }
-      }
-     html { --accent: #ebf92f}`,
+     html { --accent: #ebf92f}
+     body.lightning {
+        animation-name: rumble;
+        animation-duration: 0.3s;
+        animation-delay: 0.1s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: 10;
+     }`,
 		},
 	],
 	presets: [

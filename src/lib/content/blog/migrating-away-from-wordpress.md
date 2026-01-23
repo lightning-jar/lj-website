@@ -23,7 +23,7 @@ This is a conscious uncoupling of our clients from the WordPress ecosystem, for 
 
 ## Hidden Costs: The Upkeep Tax
 
-* WordPress deployments can be inexpensive to launch—but the long tail of maintenance is real.
+* WordPress deployments can be inexpensive to launch,but the long tail of maintenance is real.
 * The plugin-first paradigm translates to constant updates, regression testing, and surprise breakage from undocumented changes.
 * When we analyzed the time spent on legacy maintenance versus new feature development, the economics no longer made sense for most projects.
 
