@@ -30,7 +30,18 @@ words = [
     "contentinfo",
     "focusable",
     "FX",
-    "sfx"
+    "sfx",
+    "automatable",
+    "webhooks",
+    "Pimcore",
+    "Shopify",
+    "Hubspot",
+    "Squarespace",
+    "Wix",
+    "Webflow",
+    "Magento",
+    "Joomla",
+    "Sharepoint"
 ]
 flag_words = [
     "todo",

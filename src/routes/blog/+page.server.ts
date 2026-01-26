@@ -1,8 +1,9 @@
 // utils
-import { allBlogArticles } from "$content/getters/getBlogArticles";
 
 // types
-type FrontMatter = Record<string, string>;
+import type { FrontMatter } from "$types/FrontMatter";
+
+import { allBlogArticles } from "$content/getters/getBlogArticles";
 
 // get all blog articles
 const rawArticles = await allBlogArticles;
@@ -13,8 +14,8 @@ const articles: FrontMatter[] = rawArticles.map((article) => {
 });
 
 const sortedArticles = articles.sort((a, b) => {
-	const dateA = new Date(a.date);
-	const dateB = new Date(b.date);
+	const dateA = new Date(a.date || "");
+	const dateB = new Date(b.date || "");
 	return dateB.getTime() - dateA.getTime();
 });
 

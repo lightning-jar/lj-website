@@ -26,8 +26,16 @@ async function getArticles() {
 		return parseMarkdown(article);
 	});
 	return articles.sort((a, b) => {
-		const dateA = new Date(a.frontMatter?.date || "");
-		const dateB = new Date(b.frontMatter?.date || "");
+		const dateA = new Date(
+			a.frontMatter?.date && typeof a.frontMatter.date === "string"
+				? a.frontMatter.date
+				: "",
+		);
+		const dateB = new Date(
+			b.frontMatter?.date && typeof b.frontMatter.date === "string"
+				? b.frontMatter.date
+				: "",
+		);
 		return dateB.getTime() - dateA.getTime();
 	});
 }
@@ -53,10 +61,26 @@ export const allBlogArticlesSitemapMeta = allBlogArticles.map((article) => {
 function buildHumanSitemapSection() {
 	const pages: SitemapPage[] = allBlogArticles.map((article) => {
 		return {
-			title: article.frontMatter?.metaTitle || "",
-			description: article.frontMatter?.description || "",
-			date: article.frontMatter?.date || "",
-			href: `/blog/${article.frontMatter?.slug}` || "",
+			title:
+				article.frontMatter?.metaTitle &&
+				typeof article.frontMatter.metaTitle === "string"
+					? article.frontMatter.metaTitle
+					: "",
+			description:
+				article.frontMatter?.description &&
+				typeof article.frontMatter.description === "string"
+					? article.frontMatter.description
+					: "",
+			date:
+				article.frontMatter?.date &&
+				typeof article.frontMatter.date === "string"
+					? article.frontMatter.date
+					: "",
+			href:
+				article.frontMatter?.slug &&
+				typeof article.frontMatter.slug === "string"
+					? `/blog/${article.frontMatter.slug}`
+					: "",
 		};
 	});
 	const landing = {

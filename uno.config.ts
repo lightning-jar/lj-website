@@ -134,7 +134,7 @@ export default defineConfig({
 		["page-x-padding", "px-4 sm:px-6 md:px-7 lg:px-8 xl:px-16 2xl:px-24"],
 		[
 			"display",
-			"font-700 font-display text-maximumYellow mb-3 text-32px lg:text-42px",
+			"font-700 font-display text-maximumYellow mb-3 text-32px lg:text-42px leading-snug",
 		],
 		[
 			"heading-2",
@@ -155,14 +155,30 @@ export default defineConfig({
 		[
 			"blog-article",
 			`
-			[&_h2]:(font-700 font-serif text-maximumYellow text-1.1em mt-5 opacity-98)
-			[&_h3]:(font-600 mt-4 text-maximumYellow)
-		  [&_p]:(mb-3 mt-2 opacity-90)
+			[&_h2]:(font-700 font-serif text-maximumYellow text-1.133em mt-8 mb-2 opacity-98 text-pretty text-balance)
+			[&_h3]:(font-500 mt-5 text-maximumYellow/95 text-1.05em)
+			[&_h4]:(font-400 mt-3 text-blue-200)
+		  [&_p]:(mb-3 mt-1 opacity-90)
 			[&_ul]:(mb-4 mt-2 list-disc decoration-white list-outside ml-3)
 			[&_ol]:(mb-4 list-decimal decoration-white list-outside ml-4)
-			[&_li]:(mb-3 mt-2 leading-tight opacity-90)
-			[&_strong]:font-700
-		`,
+			[&_li]:(mb-2 mt-2 leading-tight opacity-90)
+			[&_p_a,_&_li_a]:(underline underline-offset-2)
+			[&_a:hover]:text-maximumYellow
+			[&_strong]:(font-700)
+			[&_img]:(w-full h-auto aspect-video overflow-hidden rounded flex object-cover mb-5)
+			[&_table]:(hidden md:block w-full border-collapse text-15px text-left relative border border-slate-100/40 rounded pb-0 overflow-hidden my-4)
+			[&_table_thead]:(flex items-center justify-between text-slate-100)
+			[&_table_thead_tr]:(w-full grid grid-cols-[repeat(auto-fit,_minmax(min(100%,_150px),_1fr))])
+			[&_table_thead_tr_th]:(block bg-blue/40 leading-tight font-700 px-3 py-2 truncate w-full border-b border-slate-100/40)
+			[&_table_thead_tr_th:not(:last-child)]:(border-r)
+			[&_table_tbody]:(grid grid-cols-1)
+			[&_table_tbody_tr]:(w-full grid grid-cols-[repeat(auto-fit,_minmax(min(100%,_150px),_1fr))])
+			[&_table_tbody_tr:has(em)]:(bg-blue/10)
+			[&_table_tbody_tr:has(strong_em)]:(bg-blue/40)
+			[&_table_tbody_tr_td]:(flex bg-blue/0 leading-tight px-3 py-2 w-full border-b border-slate-100/40 opacity-90 text-15px)
+			[&_table_tbody_tr:last-child_td]:(border-b-none pb-3)
+			[&_table_tbody_tr_td:not(:last-child)]:(border-r)
+			`,
 		],
 	],
 	transformers: [transformerDirectives(), transformerVariantGroup()],
