@@ -1,8 +1,8 @@
 <script lang="ts">
-// components
-import LinkButton from "$components/LinkButton.svelte";
+  // components
+  import LinkButton from "$components/LinkButton.svelte";
 
-let { data } = $props();
+  let { data } = $props();
 </script>
 
 <div
@@ -26,6 +26,7 @@ let { data } = $props();
           <img
             src={story.thumbnailImage.src}
             alt="{story.customer.name} Logo"
+            loading="lazy"
             class="aspect-[5/4] object-cover mb-4 max-w-200px rounded overflow-hidden"
           />
         {/if}
