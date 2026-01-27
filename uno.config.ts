@@ -127,7 +127,21 @@ export default defineConfig({
 		],
 		[
 			"button",
-			"flex max-w-fit gap-2 px-3 py-2 rounded border border-current opacity-90 text-[0.9em] hover:text-accent hover:opacity-100",
+			`
+      flex
+      max-w-fit
+      gap-2
+      px-3
+      py-2
+      rounded
+      border
+      border-current
+      opacity-90
+      text-[0.9em]
+      hover:text-accent
+      hover:opacity-100
+      hover:shadow
+      hover:shadow-current`,
 		],
 		["button-accent", "button text-accent hover:text-oxford hover:bg-accent"],
 

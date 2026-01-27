@@ -16,13 +16,15 @@
 		"id": "securelogix",
 		"category": "Cybersecurity",
 		"name": "SecureLogix",
-		"logo": "/images/customer-logo-securelogix.png",
-		"thumb": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/replicator-01.webp"
+		"logo": "/images/customer-logo-securelogix.png"
 	},
 	"excerpt": "For more than a decade, Lightning Jar has been the primary digital agency of record for SecureLogix, delivering a unified stack: marketing site, partner portal, knowledge base, and a custom LLM-powered brand operating system that helps a lean team outperform larger competitors.",
 	"title": "SecureLogix Amplifies Voice Network Security Marketing With an AI-Enabled Digital Stack",
 	"slug": "securelogix-digital-stack",
-	"image": "/images/customer-story-securelogix-hero.jpg",
+	"thumbnailImage": {
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/securelogix-call-branding.webp",
+		"alt": "SecureLogix Call Branding"
+	},
 	"content": [
 		{
 			"heading": "Customer",

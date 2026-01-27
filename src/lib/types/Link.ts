@@ -1,3 +1,5 @@
-export interface Link extends HTMLAnchorElement {
-	"data-text": string;
+import type { HTMLAnchorAttributes } from "svelte/elements";
+
+export interface Link extends HTMLAnchorAttributes {
+	"data-text"?: string;
 }

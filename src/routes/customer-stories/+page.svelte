@@ -1,4 +1,7 @@
 <script lang="ts">
+// components
+import LinkButton from "$components/LinkButton.svelte";
+
 let { data } = $props();
 </script>
 
@@ -18,29 +21,50 @@ let { data } = $props();
 
   <section>
     {#each data?.stories ?? [] as story}
-      <article class="max-w-article mb-8">
+      <article class="max-w-article mb-10">
+        {#if story?.thumbnailImage}
+          <img
+            src={story.thumbnailImage.src}
+            alt="{story.customer.name} Logo"
+            class="aspect-[5/4] object-cover mb-4 max-w-200px rounded overflow-hidden"
+          />
+        {/if}
         <h3 class="text-24px font-700 font-serif text-maximumYellow mb-3">
           {story?.banner.heading}
         </h3>
 
-        <div class="mb-5">
-          {story?.excerpt ?? "No excerpt available."}
+        <div class="mb-5 w-full">
+          <div class="w-full opacity-90">
+            {story?.excerpt ?? "No excerpt available."}
+          </div>
 
-          {#if story.customer.tags?.[0]}
-            <div class="mt-2 inline-flex gap-2 text-0.9em text-accent">
-              {#each story.customer.tags as tag}
-                <span>#{tag}</span>
+          {#if story.tags?.[0]}
+            <div class="mt-2 flex gap-2 text-0.9em text-accent">
+              {#each story.tags as tag}
+                <span class="opacity-90 hover-opacity-100 cursor-pointer"
+                  >#{tag}</span
+                >
               {/each}
             </div>
           {/if}
         </div>
 
         {#if story.slug}
-          <a
+          <!-- <a
             class="button-accent"
             title="read full story"
             href="/customer-stories/{story.slug ?? ''}">Read Story</a
+          > -->
+
+          <LinkButton
+            classes="button-accent"
+            link={{
+              href: `/customer-stories/${story.slug ?? ""}`,
+              title: "read full story",
+            }}
           >
+            Read Story
+          </LinkButton>
         {/if}
       </article>
     {/each}

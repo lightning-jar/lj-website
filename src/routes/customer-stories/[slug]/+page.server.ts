@@ -1,7 +1,8 @@
 // types
-import type { CustomerStory } from "$types/CustomerStory";
 
 import { error } from "@sveltejs/kit";
+
+import type { CustomerStory } from "$types/CustomerStory";
 
 import { getCustomerStoryBySlug } from "$content/getters/getCustomerStories";
 

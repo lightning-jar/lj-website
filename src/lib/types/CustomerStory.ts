@@ -7,13 +7,14 @@ import type { PageMeta } from "$types/PageMeta";
 import type { Testimonial } from "$types/Testimonial";
 
 export interface CustomerStory {
+	id?: string;
 	banner: Banner;
 	meta: PageMeta;
 	customer: Customer;
 	excerpt: string;
 	title: string;
 	slug: string;
-	image: string;
+	thumbnailImage: Image;
 	content: ContentBlock[];
 	testimonials: Testimonial[];
 	images: Image[];
@@ -25,6 +26,6 @@ export interface CustomerStory {
 		link?: Link;
 	}[];
 	featuredTechnologies?: string[];
-	order?: number;
+	order: number;
 	tags?: string[];
 }

@@ -1,10 +1,11 @@
 // preprocessor
-import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 // vercel adapter
 import { default as vercel } from "@sveltejs/adapter-vercel";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 const aliasList = {
+	$attachments: "./src/lib/attachments",
 	$assets: "./src/lib/assets",
 	$components: "./src/lib/components",
 	$config: "./src/lib/config",

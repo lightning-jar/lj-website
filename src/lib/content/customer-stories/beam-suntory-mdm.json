@@ -22,7 +22,10 @@
 	"excerpt": "We helped the Suntory Group architect and deploy a Pimcore MDM / PIM / DAM solution to manage products, product data, images, labels, recipes, and marketing content for hundreds of products and thousands of product variations across languages and regions.",
 	"title": "Beam Suntory Mixes the Perfect Cocktail of Unified Marketing & Product Data",
 	"slug": "beam-suntory-mdm",
-	"image": "/images/customer-story-1.jpg",
+	"thumbnailImage": {
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/old-fashioned.webp",
+		"alt": "Old Fashioned Cocktail"
+	},
 	"content": [
 		{
 			"heading": "Customer",
