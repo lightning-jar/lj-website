@@ -14,10 +14,17 @@ import type { Attachment } from "svelte/attachments";
 
 // props
 let {
+	ariaLabel = null,
 	classes = "",
 	onclick = () => {},
 	character = "",
 	enableClickMe = false,
+}: {
+	ariaLabel?: string | null;
+	classes?: string;
+	onclick?: () => void;
+	character?: string;
+	enableClickMe?: boolean;
 } = $props();
 
 // state
@@ -83,6 +90,7 @@ async function playClick() {
   class="relative text-maximumYellow w-full h-auto aspect-square flex justify-center"
 >
   <button
+    aria-label={ariaLabel}
     title="Click me."
     class="
     cursor-pointer

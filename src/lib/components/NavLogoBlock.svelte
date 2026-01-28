@@ -1,6 +1,5 @@
 <script lang="ts">
 // import components
-import LightningBolt from "$components/LightningBolt.svelte";
 import LightningButton from "$components/LightningButton.svelte";
 
 // props
@@ -71,15 +70,10 @@ function handleBoltClick() {
   </a>
 
   <!-- lightning bolt -->
-  <div
-    aria-hidden="true"
-    class="w-full text-maximumYellow flex items-center justify-center"
-  >
-    <div
-      aria-hidden="true"
-      class="bg-transparent w-26px sm:w-8 lg:w-9 aspect-square"
-    >
+  <div class="w-full text-maximumYellow flex items-center justify-center">
+    <div class="bg-transparent w-26px sm:w-8 lg:w-9 aspect-square">
       <LightningButton
+        ariaLabel="simulates a lightning flash on the screen and plays a sound - just for fun"
         character=""
         classes="hover:text-maximumYellow hover:scale-125 transition-transform"
       />

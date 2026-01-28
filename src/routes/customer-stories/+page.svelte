@@ -1,25 +1,26 @@
 <script lang="ts">
-  // components
-  import LinkButton from "$components/LinkButton.svelte";
+// components
+import LinkButton from "$components/LinkButton.svelte";
 
-  let { data } = $props();
+let { data } = $props();
 </script>
 
 <div
   class="page-x-padding main-y-padding pb-6 grid grid-cols-1 gap-12 min-h-screen place-content-start"
 >
   {#if data?.banner}
-    <section class="max-w-prose">
+    <header class="max-w-prose">
       <h1 class="display">
         {data.banner?.heading}
       </h1>
       <p class="max-w-prose mb-5 empty:hidden">
         {data.banner?.subheading ?? ""}
       </p>
-    </section>
+    </header>
   {/if}
 
-  <section>
+  <main>
+    <h2>Select a Customer Story Below to Read More</h2>
     {#each data?.stories ?? [] as story}
       <article class="max-w-article mb-10">
         {#if story?.thumbnailImage}
@@ -69,5 +70,5 @@
         {/if}
       </article>
     {/each}
-  </section>
+  </main>
 </div>
