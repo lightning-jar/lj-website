@@ -48,9 +48,35 @@ export async function getAllCustomerStories(): Promise<CustomerStory[]> {
 
 export const allCustomerStories: CustomerStory[] =
 	await getAllCustomerStories();
+
 export const allCustomerStorySlugs: string[] = allCustomerStories
 	.map((story) => story?.slug || "")
 	.filter(Boolean);
+
+export const getCustomerStoryIndexBySlug = (
+	slug: string,
+): number | undefined => {
+	return allCustomerStorySlugs.indexOf(slug);
+};
+
+export const getNextCustomerStorySlug = (slug: string): string | undefined => {
+	const index = getCustomerStoryIndexBySlug(slug) || 0;
+	let nextSlug = allCustomerStorySlugs[index + 1];
+	if (index === undefined || index >= allCustomerStorySlugs.length - 1) {
+		nextSlug = allCustomerStorySlugs[0] || "";
+	}
+	return nextSlug;
+};
+
+export const getPreviousCustomerStorySlug = (
+	slug: string,
+): string | undefined => {
+	const index = getCustomerStoryIndexBySlug(slug);
+	if (index === undefined || index === 0) {
+		return undefined;
+	}
+	return allCustomerStorySlugs[index - 1];
+};
 
 export function getCustomerStoryBySlug(
 	slug: string,

@@ -148,7 +148,7 @@ export default defineConfig({
 		["page-x-padding", "px-4 sm:px-6 md:px-7 lg:px-8 xl:px-16 2xl:px-24"],
 		[
 			"display",
-			"font-700 font-display text-maximumYellow mb-3 text-32px lg:text-42px leading-snug",
+			"text-balance font-700 font-display text-maximumYellow mb-3 text-32px lg:text-42px leading-snug",
 		],
 		[
 			"heading-2",
@@ -170,6 +170,7 @@ export default defineConfig({
 			"blog-article",
 			`
 			[&_h2]:(font-700 font-serif text-maximumYellow text-1.133em mt-8 mb-2 opacity-98 text-pretty text-balance)
+			[&_h2:first-child]:mt-0
 			[&_h3]:(font-500 mt-5 text-maximumYellow/95 text-1.05em)
 			[&_h4]:(font-400 mt-3 text-blue-200)
 		  [&_p]:(mb-3 mt-1 opacity-90)
@@ -192,6 +193,16 @@ export default defineConfig({
 			[&_table_tbody_tr_td]:(flex bg-blue/0 leading-tight px-3 py-2 w-full border-b border-slate-100/40 opacity-90 text-15px)
 			[&_table_tbody_tr:last-child_td]:(border-b-none pb-3)
 			[&_table_tbody_tr_td:not(:last-child)]:(border-r)
+			`,
+		],
+		[
+			"article-columns",
+			`gap-8
+			grid
+			grid-cols-1
+			place-content-start
+			md:grid-cols-[minmax(36ch,_640px)_minmax(30ch,_420px)]
+			lg:grid-cols-[minmax(58ch,_640px)_minmax(30ch,_1fr)]
 			`,
 		],
 	],

@@ -20,7 +20,7 @@ let { data } = $props();
   {/if}
 
   <main>
-    <h2>Select a Customer Story Below to Read More</h2>
+    <h2 class="sr-only">Select a Customer Story Below to Read More</h2>
     {#each data?.stories ?? [] as story}
       <article class="max-w-article mb-10">
         {#if story?.thumbnailImage}

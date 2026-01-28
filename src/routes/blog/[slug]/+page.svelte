@@ -10,8 +10,10 @@ let formattedDate = $derived(
 $inspect(data.glossary);
 </script>
 
+<!-- skip link  -->
 <a class="sr-only" href="#main">Skip to main content</a>
 
+<!-- body content area -->
 <div
   class="page-x-padding min-h-screen pt-8 pb-8 grid grid-cols-1 gap-8 lg:gap-12 lg:grid-cols-[minmax(65ch,_640px)_1fr]"
 >
@@ -122,8 +124,9 @@ $inspect(data.glossary);
     </div>
   </aside>
 </div>
+
 <!-- prefooter -->
-<div class="page-x-padding py-6">
+<nav class="page-x-padding py-6">
   {#if data.nextArticleSlug}
     <a
       href="/blog/{data.nextArticleSlug}"
@@ -132,4 +135,4 @@ $inspect(data.glossary);
       Next Article →
     </a>
   {/if}
-</div>
+</nav>

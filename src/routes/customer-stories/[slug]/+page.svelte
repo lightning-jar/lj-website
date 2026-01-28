@@ -1,27 +1,33 @@
 <script lang="ts">
-let { data } = $props();
+// components
+import LinkButton from "$components/LinkButton.svelte";
+import LinkText from "$components/LinkText.svelte";
 
-const safe = "scale-50 scale-60"; // for unocss
+// props
+let { data } = $props();
 </script>
 
+<!-- skip link  -->
 <a class="sr-only" href="#main">Skip to main content</a>
+
 <div
-  class="page-x-padding pt-8 sm:pt-2 pb-6 grid grid-cols-1 min-h-screen place-content-start"
+  class="page-x-padding article-columns pt-8 sm:pt-2 pb-6 grid grid-cols-1 place-content-start"
 >
-  <a
-    class="hidden sm:flex justify-end mb-0 sm:text-12px text-maximumYellow opacity-80 underline underline-offset-4 mb-6"
-    href="/customer-stories"
-    title="browse all customer stories">Back to Customer Stories</a
-  >
   {#if data?.banner}
-    <header class="max-w-prose mb-6">
-      <div class="uppercase">
-        {data.banner?.tag?.["data-text"]}
-      </div>
+    <header class="pt-2 sm:pt-8 max-w-prose">
+      <LinkText
+        classes="uppercase lg:text-14px opacity-80 mb-3 leading-tight"
+        link={{
+          href: "/customer-stories",
+          title: "browse all customer stories",
+        }}
+      >
+        Customer Stories
+      </LinkText>
       <h1 class="display">
         {data.banner?.heading}
       </h1>
-      <p class="max-w-prose mb-5 empty:hidden">
+      <p class="mb-5 empty:hidden opacity-90">
         {data.banner?.subheading ?? ""}
       </p>
       <div class="text-maximumYellow opacity-95">
@@ -30,35 +36,35 @@ const safe = "scale-50 scale-60"; // for unocss
         {/each}
       </div>
     </header>
+    <div class="hidden md:block">&nbsp;</div>
   {/if}
 
-  <!-- main content -->
-  <div
-    class="gap-x-8 gap-y-12 grid grid-cols-1 md:grid-cols-2 xl:gap-x-24 xl:flex border-t pt-12"
-  >
-    <!-- col 1 -->
-    <main id="main" class="lg:max-w-article">
-      {#each data.content ?? [] as item}
-        <section class="max-w-article">
-          <h2 class="text-24px font-700 font-serif text-maximumYellow mb-3">
-            {item.heading}
-          </h2>
+  <hr class="md:col-span-2 opacity-40" />
 
-          {#each item.text ?? [] as text}
-            <p class="mb-5">{@html text}</p>
-          {/each}
-        </section>
-      {/each}
-    </main>
+  <!-- col 1 -->
+  <main id="main" class="lg:max-w-article blog-article">
+    {#each data.content ?? [] as item}
+      <section class="max-w-article">
+        <h2>
+          {item.heading}
+        </h2>
 
-    <!-- col 2 -->
-    <aside class="grid grid-cols-1 gap-y-5 place-content-start">
+        {#each item.text ?? [] as text}
+          <p>{@html text}</p>
+        {/each}
+      </section>
+    {/each}
+  </main>
+
+  <!-- col 2 -->
+  <aside class="flex justify-end">
+    <div class="grid grid-cols-1 gap-y-5 place-content-start md:max-w-420px">
       <h2 class="sr-only">Sidebar</h2>
       <!-- testimonials -->
       <section>
         <h3 class="sr-only">Testimonials</h3>
         {#each data.testimonials ?? [] as item}
-          <div class="max-w-420px">
+          <div>
             <p
               class="text-22px font-500 font-serif text-maximumYellow mb-3 italic"
             >
@@ -78,7 +84,7 @@ const safe = "scale-50 scale-60"; // for unocss
       <section>
         <h3 class="sr-only">Images</h3>
         {#each data.images ?? [] as item}
-          <div class="max-w-420px">
+          <div>
             <img class="bg-slate-500/40 rounded w-full h-auto" {...item} />
           </div>
         {/each}
@@ -88,8 +94,8 @@ const safe = "scale-50 scale-60"; // for unocss
       <section>
         <h3 class="sr-only">Perspectives</h3>
         {#each data.perspectives ?? [] as item}
-          <div class="max-w-420px bg-slate-500/40 rounded px-4 pt-4 pb-5 mb-8">
-            <p class="text-16px font-600 mb-3 italic">
+          <div class="bg-slate-500/10 rounded px-4 pt-4 pb-5 mb-8">
+            <p class="text-16px font-600 mb-3 italic opacity-90">
               "{item.quote}
             </p>
 
@@ -105,17 +111,17 @@ const safe = "scale-50 scale-60"; // for unocss
 
       <!-- featured technologies -->
       {#if data.technologies?.[0]}
-        <section class="w-full max-w-420px">
+        <section class="w-full">
           <h3 class="mb-3 text-maximumYellow">Featured Technologies</h3>
           <div
-            class="px-4 pt-5 pb-6 w-full grid grid-cols-3 place-items-center place-content-center overflow-hidden gap-4 border rounded border-slate-100/40"
+            class="px-4 pt-5 pb-6 w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 place-items-center place-content-center overflow-hidden gap-4 border rounded border-slate-100/40"
           >
             {#each data.technologies ?? [] as item}
               {#if item?.logo?.src && item?.link?.href}
                 <a
                   aria-label={item.name}
                   href={item.link.href}
-                  class="w-full overflow-hidden aspect-4/3 flex justify-center items-center rounded bg-slate-100/10"
+                  class="w-full overflow-hidden aspect-4/3 flex justify-center items-center rounded bg-slate-100/5 hover:bg-slate-100/10 hover:outline-2 !outline-maximumYellow focus-visible:outline-2 focus-visible:bg-slate-100/10"
                 >
                   <img
                     class="w-full h-auto rounded"
@@ -128,17 +134,36 @@ const safe = "scale-50 scale-60"; // for unocss
           </div>
         </section>
       {/if}
-    </aside>
-  </div>
-
-  <!-- prefooter  -->
-  <div class="my-4">
-    <a
-      class="px-3 py-2 rounded border inline-flex justify-center items-center leading-none text-15px opacity-80"
-      href="/customer-stories"
-      title="browse all customer stories"
-    >
-      All Customer Stories
-    </a>
-  </div>
+    </div>
+  </aside>
 </div>
+
+<!-- prefooter  -->
+<nav class="block page-x-padding pt-4 mb-10">
+  <!-- <a
+    class="px-3 py-2 rounded border inline-flex justify-center items-center leading-none text-15px opacity-80"
+    href="/customer-stories"
+    title="browse all customer stories"
+  >
+    All Customer Stories
+  </a> -->
+  {#if data.nextStorySlug}
+    <LinkButton
+      classes="mb-4"
+      link={{
+        href: `/customer-stories/${data.nextStorySlug}`,
+        title: "browse all customer stories",
+      }}
+    >
+      Next Story
+    </LinkButton>
+  {/if}
+  <LinkText
+    link={{
+      href: "/customer-stories",
+      title: "browse all customer stories",
+    }}
+  >
+    Back to all Customer Stories
+  </LinkText>
+</nav>
