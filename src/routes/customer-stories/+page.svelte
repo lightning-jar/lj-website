@@ -27,7 +27,7 @@
             src={story.thumbnailImage.src}
             alt="{story.customer.name} Logo"
             loading="lazy"
-            class="aspect-[5/4] object-cover mb-4 max-w-200px rounded overflow-hidden"
+            class="aspect-[5/4] object-cover mb-4 h-160px w-200px rounded overflow-hidden"
           />
         {/if}
         <h3 class="text-24px font-700 font-serif text-maximumYellow mb-3">
