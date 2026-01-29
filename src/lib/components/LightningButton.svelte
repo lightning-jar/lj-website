@@ -135,9 +135,6 @@ async function playClick() {
       onclick={handleBoltClick}
       onmouseenter={(_e) => {
         sfx.play("click");
-        if (onclick) {
-          onclick();
-        }
       }}
     >
       <LightningBolt
