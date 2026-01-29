@@ -65,7 +65,7 @@ function decrementCounter(counterName: string, counterLength: number): void {
 
 function handleKeyDown(event: KeyboardEvent) {
 	if (
-		event.key === "Enter" ||
+		// event.key === "Enter" ||
 		event.key === "ArrowRight" ||
 		event.key === "ArrowDown"
 	) {
@@ -150,7 +150,7 @@ function handleKeyDown(event: KeyboardEvent) {
 					text-yellow-50
 					mb-6
 					pl-0
-					//opacity-95
+					opacity-95
 					"
           >
             {@html text}
@@ -171,33 +171,31 @@ function handleKeyDown(event: KeyboardEvent) {
   					pl-3"
           >
             {#each topic.bullets as bullet}
-              <li class="leading-snug">{bullet}</li>
+              <li class="leading-snug opacity-95">{bullet}</li>
             {/each}
           </ul>
         {/if}
       {/if}
     {/each}
 
-    <div class="absolute top-32 sm:top-18 right-0 lg:right-4 group">
-      <div class="flex justify-left w-8 h-8 items-center justify-center">
-        <LightningButton
-          character="→"
-          classes="
+    <LightningButton
+      ariaLabel="go to next topic"
+      character="→"
+      containerClasses="w-8 h-8 items-center !absolute top-32 sm:top-18 right-0 lg:right-4"
+      classes="
             border
             border-maximumYellow
             bg-maximumYellow
-            p-10px
+            p-9px
             text-oxford
-            hover:text-oxford
             hover:bg-transparent
             hover:text-maximumYellow"
-          enableClickMe={true}
-          onclick={() => {
-            incrementCounter("topic", topics.length);
-          }}
-        />
-      </div>
-    </div>
+      enableClickMe={true}
+      onclick={() => {
+        incrementCounter("topic", topics.length);
+      }}
+      useImage={false}
+    />
   </main>
 
   <!-- column 2 -->

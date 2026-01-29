@@ -15,21 +15,43 @@ import type { Attachment } from "svelte/attachments";
 // props
 let {
 	ariaLabel = null,
+	containerClasses = "",
+	triggerClick = $bindable(),
 	classes = "",
 	onclick = () => {},
 	character = "",
 	enableClickMe = false,
+	tag = "button",
+	title = undefined,
+	useImage = false,
 }: {
 	ariaLabel?: string | null;
+	button?: HTMLButtonElement | null;
 	classes?: string;
+	containerClasses?: string;
 	onclick?: () => void;
 	character?: string;
 	enableClickMe?: boolean;
+	tag?: string;
+	title?: string;
+	triggerClick?: () => void;
+	useImage?: boolean;
 } = $props();
+
+triggerClick = () => {
+	handleBoltClick();
+};
 
 // state
 let clickMe: HTMLDivElement | null = $state(null);
 let lightningState: "inactive" | "active" = $state("inactive");
+
+// derived
+let lightningClasses = $derived(
+	lightningState !== "inactive"
+		? "scale-50000% hover:scale-500000% motion-reduce:scale-200% motion-reduce:hover:scale-200%"
+		: "",
+);
 
 // functions
 function hideClickMe() {
@@ -87,51 +109,67 @@ async function playClick() {
 </script>
 
 <div
-  class="relative text-maximumYellow w-full h-auto aspect-square flex justify-center"
->
-  <button
-    aria-label={ariaLabel}
-    title="Click me."
-    class="
-    cursor-pointer
+  class="
+    aspect-square
     flex
-    group
-    h-full
-    items-center
+    h-auto
     justify-center
-    leading-none
-    rounded-full
-    w-full
-    {classes}"
-    onclick={handleBoltClick}
-  >
-    <span
+    relative
+    {containerClasses}"
+>
+  {#if tag === "button"}
+    <button
+      aria-label={ariaLabel}
+      {title}
       class="
-      origin-center
-      transition-transform
-      text-maximumYellow
-      {lightningState === 'active'
-        ? 'scale-50000% hover:scale-500000% motion-reduce:scale-200% motion-reduce:hover:scale-200% '
-        : ''}
-      {character ? 'hidden group-hover:inline-flex' : 'flex w-full h-full'}
-      "
+        cursor-pointer
+        flex
+        group
+        h-full
+        items-center
+        justify-center
+        leading-none
+        rounded-full
+        w-full
+        {classes}"
+      onclick={handleBoltClick}
+      onmouseenter={(_e) => {
+        sfx.play("click");
+        if (onclick) {
+          onclick();
+        }
+      }}
     >
-      <LightningBolt />
-    </span>
-    <!-- optional character -->
-    <span
-      class={character
-        ? "leading-none inline-flex justify-center items-baseline group-hover:hidden "
-        : "hidden bg-red"}>{character}</span
-    >
-  </button>
-  {#if enableClickMe}
-    <div
-      bind:this={clickMe}
-      {...clickMeProps}
-      class="text-.9em top-105% left-0 absolute flex justify-center text-nowrap w-full transition-opacity"
-    >
-      <span>try me!</span>
-    </div>
+      <LightningBolt
+        {useImage}
+        classes="{lightningClasses} {character
+          ? 'hidden group-hover:inline-flex'
+          : 'flex w-full h-full'}"
+      />
+
+      <!-- optional character -->
+      <div
+        class={character
+          ? "leading-none inline-flex justify-center items-baseline group-hover:hidden "
+          : "hidden bg-red"}
+      >
+        {character}
+      </div>
+    </button>
+
+    {#if enableClickMe}
+      <div
+        bind:this={clickMe}
+        {...clickMeProps}
+        class="text-.9em top-105% left-0 absolute flex justify-center text-nowrap w-full transition-opacity"
+      >
+        try me!
+      </div>
+    {/if}
+  {/if}
+
+  <!-- inert version for when element is nested inside a link or parent button -->
+  {#if tag !== "button"}
+    <LightningBolt classes={lightningClasses} {useImage} />
   {/if}
 </div>
