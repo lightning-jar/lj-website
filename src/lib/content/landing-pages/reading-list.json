@@ -1,0 +1,12 @@
+{
+	"banner": {
+		"heading": "Reading List",
+		"subheading": "A curated list of things we're reading and thinking about."
+	},
+	"meta": {
+		"title": "Reading List",
+		"description": "Welcome to our reading list page. Here, you'll find a curated list of things we've read and found interesting.",
+		"robotsFollow": true,
+		"analyticsOn": true
+	}
+}

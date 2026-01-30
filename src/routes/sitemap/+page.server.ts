@@ -2,10 +2,11 @@ import { blogArticlesSitemapSection } from "$content/getters/getBlogArticles";
 import { builtWithSitemapSection } from "$content/getters/getBuiltWithContent";
 import { customerStoriesSitemapSection } from "$content/getters/getCustomerStories";
 import { homeSitemapSection } from "$content/getters/getHomeContent";
+import { readingListSitemapSection } from "$content/getters/getReadingList";
 import { servicesSitemapSection } from "$content/getters/getServicesContent";
-import { testimonialsSitemapSection } from "$content/getters/getTestimonialsContent";
 import { technologiesSitemapSection } from "$content/getters/getTechnologiesContent";
 import { termsSitemapSection } from "$content/getters/getTermsContent";
+import { testimonialsSitemapSection } from "$content/getters/getTestimonialsContent";
 
 const archiveSection = {
 	name: "Archive",
@@ -54,6 +55,7 @@ const sitemap = [
 	testimonialsSitemapSection,
 	termsSitemapSection,
 	archiveSection,
+	readingListSitemapSection,
 	sitemapSection,
 ];
 

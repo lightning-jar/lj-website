@@ -71,6 +71,7 @@ const pages = [
 	generateSiteMapXMLPage(`/blog`, "monthly", 0.25), // blog landing page
 	generateSiteMapXMLPage(`/built-with`, "monthly", 0.25), // built with
 	generateSiteMapXMLPage(`/customer-stories`, "monthly", 0.25), // customer stories landing page
+	generateSiteMapXMLPage(`/reading-list`, "monthly", 0.25), // reading list landing page
 	generateSiteMapXMLPage(`/services`, "monthly", 0.25), // services landing page
 	generateSiteMapXMLPage(`/technologies`, "monthly", 0.25), // technologies landing page
 	generateSiteMapXMLPage(`/terms`, "monthly", 0.25), // terms landing page

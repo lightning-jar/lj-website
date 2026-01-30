@@ -109,7 +109,7 @@
 	"featuredTechnologies": [
 		"svelte-sveltekit",
 		"typescript",
-		"turso",
+		"turso-sqlite",
 		"anthropic-claude",
 		"unocss",
 		"bun"

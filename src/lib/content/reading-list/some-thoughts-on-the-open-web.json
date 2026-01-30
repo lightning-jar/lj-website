@@ -1,0 +1,27 @@
+{
+	"author": {
+		"name": "Mark Nottingham",
+		"email": "mark@nottingham.org",
+		"mastodon": "@mnot@techpolicy.social",
+		"url": "https://www.mnot.net/personal/"
+	},
+	"comments": [""],
+	"excerpt": "We have to create an Internet where people want to publish content openly – for some definition of 'open.' Doing that may challenge the assumptions we've made about the Web as well as what we want 'open' to be. What's worked before may no longer create the incentive structure that leads to the greatest amount of content available to the greatest number of people for the greatest number of purposes.",
+	"id": "4VPoclkNVgLYjHiQo9Rsr",
+	"image": {
+		"src": "",
+		"alt": ""
+	},
+	"publishDate": "2026-01-20",
+	"repostDate": "2026-01-20",
+	"slug": "some-thoughts-on-the-open-web",
+	"source": {
+		"publicationName": "Blog",
+		"publicationUrl": "https://www.mnot.net/blog/"
+	},
+	"summary": "Web policy and governance expert Mark Nottingham reflects on the concept of \"The Open Web,\" particularly focusing on open access to information and how AI is disrupting the traditional incentive structures that have kept content freely available online.",
+	"tags": ["Open Web", "Policy", "AI"],
+	"title": "Some Thoughts on the Open Web",
+	"type": "Blog Article",
+	"url": "https://www.mnot.net/blog/2026/01/20/open_web"
+}

@@ -1,0 +1,24 @@
+{
+	"author": {
+		"name": "Sylvain Kerkour",
+		"email": "",
+		"url": "https://kerkour.com/"
+	},
+	"comments": [],
+	"excerpt": "I love Rust and I love SQLite, so you can imagine that I was pretty excited when I learned that \"SQLite was being rewritten in Rust\": Turso.",
+	"id": "turso-sqlite-deep-dive",
+	"image": {
+		"alt": "In-process vs networked database"
+	},
+	"publishDate": "2026-01-30",
+	"repostDate": "2026-01-30",
+	"slug": "turso-sqlite",
+	"source": {
+		"publicationName": "Sylvain Kerkour's Blog",
+		"publicationUrl": "https://kerkour.com/blog"
+	},
+	"summary": "A deep dive into Turso, a new database engine compatible with SQLite's file format but rewritten in Rust. The article explores why Turso is needed, how it addresses SQLite's pain points (concurrent writes, MVCC, async I/O), and why a database that scales from in-process to networked is the future for modern development.",
+	"tags": ["Rust", "SQLite", "Turso", "Database", "Performance"],
+	"title": "Deep dive into Turso, the \"SQLite rewrite in Rust\"",
+	"url": "https://kerkour.com/turso-sqlite"
+}
