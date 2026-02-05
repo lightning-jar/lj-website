@@ -40,6 +40,7 @@ export async function load({ params }) {
 		glossary: fm?.glossary ?? [],
 		image: fm?.image ?? "",
 		html,
+		sources: fm?.sources ?? [],
 		nextArticleSlug,
 		previousArticleSlug,
 	};

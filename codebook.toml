@@ -3,12 +3,14 @@ dictionaries = [
     "en_gb",
 ]
 words = [
+  "affordance",
     "automatable",
     "bindable",
     "changefreq",
     "codebook",
     "contentinfo",
     "favicons",
+    "frontmatter",
     "focusable",
     "FX",
     "Googlebot",
@@ -28,6 +30,7 @@ words = [
     "nosnippet",
     "notranslate",
     "onmouseenter",
+    "Peckham",
     "Pimcore",
     "popovertarget",
     "ROI",

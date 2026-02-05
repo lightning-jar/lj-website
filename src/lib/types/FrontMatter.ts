@@ -1,3 +1,5 @@
+import type { ArticleSource } from "$types/ArticleSource";
+
 export interface FrontMatter {
 	[key: string]: unknown;
 	title?: string;
@@ -13,6 +15,7 @@ export interface FrontMatter {
 		text: string;
 		attribution?: string;
 	};
+	sources?: ArticleSource[];
 	glossary?: {
 		term: string;
 		definition: string;

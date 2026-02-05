@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import { addIntegration } from "@sentry/sveltekit";
 
 let { data } = $props();
@@ -7,7 +7,22 @@ let formattedDate = $derived(
 	data.meta?.date ? new Date(data?.meta.date).toLocaleDateString() : "",
 );
 
-$inspect(data.glossary);
+import type { ArticleSource } from "$types/ArticleSource";
+
+function getAttributionFromSource(source: ArticleSource): string {
+	const array: string[] = [];
+	if (source?.publication) {
+		array.push(source.publication);
+	}
+	if (source?.author) {
+		array.push(source.author);
+	}
+	if (source?.date) {
+		const formattedDate = new Date(source.date)?.toLocaleDateString() || "";
+		if (formattedDate) array.push(formattedDate);
+	}
+	return array.join(", ");
+}
 </script>
 
 <!-- skip link  -->
@@ -117,6 +132,31 @@ $inspect(data.glossary);
                   {title}
                 </a>
               </div>
+            {/each}
+          </div>
+        </div>
+      {/if}
+
+      <!-- sources -->
+      {#if data.sources?.[0]?.title}
+        <div>
+          <h2 class="font-serif font-700 text-17px mb-3 px-3">Sources</h2>
+          <div
+            class="w-full border border-slate-100/10 bg-slate-100/5 rounded px-3 pt-4 pb-5 grid grid-cols-1 gap-3"
+          >
+            {#each data.sources as source}
+              {#if source.title && source.url}
+                {@const attribution = getAttributionFromSource(source)}
+                <div>
+                  <a
+                    class="block text-maximumYellow opacity-90 font-700 leading-tight mb-2 underline underline-offset-4 hover:opacity-100"
+                    href={source.url}
+                  >
+                    {source.title}
+                  </a>
+                  <div class="opacity-90 text-0.9em">{attribution}</div>
+                </div>
+              {/if}
             {/each}
           </div>
         </div>
