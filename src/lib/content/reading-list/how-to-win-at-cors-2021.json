@@ -1,0 +1,26 @@
+{
+	"author": {
+		"name": "Jake Archibald",
+		"email": "jaffathecake@gmail.com",
+		"mastodon": "@jaffathecake@mastodon.social",
+		"url": "https://jakearchibald.com/who/"
+	},
+	"comments": [""],
+	"excerpt": "A practical, opinionated deep dive on CORS—why it exists, how it works, and how to configure headers (including credentials, caching, and preflights) without shooting yourself in the foot.",
+	"id": "jake-archibald-how-to-win-at-cors-2021",
+	"image": {
+		"alt": "Jake Archibald in a garden with a black cat"
+	},
+	"publishDate": "2021-10-01",
+	"repostDate": "2026-02-05",
+	"slug": "how-to-win-at-cors",
+	"source": {
+		"publicationName": "Jake Archibald — Blog",
+		"publicationUrl": "https://jakearchibald.com/"
+	},
+	"summary": "Jake Archibald explains CORS from first principles—origins vs sites, why credentials complicate cross-origin requests, and how the CORS header model evolved. He shows when CORS applies, how to use Access-Control-Allow-Origin, credentials with Access-Control-Allow-Credentials, the importance of Vary for caches/CDNs, and how preflights work for unusual methods/headers. Includes a hands-on playground and gotchas (e.g., method casing in Chrome, header exposure, caching pitfalls).",
+	"tags": ["Web", "Security", "CORS", "HTTP", "Browsers"],
+	"title": "How to win at CORS",
+	"type": "Technical Article",
+	"url": "https://jakearchibald.com/2021/cors/"
+}

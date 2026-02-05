@@ -1,0 +1,27 @@
+{
+	"author": {
+		"name": "Megan Chan",
+		"email": "",
+		"mastodon": "",
+		"url": "https://www.nngroup.com/people/megan-chan/"
+	},
+	"comments": [""],
+	"excerpt": "A mental model is what users believe about a system. Aligning interfaces with users’ existing expectations reduces errors and confusion; when you must deviate, clearly teach the new model.",
+	"id": "nng-mental-models-2024-01-26",
+	"image": {
+		"src": "",
+		"alt": ""
+	},
+	"publishDate": "2024-01-26",
+	"repostDate": "2026-02-05",
+	"slug": "mental-models-nng",
+	"source": {
+		"publicationName": "Nielsen Norman Group",
+		"publicationUrl": "https://www.nngroup.com/"
+	},
+	"summary": "NN/g explains mental models in UX: users form beliefs about how systems work based on prior experiences, which guide their predictions and actions. Common patterns (ecommerce carts, the Back button, single-site search) illustrate how mismatches cause usability issues. Because mental-model inertia is strong, designers should favor established conventions and only innovate when clearly better, while teaching new concepts succinctly through onboarding, help, and testing. Think-aloud user testing helps reveal users’ mental models so teams can fix IA, labels, and flows.",
+	"tags": ["UX", "Usability", "Mental Models", "Design Patterns"],
+	"title": "Mental Models",
+	"type": "Article",
+	"url": "https://www.nngroup.com/articles/mental-models/"
+}

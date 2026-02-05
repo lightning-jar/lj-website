@@ -1,0 +1,32 @@
+{
+	"author": {
+		"name": "Sean Goedecke",
+		"email": "",
+		"mastodon": "",
+		"url": "https://www.seangoedecke.com/about"
+	},
+	"comments": [""],
+	"excerpt": "You can’t design real software well without intimate knowledge of the codebase. Generic advice is mostly useless for existing systems; concrete constraints dominate.",
+	"id": "sean-goedecke-you-cant-design-software-you-dont-work-on",
+	"image": {
+		"src": "",
+		"alt": ""
+	},
+	"publishDate": "2026-01-01",
+	"repostDate": "2026-02-05",
+	"slug": "you-cant-design-software-you-dont-work-on",
+	"source": {
+		"publicationName": "seangoedecke.com",
+		"publicationUrl": "https://www.seangoedecke.com/"
+	},
+	"summary": "Sean Goedecke argues that meaningful software design for large, established systems can only be done by engineers who work on them. Concrete details—module boundaries, data availability, coupling, and historical constraints—outweigh generic patterns and principles. Useful design discussions are small, detail-heavy, and often boring to outsiders. Generic design still has roles: greenfield projects, tie-breaking among acceptable concrete options, and company-wide consistency or platform choices. He critiques detached architect roles with no delivery accountability and proposes that those who design should also own outcomes.",
+	"tags": [
+		"Software Design",
+		"Architecture",
+		"Engineering Practice",
+		"Large Codebases"
+	],
+	"title": "You Can't Design Software You Don't Work On",
+	"type": "Blog Article",
+	"url": "https://www.seangoedecke.com/you-cant-design-software-you-dont-work-on/"
+}
