@@ -62,6 +62,7 @@ beforeEach(() => {
 	class IO implements IntersectionObserver {
 		root: Element | null;
 		rootMargin: string;
+		scrollMargin = "0px";
 		thresholds: number[];
 		callback: IntersectionObserverCallback;
 		observed = new Set<Element>();
