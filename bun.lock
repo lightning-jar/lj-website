@@ -5,26 +5,27 @@
     "": {
       "name": "slx-doc-editor",
       "dependencies": {
-        "@sentry/sveltekit": "latest",
-        "biome": "latest",
-        "happy-dom": "latest",
-        "yaml": "latest",
+        "@sentry/sveltekit": "^10.38.0",
+        "biome": "^0.3.3",
+        "happy-dom": "^20.5.0",
+        "yaml": "^2.8.2",
       },
       "devDependencies": {
-        "@biomejs/biome": "latest",
-        "@sveltejs/adapter-vercel": "latest",
-        "@sveltejs/kit": "latest",
-        "@sveltejs/vite-plugin-svelte": "latest",
-        "@unocss/extractor-svelte": "latest",
-        "@unocss/preset-web-fonts": "latest",
-        "@unocss/preset-wind4": "latest",
-        "baseline-browser-mapping": "latest",
-        "nanoid": "latest",
-        "svelte": "latest",
-        "svelte-check": "latest",
-        "typescript": "latest",
-        "unocss": "latest",
-        "vite": "latest",
+        "@biomejs/biome": "^2.3.14",
+        "@sveltejs/adapter-vercel": "^6.3.1",
+        "@sveltejs/kit": "^2.50.2",
+        "@sveltejs/vite-plugin-svelte": "^6.2.4",
+        "@types/bun": "^1.3.12",
+        "@unocss/extractor-svelte": "^66.6.0",
+        "@unocss/preset-web-fonts": "^66.6.0",
+        "@unocss/preset-wind4": "^66.6.0",
+        "baseline-browser-mapping": "^2.9.19",
+        "nanoid": "^5.1.6",
+        "svelte": "^5.49.2",
+        "svelte-check": "^4.3.6",
+        "typescript": "^5.9.3",
+        "unocss": "^66.6.0",
+        "vite": "^7.3.1",
       },
     },
   },
@@ -342,6 +343,8 @@
 
     "@sveltejs/vite-plugin-svelte-inspector": ["@sveltejs/vite-plugin-svelte-inspector@5.0.1", "", { "dependencies": { "debug": "^4.4.1" }, "peerDependencies": { "@sveltejs/vite-plugin-svelte": "^6.0.0-next.0", "svelte": "^5.0.0", "vite": "^6.3.0 || ^7.0.0" } }, "sha512-ubWshlMk4bc8mkwWbg6vNvCeT7lGQojE3ijDh3QTR6Zr/R+GXxsGbyH4PExEPpiFmqPhYiVSVmHBjUcVc1JIrA=="],
 
+    "@types/bun": ["@types/bun@1.3.12", "", { "dependencies": { "bun-types": "1.3.12" } }, "sha512-DBv81elK+/VSwXHDlnH3Qduw+KxkTIWi7TXkAeh24zpi5l0B2kUg9Ga3tb4nJaPcOFswflgi/yAvMVBPrxMB+A=="],
+
     "@types/connect": ["@types/connect@3.4.38", "", { "dependencies": { "@types/node": "*" } }, "sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug=="],
 
     "@types/cookie": ["@types/cookie@0.6.0", "", {}, "sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA=="],
@@ -471,6 +474,8 @@
     "braces": ["braces@3.0.3", "", { "dependencies": { "fill-range": "^7.1.1" } }, "sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA=="],
 
     "browserslist": ["browserslist@4.27.0", "", { "dependencies": { "baseline-browser-mapping": "^2.8.19", "caniuse-lite": "^1.0.30001751", "electron-to-chromium": "^1.5.238", "node-releases": "^2.0.26", "update-browserslist-db": "^1.1.4" }, "bin": { "browserslist": "cli.js" } }, "sha512-AXVQwdhot1eqLihwasPElhX2tAZiBjWdJ9i/Zcj2S6QYIjkx62OKSfnobkriB81C3l4w0rVy3Nt4jaTBltYEpw=="],
+
+    "bun-types": ["bun-types@1.3.12", "", { "dependencies": { "@types/node": "*" } }, "sha512-HqOLj5PoFajAQciOMRiIZGNoKxDJSr6qigAttOX40vJuSp6DN/CxWp9s3C1Xwm4oH7ybueITwiaOcWXoYVoRkA=="],
 
     "cac": ["cac@6.7.14", "", {}, "sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ=="],
 
