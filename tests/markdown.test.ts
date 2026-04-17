@@ -47,7 +47,7 @@ build-number: 42
 `;
 		expect(getFrontMatter(md)).toEqual({
 			"seo.title": "Site",
-			"build-number": "42",
+			"build-number": 42,
 		});
 	});
 });
