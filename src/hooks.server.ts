@@ -1,12 +1,10 @@
-// serverless Functions
-/** @type {import('@sveltejs/adapter-vercel').Config} */
-export const config = {
-	runtime: "nodejs22.x",
-};
-
-import { sequence } from "@sveltejs/kit/hooks";
-
 import { handleErrorWithSentry, sentryHandle } from "@sentry/sveltekit";
+import { sequence } from "@sveltejs/kit/hooks";
+import type { Config } from "@sveltejs/adapter-vercel";
+
+export const config: Config = {
+	runtime: "nodejs24.x",
+};
 
 // If you have custom handlers, make sure to place them after `sentryHandle()` in the `sequence` function.
 export const handle = sequence(sentryHandle());

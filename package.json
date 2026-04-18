@@ -24,7 +24,8 @@
 		"@unocss/extractor-svelte": "^66.6.8",
 		"@unocss/preset-web-fonts": "^66.6.8",
 		"@unocss/preset-wind4": "^66.6.8",
-		"baseline-browser-mapping": "^2.10.19",
+		"@vercel/config": "^0.2.1",
+		"happy-dom": "^20.9.0",
 		"nanoid": "^5.1.9",
 		"svelte": "^5.55.4",
 		"svelte-check": "^4.4.6",
@@ -34,8 +35,6 @@
 	},
 	"dependencies": {
 		"@sentry/sveltekit": "^10.49.0",
-		"biome": "^0.3.3",
-		"happy-dom": "^20.9.0",
 		"yaml": "^2.8.3"
 	},
 	"trustedDependencies": [
