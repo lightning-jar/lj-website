@@ -1,24 +1,24 @@
 <script lang="ts">
-	// components
-	import LightningButton from "$components/LightningButton.svelte";
+// components
+import LightningButton from "$components/LightningButton.svelte";
 
-	// props
-	let { data } = $props();
+// props
+let { data } = $props();
 
-	// helpers
-	function clickLightningButton() {
-		const lightningButton = document.querySelector(
-			"[data-lightning-button]",
-		) as HTMLButtonElement;
-		lightningButton?.click();
-	}
+// helpers
+function clickLightningButton() {
+	const lightningButton = document.querySelector(
+		"[data-lightning-button]",
+	) as HTMLButtonElement;
+	lightningButton?.click();
+}
 
-	function incrementPanel() {
-		activePanel = (activePanel + 1) % panelsCount;
-	}
+function incrementPanel() {
+	activePanel = (activePanel + 1) % panelsCount;
+}
 
-	let activePanel = $state(0);
-	let panelsCount: number = $derived(data.testimonials?.length ?? 0);
+let activePanel = $state(0);
+let panelsCount: number = $derived(data.testimonials?.length ?? 0);
 </script>
 
 <div class="page-x-padding min-h-screen">
