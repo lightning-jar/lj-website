@@ -1,16 +1,13 @@
 // src/routes/sitemap.xml/+server.ts
 
 // env variables
-import { VERCEL_PROJECT_PRODUCTION_URL } from "$env/static/private";
+import { ENV } from "varlock/env";
 
 // types
 import type { RequestHandler } from "@sveltejs/kit";
 import type { SitemapXMLFrequency, SitemapXMLPage } from "$types/Sitemap";
 
-// const isProduction = VERCEL_ENV === "production";
-const productionUrl = VERCEL_PROJECT_PRODUCTION_URL
-	? VERCEL_PROJECT_PRODUCTION_URL
-	: "www.lightningjar.com";
+const productionUrl = ENV.VERCEL_PROJECT_PRODUCTION_URL || "www.lightningjar.com";
 
 // get data for blog
 import { allBlogArticleSlugs } from "$content/getters/getBlogArticles";

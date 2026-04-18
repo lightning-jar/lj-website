@@ -1,7 +1,7 @@
 {
 	"name": "lj-website",
 	"private": true,
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
@@ -9,9 +9,9 @@
 		"lint": "bunx biome lint --write .",
 		"build": "vite build",
 		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"prepare": "varlock typegen && svelte-kit sync || echo ''",
+		"check": "varlock typegen && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "varlock typegen && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test": "bun test",
 		"test:watch": "bun test --watch"
 	},
@@ -24,6 +24,7 @@
 		"@unocss/extractor-svelte": "^66.6.8",
 		"@unocss/preset-web-fonts": "^66.6.8",
 		"@unocss/preset-wind4": "^66.6.8",
+		"@varlock/vite-integration": "^0.2.10",
 		"@vercel/config": "^0.2.1",
 		"happy-dom": "^20.9.0",
 		"nanoid": "^5.1.9",
@@ -35,6 +36,7 @@
 	},
 	"dependencies": {
 		"@sentry/sveltekit": "^10.49.0",
+		"varlock": "^0.9.0",
 		"yaml": "^2.8.3"
 	},
 	"trustedDependencies": [

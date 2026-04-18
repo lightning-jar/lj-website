@@ -8,11 +8,3 @@ declare namespace App {
 	// interface PrivateEnv {}
 	// interface PublicEnv {}
 }
-
-// Vercel-provided environment variables. These are injected at runtime by Vercel
-// but are not always present in local `.env` files, so we declare them here so
-// TypeScript can resolve them via `$env/static/private`.
-declare module "$env/static/private" {
-	export const VERCEL_ENV: string;
-	export const VERCEL_PROJECT_PRODUCTION_URL: string;
-}
