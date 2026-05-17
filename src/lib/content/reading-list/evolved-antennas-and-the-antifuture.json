@@ -1,0 +1,27 @@
+{
+	"author": {
+		"name": "Eric W. Bailey",
+		"email": "",
+		"mastodon": "",
+		"url": "https://ericwbailey.website/"
+	},
+	"comments": [""],
+	"excerpt": "Being open and transparent is a radical strength, not a weakness. We should not throw this away in the pursuit of a convenient perceived inevitability.",
+	"id": "ericwbailey-evolved-antennas-2026-05-11",
+	"image": {
+		"src": "",
+		"alt": ""
+	},
+	"publishDate": "2026-05-11",
+	"repostDate": "2026-05-17",
+	"slug": "evolved-antennas-and-the-antifuture",
+	"source": {
+		"publicationName": "ericwbailey.website",
+		"publicationUrl": "https://ericwbailey.website/"
+	},
+	"summary": "Accessibility advocate Eric W. Bailey draws a line from NASA's evolutionary \"evolved antennas\"—optimized purely for function with no regard for human legibility—to a possible future in which LLM-optimized code becomes terse, cryptic, and decoupled from human understanding. He argues that cost and efficiency pressures (token economics, the \"caveman prompt\") push toward inaccessible-by-default output, that this functions as both implicit and explicit control over who can use and modify the web, and that the openness and transparency of the public internet and open source are strengths worth deliberately defending.",
+	"tags": ["LLMs", "Open Web", "Accessibility", "Craft"],
+	"title": "Evolved antennas, LLM-generated code, and a potential antifuture",
+	"type": "Blog Article",
+	"url": "https://ericwbailey.website/published/evolved-antennas-llm-generated-code-and-a-potential-antifuture/"
+}

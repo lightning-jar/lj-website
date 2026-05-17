@@ -1,0 +1,27 @@
+{
+	"author": {
+		"name": "Wes Bos & Scott Tolinski",
+		"email": "",
+		"mastodon": "",
+		"url": "https://syntax.fm/"
+	},
+	"comments": [""],
+	"excerpt": "This was not somebody getting any of their credentials stolen at all.",
+	"id": "syntax-1004-tanhacked-2026-05-13",
+	"image": {
+		"src": "",
+		"alt": ""
+	},
+	"publishDate": "2026-05-13",
+	"repostDate": "2026-05-17",
+	"slug": "tanhacked-syntax-1004",
+	"source": {
+		"publicationName": "Syntax.fm",
+		"publicationUrl": "https://syntax.fm/"
+	},
+	"summary": "Wes Bos and Scott Tolinski break down \"Mini Shai Hulud,\" a supply chain attack that hit popular JavaScript packages including TanStack. They explain how attackers abused GitHub Actions cache poisoning via pull_request_target to steal npm publishing credentials—without ever compromising a maintainer's password—then trace how the worm propagated across packages, including a destructive dead man's switch, and cover practical protections for both maintainers and consumers. Linked to the readable episode transcript.",
+	"tags": ["Supply Chain Security", "npm", "GitHub Actions", "Security"],
+	"title": "TanHacked — Syntax #1004",
+	"type": "Podcast Transcript",
+	"url": "https://syntax.fm/show/1004/tanhacked/transcript"
+}

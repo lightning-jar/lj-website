@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- New blog article: "Pimcore or OpenDXP: A Fork in the Road for Long-Tenured DXP Stacks" (`src/lib/content/blog/20260517-opendxp-pimcore-fork.md`).
+- Technology entries: OpenDXP, Socket.dev, Snyk, Varlock, 1Password, Fallow.
+- Reading-list entries: "Evolved antennas, LLM-generated code, and a potential antifuture" (Eric W. Bailey), "How I use LLMs as a staff engineer in 2026" (Sean Goedecke), "TanHacked — Syntax #1004" (Wes Bos & Scott Tolinski, transcript).
+- Optional `relatedArticle` field on the `Technology` type, rendered on `/technologies`; Pimcore and OpenDXP entries link to the OpenDXP fork article.
+- "Reading List" link in the global nav, between Customer Stories and Technologies.
+- "2026 update" tout on `/archive/introduction-to-pimcore` linking to the OpenDXP fork article.
+
+### Changed
+- `pimcore.json`: licensing copy updated for the GPLv3 → POCL transition and Pimcore 12 implications; `license` field revised accordingly.
+
 ## [0.1.0] - 2026-04-18
 
 ### Added

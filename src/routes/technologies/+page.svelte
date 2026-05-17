@@ -44,6 +44,18 @@ let { data } = $props();
               <p class="opacity-90 mb-3">
                 {(technology.description ?? []).join(" ")}
               </p>
+              <!-- related article -->
+              {#if technology.relatedArticle}
+                <p class="opacity-90 mb-3">
+                  Related reading:
+                  <a
+                    href={technology.relatedArticle.href}
+                    class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4"
+                  >
+                    {technology.relatedArticle.title}
+                  </a>
+                </p>
+              {/if}
               <!-- use cases -->
               <div class="opacity-90">
                 <h4 class="font-700 mb-2 leading-none text-maximumYellow">

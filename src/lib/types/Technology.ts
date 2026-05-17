@@ -10,6 +10,10 @@ export interface Technology {
 	license?: string;
 	logo?: Image;
 	link?: Link;
+	relatedArticle?: {
+		href: string;
+		title: string;
+	};
 	supercategory?: string;
 	useCases?: string[];
 }

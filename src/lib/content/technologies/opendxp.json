@@ -1,0 +1,26 @@
+{
+	"id": "opendxp",
+	"name": "OpenDXP",
+	"shortDescription": "Community-driven, GPLv3 fork of Pimcore Community Edition for PIM, DAM, headless CMS, and commerce.",
+	"description": [
+		"OpenDXP (Open Data & Digital Experience Platform) is a community-driven fork of Pimcore Community Edition, made public in February 2026. It is forked from the last GPLv3 Pimcore CE release (v11.5.13) and is licensed under GPLv3 in perpetuity, preserving an open-source continuation of the platform after Pimcore's move to the source-available POCL license.",
+		"It is architecturally faithful to Pimcore 11—same Symfony foundation, same data-modeling approach, same admin-bundle UI model—and carries the full DXP scope: Product Information Management (PIM), Digital Asset Management (DAM), headless CMS, and composable commerce. The project is initiated and sponsored by DACHCOM.DIGITAL, a Swiss digital agency with a long history of Pimcore implementation work.",
+		"We recommend OpenDXP for clients on established Pimcore Community Edition deployments who want to stay on GPLv3, avoid the Pimcore 12 license change and ExtJS admin-UI rewrite, and keep their existing copyleft dependencies legally compliant.",
+		"Licensing notes: GPLv3 in perpetuity; community-governed; independent of and not endorsed by Pimcore GmbH."
+	],
+	"license": "Open Source (GPLv3)",
+	"category": "Digital Experience Platform (PIM, DAM, CMS, Commerce)",
+	"link": {
+		"href": "https://www.opendxp.io/en"
+	},
+	"relatedArticle": {
+		"href": "/blog/opendxp-pimcore-fork",
+		"title": "Pimcore or OpenDXP: A Fork in the Road for Long-Tenured DXP Stacks"
+	},
+	"useCases": [
+		"GPLv3-preserving migration path for existing Pimcore CE deployments",
+		"Multi-language, multi-catalog product data with governance",
+		"Omnichannel content and asset syndication without vendor license changes"
+	],
+	"supercategory": "content-management-pim"
+}

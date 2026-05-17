@@ -1,0 +1,20 @@
+{
+	"id": "socket-dev",
+	"name": "Socket.dev",
+	"shortDescription": "Software supply chain security that detects malicious and risky open-source dependencies.",
+	"description": [
+		"We use Socket.dev to defend the software supply chain—proactively detecting malicious or risky open-source packages: typosquats, install-script abuse, obfuscated code, and hijacked maintainer releases, often before a CVE is ever published.",
+		"Socket.dev integrates into pull requests and CI, flagging dangerous dependency changes at review time so threats are caught before they reach production rather than after."
+	],
+	"useCases": [
+		"Blocking malicious or typosquatted packages in pull requests",
+		"Surfacing risky dependency behaviors (install scripts, network, filesystem access)",
+		"Continuous supply-chain monitoring across the dependency graph"
+	],
+	"license": "Commercial (free tier for open source)",
+	"category": "Software Supply Chain Security",
+	"link": {
+		"href": "https://socket.dev/"
+	},
+	"supercategory": "auth-security"
+}

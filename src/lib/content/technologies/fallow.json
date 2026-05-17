@@ -1,0 +1,20 @@
+{
+	"id": "fallow",
+	"name": "Fallow",
+	"shortDescription": "Codebase intelligence for TypeScript/JavaScript—dead code, duplication, and refactor prioritization.",
+	"description": [
+		"We use Fallow for codebase intelligence on TypeScript and JavaScript projects—detecting dead code (unused files, exports, and dependencies), surfacing duplication before it spreads, and scoring complexity and health to prioritize refactoring.",
+		"Fallow runs as a CLI, a VS Code extension, and an MCP integration for coding agents, so the same analysis is available in CI, in the editor, and to AI assistants. An optional paid runtime-intelligence layer adds production hot/cold path data as evidence for safe deletions."
+	],
+	"useCases": [
+		"Removing dead and cold code with confidence",
+		"Catching duplication and complexity before it compounds",
+		"Prioritizing refactoring with health scoring and runtime evidence"
+	],
+	"license": "Open Source (MIT static analysis; paid runtime-intelligence layer)",
+	"category": "Codebase Intelligence & Code Quality",
+	"link": {
+		"href": "https://docs.fallow.tools/"
+	},
+	"supercategory": "monitoring-testing"
+}

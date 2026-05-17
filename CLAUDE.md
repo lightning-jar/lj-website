@@ -36,6 +36,8 @@ All content is stored in git (no database):
 - **Blog posts**: Markdown files in `src/lib/content/blog/` with YAML frontmatter
 - **Landing pages**: JSON files in `src/lib/content/landing-pages/`
 - **Customer stories**: JSON in `src/lib/content/customer-stories/`
+- **Reading list**: `Article`-shaped JSON in `src/lib/content/reading-list/` (title, author, source, summary, excerpt, tags, url)
+- **Technologies**: JSON in `src/lib/content/technologies/`, grouped by `supercategory` (defined in `src/lib/content/technologySuperCategories/`)
 
 Content is loaded via getter functions in `src/lib/content/getters/` using `import.meta.glob()`. A custom `parseMarkdown()` utility handles frontmatter extraction and HTML conversion.
 

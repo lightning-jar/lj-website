@@ -1,0 +1,21 @@
+{
+	"id": "varlock",
+	"name": "Varlock",
+	"shortDescription": "Schema-driven environment variable management with validation, typing, and secret safety.",
+	"description": [
+		"We use Varlock to manage environment variables from a single committed schema (.env.schema) with decorators for required, typed, and sensitive values—replacing framework-native env access with one consistent, validated source of truth.",
+		"Varlock validates configuration at build and runtime, generates TypeScript types, and keeps secrets explicitly marked and out of logs—giving us uniform, safe config handling across projects regardless of host or framework.",
+		"For sensitive values it integrates with 1Password through the @varlock/1password-plugin, resolving op:// secret references at load time so credentials stay in a vault rather than in plaintext .env files."
+	],
+	"useCases": [
+		"Schema-validated, typed environment configuration across environments",
+		"Explicitly marking and protecting sensitive secrets",
+		"Catching missing or misconfigured env vars before deploy"
+	],
+	"license": "Open Source (MIT)",
+	"category": "Environment & Secrets Management",
+	"link": {
+		"href": "https://varlock.dev"
+	},
+	"supercategory": "auth-security"
+}

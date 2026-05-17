@@ -88,6 +88,30 @@ const notes = [
   <p class="max-w-prose">This podcast episode was recorded in April 2018</p>
 </div>
 
+<div class="page-x-padding pb-6">
+  <aside
+    class="max-w-prose border border-maximumYellow/50 bg-maximumYellow/5 rounded p-4 sm:p-5"
+  >
+    <p
+      class="text-13px uppercase tracking-wide font-700 text-maximumYellow mb-1"
+    >
+      2026 update
+    </p>
+    <p class="max-w-prose">
+      This episode is from 2018, and Pimcore's licensing has changed
+      significantly since then. The Community Edition moved from GPLv3 to the
+      source-available Pimcore Open Core License, and a community fork —
+      OpenDXP — now continues the GPLv3 codebase.{" "}
+      <a
+        href="/blog/opendxp-pimcore-fork"
+        class="text-maximumYellow underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4"
+      >
+        Read our analysis: Pimcore or OpenDXP →
+      </a>
+    </p>
+  </aside>
+</div>
+
 <div class="page-x-padding pb-24 grid grid-cols-1 gap-12">
   <section class="max-w-prose">
     <h2 class="text-24px mb-2 font-700 font-serif">Let's Talk Pimcore</h2>

@@ -3,14 +3,18 @@
 	"name": "Pimcore",
 	"shortDescription": "Enterprise platform unifying PIM, DAM, headless CMS, and customer data capabilities.",
 	"description": [
-		"An open-source, enterprise-grade platform that unifies Product Information Management (PIM), Digital Asset Management (DAM), headless CMS, and customer data capabilities in one stack. Pimcore shines when you need a single source of truth for complex catalogs, omnichannel content, and assets—powering consistent experiences across web, mobile, marketplaces, and POS.",
+		"An enterprise-grade platform that unifies Product Information Management (PIM), Digital Asset Management (DAM), headless CMS, and customer data capabilities in one stack. Pimcore shines when you need a single source of truth for complex catalogs, omnichannel content, and assets—powering consistent experiences across web, mobile, marketplaces, and POS.",
 		"We choose Pimcore for data-heavy builds, multi-language catalogs, and intricate data modeling with strict governance. Its API-first approach pairs well with modern frontends (e.g., SvelteKit, Vue/Nuxt, Astro) and enables scalable, composable architectures without locking you into a single frontend or commerce engine.",
-		"Licensing notes: GPLv3 with commercial license available; self-hosting supported for data residency and compliance."
+		"Licensing change (2025): Pimcore Community Edition moved from GPLv3 to the source-available Pimcore Open Core License (POCL). Version 2024.4 is the last GPLv3 CE release; 2025.1 and later are POCL. Pimcore 12 additionally removes the legacy ExtJS admin UI and requires replacing copyleft dependencies before upgrading. For teams that need to remain on GPLv3, the community fork OpenDXP continues the v11 codebase—see our analysis in the related reading below."
 	],
-	"license": "Open Source (GPLv3; commercial license available)",
+	"license": "Source-available since 2025 (Pimcore Open Core License; GPLv3 through v2024.4)",
 	"category": "Digital Experience Platform (PIM, DAM, CMS, CDP, Commerce)",
 	"link": {
 		"href": "https://pimcore.com/"
+	},
+	"relatedArticle": {
+		"href": "/blog/opendxp-pimcore-fork",
+		"title": "Pimcore or OpenDXP: A Fork in the Road for Long-Tenured DXP Stacks"
 	},
 	"useCases": [
 		"Multi-language, multi-catalog product data with governance",

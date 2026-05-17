@@ -1,0 +1,20 @@
+{
+	"id": "snyk",
+	"name": "Snyk",
+	"shortDescription": "Developer security platform for dependency, code, container, and IaC vulnerabilities.",
+	"description": [
+		"We use Snyk to find and fix known vulnerabilities across the stack—open-source dependencies (SCA), first-party code (SAST), containers, and infrastructure as code—mapped against its curated vulnerability database.",
+		"Snyk integrates with the repository and CI/CD, opening automated fix pull requests and enforcing license and security policy gates without slowing delivery."
+	],
+	"useCases": [
+		"Dependency (SCA) vulnerability scanning with automated fix PRs",
+		"Static analysis (SAST) of first-party code in CI",
+		"Container image and infrastructure-as-code misconfiguration scanning"
+	],
+	"license": "Commercial (free tier available)",
+	"category": "Developer Security Platform",
+	"link": {
+		"href": "https://snyk.io/"
+	},
+	"supercategory": "auth-security"
+}
