@@ -82,7 +82,7 @@ sources:
     url: "https://thenewstack.io/linux-foundation-forks-the-open-source-redis-as-valkey/"
 ---
 
-Over the last eighteen months, organizations running Pimcore have been handed a decision their original technology selection did not anticipate. The platform they adopted under the GNU General Public License v3 — the platform many of them have customized, integrated, and operated for the better part of a decade — has been relicensed. It is no longer open source. The admin UI most of those customizations were written against has been removed. And the upgrade path to the new major version requires auditing and replacing every copyleft third-party dependency in the codebase.
+Over the last eighteen months, organizations running Pimcore have been handed a decision their original technology selection did not anticipate. The platform they adopted under the GNU General Public License v3, the platform many of them have customized, integrated, and operated for the better part of a decade has been relicensed. It is no longer open source. The admin UI most of those customizations were written against has been removed. And the upgrade path to the new major version requires auditing and replacing every copyleft third-party dependency in the codebase.
 
 At the same time, a community-driven fork of Pimcore Community Edition has appeared and is now publicly available under the original GPLv3 license. It is called [OpenDXP](https://www.opendxp.io/en), and it was launched in February 2026 by a Swiss agency, [DACHCOM.DIGITAL](https://www.dachcom.com/de-ch), with the explicit purpose of preserving a GPLv3-licensed continuation of the platform.
 
@@ -99,25 +99,25 @@ In spring 2025, Pimcore GmbH announced that the Pimcore Community Edition would 
 
 POCL is explicitly **not** an open-source license under the Open Source Initiative's definition. Pimcore and Pimcore's partners describe it as "source-available": you can read the code, you can customize it, you can build extensions on top of it, and you can operate it commercially up to a revenue threshold of **€5 million in global annual revenue**. Above that threshold, a commercial license from Pimcore is required. The license also restricts redistribution and prohibits offering Pimcore core as a SaaS without a license.
 
-For organizations that originally selected Pimcore *because* it was GPLv3, the relevant point is not whether POCL is reasonable as a license — for many businesses it will be. The relevant point is that it is a different license than the one the decision was made under, and that change is not optional for anyone wishing to upgrade past 2024.4.
+For organizations that originally selected Pimcore *because* it was GPLv3, the relevant point is not whether POCL is reasonable as a license (for many businesses it will be). The relevant point is that it is a different license than the one the decision was made under, and that change is not optional for anyone wishing to upgrade past 2024.4.
 
 ### Change 2 — The Admin UI: ExtJS Removed, Pimcore Studio Mandatory
 
 The second change is technical and, for most production Pimcore deployments, expensive.
 
-Every Pimcore project of the last decade was built against the **ExtJS-based Admin UI** — the classic Pimcore back-office interface that ships with the platform. Custom data object behaviors, class definition tweaks, perspectives, custom action buttons, bundle-supplied admin panels, integrations with PIM/DAM editorial workflows: all of these were typically implemented as ExtJS extensions to that UI.
+Every Pimcore project of the last decade was built against the **ExtJS-based Admin UI**, the classic Pimcore back-office interface that ships with the platform. Custom data object behaviors, class definition tweaks, perspectives, custom action buttons, bundle-supplied admin panels, integrations with PIM / DAM editorial workflows: all of these were typically implemented as ExtJS extensions to that UI.
 
 With **Pimcore 12 / 2026.1**, the ExtJS Admin UI is fully removed from the codebase. The replacement, **Pimcore Studio**, becomes the sole supported interface. The platform's own upgrade documentation confirms it: bundles that implemented `BundleAdminClassicInterface` or used `BundleAdminClassicTrait` no longer work; the `getJsPaths()` and `getCssPaths()` extension points are gone; admin panels that were ExtJS-based must be re-implemented in the Pimcore Studio framework.
 
 Version **2025.4** is the last release that runs both the legacy and Studio UIs in parallel. After that, Studio is the only option.
 
-For greenfield Pimcore projects, this is fine — they will simply be built on Studio from the start. For 10+ year deployments with bespoke admin extensions, it is a re-implementation engagement.
+For greenfield Pimcore projects, this is fine; they will simply be built on Studio from the start. For 10+ year deployments with bespoke admin extensions, it is a re-implementation engagement.
 
 ### Change 3 — The Wholesale Copyleft-Dependency Purge
 
 This third change is the one most often missed in summaries of Pimcore's strategy shift, and it is arguably the most consequential for established codebases.
 
-POCL is fundamentally **incompatible with all copyleft licenses** — GPL, LGPL, and AGPL — when those copyleft components are combined with Pimcore core. POCL Section 3.4 prohibits the mixing explicitly. This is not a technical incompatibility; it is a legal one, baked into the license text.
+POCL is fundamentally **incompatible with all copyleft licenses** (GPL, LGPL, and AGPL) when those copyleft components are combined with Pimcore core. POCL Section 3.4 prohibits the mixing explicitly. This is not a technical incompatibility; it is a legal one, baked into the license text.
 
 Pimcore's own GPLv3 bundles were relicensed to POCL in version 12 to remove the internal conflict. The `pimcore/platform-version` repository's 2026.1 work even includes a commit titled "Remove gpl licence." But the cleanup does not stop at Pimcore-authored code. **Every third-party copyleft dependency in the project's composer.json must also be audited and replaced** before the V12 upgrade can be performed in a legally compliant way.
 
@@ -162,7 +162,7 @@ The original case in the modern era is older but still instructive. When **Sun M
 
 ### The Pattern, Stated Plainly
 
-These cases differ in their specifics — the licenses involved, the size of the projects, the sophistication of the forking coalitions — but they share a common architecture:
+These cases differ in their specifics. The licenses involved, the size of the projects, the sophistication of the forking coalitions all vary, but they share a common architecture:
 
 1. A commercial sponsor changes the terms under which an established OSS project is distributed.
 2. That change makes the project no longer open source under the OSI definition (or no longer practical for some segment of the user base).
@@ -170,13 +170,13 @@ These cases differ in their specifics — the licenses involved, the size of the
 4. The fork stabilizes under neutral governance and inherits the original ecosystem of integrators, hosting providers, and operators.
 5. The relicensed product continues, often successfully, but optimized for a different customer segment than the one the original OSS users represented.
 
-The Pimcore → OpenDXP situation fits this pattern. The fork is younger and smaller than OpenSearch, OpenTofu, or Valkey — DACHCOM.DIGITAL is one anchor sponsor rather than the Linux Foundation plus three hyperscalers — but the underlying decision shape is the same. And, importantly, none of the prior forks have died.
+The Pimcore → OpenDXP situation fits this pattern. The fork is younger and smaller than OpenSearch, OpenTofu, or Valkey. DACHCOM.DIGITAL is one anchor sponsor rather than the Linux Foundation plus three hyperscalers, but the underlying decision shape is the same. And, importantly, none of the prior forks have died.
 
 ---
 
 ## Part 3: What OpenDXP Actually Is
 
-OpenDXP — *Open Data & Digital Experience Platform* — is a community-driven fork of Pimcore Community Edition that was made public on **February 12, 2026**. It is built on the following facts:
+OpenDXP (*Open Data & Digital Experience Platform*) is a community-driven fork of Pimcore Community Edition that was made public on **February 12, 2026**. It is built on the following facts:
 
 - **Forked from Pimcore CE v11.5.13**, commit `9246a42`. This is the last meaningful release of Pimcore CE before the licensing transition.
 - **Licensed under GPLv3 in perpetuity** as a community codebase. The project is explicit in its stated intent: to preserve a GPLv3-licensed Pimcore continuation for organizations that want one.
@@ -193,13 +193,13 @@ A useful way to describe OpenDXP is that it is *what Pimcore 11 would have conti
 
 This is the section where we move from "what happened" to "what to do about it." Our default recommendation for clients currently operating on Pimcore Community Edition is to **migrate to OpenDXP** before adopting any Pimcore 2025.x or 2026.x release. The reasoning has three layers.
 
-### Layer 1 — Preserve the Original Contract
+### Layer 1: Preserve the Original Contract
 
 The first reason is the simplest. The platform was selected under GPLv3. That license was part of the value proposition: predictable terms, no revenue clauses, no audit overhead specific to one vendor, no single point of policy change.
 
 OpenDXP preserves that contract. Pimcore 2025+ does not. For a client whose procurement, legal, and operations posture was built around GPLv3, the lower-disruption move is to follow the GPLv3 codebase. POCL is a new license that legal and procurement teams need to evaluate independently, and Pimcore retains the right to revise it for future versions.
 
-### Layer 2 — Avoid the Three-Cost Upgrade
+### Layer 2: Avoid the Three-Cost Upgrade
 
 The second reason is operational. Continuing with Pimcore is not "keep doing what you are doing." It is, in one upgrade cycle:
 
@@ -210,9 +210,9 @@ The second reason is operational. Continuing with Pimcore is not "keep doing wha
 
 OpenDXP keeps all four of those costs at, or near, zero. It is forked from the same v11 codebase the client is already running, it remains GPLv3 (so existing copyleft dependencies remain legal), and the existing admin UI model is preserved.
 
-The standard objection here — "but doesn't moving to OpenDXP also have costs?" — is fair, and the honest answer is: yes, but smaller and more bounded. The migration from a current Pimcore 11 installation to OpenDXP 1.x consists primarily of namespace and package-name changes plus the documented OpenDXP 1.0 upgrade notes. It is not a UI rebuild, not a license renegotiation, and not a dependency-graph reconstruction. It is a fork-following exercise.
+The standard objection here *"but doesn't moving to OpenDXP also have costs?"* is fair, and the honest answer is: yes, but smaller and more bounded. The migration from a current Pimcore 11 installation to OpenDXP 1.x consists primarily of namespace and package-name changes plus the documented OpenDXP 1.0 upgrade notes. It is not a UI rebuild, not a license renegotiation, and not a dependency-graph reconstruction. It is a fork-following exercise.
 
-### Layer 3 — Lower Vendor-Concentration Risk
+### Layer 3: Lower Vendor-Concentration Risk
 
 The third reason is structural. The same dynamics that produced the Pimcore licensing pivot in 2025 could produce another in 2027 or 2029. A vendor that has demonstrated willingness to change the terms of distribution once will, all else equal, do so again when business conditions favor it.
 
@@ -224,7 +224,7 @@ A few scenarios in which staying on Pimcore is the better call:
 
 - **The client is already on Pimcore Professional, Enterprise, or Enterprise PaaS.** The licensing change applies to the Community Edition; commercial-licensed deployments are unaffected by the GPLv3 → POCL pivot.
 - **The client's deployment is very recent or very simple.** A greenfield Pimcore install built within the last 12 months, with minimal custom admin code and a clean dependency graph, will face a much smaller V12 upgrade than a decade-old codebase. The migration math can swing either way.
-- **The client is structurally committed to Pimcore's commercial offerings** — for support contract reasons, partnership reasons, or roadmap reasons. In that case the license change is a formality.
+- **The client is structurally committed to Pimcore's commercial offerings** for support contract reasons, partnership reasons, or roadmap reasons. In that case the license change is a formality.
 
 For most of the established clients we work with, none of these conditions hold, and OpenDXP is the right call.
 
