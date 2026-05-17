@@ -57,6 +57,15 @@ sources:
     author: "Factory.dev"
     publication: "Factory.dev Pimcore Knowledge Base"
     url: "https://factory.dev/pimcore-knowledge-base/how-to/pimcore-2025-1-legal-compliance-guide"
+  - title: "Migrating from GPLv3 to Pimcore Open Core License (POCL)"
+    author: "Pimcore"
+    date: "2025-04"
+    publication: "Pimcore Whitepaper"
+    url: "https://144170849.fs1.hubspotusercontent-eu1.net/hubfs/144170849/Whitepaper%20-%20Migrating%20from%20GPLv3%20to%20Pimcore%20Open%20Core%20License%20(POCL)%20-%20April%202025%201.pdf"
+  - title: "Pimcore's Switch from GPLv3 to the Pimcore Open Core License"
+    author: "Blackbit"
+    publication: "Blackbit"
+    url: "https://digital-commerce.blackbit.com/en/pimcores-wechsel-von-gplv3-zur-pimcore-open-core-lizenz-hintergr%C3%BCnde-und-konsequenzen-f%C3%BCr-unternehmen"
   - title: "OpenDXP — Official Site"
     author: "DACHCOM.DIGITAL"
     publication: "opendxp.io"
@@ -65,6 +74,10 @@ sources:
     author: "OpenDXP"
     publication: "GitHub"
     url: "https://github.com/open-dxp/opendxp/blob/1.x/README.md"
+  - title: "OpenDXP — Packagist Package"
+    author: "OpenDXP"
+    publication: "Packagist"
+    url: "https://packagist.org/packages/open-dxp/opendxp"
   - title: "Amazon Forks Elasticsearch and Kibana as OpenSearch"
     author: "InfoQ"
     date: "2021-04"
@@ -75,6 +88,11 @@ sources:
     date: "2023-09"
     publication: "TechCrunch"
     url: "https://techcrunch.com/2023/09/20/terraform-fork-gets-a-new-name-opentofu-and-joins-linux-foundation/"
+  - title: "OpenTofu Announces Fork of Terraform"
+    author: "OpenTofu"
+    date: "2023-09"
+    publication: "OpenTofu Blog"
+    url: "https://opentofu.org/blog/opentofu-announces-fork-of-terraform/"
   - title: "Linux Foundation Forks the Open Source Redis as Valkey"
     author: "The New Stack"
     date: "2024-04"
@@ -259,27 +277,3 @@ We are guiding our clients through this decision case-by-case, but the default r
 ---
 
 *If you are weighing this decision for your own organization, we are happy to talk through the specifics of your Pimcore deployment and the practical migration shape. Reach out at [opendxp@lightningjar.com](mailto:opendxp@lightningjar.com).*
-
----
-
-### Sources & Further Reading
-
-**On the Pimcore licensing transition and V12 upgrade:**
-
-- Pimcore — *Breaking Free: Pimcore Says Goodbye to GPL and Enters a New Era with POCL.* [pimcore.com](https://pimcore.com/en/resources/blog/breaking-free-pimcore-says-goodbye-to-gpl-and-enters-a-new-era-with-pocl)
-- Pimcore Documentation — *Upgrading Pimcore from Version 11.x to Version 12.* [docs.pimcore.com](https://docs.pimcore.com/platform/2025.3/Pimcore/Installation_and_Upgrade/Updating_Pimcore/V11_to_V12/)
-- Factory.dev — *Upgrading to Pimcore 2025.1: Legal & License Compliance Guide.* [factory.dev](https://factory.dev/pimcore-knowledge-base/how-to/pimcore-2025-1-legal-compliance-guide)
-- Pimcore (whitepaper) — *Migrating from GPLv3 to Pimcore Open Core License (POCL), April 2025.* [PDF](https://144170849.fs1.hubspotusercontent-eu1.net/hubfs/144170849/Whitepaper%20-%20Migrating%20from%20GPLv3%20to%20Pimcore%20Open%20Core%20License%20(POCL)%20-%20April%202025%201.pdf)
-- Blackbit — *Pimcore's Switch from GPLv3 to the Pimcore Open Core License.* [digital-commerce.blackbit.com](https://digital-commerce.blackbit.com/en/pimcores-wechsel-von-gplv3-zur-pimcore-open-core-lizenz-hintergr%C3%BCnde-und-konsequenzen-f%C3%BCr-unternehmen)
-
-**On OpenDXP:**
-
-- OpenDXP — Official site. [opendxp.io](https://www.opendxp.io/en)
-- OpenDXP — README and upstream-origin disclosure. [github.com/open-dxp/opendxp](https://github.com/open-dxp/opendxp/blob/1.x/README.md)
-- OpenDXP — Packagist package. [packagist.org/packages/open-dxp/opendxp](https://packagist.org/packages/open-dxp/opendxp)
-
-**On the historical OSS-fork comparisons:**
-
-- Elasticsearch → OpenSearch: [InfoQ, April 2021](https://www.infoq.com/news/2021/04/amazon-opensearch/)
-- Terraform → OpenTofu: [TechCrunch, September 2023](https://techcrunch.com/2023/09/20/terraform-fork-gets-a-new-name-opentofu-and-joins-linux-foundation/) · [OpenTofu announcement](https://opentofu.org/blog/opentofu-announces-fork-of-terraform/)
-- Redis → Valkey: [The New Stack, April 2024](https://thenewstack.io/linux-foundation-forks-the-open-source-redis-as-valkey/)
