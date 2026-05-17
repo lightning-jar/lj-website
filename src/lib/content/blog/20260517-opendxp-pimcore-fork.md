@@ -156,7 +156,7 @@ OpenTofu was forked from Terraform 1.5.6 — the last MPL-licensed release — a
 
 On **March 20, 2024**, Redis Ltd. relicensed Redis from the **3-clause BSD license** to a dual SSPL / RSALv2 model — again, neither license OSI-approved. Within roughly two weeks, on **April 1, 2024**, the Linux Foundation announced **Valkey**, a BSD-licensed fork of Redis 7.2.4, with backing from AWS, Google Cloud, Oracle, and others. Valkey established a Technical Steering Committee model to prevent single-vendor control and to keep the protocol-compatibility surface stable. Within weeks the project had passed 50 contributing companies and 150+ individual contributors. (Redis itself subsequently moved to AGPLv3 in 2025, but by that point the Valkey community had its own momentum.)
 
-### MariaDB → MySQL (2009)
+### MySQL → MariaDB (2009)
 
 The original case in the modern era is older but still instructive. When **Sun Microsystems** — which had acquired MySQL AB — was acquired by **Oracle** in 2009, concern over Oracle's stewardship led MySQL's original co-founder Monty Widenius to fork the database as **MariaDB**, retaining GPL licensing and explicit community governance. Sixteen years later, MariaDB is the default in many Linux distributions and powers a large fraction of production deployments that would otherwise have been MySQL.
 
