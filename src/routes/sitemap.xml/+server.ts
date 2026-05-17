@@ -7,7 +7,8 @@ import { ENV } from "varlock/env";
 import type { RequestHandler } from "@sveltejs/kit";
 import type { SitemapXMLFrequency, SitemapXMLPage } from "$types/Sitemap";
 
-const productionUrl = ENV.VERCEL_PROJECT_PRODUCTION_URL || "www.lightningjar.com";
+const productionUrl =
+	ENV.VERCEL_PROJECT_PRODUCTION_URL || "www.lightningjar.com";
 
 // get data for blog
 import { allBlogArticleSlugs } from "$content/getters/getBlogArticles";

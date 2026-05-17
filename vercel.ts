@@ -63,6 +63,10 @@ export const config: VercelConfig = {
 			statusCode: 301,
 		},
 		{ source: "/favicon.ico", destination: "/icon.svg", statusCode: 301 },
-		{ source: "/podcast/thunderclap", destination: "/archive", statusCode: 301 },
+		{
+			source: "/podcast/thunderclap",
+			destination: "/archive",
+			statusCode: 301,
+		},
 	],
 };
