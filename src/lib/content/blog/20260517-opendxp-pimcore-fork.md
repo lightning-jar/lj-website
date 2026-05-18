@@ -1,6 +1,6 @@
 ---
 title: "Pimcore or OpenDXP: A Fork in the Road for Long-Tenured DXP Stacks"
-metaTitle: "Pimcore vs OpenDXP After the GPLv3-to-POCL Pivot"
+metaTitle: "Pimcore Fork | OpenDXP"
 slug: opendxp-pimcore-fork
 description: Pimcore relicensed its Community Edition away from GPLv3, removed the ExtJS admin UI, and now requires a full copyleft-dependency purge to upgrade. OpenDXP forks the last GPLv3 release. Here's how we're advising clients.
 date: 2026-05-17
