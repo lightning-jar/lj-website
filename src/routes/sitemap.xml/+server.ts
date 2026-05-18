@@ -1,5 +1,11 @@
 // src/routes/sitemap.xml/+server.ts
 
+// Prerender at build time: the sitemap is fully static (derived from git
+// content) and this is the only route that would otherwise resolve
+// `varlock/env` at request time in the Vercel serverless runtime, where
+// varlock has no resolution context and the function crashes.
+export const prerender = true;
+
 // env variables
 import { ENV } from "varlock/env";
 

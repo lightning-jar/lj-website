@@ -16,6 +16,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 - `pimcore.json`: licensing copy updated for the GPLv3 → POCL transition and Pimcore 12 implications; `license` field revised accordingly.
+- OpenDXP article: deduplicated sources — removed the in-body "Sources & Further Reading" section (it duplicated the sidebar and was inconsistent with other articles) and folded its 4 body-only links into frontmatter `sources:` (12 total, no links lost). Punctuation/em-dash copyedit pass.
+
+### Fixed
+- OpenDXP article: reversed "MariaDB → MySQL (2009)" section heading corrected to "MySQL → MariaDB (2009)" — MySQL is upstream, MariaDB is the fork (matches the Original → Fork pattern used throughout the section and the prose).
+- `/sitemap.xml` 500 crash in production (`FUNCTION_INVOCATION_FAILED`). The endpoint lacked `export const prerender = true`, so it ran as a request-time serverless function resolving `varlock/env`, which has no resolution context in the Vercel runtime (the varlock migration replaced build-time-inlined `$env/static/private`). Now prerendered like the rest of the site; served as a static file with `ENV` resolved at build time.
 
 ## [0.1.0] - 2026-04-18
 
