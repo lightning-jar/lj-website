@@ -26,6 +26,11 @@ export interface CustomerStory {
 		link?: Link;
 	}[];
 	featuredTechnologies?: string[];
+	notice?: {
+		label?: string;
+		text: string;
+		link: { href: string; text: string };
+	};
 	order: number;
 	tags?: string[];
 }

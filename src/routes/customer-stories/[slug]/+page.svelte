@@ -39,6 +39,29 @@ let { data } = $props();
     <div class="hidden md:block">&nbsp;</div>
   {/if}
 
+  {#if data.notice}
+    <aside
+      class="md:col-span-2 max-w-prose border border-maximumYellow/50 bg-maximumYellow/5 rounded p-4 sm:p-5 mb-2"
+    >
+      {#if data.notice.label}
+        <p
+          class="text-13px uppercase tracking-wide font-700 text-maximumYellow mb-1"
+        >
+          {data.notice.label}
+        </p>
+      {/if}
+      <p class="max-w-prose">
+        {data.notice.text}
+        <a
+          href={data.notice.link.href}
+          class="text-maximumYellow underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4"
+        >
+          {data.notice.link.text}
+        </a>
+      </p>
+    </aside>
+  {/if}
+
   <hr class="md:col-span-2 opacity-40" />
 
   <!-- col 1 -->

@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Optional `relatedArticle` field on the `Technology` type, rendered on `/technologies`; Pimcore and OpenDXP entries link to the OpenDXP fork article.
 - "Reading List" link in the global nav, between Customer Stories and Technologies.
 - "2026 update" tout on `/archive/introduction-to-pimcore` linking to the OpenDXP fork article.
+- Optional `notice` field on the `CustomerStory` type, rendered near the top of `customer-stories/[slug]`; set on the Beam Suntory story to surface the Pimcore licensing change and link the OpenDXP fork article.
 
 ### Changed
 - `pimcore.json`: licensing copy updated for the GPLv3 → POCL transition and Pimcore 12 implications; `license` field revised accordingly.
