@@ -1,6 +1,6 @@
 import type { VercelConfig } from "@vercel/config/v1";
 
-export const config: VercelConfig = {
+const config: VercelConfig = {
 	framework: "sveltekit-1",
 	buildCommand: "vite build",
 	installCommand: "bun install",
@@ -70,3 +70,5 @@ export const config: VercelConfig = {
 		},
 	],
 };
+
+export default config;
