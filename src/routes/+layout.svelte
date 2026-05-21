@@ -42,6 +42,14 @@ let pageMeta = $derived((page.data?.meta as PageMeta) ?? {});
     <link href="https://{data.productionUrl}{data.pathname}" rel="canonical" />
   {/if}
 
+  <!-- atom feed autodiscovery -->
+  <link
+    href="/atom.xml"
+    rel="alternate"
+    title="Lightning Jar — Blog & Reading List"
+    type="application/atom+xml"
+  />
+
   <!-- robots -->
   {#if data.isProduction && pageMeta?.robotsFollow !== false}
     <meta
