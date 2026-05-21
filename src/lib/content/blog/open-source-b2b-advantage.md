@@ -49,6 +49,8 @@ additionalReading:
     url: "/blog/questions-decisions-compromises"
   - title: "Why SvelteKit is the Best Choice for Modern B2B Websites"
     url: "/blog/sveltekit-vs-wordpress-b2b"
+  - title: "Pimcore or OpenDXP: A Fork in the Road for Long-Tenured DXP Stacks"
+    url: "/blog/opendxp-pimcore-fork"
 ---
 
 Every year, businesses spend millions on proprietary web platforms that promise simplicity but deliver [vendor lock-in](https://www.cloudflare.com/learning/cloud/what-is-vendor-lock-in/), escalating costs, and limited flexibility. This article argues that [open source](https://www.heavybit.com/library/article/open-source-vs-proprietary) is the superior choice for B2B organizations, offering better security, lower [total cost of ownership](https://www.ibm.com/think/topics/total-cost-of-ownership), and faster innovation than proprietary alternatives.
@@ -176,6 +178,8 @@ The sunk-cost fallacy becomes dangerous when you have:
 * Deploy anywhere. [Vercel](https://vercel.com/), [Netlify](https://www.netlify.com/), AWS, etc, or your own infrastructure
 * Switch providers if pricing changes or better options emerge
 * **This breaks the sunk-cost fallacy** – choose the best option for the future
+
+License choice matters here, too. In 2025, Pimcore relicensed its Community Edition away from GPLv3 to a source-available license — a reminder that "open source" is only as durable as the license under which the code is published. Because the prior releases remained GPLv3, the community was able to fork them as [OpenDXP](/blog/opendxp-pimcore-fork) and continue forward. That escape hatch is what no proprietary platform offers.
 
 ### 3. Superior Security Through Transparency
 

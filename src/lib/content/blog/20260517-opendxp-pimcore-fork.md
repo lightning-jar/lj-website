@@ -188,7 +188,7 @@ These cases differ in their specifics. The licenses involved, the size of the pr
 4. The fork stabilizes under neutral governance and inherits the original ecosystem of integrators, hosting providers, and operators.
 5. The relicensed product continues, often successfully, but optimized for a different customer segment than the one the original OSS users represented.
 
-The Pimcore → OpenDXP situation fits this pattern. The fork is younger and smaller than OpenSearch, OpenTofu, or Valkey. DACHCOM.DIGITAL is one anchor sponsor rather than the Linux Foundation plus three hyperscalers, but the underlying decision shape is the same. And, importantly, none of the prior forks have died.
+The Pimcore → OpenDXP situation fits this pattern. The fork is younger and smaller than OpenSearch, OpenTofu, or Valkey. DACHCOM.DIGITAL is one anchor sponsor rather than the Linux Foundation plus three hyperscalers, but the underlying decision shape is the same. And, importantly, none of the prior forks have died. Forkability is the structural protection that distinguishes open source from proprietary platforms — the broader case for which we make in [Why Open Source Beats Proprietary Platforms for B2B Websites](/blog/open-source-b2b-advantage).
 
 ---
 

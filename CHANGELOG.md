@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Optional `notice` field on the `CustomerStory` type, rendered near the top of `customer-stories/[slug]`; set on the Beam Suntory story to surface the Pimcore licensing change and link the OpenDXP fork article.
 
 ### Changed
+- `open-source-b2b-advantage` ↔ `opendxp-pimcore-fork` reciprocal cross-link. In `open-source-b2b-advantage`: inline paragraph in the "No Vendor Lock-In" section noting Pimcore's 2025 relicensing as a real-world illustration of why license choice matters, plus an `additionalReading` entry pointing to `/blog/opendxp-pimcore-fork`. In `opendxp-pimcore-fork`: inline sentence at the end of "The Pattern, Stated Plainly" linking to `/blog/open-source-b2b-advantage` for the broader open-vs-proprietary argument (the OpenDXP article already listed the b2b piece in its `additionalReading`).
 - `pimcore.json`: licensing copy updated for the GPLv3 → POCL transition and Pimcore 12 implications; `license` field revised accordingly.
 - OpenDXP article: deduplicated sources — removed the in-body "Sources & Further Reading" section (it duplicated the sidebar and was inconsistent with other articles) and folded its 4 body-only links into frontmatter `sources:` (12 total, no links lost). Punctuation/em-dash copyedit pass.
 
