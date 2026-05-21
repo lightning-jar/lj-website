@@ -1,0 +1,20 @@
+{
+	"id": "renovate",
+	"name": "Renovate",
+	"shortDescription": "Automated dependency updates with configurable scheduling, grouping, and auto-merge.",
+	"description": [
+		"We use Renovate (by Mend) to keep dependencies current—opening pull requests as new versions ship across npm, GitHub Actions, Docker images, and more, with release notes inlined so reviewers see what changed.",
+		"Renovate's config supports grouping related updates, scheduling noisy ecosystems to off-hours, pinning or ranging strategies per package, and auto-merging trusted updates that pass CI, which keeps the dependency graph healthy without drowning the team in PRs."
+	],
+	"useCases": [
+		"Automated pull requests for outdated dependencies across multiple package managers",
+		"Grouping and scheduling updates to reduce review burden",
+		"Auto-merging passing patch/minor updates from trusted packages"
+	],
+	"license": "AGPL-3.0 (self-hosted) / Free hosted app",
+	"category": "Dependency Update Automation",
+	"link": {
+		"href": "https://www.mend.io/renovate/"
+	},
+	"supercategory": "auth-security"
+}
