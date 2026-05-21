@@ -8,7 +8,7 @@ const config: VercelConfig = {
 	trailingSlash: false,
 	headers: [
 		{
-			source: "/atom.xml",
+			source: "/(atom.xml|blog/atom.xml|reading-list/atom.xml)",
 			headers: [
 				{
 					key: "Content-Type",

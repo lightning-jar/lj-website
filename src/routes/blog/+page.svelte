@@ -1,17 +1,31 @@
 <script lang="ts">
+import FeedBadge from "$components/FeedBadge.svelte";
+
 let { data } = $props();
 </script>
+
+<svelte:head>
+  <link
+    href="/blog/atom.xml"
+    rel="alternate"
+    title="Lightning Jar — Blog"
+    type="application/atom+xml"
+  />
+</svelte:head>
 
 <div
   class="page-x-padding min-h-screen pt-8 pb-8 grid gird-cols-1 min-h-screen place-content-start"
 >
-  <header class="max-w-prose mb-8">
-    <h1 class="display">{data?.meta?.title || "Blog"}</h1>
-    <p>
-      {data?.meta?.description || ""}
-    </p>
-    <h2 class="sr-only">Articles</h2>
-  </header>
+  <div class="flex items-start justify-between gap-4 mb-8">
+    <header class="max-w-prose">
+      <h1 class="display">{data?.meta?.title || "Blog"}</h1>
+      <p>
+        {data?.meta?.description || ""}
+      </p>
+      <h2 class="sr-only">Articles</h2>
+    </header>
+    <FeedBadge href="/blog/atom.xml" />
+  </div>
 
   <main
     class="grid max-w-420px sm-max-w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5"

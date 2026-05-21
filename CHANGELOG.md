@@ -13,7 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Optional `relatedArticle` field on the `Technology` type, rendered on `/technologies`; Pimcore and OpenDXP entries link to the OpenDXP fork article.
 - "Reading List" link in the global nav, between Customer Stories and Technologies.
 - "2026 update" tout on `/archive/introduction-to-pimcore` linking to the OpenDXP fork article.
-- Atom feed at `/atom.xml` merging blog posts and reading-list entries (summary-only). Reading-list entries link to the external `url`; blog entries link to `/blog/{slug}`. Autodiscovery `<link rel="alternate" type="application/atom+xml">` added to the global layout head. `vercel.ts` sets `Content-Type: application/atom+xml; charset=utf-8` on `/atom.xml` (overrides the static-extension default of `application/xml`).
+- Atom feeds: combined `/atom.xml` (blog + reading-list) plus section-specific `/blog/atom.xml` and `/reading-list/atom.xml`, all summary-only. Reading-list entries link to the external `url`; blog entries link to `/blog/{slug}`. Global layout advertises the combined feed; `/blog` and `/reading-list` pages also advertise their own feeds via `<link rel="alternate">` and a `FeedBadge` link in the page header (top right). `vercel.ts` sets `Content-Type: application/atom+xml; charset=utf-8` on all three feed paths (overrides the static-extension default of `application/xml`). Shared builder lives in `src/lib/utils/atomFeed.ts` + `src/lib/utils/feedEntries.ts`.
 - Optional `notice` field on the `CustomerStory` type, rendered near the top of `customer-stories/[slug]`; set on the Beam Suntory story to surface the Pimcore licensing change and link the OpenDXP fork article.
 
 ### Changed

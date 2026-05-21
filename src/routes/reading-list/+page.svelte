@@ -1,22 +1,35 @@
 <script lang="ts">
 // components
+import FeedBadge from "$components/FeedBadge.svelte";
 import LinkButton from "$components/LinkButton.svelte";
 
 let { data } = $props();
 </script>
 
+<svelte:head>
+  <link
+    href="/reading-list/atom.xml"
+    rel="alternate"
+    title="Lightning Jar — Reading List"
+    type="application/atom+xml"
+  />
+</svelte:head>
+
 <div
   class="page-x-padding main-y-padding pb-6 grid grid-cols-1 gap-12 min-h-screen place-content-start"
 >
   {#if data?.banner}
-    <header class="max-w-prose">
-      <h1 class="display">
-        {data.banner?.heading}
-      </h1>
-      <p class="max-w-prose mb-5 empty:hidden">
-        {data.banner?.subheading ?? ""}
-      </p>
-    </header>
+    <div class="flex items-start justify-between gap-4">
+      <header class="max-w-prose">
+        <h1 class="display">
+          {data.banner?.heading}
+        </h1>
+        <p class="max-w-prose mb-5 empty:hidden">
+          {data.banner?.subheading ?? ""}
+        </p>
+      </header>
+      <FeedBadge href="/reading-list/atom.xml" />
+    </div>
   {/if}
 
   <main>
