@@ -1,0 +1,27 @@
+{
+	"author": {
+		"name": "Shaun Bent",
+		"email": "",
+		"mastodon": "",
+		"url": "https://www.shaunbent.co.uk/"
+	},
+	"comments": [""],
+	"excerpt": "When everybody owns something, nobody owns it.",
+	"id": "shaunbent-federated-design-systems-2025-12-08",
+	"image": {
+		"src": "",
+		"alt": ""
+	},
+	"publishDate": "2025-12-08",
+	"repostDate": "2026-05-21",
+	"slug": "why-federated-design-systems-keep-failing",
+	"source": {
+		"publicationName": "shaunbent.co.uk",
+		"publicationUrl": "https://www.shaunbent.co.uk/"
+	},
+	"summary": "Drawing on nine years leading design systems at Spotify, Shaun Bent argues that federated design-system models keep failing in practice despite their appealing promise of distributed ownership. He walks through two failed federation attempts at Spotify and explains how, instead of broad community contribution, federation tends to produce ownership vacuums, exponential component duplication, and design–code drift. The takeaway: centralized teams with clear ownership ship faster and deliver more consistent results, and most organizations attempting federation lack the governance infrastructure, discovery tooling, and cultural conditions to make it viable.",
+	"tags": ["Design Systems", "Governance", "Frontend", "Organization"],
+	"title": "Why Federated Design Systems Keep Failing",
+	"type": "Blog Article",
+	"url": "https://www.shaunbent.co.uk/blog/why-federated-design-systems-keep-failing/"
+}

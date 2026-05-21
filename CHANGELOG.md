@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 - New blog article: "Pimcore or OpenDXP: A Fork in the Road for Long-Tenured DXP Stacks" (`src/lib/content/blog/20260517-opendxp-pimcore-fork.md`).
 - Technology entries: OpenDXP, Socket.dev, Snyk, Varlock, 1Password, Fallow, Renovate.
-- Reading-list entries: "Evolved antennas, LLM-generated code, and a potential antifuture" (Eric W. Bailey), "How I use LLMs as a staff engineer in 2026" (Sean Goedecke), "TanHacked — Syntax #1004" (Wes Bos & Scott Tolinski, transcript), "The Pre-Training Wall and the Treadmill After It — CoRecursive #121" (Adam Gordon Bell with Don McKay, transcript).
+- Reading-list entries: "Evolved antennas, LLM-generated code, and a potential antifuture" (Eric W. Bailey), "How I use LLMs as a staff engineer in 2026" (Sean Goedecke), "TanHacked — Syntax #1004" (Wes Bos & Scott Tolinski, transcript), "The Pre-Training Wall and the Treadmill After It — CoRecursive #121" (Adam Gordon Bell with Don McKay, transcript), "Why Federated Design Systems Keep Failing" (Shaun Bent).
 - Optional `relatedArticle` field on the `Technology` type, rendered on `/technologies`; Pimcore and OpenDXP entries link to the OpenDXP fork article.
 - "Reading List" link in the global nav, between Customer Stories and Technologies.
 - "2026 update" tout on `/archive/introduction-to-pimcore` linking to the OpenDXP fork article.
