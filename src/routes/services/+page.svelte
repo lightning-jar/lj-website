@@ -56,7 +56,7 @@ let panelsCount: number = $derived(data?.services?.length ?? 0);
           text-oxford
           hover:text-oxford
           hover:bg-transparent
-          hover:text-maximumYellow"
+          hover:!text-maximumYellow"
         onclick={() => {
           clickLightningButton();
           incrementPanel();
