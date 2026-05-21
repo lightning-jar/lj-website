@@ -8,6 +8,15 @@ const config: VercelConfig = {
 	trailingSlash: false,
 	headers: [
 		{
+			source: "/atom.xml",
+			headers: [
+				{
+					key: "Content-Type",
+					value: "application/atom+xml; charset=utf-8",
+				},
+			],
+		},
+		{
 			source: "/(.*)",
 			headers: [
 				{
