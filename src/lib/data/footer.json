@@ -61,6 +61,10 @@
 		{
 			"href": "/reading-list",
 			"data-text": "Reading List"
+		},
+		{
+			"href": "/atom.xml",
+			"data-text": "Atom Feed"
 		}
 	]
 }
