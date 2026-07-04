@@ -110,7 +110,7 @@ let pageMeta = $derived((page.data?.meta as PageMeta) ?? {});
 <GlobalNav />
 
 <!-- children -->
-<div class="relative w-full max-w-screen overflow-x-hidden place-self-stretch">
+<div class="relative w-full max-w-screen place-self-stretch">
   {@render children?.()}
 </div>
 

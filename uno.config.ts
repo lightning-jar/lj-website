@@ -193,6 +193,9 @@ export default defineConfig({
 			[&_table_tbody_tr_td]:(flex bg-blue/0 leading-tight px-3 py-2 w-full border-b border-slate-100/40 opacity-90 text-15px)
 			[&_table_tbody_tr:last-child_td]:(border-b-none pb-3)
 			[&_table_tbody_tr_td:not(:last-child)]:(border-r)
+			[&_pre]:(bg-black/40 px-4 pt-4 pb-5 rounded my-4 overflow-x-auto)
+			[&_pre_code]:(font-mono text-13px leading-relaxed text-slate-100/90)
+			[&_:not(pre)>code]:(font-mono text-0.9em bg-black/30 rounded px-1 py-0.5)
 			`,
 		],
 		[
