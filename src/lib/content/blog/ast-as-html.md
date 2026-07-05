@@ -117,6 +117,8 @@ The node's type, name, and constraints are readable before you ever step inside,
 
 The irony is that we always planned to hand this tree to an LLM, but our early prototypes didn't yet; templates had to be authored and debugged by hand, so the problem we were solving first was *human* parsability. Labels on the outside made the tree easier for a person to read and write. That choice ended up revealing a hidden truth about LLM readability: legibility for the human author and fluency for the model are the same property.
 
+(Hold that thought about the attic, though; it comes back. An attic is a perfectly good place to *store* things. You just don't want to *work* in one.)
+
 ### The Payoff Is Practical, Not Just Aesthetic
 
 - **Fewer tokens burned.** The prompt no longer has to teach a schema the model already knows.
@@ -124,8 +126,6 @@ The irony is that we always planned to hand this tree to an LLM, but our early p
 - **More reliable transfer.** A slipped tag fails loudly at the parser instead of silently corrupting everything after it.
 - **Faster reads.** The model scans labels instead of reconstructing structure.
 - **Better integrity on every parse-and-rebuild cycle.** A tree whose nodes announce themselves is a tree you can verify at a glance.
-
-(Hold that thought about the attic, though; it comes back. An attic is a perfectly good place to *store* things. You just don't want to *work* in one.)
 
 ## The Escape Hatch
 
@@ -162,10 +162,10 @@ One more discipline that earns its keep: **round-trip property tests.** `parse(b
 
 ## Takeaways
 
-1. **Choose formats the model already speaks.** Fluency you don't have to prompt for is the cheapest capability you will ever ship.
+1. **Choose formats the model already speaks.** Fluency you don't have to prompt for is the cheapest capability you will ever ship, and it's the same property as human legibility: design for the person reading by hand and the model benefits for free.
 2. **Prefer one coherent edit over many granular ones.** Whole-artifact rewrites eliminate intermediate invalid states and the stale-reference bugs that plague mutation APIs. Add one surgical tool, not twelve.
 3. **Validate at the boundary, then reuse the human pipeline.** The agent should be an ordinary author flowing through the same funnel as everyone else, not a privileged actor with a private write path.
 4. **Treat identifiers as a contract.** Anything the agent can reference later must survive every formatter, normalizer, and round trip unchanged.
-5. **Keep the friendly format at the edges.** Store typed data; expose the ergonomic dialect only where humans and models actually author.
+5. **Keep the friendly format at the edges.** Store typed data in the attic; expose the ergonomic dialect only where humans and models actually author.
 
 The unfashionable summary: we got a better agent by giving it *less* API and *more* HTML.
