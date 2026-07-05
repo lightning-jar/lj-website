@@ -185,4 +185,4 @@ The core has zero runtime dependencies. It uses the platform `DOMParser` in the 
 
 ## Credits
 
-Thanks to David Heard of [SecureLogix](https://www.securelogix.com), who set us on the path to building the marketing tools that led to this discovery. SecureLogix makes industry-leading software that solves security and business challenges around contact centers and phone systems. If you need to protect your voice network, or need customers to actually answer when your company calls, check them out.
+Thanks to David Heard of [SecureLogix](https://www.securelogix.com), who set us on the path to building the marketing tools that led to this discovery.
