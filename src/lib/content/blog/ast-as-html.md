@@ -2,7 +2,7 @@
 title: "HTML as a Native Data Format for LLMs: Why We Encode Our Data in Markup Instead of JSON"
 metaTitle: "HTML as a Native Data Format for LLMs | AST-as-HTML"
 slug: ast-as-html
-description: "We built a document platform where an AI assistant authors template layouts. Getting it fluent hinged on one unfashionable choice: the template format is HTML, and the agent's main tool is \"rewrite the whole thing.\" Here's why that beat a granular JSON tool API."
+description: "LLMs have deep, pre-trained fluency in HTML. So when the AI assistant in our document platform reads and writes template layouts, we encode the tree as markup instead of JSON. Here's why a format the model already speaks beat a granular JSON tool API, and the scars we picked up along the way."
 date: 2026-07-04
 draft: false
 tags: [ai, agents, llm, html, architecture]
