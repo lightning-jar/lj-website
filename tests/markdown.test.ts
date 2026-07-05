@@ -606,3 +606,50 @@ describe("parseMarkdown - XSS prevention", () => {
 		expect(out.html).not.toContain("<script");
 	});
 });
+
+describe("parseMarkdownTextToHtml - code spans inside links and images", () => {
+	it("renders a code span inside link text", () => {
+		const md = "See the [`parse` docs](https://example.com) here.";
+		const html = parseMarkdownTextToHtml({
+			markdown: md,
+			options: { sanitize: true },
+		});
+		expect(normalize(html)).toBe(
+			normalize(
+				`<p>See the <a href="https://example.com"><code>parse</code> docs</a> here.</p>`,
+			),
+		);
+	});
+
+	it("renders link text that is entirely a code span", () => {
+		const md = "[`@kevinpeckham/barkup`](https://www.npmjs.com/package/@kevinpeckham/barkup)";
+		const html = parseMarkdownTextToHtml({
+			markdown: md,
+			options: { sanitize: true },
+		});
+		expect(html).toContain(
+			`<a href="https://www.npmjs.com/package/@kevinpeckham/barkup"><code>@kevinpeckham/barkup</code></a>`,
+		);
+		expect(html).not.toContain("MD_CODE");
+	});
+
+	it("still neutralizes HTML in link text around code spans", () => {
+		const md = "[a <b> `c`](https://example.com)";
+		const html = parseMarkdownTextToHtml({
+			markdown: md,
+			options: { sanitize: true },
+		});
+		expect(html).not.toContain("<b>");
+		expect(html).toContain("<code>c</code>");
+		expect(html).not.toContain("MD_CODE");
+	});
+
+	it("does not leak placeholder tokens from image alt or title text", () => {
+		const md = '![the `foo` helper](https://example.com/a.png "uses `foo`")';
+		const html = parseMarkdownTextToHtml({
+			markdown: md,
+			options: { sanitize: true },
+		});
+		expect(html).not.toContain("MD_CODE");
+	});
+});

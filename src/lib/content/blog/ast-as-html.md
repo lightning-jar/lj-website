@@ -172,7 +172,7 @@ The unfashionable summary: we got a better agent by giving it *less* API and *mo
 
 ## A Reference Implementation: barkup
 
-The pattern in this article now has a reference implementation: [barkup](https://github.com/kevinpeckham/barkup), published on npm as [@kevinpeckham/barkup](https://www.npmjs.com/package/@kevinpeckham/barkup) (MIT). The name is the thesis: bark is how a tree shows you what it is without being cut open.
+The pattern in this article now has a reference implementation: [barkup](https://github.com/kevinpeckham/barkup), published on npm as [`@kevinpeckham/barkup`](https://www.npmjs.com/package/@kevinpeckham/barkup) (MIT). The name is the thesis: bark is how a tree shows you what it is without being cut open.
 
 You declare a grammar (node types, allowed children, typed attributes) and get `build`, `parse`, `format`, and `validate` with the guarantees this article argues for baked in:
 

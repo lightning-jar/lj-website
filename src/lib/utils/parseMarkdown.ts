@@ -235,6 +235,27 @@ function escapeLtExceptSafe(s: string): string {
 	);
 }
 
+/**
+ * Escape HTML special characters while leaving protected code-span
+ * placeholder tokens intact so restoreCodeSpans can still find them.
+ * Needed wherever escaping runs on text that may contain a code span,
+ * e.g. link text like [`code`](url).
+ */
+function escapeHtmlPreservingCodeSpans(s: string): string {
+	const tokenRe = new RegExp(`${CODE_START}\\d+${CODE_END}`, "g");
+	const parts: string[] = [];
+	let lastIndex = 0;
+	for (;;) {
+		const m = tokenRe.exec(s);
+		if (!m) break;
+		parts.push(escapeHtml(s.slice(lastIndex, m.index)));
+		parts.push(m[0]);
+		lastIndex = m.index + m[0].length;
+	}
+	parts.push(escapeHtml(s.slice(lastIndex)));
+	return parts.join("");
+}
+
 /** Escape raw HTML tags to prevent XSS, preserving allowlisted safe tags */
 function preSanitize(s: string): string {
 	const tokenRe = new RegExp(`${CODE_START}\\d+${CODE_END}`, "g");
@@ -256,9 +277,13 @@ function processImages(s: string, opts: InlineOpts): string {
 	return s.replace(
 		/!\[([^[\]]*(?:\[[^\]]*\][^[\]]*)*)\]\(([^()\s]*(?:\([^)]*\)[^()\s]*)*)(?:\s+"([^"]*)")?\)/g,
 		(_, alt, url, title) => {
-			const a = opts.sanitize ? escapeHtml(alt) : alt;
+			const a = opts.sanitize ? escapeHtmlPreservingCodeSpans(alt) : alt;
 			const u = opts.sanitize ? escapeHtml(url) : url;
-			const t = title ? (opts.sanitize ? escapeHtml(title) : title) : null;
+			const t = title
+				? opts.sanitize
+					? escapeHtmlPreservingCodeSpans(title)
+					: title
+				: null;
 			const loading = opts.lazyImages ? "lazy" : "auto";
 			const titleAttr = t ? ` title="${t}"` : "";
 			return `<img loading="${loading}" src="${u}" alt="${a}"${titleAttr}>`;
@@ -271,10 +296,10 @@ function processLinks(s: string, opts: InlineOpts): string {
 	return s.replace(
 		/\[([^[\]]*(?:\[[^\]]*\][^[\]]*)*)\]\(([^()\s]*(?:\([^)]*\)[^()\s]*)*)(?:\s+"([^"]*)")?\)/g,
 		(_, text, url, title) => {
-			const t = opts.sanitize ? escapeHtml(text) : text;
+			const t = opts.sanitize ? escapeHtmlPreservingCodeSpans(text) : text;
 			const u = opts.sanitize ? escapeHtml(url) : url;
 			const titleAttr = title
-				? ` title="${opts.sanitize ? escapeHtml(title) : title}"`
+				? ` title="${opts.sanitize ? escapeHtmlPreservingCodeSpans(title) : title}"`
 				: "";
 			return `<a href="${u}"${titleAttr}>${t}</a>`;
 		},
