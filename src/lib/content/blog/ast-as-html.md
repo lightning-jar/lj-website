@@ -107,7 +107,7 @@ Every agent edit flows through the exact pipeline every human edit uses. Same va
 
 Working with JSON is like hunting through closed storage containers in an attic. The labels are inside the lid; you have to open each container to learn what it is, and because JSON nests, you're opening containers inside containers inside containers. The containers only make sense if you brought the packing list: without knowing the key names and schema in advance, you can't even ask the right questions. And when you're done rummaging, the way out is a run of identical unlabeled lids (`}]}}`), none of which says what it closes. Deep in the attic, one misplaced lid and the whole stack is corrupt.
 
-**HTML labels the outside of every container:**
+***HTML labels the outside of every container:***
 
 ```html
 <div data-type="text-atom" data-name="heading" data-max-length="60">
