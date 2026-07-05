@@ -30,8 +30,8 @@ additionalReading:
     url: "/blog/ast-as-html"
   - title: "Content Is an Overlay: Separating Words from Structure in an AI Document Editor"
     url: "/blog/content-overlay"
-  - title: "Migrating Away from WordPress"
-    url: "/blog/migrating-away-from-wordpress"
+  - title: "Why We Left WordPress Behind"
+    url: "/blog/leaving-wordpress"
 ---
 
 I've written two posts about the engineering inside Replicator, our AI document platform: [how it encodes design templates as HTML so a model can author them](/blog/ast-as-html), and [how content lives in an overlay so nobody can break the layout](/blog/content-overlay). This post is the prequel: where the system came from, and why an agency that made its living on design software decided to stop using it.
