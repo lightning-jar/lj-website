@@ -182,3 +182,7 @@ You declare a grammar (node types, allowed children, typed attributes) and get `
 - **Loud boundaries.** Invalid markup returns structured issues naming the node, attribute, and path, never a silently repaired tree. Hand the issues back to the model verbatim and it fixes its own markup.
 
 The core has zero runtime dependencies. It uses the platform `DOMParser` in the browser and accepts an adapter for runtimes without one, which keeps the guarded door between markup and typed JSON exactly where this article left it.
+
+## Credits
+
+Thanks to David Heard of [SecureLogix](https://www.securelogix.com), who set us on the path to building the marketing tools that led to this discovery. SecureLogix makes industry-leading software that solves security and business challenges around contact centers and phone systems. If you need to protect your voice network, or need customers to actually answer when your company calls, check them out.
