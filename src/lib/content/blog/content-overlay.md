@@ -2,7 +2,7 @@
 title: "Content Is an Overlay: Separating Words from Structure in an AI Document Editor"
 metaTitle: "Content Is an Overlay | Words vs. Structure"
 slug: content-overlay
-description: "A template gets designed once and used for many documents, so the person typing a headline must never be editing the template. Our answer borrows from classic animation: content lives in a flat overlay of particles that register onto stable node ids like cels dropping onto pegs. Humans and the AI assistant edit through the same path, and neither can break the layout."
+description: "Words and structure should not live in the same document: the person typing a headline must not be able to break the layout, and neither should the AI drafting the copy. So our platform separates them, storing content as a flat overlay of particles that register onto the template's stable node ids like animation cels dropping onto pegs. Here's the design, the instance problem, and the scars."
 date: 2026-07-05
 draft: false
 tags: [ai, agents, llm, architecture, cms]
@@ -10,7 +10,7 @@ image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/writing.webp
 imageDescription: A vintage illustration of a girl writing at a wooden desk
 author: Kevin Peckham
 quote:
-  text: "We got safer documents by giving editors less access and better addresses. The background painting stays on the table. Everyone else just drops cels on the pegs."
+  text: "The person typing is physically incapable of restructuring the document, because the surface they're editing doesn't contain the structure."
   attribution: Kevin Peckham, Principal at Lightning Jar
 glossary:
   - term: Cel
