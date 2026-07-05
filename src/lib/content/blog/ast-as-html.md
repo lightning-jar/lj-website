@@ -28,7 +28,7 @@ glossary:
   - term: Round-trip property test
     definition: A test asserting that parsing then re-serializing a structure, parse(build(tree)), preserves it exactly, including ids, names, and attributes.
 additionalReading:
-  - title: "Content Is an Overlay (and Ids Are Its Registration Pegs)"
+  - title: "Content Is an Overlay: Separating Words from Structure in an AI Document Editor"
     url: "/blog/content-overlay"
   - title: "Questions, Decisions & Compromises"
     url: "/blog/questions-decisions-compromises"

@@ -1,6 +1,6 @@
 ---
-title: "Content Is an Overlay (and Ids Are Its Registration Pegs)"
-metaTitle: "Content Is an Overlay | Registration Pegs"
+title: "Content Is an Overlay: Separating Words from Structure in an AI Document Editor"
+metaTitle: "Content Is an Overlay | Words vs. Structure"
 slug: content-overlay
 description: "A template gets designed once and used for many documents, so the person typing a headline must never be editing the template. Our answer borrows from classic animation: content lives in a flat overlay of particles that register onto stable node ids like cels dropping onto pegs. Humans and the AI assistant edit through the same path, and neither can break the layout."
 date: 2026-07-05
