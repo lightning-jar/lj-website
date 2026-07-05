@@ -103,6 +103,28 @@ editor.markupCurrent = format(build(parsed)); // same funnel as human edits
 
 Every agent edit flows through the exact pipeline every human edit uses. Same validation, same undo, same reactive preview. The agent isn't a privileged actor with its own write path; it's just another author.
 
+## Closed Containers in the Attic
+
+Working with JSON is like hunting through closed storage containers in an attic. The labels are inside the lid; you have to open each container to learn what it is, and because JSON nests, you're opening containers inside containers inside containers. The containers only make sense if you brought the packing list: without knowing the key names and schema in advance, you can't even ask the right questions. And when you're done rummaging, the way out is a run of identical unlabeled lids (`}]}}`), none of which says what it closes. Deep in the attic, one misplaced lid and the whole stack is corrupt.
+
+HTML labels the outside of every container:
+
+```html
+<div data-type="text-atom" data-name="heading" data-max-length="60">
+```
+
+The node's type, name, and constraints are readable before you ever step inside, and the container closes with its name on it. Ask a model for an inventory of a JSON tree and it *reconstructs*; ask for an inventory of an HTML tree and it *reads the labels*. That difference is most of why the whole-tree tool works: generating sixty nodes of labeled, self-closing HTML containers is something the model has done a billion times, and getting the lids right is easy when every lid says what it belongs to.
+
+### The Payoff Is Practical, Not Just Aesthetic
+
+- **Fewer tokens burned.** The prompt no longer has to teach a schema the model already knows.
+- **Fewer round trips.** A model this fluent can author the whole tree in one pass instead of assembling it mutation by mutation.
+- **More reliable transfer.** A slipped tag fails loudly at the parser instead of silently corrupting everything after it.
+- **Faster reads.** The model scans labels instead of reconstructing structure.
+- **Better integrity on every parse-and-rebuild cycle.** A tree whose nodes announce themselves is a tree you can verify at a glance.
+
+(Hold that thought about the attic, though; it comes back. An attic is a perfectly good place to *store* things. You just don't want to *work* in one.)
+
 ## The Escape Hatch
 
 Full-tree rewrites are wasteful for one-attribute tweaks, and rewriting sixty nodes to change one class invites transcription drift in the other fifty-nine. So there's exactly one surgical tool:
@@ -110,6 +132,8 @@ Full-tree rewrites are wasteful for one-attribute tweaks, and rewriting sixty no
 ```
 set_node_attributes(nodeId: string, attributes: Record<string, value>)
 ```
+
+The tool cost almost nothing to build, and that's worth pausing on. In a web application, the machinery for editing HTML surgically already ships with the browser: `getElementById`, `setAttribute`, `querySelector`. These APIs are fast, battle-tested, and documented to a depth no in-house tree-mutation library will ever match. We didn't have to invent a node-addressing scheme or write an attribute patcher; the platform had already spent decades perfecting them.
 
 Two tools total for structural editing. In practice the model picks correctly without guidance: big changes get a rewrite, tweaks get a patch. Compare that with the tool-catalog approach, where the model must choose among a dozen mutations and compose them correctly.
 
@@ -123,7 +147,7 @@ This is the part most posts skip. Three real bugs, all instructive:
 
 **2. HTML attributes are stringly typed; your AST probably isn't.** Our parser coerces `"true"` → `true` and `"1.5"` → `1.5` on read. Useful for humans, hazardous in general: a version string like `"1.5"` becomes the number 1.5, and a text attribute that happens to look numeric gets type-bent on every round trip. We maintain an opt-out list of string-only attributes, which means every new attribute is a latent bug until someone remembers the list. If we started over, coercion would be per-attribute and declared in the node config, not inferred.
 
-**3. Markup is the interchange format, not the storage format.** Our blobs actually store the parsed AST as JSON. Markup exists at exactly two boundaries: the human markup editor and the agent's tool I/O. This matters more than it sounds: our servers have no DOMParser, so *all* markup→AST conversion happens client-side at those boundaries, and everything downstream (slot resolution, rendering, content matching) works on typed JSON. "AST-as-HTML" really means *HTML as the authoring dialect of the AST*, with one guarded door between them. Blur that line and you'll end up parsing HTML in places that can't.
+**3. Markup is the interchange format, not the storage format.** Our blobs actually store the parsed AST as JSON (the attic, remember, is a fine place to keep things). Machines fetching sealed containers by address don't care that the labels are inside; only *authors* do. Markup exists at exactly two boundaries: the human markup editor and the agent's tool I/O. Those are the two places where someone is actually rummaging. This matters more than it sounds: our servers have no DOMParser, so *all* markup→AST conversion happens client-side at those boundaries, and everything downstream (slot resolution, rendering, content matching) works on typed JSON. "AST-as-HTML" really means *HTML as the authoring dialect of the AST*, with one guarded door between them. Blur that line and you'll end up parsing HTML in places that can't.
 
 One more discipline that earns its keep: **round-trip property tests.** `parse(build(tree))` must preserve ids, names, and attributes exactly. The formatter bug above would have been caught by a five-line test we only wrote afterward.
 
