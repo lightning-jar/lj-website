@@ -1,0 +1,133 @@
+{
+	"order": 5,
+	"date": "2026-06-15",
+	"banner": {
+		"tag": {
+			"data-text": "CCRTA + Transit Platform",
+			"href": "https://www.ccrta.org/"
+		},
+		"heading": "Leaving WordPress Behind for CCRTA",
+		"subheading": "Lightning Jar migrated the Corpus Christi Regional Transportation Authority from WordPress to SvelteKit: a faster, safer, more accessible site with a custom real-time bus tracker built on open GTFS data at a fraction of the cost of turnkey systems."
+	},
+	"meta": {
+		"title": "Public Transit | Customer Story",
+		"description": "How Lightning Jar migrated CCRTA from WordPress to SvelteKit and Hygraph: serverless security against constant automated attacks, accessibility by design, hardened e-commerce, and a custom GTFS-powered bus tracker at a fraction of turnkey cost."
+	},
+	"customer": {
+		"id": "ccrta",
+		"category": "Public Transit",
+		"name": "CCRTA",
+		"logo": "/images/customer-logo-ccrta.png"
+	},
+	"excerpt": "The Corpus Christi Regional Transportation Authority needed more than a website refresh: WordPress had become a security liability under constant automated attack, an accessibility sore point, and a ceiling on custom features. Lightning Jar rebuilt the platform on SvelteKit and Hygraph with a serverless architecture, and delivered a real-time bus tracker built on open GTFS data for a fraction of the cost of turnkey transit systems.",
+	"title": "CCRTA Leaves WordPress for SvelteKit: Safer, More Accessible, and Tracking Buses in Real Time",
+	"slug": "ccrta-transit-website",
+	"thumbnailImage": {
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/ccrta-bus-tracker.webp",
+		"alt": "The CCRTA Bus Tracker showing live bus positions on a map of Corpus Christi"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"The <a href=\"https://www.ccrta.org\">Corpus Christi Regional Transportation Authority</a> (CCRTA) provides public transportation across the Corpus Christi, Texas region: fixed bus routes, paratransit and accessibility services, a harbor ferry, and the rider-facing information that keeps it all usable, from schedules and detours to board meetings and public notices."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"subheading": "WordPress Was the Ceiling",
+			"text": [
+				"CCRTA's previous WordPress site had become a liability on three fronts. Security: like every high-visibility public-agency site, ccrta.org absorbs a constant stream of automated attacks, and a WordPress installation (a server, a database, an admin login, and a plugin ecosystem, each needing perpetual patching) gives that traffic something to hit. Accessibility: a transit authority serves riders who depend on assistive technology as a matter of daily mobility, and accessibility had been a persistent sore point on the old platform. And capability: the features riders actually wanted, starting with live bus tracking, were either impossible to build well on WordPress or available only as expensive turnkey systems.",
+				"We've written about this decision pattern in general on our blog: <a href=\"/blog/leaving-wordpress\">Why We Left WordPress Behind</a>."
+			]
+		},
+		{
+			"heading": "Solution",
+			"subheading": "SvelteKit, Headless Content, Serverless Everything",
+			"text": [
+				"Lightning Jar rebuilt the platform on SvelteKit with TypeScript, deployed serverless on Vercel. Content management moved to Hygraph, a headless GraphQL CMS, so staff edit structured content (landing pages, topic pages, staff directories, board meetings, route maps) without touching code, and without a CMS server bolted to the public site.",
+				"The result is a site that is mostly prerendered static pages backed by serverless functions where interactivity demands it. There is no always-on server to patch, no plugin ecosystem to audit, and no admin login on the public domain."
+			]
+		},
+		{
+			"heading": "Featured Project",
+			"subheading": "A Real-Time Bus Tracker Built on Open Data",
+			"text": [
+				"The centerpiece of the new platform is a live transit map and bus tracker built directly on GTFS, the open standard for transit data, for a fraction of the cost of turnkey tracking products.",
+				"• The static GTFS feed (routes, stops, shapes, timetables) is processed by a custom enrichment pipeline into compact data the site serves instantly.",
+				"• The GTFS-Realtime feed (live vehicle positions, trip updates, and seat availability, delivered as protobuf) is decoded server-side and cached in Redis for about 25 seconds, so the upstream feed is hit only a few times a minute no matter how many riders are watching, and every rider sees near-live positions.",
+				"• Every stop has its own departure board, powered by scheduled timetables loaded into a Turso database and corrected in real time by the live feed. When the realtime feed hiccups, the boards degrade gracefully to the schedule instead of going blank.",
+				"• Lightning Jar also produced print-ready QR code stickers for every physical bus stop in the system, generated programmatically from the same data, so a rider standing at any stop can scan straight to that stop's live departures."
+			]
+		},
+		{
+			"heading": "Accessibility",
+			"subheading": "A Requirement, Not a Retrofit",
+			"text": [
+				"For a transit authority, web accessibility is not a compliance checkbox; many riders depend on assistive technology to plan the trips the agency exists to provide. Accessibility problems that had accumulated on the WordPress site were addressed structurally in the rebuild: semantic HTML throughout, keyboard-navigable interfaces, and accessible patterns applied consistently across schedules, maps, forms, and the tracker rather than patched page by page."
+			]
+		},
+		{
+			"heading": "Commerce, Simplified and Hardened",
+			"text": [
+				"The old platform's e-commerce stack was more machinery than the store needed. The rebuilt store is deliberately minimal: products are versioned content in the repository, and payment happens through the processor's hosted checkout, so card data never touches CCRTA's website at all. Riders get a simple store for passes and fare media; the agency gets a payment surface with almost nothing to attack or audit."
+			]
+		},
+		{
+			"heading": "Security by Architecture",
+			"subheading": "Serverless Is a Safer Bet",
+			"text": [
+				"Public-sector websites are scanned and probed continuously by bots hunting for WordPress admin pages, vulnerable plugins, and unpatched servers. The new platform answers that traffic with architecture rather than vigilance: prerendered pages and serverless functions leave no persistent server to compromise, no database behind the public pages, and no CMS login to brute-force. Layered on top are Arcjet for edge protection, bot-poisoning on public forms, and Sentry for error monitoring, so the remaining attack surface is small, watched, and boring."
+			]
+		},
+		{
+			"heading": "Results",
+			"subheading": "More Capability, Less Attack Surface",
+			"text": [
+				"• A real-time bus tracker and per-stop departure boards, built on open GTFS data at a fraction of the cost of turnkey transit tracking systems.",
+				"• Accessibility addressed structurally across the site rather than patched reactively.",
+				"• A payment flow where card data never touches agency infrastructure.",
+				"• A security posture that neutralizes the constant automated attack traffic by removing its targets: no server, no plugins, no public admin.",
+				"• Staff manage content in Hygraph without developer involvement, and riders get faster pages on every device."
+			]
+		}
+	],
+	"testimonials": [],
+	"images": [
+		{
+			"alt": "The CCRTA Bus Tracker: a live map of Corpus Christi with route lines, stop markers, and a selected bus showing its route, vehicle number, next stop, and departure time",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/ccrta-bus-tracker.webp",
+			"width": "1622",
+			"height": "1252"
+		}
+	],
+	"perspectives": [
+		{
+			"quote": [
+				"A transit site is critical infrastructure with a hostile audience of bots. What I love about this build is that the security story and the feature story are the same story: the architecture that leaves attackers nothing to hit is the same architecture that let us build a real-time bus tracker on open data for a fraction of what agencies are quoted for turnkey systems."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal",
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "/images/team-member.webp",
+					"width": "63",
+					"height": "63"
+				}
+			}
+		}
+	],
+	"featuredTechnologies": [
+		"svelte-sveltekit",
+		"hygraph",
+		"typescript",
+		"vercel",
+		"turso-sqlite",
+		"arcjet",
+		"unocss"
+	],
+	"technologies": [],
+	"tags": ["Websites", "Public Sector", "SvelteKit", "Accessibility", "Security"]
+}
