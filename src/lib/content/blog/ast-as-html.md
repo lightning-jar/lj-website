@@ -107,13 +107,15 @@ Every agent edit flows through the exact pipeline every human edit uses. Same va
 
 Working with JSON is like hunting through closed storage containers in an attic. The labels are inside the lid; you have to open each container to learn what it is, and because JSON nests, you're opening containers inside containers inside containers. The containers only make sense if you brought the packing list: without knowing the key names and schema in advance, you can't even ask the right questions. And when you're done rummaging, the way out is a run of identical unlabeled lids (`}]}}`), none of which says what it closes. Deep in the attic, one misplaced lid and the whole stack is corrupt.
 
-HTML labels the outside of every container:
+**HTML labels the outside of every container:**
 
 ```html
 <div data-type="text-atom" data-name="heading" data-max-length="60">
 ```
 
 The node's type, name, and constraints are readable before you ever step inside, and the container closes with its name on it. Ask a model for an inventory of a JSON tree and it *reconstructs*; ask for an inventory of an HTML tree and it *reads the labels*. That difference is most of why the whole-tree tool works: generating sixty nodes of labeled, self-closing HTML containers is something the model has done a billion times, and getting the lids right is easy when every lid says what it belongs to.
+
+The irony is that we chose this format before any of the data was headed to an LLM, and for the same reason: labels on the outside made the tree easier for a *human* to read and write by hand. Legibility for the author and fluency for the model turned out to be the same property. We just didn't know yet who the second author would be.
 
 ### The Payoff Is Practical, Not Just Aesthetic
 
