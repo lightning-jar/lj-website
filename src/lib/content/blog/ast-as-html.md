@@ -1,6 +1,6 @@
 ---
-title: "AST-as-HTML: The Storage Format That Made Our Agent Fluent"
-metaTitle: "AST-as-HTML | Fluent Agents"
+title: "HTML as a Native Data Format for LLMs: Why We Encode Our Data in Markup Instead of JSON"
+metaTitle: "HTML as a Native Data Format for LLMs | AST-as-HTML"
 slug: ast-as-html
 description: "We built a document platform where an AI assistant authors template layouts. Getting it fluent hinged on one unfashionable choice: the template format is HTML, and the agent's main tool is \"rewrite the whole thing.\" Here's why that beat a granular JSON tool API."
 date: 2026-07-04
