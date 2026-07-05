@@ -183,6 +183,8 @@ You declare a grammar (node types, allowed children, typed attributes) and get `
 
 The core has zero runtime dependencies. It uses the platform `DOMParser` in the browser and accepts an adapter for runtimes without one, which keeps the guarded door between markup and typed JSON exactly where this article left it.
 
+And it is not an extraction for show: the document platform this article describes now runs on barkup. The template grammar is declared through the library, and the same codec that validates the agent's markup enforces the guarantees above in production. The scars are why the guarantees exist; dogfooding is how we know they hold.
+
 ## Credits
 
 Thanks to David Heard of [SecureLogix](https://www.securelogix.com), who set us on the path to building the marketing tools that led to this discovery.
