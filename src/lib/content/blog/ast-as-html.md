@@ -10,7 +10,7 @@ image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/tree-01.webp
 imageDescription: A watercolor painting of a tree
 author: Kevin Peckham
 quote:
-  text: "We didn't teach a format; we borrowed one the model already speaks natively. The prompt spends its budget on our semantics instead of on syntax."
+  text: "Ask a model for an inventory of a JSON tree and it reconstructs; ask for an inventory of an HTML tree and it reads the labels."
   attribution: Kevin Peckham, Principal at Lightning Jar
 glossary:
   - term: AST (Abstract Syntax Tree)
