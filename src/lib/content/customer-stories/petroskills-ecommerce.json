@@ -1,0 +1,128 @@
+{
+	"order": 4,
+	"banner": {
+		"tag": {
+			"data-text": "PetroSkills + Training Commerce",
+			"href": "https://www.petroskills.com/"
+		},
+		"heading": "Selling Seats, Not SKUs, for PetroSkills",
+		"subheading": "Lightning Jar builds and stewards the PetroSkills e-commerce platform: an OpenDXP and Vue storefront with a bespoke dual checkout that integrates with the client's custom ERP, where buying an in-person course is also registering its attendees."
+	},
+	"meta": {
+		"title": "Training E-Commerce | Customer Story",
+		"description": "How Lightning Jar built PetroSkills' e-commerce platform on OpenDXP with a Vue frontend: a bespoke dual checkout for e-learning and scheduled in-person training, integrated with a custom ERP that manages session inventory by time, date, and location."
+	},
+	"customer": {
+		"id": "petroskills",
+		"category": "Energy Industry Training",
+		"name": "PetroSkills",
+		"logo": "/images/customer-logo-petroskills.png"
+	},
+	"excerpt": "PetroSkills sells training, not widgets: self-paced e-learning alongside scheduled in-person and virtual courses with real dates, locations, instructors, and limited seats. Lightning Jar built their e-commerce platform on OpenDXP with a Vue frontend and a bespoke dual-checkout workflow, integrated with the client's custom ERP so that buying a scheduled course doubles as attendee registration.",
+	"title": "PetroSkills Sells Complex Training Products With a Bespoke OpenDXP and Vue Commerce Platform",
+	"slug": "petroskills-ecommerce",
+	"thumbnailImage": {
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/petroskills-scheduled-training.webp",
+		"alt": "The PetroSkills scheduled-training catalog with sessions listed by date, location, and price"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"<a href=\"https://www.petroskills.com\">PetroSkills</a>, part of RelyOn, is a leading provider of training for the petroleum industry, serving energy companies and professionals worldwide with instructor-led courses (in classrooms and virtual sessions around the globe, from Houston to London to Dubai to Kuala Lumpur), self-paced e-learning, and technical publications."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"subheading": "Training Doesn't Fit in a Shopping Cart",
+			"text": [
+				"Off-the-shelf e-commerce assumes you are selling SKUs: fixed products with prices and stock counts. PetroSkills sells something harder. A self-paced e-learning module behaves roughly like a product, but a scheduled course is an event: it has a start date and an end date, a physical or virtual location, assigned instructors, session-based pricing, and an inventory measured in seats at a specific time and place.",
+				"The complexity compounds at checkout. The buyer is frequently not the student: a training coordinator may purchase seats for several engineers at once, which means checkout is not just a payment flow, it is attendee registration. And the source of truth for session inventory (what runs where, when, with how many seats) lives in a custom ERP that PetroSkills built and operates in-house, so the storefront had to integrate deeply with the client's own system rather than owning the data itself."
+			]
+		},
+		{
+			"heading": "Solution",
+			"subheading": "OpenDXP Platform, Vue Storefront, Bespoke Checkout",
+			"text": [
+				"Lightning Jar originally built the PetroSkills platform on Pimcore, the open-source digital experience platform, which provides the product information management and content backbone for the course catalog, e-learning modules, and book sales. This year we ported the platform to OpenDXP, the GPLv3 community fork of Pimcore, a decision we wrote about on our blog: <a href=\"/blog/opendxp-pimcore-fork\">Pimcore or OpenDXP: A Fork in the Road</a>. The storefront frontend is built in Vue, with Pinia state management and a component library covering course discovery, faceted filtering, session selection, and checkout.",
+				"Because no packaged checkout could model their products, we built the checkout workflows from scratch, tailored to how training is actually bought: one flow for on-demand e-learning and a distinct flow for scheduled courses, sharing components and state where the flows genuinely overlap and diverging where they don't."
+			]
+		},
+		{
+			"heading": "Featured Project",
+			"subheading": "One Store, Two Checkouts",
+			"text": [
+				"The platform maintains two distinct checkout workflows because the two product types are genuinely different transactions.",
+				"• E-learning checkout treats the purchase like a product: pick a module, add one or more students, pay, and enrollment follows on demand.",
+				"• Scheduled-course checkout treats the purchase like an event registration: the buyer selects a specific session (with its dates, location, format, and instructors), and the checkout captures the attendees themselves. Buying the seat and registering the engineer who will sit in it are the same act.",
+				"Both flows run in the same Vue application on the native HTML Popover API rather than heavyweight modal frameworks, which improved both performance and accessibility."
+			]
+		},
+		{
+			"heading": "ERP Integration",
+			"subheading": "The Client's System Stays the Source of Truth",
+			"text": [
+				"Session inventory (time, date, location, capacity) is managed by TMS, a custom ERP built by PetroSkills. Rather than replicate that data, the storefront integrates with it: session availability flows from the ERP to the catalog, and completed checkouts flow back as registrations and payment transactions.",
+				"Running commerce against a client-operated system also meant hardening the boundary. After a real-world carding-bot incident, Lightning Jar built a layered defense stack in front of the payment endpoint: rate limiting by IP, fingerprint, and card, duplicate-submission detection, header verification, and heuristic bot blocks, all with privacy-safe logging (card data is truncated before it ever reaches a log line, a rule locked in by automated tests)."
+			]
+		},
+		{
+			"heading": "Platform Stewardship",
+			"subheading": "Kept Modern Without a Rebuild",
+			"text": [
+				"An e-commerce platform is never done, and Lightning Jar has evolved this one continuously rather than letting it calcify toward an expensive rewrite:",
+				"• Migrated the platform from Pimcore 10 to Pimcore 11 and then to OpenDXP, with a clean production cutover in May 2026.",
+				"• Completed a full migration from Bootstrap to UnoCSS across every template.",
+				"• Moved JavaScript, CSS, and static assets to a multi-environment CDN with per-environment cache policies.",
+				"• End-to-end test coverage with Playwright guards the checkout flows."
+			]
+		},
+		{
+			"heading": "Results",
+			"subheading": "Commerce Shaped Like the Business",
+			"text": [
+				"• A storefront that models training accurately: seats, sessions, and students, not just SKUs.",
+				"• Checkout that doubles as attendee registration, eliminating a separate enrollment step for scheduled courses.",
+				"• The client's own ERP remains the operational source of truth, with the web platform integrated around it.",
+				"• A hardened, tested payment boundary that shut down real-world bot abuse without harming legitimate buyers."
+			]
+		}
+	],
+	"testimonials": [],
+	"images": [
+		{
+			"alt": "The PetroSkills scheduled-training catalog: faceted filters for format, location, and discipline beside sessions listed with dates, locations, and per-session pricing",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/petroskills-scheduled-training.webp",
+			"width": "1622",
+			"height": "1252"
+		}
+	],
+	"perspectives": [
+		{
+			"quote": [
+				"Selling training is deceptively hard commerce. A seat in a classroom in Houston in March is not a SKU; it's inventory with a clock on it, owned by the client's own ERP, bought by someone who usually isn't the person attending. The interesting engineering in this project was refusing to flatten that reality into a generic cart, and building checkout around how training is actually purchased."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal",
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "/images/team-member.webp",
+					"width": "63",
+					"height": "63"
+				}
+			}
+		}
+	],
+	"featuredTechnologies": [
+		"opendxp",
+		"vue-nuxt",
+		"typescript",
+		"unocss",
+		"playwright",
+		"bun"
+	],
+	"technologies": [],
+	"tags": ["E-Commerce", "Websites", "OpenDXP", "Vue", "Education"]
+}
