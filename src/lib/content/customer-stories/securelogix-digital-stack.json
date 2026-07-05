@@ -51,10 +51,11 @@
 		},
 		{
 			"heading": "Featured Project",
-			"subheading": "AI Brand Operating System",
+			"subheading": "Replicator: The AI Brand Operating System",
 			"text": [
-				"SecureLogix was the first client to pilot Lightning Jar’s LLM‑powered Brand Operating System—a turnkey platform that combines a centralized marketing repository (brand collateral, image libraries, logos, and style guidelines) with a custom collateral editor.",
-				"The system enables the team to generate on‑brand flyers, landing pages, presentations, emails, and more with the help of a private LLM assistant pre‑trained on SecureLogix products, solutions, brand voice, and style rules using preset templates. The result is faster time‑to‑market, consistent brand execution, and reduced reliance on manual production cycles."
+				"SecureLogix was the first client to pilot Replicator, Lightning Jar's LLM-powered brand operating system. Replicator combines a centralized brand repository (collateral, image libraries, logos, and style guidelines) with versioned design templates and an edit-in-place document editor, so documents never fork from the design system that produced them.",
+				"The team generates on-brand flyers, landing pages, presentations, emails, and more with an AI assistant that designs layouts and drafts copy inside brand-approved rails, pre-trained on SecureLogix products, solutions, brand voice, and style rules. Humans finish each document by clicking into the rendered page and typing; the architecture makes it impossible for a copy edit (human or AI) to break the layout. The result is faster time-to-market, consistent brand execution, and reduced reliance on manual production cycles.",
+				"The full story of the platform is told in <a href=\"/customer-stories/replicator-evolution\">The Evolution of Replicator</a>, and the engineering behind it is documented in three blog articles: <a href=\"/blog/replicator-origin\">the origin story</a>, <a href=\"/blog/ast-as-html\">HTML as a native data format for LLMs</a>, and <a href=\"/blog/content-overlay\">the content overlay</a>."
 			]
 		},
 		{
@@ -91,14 +92,14 @@
 	"perspectives": [
 		{
 			"quote": [
-				"The first time I met David (CMO of SecureLogix), was at an event we were hosting at SXSW in 2016. We clicked immediately and have been working together ever since. David has great ideas and a clear vision and is always helping us help him. He helped us concieve and refine the LLM-powered Replicator Brand Operating System, which is a powerful tool for authoring, managing and optimizing brand assets and marketing content."
+				"The first time I met David (CMO of SecureLogix), was at an event we were hosting at SXSW in 2016. We clicked immediately and have been working together ever since. David has great ideas and a clear vision and is always helping us help him. He helped us conceive and refine Replicator, our LLM-powered brand operating system, which is a powerful tool for authoring, managing, and optimizing brand assets and marketing content."
 			],
 			"attribution": {
 				"name": "Kevin Peckham",
 				"title": "Principal",
 				"organization": "Lightning Jar",
 				"image": {
-					"alt": "REPLACE_WITH_NAME",
+					"alt": "Kevin Peckham",
 					"src": "/images/team-member.webp",
 					"width": "63",
 					"height": "63"
