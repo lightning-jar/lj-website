@@ -13,6 +13,10 @@
 	],
 	"license": "Commercial",
 	"category": "Hosting & Edge",
+	"logo": {
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/logos/logo-vercel.svg",
+		"alt": "Vercel Logo"
+	},
 	"link": {
 		"href": "https://vercel.com/"
 	},
