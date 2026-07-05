@@ -1,0 +1,149 @@
+{
+	"order": 0,
+	"banner": {
+		"tag": {
+			"data-text": "SecureLogix + Replicator",
+			"href": "https://www.securelogix.com/"
+		},
+		"heading": "The Evolution of Replicator",
+		"subheading": "How a decade-long partnership with SecureLogix produced Replicator: an AI brand operating system where humans and an LLM assistant design, write, and finish marketing documents together inside brand-approved rails."
+	},
+	"meta": {
+		"title": "The Evolution of Replicator | Customer Story",
+		"description": "The story behind Replicator, Lightning Jar's AI brand operating system: from brand repository to templating engine to an AI document platform where an assistant designs layouts and drafts copy while humans finish documents by clicking in and typing."
+	},
+	"customer": {
+		"id": "securelogix",
+		"category": "Cybersecurity",
+		"name": "SecureLogix",
+		"logo": "/images/customer-logo-securelogix.png"
+	},
+	"excerpt": "Replicator began as a way to help a lean marketing team produce more on-brand collateral, and evolved into a full AI document platform: a brand repository, a versioned templating engine, and an LLM assistant that designs layouts and drafts copy, all feeding one editor where a human finishes the document by clicking into the page and typing.",
+	"title": "From Brand Repository to AI Document Platform: The Evolution of Replicator",
+	"slug": "replicator-evolution",
+	"thumbnailImage": {
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/replicator-document-generation.webp",
+		"alt": "The Replicator editor generating a SecureLogix flyer with its AI assistant"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"<a href=\"https://www.securelogix.com\">SecureLogix</a> is a leader in voice network security and call trust, protecting more than 300 enterprise customers and blocking over 200 million fraudulent or abusive calls every year. Lightning Jar has served as the company's digital agency of record for more than a decade, and SecureLogix was the first client to pilot Replicator, our LLM-powered brand operating system."
+			]
+		},
+		{
+			"heading": "Genesis",
+			"subheading": "Two Chronic Pain Points, One Realization",
+			"text": [
+				"Replicator grew out of two problems that had frustrated Lightning Jar and its clients for as long as the agency has existed. Content management systems fail in one of two directions: locked down, they generate endless requests for workarounds; left open, page quality deteriorates fast. And print collateral built in design software makes content a liability, where adding a paragraph means pulling a designer back in to reflow and re-proof an entire document. Eventually those registered as one problem: content and design living in the same document, edited with the same tool, by people with different jobs.",
+				"So Lightning Jar moved its entire PDF production into web code, separating copy (data) from layout (components), then built an edit-in-place editor and a versioned repository around that separation. When capable LLMs arrived and SecureLogix asked how to use them for marketing collateral, the system was already speaking the model's native language. The full origin story, including why we stopped using design software altogether, is on our blog: <a href=\"/blog/replicator-origin\">Why We Moved Our Document Production into Web Code</a>."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"subheading": "A Lean Team, an Enterprise-Sized Content Appetite",
+			"text": [
+				"SecureLogix competes against the largest IT vendors in the world with a modestly sized marketing team. Every flyer, brochure, one-pager, and campaign asset had to be produced, reviewed for brand compliance, and shipped without adding headcount. The traditional answers each failed in a familiar way: agencies are slow and expensive per asset, self-serve design tools produce off-brand output, and template documents fork the moment someone edits one, so improvements to the design never propagate.",
+				"The goal we set with SecureLogix was more ambitious than faster production. We wanted a system where brand governance is enforced by architecture rather than review: where the people (and AI assistants) writing copy are structurally incapable of breaking the design, and where the designers improving templates automatically improve every document built on them."
+			]
+		},
+		{
+			"heading": "Foundation",
+			"subheading": "The Brand Repository",
+			"text": [
+				"Replicator's first layer is a multi-organization brand repository: image libraries with metadata and tagging, PDF collateral with automatic thumbnail generation and text extraction, and brand asset management for logos, wordmarks, and icons. Role-based access lets internal teams and outside vendors work in the same system, and everything downstream (templates, documents, the AI assistant) draws on this single source of brand truth."
+			]
+		},
+		{
+			"heading": "The Templating Engine",
+			"subheading": "Versioned Layouts That Never Fork",
+			"text": [
+				"On top of the repository sits a templating system with three layers of reuse: templates (whole documents), pages (reusable page layouts), and widgets (reusable blocks like header bars, touts, and stat panels). Every entity is versioned, and documents reference template versions rather than copying them, so a designer's improvement propagates to every document built on that template.",
+				"Themes paint the entire tree through CSS variables: a template never hardcodes a color, it names a token, and the active brand theme decides what that token means. The same layout renders correctly for any brand configuration.",
+				"Under the hood, every template is a typed tree stored as JSON but authored as HTML, an approach we found so useful we extracted it into an open-source library and wrote about it publicly."
+			]
+		},
+		{
+			"heading": "The AI Assistant",
+			"subheading": "An Agent That Designs and Writes Inside the Rails",
+			"text": [
+				"Replicator's assistant works on both halves of a document. It authors template layouts conversationally (ask for a full-width widget with a rounded content box on the left and a stat panel on the right, and it builds the tree), and it drafts copy for whole documents, with the words visibly streaming into the rendered layout as the model writes.",
+				"The architectural decision that makes this reliable is that the agent is never a privileged actor. It edits through the same validated pipeline as a human: template edits flow through the same parser and undo system as the markup editor, and copy edits route through the same update path as a keystroke. Brand rails hold for everyone, human or model.",
+				"The engineering behind this is documented in detail in two companion posts: <a href=\"/blog/ast-as-html\">HTML as a Native Data Format for LLMs</a> and <a href=\"/blog/content-overlay\">Content Is an Overlay</a>."
+			]
+		},
+		{
+			"heading": "Finishing by Hand",
+			"subheading": "Click Into the Page and Type",
+			"text": [
+				"The final experience is the one we designed for from the start: open a document, see the finished design, click into a headline on the rendered page, and type. Content lives in an overlay of addressed particles that register onto the template's stable node ids, so the person typing (or the assistant drafting) can change every word without being able to touch the structure. Length budgets push back as you type, images swap through a picker, and placeholder content generated from the template's own constraints keeps unfinished documents previewing at realistic density."
+			]
+		},
+		{
+			"heading": "Open Source",
+			"subheading": "barkup",
+			"text": [
+				"The codec at the heart of Replicator's template system is now open source: <a href=\"https://github.com/kevinpeckham/barkup\">barkup</a> (MIT), a config-driven grammar codec for authoring typed trees as HTML, with byte-for-byte id preservation, declared attribute coercion, and property-tested round-trip guarantees. Replicator dogfoods the published package in production."
+			]
+		},
+		{
+			"heading": "Results",
+			"subheading": "Brand Governance as Architecture",
+			"text": [
+				"• On-brand collateral produced by a lean team at a pace that previously required outside production cycles.",
+				"• Template improvements propagate to every document instantly; nothing forks, so there is no drift to audit.",
+				"• Copy editing (human or AI) is structurally incapable of breaking layouts, replacing review-based governance with architectural governance.",
+				"• A single source of brand truth spanning assets, templates, themes, and AI assistance."
+			]
+		}
+	],
+	"testimonials": [
+		{
+			"quote": [
+				"Replicator is the tool we always wished existed: the design system is protected, every word is addressable, and the AI assistant works inside the same rails as everyone else. A lean marketing team gets studio-scale output without putting the brand at risk."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal",
+				"organization": "Lightning Jar"
+			}
+		}
+	],
+	"images": [
+		{
+			"alt": "Replicator's document editor showing a rendered SecureLogix flyer beside the AI assistant drafting content and reviewing the layout",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/replicator-document-generation.webp",
+			"width": "1838",
+			"height": "1286"
+		}
+	],
+	"perspectives": [
+		{
+			"quote": [
+				"Replicator is the most satisfying kind of product to build: every layer we shipped made the next layer possible. The repository made templates trustworthy, the templates made the AI assistant safe, and the assistant made the whole system feel alive. David helped us conceive and refine it from the beginning, and SecureLogix pushed it into production reality."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal",
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "/images/team-member.webp",
+					"width": "63",
+					"height": "63"
+				}
+			}
+		}
+	],
+	"featuredTechnologies": [
+		"svelte-sveltekit",
+		"typescript",
+		"turso-sqlite",
+		"anthropic-claude",
+		"unocss",
+		"bun"
+	],
+	"technologies": [],
+	"tags": ["AI", "SaaS", "Design Systems", "Sveltekit", "Open Source"]
+}
