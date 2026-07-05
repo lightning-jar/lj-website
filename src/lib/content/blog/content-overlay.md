@@ -30,6 +30,8 @@ glossary:
 additionalReading:
   - title: "HTML as a Native Data Format for LLMs"
     url: "/blog/ast-as-html"
+  - title: "Why We Moved Our Document Production into Web Code: The Origin of Replicator"
+    url: "/blog/replicator-origin"
   - title: "Questions, Decisions & Compromises"
     url: "/blog/questions-decisions-compromises"
   - title: "Why SvelteKit is the Best Choice for Modern B2B Websites"
