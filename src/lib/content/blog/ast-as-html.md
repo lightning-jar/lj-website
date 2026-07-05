@@ -38,7 +38,7 @@ additionalReading:
 
 We built a document platform where an AI assistant designs marketing documents (flyers, brochures, one-pagers) inside brand-approved rails, and humans finish them by clicking into the rendered page and typing. Getting the agent to *author templates*, the structural layouts those documents are built from, turned out to hinge on a single unfashionable decision:
 
-**Our template format is HTML. And the agent's main editing tool is "rewrite the whole thing."**
+**We encode our templates as HTML, not JSON. And the agent's main editing tool is "rewrite the whole thing."**
 
 That inverts most of the current advice about building agents on structured data, so this post is about why we did it, what it bought us, and the scars we picked up along the way.
 
