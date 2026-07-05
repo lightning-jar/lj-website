@@ -40,7 +40,7 @@ We built a document platform where an AI assistant designs marketing documents (
 
 **We encode our templates as HTML, not JSON. And the agent's main editing tool is "rewrite the whole thing."**
 
-That inverts most of the current advice about building agents on structured data, so this post is about why we did it, what it bought us, and the scars we picked up along the way.
+That inverts most of the current advice about building agents on structured data. It also turned out to be the cheaper, sturdier choice: fewer tokens burned, faster responses, and better data integrity on every edit. This post is about why.
 
 ## The Problem
 
