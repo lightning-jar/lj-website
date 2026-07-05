@@ -115,7 +115,7 @@ Working with JSON is like hunting through closed storage containers in an attic.
 
 The node's type, name, and constraints are readable before you ever step inside, and the container closes with its name on it. Ask a model for an inventory of a JSON tree and it *reconstructs*; ask for an inventory of an HTML tree and it *reads the labels*. That difference is most of why the whole-tree tool works: generating sixty nodes of labeled, self-closing HTML containers is something the model has done a billion times, and getting the lids right is easy when every lid says what it belongs to.
 
-The irony is that we chose this format before any of the data was headed to an LLM, and for the same reason: labels on the outside made the tree easier for a *human* to read and write by hand. Legibility for the author and fluency for the model turned out to be the same property. We just didn't know yet who the second author would be.
+The irony is that we always planned to hand this tree to an LLM, but our early prototypes didn't yet; templates had to be authored and debugged by hand, so the problem we were solving first was *human* parsability. Labels on the outside made the tree easier for a person to read and write. That choice ended up revealing a hidden truth about LLM readability: legibility for the human author and fluency for the model are the same property.
 
 ### The Payoff Is Practical, Not Just Aesthetic
 
