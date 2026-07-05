@@ -147,7 +147,7 @@ This is the part most posts skip. Three real bugs, all instructive:
 
 **1. Ids are sacred, and our formatter wasn't treating them that way.** Content in our system is matched to template nodes by id, and the agent references nodes by the ids *it authored* ("wgt-wrapper"). Our HTML formatter had an old rule: regenerate any id shorter than 21 characters (the length of our generated nanoids). So the agent's readable ids were silently rewritten to random strings on the first format pass, and its follow-up `set_node_attributes("wgt-wrapper", …)` failed with *"No node with id."* A user hit this in the first real session. The fix was one line (only generate an id when one is *missing*), but the lesson generalizes: **if agents reference identifiers, every pass in your pipeline must preserve them byte-for-byte.** Normalization steps written for humans will betray you.
 
-**2. HTML attributes are stringly typed; your AST probably isn't.** Our parser coerces `"true"` → `true` and `"1.5"` → `1.5` on read. Useful for humans, hazardous in general: a version string like `"1.5"` becomes the number 1.5, and a text attribute that happens to look numeric gets type-bent on every round trip. We maintain an opt-out list of string-only attributes, which means every new attribute is a latent bug until someone remembers the list. If we started over, coercion would be per-attribute and declared in the node config, not inferred.
+**2. HTML attributes are stringly typed; your AST probably isn't.** Our parser coerces `"true"` → `true` and `"1.5"` → `1.5` on read. Useful for humans, hazardous in general: a version string like `"1.5"` becomes the number 1.5, and a text attribute that happens to look numeric gets type-bent on every round trip. We maintain an opt-out list of string-only attributes, which means every new attribute is a latent bug until someone remembers the list. If we started over, coercion would be per-attribute and declared in the node config, not inferred. (The reference implementation at the end of this article does exactly that.)
 
 **3. Markup is the interchange format, not the storage format.** Our blobs actually store the parsed AST as JSON (the attic, remember, is a fine place to keep things). Machines fetching sealed containers by address don't care that the labels are inside; only *authors* do. Markup exists at exactly two boundaries: the human markup editor and the agent's tool I/O. Those are the two places where someone is actually rummaging. This matters more than it sounds: our servers have no DOMParser, so *all* markup→AST conversion happens client-side at those boundaries, and everything downstream (slot resolution, rendering, content matching) works on typed JSON. "AST-as-HTML" really means *HTML as the authoring dialect of the AST*, with one guarded door between them. Blur that line and you'll end up parsing HTML in places that can't.
 
@@ -169,3 +169,16 @@ One more discipline that earns its keep: **round-trip property tests.** `parse(b
 5. **Keep the friendly format at the edges.** Store typed data in the attic; expose the ergonomic dialect only where humans and models actually author.
 
 The unfashionable summary: we got a better agent by giving it *less* API and *more* HTML.
+
+## A Reference Implementation: barkup
+
+The pattern in this article now has a reference implementation: [barkup](https://github.com/kevinpeckham/barkup), published on npm as [@kevinpeckham/barkup](https://www.npmjs.com/package/@kevinpeckham/barkup) (MIT). The name is the thesis: bark is how a tree shows you what it is without being cut open.
+
+You declare a grammar (node types, allowed children, typed attributes) and get `build`, `parse`, `format`, and `validate` with the guarantees this article argues for baked in:
+
+- **Ids are a contract.** Ids survive parse, build, and format byte-for-byte; `format()` fills in only *missing* ids and never touches an existing one. That is scar number one, fixed at the library level.
+- **Declared coercion only.** An attribute's type comes from its grammar declaration, never from the shape of its value, so `"1.5"` stays a string unless you declared the attribute a number. That is scar number two, fixed the way we said we would fix it.
+- **Round-trip identity.** `parse(build(tree))` deep-equals the normalized tree: ids, names, types, attributes, order. A testing entry point ships property-test helpers so you can prove the same guarantee over *your* grammar.
+- **Loud boundaries.** Invalid markup returns structured issues naming the node, attribute, and path, never a silently repaired tree. Hand the issues back to the model verbatim and it fixes its own markup.
+
+The core has zero runtime dependencies. It uses the platform `DOMParser` in the browser and accepts an adapter for runtimes without one, which keeps the guarded door between markup and typed JSON exactly where this article left it.
