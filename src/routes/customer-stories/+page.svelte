@@ -19,8 +19,9 @@ let { data } = $props();
     </header>
   {/if}
 
-  <main>
-    <h2 class="sr-only">Select a Customer Story Below to Read More</h2>
+  <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_260px] gap-12">
+    <main>
+      <h2 class="sr-only">Select a Customer Story Below to Read More</h2>
     {#each data?.stories ?? [] as story}
       <article class="max-w-article mb-10">
         {#if story?.thumbnailImage}
@@ -70,5 +71,21 @@ let { data } = $props();
         {/if}
       </article>
     {/each}
-  </main>
+    </main>
+
+    {#if data?.clients?.length}
+      <aside>
+        <h2 class="text-18px font-700 font-serif text-maximumYellow mb-4">
+          Customers Past &amp; Present
+        </h2>
+        <ul
+          class="grid grid-cols-2 lg:grid-cols-1 gap-x-6 gap-y-1.5 text-14px opacity-85"
+        >
+          {#each data.clients as client}
+            <li>{client}</li>
+          {/each}
+        </ul>
+      </aside>
+    {/if}
+  </div>
 </div>

@@ -9,6 +9,7 @@ import { default as landing } from "$content/landing-pages/customer-stories.json
 
 const banner: Banner = landing.banner;
 const meta: PageMeta = landing.meta;
+const clients: string[] = landing.clients ?? [];
 
 // reduce customer stories to summaries
 const customerStorySummaries: CustomerStorySummary[] = allCustomerStories
@@ -26,10 +27,12 @@ export function load(): {
 	banner: Banner;
 	meta: PageMeta;
 	stories: CustomerStorySummary[];
+	clients: string[];
 } {
 	return {
 		banner,
 		meta,
 		stories: customerStorySummaries,
+		clients,
 	};
 }
