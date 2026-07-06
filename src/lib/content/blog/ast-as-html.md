@@ -129,7 +129,7 @@ The irony is that we always planned to hand this tree to an LLM, but our early p
 
 ### The Payoff Is Practical, Not Just Aesthetic
 
-- **Fewer tokens burned.** The prompt no longer has to teach a schema the model already knows. (*Update, July 2026: 4 to 5× fewer tokens than mutation tools on small and medium trees; about 30% cheaper than JSON rewrite on large trees.*)
+- **Fewer tokens burned.** The prompt no longer has to teach a schema the model already knows. (*Update, July 2026: 4 to 5× fewer tokens than mutation tools on small and medium trees; about 30% cheaper than JSON rewrite on large trees; id-anchored patches beat everything at 13.2k tokens per solved 150-node task.*)
 - **Fewer round trips.** A model this fluent can author the whole tree in one pass instead of assembling it mutation by mutation.
 - **More reliable transfer.** A slipped tag fails loudly at the parser instead of silently corrupting everything after it.
 - **Faster reads.** The model scans labels instead of reconstructing structure.
@@ -186,15 +186,15 @@ We're putting the finishing touches on a series of benchmark tests designed to p
 
 ## Update (July 2026): The Benchmark Results Are In
 
-We ran the benchmark we promised: pre-registered, five conditions (HTML vs an equal-strictness JSON twin, whole-tree rewrite vs granular mutation tools vs JSON Patch), four models from three vendors, 8,000 scored runs, every prompt and seed committed before the first scored call. Full report and code: [barkup-bench](https://github.com/kevinpeckham/barkup-bench).
+We ran the benchmark we promised: pre-registered, six conditions (HTML vs an equal-strictness JSON twin, whole-tree rewrite vs granular mutation tools vs JSON Patch vs id-anchored patches), four models from three vendors, 9,600 scored runs, every prompt and seed committed before the first scored call. Full report and code: [barkup-bench](https://github.com/kevinpeckham/barkup-bench).
 
-![Line chart: task success rate versus tree size for five conditions. Whole-tree rewrite conditions stay on top at every size; JSON Patch drops to 69.6% at about 150 nodes.](/blog/img/crossover-success-light.svg)
+![Line chart: task success rate versus tree size for six conditions. Whole-tree rewrite and id-anchored patches stay on top at every size; RFC 6902 JSON Patch drops to 69.6% at about 150 nodes.](/blog/img/crossover-success-light.svg)
 
 *Task success by tree size, pooled over four models with parity prompts; whiskers are Wilson 95% intervals.*
 
-What held up: **whole-tree rewrite beat granular mutation tools**, by +5.3 points overall (p < 0.0001) and +33 points on multi-turn tasks where the agent edits a node it created earlier. The failures were not stale ids; smaller models simply failed to execute follow-up edits in multi-turn tool conversations. The predicted "tools win on big trees" crossover never appeared up to ~190 nodes. JSON Patch collapsed to 69.6% success on large trees. And rewrite solved small and medium tasks with 4 to 5× fewer tokens than tools.
+What held up: **whole-tree rewrite beat granular mutation tools**, by +5.3 points overall (p < 0.0001) and +33 points on multi-turn tasks where the agent edits a node it created earlier. The failures were not stale ids; smaller models simply failed to execute follow-up edits in multi-turn tool conversations. The predicted "tools win on big trees" crossover never appeared up to ~190 nodes. JSON Patch collapsed to 69.6% success on large trees. A pre-registered follow-up confirmed the diagnosis: patches that address nodes by id instead of positional paths recovered the entire collapse (85.1% at ~150 nodes), matched whole-tree rewrite's success rate (92.6% vs 91.9%, p = 0.53), and were the cheapest condition measured. And rewrite solved small and medium tasks with 4 to 5× fewer tokens than tools.
 
-![Dot plot: multi-turn reference-edit success for four models across five conditions. gpt-5.4 and sonnet-4.5 score high everywhere; haiku-4.5 and gemini-3.5-flash drop to between 2.5% and 32.5% in the mutation-tool conditions.](/blog/img/reference-stability-light.svg)
+![Dot plot: multi-turn reference-edit success for four models across six conditions. gpt-5.4 and sonnet-4.5 score high everywhere; haiku-4.5 and gemini-3.5-flash drop to between 2.5% and 32.5% with mutation tools while id-anchored patches stay high.](/blog/img/reference-stability-light.svg)
 
 *Multi-turn reference edits by model and condition. Whole-tree rewrite stays reliable; granular tools fall apart on the two smaller models.*
 

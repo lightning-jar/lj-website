@@ -2,7 +2,7 @@
 title: "We Benchmarked It: What Held Up in 'HTML as a Native Data Format for LLMs', and What Didn't"
 metaTitle: "We Benchmarked It | HTML vs JSON for LLMs"
 slug: barkup-bench-results
-description: "We pre-registered a benchmark to test the argument in 'HTML as a Native Data Format for LLMs': 8,000 scored runs across five conditions and four models. The whole-tree rewrite strategy won clearly, especially on multi-turn edits and smaller models. The HTML format itself was accuracy-neutral and only cheaper at scale. Mixed results, published as found."
+description: "We pre-registered a benchmark to test the argument in 'HTML as a Native Data Format for LLMs': 9,600 scored runs across six conditions and four models. The whole-tree rewrite strategy won clearly, especially on multi-turn edits and smaller models. The HTML format itself was accuracy-neutral and only cheaper at scale. Mixed results, published as found."
 date: 2026-07-06
 draft: false
 tags: [ai, agents, llm, benchmark, html]
@@ -42,11 +42,11 @@ The findings are in. Some of the argument survived contact with the data. Some o
 
 **The whole-tree rewrite strategy wins. The HTML format, by itself, doesn't.**
 
-Across 8,000 scored runs (200 procedurally generated tasks, five conditions, four models from three vendors, two prompt regimes, every prompt and seed committed before the first scored call) rewriting the whole artifact beat granular mutation tools by 5.3 points overall and by **33 points** on multi-turn tasks where the agent had to reference a node from its own earlier output. But a scrupulously fair JSON twin of our setup (same grammar, same validator strictness, same error quality) rewrote trees just as accurately as the HTML dialect did. The win belongs to the *strategy*. The format is a wash on accuracy, and earns its keep elsewhere.
+Across 9,600 scored runs (200 procedurally generated tasks, five conditions plus a pre-registered sixth, four models from three vendors, two prompt regimes, every prompt and seed committed before the first scored call) rewriting the whole artifact beat granular mutation tools by 5.3 points overall and by **33 points** on multi-turn tasks where the agent had to reference a node from its own earlier output. But a scrupulously fair JSON twin of our setup (same grammar, same validator strictness, same error quality) rewrote trees just as accurately as the HTML dialect did. The win belongs to the *strategy*. The format is a wash on accuracy, and earns its keep elsewhere.
 
 That's a mixed result for the article, and exactly the kind we committed to publishing.
 
-![Line chart: task success rate versus tree size for five conditions. Whole-tree rewrite conditions stay on top at every size; JSON Patch drops to 69.6% at about 150 nodes.](/blog/img/crossover-success-light.svg)
+![Line chart: task success rate versus tree size for six conditions. Whole-tree rewrite and id-anchored patches stay on top at every size; RFC 6902 JSON Patch drops to 69.6% at about 150 nodes.](/blog/img/crossover-success-light.svg)
 
 *Task success by tree size, pooled over four models with parity prompts; whiskers are Wilson 95% intervals.*
 
@@ -64,7 +64,7 @@ Five conditions, one grammar semantics: **A** HTML plus whole-tree rewrite (the 
 
 **"Granular tools invite granular failure": strongly supported, with a mechanism I didn't predict.** Whole-tree rewrite beat mutation tools by +5.3 points overall (p < 0.0001) and +33 points on the multi-turn reference tasks. Here's the surprise: we logged *zero* stale-id failures. The referenced ids always survived. What actually happened, in every one of the 110 failures we audited, is that the smaller models simply never executed the follow-up edit. They made unrelated tool calls, or inserted a duplicate node instead of mutating the one they had just created, and then declared the job done. Multi-turn tool-calling is where small models quietly fall apart. A whole-artifact rewrite never exposes that surface: the edit is coherent or it's rejected, exactly as the article argued, for a reason the article didn't know about.
 
-![Dot plot: multi-turn reference-edit success for four models across five conditions. gpt-5.4 and sonnet-4.5 score high everywhere; haiku-4.5 and gemini-3.5-flash drop to between 2.5% and 32.5% in the mutation-tool conditions.](/blog/img/reference-stability-light.svg)
+![Dot plot: multi-turn reference-edit success for four models across six conditions. gpt-5.4 and sonnet-4.5 score high everywhere; haiku-4.5 and gemini-3.5-flash drop to between 2.5% and 32.5% with mutation tools while id-anchored patches stay high.](/blog/img/reference-stability-light.svg)
 
 *Multi-turn reference edits by model and condition. Whole-tree rewrite stays reliable; granular tools fall apart on the two smaller models.*
 
@@ -72,11 +72,13 @@ Five conditions, one grammar semantics: **A** HTML plus whole-tree rewrite (the 
 
 **"Fewer tokens burned": supported, with an asterisk.** Rewrite solved small and medium tasks with 4 to 5× fewer total tokens than tools (which re-send a growing conversation on every call). At 150 nodes it was still ahead. The asterisk: rewrite tokens are output tokens, which cost about 5× more each, and providers increasingly cache the tool arms' repeated inputs, so the *dollar* gap is narrower than the token gap. Here, finally, the format itself matters: the HTML dialect's terse attribute encoding made A about 30% cheaper than JSON rewrite on large trees (15.6k vs 23k tokens per solved task).
 
-![Line chart: mean tokens per solved task by tree size. Mutation-tool conditions cost four to five times more on small trees; at about 150 nodes HTML rewrite uses 15.6k tokens versus 23k for JSON rewrite.](/blog/img/tokens-per-solved-light.svg)
+![Line chart: mean tokens per solved task by tree size. Mutation tools cost four to five times more on small trees; id-anchored patches are cheapest at every size, 13.2k tokens at about 150 nodes.](/blog/img/tokens-per-solved-light.svg)
 
 *Mean tokens per solved task by tree size, parity prompts. Tool loops resend the growing conversation on every call.*
 
 **One finding we weren't even looking for:** JSON Patch, the common middle ground, held its own through medium trees and then collapsed to 69.6% success at 150 nodes. Index-based paths (`/children/3/children/0/attributes/…`) are exactly the kind of positional arithmetic you shouldn't make a language model do at scale.
+
+**And one follow-up experiment the data demanded.** If JSON Patch dies by index arithmetic, what happens when a patch addresses nodes by *id* instead? We pre-registered a sixth condition, an anchored-patch dialect where every operation names its target by id and placements anchor to sibling ids ("insert after `n7`") rather than positions, and ran it through the identical harness. It confirmed the diagnosis emphatically: anchored patches recovered the entire large-tree collapse (85.1% vs RFC 6902's 69.6%, p < 0.0001), matched whole-tree rewrite's success rate overall (92.6% vs 91.9%, statistically indistinguishable), and did it as the cheapest condition we measured: 13.2k tokens per solved 150-node task, 16% under rewrite. It was also a top-two condition for both of the smaller models. The catch: it only works if your pipeline guarantees stable node ids, which is exactly the guarantee a codec like barkup exists to provide.
 
 **Who needs this advice?** The rewrite-vs-tools gap is a small-model phenomenon. gpt-5.4 and claude-sonnet-4.5 handled granular tools about as well as rewrite. claude-haiku-4.5 and gemini-3.5-flash were 10 to 11 points worse with tools than with rewrite. If your agents run on frontier models, either interface works today. If cost pressure ever pushes you down-tier, and it always eventually does, the rewrite interface is the one that degrades gracefully.
 
@@ -90,8 +92,8 @@ The article's core claim about legibility, "legibility for the human author and 
 
 Add the measured 30% token savings on large trees, identical accuracy, identical validity, and the guarantees a purpose-built codec gives you for free (byte-for-byte id preservation, round-trip identity, structured issues designed to be pasted back into a correction loop) and HTML-as-AST comes out of the benchmark not vindicated as magic, but validated as a sound default with zero measured downside and one unmeasured, decisive upside: people can read it.
 
-What I'd say differently after the data: don't sell HTML as making your agents smarter. Sell whole-artifact rewrite as making your pipeline robust, especially below the frontier, and HTML as making the same artifact legible to everyone who has to live with it.
+What I'd say differently after the data: don't sell HTML as making your agents smarter. Sell whole-artifact rewrite as making your pipeline robust, especially below the frontier, and HTML as making the same artifact legible to everyone who has to live with it. And when token cost starts to bite, reach for id-anchored patches: the follow-up experiment says they keep rewrite's reliability at patch prices, riding on the id stability the codec already guarantees.
 
 ## The Receipts
 
-Everything is open: the pre-registered brief, corpus generators (seeded and committed), the fairness twin with its parity tests, the harness, the raw analysis, and the report, at [github.com/kevinpeckham/barkup-bench](https://github.com/kevinpeckham/barkup-bench). One command regenerates the corpus; one re-runs the matrix; one re-grades. If you run it on other models or bigger trees (the crossover question past 190 nodes is genuinely open) I'd love to see the numbers, whichever way they point.
+Everything is open: the pre-registered brief (plus a second brief, `docs/BRIEF-F.md`, for the follow-up condition), corpus generators (seeded and committed), the fairness twin with its parity tests, the harness, the raw analysis, and the report, at [github.com/kevinpeckham/barkup-bench](https://github.com/kevinpeckham/barkup-bench). One command regenerates the corpus; one re-runs the matrix; one re-grades. If you run it on other models or bigger trees (the crossover question past 190 nodes is genuinely open) I'd love to see the numbers, whichever way they point.
