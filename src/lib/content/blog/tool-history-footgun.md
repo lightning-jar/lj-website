@@ -6,8 +6,8 @@ description: "Every multi-turn failure in our benchmark traced back to one line 
 date: 2026-07-06T16:00:00Z
 draft: false
 tags: [ai, agents, llm, benchmark, debugging]
-image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/beetle-on-wildflower
-imageDescription: A watercolor painting of a beetle on a blue wildflower
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/gun.webp
+imageDescription: A watercolor painting of a revolver tied with a pink gingham bow
 author: Kevin Peckham
 quote:
   text: "Rigor didn't save us; reading the transcripts did."
