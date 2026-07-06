@@ -1,0 +1,24 @@
+{
+	"id": "barkup",
+	"name": "barkup",
+	"shortDescription": "Our open-source library for authoring typed trees as HTML, the format LLMs already speak fluently.",
+	"description": [
+		"barkup is a config-driven grammar codec that lets humans and LLM agents author the same typed tree as HTML instead of JSON. You declare a grammar of node types and typed attributes and get build, parse, format, and validate with hard guarantees: byte-for-byte id preservation, declared-only attribute coercion, property-tested round-trip identity, and structured errors at the boundary.",
+		"We built barkup at Lightning Jar and extracted it from Replicator, our AI document platform, where it powers the way an assistant reads and writes template layouts. It has zero runtime dependencies and is published on npm as @kevinpeckham/barkup under the MIT license. We reach for it whenever a model needs to author or edit structured data reliably, because HTML is a format the model has deep pre-trained fluency in."
+	],
+	"license": "Open Source (MIT)",
+	"category": "LLM Data Format / Codec",
+	"link": {
+		"href": "https://github.com/kevinpeckham/barkup"
+	},
+	"relatedArticle": {
+		"href": "/blog/ast-as-html",
+		"title": "HTML as a Native Data Format for LLMs: Why We Encode Our Data in Markup Instead of JSON"
+	},
+	"useCases": [
+		"Handing structured tree data to an LLM as HTML instead of JSON",
+		"Reliable whole-artifact edits from an agent, with stable ids",
+		"Authoring the same typed content by hand and by model"
+	],
+	"supercategory": "ai-llm"
+}
