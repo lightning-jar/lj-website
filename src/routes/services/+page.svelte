@@ -39,6 +39,27 @@ let panelsCount: number = $derived(data?.services?.length ?? 0);
           >
             "{service.text}"
           </p>
+          {#if service.links?.length}
+            <div class="mt-2 max-w-540px">
+              <h3
+                class="text-12px uppercase tracking-wider text-slate-400 mb-2"
+              >
+                Related reading
+              </h3>
+              <ul class="grid gap-1.5">
+                {#each service.links as link}
+                  <li>
+                    <a
+                      href={link.href}
+                      class="text-15px text-slate-100 underline-offset-4 hover:text-accent hover:underline"
+                    >
+                      {link.text}
+                    </a>
+                  </li>
+                {/each}
+              </ul>
+            </div>
+          {/if}
         </article>
       {/if}
     {/each}

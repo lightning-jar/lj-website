@@ -12,17 +12,45 @@
 				"alt": "stylized block drawing of a web page",
 				"width": "24",
 				"height": "24"
-			}
+			},
+			"links": [
+				{
+					"text": "Customer story: rebuilding CCRTA on SvelteKit",
+					"href": "/customer-stories/ccrta-transit-website"
+				},
+				{
+					"text": "Why SvelteKit is the best choice for modern B2B websites",
+					"href": "/blog/sveltekit-vs-wordpress-b2b"
+				},
+				{
+					"text": "Why we left WordPress behind",
+					"href": "/blog/leaving-wordpress"
+				}
+			]
 		},
 		{
 			"heading": "Custom AI Solutions",
-			"text": "We architect custom AI tools for internal team use, as well as user-facing chatbots and other bespoke AI applications.",
+			"text": "We help companies adapt to the AI era, from strategy to shipped software. We architect internal tools that make teams faster, customer-facing AI experiences, and bespoke platforms where humans and AI work together, like Replicator, our own brand operating system. We also open source what we learn, because the best way to keep pace with a shift this large is to build on it.",
 			"icon": {
 				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-web-design.svg",
 				"alt": "stylized block drawing of a web page",
 				"width": "24",
 				"height": "24"
-			}
+			},
+			"links": [
+				{
+					"text": "Customer story: the evolution of Replicator",
+					"href": "/customer-stories/replicator-evolution"
+				},
+				{
+					"text": "HTML as a native data format for LLMs",
+					"href": "/blog/ast-as-html"
+				},
+				{
+					"text": "Why we moved our document production into web code",
+					"href": "/blog/replicator-origin"
+				}
+			]
 		},
 		{
 			"heading": "Custom Software & Apps",
@@ -32,27 +60,61 @@
 				"alt": "stylized icon of a grid of app tiles",
 				"width": "24",
 				"height": "24"
-			}
+			},
+			"links": [
+				{
+					"text": "Customer story: PetroSkills bespoke commerce platform",
+					"href": "/customer-stories/petroskills-ecommerce"
+				},
+				{
+					"text": "Customer story: the evolution of Replicator",
+					"href": "/customer-stories/replicator-evolution"
+				}
+			]
 		},
 		{
 			"heading": "eCommerce & PIM",
-			"text": "Our technology studio specializes in PIM, DAM, and MDM implementations and eCommerce transformations leveraging the power of Pimcore—the world’s most flexible and powerful unified digital platform.",
+			"text": "Our technology studio specializes in PIM, DAM, and MDM implementations and eCommerce transformations leveraging the power of OpenDXP, the world’s most flexible and powerful open source unified digital platform.",
 			"icon": {
 				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-ecommerce.svg",
 				"alt": "stylized icon of a grid of app tiles",
 				"width": "24",
 				"height": "24"
-			}
+			},
+			"links": [
+				{
+					"text": "Customer story: selling seats, not SKUs, for PetroSkills",
+					"href": "/customer-stories/petroskills-ecommerce"
+				},
+				{
+					"text": "Customer story: marketing data for Beam Suntory",
+					"href": "/customer-stories/beam-suntory-mdm"
+				},
+				{
+					"text": "Pimcore or OpenDXP: a fork in the road",
+					"href": "/blog/opendxp-pimcore-fork"
+				}
+			]
 		},
 		{
 			"heading": "Sales & Pricing Tools",
-			"text": "What are the challenges and friction points slowing down your sales team or agents in the call center? Too often, the sales organization is the last to benefit from digital transformation—ask yourself what happens if you turn that equation around.",
+			"text": "What are the challenges and friction points slowing down your sales team or agents in the call center? Too often, the sales organization is the last to benefit from digital transformation. Ask yourself what happens if you turn that equation around.",
 			"icon": {
 				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-sales-tools.svg",
 				"alt": "stylized icon of sales and pricing tools",
 				"width": "24",
 				"height": "24"
-			}
+			},
+			"links": [
+				{
+					"text": "Customer story: SecureLogix unified digital stack",
+					"href": "/customer-stories/securelogix-digital-stack"
+				},
+				{
+					"text": "Customer story: the evolution of Replicator",
+					"href": "/customer-stories/replicator-evolution"
+				}
+			]
 		},
 		{
 			"heading": "UX Optimization",
@@ -62,7 +124,17 @@
 				"alt": "stylized icon representing user experience optimization",
 				"width": "24",
 				"height": "24"
-			}
+			},
+			"links": [
+				{
+					"text": "Customer story: accessibility-first transit site for CCRTA",
+					"href": "/customer-stories/ccrta-transit-website"
+				},
+				{
+					"text": "Please don’t force links to open in new tabs",
+					"href": "/blog/why-links-should-not-open-in-new-tabs"
+				}
+			]
 		}
 	],
 	"meta": {
