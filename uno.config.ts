@@ -193,7 +193,8 @@ export default defineConfig({
 			[&_p_a,_&_li_a]:(underline underline-offset-2)
 			[&_a:hover]:text-maximumYellow
 			[&_strong]:(font-700)
-			[&_img]:(w-full h-auto aspect-video overflow-hidden rounded flex object-cover mb-5)
+			[&_img]:(w-full h-auto max-w-full my-4)
+			[&_img+p]:(text-13px opacity-70 mt-2 mb-6 leading-snug)
 			[&_table]:(hidden md:block w-full border-collapse text-15px text-left relative border border-slate-100/40 rounded pb-0 overflow-hidden my-4)
 			[&_table_thead]:(flex items-center justify-between text-slate-100)
 			[&_table_thead_tr]:(w-full grid grid-cols-[repeat(auto-fit,_minmax(min(100%,_150px),_1fr))])

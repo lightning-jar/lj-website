@@ -1,5 +1,5 @@
 // utils
-import { parseMarkdown } from "$utils/parseMarkdown";
+import { getFrontMatter, parseMarkdownTextToHtml } from "$utils/parseMarkdown";
 
 // types
 import type { SitemapPage, SitemapSection } from "$types/Sitemap";
@@ -22,9 +22,13 @@ async function loadAllText() {
 
 async function getArticles() {
 	const rawArticles = await loadAllText();
-	const articles = rawArticles.map((article) => {
-		return parseMarkdown(article);
-	});
+	const articles = rawArticles.map((article) => ({
+		frontMatter: getFrontMatter(article),
+		html: parseMarkdownTextToHtml({
+			markdown: article,
+			options: { sanitize: true, lazyImages: true },
+		}),
+	}));
 	return articles.sort((a, b) => {
 		const dateA = new Date(
 			a.frontMatter?.date && typeof a.frontMatter.date === "string"

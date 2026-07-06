@@ -188,7 +188,15 @@ We're putting the finishing touches on a series of benchmark tests designed to p
 
 We ran the benchmark we promised: pre-registered, five conditions (HTML vs an equal-strictness JSON twin, whole-tree rewrite vs granular mutation tools vs JSON Patch), four models from three vendors, 8,000 scored runs, every prompt and seed committed before the first scored call. Full report and code: [barkup-bench](https://github.com/kevinpeckham/barkup-bench).
 
+![Line chart: task success rate versus tree size for five conditions. Whole-tree rewrite conditions stay on top at every size; JSON Patch drops to 69.6% at about 150 nodes.](/blog/img/crossover-success-light.svg)
+
+*Task success by tree size, pooled over four models with parity prompts; whiskers are Wilson 95% intervals.*
+
 What held up: **whole-tree rewrite beat granular mutation tools**, by +5.3 points overall (p < 0.0001) and +33 points on multi-turn tasks where the agent edits a node it created earlier. The failures were not stale ids; smaller models simply failed to execute follow-up edits in multi-turn tool conversations. The predicted "tools win on big trees" crossover never appeared up to ~190 nodes. JSON Patch collapsed to 69.6% success on large trees. And rewrite solved small and medium tasks with 4 to 5× fewer tokens than tools.
+
+![Dot plot: multi-turn reference-edit success for four models across five conditions. gpt-5.4 and sonnet-4.5 score high everywhere; haiku-4.5 and gemini-3.5-flash drop to between 2.5% and 32.5% in the mutation-tool conditions.](/blog/img/reference-stability-light.svg)
+
+*Multi-turn reference edits by model and condition. Whole-tree rewrite stays reliable; granular tools fall apart on the two smaller models.*
 
 What didn't: **the HTML dialect itself was accuracy-neutral.** Against a JSON twin with identical validator strictness and error quality, HTML and JSON tied on first-pass validity (≥99% everywhere; modern models write both formats essentially perfectly), tied on editing success, and tied on reading accuracy. The one place the format measurably mattered was cost: HTML's terser encoding was about 30% cheaper than JSON per solved large-tree task.
 

@@ -46,6 +46,10 @@ Across 8,000 scored runs (200 procedurally generated tasks, five conditions, fou
 
 That's a mixed result for the article, and exactly the kind we committed to publishing.
 
+![Line chart: task success rate versus tree size for five conditions. Whole-tree rewrite conditions stay on top at every size; JSON Patch drops to 69.6% at about 150 nodes.](/blog/img/crossover-success-light.svg)
+
+*Task success by tree size, pooled over four models with parity prompts; whiskers are Wilson 95% intervals.*
+
 ## How We Kept It Honest
 
 A benchmark like this is easy to rig by accident. The conventional arm gets a lazy validator, terse error messages, a schema the model has to guess at, and the "novel" approach wins by forfeit. So the JSON twin was built as the single most important fairness artifact in the project: a validator exactly as strict as barkup's, emitting the same issue codes, the same message wording, the same human-readable paths, cross-checked against an independently compiled JSON Schema in the test suite. The mutation-tool arm got real tools with realistic errors. The JSON Patch arm got a battle-tested RFC 6902 implementation so it could never lose to a bug in our patch engine.
@@ -60,9 +64,17 @@ Five conditions, one grammar semantics: **A** HTML plus whole-tree rewrite (the 
 
 **"Granular tools invite granular failure": strongly supported, with a mechanism I didn't predict.** Whole-tree rewrite beat mutation tools by +5.3 points overall (p < 0.0001) and +33 points on the multi-turn reference tasks. Here's the surprise: we logged *zero* stale-id failures. The referenced ids always survived. What actually happened, in every one of the 110 failures we audited, is that the smaller models simply never executed the follow-up edit. They made unrelated tool calls, or inserted a duplicate node instead of mutating the one they had just created, and then declared the job done. Multi-turn tool-calling is where small models quietly fall apart. A whole-artifact rewrite never exposes that surface: the edit is coherent or it's rejected, exactly as the article argued, for a reason the article didn't know about.
 
+![Dot plot: multi-turn reference-edit success for four models across five conditions. gpt-5.4 and sonnet-4.5 score high everywhere; haiku-4.5 and gemini-3.5-flash drop to between 2.5% and 32.5% in the mutation-tool conditions.](/blog/img/reference-stability-light.svg)
+
+*Multi-turn reference edits by model and condition. Whole-tree rewrite stays reliable; granular tools fall apart on the two smaller models.*
+
 **And the crossover never came.** I expected rewrite to win on small trees and lose to tools as trees grew and rewriting got expensive and error-prone. It didn't reverse. Rewrite led at every size we tested, up to about 190 nodes. The gap narrowed at the top of the range, so a crossover may exist somewhere beyond it, but we didn't find it.
 
 **"Fewer tokens burned": supported, with an asterisk.** Rewrite solved small and medium tasks with 4 to 5× fewer total tokens than tools (which re-send a growing conversation on every call). At 150 nodes it was still ahead. The asterisk: rewrite tokens are output tokens, which cost about 5× more each, and providers increasingly cache the tool arms' repeated inputs, so the *dollar* gap is narrower than the token gap. Here, finally, the format itself matters: the HTML dialect's terse attribute encoding made A about 30% cheaper than JSON rewrite on large trees (15.6k vs 23k tokens per solved task).
+
+![Line chart: mean tokens per solved task by tree size. Mutation-tool conditions cost four to five times more on small trees; at about 150 nodes HTML rewrite uses 15.6k tokens versus 23k for JSON rewrite.](/blog/img/tokens-per-solved-light.svg)
+
+*Mean tokens per solved task by tree size, parity prompts. Tool loops resend the growing conversation on every call.*
 
 **One finding we weren't even looking for:** JSON Patch, the common middle ground, held its own through medium trees and then collapsed to 69.6% success at 150 nodes. Index-based paths (`/children/3/children/0/attributes/…`) are exactly the kind of positional arithmetic you shouldn't make a language model do at scale.
 
