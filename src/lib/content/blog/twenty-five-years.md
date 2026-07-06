@@ -84,4 +84,4 @@ The second is that Buckminster Fuller line from the very first site. We have nev
 
 Nothing about this anniversary is nostalgic. The tools in our hands right now are the newest we have ever held, and we are using them the way we have used every generation before: to do the same work, which never changed. Solve the real problem, and refuse to call it done until the solution is beautiful.
 
-Here is to the people who built the first twenty-five years, the clients who trusted us across every reinvention, and whatever the question turns out to be next.
+Here is to the people who built the first twenty-five years, the clients who trusted us across every reinvention, and, especially, to Alan Ruthazer, whose leadership and vision started all of it and without whom this anniversary would never have been possible. And here is to whatever the question turns out to be next.
