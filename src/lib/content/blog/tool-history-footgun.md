@@ -65,8 +65,13 @@ messages.push(...result.response.messages); // looks right. isn't.
 Here's the thing: in a multi-step tool run, `result.response.messages` contains **only the final step's assistant text**. The tool calls the model made, and the tool results it received, live one level down, per step. What you actually want is:
 
 ```ts
+messages.push(...result.responseMessages); // the idiomatic v7 accessor
+
+// equivalent, built from the per-step data:
 messages.push(...result.steps.flatMap((s) => s.response.messages));
 ```
+
+And what makes this a *migration* trap rather than a plain bug: `result.response.messages` was the documented v5 pattern for exactly this purpose. v7 kept the property, changed its meaning to final-step-only, and moved the accumulated history to a new top-level accessor, [`result.responseMessages`](https://ai-sdk.dev/docs/migration-guides/migration-guide-7-0) — documented in the migration guide, but silent at the call site. No type error. No runtime warning. Code written against v5 still typechecks, still runs, and quietly means something else.
 
 One line. But with the first version, every multi-turn conversation we ran had a hole in it: the model's own tool activity was erased from its history. From the model's point of view, the past looked like this — *user asked for an edit; I replied "DONE."* No insertNode call. No tool result with the new id. Just a user request and a one-word answer that apparently satisfied everyone.
 
@@ -104,7 +109,7 @@ And one more trap from our ablations: prompt mitigations interact with the broke
 ## The five-minute audit
 
 1. **Dump the exact message array you send on turn N+1** of a tool-using conversation — not what your abstraction claims, the actual array. Look for `tool-call` and `tool-result` parts from turn N. If your assistant turns are all bare text, you have the bug.
-2. **Check your persistence layer.** The SDK-level fix is `steps.flatMap(s => s.response.messages)`, but the same hole opens one layer up: if your conversation store saves only the assistant's visible text (very common — that's what the user sees), every rebuilt history is tool-less no matter what the SDK returned.
+2. **Check your persistence layer.** The SDK-level fix is `result.responseMessages` — the official accumulated-history accessor — or the equivalent `steps.flatMap(s => s.response.messages)`, but the same hole opens one layer up: if your conversation store saves only the assistant's visible text (very common — that's what the user sees), every rebuilt history is tool-less no matter what the SDK returned.
 3. **Add one regression test**: run a two-turn tool conversation; assert the rebuilt history for turn two contains at least one tool-call part and one tool-result part. It's the cheapest insurance in agent engineering.
 4. **Re-run your evals on your cheapest model, not your best one.** Small models are your canary for context defects. If haiku-class models suddenly can't follow up, don't conclude they're bad at tools — we did, in public, with confidence intervals.
 
