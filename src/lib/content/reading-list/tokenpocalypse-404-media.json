@@ -1,0 +1,27 @@
+{
+	"author": {
+		"name": "Joseph Cox, Sam Cole, and Emanuel Maiberg",
+		"email": "",
+		"mastodon": "",
+		"url": "https://www.404media.co/"
+	},
+	"comments": [""],
+	"excerpt": "As AI providers charge by the token, companies scramble to control the bill, including a tool that quietly rewrites AI output to be more terse.",
+	"id": "404media-tokenpocalypse-2026-06-30",
+	"image": {
+		"src": "",
+		"alt": ""
+	},
+	"publishDate": "2026-06-30",
+	"repostDate": "2026-06-30",
+	"slug": "tokenpocalypse-404-media",
+	"source": {
+		"publicationName": "404 Media",
+		"publicationUrl": "https://www.404media.co/"
+	},
+	"summary": "The 404 Media co-founders dig into what they call the tokenpocalypse: the scramble inside large companies to control AI spending now that providers charge per token. They cover the internal tactics being deployed to curb costs, including a tool that modifies AI output to be more terse, and close with a stranger story about fake AI-generated flower seeds being sold to unsuspecting buyers on major e-commerce platforms.",
+	"tags": ["LLMs", "Token Economics", "Industry", "AI Costs"],
+	"title": "The Tokenpocalypse Is Here",
+	"type": "Podcast Episode",
+	"url": "https://subscribe.transistor.fm/8a2c2ab392080f/listen/8c4df26e"
+}

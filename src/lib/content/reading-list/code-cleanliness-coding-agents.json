@@ -1,0 +1,27 @@
+{
+	"author": {
+		"name": "Priyansh Trivedi and Olivier Schmitt",
+		"email": "",
+		"mastodon": "",
+		"url": ""
+	},
+	"comments": [""],
+	"excerpt": "Cleaner code did not make the coding agent more likely to succeed, but it made the agent meaningfully cheaper: fewer tokens, fewer repeated file reads.",
+	"id": "trivedi-schmitt-code-cleanliness-coding-agents-2026-05-19",
+	"image": {
+		"src": "",
+		"alt": ""
+	},
+	"publishDate": "2026-05-19",
+	"repostDate": "2026-05-19",
+	"slug": "code-cleanliness-coding-agents",
+	"source": {
+		"publicationName": "arXiv",
+		"publicationUrl": "https://arxiv.org/"
+	},
+	"summary": "Researchers at SonarSource ran a controlled minimal-pair experiment: pairs of codebases identical in architecture and behavior but differing only in cleanliness metrics, run through an autonomous coding agent across 660 trials with Claude Code. Code cleanliness did not change task completion rates, but it substantially lowered cost, with agents on cleaner code using 7 to 8 percent fewer tokens and revisiting files 34 percent less often. The takeaway is that traditional maintainability principles still pay off in an AI-assisted workflow, shaping agent efficiency alongside model choice and prompting.",
+	"tags": ["LLMs", "Coding Agents", "Code Quality", "Software Engineering"],
+	"title": "Does Code Cleanliness Affect Coding Agents? A Controlled Minimal-Pair Study",
+	"type": "Technical Article",
+	"url": "https://arxiv.org/abs/2605.20049"
+}

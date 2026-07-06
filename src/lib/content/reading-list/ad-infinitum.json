@@ -1,0 +1,27 @@
+{
+	"author": {
+		"name": "Matthias Ott",
+		"email": "",
+		"mastodon": "https://front-end.social/@matthiasott",
+		"url": "https://matthiasott.com/"
+	},
+	"comments": [""],
+	"excerpt": "Google is rebuilding search around AI-generated answers where the ad is the answer, quietly breaking its old contract with the open web.",
+	"id": "matthiasott-ad-infinitum-2026-05-21",
+	"image": {
+		"src": "",
+		"alt": ""
+	},
+	"publishDate": "2026-05-21",
+	"repostDate": "2026-05-28",
+	"slug": "ad-infinitum",
+	"source": {
+		"publicationName": "matthiasott.com",
+		"publicationUrl": "https://matthiasott.com/"
+	},
+	"summary": "Matthias Ott reads Google's I/O announcements as a fundamental change to how search works: dismantling the traditional results page and rebuilding it around AI-generated content where, as he puts it, the ad is the answer rather than something shown beside it. He walks through the proposed mechanisms, token auctions and prominence allocation, that would embed paid content invisibly inside AI responses, and argues this breaks Google's long-standing contract with the open web while further privatizing user data. It is a sharp, worried look at what happens to the web when the front door to it changes shape.",
+	"tags": ["Open Web", "Search", "Advertising", "LLMs"],
+	"title": "Ad Infinitum",
+	"type": "Blog Article",
+	"url": "https://matthiasott.com/notes/ad-infinitum"
+}
