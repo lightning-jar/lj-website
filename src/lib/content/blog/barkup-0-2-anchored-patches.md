@@ -24,6 +24,8 @@ glossary:
 additionalReading:
   - title: "We Benchmarked It: What Held Up in 'HTML as a Native Data Format for LLMs', and What Didn't"
     url: "/blog/barkup-bench-results"
+  - title: "One Hidden Default Broke My Benchmark (and Maybe Your Agent)"
+    url: "/blog/tool-history-footgun"
   - title: "HTML as a Native Data Format for LLMs: Why We Encode Our Data in Markup Instead of JSON"
     url: "/blog/ast-as-html"
   - title: "Content Is an Overlay: Separating Words from Structure in an AI Document Editor"
