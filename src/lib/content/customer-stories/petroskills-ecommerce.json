@@ -71,7 +71,7 @@
 			"subheading": "Kept Modern Without a Rebuild",
 			"text": [
 				"An e-commerce platform is never done, and Lightning Jar has evolved this one continuously rather than letting it calcify toward an expensive rewrite:",
-				"• Migrated the platform from Pimcore 10 to Pimcore 11 and then to OpenDXP, with a clean production cutover in May 2026.",
+				"• Migrated the platform from Pimcore 10 to Pimcore 11 and then to OpenDXP, and modernized the server underneath it (a fresh RHEL host, rootless Podman, and Caddy) with a clean production cutover in May 2026. We wrote up that migration on our blog: <a href=\"/blog/pimcore-opendxp-podman-migration\">Migrating a Decade-Old Pimcore Site to OpenDXP on Rootless Podman and Caddy</a>.",
 				"• Completed a full migration from Bootstrap to UnoCSS across every template.",
 				"• Moved JavaScript, CSS, and static assets to a multi-environment CDN with per-environment cache policies.",
 				"• End-to-end test coverage with Playwright guards the checkout flows."
