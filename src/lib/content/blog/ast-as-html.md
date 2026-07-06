@@ -42,6 +42,8 @@ additionalReading:
     url: "/blog/why-links-should-not-open-in-new-tabs"
 ---
 
+***Update (July 2026):*** *After publishing this, we put its claims to a pre-registered benchmark, and not all of them held up: the whole-tree rewrite strategy won clearly, but the HTML dialect itself proved accuracy-neutral rather than the edge this piece assumed. The original argument stands below as written, with the specifics corrected inline and in the update section near the end. Full results: [We Benchmarked It](/blog/barkup-bench-results).*
+
 We built a document platform where an AI assistant designs marketing documents (flyers, brochures, one-pagers) inside brand-approved rails, and humans finish them by clicking into the rendered page and typing. Getting the agent to *author templates*, the structural layouts those documents are built from, turned out to hinge on a single unfashionable decision:
 
 **We encode our templates as HTML, not JSON. And the agent's main editing tool is "rewrite the whole thing."**

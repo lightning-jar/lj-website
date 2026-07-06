@@ -3,7 +3,7 @@ title: "If the Solution Is Not Beautiful, It Is Wrong: Twenty-Five Years of Ligh
 metaTitle: "25 Years of Lightning Jar | A Digital Agency Since 2001"
 slug: twenty-five-years
 description: "We started as Siite Interactive in 2001, when most people didn't own a mobile phone and the iPod had just arrived. Twenty-five years later, the web has been reinvented several times over and so have we. A look back at what changed, what we built, and the two things we refused to give up: our independence and a line from Buckminster Fuller."
-date: 2026-07-06
+date: 2026-07-05
 draft: false
 tags: [agency, history, web, opinion]
 image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/birthday-cake.webp
