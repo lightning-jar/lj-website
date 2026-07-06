@@ -26,6 +26,8 @@ glossary:
   - term: McNemar test
     definition: A paired statistical test for whether two methods differ on the same set of tasks, used here to compare conditions run on identical inputs.
 additionalReading:
+  - title: "barkup 0.2: We Shipped What the Benchmark Told Us"
+    url: "/blog/barkup-0-2-anchored-patches"
   - title: "HTML as a Native Data Format for LLMs: Why We Encode Our Data in Markup Instead of JSON"
     url: "/blog/ast-as-html"
   - title: "Content Is an Overlay: Separating Words from Structure in an AI Document Editor"
