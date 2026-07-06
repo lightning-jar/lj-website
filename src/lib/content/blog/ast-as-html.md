@@ -164,6 +164,22 @@ One more discipline that earns its keep: **round-trip property tests.** `parse(b
 - **Trees the model shouldn't fully see.** Whole-tree I/O assumes the whole tree fits in context and is safe to show.
 - **Multi-writer concurrency.** "Replace everything" is last-write-wins by construction. Fine for one user plus one assistant in a session; wrong for real-time collaboration.
 
+## Isn't This Just XML?
+
+Structurally, yes: an HTML dialect built from `data-*` attributes is more or less XML with a fixed vocabulary, and anyone who lived through the SOAP era has earned their suspicion. But the argument was never about angle brackets. It's about two things XML doesn't give you.
+
+**Training distribution.** Models have seen orders of magnitude more HTML than XML: billions of pages of it, in every style, next to every kind of surrounding context. The idioms our dialect leans on (`data-*` attributes, class strings, id discipline, labeled closing structure) are HTML-native patterns the model has produced constantly since pretraining. Generic XML fluency exists, but it's thinner, more formal, and further from how our trees actually read.
+
+**Platform machinery.** Every browser ships a battle-tested parser, serializer, and query engine for HTML: `DOMParser`, `querySelector`, `setAttribute`. Our surgical tool cost almost nothing to build because the platform had spent decades building it for us. Choosing XML would buy the same syntax with weaker model fluency and none of that free tooling at the authoring boundary.
+
+And in our domain the choice isn't even a metaphor: document layout is *already* HTML-shaped, and the dialect describes things that will eventually render as HTML anyway. If your tree is a financial ledger, the calculus may differ. Ours is a page.
+
+## A Note on Evidence
+
+Everything in this post is production experience: real bugs, real user sessions, and zero controlled experiments. Claims like "it needed less prompting" and "transcription drift went away" are honest observations, but they are anecdotes, not measurements.
+
+We're putting the finishing touches on a series of benchmark tests designed to prove (or disprove) the hypotheses in this article: that encoding trees as HTML instead of JSON buys fewer tokens, fewer round trips, and more reliable edits. We'll share the findings either way, good or bad, and we'll open-source the benchmark itself so the tests are repeatable on your models and your trees. If these claims don't survive measurement, you'll read about that here too.
+
 ## Takeaways
 
 1. **Choose formats the model already speaks.** Fluency you don't have to prompt for is the cheapest capability you will ever ship, and it's the same property as human legibility: design for the person reading by hand and the model benefits for free.
