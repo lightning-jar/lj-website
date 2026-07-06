@@ -80,6 +80,8 @@ Five conditions, one grammar semantics: **A** HTML plus whole-tree rewrite (the 
 
 **Who needs this advice?** The rewrite-vs-tools gap is a small-model phenomenon. gpt-5.4 and claude-sonnet-4.5 handled granular tools about as well as rewrite. claude-haiku-4.5 and gemini-3.5-flash were 10 to 11 points worse with tools than with rewrite. If your agents run on frontier models, either interface works today. If cost pressure ever pushes you down-tier, and it always eventually does, the rewrite interface is the one that degrades gracefully.
 
+None of this is unprecedented, and it shouldn't be. Aider's [edit-format benchmarks](https://aider.chat/docs/leaderboards/) have long shown that whole-file editing outperforms diff-style formats, especially for less capable models, and the [Berkeley Function-Calling Leaderboard](https://gorilla.cs.berkeley.edu/leaderboard.html) documents how sharply multi-turn tool reliability varies by model. Our results line up with both. What this benchmark adds is the controlled separation of strategy from format: an equal-strictness JSON twin that lets us say the win belongs to whole-tree rewrite, not to HTML.
+
 ## So Why Are We Still Authoring in HTML?
 
 Because accuracy was never the only budget, and the benchmark showed the format costs nothing on the budgets it measured.
