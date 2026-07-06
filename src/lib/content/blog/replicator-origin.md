@@ -3,7 +3,7 @@ title: "Why We Moved Our Document Production into Web Code: The Origin of Replic
 metaTitle: "Documents as Web Code | Origin of Replicator"
 slug: replicator-origin
 description: "CMSs frustrate everyone in one of two directions, and print design fails the same way with different symptoms. The origin story of Replicator: how an agency fired its design software, moved PDF production into SvelteKit, built an edit-in-place editor and versioned repository, and discovered the whole system already spoke the LLM's native language."
-date: 2026-07-05
+date: 2026-07-06
 draft: false
 tags: [ai, cms, design, pdf, architecture]
 image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/owl.webp
