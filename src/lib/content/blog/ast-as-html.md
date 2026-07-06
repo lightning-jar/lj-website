@@ -28,6 +28,8 @@ glossary:
   - term: Round-trip property test
     definition: A test asserting that parsing then re-serializing a structure, parse(build(tree)), preserves it exactly, including ids, names, and attributes.
 additionalReading:
+  - title: "We Benchmarked It: What Held Up in 'HTML as a Native Data Format for LLMs', and What Didn't"
+    url: "/blog/barkup-bench-results"
   - title: "Content Is an Overlay: Separating Words from Structure in an AI Document Editor"
     url: "/blog/content-overlay"
   - title: "Why We Moved Our Document Production into Web Code: The Origin of Replicator"
@@ -66,7 +68,7 @@ removeNode(nodeId)
 We've built agents like this. They work, but they under-perform in three predictable ways:
 
 1. **You're teaching a bespoke schema from scratch.** Every node type, every attribute, every containment rule has to be spelled out in the prompt, and the model's only fluency is whatever your prompt bought. It has seen your JSON schema zero times in training.
-2. **Granular tools invite granular failure.** Building a twelve-node layout takes a dozen round trips. Each call can reference a stale id, a wrong parent, an index that shifted two calls ago. The tree passes through eleven intermediate states, each a chance to strand the agent somewhere invalid, and each a state your renderer might have to survive.
+2. **Granular tools invite granular failure.** Building a twelve-node layout takes a dozen round trips. Each call can reference a stale id, a wrong parent, an index that shifted two calls ago. The tree passes through eleven intermediate states, each a chance to strand the agent somewhere invalid, and each a state your renderer might have to survive. (*Update, July 2026: measured at +33 points for rewrite on multi-turn reference edits, though the mechanism was models failing to execute follow-up tool calls, not stale references.*)
 3. **The model can't "see" its work.** With mutation-by-tool-call, the model's picture of the current tree is a mental reconstruction from its own call history. Drift is inevitable.
 
 ## The Inversion
@@ -117,7 +119,7 @@ Working with JSON is like hunting through closed storage containers in an attic.
 <div data-type="text-atom" data-name="heading" data-max-length="60">
 ```
 
-The node's type, name, and constraints are readable before you ever step inside, and the container closes with its name on it. Ask a model for an inventory of a JSON tree and it *reconstructs*; ask for an inventory of an HTML tree and it *reads the labels*. That difference is most of why the whole-tree tool works: generating sixty nodes of labeled, self-closing HTML containers is something the model has done a billion times, and getting the lids right is easy when every lid says what it belongs to.
+The node's type, name, and constraints are readable before you ever step inside, and the container closes with its name on it. Ask a model for an inventory of a JSON tree and it *reconstructs*; ask for an inventory of an HTML tree and it *reads the labels*. (*Update, July 2026: this one didn't survive the benchmark; measured reading accuracy tied across formats, 87.1% vs 87.9%.*) That difference is most of why the whole-tree tool works: generating sixty nodes of labeled, self-closing HTML containers is something the model has done a billion times, and getting the lids right is easy when every lid says what it belongs to.
 
 The irony is that we always planned to hand this tree to an LLM, but our early prototypes didn't yet; templates had to be authored and debugged by hand, so the problem we were solving first was *human* parsability. Labels on the outside made the tree easier for a person to read and write. That choice ended up revealing a hidden truth about LLM readability: legibility for the human author and fluency for the model are the same property.
 
@@ -125,7 +127,7 @@ The irony is that we always planned to hand this tree to an LLM, but our early p
 
 ### The Payoff Is Practical, Not Just Aesthetic
 
-- **Fewer tokens burned.** The prompt no longer has to teach a schema the model already knows.
+- **Fewer tokens burned.** The prompt no longer has to teach a schema the model already knows. (*Update, July 2026: 4 to 5× fewer tokens than mutation tools on small and medium trees; about 30% cheaper than JSON rewrite on large trees.*)
 - **Fewer round trips.** A model this fluent can author the whole tree in one pass instead of assembling it mutation by mutation.
 - **More reliable transfer.** A slipped tag fails loudly at the parser instead of silently corrupting everything after it.
 - **Faster reads.** The model scans labels instead of reconstructing structure.
@@ -179,6 +181,16 @@ And in our domain the choice isn't even a metaphor: document layout is *already*
 Everything in this post is production experience: real bugs, real user sessions, and zero controlled experiments. Claims like "it needed less prompting" and "transcription drift went away" are honest observations, but they are anecdotes, not measurements.
 
 We're putting the finishing touches on a series of benchmark tests designed to prove (or disprove) the hypotheses in this article: that encoding trees as HTML instead of JSON buys fewer tokens, fewer round trips, and more reliable edits. We'll share the findings either way, good or bad, and we'll open-source the benchmark itself so the tests are repeatable on your models and your trees. If these claims don't survive measurement, you'll read about that here too.
+
+## Update (July 2026): The Benchmark Results Are In
+
+We ran the benchmark we promised: pre-registered, five conditions (HTML vs an equal-strictness JSON twin, whole-tree rewrite vs granular mutation tools vs JSON Patch), four models from three vendors, 8,000 scored runs, every prompt and seed committed before the first scored call. Full report and code: [barkup-bench](https://github.com/kevinpeckham/barkup-bench).
+
+What held up: **whole-tree rewrite beat granular mutation tools**, by +5.3 points overall (p < 0.0001) and +33 points on multi-turn tasks where the agent edits a node it created earlier. The failures were not stale ids; smaller models simply failed to execute follow-up edits in multi-turn tool conversations. The predicted "tools win on big trees" crossover never appeared up to ~190 nodes. JSON Patch collapsed to 69.6% success on large trees. And rewrite solved small and medium tasks with 4 to 5× fewer tokens than tools.
+
+What didn't: **the HTML dialect itself was accuracy-neutral.** Against a JSON twin with identical validator strictness and error quality, HTML and JSON tied on first-pass validity (≥99% everywhere; modern models write both formats essentially perfectly), tied on editing success, and tied on reading accuracy. The one place the format measurably mattered was cost: HTML's terser encoding was about 30% cheaper than JSON per solved large-tree task.
+
+So the honest, post-data version of this article's thesis: the *strategy* (whole-artifact rewrite over a validating codec) is what makes agent editing robust, especially below the frontier tier. The HTML dialect costs nothing on accuracy, saves tokens at scale, and keeps its unmeasured, decisive advantage: the same artifact stays legible to the humans who review, diff, and debug it. We'd still choose it. We'd just sell it differently, and now we can say why with numbers. Longer write-up: [We Benchmarked It](/blog/barkup-bench-results).
 
 ## Takeaways
 
