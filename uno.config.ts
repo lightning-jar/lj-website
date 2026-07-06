@@ -97,7 +97,20 @@ export default defineConfig({
 			xanthous: "#f7b32b",
 		},
 	},
-	rules: [],
+	rules: [
+		// content-visibility: skip rendering + layout for off-screen items.
+		// `content-auto` defaults to a 400px intrinsic-size placeholder;
+		// `content-auto-<n>` overrides it (e.g. content-auto-480 → 480px).
+		// The `auto` keyword remembers each element's real size once rendered,
+		// so the fallback only applies to items that have never been on screen.
+		[
+			/^content-auto(?:-(\d+))?$/,
+			([, px]: string[]) => ({
+				"content-visibility": "auto",
+				"contain-intrinsic-size": `auto ${px ?? 400}px`,
+			}),
+		],
+	],
 	safelist: [
 		"contents",
 		"bg-oxford",

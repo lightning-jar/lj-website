@@ -38,7 +38,7 @@ let { data } = $props();
       {#if index !== -1}
         <hr class="mb-6 opacity-40" />
       {/if}
-      <article class="max-w-article mb-10">
+      <article class="max-w-article mb-10 content-auto-480">
         {#if article?.image?.src}
           <img
             src={article.image.src}
