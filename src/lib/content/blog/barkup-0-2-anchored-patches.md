@@ -34,9 +34,11 @@ This is the third step of a loop we don't usually get to finish in public. We ma
 
 ## What the data said
 
-The benchmark ran a pre-registered sixth condition after the main study: a patch dialect whose operations address nodes exclusively by id, with placements anchored to sibling ids rather than positions. It was the standout result. Anchored patches tied whole-tree rewrite on task success (92.6% vs 91.9%, p = 0.53), fully recovered the large-tree collapse that sank standard RFC 6902 JSON Patch (85.1% vs 69.6% at about 150 nodes, p < 0.0001), and did it as the cheapest condition at every tree size (13.2k tokens per solved 150-node task, 16% under rewrite). It was also a top-two condition for both of the smaller models we tested.
+The benchmark ran a pre-registered sixth condition after the main study: a patch dialect whose operations address nodes exclusively by id, with placements anchored to sibling ids rather than positions. It was the standout result. Anchored patches tied whole-tree rewrite on task success (92.6% vs 91.9%, p = 0.53), fully recovered the large-tree collapse that sank standard RFC 6902 JSON Patch (85.1% vs 69.6% at about 150 nodes, p < 0.0001), and did it as the cheapest condition at every tree size (13.2k tokens per solved 150-node task, 16% under rewrite).
 
-That is a rare shape for a result: as reliable as the best strategy, at the lowest cost, and it degrades gracefully on the cheap models where everything else falls apart. It depends on exactly one thing: stable node ids. Which happens to be barkup's first guarantee.
+***Update (July 2026):*** *barkup-bench later published a protocol correction affecting its granular-tools results. The anchored-patch numbers cited here ran on protocols the defect never touched and are unchanged; see the [correction in the benchmark repo](https://github.com/kevinpeckham/barkup-bench) and the [corrected results post](/blog/barkup-bench-results).*
+
+That is a rare shape for a result: as reliable as the best strategy, at the lowest cost. We originally read a third virtue into it — strong performance on smaller models where the alternatives degraded — but the benchmark's correction showed that small-model fragility in the granular-tools conditions was a harness artifact, not a property of the tools. What genuinely degraded is positional RFC 6902 JSON Patch on large trees, and that comparison stands. Anchored patches depend on exactly one thing: stable node ids. Which happens to be barkup's first guarantee.
 
 ## What shipped
 
@@ -63,9 +65,9 @@ The operation set is small on purpose: `set-attribute`, `remove-attribute`, `set
 
 ## When to reach for it
 
-Nothing here demotes whole-tree rewrite. Rewrite is still the simplest robust interface, and for most edits it is the right default: one coherent artifact, validated in one shot. Anchored patches are the optimization you reach for when token cost or latency starts to bite, especially on longer documents or smaller models, where resending and rewriting the whole tree on every turn gets expensive. The two winning strategies from the benchmark now both live in the library, and you can pick per workload.
+Nothing here demotes whole-tree rewrite. Rewrite is still the simplest robust interface, and for most edits it is the right default: one coherent artifact, validated in one shot. Anchored patches are the optimization you reach for when token cost or latency starts to bite, especially on longer documents, where resending and rewriting the whole tree on every turn gets expensive. The two winning strategies from the benchmark now both live in the library, and you can pick per workload.
 
-The approaches to keep avoiding, below the frontier tier, are the ones the benchmark punished: granular mutation tools (small models quietly fail to execute the follow-up call) and positional JSON Patch (index arithmetic breaks down as trees grow).
+One caution we published here originally did not survive the benchmark's own correction: granular mutation tools are not unreliable. Under corrected conversation history they match rewrite on accuracy at every model tier. The reasons to prefer anchored patches are different, and sturdier. They were the cheapest condition measured at every tree size. They keep addressing nodes correctly on large trees, where positional JSON Patch collapses (index arithmetic breaks down as trees grow). And a single-artifact interface is structurally immune to the failure class the benchmark itself tripped over: there is no hidden tool channel for a framework to silently drop from conversation history.
 
 ## Why it belongs in barkup, not beside it
 
