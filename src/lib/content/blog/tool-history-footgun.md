@@ -71,7 +71,7 @@ messages.push(...result.responseMessages); // the idiomatic v7 accessor
 messages.push(...result.steps.flatMap((s) => s.response.messages));
 ```
 
-And what makes this a *migration* trap rather than a plain bug: `result.response.messages` was the documented v5 pattern for exactly this purpose. v7 kept the property, changed its meaning to final-step-only, and moved the accumulated history to a new top-level accessor, [`result.responseMessages`](https://ai-sdk.dev/docs/migration-guides/migration-guide-7-0) — documented in the migration guide, but silent at the call site. No type error. No runtime warning. Code written against v5 still typechecks, still runs, and quietly means something else.
+And what makes this a *migration* trap rather than a plain bug: `result.response.messages` was the documented v5 pattern for exactly this purpose. v7 kept the property, changed its meaning to final-step-only, and moved the accumulated history to a new top-level accessor, [`result.responseMessages`](https://ai-sdk.dev/docs/migration-guides/migration-guide-7-0) — documented in the migration guide, but silent at the call site. No type error. No runtime warning. Code written against v5 still typechecks, still runs, and quietly means something else. We've reported this upstream with a proposed dev-time warning: [vercel/ai#16840](https://github.com/vercel/ai/issues/16840).
 
 One line. But with the first version, every multi-turn conversation we ran had a hole in it: the model's own tool activity was erased from its history. From the model's point of view, the past looked like this — *user asked for an edit; I replied "DONE."* No insertNode call. No tool result with the new id. Just a user request and a one-word answer that apparently satisfied everyone.
 
