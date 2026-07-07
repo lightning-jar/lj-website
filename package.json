@@ -24,7 +24,7 @@
 		"@unocss/extractor-svelte": "^66.6.8",
 		"@unocss/preset-web-fonts": "^66.6.8",
 		"@unocss/preset-wind4": "^66.6.8",
-		"@varlock/vite-integration": "^0.2.10",
+		"@varlock/vite-integration": "1.2.0",
 		"@vercel/config": "^0.2.1",
 		"happy-dom": "^20.9.0",
 		"nanoid": "^5.1.9",
@@ -36,7 +36,7 @@
 	},
 	"dependencies": {
 		"@sentry/sveltekit": "^10.49.0",
-		"varlock": "^0.9.0",
+		"varlock": "1.9.0",
 		"yaml": "^2.8.3"
 	},
 	"trustedDependencies": [
