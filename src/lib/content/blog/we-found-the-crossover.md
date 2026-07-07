@@ -30,7 +30,7 @@ additionalReading:
     url: "/blog/barkup-bench-results"
   - title: "barkup 0.2: We Shipped What the Benchmark Told Us"
     url: "/blog/barkup-0-2-anchored-patches"
-  - title: "One Hidden Default Broke My Benchmark (and Maybe Your Agent)"
+  - title: "A Deprecated Accessor That Still Typechecks Broke My Benchmark (and Maybe Your Agent)"
     url: "/blog/tool-history-footgun"
   - title: "barkup-bench on GitHub: pre-registration, corpus, and raw analysis"
     url: "https://github.com/kevinpeckham/barkup-bench"

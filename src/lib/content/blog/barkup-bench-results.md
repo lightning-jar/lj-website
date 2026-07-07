@@ -30,7 +30,7 @@ glossary:
 additionalReading:
   - title: "We Found the Crossover (It Wasn't Where Anyone Looked)"
     url: "/blog/we-found-the-crossover"
-  - title: "One Hidden Default Broke My Benchmark (and Maybe Your Agent)"
+  - title: "A Deprecated Accessor That Still Typechecks Broke My Benchmark (and Maybe Your Agent)"
     url: "/blog/tool-history-footgun"
   - title: "barkup 0.2: We Shipped What the Benchmark Told Us"
     url: "/blog/barkup-0-2-anchored-patches"
@@ -48,7 +48,7 @@ additionalReading:
 
 What stands, unaffected by the defect: every cost finding (rewrite and patches solve small and medium tasks with 4 to 5× fewer tokens than tools, and HTML stays about 30% terser than JSON at scale), the format null results (validity ≥99% and reading accuracy tied across HTML and JSON), RFC 6902 JSON Patch's collapse to 69.6% at about 150 nodes, and every id-anchored-patch result: anchored patches still tie whole-tree rewrite at the lowest cost measured.
 
-And the new headline finding is the defect itself: one line of history handling silently collapses small-model multi-turn tool reliability while frontier models mask it. With their own tool calls hidden from history, gemini-3.5-flash completed 3.8% of multi-turn reference edits and haiku-4.5 28.7%; with correct history, 71.3% and 98.8%, while sonnet-4.5 and gpt-5.4 barely moved. A pre-registered 2,160-cell follow-up study passes every cell, for every model, at every depth under corrected history. If a small model "can't do multi-turn tool calling," audit the conversation history your framework actually sends before concluding anything about the model. The figures below now carry corrected, protocol-v2 data; the original text is preserved with inline corrections as the record of what we got wrong. Full corrected report: [barkup-bench](https://github.com/kevinpeckham/barkup-bench). The full story of the defect, and the five-minute audit for your own agent: [One Hidden Default Broke My Benchmark (and Maybe Your Agent)](/blog/tool-history-footgun).
+And the new headline finding is the defect itself: one line of history handling silently collapses small-model multi-turn tool reliability while frontier models mask it. With their own tool calls hidden from history, gemini-3.5-flash completed 3.8% of multi-turn reference edits and haiku-4.5 28.7%; with correct history, 71.3% and 98.8%, while sonnet-4.5 and gpt-5.4 barely moved. A pre-registered 2,160-cell follow-up study passes every cell, for every model, at every depth under corrected history. If a small model "can't do multi-turn tool calling," audit the conversation history your framework actually sends before concluding anything about the model. The figures below now carry corrected, protocol-v2 data; the original text is preserved with inline corrections as the record of what we got wrong. Full corrected report: [barkup-bench](https://github.com/kevinpeckham/barkup-bench). The full story of the defect, and the five-minute audit for your own agent: [A Deprecated Accessor That Still Typechecks Broke My Benchmark (and Maybe Your Agent)](/blog/tool-history-footgun).
 
 ![Dumbbell chart: multi-turn reference-edit success per model with the model's own tool calls hidden from history versus corrected history. gemini-3.5-flash rises from 3.8% to 71.3%, haiku-4.5 from 28.7% to 98.8%; sonnet-4.5 and gpt-5.4 barely move.](/blog/img/tool-history-footgun-light.svg)
 
