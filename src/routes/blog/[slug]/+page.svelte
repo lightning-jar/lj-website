@@ -44,9 +44,12 @@ function getAttributionFromSource(source: ArticleSource): string {
 
   <main id="main" class="blog-article max-w-prose contents">
     <div class="w-full">
-      <!-- article image  -->
+      <!-- article image (wrapped so it is not an adjacent sibling of the
+           first body paragraph, which would trigger the [&_img+p] caption rule) -->
       {#if data.image}
-        <img src={data.image} alt={data.title} class="w-full h-auto mb-8" />
+        <div class="mb-8">
+          <img src={data.image} alt={data.title} class="w-full h-auto" />
+        </div>
       {/if}
 
       <!-- article body -->
