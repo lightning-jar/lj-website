@@ -26,6 +26,8 @@ glossary:
   - term: Pre-registered benchmark
     definition: A benchmark whose hypotheses, prompts, corpus seeds, and grading are committed to version control before any scored run, so the design cannot be tuned after the fact to flatter the result.
 additionalReading:
+  - title: "The Model Doesn't Need to See Your Tree"
+    url: "/blog/the-model-doesnt-need-to-see-your-tree"
   - title: "We Benchmarked It: What Held Up in 'HTML as a Native Data Format for LLMs', and What Didn't"
     url: "/blog/barkup-bench-results"
   - title: "barkup 0.2: We Shipped What the Benchmark Told Us"
@@ -80,4 +82,4 @@ The through-line of the whole series is stable identity. Positional patches fail
 
 Everything is reproducible from the repo: pre-registration ([BRIEF-H](https://github.com/kevinpeckham/barkup-bench/blob/main/docs/BRIEF-H.md)), corpus, seeds, raw analysis, and the streaming-transport protocol note, all at [barkup-bench](https://github.com/kevinpeckham/barkup-bench).
 
-***Update (July 2026):*** *One more result since publishing: anchored patches' one remaining cost at scale was resending the whole tree as input on every request. A pre-registered follow-up (Study I in the benchmark repo) replaced the full tree with a focused view centered on the nodes the edit references and found accuracy unchanged, with input tokens down 96 to 98% at about 1000 nodes. The input side is now effectively size-invariant too.*
+***Update (July 2026):*** *One more result since publishing: anchored patches' one remaining cost at scale was resending the whole tree as input on every request. A pre-registered follow-up (Study I in the benchmark repo) replaced the full tree with a focused view centered on the nodes the edit references and found accuracy unchanged, with input tokens down 96 to 98% at about 1000 nodes. The input side is now effectively size-invariant too. A second follow-up (Study J) confirmed the views cost even less rendered in barkup's native HTML dialect, at identical accuracy. Both are written up in [The Model Doesn't Need to See Your Tree](/blog/the-model-doesnt-need-to-see-your-tree).*
