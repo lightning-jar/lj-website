@@ -44,7 +44,7 @@ Here's a transcript from our benchmark. The model has just created a node with a
 
 No tool call. No edit. Just: DONE. A cheerful, confident lie.
 
-We had 114 of these. Every failing case in our multi-turn editing tasks looked exactly like this: correct instruction in, zero action out, "DONE." The smaller the model, the worse it got: gemini-3.5-flash failed 96% of these follow-ups, claude-haiku-4.5 failed 71%, while gpt-5.4 and claude-sonnet-4.5 sailed through. We published the finding with a number on it: whole-tree rewrite beat granular tool calling by 33 points on multi-turn edits. We had a tidy story about small models and multi-turn fragility.
+We had 114 of these (the count from a fresh, fully instrumented re-run of the broken protocol with transcripts captured; the original run had 110, run-to-run variance, same disease). Every one of the 114 was transcript-classified the same way: correct instruction in, zero tool calls out, "DONE." The smaller the model, the worse it got: gemini-3.5-flash failed 96% of these follow-ups, claude-haiku-4.5 failed 71%, while gpt-5.4 and claude-sonnet-4.5 sailed through. We published the finding with a number on it: whole-tree rewrite beat granular tool calling by 33 points on multi-turn edits. We had a tidy story about small models and multi-turn fragility.
 
 The story was wrong. Not the data: the data was real, reproducible, temperature-zero real. The *interpretation* was wrong, and the way we found out is the most useful thing this benchmark ever produced.
 
@@ -89,16 +89,18 @@ On the original benchmark's multi-turn tasks (tools conditions, pooled):
 
 | Model | Broken history | Corrected history |
 |---|---|---|
-| gemini-3.5-flash | 3.8% | 71.3% |
-| claude-haiku-4.5 | 28.7% | 98.8% |
-| claude-sonnet-4.5 | 96.3% | 100% |
-| gpt-5.4 | 96.3% | 100% |
+| gemini-3.5-flash | 3.8% (3/80) | 71.2% (57/80) |
+| claude-haiku-4.5 | 28.8% (23/80) | 98.8% (79/80) |
+| claude-sonnet-4.5 | 96.2% (77/80) | 100% (80/80) |
+| gpt-5.4 | 96.2% (77/80) | 100% (80/80) |
 
-![Dumbbell chart: multi-turn reference-edit success per model with the model's own tool calls hidden from history versus corrected history. gemini-3.5-flash rises from 3.8% to 71.3%, haiku-4.5 from 28.7% to 98.8%; sonnet-4.5 and gpt-5.4 barely move.](/blog/img/tool-history-footgun-light.svg)
+*(Reference-family tasks, both tools conditions pooled, parity prompts, n = 80 per model per protocol; full tables and slice definition in [results/analysis-permodel-reference.txt](https://github.com/kevinpeckham/barkup-bench/blob/main/results/analysis-permodel-reference.txt).)*
+
+![Dumbbell chart: multi-turn reference-edit success per model with the model's own tool calls hidden from history versus corrected history. gemini-3.5-flash rises from 3.8% to 71.2%, haiku-4.5 from 28.8% to 98.8%; sonnet-4.5 and gpt-5.4 barely move.](/blog/img/tool-history-footgun-light.svg)
 
 *Multi-turn reference-edit success by model, tools conditions pooled: the model's own tool calls hidden from history versus corrected history.*
 
-Same tasks. Same models. Same prompts. The only thing that changed is whether the conversation history contained the model's own tool calls.
+Same tasks. Same models. Same prompts. The only thing that changed is whether the conversation history contained the model's own tool calls. (Gemini's residual corrected-history failures are all phase-one accuracy, fumbling the initial insert, not follow-up dropout. The dropout class went to zero in every model.)
 
 ## Why you probably wouldn't catch it
 
