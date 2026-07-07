@@ -83,7 +83,7 @@ What you use this month might change next month or next year. Avoid giant contra
 
 ### *Avoid trends*  
 
-[Kanban](https://kanban.university/kanban-guide/), [Gantt](https://www.atlassian.com/agile/project-management/gantt-chart), [OKRs](https://www.atlassian.com/agile/agile-at-scale/okr), roadmaps—these are tools, not religions. Borrow what works, ignore the rest. If a technique requires constant evangelism to survive, it's probably not a fit.
+[Kanban](https://kanban.university/kanban-guide/), [Gantt](https://www.atlassian.com/agile/project-management/gantt-chart), [OKRs](https://www.atlassian.com/agile/agile-at-scale/okr), roadmaps: these are tools, not religions. Borrow what works, ignore the rest. If a technique requires constant evangelism to survive, it's probably not a fit.
 
 ## Practical Guardrails Without the Overhead
 
@@ -101,7 +101,7 @@ A brief weekly summary, demo notes, and risks/asks. Keep it under five minutes t
 
 ### *Timebox experiments*
 
-Pilot a new tool with a single team for 4–6 weeks. Decide explicitly to adopt, pivot, or kill. No "quiet defaults."
+Pilot a new tool with a single team for 4 to 6 weeks. Decide explicitly to adopt, pivot, or kill. No "quiet defaults."
 
 ### *Automate sparingly* 
 
@@ -118,7 +118,7 @@ Sometimes you need to meet clients where they are. If you need clients to use th
 * Creating a minimal "client interface" project or board that mirrors only the essentials: milestones, decisions, deliverables, and dates.
 * Syncing via simple exports or lightweight integrations. If sync is unreliable, choose one source of truth and make the other read-only.
 * Establishing a single cadence for client-visible updates (e.g., weekly summary + next steps + risks).
-* Setting expectations early: your internal workflow can differ from the client's—what matters is clarity and delivery.
+* Setting expectations early: your internal workflow can differ from the client's: what matters is clarity and delivery.
 
 ## A Simple Operating Model You Can Adopt Tomorrow
 

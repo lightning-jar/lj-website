@@ -68,13 +68,13 @@ Digital advertising is everywhere. On every platform, in every feed, and in most
 
 * Ad markets swing with platform changes, auction volatility, tracking updates, and shrinking attribution windows.
 * Budget-to-results consistency is rare. The same spend can produce wildly different outcomes month to month, and the levers you can control (creative, landing pages, offer) often can’t overcome what you can’t (platform policy, inventory, CPM inflation).
-* Reliability matters to our clients and to us. We’d rather stand behind durable assets—site like performance, conversion architecture, and content systems than short-term arbitrage.
+* Reliability matters to our clients and to us. We’d rather stand behind durable assets: site like performance, conversion architecture, and content systems than short-term arbitrage.
 
-## The Space Is Unserious—With Serious Gaps Between Science
+## The Space Is Unserious: With Serious Gaps Between Science
 
 * Digital ads promise precision, but the measurement stack is full of holes: fingerprinting bans, [ITP](https://webkit.org/tracking-prevention/) / [ETP](https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop), privacy regulations, and modeled conversions.
 * “Optimization” often means p-hacking dashboards and chasing platform-provided metrics that don’t map to real business outcomes.
-* Real causal inference requires holdouts, [MMM](https://www.measured.com/faq/marketing-mix-modeling-2025-complete-guide-for-strategic-marketers/), [incrementality testing](https://www.measured.com/faq/what-is-incrementality-testing/), and patient decision cycles—rare in practice and misaligned with most ad buying incentives.
+* Real causal inference requires holdouts, [MMM](https://www.measured.com/faq/marketing-mix-modeling-2025-complete-guide-for-strategic-marketers/), [incrementality testing](https://www.measured.com/faq/what-is-incrementality-testing/), and patient decision cycles, rare in practice and misaligned with most ad buying incentives.
 
 ## The Margins Are Paper Thin
 
@@ -98,7 +98,7 @@ Digital advertising is everywhere. On every platform, in every feed, and in most
 * Paid placement, ads that mimic organic results, and AI-overview clutter degrade user trust and discovery quality.
 * The result: higher acquisition costs, lower signal-to-noise, and a race-to-the-bottom experience for both users and brands.
 
-## Our Clients Are Mostly B2B—And Ads Rarely Pencil Out
+## Our Clients Are Mostly B2B: And Ads Rarely Pencil Out
 
 * B2B buying cycles are long and committee-driven. One ad click rarely equals pipeline.
 * The channels that move B2B deals like trust, expertise, referrals, events, and partner ecosystems, don’t scale well through ad auctions.

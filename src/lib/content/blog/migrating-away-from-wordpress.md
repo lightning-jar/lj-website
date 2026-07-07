@@ -69,7 +69,7 @@ This is a conscious uncoupling of our clients from the WordPress ecosystem, for 
 
 ## Plugin Fatigue: Quality Varies, Complexity Compounds
 
-* There are great plugins—and many not-so-great ones. Evaluating, vetting, and maintaining them is costly.
+* There are great plugins, and many not-so-great ones. Evaluating, vetting, and maintaining them is costly.
 * Poor documentation and inconsistent quality create friction.
 * Client-driven plugin additions can quickly destabilize environments and blur governance lines.
 
@@ -108,7 +108,7 @@ Our approach now:
 
 * We're agnostic about languages, but today's [JavaScript/TypeScript ecosystem](https://www.netguru.com/blog/typescript-benefits) offers superior tooling, DX, and cloud-native ergonomics for our use cases. [learn more](https://strapi.io/blog/benefits-of-typescript)
 * [Server-side rendering](https://developer.mozilla.org/en-US/docs/Glossary/SSR) in frameworks like SvelteKit narrows historical PHP advantages.
-* The talent market also leans in our favor—finding great JS engineers is generally easier than sourcing senior PHP talent with the flexibility agencies require.
+* The talent market also leans in our favor: finding great JS engineers is generally easier than sourcing senior PHP talent with the flexibility agencies require.
 
 ## User Experience: The Paradigm Has Shifted
 
@@ -118,7 +118,7 @@ Our approach now:
 
 ## Where We Still Use WordPress
 
-There are still some scenarios especially complex, authenticated, content-heavy platforms— where WordPress paired with excellent theme frameworks remains a defensible choice. We support those instances thoughtfully and continue to value the partners and tools that do it right.
+There are still some scenarios (especially complex, authenticated, content-heavy platforms) where WordPress paired with excellent theme frameworks remains a defensible choice. We support those instances thoughtfully and continue to value the partners and tools that do it right.
 
 ## The Lightning Jar Approach Going Forward
 
@@ -127,6 +127,6 @@ There are still some scenarios especially complex, authenticated, content-heavy 
 * Governance: Minimize dependencies, maximize clarity, and right-size CMS capabilities.
 * Support: First-year content updates included for most projects; CMS introduced only when justified by real usage.
 
-WordPress helped define an era. For our clients' needs today—security, speed, sustainability, and maintainability we find modern JS frameworks and serverless platforms are the better fit.
+WordPress helped define an era. For our clients' needs today (security, speed, sustainability, and maintainability), we find modern JS frameworks and serverless platforms are the better fit.
 
 If you're navigating similar trade-offs, we're happy to share what we've learned and help you choose the right path for your team and your roadmap.

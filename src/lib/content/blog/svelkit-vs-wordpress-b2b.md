@@ -2,7 +2,7 @@
 title: Why SvelteKit is the Best Choice for Modern B2B Websites
 metaTitle: "SvelteKit vs WordPress for B2B: Security, Speed, Cost"
 slug: sveltekit-vs-wordpress-b2b
-description: A pragmatic comparison of SvelteKit and WordPress for B2B websites—covering security, cost, performance, DX, sustainability, and time-to-value.
+description: A pragmatic comparison of SvelteKit and WordPress for B2B websites: covering security, cost, performance, DX, sustainability, and time-to-value.
 date: 2026-01-23
 draft: false
 tags: [sveltekit, wordpress, b2b, web-performance,security]
@@ -53,7 +53,7 @@ glossary:
     definition: The overall experience developers have while using tools, frameworks, and workflows. Better DX typically leads to faster development, fewer bugs, and higher code quality.
   
   - term: TCO (Total Cost of Ownership)
-    definition: The complete cost of a technology solution over its lifetime, including initial setup, maintenance, updates, security, hosting, and opportunity costs—not just upfront expenses.
+    definition: The complete cost of a technology solution over its lifetime, including initial setup, maintenance, updates, security, hosting, and opportunity costs, not just upfront expenses.
 additionalReading:
   - title: "Why We Left Wordpress Behind"
     url: "/blog/leaving-wordpress"
@@ -71,7 +71,7 @@ Below is a practical, experience-based breakdown of why we prefer SvelteKit for 
 
 ## Security: Shrink the Attack Surface
 
-WordPress's popularity makes it a magnet for automated attacks. Any business WordPress instance will see a constant barrage of [credential stuffing](https://owasp.org/www-community/attacks/Credential_stuffing), [XML-RPC abuse](https://www.wordfence.com/blog/2015/10/should-you-disable-xml-rpc-on-wordpress/), plugin [CVEs](https://www.cve.org/About/Overview), and brute-force probes—daily, at scale. The platform's reliance on a stateful PHP app, admin UI on the public internet, and a sprawling plugin ecosystem increases the number of ways attackers can get in.
+WordPress's popularity makes it a magnet for automated attacks. Any business WordPress instance will see a constant barrage of [credential stuffing](https://owasp.org/www-community/attacks/Credential_stuffing), [XML-RPC abuse](https://www.wordfence.com/blog/2015/10/should-you-disable-xml-rpc-on-wordpress/), plugin [CVEs](https://www.cve.org/About/Overview), and brute-force probes, daily, at scale. The platform's reliance on a stateful PHP app, admin UI on the public internet, and a sprawling plugin ecosystem increases the number of ways attackers can get in.
 
 SvelteKit, paired with a headless CMS and serverless or edge hosting, dramatically reduces exposure:
 
@@ -84,7 +84,7 @@ The result: fewer patches, fewer late-night incident responses, and a safer defa
 
 ## The Hidden Costs of "Cheap" WordPress
 
-WordPress is inexpensive to start—and expensive to keep safe and fast over time.
+WordPress is inexpensive to start, and expensive to keep safe and fast over time.
 
 * The upkeep tax: Continuous plugin/theme updates, PHP version bumps, database tuning, and [WAF](https://www.cloudflare.com/learning/ddos/glossary/web-application-firewall-waf/)/CDN band-aids.  
 * Performance debt: Chasing [Core Web Vitals](https://web.dev/articles/vitals) through caching plugins, image plugins, optimization plugins, and still wrestling with [TTFB](https://web.dev/articles/ttfb) and [layout shift](https://web.dev/articles/cls).  
@@ -129,7 +129,7 @@ We routinely ship new SvelteKit sites in roughly half the time of comparable Wor
 * No theme wrestling: 90%+ of our work is bespoke.  
 * Fewer dependencies to reconcile, fewer regressions to chase.  
 * File-based routing, server + client co-location, and tight TypeScript integration speed development.  
-* Built-in [SSR](https://web.dev/articles/rendering-on-the-web) and CSR where needed—no plugin gymnastics.
+* Built-in [SSR](https://web.dev/articles/rendering-on-the-web) and CSR where needed, no plugin gymnastics.
 
 That speed compounds: faster first release, faster iteration cycles, faster experimentation on copy, design, and funnels.
 
@@ -156,7 +156,7 @@ Result: marketers move faster with fewer tickets to dev.
 
 ## Better DX → Better UI (and Fewer Bugs)
 
-Developer experience isn't vanity—it's a leading indicator of product quality.
+Developer experience isn't vanity: it's a leading indicator of product quality.
 
 * [Svelte's reactivity model](https://svelte.dev/docs/svelte/reactivity) reduces state complexity and boilerplate, leading to fewer edge-case bugs.  
 * TypeScript-first flows and strong tooling shorten feedback loops.  
@@ -198,4 +198,4 @@ If you're curious what we typically ship:
 
 For B2B websites that must be fast, safe, brand-faithful, and easy to iterate, SvelteKit beats WordPress on security, delivery speed, performance, operating cost, and sustainability. You get fewer moving parts, fewer compromises, and more control where it matters.
 
-If you're weighing a new build or a re-platform, we're happy to assess your stack and outline the clearest path to measurable wins—security-hardening, Core Web Vitals, authoring experience, and total cost included.
+If you're weighing a new build or a re-platform, we're happy to assess your stack and outline the clearest path to measurable wins: security-hardening, Core Web Vitals, authoring experience, and total cost included.

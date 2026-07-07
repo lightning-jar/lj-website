@@ -70,7 +70,7 @@ Speed comes from sequencing decisions, not avoiding them.
 * Defer reversible, low-impact decisions without blocking momentum (icon choices, microcopy variations).
 * Codify decisions as standards so future choices become defaults, not debates.
 
-The fastest teams I've worked with were decisive—not reckless. They decided with intent, documented rationale, and revisited assumptions when data or business requirements demanded, not when opinions wandered.
+The fastest teams I've worked with were decisive, not reckless. They decided with intent, documented rationale, and revisited assumptions when data or business requirements demanded, not when opinions wandered.
 
 ## Implementation: Compromises Are the Bridge
 
