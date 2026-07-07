@@ -69,6 +69,8 @@ The operation set is small on purpose: `set-attribute`, `remove-attribute`, `set
 
 Nothing here demotes whole-tree rewrite. Rewrite is still the simplest robust interface, and for most edits it is the right default: one coherent artifact, validated in one shot. Anchored patches are the optimization you reach for when token cost or latency starts to bite, especially on longer documents, where resending and rewriting the whole tree on every turn gets expensive. The two winning strategies from the benchmark now both live in the library, and you can pick per workload.
 
+***Update (July 2026):*** *The size extension below sharpens this guidance with a threshold. Below about 200 nodes, either interface works and rewrite stays the simplest default. At or above roughly 300 nodes, anchored patches are the only interface that is simultaneously reliable across model tiers, fast (seconds, not minutes), cheap, and free of transport ceilings.*
+
 One caution we published here originally did not survive the benchmark's own correction: granular mutation tools are not unreliable. Under corrected conversation history they match rewrite on accuracy at every model tier. The reasons to prefer anchored patches are different, and sturdier. They were the cheapest condition measured at every tree size. They keep addressing nodes correctly on large trees, where positional JSON Patch collapses (index arithmetic breaks down as trees grow). And a single-artifact interface is structurally immune to the failure class the benchmark itself tripped over: there is no hidden tool channel for a framework to silently drop from conversation history.
 
 ## Why it belongs in barkup, not beside it
@@ -78,3 +80,20 @@ This is a scope extension with evidence behind it, not scope creep. Anchored pat
 And we are not recommending this from a benchmark alone: barkup 0.2 is already running in production in [Replicator](/customer-stories/replicator-evolution), our AI document platform. A single pre-registered condition is a strong signal, not the last word, so we are about to run a deeper round of benchmarks to see whether anchored patches keep holding up as expected under heavier, more varied workloads. We will publish that too, whichever way it points.
 
 We got here by doing the unglamorous thing in order: argue it, test it in the open, and ship only what survived. barkup 0.2 is [on npm](https://www.npmjs.com/package/@kevinpeckham/barkup) under MIT, and the anchored-patch design note and the full benchmark that motivated it are [in the repo](https://github.com/kevinpeckham/barkup).
+
+***Update (July 2026), the size extension:*** *The deeper round of benchmarks promised above has run, and anchored patches did more than hold up. We pre-registered 45 fresh transformation tasks at roughly 300, 600, and 1,000 nodes (well past the original study's ~190-node ceiling) and ran whole-tree rewrite, anchored patches, and RFC 6902 JSON Patch through the corrected protocol-v2 harness on claude-sonnet-4.5 and gemini-3.5-flash. The crossover the original benchmark went looking for exists, and it is a cliff, not a slope.*
+
+| Tasks solved | ~300 nodes | ~600 nodes | ~1000 nodes |
+|---|---|---|---|
+| sonnet · whole-tree rewrite | 15/15 | 14/15 | 12/15 |
+| sonnet · anchored patch | 15/15 | 15/15 | 13/15 |
+| sonnet · RFC 6902 patch | 8/15 | 3/15 | 1/15 |
+| gemini-flash · whole-tree rewrite | 9/15 | 5/15 | **0/15** |
+| gemini-flash · anchored patch | 14/15 | 14/15 | 13/15 |
+| gemini-flash · RFC 6902 patch | 8/15 | 3/15 | 2/15 |
+
+![Line chart: task success at 300 to 1000 nodes. Anchored patches hold 87 to 100 percent for both models; whole-tree rewrite falls to zero for gemini-3.5-flash and 80 percent for claude-sonnet-4.5; RFC 6902 JSON Patch decays below 15 percent.](/blog/img/size-extension-light.svg)
+
+*Task success by tree size and model, barkup-bench Study H: 45 pre-registered tasks across three sizes, protocol v2, n = 15 per cell.*
+
+*Above a few hundred nodes, whole-tree rewrite becomes a frontier-model-only technique: gemini-3.5-flash slides from 9/15 to 0/15, while sonnet stays strong (15/15 → 14/15 → 12/15) but only after we switched to a streaming transport, because its unstreamed rewrites of 600-node-and-larger trees (10-to-15-minute generations) were dying at the gateway before the model finished. Anchored patches hold 87 to 100% for both models at every size (pooled, patches beat rewrite 93.3% vs 61.1%, p < 0.0001; for sonnet alone the two are statistically indistinguishable), and positional RFC 6902 decays to between 7 and 13%. The economics at ~1,000 nodes are just as lopsided: per solved task, sonnet rewrite costs about $0.88 and 597 seconds against $0.26 and 4 seconds for a sonnet anchored patch, and $0.037 and 2 seconds for a gemini-flash patch. So the practical rule is now a threshold: at or below about 200 nodes, pick either interface; at or above roughly 300 nodes, anchored patches are the only interface that is reliable across model tiers, fast, cheap, and free of transport ceilings. Full tables and the pre-registered brief are in [barkup-bench](https://github.com/kevinpeckham/barkup-bench).*
