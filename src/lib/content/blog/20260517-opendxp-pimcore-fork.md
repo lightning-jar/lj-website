@@ -66,15 +66,15 @@ sources:
     author: "Blackbit"
     publication: "Blackbit"
     url: "https://digital-commerce.blackbit.com/en/pimcores-wechsel-von-gplv3-zur-pimcore-open-core-lizenz-hintergr%C3%BCnde-und-konsequenzen-f%C3%BCr-unternehmen"
-  - title: "OpenDXP — Official Site"
+  - title: "OpenDXP: Official Site"
     author: "DACHCOM.DIGITAL"
     publication: "opendxp.io"
     url: "https://www.opendxp.io/en"
-  - title: "OpenDXP — README and Upstream-Origin Disclosure"
+  - title: "OpenDXP: README and Upstream-Origin Disclosure"
     author: "OpenDXP"
     publication: "GitHub"
     url: "https://github.com/open-dxp/opendxp/blob/1.x/README.md"
-  - title: "OpenDXP — Packagist Package"
+  - title: "OpenDXP: Packagist Package"
     author: "OpenDXP"
     publication: "Packagist"
     url: "https://packagist.org/packages/open-dxp/opendxp"
@@ -111,7 +111,7 @@ For our clients on Pimcore, this is not an academic discussion. It is a decision
 
 The temptation, when summarizing a vendor's strategy shift, is to reduce it to a single headline. In Pimcore's case the headline is usually "the license changed." That description is true but incomplete. Three things changed simultaneously, and they compound each other.
 
-### Change 1 — The License: GPLv3 → POCL
+### Change 1: The License (GPLv3 → POCL)
 
 In spring 2025, Pimcore GmbH announced that the Pimcore Community Edition would transition from the GNU General Public License v3 to a new license of its own authorship: the **Pimcore Open Core License**, or POCL. Version **2024.4 is the last release of the Community Edition under GPLv3**. Every release from **Pimcore 2025.1** onward is licensed under POCL.
 
@@ -119,7 +119,7 @@ POCL is explicitly **not** an open-source license under the Open Source Initiati
 
 For organizations that originally selected Pimcore *because* it was GPLv3, the relevant point is not whether POCL is reasonable as a license (for many businesses it will be). The relevant point is that it is a different license than the one the decision was made under, and that change is not optional for anyone wishing to upgrade past 2024.4.
 
-### Change 2 — The Admin UI: ExtJS Removed, Pimcore Studio Mandatory
+### Change 2: The Admin UI (ExtJS Removed, Pimcore Studio Mandatory)
 
 The second change is technical and, for most production Pimcore deployments, expensive.
 
@@ -131,7 +131,7 @@ Version **2025.4** is the last release that runs both the legacy and Studio UIs 
 
 For greenfield Pimcore projects, this is fine; they will simply be built on Studio from the start. For 10+ year deployments with bespoke admin extensions, it is a re-implementation engagement.
 
-### Change 3 — The Wholesale Copyleft-Dependency Purge
+### Change 3: The Wholesale Copyleft-Dependency Purge
 
 This third change is the one most often missed in summaries of Pimcore's strategy shift, and it is arguably the most consequential for established codebases.
 
@@ -166,17 +166,17 @@ In **April 2021**, Amazon forked the last Apache-licensed release (Elasticsearch
 
 ### Terraform → OpenTofu (2023)
 
-On **August 10, 2023**, HashiCorp announced that its core products — including Terraform — would be relicensed from the **Mozilla Public License v2** to the **Business Source License (BSL)**, a source-available license. The community response was fast: by August 15, the **OpenTF manifesto** was published, and on September 5 the fork was officially released. On **September 20, 2023**, the project — by then renamed **OpenTofu** — joined the **Linux Foundation**. The manifesto attracted endorsements from 140+ companies and the project launched with more than 18 full-time-equivalent engineers committed across multiple sponsoring organizations.
+On **August 10, 2023**, HashiCorp announced that its core products (including Terraform) would be relicensed from the **Mozilla Public License v2** to the **Business Source License (BSL)**, a source-available license. The community response was fast: by August 15, the **OpenTF manifesto** was published, and on September 5 the fork was officially released. On **September 20, 2023**, the project (by then renamed **OpenTofu**) joined the **Linux Foundation**. The manifesto attracted endorsements from 140+ companies and the project launched with more than 18 full-time-equivalent engineers committed across multiple sponsoring organizations.
 
-OpenTofu was forked from Terraform 1.5.6 — the last MPL-licensed release — and has continued to evolve in parallel since.
+OpenTofu was forked from Terraform 1.5.6 (the last MPL-licensed release) and has continued to evolve in parallel since.
 
 ### Redis → Valkey (2024)
 
-On **March 20, 2024**, Redis Ltd. relicensed Redis from the **3-clause BSD license** to a dual SSPL / RSALv2 model — again, neither license OSI-approved. Within roughly two weeks, on **April 1, 2024**, the Linux Foundation announced **Valkey**, a BSD-licensed fork of Redis 7.2.4, with backing from AWS, Google Cloud, Oracle, and others. Valkey established a Technical Steering Committee model to prevent single-vendor control and to keep the protocol-compatibility surface stable. Within weeks the project had passed 50 contributing companies and 150+ individual contributors. (Redis itself subsequently moved to AGPLv3 in 2025, but by that point the Valkey community had its own momentum.)
+On **March 20, 2024**, Redis Ltd. relicensed Redis from the **3-clause BSD license** to a dual SSPL / RSALv2 model. Again, neither license is OSI-approved. Within roughly two weeks, on **April 1, 2024**, the Linux Foundation announced **Valkey**, a BSD-licensed fork of Redis 7.2.4, with backing from AWS, Google Cloud, Oracle, and others. Valkey established a Technical Steering Committee model to prevent single-vendor control and to keep the protocol-compatibility surface stable. Within weeks the project had passed 50 contributing companies and 150+ individual contributors. (Redis itself subsequently moved to AGPLv3 in 2025, but by that point the Valkey community had its own momentum.)
 
 ### MySQL → MariaDB (2009)
 
-The original case in the modern era is older but still instructive. When **Sun Microsystems** — which had acquired MySQL AB — was acquired by **Oracle** in 2009, concern over Oracle's stewardship led MySQL's original co-founder Monty Widenius to fork the database as **MariaDB**, retaining GPL licensing and explicit community governance. Sixteen years later, MariaDB is the default in many Linux distributions and powers a large fraction of production deployments that would otherwise have been MySQL.
+The original case in the modern era is older but still instructive. When **Sun Microsystems** (which had acquired MySQL AB) was acquired by **Oracle** in 2009, concern over Oracle's stewardship led MySQL's original co-founder Monty Widenius to fork the database as **MariaDB**, retaining GPL licensing and explicit community governance. Sixteen years later, MariaDB is the default in many Linux distributions and powers a large fraction of production deployments that would otherwise have been MySQL.
 
 ### The Pattern, Stated Plainly
 
@@ -188,7 +188,7 @@ These cases differ in their specifics. The licenses involved, the size of the pr
 4. The fork stabilizes under neutral governance and inherits the original ecosystem of integrators, hosting providers, and operators.
 5. The relicensed product continues, often successfully, but optimized for a different customer segment than the one the original OSS users represented.
 
-The Pimcore → OpenDXP situation fits this pattern. The fork is younger and smaller than OpenSearch, OpenTofu, or Valkey. DACHCOM.DIGITAL is one anchor sponsor rather than the Linux Foundation plus three hyperscalers, but the underlying decision shape is the same. And, importantly, none of the prior forks have died. Forkability is the structural protection that distinguishes open source from proprietary platforms — the broader case for which we make in [Why Open Source Beats Proprietary Platforms for B2B Websites](/blog/open-source-b2b-advantage).
+The Pimcore → OpenDXP situation fits this pattern. The fork is younger and smaller than OpenSearch, OpenTofu, or Valkey. DACHCOM.DIGITAL is one anchor sponsor rather than the Linux Foundation plus three hyperscalers, but the underlying decision shape is the same. And, importantly, none of the prior forks have died. Forkability is the structural protection that distinguishes open source from proprietary platforms: the broader case for which we make in [Why Open Source Beats Proprietary Platforms for B2B Websites](/blog/open-source-b2b-advantage).
 
 ---
 
@@ -198,8 +198,8 @@ OpenDXP (*Open Data & Digital Experience Platform*) is a community-driven fork o
 
 - **Forked from Pimcore CE v11.5.13**, commit `9246a42`. This is the last meaningful release of Pimcore CE before the licensing transition.
 - **Licensed under GPLv3 in perpetuity** as a community codebase. The project is explicit in its stated intent: to preserve a GPLv3-licensed Pimcore continuation for organizations that want one.
-- **Initiated and sponsored by [DACHCOM.DIGITAL](https://www.dachcom.com/de-ch)**, a Swiss digital agency (Rheineck, Switzerland) with a substantial history of Pimcore implementation work — meaning the project's anchor sponsor has direct operational reasons to keep the codebase healthy.
-- **Independent of Pimcore GmbH** — not affiliated, not endorsed, not sponsored. The project is careful about the Pimcore® trademark, which remains a registered mark of Pimcore GmbH; OpenDXP uses it only descriptively to identify the upstream origin.
+- **Initiated and sponsored by [DACHCOM.DIGITAL](https://www.dachcom.com/de-ch)**, a Swiss digital agency (Rheineck, Switzerland) with a substantial history of Pimcore implementation work, meaning the project's anchor sponsor has direct operational reasons to keep the codebase healthy.
+- **Independent of Pimcore GmbH**: not affiliated, not endorsed, not sponsored. The project is careful about the Pimcore® trademark, which remains a registered mark of Pimcore GmbH; OpenDXP uses it only descriptively to identify the upstream origin.
 - **Architecturally faithful to Pimcore 11**. Same Symfony foundation, same data-modeling approach, same admin-bundle UI model. The composer package is `open-dxp/opendxp`; the public repository is [github.com/open-dxp](https://github.com/open-dxp/); the documentation lives at `docs.opendxp.io`.
 - **Full DXP scope**: PIM, DAM, Headless CMS, and Composable Commerce, with bundle-level forks (`admin-bundle`, `ecommerce-framework-bundle`, `web-to-print-bundle`, `system-info-bundle`, others) maintained as separate repositories.
 
@@ -254,13 +254,13 @@ This section is here on purpose. Recommending a young fork is not free of risk, 
 
 **OpenDXP is new.** The project launched publicly in February 2026. The release cadence, contributor base, and long-term maintainership patterns are still being established. That is true of every fork at the equivalent stage.
 
-**It has one primary sponsor at the moment.** DACHCOM.DIGITAL is a credible commercial anchor — they implement and operate the platform, so they have business reasons to keep it healthy — but a project's long-term resilience benefits from a broader sponsor base. The historical comparison cases (OpenSearch, OpenTofu, Valkey) had multiple hyperscaler-class backers and Linux Foundation governance from week one. OpenDXP does not, yet.
+**It has one primary sponsor at the moment.** DACHCOM.DIGITAL is a credible commercial anchor (they implement and operate the platform, so they have business reasons to keep it healthy), but a project's long-term resilience benefits from a broader sponsor base. The historical comparison cases (OpenSearch, OpenTofu, Valkey) had multiple hyperscaler-class backers and Linux Foundation governance from week one. OpenDXP does not, yet.
 
 **The bundle ecosystem will fragment.** Some commercial Pimcore bundle vendors will support OpenDXP, some will support Pimcore POCL, some will support both, and some will not survive the split. This is the messiest part of any fork's first 18 months and worth budgeting for.
 
 **Trademark and naming friction will exist.** OpenDXP is careful with the Pimcore® mark and explicit that it is not a competitor. That is the right legal posture but it does create some friction in marketing and documentation. Expect some adjustment as the project matures.
 
-Against this, the relevant counter-question is *compared to what?* The Pimcore path has its own risk profile — a license that can be revised again, a vendor relationship that has just demonstrated a willingness to change terms unilaterally, an architecture that has been substantially reshuffled in one release cycle, and a dependency audit that has to be performed on a codebase the team did not choose to refactor. Both paths have risks. OpenDXP's are the risks of a young project; Pimcore's are the risks of a maturing commercial OSS company optimizing for a different customer segment than the long-tail Community Edition installed base.
+Against this, the relevant counter-question is *compared to what?* The Pimcore path has its own risk profile: a license that can be revised again, a vendor relationship that has just demonstrated a willingness to change terms unilaterally, an architecture that has been substantially reshuffled in one release cycle, and a dependency audit that has to be performed on a codebase the team did not choose to refactor. Both paths have risks. OpenDXP's are the risks of a young project; Pimcore's are the risks of a maturing commercial OSS company optimizing for a different customer segment than the long-tail Community Edition installed base.
 
 Our judgment is that for established Community Edition deployments, OpenDXP's risk profile is the more manageable of the two.
 
@@ -268,9 +268,9 @@ Our judgment is that for established Community Edition deployments, OpenDXP's ri
 
 ## Closing
 
-Open-source license pivots have become a recurring feature of the commercial software landscape. They are not, on their own, a sign of bad faith — companies grow, business models evolve, sponsors of OSS projects sometimes need to recapture commercial value to remain viable. But they do mean that the original contract under which an enterprise selected a platform has changed, and the right response to that change is a deliberate, informed re-selection rather than an automatic upgrade.
+Open-source license pivots have become a recurring feature of the commercial software landscape. They are not, on their own, a sign of bad faith: companies grow, business models evolve, sponsors of OSS projects sometimes need to recapture commercial value to remain viable. But they do mean that the original contract under which an enterprise selected a platform has changed, and the right response to that change is a deliberate, informed re-selection rather than an automatic upgrade.
 
-For Pimcore's long-tenured Community Edition users, the deliberate re-selection points, today, at OpenDXP. The fork is young but credible. It preserves the license, the architecture, and the operational assumptions that the original Pimcore selection was made under. And, perhaps most importantly, it gives organizations the option to evolve their DXP stack on their own timetable — rather than on the schedule of a vendor whose priorities have moved on.
+For Pimcore's long-tenured Community Edition users, the deliberate re-selection points, today, at OpenDXP. The fork is young but credible. It preserves the license, the architecture, and the operational assumptions that the original Pimcore selection was made under. And, perhaps most importantly, it gives organizations the option to evolve their DXP stack on their own timetable, rather than on the schedule of a vendor whose priorities have moved on.
 
 We are guiding our clients through this decision case-by-case, but the default recommendation is clear. If you are operating a Pimcore CE installation today and you have been wondering whether to move, this is the year to make the call.
 
