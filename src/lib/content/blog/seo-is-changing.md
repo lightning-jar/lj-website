@@ -32,7 +32,7 @@ glossary:
     definition: A lightweight format for encoding structured data using JSON, commonly used to implement Schema.org markup on web pages.
   
   - term: E-E-A-T
-    definition: Google's quality framework standing for Experience, Expertise, Authoritativeness, and Trustworthiness—signals used to evaluate content credibility.
+    definition: Google's quality framework standing for Experience, Expertise, Authoritativeness, and Trustworthiness: signals used to evaluate content credibility.
   
   - term: Canonical Tag
     definition: An HTML element that tells search engines which version of a page is the primary one when duplicate or similar content exists across multiple URLs.
@@ -44,7 +44,7 @@ glossary:
     definition: A string of text that identifies the browser, bot, or application making a request to a web server, allowing sites to serve different content or rules to different visitors.
   
   - term: Pogo-sticking
-    definition: The behavior of users clicking a search result, quickly returning to the SERP, and clicking another result—often a signal of poor content match or quality.
+    definition: The behavior of users clicking a search result, quickly returning to the SERP, and clicking another result, often a signal of poor content match or quality.
   
   - term: SEO Content Farms
     definition: Websites that mass-produce low-quality, keyword-optimized content at scale, often using templates or AI, primarily to capture search traffic rather than provide genuine value.
@@ -64,11 +64,11 @@ additionalReading:
     url: "/blog/open-source-b2b-advantage"
 ---
 
-The search landscape is undergoing the biggest shift since "10 blue links." Large language models (LLMs) are changing how people discover, evaluate, and act on information, often without ever visiting a website. If your growth strategy still assumes a Google-first world, you're leaving attention, conversions, and money on the table. Here's what's changing, what still matters, and how to future‑proof your content and measurement.
+The search landscape is undergoing the biggest shift since "10 blue links." Large language models (LLMs) are changing how people discover, evaluate, and act on information, often without ever visiting a website. If your growth strategy still assumes a Google-first world, you're leaving attention, conversions, and money on the table. Here's what's changing, what still matters, and how to future-proof your content and measurement.
 
 ## Google Search Was Already Broken
 
-* Incentives have long favored ad load, affiliate-heavy content, and formats that optimize for crawlers—not humans.  
+* Incentives have long favored ad load, affiliate-heavy content, and formats that optimize for crawlers, not humans.  
 * SERPs increasingly keep users inside Google with answer boxes, knowledge panels, and [AI Overviews](https://search.google/ways-to-search/ai-overviews/).  
 * The rise of programmatic "SEO content farms" flooded the web with derivative copy, making it harder for high-quality pages to surface and for users to trust results.
 
@@ -76,7 +76,7 @@ The net effect: users see sameness, slower paths to answers, and more noise than
 
 ## Consumers Are Turning To LLMs
 
-* LLMs provide fast, synthesized answers—no pogo-sticking across tabs.  
+* LLMs provide fast, synthesized answers, no pogo-sticking across tabs.  
 * They handle intent shifts (clarification, follow-ups, constraints) in natural language.  
 * They reduce cognitive load: fewer decisions, less filtering.  
 * They're increasingly embedded: in search, browsers, IDEs, phones, and productivity suites.
@@ -108,8 +108,8 @@ Traditional crawlers (e.g., Googlebot) index pages to rank them later. LLM-orien
 * Retrieval vs. ranking: Google ranks documents against a query. LLMs often retrieve a small set of passages, then synthesize an answer.  
 * Semantic tolerance: LLMs are less brittle than keyword match; they map concepts across synonyms and related ideas.  
 * Chain-of-thought and tool use: LLMs "reason" over retrieved content and may call tools (calculators, code, datasets) to answer precisely.  
-* Citation dynamics: LLMs can cite fewer, higher-quality sources that directly support a claim. If your page doesn't contain crisp, quotable evidence, you're invisible—even if you rank in a traditional SERP.  
-* Task orientation: LLMs bias toward completion—checklists, steps, templates—rather than listing options.
+* Citation dynamics: LLMs can cite fewer, higher-quality sources that directly support a claim. If your page doesn't contain crisp, quotable evidence, you're invisible, even if you rank in a traditional SERP.  
+* Task orientation: LLMs bias toward completion (checklists, steps, templates) rather than listing options.
 
 Bottom line: Optimizing for LLMs means optimizing for extract-ability, verifiability, and usefulness in synthesis.
 
@@ -117,7 +117,7 @@ Bottom line: Optimizing for LLMs means optimizing for extract-ability, verifiabi
 
 1) Structure and markup  
 * Use [schema.org](https://schema.org/) (Article, HowTo, FAQPage, Product, Organization, Person, Event, Dataset).  
-* Include explicit definitions, bullet points, numbered steps, pros/cons tables, and key takeaways boxes—great for chunking and quoting.  
+* Include explicit definitions, bullet points, numbered steps, pros/cons tables, and key takeaways boxes, great for chunking and quoting.  
 * Provide high-signal elements: abstracts, TL;DRs, summaries, FAQs, and glossaries.
 
 2) Evidence and attribution  
@@ -143,15 +143,15 @@ Bottom line: Optimizing for LLMs means optimizing for extract-ability, verifiabi
 ## The Basics Still Matter (More Than Ever)
 
 * Quality over volume: publish fewer, deeper, better-sourced pieces.  
-* Originality: offer unique data, frameworks, and POV—not summaries of summaries.  
+* Originality: offer unique data, frameworks, and POV, not summaries of summaries.  
 * Human voice and utility: user-tested tutorials, real screenshots, benchmarks, failure modes.  
-* [E‑E-A-T](https://developers.google.com/search/blog/2022/12/google-raters-guidelines-e-e-a-t) signals: experience, expertise, author identity, and accountability.
+* [E-E-A-T](https://developers.google.com/search/blog/2022/12/google-raters-guidelines-e-e-a-t) signals: experience, expertise, author identity, and accountability.
 
 These basics are exactly what LLMs seek when choosing what to cite.
 
 ## Rethink Your SEO Budget
 
-A lot of legacy SEO work has been commodified: generic keyword lists, templated briefs, link swaps, and over-optimized H1s. If an agency isn't experimenting with LLM-era tactics—structured evidence, retrieval optimization, prompt-optimized content design, and measurement beyond organic sessions—you're subsidizing outdated playbooks.
+A lot of legacy SEO work has been commodified: generic keyword lists, templated briefs, link swaps, and over-optimized H1s. If an agency isn't experimenting with LLM-era tactics (structured evidence, retrieval optimization, prompt-optimized content design, and measurement beyond organic sessions), you're subsidizing outdated playbooks.
 
 Where to spend instead:  
 * Information architecture for retrieval: content hubs, canonical source pages, entity pages.  
@@ -188,7 +188,7 @@ Quarter 3: Diversify Discovery
 * Engage alternative engines: test [Kagi](https://kagi.com/) and [Perplexity](https://www.perplexity.ai/) ads or partnerships where available.
 
 Quarter 4: Measure What Matters  
-* Track brand search, direct sign-ups, assisted conversions, and mention/citation monitoring—not just sessions.  
+* Track brand search, direct sign-ups, assisted conversions, and mention/citation monitoring, not just sessions.  
 * Correlate content updates with assistant citations and downstream conversions.  
 * Prune or consolidate under-performing pages that cannibalize authority.
 
@@ -206,8 +206,8 @@ Quarter 4: Measure What Matters
 * Provide evaluation criteria: decision matrices and checklists LLMs can quote.  
 * Offer model-ready context: a public docs site with stable anchors and versioning that [RAG](https://aws.amazon.com/what-is/retrieval-augmented-generation/) systems love.  
 * Experiment with retrieval beacons: concise "fact cards" or "spec sheets" pages per entity.  
-* Community verification: comments from SMEs, GitHub issues, changelogs—signals of living expertise.
+* Community verification: comments from SMEs, GitHub issues, changelogs, signals of living expertise.
 
 ## Closing Thought
 
-LLMs don't replace search; they rewire discovery. Optimize for being the best source to synthesize—not merely the best page to rank. If you make your knowledge easy to retrieve, verify, and quote, assistants will increasingly bring your expertise to your audience—even when the click never happens.
+LLMs don't replace search; they rewire discovery. Optimize for being the best source to synthesize, not merely the best page to rank. If you make your knowledge easy to retrieve, verify, and quote, assistants will increasingly bring your expertise to your audience, even when the click never happens.
