@@ -32,7 +32,7 @@ glossary:
     definition: A lightweight format for encoding structured data using JSON, commonly used to implement Schema.org markup on web pages.
   
   - term: E-E-A-T
-    definition: Google's quality framework standing for Experience, Expertise, Authoritativeness, and Trustworthiness: signals used to evaluate content credibility.
+    definition: "Google's quality framework standing for Experience, Expertise, Authoritativeness, and Trustworthiness: signals used to evaluate content credibility."
   
   - term: Canonical Tag
     definition: An HTML element that tells search engines which version of a page is the primary one when duplicate or similar content exists across multiple URLs.

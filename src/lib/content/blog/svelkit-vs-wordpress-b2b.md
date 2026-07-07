@@ -2,7 +2,7 @@
 title: Why SvelteKit is the Best Choice for Modern B2B Websites
 metaTitle: "SvelteKit vs WordPress for B2B: Security, Speed, Cost"
 slug: sveltekit-vs-wordpress-b2b
-description: A pragmatic comparison of SvelteKit and WordPress for B2B websites: covering security, cost, performance, DX, sustainability, and time-to-value.
+description: "A pragmatic comparison of SvelteKit and WordPress for B2B websites: covering security, cost, performance, DX, sustainability, and time-to-value."
 date: 2026-01-23
 draft: false
 tags: [sveltekit, wordpress, b2b, web-performance,security]

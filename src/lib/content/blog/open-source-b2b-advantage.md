@@ -2,7 +2,7 @@
 title: Why Open Source Beats Proprietary Platforms for B2B Websites
 metaTitle: "Open Source vs Proprietary for B2B: Why Freedom Wins"
 slug: open-source-b2b-advantage
-description: Why open source technology gives B2B organizations a durable competitive edge over proprietary platforms: lowering costs, avoiding vendor lock-in, ensuring security transparency, and accelerating innovation.
+description: "Why open source technology gives B2B organizations a durable competitive edge over proprietary platforms: lowering costs, avoiding vendor lock-in, ensuring security transparency, and accelerating innovation."
 date: 2026-01-24
 draft: true
 tags: [open-source, b2b, security, innovation, cost, wordpress, jamstack, sveltekit, salesforce, hubspot]
