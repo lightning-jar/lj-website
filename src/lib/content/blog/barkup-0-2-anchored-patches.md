@@ -40,7 +40,7 @@ The benchmark ran a pre-registered sixth condition after the main study: a patch
 
 ***Update (July 2026):*** *barkup-bench later published a protocol correction affecting its granular-tools results. The anchored-patch numbers cited here ran on protocols the defect never touched and are unchanged; see the [correction in the benchmark repo](https://github.com/kevinpeckham/barkup-bench) and the [corrected results post](/blog/barkup-bench-results).*
 
-That is a rare shape for a result: as reliable as the best strategy, at the lowest cost. We originally read a third virtue into it — strong performance on smaller models where the alternatives degraded — but the benchmark's correction showed that small-model fragility in the granular-tools conditions was a harness artifact, not a property of the tools. What genuinely degraded is positional RFC 6902 JSON Patch on large trees, and that comparison stands. Anchored patches depend on exactly one thing: stable node ids. Which happens to be barkup's first guarantee.
+That is a rare shape for a result: as reliable as the best strategy, at the lowest cost. We originally read a third virtue into it (strong performance on smaller models where the alternatives degraded), but the benchmark's correction showed that small-model fragility in the granular-tools conditions was a harness artifact, not a property of the tools. What genuinely degraded is positional RFC 6902 JSON Patch on large trees, and that comparison stands. Anchored patches depend on exactly one thing: stable node ids. Which happens to be barkup's first guarantee.
 
 ## What shipped
 
