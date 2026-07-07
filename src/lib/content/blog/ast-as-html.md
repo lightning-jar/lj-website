@@ -28,6 +28,8 @@ glossary:
   - term: Round-trip property test
     definition: A test asserting that parsing then re-serializing a structure, parse(build(tree)), preserves it exactly, including ids, names, and attributes.
 additionalReading:
+  - title: "Your Agent's Session Is Drifting (and the Fix Is Cheaper Than the Bug)"
+    url: "/blog/your-agents-session-is-drifting"
   - title: "We Benchmarked It: What Held Up in 'HTML as a Native Data Format for LLMs', and What Didn't"
     url: "/blog/barkup-bench-results"
   - title: "A Deprecated Accessor That Still Typechecks Broke My Benchmark (and Maybe Your Agent)"
@@ -215,6 +217,8 @@ So the honest, post-data version of this article's thesis: the *strategy* (whole
 **July 7: the size extension finds the crossover this article predicted.** A pre-registered size extension (Study H) found the crossover this article originally predicted, just not between rewrite and granular tools. At 300 to 1000 nodes, whole-tree rewrite becomes a frontier-only technique (gemini-3.5-flash solved 0 of 15 tasks at about 1000 nodes; claude-sonnet-4.5 solved 12 of 15, and only over a streaming transport), while id-anchored patches held 87 to 100% for both models at every size, at a fraction of the cost. So the "one coherent edit" advice below stands for trees up to about 200 nodes; above about 300, anchor the edit to stable ids instead. Details: [We Found the Crossover](/blog/we-found-the-crossover).
 
 **July 7: focused views, and a partial comeback for the fluency claim.** A final pre-registered pair of studies (I and J) rehabilitates the fluency claim at a different boundary: when the model reads a focused HTML view of the tree instead of a full serialization, accuracy matches the full tree at 2 to 4% of the input cost, the HTML rendering is 9 to 24% terser than an equal-content JSON twin at identical accuracy, and the HTML views showed a small (exploratory) edge in first-pass patch validity. The full write-up is [The Model Doesn't Need to See Your Tree](/blog/the-model-doesnt-need-to-see-your-tree).
+
+**July 7: sessions, and the last word on rewrite as a protocol.** A session study (Study K: 140 sessions of twelve sequential edits each) measured what this article's advice looks like over a whole conversation. Attaching a fresh minimal focused view to every editing turn was the most accurate policy at every model tier and the cheapest by 4 to 15x; showing the tree once at session start drifted (claude-sonnet-4.5 fell to 83.8% per-step success by the final third, with the decay concentrated in stale ordinal placement). Whole-tree rewrite, this article's own headline strategy, is out as a session protocol: twelve accumulated rewrites deterministically exhausted a 200k context window, and below the frontier tier the failures were trees that pass validation while silently drifting. Single-shot rewrite below ~300 nodes stands, exactly as the takeaways below say; repeating it across a session does not. Write-up: [Your Agent's Session Is Drifting](/blog/your-agents-session-is-drifting).
 
 ## Takeaways
 

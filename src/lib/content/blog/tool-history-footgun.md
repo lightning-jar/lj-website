@@ -24,6 +24,8 @@ glossary:
   - term: Pre-registered benchmark
     definition: A benchmark whose hypotheses, prompts, corpus seeds, and grading are committed to version control before any scored run, so the design cannot be tuned after the fact to flatter the result.
 additionalReading:
+  - title: "Your Agent's Session Is Drifting (and the Fix Is Cheaper Than the Bug)"
+    url: "/blog/your-agents-session-is-drifting"
   - title: "We Found the Crossover (It Wasn't Where Anyone Looked)"
     url: "/blog/we-found-the-crossover"
   - title: "We Benchmarked It: What Held Up in 'HTML as a Native Data Format for LLMs', and What Didn't"
@@ -124,3 +126,5 @@ There's also a structural way out: interfaces where the model's work product *is
 We'd published numbers this bug manufactured: "+5.3 points for rewrite over tools," "+33 points on multi-turn edits," "tool fragility is a small-model problem." Corrected: tools and rewrite are at parity (tools actually edge ahead by 2 points); the multi-turn gap is gone; haiku's tool score jumped from 80.5% to 95% without haiku changing at all. The corrections are live in [the benchmark repo](https://github.com/kevinpeckham/barkup-bench) and annotated in both earlier posts, with the original claims left visible: that's what pre-registration and publishing-either-way are for. The findings that survive (format-fluency parity, token economics, positional JSON Patch collapsing on big trees, id-anchored patches matching rewrite at the lowest cost) survive *because* the protocols they ran under never touched the broken code path.
 
 One last, slightly uncomfortable thought. Multi-turn tool benchmarks are everywhere right now, and every one of them constructs conversation histories in framework code that nobody's results section describes. Our +33-point phantom effect had confidence intervals, p-values, temperature 0, and 8,000 scored runs behind it. Rigor didn't save us; reading the transcripts did. If you maintain a multi-turn eval (or trust one), it's worth an afternoon to go look at what your models actually see.
+
+***Update (July 2026):*** *A later session study (Study K, 140 twelve-edit sessions) confirmed the diagnosis from the opposite direction: with its own edit history fully visible, gemini-3.5-flash tracked twelve turns of its own patches at 96.3% in the final session third, barely drifting, while the frontier model leaned on a stale mental picture of a tree shown only once and fell to 83.8%. Hidden history was the disease; visibility is the cure, at every tier. Details: [Your Agent's Session Is Drifting](/blog/your-agents-session-is-drifting).*

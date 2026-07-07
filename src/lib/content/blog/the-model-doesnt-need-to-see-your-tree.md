@@ -24,6 +24,8 @@ glossary:
   - term: Pre-registered benchmark
     definition: A benchmark whose hypotheses, prompts, corpus seeds, and grading are committed to version control before any scored run, so the design cannot be tuned after the fact to flatter the result.
 additionalReading:
+  - title: "Your Agent's Session Is Drifting (and the Fix Is Cheaper Than the Bug)"
+    url: "/blog/your-agents-session-is-drifting"
   - title: "We Found the Crossover (It Wasn't Where Anyone Looked)"
     url: "/blog/we-found-the-crossover"
   - title: "We Benchmarked It: What Held Up in 'HTML as a Native Data Format for LLMs', and What Didn't"
@@ -99,6 +101,8 @@ Three results, in increasing order of interest:
 ## The caveats, pre-registered
 
 The big one: this is the **oracle bound**. Task instructions name their target ids explicitly, so "retrieval" is trivially perfect, and the views were built from exactly the ids each instruction quotes (verified: zero leakage beyond the instruction text). How a real system decides *which* nodes a vague request concerns is a different problem, deliberately untested here. These studies establish that once you know the neighborhood, the model needs nothing else. They say nothing about finding the neighborhood. Single-turn tasks only, two models, n = 45 per model and condition.
+
+***Update (July 2026):*** *The single-turn caveat is now closed. A sixth pre-registered study ran 140 twelve-edit sessions and found that attaching a fresh minimal view to every editing turn is the most accurate session policy at every model tier tested and the cheapest by 4 to 15x; serializing the tree once at session start drifts (claude-sonnet-4.5 fell to 83.8% per-step success by the final third, with only 8 of 20 sessions ending exactly intact, against 19 of 20 for per-turn views). Full write-up: [Your Agent's Session Is Drifting](/blog/your-agents-session-is-drifting).*
 
 ## What ships, and the map after five posts
 
