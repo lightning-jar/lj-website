@@ -48,7 +48,7 @@ additionalReading:
 
 ***Update (July 2026):*** *After publishing this, we put its claims to a pre-registered benchmark, and not all of them held up: the whole-tree rewrite strategy won clearly, but the HTML dialect itself proved accuracy-neutral rather than the edge this piece assumed. The original argument stands below as written, with the specifics corrected inline and in the update section near the end. Full results: [We Benchmarked It](/blog/barkup-bench-results).*
 
-***Correction (July 6, 2026):*** *A harness defect was then found in the benchmark itself: our tools loop hid the models' own tool calls from multi-turn conversation history. With that fixed, the whole-tree rewrite strategy's accuracy win also disappears: no interface dominates. The cost findings and the format results stand. Details in the update section near the end of this article and in the corrected companion post, [We Benchmarked It](/blog/barkup-bench-results).*
+***Correction (July 6, 2026):*** *A harness defect was then found in the benchmark itself: our tools loop hid the models' own tool calls from multi-turn conversation history. With that fixed, the whole-tree rewrite strategy's accuracy win also disappears: no interface dominates. The cost findings and the format results stand. So the case this article makes now rests on whole-tree rewrite's structural immunity to exactly that class of tool-history loss, on its token economy, and on the codec's guarantees — not on model fluency or on granular tools being unreliable. Details in the update section near the end of this article and in the corrected companion post, [We Benchmarked It](/blog/barkup-bench-results).*
 
 We built a document platform where an AI assistant designs marketing documents (flyers, brochures, one-pagers) inside brand-approved rails, and humans finish them by clicking into the rendered page and typing. Getting the agent to *author templates*, the structural layouts those documents are built from, turned out to hinge on a single unfashionable decision:
 
@@ -170,7 +170,7 @@ One more discipline that earns its keep: **round-trip property tests.** `parse(b
 ## When You Shouldn't Do This
 
 - **Deeply typed or numeric-heavy trees.** If your nodes are mostly floats, enums, and cross-references, HTML's stringly attributes fight you. This works because document layout is *already* HTML-shaped.
-- **Huge documents.** Full-tree rewrites scale with tree size. Ours are bounded (a template is a few dozen nodes); a 10,000-node scene graph would need the granular API after all, or chunked rewrites.
+- **Huge documents.** Full-tree rewrites scale with tree size. Ours are bounded (a template is a few dozen nodes); a 10,000-node scene graph would need the granular API after all, or chunked rewrites. (*Update, July 2026: now measured — above about 300 nodes, whole-markup rewrite becomes frontier-model-only and slow (minutes per edit), and id-anchored patches, which held 87 to 100% at every size tested, are the measured alternative.*)
 - **Trees the model shouldn't fully see.** Whole-tree I/O assumes the whole tree fits in context and is safe to show.
 - **Multi-writer concurrency.** "Replace everything" is last-write-wins by construction. Fine for one user plus one assistant in a session; wrong for real-time collaboration.
 
