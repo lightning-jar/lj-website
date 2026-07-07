@@ -79,6 +79,8 @@ The anchoring is the other half. RFC 6902 addresses nodes by position ("fourth c
 
 Output is where models are slow, expensive, and fallible; input is comparatively cheap and reliable. Moving faithful reproduction out of the model and into code is where every win in the numbers above comes from.
 
+***Update (July 2026):*** *A pre-registered follow-up tested exactly this question: what if the model does not see the whole tree? Replacing the full tree in the prompt with a focused view (the path to the referenced nodes plus their child lists, everything else collapsed to labeled placeholders or omitted with a count) left accuracy statistically unchanged for both models tested, and claude-sonnet-4.5 on the most aggressive view solved 45 of 45 tasks. Input tokens fell 96 to 98% at 1000 nodes, and the view grows with tree depth rather than node count, so the input side stops scaling with the tree at all. Pre-registration and results: [barkup-bench](https://github.com/kevinpeckham/barkup-bench), Study I.*
+
 ## When to reach for it
 
 Nothing here demotes whole-tree rewrite. Rewrite is still the simplest robust interface, and for most edits it is the right default: one coherent artifact, validated in one shot. Anchored patches are the optimization you reach for when token cost or latency starts to bite, especially on longer documents, where resending and rewriting the whole tree on every turn gets expensive. The two winning strategies from the benchmark now both live in the library, and you can pick per workload.
