@@ -67,6 +67,18 @@ if (result.ok) {
 
 The operation set is small on purpose: `set-attribute`, `remove-attribute`, `set-name`, `remove`, `insert`, and `move`, with `before` / `after` / `parentId` placements. Patches are atomic, so one failing operation rejects the whole patch and the input tree is never mutated. The result is validated against your grammar just like a parse, and the `operations` argument is typed `unknown` on purpose: a patch is agent input, so shape problems come back as structured issues you can hand straight back to the model, not as type errors you have to catch. It has zero runtime dependencies and never touches the DOM; it operates on typed trees, before or after any markup crosses the boundary.
 
+## How a patch edit actually works
+
+A fair question at this point: does the model still see the whole tree? Yes. In both interfaces the prompt contains the full tree plus the edit request, because the model needs the context to find its target either way. Input cost is about the same. The difference is entirely in what comes back.
+
+With whole-tree rewrite, the reply is the entire edited tree, and every untouched node has to come back byte-for-byte. It is like fixing a typo in a book by retyping the book. At a thousand nodes that reply runs to roughly 50,000 output tokens and ten minutes of generation, and one drifted attribute anywhere is a failed edit.
+
+With an anchored patch, the reply is an editor's note: a few operations naming their targets by id. "Set maxLength to 80 on the node whose id is wgt-heading." A few dozen output tokens, applied to the real tree by code, deterministically. The untouched nodes are never regenerated, so they cannot drift; the applier simply does not touch them.
+
+The anchoring is the other half. RFC 6902 addresses nodes by position ("fourth child, then eighth child inside that"), which is like an editor's note reading "page 312, line 14": correct until anything shifts, and dependent on the model counting nested indexes perfectly. An id cannot move out from under the operation that names it.
+
+Output is where models are slow, expensive, and fallible; input is comparatively cheap and reliable. Moving faithful reproduction out of the model and into code is where every win in the numbers above comes from.
+
 ## When to reach for it
 
 Nothing here demotes whole-tree rewrite. Rewrite is still the simplest robust interface, and for most edits it is the right default: one coherent artifact, validated in one shot. Anchored patches are the optimization you reach for when token cost or latency starts to bite, especially on longer documents, where resending and rewriting the whole tree on every turn gets expensive. The two winning strategies from the benchmark now both live in the library, and you can pick per workload.
