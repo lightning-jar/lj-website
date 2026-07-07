@@ -68,7 +68,7 @@ Digital advertising is everywhere. On every platform, in every feed, and in most
 
 * Ad markets swing with platform changes, auction volatility, tracking updates, and shrinking attribution windows.
 * Budget-to-results consistency is rare. The same spend can produce wildly different outcomes month to month, and the levers you can control (creative, landing pages, offer) often can’t overcome what you can’t (platform policy, inventory, CPM inflation).
-* Reliability matters to our clients and to us. We’d rather stand behind durable assets: site like performance, conversion architecture, and content systems than short-term arbitrage.
+* Reliability matters to our clients and to us. We’d rather stand behind durable assets like site performance, conversion architecture, and content systems than short-term arbitrage.
 
 ## The Space Is Unserious: With Serious Gaps Between Science
 

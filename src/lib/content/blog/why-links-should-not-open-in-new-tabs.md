@@ -7,7 +7,7 @@ date: 2026-02-05
 draft: false
 tags: [ux, accessibility, web-standards, usability, design]
 image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/beetle-on-wildflower
-imageDescription: A watercolor painting of aslug on a blue wildflower
+imageDescription: A watercolor painting of a beetle on a blue wildflower
 author: Kevin Peckham
 quote:
   text: "Good UX honors user choice. Forcing new tabs is a choice taken away."
@@ -89,10 +89,10 @@ Teams often cite three reasons for `target="_blank"`. None require it.
 ### “We don’t want people to leave our site.”
 If the experience is strong, they’ll come back. Focus on clear way-finding, internal linking, and good information architecture. [Jakob Nielsen’s](https://www.nngroup.com/articles/ten-usability-heuristics/) emphasize user control and freedom; preserve predictable navigation and let users decide how to open links. 
 
-### “We don’t want users to lose their place in a form.*  
+### “We don’t want users to lose their place in a form.”  
 Preserve state instead: autosave drafts, warn before navigation, or surface help inline via a well-built dialog or side panel. Use accessible status messages or [live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions) to confirm autosave without stealing focus. 
 
-### “It’s an external link.”*  
+### “It’s an external link.”  
 Externality alone isn’t a valid reason. Use a small icon or label to set expectations and let users decide whether to branch their workflow. Accessibility checklists recommend indicating when links open new windows and when linking to non-HTML files, but not forcing tabs by default.
 
 ## When a New Tab Is Reasonable
