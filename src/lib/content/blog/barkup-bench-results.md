@@ -40,7 +40,9 @@ additionalReading:
     url: "/blog/replicator-origin"
 ---
 
-***Correction (July 6, 2026):*** **After publishing this post we found a defect in our benchmark harness, and the headline interface-reliability findings below did not survive the fix.** Our tools loop built multi-turn conversation history from the AI SDK's `response.messages`, which silently omits tool-call and tool-result messages — so in every multi-turn tools conversation, the model was shown a history in which its own tool activity was invisible. Re-running the affected cells with correct history ("protocol v2") eliminated the gaps this post led with: whole-tree rewrite vs granular tools overall is now 91.9% vs 93.9% (a slight *tools* edge, −2.0 points, p = 0.04 — originally +5.3 points for rewrite); the +33-point multi-turn reference gap becomes −3.1 points and is not significant (88.1% vs 91.3%); and the "small models fall apart with tools" pattern is gone (claude-haiku-4.5 with tools: 80.5% → 95.0%; gemini-3.5-flash: 75.5% → 88.5%, its modest remaining deficit traced to first-phase tool accuracy, not follow-up dropout).
+## Correction (July 6, 2026)
+
+**After publishing this post we found a defect in our benchmark harness, and the headline interface-reliability findings below did not survive the fix.** Our tools loop built multi-turn conversation history from the AI SDK's `response.messages`, which silently omits tool-call and tool-result messages — so in every multi-turn tools conversation, the model was shown a history in which its own tool activity was invisible. Re-running the affected cells with correct history ("protocol v2") eliminated the gaps this post led with: whole-tree rewrite vs granular tools overall is now 91.9% vs 93.9% (a slight *tools* edge, −2.0 points, p = 0.04 — originally +5.3 points for rewrite); the +33-point multi-turn reference gap becomes −3.1 points and is not significant (88.1% vs 91.3%); and the "small models fall apart with tools" pattern is gone (claude-haiku-4.5 with tools: 80.5% → 95.0%; gemini-3.5-flash: 75.5% → 88.5%, its modest remaining deficit traced to first-phase tool accuracy, not follow-up dropout).
 
 What stands, unaffected by the defect: every cost finding (rewrite and patches solve small and medium tasks with 4 to 5× fewer tokens than tools, and HTML stays about 30% terser than JSON at scale), the format null results (validity ≥99% and reading accuracy tied across HTML and JSON), RFC 6902 JSON Patch's collapse to 69.6% at about 150 nodes, and every id-anchored-patch result — anchored patches still tie whole-tree rewrite at the lowest cost measured.
 
@@ -49,6 +51,10 @@ And the new headline finding is the defect itself: one line of history handling 
 ![Dumbbell chart: multi-turn reference-edit success per model with the model's own tool calls hidden from history versus corrected history. gemini-3.5-flash rises from 3.8% to 71.3%, haiku-4.5 from 28.7% to 98.8%; sonnet-4.5 and gpt-5.4 barely move.](/blog/img/tool-history-footgun-light.svg)
 
 *The same benchmark under two histories: the model's own tool calls hidden from the conversation (the SDK default we shipped) versus corrected history (protocol v2).*
+
+---
+
+## The Original Post, As Published
 
 Recently I made an argument and a promise. The argument: typed trees should be authored as an HTML dialect and edited by whole-tree rewrite, because models are fluent in markup and because granular mutation tools invite granular failure. The promise: we would benchmark it, publish the design before running it, and share the findings either way, good or bad. This is the companion to [HTML as a Native Data Format for LLMs](/blog/ast-as-html).
 
