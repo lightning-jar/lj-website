@@ -24,6 +24,8 @@ glossary:
   - term: Pre-registered benchmark
     definition: A benchmark whose hypotheses, prompts, corpus seeds, and grading are committed to version control before any scored run, so the design cannot be tuned after the fact to flatter the result.
 additionalReading:
+  - title: "We Found the Crossover (It Wasn't Where Anyone Looked)"
+    url: "/blog/we-found-the-crossover"
   - title: "We Benchmarked It: What Held Up in 'HTML as a Native Data Format for LLMs', and What Didn't"
     url: "/blog/barkup-bench-results"
   - title: "HTML as a Native Data Format for LLMs: Why We Encode Our Data in Markup Instead of JSON"

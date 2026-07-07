@@ -22,6 +22,8 @@ glossary:
   - term: Atomic patch
     definition: A patch that is applied all-or-nothing, so a single failing operation rejects the whole patch and leaves the input tree untouched.
 additionalReading:
+  - title: "We Found the Crossover (It Wasn't Where Anyone Looked)"
+    url: "/blog/we-found-the-crossover"
   - title: "We Benchmarked It: What Held Up in 'HTML as a Native Data Format for LLMs', and What Didn't"
     url: "/blog/barkup-bench-results"
   - title: "One Hidden Default Broke My Benchmark (and Maybe Your Agent)"

@@ -28,6 +28,8 @@ glossary:
   - term: Protocol v2
     definition: The corrected benchmark protocol in which the model's own tool-call and tool-result messages are included in multi-turn conversation history, fixing a harness defect that had silently hidden them.
 additionalReading:
+  - title: "We Found the Crossover (It Wasn't Where Anyone Looked)"
+    url: "/blog/we-found-the-crossover"
   - title: "One Hidden Default Broke My Benchmark (and Maybe Your Agent)"
     url: "/blog/tool-history-footgun"
   - title: "barkup 0.2: We Shipped What the Benchmark Told Us"
@@ -120,4 +122,4 @@ What I'd say differently after the data: don't sell HTML as making your agents s
 
 ## The Receipts
 
-Everything is open: the pre-registered briefs (`docs/BRIEF-F.md` for the follow-up condition, `docs/BRIEF-G.md` for the tool-history study), corpus generators (seeded and committed), the fairness twin with its parity tests, the harness, the raw analysis (including both the original v1 records and the corrected protocol-v2 re-runs, so the defect itself is reproducible as a controlled ablation) and the report, at [github.com/kevinpeckham/barkup-bench](https://github.com/kevinpeckham/barkup-bench). One command regenerates the corpus; one re-runs the matrix; one re-grades. If you run it on other models or bigger trees (the crossover question past 190 nodes is genuinely open) I'd love to see the numbers, whichever way they point.
+Everything is open: the pre-registered briefs (`docs/BRIEF-F.md` for the follow-up condition, `docs/BRIEF-G.md` for the tool-history study, `docs/BRIEF-H.md` for the size extension), corpus generators (seeded and committed), the fairness twin with its parity tests, the harness, the raw analysis (including both the original v1 records and the corrected protocol-v2 re-runs, so the defect itself is reproducible as a controlled ablation) and the report, at [github.com/kevinpeckham/barkup-bench](https://github.com/kevinpeckham/barkup-bench). One command regenerates the corpus; one re-runs the matrix; one re-grades. If you run it on other models or even bigger trees, I'd love to see the numbers, whichever way they point. (We took our own advice: the size-extension follow-up at 300 to 1000 nodes found the crossover; see [We Found the Crossover](/blog/we-found-the-crossover).)
