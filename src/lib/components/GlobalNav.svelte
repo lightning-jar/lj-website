@@ -13,13 +13,13 @@ type NavItem = {
 };
 
 let navItems: NavItem[] = $state([
+	{ label: "Blog", href: "/blog" },
 	{ label: "Home", href: "/" },
 	{ label: "Services", href: "/services" },
 	{ label: "Testimonials", href: "/testimonials" },
 	{ label: "Customer Stories", href: "/customer-stories" },
 	{ label: "Reading List", href: "/reading-list" },
 	{ label: "Technologies", href: "/technologies" },
-	{ label: "Blog", href: "/blog" },
 ]);
 
 // state
