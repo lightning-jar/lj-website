@@ -22,6 +22,10 @@ glossary:
   - term: Atomic patch
     definition: A patch that is applied all-or-nothing, so a single failing operation rejects the whole patch and leaves the input tree untouched.
 additionalReading:
+  - title: "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees"
+    url: "/blog/stable-ids-are-all-you-need"
+  - title: "barkup 0.3: Focused Views, or Why the Model Doesn't Need to See Your Tree"
+    url: "/blog/barkup-0-3-focused-views"
   - title: "We Found the Crossover (It Wasn't Where Anyone Looked)"
     url: "/blog/we-found-the-crossover"
   - title: "We Benchmarked It: What Held Up in 'HTML as a Native Data Format for LLMs', and What Didn't"

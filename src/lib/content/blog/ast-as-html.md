@@ -28,6 +28,8 @@ glossary:
   - term: Round-trip property test
     definition: A test asserting that parsing then re-serializing a structure, parse(build(tree)), preserves it exactly, including ids, names, and attributes.
 additionalReading:
+  - title: "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees"
+    url: "/blog/stable-ids-are-all-you-need"
   - title: "Your Agent's Session Is Drifting (and the Fix Is Cheaper Than the Bug)"
     url: "/blog/your-agents-session-is-drifting"
   - title: "We Benchmarked It: What Held Up in 'HTML as a Native Data Format for LLMs', and What Didn't"

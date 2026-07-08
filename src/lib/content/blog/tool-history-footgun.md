@@ -24,6 +24,8 @@ glossary:
   - term: Pre-registered benchmark
     definition: A benchmark whose hypotheses, prompts, corpus seeds, and grading are committed to version control before any scored run, so the design cannot be tuned after the fact to flatter the result.
 additionalReading:
+  - title: "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees"
+    url: "/blog/stable-ids-are-all-you-need"
   - title: "Your Agent's Session Is Drifting (and the Fix Is Cheaper Than the Bug)"
     url: "/blog/your-agents-session-is-drifting"
   - title: "We Found the Crossover (It Wasn't Where Anyone Looked)"

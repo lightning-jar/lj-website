@@ -28,6 +28,8 @@ glossary:
   - term: Protocol v2
     definition: The corrected benchmark protocol in which the model's own tool-call and tool-result messages are included in multi-turn conversation history, fixing a harness defect that had silently hidden them.
 additionalReading:
+  - title: "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees"
+    url: "/blog/stable-ids-are-all-you-need"
   - title: "Your Agent's Session Is Drifting (and the Fix Is Cheaper Than the Bug)"
     url: "/blog/your-agents-session-is-drifting"
   - title: "The Model Doesn't Need to See Your Tree"
