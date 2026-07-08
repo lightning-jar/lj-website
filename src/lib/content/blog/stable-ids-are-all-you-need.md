@@ -26,6 +26,8 @@ glossary:
   - term: Pre-registered benchmark
     definition: A benchmark whose hypotheses, prompts, corpus seeds, and grading are committed to version control before any scored run, so the design cannot be tuned after the fact to flatter the result.
 additionalReading:
+  - title: "We Tried to Delete the Hard Parts. The Benchmark Said No."
+    url: "/blog/the-benchmark-said-no"
   - title: "barkup 0.3: Focused Views, or Why the Model Doesn't Need to See Your Tree"
     url: "/blog/barkup-0-3-focused-views"
   - title: "Your Agent's Session Is Drifting (and the Fix Is Cheaper Than the Bug)"

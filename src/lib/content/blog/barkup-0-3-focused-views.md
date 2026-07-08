@@ -24,6 +24,8 @@ glossary:
   - term: Conformance vectors
     definition: Machine-generated input/output test cases exported by the benchmark's own renderer, replayed in the package's test suite to prove the shipped implementation is equivalent to the one the data validated.
 additionalReading:
+  - title: "We Tried to Delete the Hard Parts. The Benchmark Said No."
+    url: "/blog/the-benchmark-said-no"
   - title: "The Model Doesn't Need to See Your Tree"
     url: "/blog/the-model-doesnt-need-to-see-your-tree"
   - title: "Your Agent's Session Is Drifting (and the Fix Is Cheaper Than the Bug)"

@@ -38,12 +38,9 @@ additionalReading:
     url: "https://github.com/kevinpeckham/barkup-bench"
 ---
 
-By last week, the barkup-bench series had assembled a pleasingly
-cheap recipe for letting LLM agents edit structured trees: address
-nodes by stable id, reply with anchored patches, show the model a
-focused view instead of the whole tree, refresh that view every
-turn. Each step was pre-registered, measured, and shipped. Input
-costs stopped scaling with document size. Sessions stopped drifting.
+[barkup-bench](https://github.com/kevinpeckham/barkup-bench) is our open, pre-registered benchmark series on a narrow question with broad consequences: what is the most reliable way to let an LLM agent edit structured data, like page layouts, document templates, and other typed trees? It began with [an argument about HTML as a data format](/blog/ast-as-html), grew into seven studies and one very public correction, and if you are new here, the whole arc is summarized in [Stable IDs Are All You Need](/blog/stable-ids-are-all-you-need).
+
+The short version: by last week the series had assembled a pleasingly cheap recipe. Address nodes by stable id. Reply with small anchored patches instead of rewriting the document. Show the model a focused view of the relevant region instead of the whole tree. Refresh that view on every turn of an editing session. Each step was pre-registered, measured, and [shipped in a small open-source library](/blog/barkup-0-3-focused-views). Input costs stopped scaling with document size. Sessions stopped drifting.
 
 Two hard parts remained, and both looked deletable. The model still
 needed to be told *which* nodes an edit concerns (our tasks named
