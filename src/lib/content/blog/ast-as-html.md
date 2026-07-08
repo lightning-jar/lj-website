@@ -42,6 +42,8 @@ additionalReading:
     url: "/blog/the-model-doesnt-need-to-see-your-tree"
   - title: "Content Is an Overlay: Separating Words from Structure in an AI Document Editor"
     url: "/blog/content-overlay"
+  - title: "The Untested Half of Your WYSIWYG"
+    url: "/blog/the-untested-half-of-your-wysiwyg"
   - title: "Why We Moved Our Document Production into Web Code: The Origin of Replicator"
     url: "/blog/replicator-origin"
   - title: "Questions, Decisions & Compromises"
@@ -234,7 +236,7 @@ The unfashionable summary: we got a better agent by giving it *less* API and *mo
 
 ## A Reference Implementation: barkup
 
-The pattern in this article now has a reference implementation: [barkup](https://github.com/kevinpeckham/barkup), published on npm as [`@kevinpeckham/barkup`](https://www.npmjs.com/package/@kevinpeckham/barkup) (MIT). The name is the thesis: bark is how a tree shows you what it is without being cut open.
+The pattern in this article now has a reference implementation: [barkup](https://github.com/kevinpeckham/barkup), published on npm as [`@kevinpeckham/barkup`](https://www.npmjs.com/package/@kevinpeckham/barkup) (MIT). The name is the thesis: bark is how a tree shows you what it is without being cut open. It has since gained a sibling, [barkdown](/blog/the-untested-half-of-your-wysiwyg), which applies the same round-trip discipline to markdown prose.
 
 You declare a grammar (node types, allowed children, typed attributes) and get `build`, `parse`, `format`, and `validate` with the guarantees this article argues for baked in:
 

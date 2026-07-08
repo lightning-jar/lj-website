@@ -30,6 +30,8 @@ glossary:
 additionalReading:
   - title: "HTML as a Native Data Format for LLMs"
     url: "/blog/ast-as-html"
+  - title: "The Untested Half of Your WYSIWYG"
+    url: "/blog/the-untested-half-of-your-wysiwyg"
   - title: "Why We Moved Our Document Production into Web Code: The Origin of Replicator"
     url: "/blog/replicator-origin"
   - title: "Questions, Decisions & Compromises"

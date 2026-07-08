@@ -26,6 +26,8 @@ glossary:
 additionalReading:
   - title: "AST as HTML: A Native Data Format for LLMs"
     url: "/blog/ast-as-html"
+  - title: "Content Is an Overlay: Separating Words from Structure in an AI Document Editor"
+    url: "/blog/content-overlay"
   - title: "barkup 0.2: We Shipped What the Benchmark Told Us"
     url: "/blog/barkup-0-2-anchored-patches"
   - title: "@kevinpeckham/barkdown on npm"

@@ -34,6 +34,8 @@ additionalReading:
     url: "/blog/tool-history-footgun"
   - title: "HTML as a Native Data Format for LLMs: Why We Encode Our Data in Markup Instead of JSON"
     url: "/blog/ast-as-html"
+  - title: "The Untested Half of Your WYSIWYG"
+    url: "/blog/the-untested-half-of-your-wysiwyg"
   - title: "Content Is an Overlay: Separating Words from Structure in an AI Document Editor"
     url: "/blog/content-overlay"
 ---
