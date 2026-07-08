@@ -36,6 +36,8 @@ additionalReading:
     url: "/blog/barkup-bench-results"
   - title: "barkup-bench on GitHub: pre-registration, corpus, and raw analysis"
     url: "https://github.com/kevinpeckham/barkup-bench"
+  - title: "@kevinpeckham/barkup on npm: the codec with the /view module"
+    url: "https://www.npmjs.com/package/@kevinpeckham/barkup"
 ---
 
 ***Series note:*** *Sixth post in the barkup-bench series, after [the benchmark](/blog/barkup-bench-results), [the shipped feature](/blog/barkup-0-2-anchored-patches), [the footgun](/blog/tool-history-footgun), [the crossover](/blog/we-found-the-crossover), and [focused views](/blog/the-model-doesnt-need-to-see-your-tree).*
@@ -104,5 +106,7 @@ Two of the three providers cache prompt prefixes by default and won't let you tu
 Our document platform's template agent already rebuilds its context from the *current* tree on every request, so it never had the serialize-once bug. But Study K exposed a residual gap: views the model requested in *earlier turns* sit in the conversation going stale, and nothing told the model not to trust them. Its prompt now says so explicitly: views from earlier turns are stale; request a fresh one before editing anything you haven't just looked at. That's the whole fix. It shipped within hours of the data.
 
 The practical rule, if you build editing agents: **attach a fresh minimal view to every editing turn.** It's the most accurate policy at every model tier we tested, the cheapest by 4 to 15×, structurally immune to context-window exhaustion, and it removes the one failure class that grows with session length.
+
+You don't have to build the view yourself, either. The [focused-view studies](/blog/the-model-doesnt-need-to-see-your-tree) doubled as the pre-registered feature gates for a `/view` module in [`@kevinpeckham/barkup`](https://www.npmjs.com/package/@kevinpeckham/barkup), our open-source tree-to-HTML codec, and both gates passed, so 0.3.0 ships it: `renderView` produces the same view contract these sessions ran on (the root-to-target spine rendered in full, everything else collapsed to id-bearing placeholders with honest omission counts, every visible id a legal patch anchor), and `VIEW_PROMPT_RULES` is the benchmark-scored prompt block that goes with it. What this study added is the *when*: the package's [README](https://github.com/kevinpeckham/barkup) now documents sessions under the heading this data earned, a fresh view every turn.
 
 Everything is reproducible: the pre-registration ([BRIEF-K](https://github.com/kevinpeckham/barkup-bench/blob/main/docs/BRIEF-K.md)), corpus, seeds, raw analysis, the cache audit, and every session transcript, at [barkup-bench](https://github.com/kevinpeckham/barkup-bench). The audit re-checked every session against its invariants (zero violations), and the two mid-study harness changes were recording-only and are disclosed in the report. We read the transcripts now. All of them.

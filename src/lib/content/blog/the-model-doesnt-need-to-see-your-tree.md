@@ -106,7 +106,7 @@ The big one: this is the **oracle bound**. Task instructions name their target i
 
 ## What ships, and the map after five posts
 
-The pre-registered feature gates both passed, so `@kevinpeckham/barkup` gets a `/view` capability with the trimmed contract these studies validated (spine, complete child lists of referenced nodes, honest omission counts, every visible id patch-addressable) and HTML as its native rendering.
+The pre-registered feature gates both passed, so [`@kevinpeckham/barkup`](https://www.npmjs.com/package/@kevinpeckham/barkup) gets a `/view` capability with the trimmed contract these studies validated (spine, complete child lists of referenced nodes, honest omission counts, every visible id patch-addressable) and HTML as its native rendering.
 
 Which completes the map this series has been drawing one study at a time:
 
