@@ -26,6 +26,8 @@ glossary:
   - term: Pre-registered benchmark
     definition: A benchmark whose hypotheses, prompts, corpus seeds, and grading are committed to version control before any scored run, so the design cannot be tuned after the fact to flatter the result.
 additionalReading:
+  - title: "Your Agent Doesn't Need a Memory: Two Worked Examples Replace Session History"
+    url: "/blog/two-examples-replace-a-memory"
   - title: "barkup 0.4: The Model Finds the Node Now"
     url: "/blog/barkup-0-4-content-search"
   - title: "We Tried to Delete the Hard Parts. The Benchmark Said No."
@@ -182,3 +184,19 @@ pre-registrations (BRIEF-N, BRIEF-O), the materialized retrieval
 file, unit-tested graders, raw analyses. Combined cost of both
 studies: about eighteen dollars, and this time, one of the two
 hypotheses we were fond of survived contact with the data.
+
+## Update: one boundary opened, one closed
+
+Two further studies sharpened both halves of this post. On
+sessions: Study P found that history's contribution is teaching,
+not memory. Two canned worked examples in the system prompt restore
+stateless sessions to full-history accuracy on both models, so the
+"keep the history" guidance above is no longer the only safe
+option. On search: Study Q stress-tested this post's recipe against
+fan-out edits ("change every X inside Y", 2 to 32 targets) and it
+did not survive: search spirals to a median of six calls, the cheap
+model loses 24 points against the full tree, and even perfect
+retrieval leaves models finishing only about half the target set.
+Fan-out wants app-side decomposition into single-target edits, not
+a cleverer prompt. Both studies are in
+[Your Agent Doesn't Need a Memory](/blog/two-examples-replace-a-memory).

@@ -26,6 +26,8 @@ glossary:
   - term: Pre-registered benchmark
     definition: A benchmark whose hypotheses, prompts, corpus seeds, and grading are committed to version control before any scored run, so the design cannot be tuned after the fact to flatter the result.
 additionalReading:
+  - title: "Your Agent Doesn't Need a Memory: Two Worked Examples Replace Session History"
+    url: "/blog/two-examples-replace-a-memory"
   - title: "Then We Found the Cheap Part: One Search Call Grounds LLM Tree Edits"
     url: "/blog/then-we-found-the-cheap-part"
   - title: "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees"
@@ -158,3 +160,14 @@ contribution to placement is not arithmetic the model failed to do.
 The full story, including an embedding retriever that failed to beat
 keyword matching, is in
 [Then We Found the Cheap Part](/blog/then-we-found-the-cheap-part).
+
+A week after that: the memory question resolved completely. Study O
+had ruled out positional arithmetic; Study P identified what history
+actually contributes, worked precedent, by faking it. Two canned
+examples of the tricky patch operations, pasted into the system
+prompt from a tree the model never edits, restore stateless sessions
+to full-history accuracy on both models. So the boundary this post
+reported ("sessions cannot forget") stands corrected in the best
+way: sessions can forget everything, provided you teach the dialect
+up front. The whole mechanism hunt is written up in
+[Your Agent Doesn't Need a Memory](/blog/two-examples-replace-a-memory).

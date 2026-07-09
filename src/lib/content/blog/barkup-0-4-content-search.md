@@ -24,6 +24,8 @@ glossary:
   - term: Oracle bound
     definition: A deliberate benchmark simplification in which the task instruction names the target node ids explicitly, so the study measures editing against a view without also measuring how a real system would retrieve the relevant nodes from a vague request.
 additionalReading:
+  - title: "Your Agent Doesn't Need a Memory: Two Worked Examples Replace Session History"
+    url: "/blog/two-examples-replace-a-memory"
   - title: "Then We Found the Cheap Part: One Search Call Grounds LLM Tree Edits"
     url: "/blog/then-we-found-the-cheap-part"
   - title: "barkup 0.3: Focused Views, or Why the Model Doesn't Need to See Your Tree"
@@ -154,3 +156,21 @@ including a disclosed tie-ordering divergence between the benched
 scorer and this shipped port (breadth-first versus document order on
 equal scores; the details are in the repo's REPORT.md). If you find
 more of those, we want the issue.
+
+## Update: the fan-out boundary
+
+We owed this release a stress test, and it found a real limit.
+Study Q ran the search-then-patch recipe against fan-out edits
+("set textStyle to serif on every text-atom inside atlas", 2 to 32
+targets per instruction). The single-target economics did not
+survive: a median of six search calls instead of one, a third of
+runs over 100k input tokens, and accuracy well below the whole-tree
+baseline on the cheap model. Even with retrieval taken out of the
+picture entirely, every model tested left fan-out patches partially
+complete. The recipe on this page is a single-target recipe. For
+"every X inside Y" requests, enumerate the targets in your
+application (one call to `findNodes` per your own query logic, or a
+plain tree traversal) and issue one single-target edit per node.
+The numbers are in
+[Your Agent Doesn't Need a Memory](/blog/two-examples-replace-a-memory)
+and the benchmark's REPORT.
