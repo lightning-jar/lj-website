@@ -98,9 +98,9 @@ roughly 90% less than pasting the tree, at accuracy that matches the
 id-oracle on the frontier model (down to failing the same two tasks)
 and matches whole-tree grounding on the cheap one.
 
-**The cheap model is fixed.** Navigation collapsed gemini to 23 of
-45. Search lifts it to 39 of 45, exactly its whole-tree grounding
-score, at 3% of the cost. The pattern that was frontier-only is now
+**The cheap model is fixed.** Navigation collapsed gemini to 23 of 45.
+Search lifts it to 39 of 45, exactly its whole-tree grounding score,
+at 3% of the cost. The pattern that was frontier-only is now
 tier-independent, which is the difference between a demo and
 something you can ship.
 
