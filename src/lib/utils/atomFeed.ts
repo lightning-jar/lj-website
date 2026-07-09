@@ -48,11 +48,10 @@ function renderEntry(e: FeedEntry): string {
   </entry>`;
 }
 
-export function buildAtomFeed(
-	entries: FeedEntry[],
-	opts: FeedOptions,
-): string {
-	const sorted = [...entries].sort((a, b) => b.updated.localeCompare(a.updated));
+export function buildAtomFeed(entries: FeedEntry[], opts: FeedOptions): string {
+	const sorted = [...entries].sort((a, b) =>
+		b.updated.localeCompare(a.updated),
+	);
 	const updated = sorted[0]?.updated ?? new Date().toISOString();
 
 	return `<?xml version="1.0" encoding="UTF-8"?>

@@ -129,5 +129,11 @@
 		"unocss"
 	],
 	"technologies": [],
-	"tags": ["Websites", "Public Sector", "SvelteKit", "Accessibility", "Security"]
+	"tags": [
+		"Websites",
+		"Public Sector",
+		"SvelteKit",
+		"Accessibility",
+		"Security"
+	]
 }

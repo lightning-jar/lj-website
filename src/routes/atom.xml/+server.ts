@@ -8,10 +8,7 @@ import { ENV } from "varlock/env";
 import type { RequestHandler } from "@sveltejs/kit";
 
 import { buildAtomFeed } from "$utils/atomFeed";
-import {
-	buildBlogEntries,
-	buildReadingListEntries,
-} from "$utils/feedEntries";
+import { buildBlogEntries, buildReadingListEntries } from "$utils/feedEntries";
 
 const baseUrl = `https://${
 	ENV.VERCEL_PROJECT_PRODUCTION_URL || "www.lightningjar.com"

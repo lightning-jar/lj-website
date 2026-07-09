@@ -622,7 +622,8 @@ describe("parseMarkdownTextToHtml - code spans inside links and images", () => {
 	});
 
 	it("renders link text that is entirely a code span", () => {
-		const md = "[`@kevinpeckham/barkup`](https://www.npmjs.com/package/@kevinpeckham/barkup)";
+		const md =
+			"[`@kevinpeckham/barkup`](https://www.npmjs.com/package/@kevinpeckham/barkup)";
 		const html = parseMarkdownTextToHtml({
 			markdown: md,
 			options: { sanitize: true },

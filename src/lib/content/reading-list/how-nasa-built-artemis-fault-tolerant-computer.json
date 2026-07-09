@@ -20,7 +20,12 @@
 		"publicationUrl": "https://cacm.acm.org/"
 	},
 	"summary": "Logan Kugler details the Orion capsule's flight computer architecture on the Artemis II mission, which moves well past the Apollo Guidance Computer and the conventional triple-modular-redundancy playbook. Orion runs eight CPUs in parallel across four Flight Control Modules (each a self-checking pair) on a time-triggered Ethernet network, choosing a \"fail-silent\" design over majority voting: a faulty module shuts up rather than emit a wrong answer, and the system selects from the next healthy module in priority order. A fully dissimilar Backup Flight Software system on different hardware and OS guards against common-mode software failure. Carnegie Mellon SEI's Michael Riley notes that this kind of architectural discipline is increasingly rare — modern Agile/DevOps cycles favor iteration, which can erode the determinism that mission-critical software requires. A useful reference for thinking about reliability engineering, dissimilar redundancy, and where time-partitioned schedulers buy you something the consumer-software stack can't.",
-	"tags": ["Reliability", "Fault Tolerance", "Aerospace", "Systems Architecture"],
+	"tags": [
+		"Reliability",
+		"Fault Tolerance",
+		"Aerospace",
+		"Systems Architecture"
+	],
 	"title": "How NASA Built Artemis II's Fault-Tolerant Computer",
 	"type": "Article",
 	"url": "https://cacm.acm.org/news/how-nasa-built-artemis-iis-fault-tolerant-computer/"
