@@ -1,6 +1,6 @@
 ---
-title: "Then We Found the Cheap Part"
-metaTitle: "Then We Found the Cheap Part | barkup-bench Studies N and O"
+title: "Then We Found the Cheap Part: One Search Call Grounds LLM Tree Edits"
+metaTitle: "Then We Found the Cheap Part: One Search Call Grounds LLM Tree Edits"
 slug: then-we-found-the-cheap-part
 description: "Two more pre-registered barkup-bench studies, one aimed at each of last week's failures. Study N replaced model-driven tree navigation with a single deterministic keyword search tool and the grounding trap disappeared: oracle-level accuracy at a median of one search call, the cheap model rescued from 23 of 45 to 39 of 45, input around a tenth of pasting the tree, and off-the-shelf embeddings adding nothing over keyword overlap. Study O printed exact positions on every view and stateless sessions still misplaced nodes, so keep the history. One gate opened, one stayed shut."
 date: 2026-07-09T16:00:00Z
@@ -26,6 +26,8 @@ glossary:
   - term: Pre-registered benchmark
     definition: A benchmark whose hypotheses, prompts, corpus seeds, and grading are committed to version control before any scored run, so the design cannot be tuned after the fact to flatter the result.
 additionalReading:
+  - title: "barkup 0.4: The Model Finds the Node Now"
+    url: "/blog/barkup-0-4-content-search"
   - title: "We Tried to Delete the Hard Parts. The Benchmark Said No."
     url: "/blog/the-benchmark-said-no"
   - title: "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees"

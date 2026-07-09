@@ -24,7 +24,9 @@ glossary:
   - term: Conformance vectors
     definition: Machine-generated input/output test cases exported by the benchmark's own renderer, replayed in the package's test suite to prove the shipped implementation is equivalent to the one the data validated.
 additionalReading:
-  - title: "Then We Found the Cheap Part"
+  - title: "barkup 0.4: The Model Finds the Node Now"
+    url: "/blog/barkup-0-4-content-search"
+  - title: "Then We Found the Cheap Part: One Search Call Grounds LLM Tree Edits"
     url: "/blog/then-we-found-the-cheap-part"
   - title: "We Tried to Delete the Hard Parts. The Benchmark Said No."
     url: "/blog/the-benchmark-said-no"
