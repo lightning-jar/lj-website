@@ -145,6 +145,17 @@ tested. More model calls, but each one small, cheap, and reliable.
 Asking one prompt to edit N nodes is, on current models, asking for
 roughly half of N.
 
+Update, two days later: we ran the decomposition advice through the
+same benchmark (Study R), alongside prompt-side alternatives (a
+worked fan-out example and an explicit coverage checklist). The
+prompt tricks did not rescue fan-out; teaching one complete example
+did not transfer to exhaustiveness the way it transferred to
+placement. Decomposition did better than we claimed: 90 of 90 tasks
+on both models, including every task with 7 to 32 targets, with 674
+of 674 single-target subtasks succeeding and total input costs about
+a third of showing the whole tree once. The boring answer is now the
+measured answer.
+
 ## What we make of the pair
 
 One study replaced a memory with a paragraph. The other found the

@@ -174,3 +174,11 @@ plain tree traversal) and issue one single-target edit per node.
 The numbers are in
 [Your Agent Doesn't Need a Memory](/blog/two-examples-replace-a-memory)
 and the benchmark's REPORT.
+
+Follow-up: Study R measured the decomposition path directly. One
+single-target edit per enumerated node ran 90 of 90 fan-out tasks on
+both models with zero subtask failures (674 of 674), at about a
+third of the input cost of a whole-tree prompt, while prompt-side
+fixes (a worked example, a coverage checklist) failed to close the
+gap. The boundary note above stands, and the workaround it
+recommends is now the best-measured recipe in the series.
