@@ -26,6 +26,8 @@ glossary:
   - term: Pre-registered benchmark
     definition: A benchmark whose hypotheses, prompts, corpus seeds, and grading are committed to version control before any scored run, so the design cannot be tuned after the fact to flatter the result.
 additionalReading:
+  - title: "Then We Found the Cheap Part"
+    url: "/blog/then-we-found-the-cheap-part"
   - title: "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees"
     url: "/blog/stable-ids-are-all-you-need"
   - title: "barkup 0.3: Focused Views, or Why the Model Doesn't Need to See Your Tree"
@@ -140,3 +142,19 @@ pre-registrations (BRIEF-L, BRIEF-M, including one disclosed pre-run
 amendment), corpora, unit-tested graders, raw analyses. Combined
 cost of both studies: about fifty dollars, and two hypotheses we
 were fond of.
+
+## Update: one week later, one gate opened
+
+We went one rung deeper on each failure, pre-registered as Studies N
+and O. The grounding boundary moved: replace the expand tool with a
+single content search tool (`find_nodes`: a few search words in, the
+five best-matching nodes out, shown in place) and the trap
+disappears. The frontier model matches its id-oracle accuracy at a
+median of one search call, the cheap model jumps from 23 of 45 to 39
+of 45, and input cost lands around a tenth of pasting the tree. The
+statelessness boundary did not move: printing every node's exact
+position on the view rescued almost nothing, so history's
+contribution to placement is not arithmetic the model failed to do.
+The full story, including an embedding retriever that failed to beat
+keyword matching, is in
+[Then We Found the Cheap Part](/blog/then-we-found-the-cheap-part).
