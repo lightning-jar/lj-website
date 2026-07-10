@@ -3,7 +3,7 @@ title: "barkup 0.5: Your Code Finds the Targets Now"
 metaTitle: "barkup 0.5 | Deterministic Selection"
 slug: barkup-0-5-deterministic-selection
 description: "barkup 0.5 ships selectNodes, a deterministic structural selector that enumerates every node matching an exact query. It is the smallest feature in the series and the best-measured: Study Q found that models leave multi-target edits partially complete under every strategy tested, and Study R found that splitting the job (code enumerates the targets, the model makes one small edit per node) ran 90 of 90 fan-out tasks with zero subtask failures at about a third of the cost. The principle: give deterministic work to deterministic code."
-date: 2026-07-09T22:00:00Z
+date: 2026-07-10T18:00:00Z
 draft: false
 tags: [ai, agents, llm, open-source, barkup]
 image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/dog-04.webp
