@@ -47,6 +47,11 @@ const config: VercelConfig = {
 	redirects: [
 		{ source: "/privacy-policy", destination: "/terms", statusCode: 301 },
 		{
+			source: "/barkup-bench",
+			destination: "/research/barkup-bench",
+			statusCode: 301,
+		},
+		{
 			source: "/blog/introduction-to-pimcore",
 			destination: "/archive/introduction-to-pimcore",
 			statusCode: 301,

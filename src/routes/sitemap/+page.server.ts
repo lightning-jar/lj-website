@@ -25,7 +25,14 @@ const researchSection = {
 	name: "Research",
 	pages: [
 		{
-			href: "/barkup-bench",
+			href: "/research",
+			title: "Research",
+			description:
+				"Lightning Jar's open research program: pre-registered studies delivering practical guidance for developers of LLM applications.",
+			date: "",
+		},
+		{
+			href: "/research/barkup-bench",
 			title: "barkup-bench",
 			description:
 				"Our open, pre-registered benchmark series measuring how LLMs read and edit structured document trees: results dashboard, packages, and the full article series.",
