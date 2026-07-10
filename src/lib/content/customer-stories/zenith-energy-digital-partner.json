@@ -21,8 +21,8 @@
 	"title": "A Decade as Zenith Energy's Digital Partner: A Multi-Region Corporate Site, Interactive Sustainability Reports, and a Unified SvelteKit Monorepo",
 	"slug": "zenith-energy-digital-partner",
 	"thumbnailImage": {
-		"src": "",
-		"alt": "PLACEHOLDER: Zenith Energy thumbnail image to be sourced"
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/zenith-home-web.webp",
+		"alt": "Zenith Energy corporate website home page"
 	},
 	"content": [
 		{
@@ -62,7 +62,14 @@
 		}
 	],
 	"testimonials": [],
-	"images": [],
+	"images": [
+		{
+			"alt": "Zenith Energy corporate website home page",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/zenith-home-web.webp",
+			"width": "2000",
+			"height": "1250"
+		}
+	],
 	"perspectives": [
 		{
 			"quote": [

@@ -1,0 +1,84 @@
+{
+	"order": 10,
+	"draft": true,
+	"banner": {
+		"heading": "Launching Hark",
+		"subtitle": "UX, Design, and Front-End Build for MediaScience's Self-Serve Research SaaS",
+		"subheading": "MediaScience set out to launch Hark (HARK Connect), a new software product that modernizes qualitative research, and it needed to go to market on an unusually tight timeline. Lightning Jar served as the UX, design, and front-end build partner: designing and building the marketing site and launch collateral, then designing and building the customer-facing product experience, from a frictionless self-onboarding flow to an account dashboard and an in-app purchase and payment workflow."
+	},
+	"meta": {
+		"title": "Launching Hark for MediaScience | Customer Story",
+		"description": "Lightning Jar served as UX, design, and front-end build partner for MediaScience's launch of Hark: a marketing microsite, self-serve onboarding, account dashboard, and purchase flow, delivered fast enough to debut at an industry conference."
+	},
+	"customer": {
+		"id": "mediascience",
+		"category": "Media & Audience Research",
+		"name": "MediaScience",
+		"logo": "",
+		"thumb": ""
+	},
+	"excerpt": "MediaScience set out to launch Hark (HARK Connect), a new software product that modernizes qualitative research, and it needed to go to market on an unusually tight timeline. Lightning Jar served as the UX, design, and front-end build partner: designing and building the marketing site and launch collateral, and then designing and building the customer-facing product experience, from self-onboarding to dashboard to payment. Working alongside MediaScience's own product team, Lightning Jar delivered a polished, self-serve SaaS experience fast enough to debut at an industry conference.",
+	"title": "Launching Hark: UX, Design, and Front-End Build for MediaScience's Self-Serve Research SaaS",
+	"slug": "hark-mediascience-launch",
+	"thumbnailImage": {
+		"src": "",
+		"alt": "PLACEHOLDER: Hark launch thumbnail image to be sourced"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"MediaScience is a neuromarketing and biometric audience-research company based in Austin, Texas, known for measuring how people actually respond to media and advertising. With Hark, it was extending that expertise into software: a platform to bring focus groups and qualitative interviews into the digital age, letting researchers observe and work with sessions remotely."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"text": [
+				"The challenge was speed without compromise. Hark was a business-critical launch with a hard deadline: a working product had to be ready to demo at the QRCA industry conference at the end of January 2020. Detailed requirements didn't yet fully exist and would be refined as the work progressed, so the team had to move quickly from rough concept to a buildable MVP.",
+				"And because Hark was a self-serve SaaS product, the software itself had to do the selling. The onboarding, dashboard, and purchase experience needed to be clean, intuitive, and trustworthy enough that a first-time user could sign up, buy, and get started on their own. MediaScience needed a partner who could take on UX, visual design, and front-end engineering together and deliver a launch-ready experience in weeks, not months."
+			]
+		},
+		{
+			"heading": "Solution",
+			"subheading": "Two Fronts, One Deadline",
+			"text": [
+				"Lightning Jar staffed a dedicated senior team (UX, art direction, and full-stack development, guided by a director of technology) and worked in fast, focused sprints across two fronts.",
+				"<strong>Go-to-market launch package.</strong> To support the conference debut, Lightning Jar designed and built Hark's marketing presence on an expedited timeline: a marketing microsite with a sign-up flow (custom-themed, search-optimized, analytics-instrumented, with form handling and automated confirmation emails), a printed tradeshow flyer with a vanity URL, and a marketing email with promo-code incentives, giving prospective users a place to discover Hark and register interest from day one.",
+				"<strong>Product UX.</strong> For the product itself, Lightning Jar mapped the experience end to end (customer journey diagrams and user flows covering the new-user path from marketing site through onboarding, dashboard, and first session), then translated it into wireframes for the key screens. Central to the design was a clear model that made the product easy to grasp and easy to buy: sessions organized into projects, with statuses that guide the user from purchase to launch to completed results.",
+				"<strong>Visual design and front-end build.</strong> Lightning Jar designed the look and feel of the key screens and then built them, delivering the onboarding workflow (account and company info, payment capture, terms acceptance, email confirmation), the account dashboard (welcome, navigation, profile, payment management, help, and feedback), and a create-a-project and session-purchase checkout flow, complete with quantity and Pro-session upsells. The build was delivered as production HTML, CSS, and JavaScript with documented styling rules, and payment was handled pragmatically through a payment-services gateway to keep the MVP simple, secure, and fast to ship.",
+				"<strong>A clean handoff with the product team.</strong> Lightning Jar owned the customer-facing experience (marketing site, onboarding, dashboard shell, and purchase flow) while coordinating with MediaScience's product team on the deeper application, so responsibilities were clear and the pieces fit together for launch."
+			]
+		},
+		{
+			"heading": "Results",
+			"text": [
+				"A launch-ready Hark experience (marketing site, onboarding, dashboard, and payment) delivered on an aggressive timeline to hit the conference debut.",
+				"A self-serve SaaS flow designed so the product sells itself: sign up, buy sessions, and get started without hand-holding.",
+				"An intuitive \"projects and sessions\" model that makes a sophisticated research tool approachable and supports quantity and upsell.",
+				"UX, visual design, and front-end engineering delivered by a single senior team, with a clean division of labor alongside MediaScience's product group.",
+				"A complete go-to-market package (microsite, flyer, and email) that gave a brand-new product an immediate market presence."
+			]
+		}
+	],
+	"testimonials": [],
+	"images": [],
+	"perspectives": [
+		{
+			"quote": [
+				"With a self-serve product, the software is the sales team. Every screen in Hark's onboarding and checkout had to answer the questions a rep would normally answer: what am I buying, what happens next, why should I trust this? Design it that way and a first-time researcher can sign up, pay, and launch a session without ever talking to a human."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal & Chief Technologist",
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/kevin-peckham-sm.webp",
+					"width": "63",
+					"height": "63"
+				}
+			}
+		}
+	],
+	"tags": ["SaaS", "UX Design", "Product Launch", "Front-End"]
+}
