@@ -1,0 +1,24 @@
+{
+	"id": "barkdown",
+	"name": "barkdown",
+	"shortDescription": "Our open-source Markdown to DOM round-trip codec: edit markdown as a live DOM and serialize it back with provably no silent loss.",
+	"description": [
+		"barkdown is a Markdown to DOM round-trip codec, guaranteed to invert marked. Parse markdown to HTML, edit it as a live DOM (contenteditable, WYSIWYG, or programmatic transforms), and serialize back to markdown that is provably the same document. The contract is a testable mathematical property: one round trip canonicalizes any input, a second is byte-identical, footnotes survive exactly, and unknown elements pass through as raw HTML with no silent loss.",
+		"It is the sibling of barkup: barkup guards the tree's identity, barkdown guards the prose's. We extracted it from our production blog CMS, where every keystroke of the WYSIWYG editor round-trips through it, and the guarantees are enforced by a corpus suite plus property tests running about 2,000 random documents per run. Published on npm as @kevinpeckham/barkdown under the MIT license."
+	],
+	"license": "Open Source (MIT)",
+	"category": "Markdown / DOM Codec",
+	"link": {
+		"href": "https://github.com/kevinpeckham/barkdown"
+	},
+	"relatedArticle": {
+		"href": "/blog/the-untested-half-of-your-wysiwyg",
+		"title": "The Untested Half of Your WYSIWYG"
+	},
+	"useCases": [
+		"Serializing WYSIWYG and contenteditable output back to clean markdown",
+		"Round-tripping markdown through programmatic DOM transforms without drift",
+		"Keeping footnotes, tables, and raw HTML intact across repeated edit cycles"
+	],
+	"supercategory": "content-management-pim"
+}
