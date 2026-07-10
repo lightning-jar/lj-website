@@ -83,6 +83,17 @@
 			"height": "1823"
 		}
 	],
-	"perspectives": [],
+	"perspectives": [
+		{
+			"quote": [
+				"The interesting problem with Sage was never any single deliverable. It was coherence: four divisions, five offices, sixty-five brokers, and one brand that has to hold its shape everywhere from the home page to the bottom of an email. That is a systems problem, and we solved it the way we solve software problems: design the system once, then let it scale."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal & Chief Technologist",
+				"organization": "Lightning Jar"
+			}
+		}
+	],
 	"tags": ["Branding", "Multi-Brand", "SvelteKit", "Energy"]
 }
