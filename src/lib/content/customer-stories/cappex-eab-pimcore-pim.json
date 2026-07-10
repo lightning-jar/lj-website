@@ -1,0 +1,85 @@
+{
+	"order": 13,
+	"draft": true,
+	"banner": {
+		"heading": "A Single Source of Truth",
+		"subtitle": "Pimcore Data Management for Cappex & EAB",
+		"subheading": "For more than seven years, Lightning Jar has served as the Pimcore partner behind the data that powers a leading college-search platform: first for Cappex, and then, seamlessly, for EAB after it acquired the company. Lightning Jar helped stand up a Pimcore-based PIM as the single source of truth for the platform's colleges, high schools, and scholarships, then built a repeatable, carefully controlled data-import process and provided the ongoing support, customization, and platform upgrades to keep it running."
+	},
+	"meta": {
+		"title": "Pimcore Data Management for Cappex & EAB | Customer Story",
+		"description": "For seven-plus years Lightning Jar has been the Pimcore partner behind a leading college-search platform: a PIM single source of truth for colleges, high schools, and scholarships, a safe repeatable import process, and support continuing seamlessly from Cappex through EAB's acquisition."
+	},
+	"customer": {
+		"id": "cappex-eab",
+		"category": "Education Technology",
+		"name": "Cappex & EAB",
+		"logo": "",
+		"thumb": ""
+	},
+	"excerpt": "For more than seven years, Lightning Jar has served as the Pimcore partner behind the data that powers a leading college-search platform: first for Cappex, and then, seamlessly, for EAB after it acquired the company. Lightning Jar helped stand up a Pimcore-based Product Information Management (PIM) system as the single source of truth for the platform's colleges, high schools, and scholarships, then built a repeatable, carefully controlled data-import process and provided the ongoing support, customization, and platform upgrades to keep it running. It's the kind of behind-the-scenes engineering partnership that quietly keeps a data-driven product accurate and current, year after year.",
+	"title": "A Single Source of Truth: Pimcore Data Management for Cappex & EAB",
+	"slug": "cappex-eab-pimcore-pim",
+	"thumbnailImage": {
+		"src": "",
+		"alt": "PLACEHOLDER: Cappex & EAB thumbnail image to be sourced"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"Cappex helped millions of students research colleges and find scholarships: a product whose entire value depends on the quality and freshness of its underlying data. EAB, a major education research and technology firm, acquired the company and carried that mission forward."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"text": [
+				"The platform's data lived across a variety of tools and platforms, making it hard to manage the content and digital assets for high schools, universities, and scholarships and slowing the company's ability to innovate. Cappex needed to centralize all of that product information into a single, authoritative repository (one book of truth) on a platform flexible enough to model complex, interrelated data and agile enough to keep pace with the business.",
+				"Standing that up was only the beginning: a college-search platform's data is never \"done.\" New and updated college and scholarship records need to be imported continuously, safely, and without disrupting production; the platform needs periodic upgrades and customization as needs evolve; and someone dependable has to be there when issues arise. And when EAB acquired Cappex, all of that had to continue without missing a beat under new ownership."
+			]
+		},
+		{
+			"heading": "Solution",
+			"subheading": "Disciplined Data Operations, Year After Year",
+			"text": [
+				"Lightning Jar brought specialized Pimcore expertise and a disciplined, repeatable approach to data operations.",
+				"<strong>PIM strategy and Pimcore implementation.</strong> Lightning Jar partnered with Cappex to design and stand up a Product Information Management platform on Pimcore, the open-source PIM/DXP, as the central repository for all product content and assets. The work spanned discovery and prioritization, platform architecture across development, staging, and production, and the design of a Pimcore object model tailored to the platform's colleges, high schools, and scholarships, along with the import and export of that content.",
+				"<strong>A safe, repeatable data-import process.</strong> At the heart of the ongoing engagement is a carefully controlled import methodology: a Senior Data Architect first prepares and validates each data set for integrity, a Senior Pimcore Developer imports it into the staging environment, the data is tested and verified there, and only then is the exact same set imported to production, with defined backup-and-restore steps and a final validation to confirm both data integrity and environment stability. It's a process designed so that keeping the platform's data current never puts production at risk.",
+				"<strong>Platform customization and upgrades.</strong> Beyond imports, Lightning Jar has tailored the system to how the team actually works (for example, customizing Pimcore grid views so editors can sort and filter by referenced data like scholarship status, surface field collections like application deadlines, and filter records by field values), and has carried out Pimcore platform upgrades over the years to keep the environment current and supported.",
+				"<strong>Ongoing support and developer enablement.</strong> Lightning Jar has provided dependable ongoing support for the platform, and, from the start, worked alongside the client's own development team to help them build their Pimcore expertise, rather than creating a black box only the vendor could touch.",
+				"<strong>Continuity through acquisition.</strong> When EAB acquired Cappex, the partnership continued without interruption. The same import methodology and support relationship simply carried forward, with EAB's developers now validating the final imported data, so the platform's data operations stayed steady through a major ownership change."
+			]
+		},
+		{
+			"heading": "Results",
+			"text": [
+				"A single Pimcore-based source of truth for the college, high school, and scholarship data that powers the platform.",
+				"A safe, repeatable import process that keeps that data current without risking the production environment.",
+				"A Pimcore environment kept current and tailored to editors' real workflows through ongoing customization and upgrades.",
+				"A dependable, specialized support partner, and a client team enabled to work in Pimcore themselves.",
+				"A relationship that has held steady for seven-plus years, continuing seamlessly from Cappex through EAB's acquisition."
+			]
+		}
+	],
+	"testimonials": [],
+	"images": [],
+	"perspectives": [
+		{
+			"quote": [
+				"Data operations should be boring, and boring takes discipline. Every import runs the same way: validate, stage, verify, back up, then and only then touch production. Seven years and an acquisition later, the process has never made news inside the company, and that is exactly the point. The highest compliment infrastructure work can earn is that nobody has a story about it."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal & Chief Technologist",
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/kevin-peckham-sm.webp",
+					"width": "63",
+					"height": "63"
+				}
+			}
+		}
+	],
+	"tags": ["Pimcore", "PIM", "Data Operations", "Education"]
+}

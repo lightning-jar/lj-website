@@ -21,8 +21,8 @@
 	"title": "A Modern Digital Presence for Zenith Capital Partners: Brand Refresh, Custom Website, Investor-Portal Integration, and a SvelteKit Rebuild",
 	"slug": "zenith-capital-digital-presence",
 	"thumbnailImage": {
-		"src": "",
-		"alt": "PLACEHOLDER: Zenith Capital Partners thumbnail image to be sourced"
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/zenith-capital-homepage.webp",
+		"alt": "Zenith Capital Partners website home page"
 	},
 	"content": [
 		{
@@ -63,7 +63,14 @@
 		}
 	],
 	"testimonials": [],
-	"images": [],
+	"images": [
+		{
+			"alt": "Zenith Capital Partners website home page",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/zenith-capital-homepage.webp",
+			"width": "2400",
+			"height": "1585"
+		}
+	],
 	"perspectives": [
 		{
 			"quote": [
