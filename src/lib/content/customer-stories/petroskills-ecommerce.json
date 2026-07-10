@@ -1,5 +1,6 @@
 {
 	"order": 4,
+	"draft": false,
 	"banner": {
 		"tag": {
 			"data-text": "PetroSkills + Training Commerce",
@@ -124,5 +125,11 @@
 		"bun"
 	],
 	"technologies": [],
-	"tags": ["E-Commerce", "Websites", "OpenDXP", "Vue", "Education"]
+	"tags": [
+		"E-Commerce",
+		"Websites",
+		"OpenDXP",
+		"Vue",
+		"Education"
+	]
 }

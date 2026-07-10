@@ -1,5 +1,6 @@
 {
 	"order": 1,
+	"draft": false,
 	"banner": {
 		"tag": {
 			"data-text": "SecureLogix + Integrated Digital Program",
@@ -116,5 +117,11 @@
 		"bun"
 	],
 	"technologies": [],
-	"tags": ["Websites", "Portals", "SaaS", "AI", "Sveltekit"]
+	"tags": [
+		"Websites",
+		"Portals",
+		"SaaS",
+		"AI",
+		"Sveltekit"
+	]
 }

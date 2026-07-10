@@ -22,13 +22,15 @@ async function loadAllText() {
 
 async function getArticles() {
 	const rawArticles = await loadAllText();
-	const articles = rawArticles.map((article) => ({
-		frontMatter: getFrontMatter(article),
-		html: parseMarkdownTextToHtml({
-			markdown: article,
-			options: { sanitize: true, lazyImages: true },
-		}),
-	}));
+	const articles = rawArticles
+		.map((article) => ({
+			frontMatter: getFrontMatter(article),
+			html: parseMarkdownTextToHtml({
+				markdown: article,
+				options: { sanitize: true, lazyImages: true },
+			}),
+		}))
+		.filter((article) => article.frontMatter?.draft !== true);
 	return articles.sort((a, b) => {
 		const dateA = new Date(
 			a.frontMatter?.date && typeof a.frontMatter.date === "string"

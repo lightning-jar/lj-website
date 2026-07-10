@@ -23,7 +23,11 @@ async function loadAllCustomerStoriesJson() {
 export async function getAllCustomerStories(): Promise<CustomerStory[]> {
 	const stories = await loadAllCustomerStoriesJson();
 
-	return stories.map((story) => {
+	const published = stories.filter(
+		(story) => typeof story === "object" && story.draft !== true,
+	);
+
+	return published.map((story) => {
 		const ids = story.featuredTechnologies;
 		if (!Array.isArray(ids) || ids.length === 0) {
 			return { ...story, technologies: [] };

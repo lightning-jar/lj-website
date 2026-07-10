@@ -4,7 +4,7 @@ metaTitle: Questions, Decisions & Compromises
 slug: questions-decisions-compromises
 description: This article proposes some thoughts on strategy, design, and implementation.
 date: 2026-01-19
-draft: true
+draft: false
 tags: [strategy, design, implementation]
 image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/avocados.webp
 imageDescription: 

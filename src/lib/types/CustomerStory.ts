@@ -33,4 +33,5 @@ export interface CustomerStory {
 	};
 	order: number;
 	tags?: string[];
+	draft?: boolean;
 }

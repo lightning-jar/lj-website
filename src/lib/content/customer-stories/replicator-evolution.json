@@ -1,5 +1,6 @@
 {
 	"order": 0,
+	"draft": false,
 	"banner": {
 		"tag": {
 			"data-text": "SecureLogix + Replicator",
@@ -145,5 +146,11 @@
 		"bun"
 	],
 	"technologies": [],
-	"tags": ["AI", "SaaS", "Design Systems", "Sveltekit", "Open Source"]
+	"tags": [
+		"AI",
+		"SaaS",
+		"Design Systems",
+		"Sveltekit",
+		"Open Source"
+	]
 }
