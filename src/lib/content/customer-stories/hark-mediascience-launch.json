@@ -1,6 +1,6 @@
 {
 	"order": 10,
-	"draft": true,
+	"draft": false,
 	"banner": {
 		"heading": "Launching Hark",
 		"subtitle": "UX, Design, and Front-End Build for MediaScience's Self-Serve Research SaaS",
@@ -21,8 +21,8 @@
 	"title": "Launching Hark: UX, Design, and Front-End Build for MediaScience's Self-Serve Research SaaS",
 	"slug": "hark-mediascience-launch",
 	"thumbnailImage": {
-		"src": "",
-		"alt": "PLACEHOLDER: Hark launch thumbnail image to be sourced"
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/hark-dashboard-web.webp",
+		"alt": "Hark account dashboard interface"
 	},
 	"content": [
 		{
@@ -61,7 +61,14 @@
 		}
 	],
 	"testimonials": [],
-	"images": [],
+	"images": [
+		{
+			"alt": "Hark account dashboard interface",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/hark-dashboard-web.webp",
+			"width": "2000",
+			"height": "1426"
+		}
+	],
 	"perspectives": [
 		{
 			"quote": [
