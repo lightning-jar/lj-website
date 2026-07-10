@@ -148,6 +148,18 @@ tool calls from history). The examples must speak your grammar, so
 write them once, unit-test that their patches apply, and laminate
 them.
 
+One scope note, in the spirit of the series. Every session we have
+measured issues self-contained requests: the instruction plus the
+current document carry everything needed to execute the edit. Real
+users also say things like "use the campaign codename we settled
+on", where the needed fact lives only in the earlier conversation.
+A stateless editor cannot resolve those by construction, and none
+of our studies has measured that class yet. Study T is now
+registered to close exactly that gap, including the obvious cheap
+fix: a small app-maintained note block, a memo instead of a
+transcript. Until it reports, read every claim in this post as
+applying to self-contained requests.
+
 ## The whole series' practical advice, in one place
 
 Nineteen studies in, here is everything we would tell a builder,
