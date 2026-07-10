@@ -107,6 +107,19 @@ every turn, and put two worked examples of your patch dialect's
 tricky operations in the system prompt. History still works. It is
 just no longer necessary, and it is not what we thought it was.
 
+Update, a day later: we tested that arithmetic instead of just
+asserting it. Study S ran both surviving recipes through 36-edit
+sessions, three times the horizon everything above was measured at.
+The stateless recipe passed its pre-registered gate on both models:
+no late-session decay (steps 25 to 36 scored 98 to 99%, so step 36
+is taught as well as step 1) and full parity with keep-history.
+Keep-history stayed essentially perfect too, but its per-step input
+grew linearly to about 24k tokens by step 36 against the stateless
+recipe's flat 2.1k, which works out to 449k versus 81k input tokens
+per session, a factor of five to six. Both recipes hold; the
+paragraph in your system prompt is now the measured default for
+long sessions.
+
 ## Study Q: then we asked for eight edits at once
 
 Every task in this series had edited exactly one node. Real
