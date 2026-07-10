@@ -1,0 +1,104 @@
+{
+	"order": 14,
+	"draft": true,
+	"banner": {
+		"heading": "One Platform, Many Channels",
+		"subtitle": "Architecting BlueLine Rental's Digital Ecosystem",
+		"subheading": "BlueLine Rental, one of the largest construction and industrial equipment rental companies in North America, set out to modernize how customers do business with it online. Over several years, Lightning Jar served as the architect behind that transformation, designing and building not a single project but an interconnected ecosystem: a unified cloud architecture tying together BlueLine's rental and CRM systems, a product-information backbone, a responsive commerce website, a location finder and local-search program, quoting and sales tools, and a customer mobile/web app."
+	},
+	"meta": {
+		"title": "Architecting BlueLine Rental's Digital Ecosystem | Customer Story",
+		"description": "Over several years, Lightning Jar architected BlueLine Rental's digital ecosystem: a unified cloud integration layer over RentalMan and Salesforce, a PIM backbone, responsive rental commerce, a location finder, quoting tools, and a customer app, all on one extensible platform."
+	},
+	"customer": {
+		"id": "blueline-rental",
+		"category": "Equipment Rental",
+		"name": "BlueLine Rental",
+		"logo": "",
+		"thumb": ""
+	},
+	"excerpt": "BlueLine Rental, one of the largest construction and industrial equipment rental companies in North America, set out to modernize how customers do business with it online. Over several years, Lightning Jar served as the architect behind that transformation, designing and building not a single project but an interconnected ecosystem: a strategy and research foundation, a unified cloud architecture tying together BlueLine's rental and CRM systems, a product-information backbone for its equipment catalog, a responsive commerce website, a location finder and local-search program, quoting and sales tools, and a customer mobile/web app. The guiding principle throughout was \"one platform, many channels\": a single, extensible foundation that many customer experiences could be built on.",
+	"title": "One Platform, Many Channels: Architecting BlueLine Rental's Digital Ecosystem",
+	"slug": "blueline-rental-digital-ecosystem",
+	"thumbnailImage": {
+		"src": "",
+		"alt": "PLACEHOLDER: BlueLine Rental thumbnail image to be sourced"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"BlueLine Rental was one of the largest construction and industrial equipment rental companies in North America, serving traveling and local contractors, equipment managers, and jobsite crews from more than a hundred branch locations."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"text": [
+				"BlueLine competed in a B2B market being reshaped by consumer expectations. Its customers increasingly expected to research, rent, pay for, and re-order equipment online with the same ease they experienced as consumers on Amazon. But BlueLine's website wasn't responsive, its search performance trailed competitors, and there was no real way to transact online. Meanwhile, the data and logic that ran the business lived in specialized back-office systems (a rental management platform, Wynne's RentalMan, and Salesforce) that weren't built to power a modern, customer-facing digital experience.",
+				"Compounding the challenge, this wasn't one problem to solve but many, all interrelated: a huge equipment catalog of roughly 1,600 rentable equipment classes needed well-structured product information; more than a hundred branch locations needed accurate, findable location data; quoting and pricing needed to draw on the same engine the branches used; and every new channel (website, mobile app, sales tools) needed to stay consistent with the others. Solving these piecemeal would have produced a pile of disconnected tools. BlueLine needed someone to architect the whole thing."
+			]
+		},
+		{
+			"heading": "Solution",
+			"subheading": "Not a Project. An Ecosystem.",
+			"text": [
+				"Lightning Jar approached BlueLine not as a website project but as a multi-year architecture effort, delivered in rapid, prioritized releases.",
+				"<strong>Strategy and research foundation.</strong> The work began with digital strategy grounded in voice-of-customer research and competitive analysis: mapping the customer journey across the pre-, during-, and post-rental experience, and setting a vision built on frictionless, convenience-first commerce (moving the conversation away from price alone).",
+				"<strong>A unified cloud architecture.</strong> At the center was an integration layer (the \"BlueLine Cloud\") that Lightning Jar designed to connect BlueLine's core systems to its customer-facing channels. It exposed RentalMan's pricing, quoting, fee, and tax logic through APIs, created quote and reservation records back in RentalMan, and pushed customers, contacts, jobsites, and quotes into Salesforce in real time. This let a modern website and app run on the same authoritative business logic the branches already trusted: one platform, many channels.",
+				"<strong>A product-information backbone.</strong> Lightning Jar delivered a product information management (PIM) approach for BlueLine's equipment data (class, make, model) as a single source of truth, so the catalog, website, and future sales tools always drew from the same current information.",
+				"<strong>A responsive commerce website.</strong> On that foundation, Lightning Jar designed and built a responsive website in a series of releases: homepage and key landing pages, an equipment catalog, a best-in-class location finder, and a full cart-and-checkout commerce flow where a website order becomes a RentalMan quote that inside sales reps convert to a reservation.",
+				"<strong>Location finder and local search.</strong> Lightning Jar built the location finder and ran a local-search program, syndicating branch information to key listing directories across the company's locations and monitoring hundreds of national and location-specific search terms, to make BlueLine findable where customers actually search.",
+				"<strong>Quoting and sales tools.</strong> Lightning Jar architected quoting applications (including Quick Quote and an advanced quoting tool, with Salesforce integration) so sales teams and customers could generate rental quotes drawing on the same pricing engine.",
+				"<strong>A customer mobile/web app.</strong> Extending the same platform, Lightning Jar (with a partner agency) designed a customer mobile/web app concept built to make BlueLine indispensable to contractors: quick rent, favorites, purchase-order support, and jobsite and equipment management, all sharing the underlying architecture."
+			]
+		},
+		{
+			"heading": "Results",
+			"text": [
+				"A unified \"one platform, many channels\" architecture that let website, commerce, location, quoting, and app experiences run on a single, extensible foundation.",
+				"Modern, customer-facing digital experiences powered by BlueLine's existing rental (RentalMan) and CRM (Salesforce) systems, without a heavy internal IT lift.",
+				"Online rental commerce that turns website orders into RentalMan quotes and reservations, bringing frictionless, convenience-first buying to a traditional B2B category.",
+				"A structured equipment-catalog and location-data foundation, paired with a local-search program, to grow organic reach.",
+				"A multi-year body of architected solutions (strategy, cloud integration, PIM, website, location finder, quoting apps, and a customer app) delivered as one coherent ecosystem for one of North America's largest equipment rental companies."
+			]
+		}
+	],
+	"testimonials": [
+		{
+			"quote": [
+				"Their technology team was my secret weapon: they helped me execute big ideas."
+			],
+			"attribution": {
+				"name": "Frank Roth",
+				"title": "Former CMO",
+				"organization": "United Rentals / BlueLine",
+				"image": {
+					"alt": "Frank Roth",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/frank-r-testimonial.webp",
+					"width": "64",
+					"height": "64"
+				}
+			}
+		}
+	],
+	"images": [],
+	"perspectives": [
+		{
+			"quote": [
+				"The cheapest feature is the one your platform already knows how to do. Because the website, the quoting tools, and the app all sat on the same foundation, every new channel BlueLine wanted was an extension, not a rebuild. One platform, many channels was not a slogan. It was the budget strategy."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal & Chief Technologist",
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/kevin-peckham-sm.webp",
+					"width": "63",
+					"height": "63"
+				}
+			}
+		}
+	],
+	"tags": ["Architecture", "eCommerce", "PIM", "B2B"]
+}
