@@ -71,7 +71,10 @@ export default defineConfig({
 			provider: "bunny",
 			fonts: {
 				display: "Bungee Shade",
-				sans: "Atkinson Hyperlegible",
+				sans: {
+					name: "Atkinson Hyperlegible",
+					weights: ["400", "700"],
+				},
 			},
 		}),
 	],
