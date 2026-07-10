@@ -28,7 +28,7 @@ let { data } = $props();
         {data.banner?.heading}
         {#if data.banner?.subtitle}
           <span
-            class="block text-18px lg:text-22px font-500 mt-2 leading-snug opacity-90"
+            class="block font-sans text-18px lg:text-22px font-500 mt-2 leading-snug opacity-90"
           >
             {data.banner.subtitle}
           </span>
