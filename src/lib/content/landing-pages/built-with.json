@@ -69,14 +69,14 @@
 			}
 		},
 		{
-			"name": "CSS",
-			"category": "Stylesheet Language",
+			"name": "Claude Code",
+			"category": "AI Coding Agent",
 			"description": [
-				"Cascading Style Sheets define the presentation layer of our site. We pair native CSS with UnoCSS utilities, using modern features like custom properties, container queries, cascade layers, and media queries for dark mode and reduced motion. This balance keeps styles predictable, accessible, and performant."
+				"Claude Code is Anthropic's agentic coding tool: a Claude-powered agent that works in the terminal and editor, reading the codebase, running commands, and making changes under human review. We use it daily to build and maintain this site, from content edits to feature work, with every change reviewed and committed through our normal git workflow. For a studio that publishes open research for developers of LLM applications, using the tools we study is the only honest way to work."
 			],
-			"license": "Open Standard",
+			"license": "Proprietary",
 			"link": {
-				"href": "https://www.w3.org/Style/CSS/"
+				"href": "https://claude.com/claude-code"
 			}
 		},
 		{
@@ -102,6 +102,17 @@
 			}
 		},
 		{
+			"name": "CSS",
+			"category": "Stylesheet Language",
+			"description": [
+				"Cascading Style Sheets define the presentation layer of our site. We pair native CSS with UnoCSS utilities, using modern features like custom properties, container queries, cascade layers, and media queries for dark mode and reduced motion. This balance keeps styles predictable, accessible, and performant."
+			],
+			"license": "Open Standard",
+			"link": {
+				"href": "https://www.w3.org/Style/CSS/"
+			}
+		},
+		{
 			"name": "DigitalOcean Spaces",
 			"category": "Object Storage CDN",
 			"description": [
@@ -116,7 +127,7 @@
 			"name": "esbuild",
 			"category": "Bundler",
 			"description": [
-				"esbuild is a fast bundler/minifier used by our toolchain (Vite, SvelteKit adapter) for speedy builds and transform steps."
+				"esbuild is a fast bundler/minifier. As of Vite 8 it is no longer part of Vite's own pipeline (Rolldown took that seat), but the SvelteKit Vercel adapter still uses it to bundle our serverless functions for deployment."
 			],
 			"license": "Open Source / MIT",
 			"link": {
@@ -146,6 +157,17 @@
 			}
 		},
 		{
+			"name": "Happy DOM",
+			"category": "Test Environment / DOM Simulation",
+			"description": [
+				"Happy DOM is a fast JavaScript implementation of the browser DOM for server-side environments. We pair it with Bun's built-in test runner so our component and markdown-parsing tests can exercise real DOM behavior without launching a browser."
+			],
+			"license": "Open Source / MIT",
+			"link": {
+				"href": "https://github.com/capricorn86/happy-dom"
+			}
+		},
+		{
 			"name": "HTML",
 			"category": "Markup Language",
 			"description": [
@@ -165,6 +187,17 @@
 			"license": "Open Standard (ECMAScript)",
 			"link": {
 				"href": "https://developer.mozilla.org/docs/Web/JavaScript"
+			}
+		},
+		{
+			"name": "Lightning CSS",
+			"category": "CSS Transformer",
+			"description": [
+				"Lightning CSS is an extremely fast CSS parser, transformer, and minifier written in Rust. It ships inside Vite 8, where it handles CSS transforms and minification in our build pipeline. Also, given our name, we were always going to like it."
+			],
+			"license": "Open Source / MPL-2.0",
+			"link": {
+				"href": "https://lightningcss.dev/"
 			}
 		},
 		{
@@ -245,14 +278,14 @@
 			}
 		},
 		{
-			"name": "Rollup",
+			"name": "Rolldown",
 			"category": "Bundler",
 			"description": [
-				"Rollup is part of Vite’s build pipeline and plugin ecosystem. We rely on it for code splitting and optimized production bundles."
+				"Rolldown is a Rust-based JavaScript bundler with Rollup-compatible plugin APIs at dramatically higher speed. It became Vite's built-in bundler in Vite 8, replacing the previous Rollup and esbuild pair, and we rely on it for code splitting and optimized production bundles."
 			],
 			"license": "Open Source / MIT",
 			"link": {
-				"href": "https://rollupjs.org/"
+				"href": "https://rolldown.rs/"
 			}
 		},
 		{
@@ -310,7 +343,6 @@
 				"href": "https://github.com/sveltejs/language-tools"
 			}
 		},
-
 		{
 			"name": "TypeScript",
 			"category": "Programming Language",
@@ -331,6 +363,17 @@
 			"license": "Open Source",
 			"link": {
 				"href": "https://unocss.dev/"
+			}
+		},
+		{
+			"name": "varlock",
+			"category": "Environment Variable Management",
+			"description": [
+				"varlock manages our environment variables with a committed .env.schema file as the single source of truth, using decorators to mark each variable required, sensitive, or typed. It validates values at build time, generates TypeScript types for every variable, and fails fast when configuration is missing, replacing scattered untyped process.env access with a typed, documented contract."
+			],
+			"license": "Open Source",
+			"link": {
+				"href": "https://varlock.dev/"
 			}
 		},
 		{
@@ -375,6 +418,17 @@
 			"license": "Proprietary (free tier available)",
 			"link": {
 				"href": "https://www.warp.dev/"
+			}
+		},
+		{
+			"name": "YAML",
+			"category": "Data Format",
+			"description": [
+				"YAML is a human-friendly data serialization format. Every blog post on this site carries YAML frontmatter (title, date, tags, and more), which we parse with the yaml npm package, one of only three runtime dependencies this site has."
+			],
+			"license": "Open Standard / ISC (yaml package)",
+			"link": {
+				"href": "https://eemeli.org/yaml/"
 			}
 		},
 		{
