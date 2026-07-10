@@ -7,7 +7,7 @@
 			"data-text": "CCRTA + Transit Platform",
 			"href": "https://www.ccrta.org/"
 		},
-		"heading": "Leaving WordPress Behind for CCRTA",
+		"heading": "Leaving WordPress Behind for CCRTA: A SvelteKit Rebuild with a Real-Time GTFS Bus Tracker",
 		"subheading": "Lightning Jar migrated the Corpus Christi Regional Transportation Authority from WordPress to SvelteKit: a faster, safer, more accessible site with a custom real-time bus tracker built on open GTFS data at a fraction of the cost of turnkey systems."
 	},
 	"meta": {
