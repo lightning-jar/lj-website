@@ -98,9 +98,9 @@ Traditional crawlers (e.g., Googlebot) index pages to rank them later. LLM-orien
 * Coverage vs. comprehension: LLM crawlers care about extractable knowledge, not just indexable text. Structured context and clean segmentation matter.  
 * Freshness windows: Many assistants blend a static foundation model with live retrieval. Ensuring your latest content is easily retrievable (feeds, sitemaps, changelogs) is critical.  
 * Source selection: LLMs favor sources that are:  
-    * Highly structured ([schema.org](https://schema.org/), [JSON-LD](https://json-ld.org/), well-labeled tables, consistent headings).  
-    * Authoritative (clear bylines, credentials, org identity, outbound citations).  
-    * Stable and canonical (fewer duplicative URLs, strong canonical tags).  
+* Highly structured ([schema.org](https://schema.org/), [JSON-LD](https://json-ld.org/), well-labeled tables, consistent headings).  
+* Authoritative (clear bylines, credentials, org identity, outbound citations).  
+* Stable and canonical (fewer duplicative URLs, strong canonical tags).  
 * Robots and permissions: Some LLM crawlers respect [robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro) and specific User-Agents; others use headless browsers, fetch APIs, or partner datasets. Maintain explicit rules, allowlisting, and monitoring.
 
 ## How LLM Logic Differs From Google's Ranking Algorithms

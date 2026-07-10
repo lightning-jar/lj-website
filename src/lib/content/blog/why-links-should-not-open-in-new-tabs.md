@@ -72,7 +72,7 @@ On the web, the default is simple: click a link, go to that page in the same tab
 
 ## Predictability Beats Fragmentation
 
-Many people don’t have a firm mental model of tabs and windows. When a new tab opens without warning, they may not notice the context switch, and the Back button appears “broken.” Instead of a smooth path back, they’re forced to close a tab or hunt through a crowded tab strip to find the original page. On mobile, where tab interfaces are hidden behind gestures or icons, the switch is even more opaque. [Good UX preserves a coherent history and keeps navigation predictable](https://www.nngroup.com/articles/new-browser-windows-and-tabs/); forced new tabs fragment the experience and make progress feel brittle. For non-HTML documents like PDFs, weigh context carefully; they often disrupt flow and are best avoided for on-screen reading. If you must link a PDF on desktop, calling out the format and potentially opening it separately can sometimes help. 
+Many people don’t have a firm mental model of tabs and windows. When a new tab opens without warning, they may not notice the context switch, and the Back button appears “broken.” Instead of a smooth path back, they’re forced to close a tab or hunt through a crowded tab strip to find the original page. On mobile, where tab interfaces are hidden behind gestures or icons, the switch is even more opaque. [Good UX preserves a coherent history and keeps navigation predictable](https://www.nngroup.com/articles/new-browser-windows-and-tabs/); forced new tabs fragment the experience and make progress feel brittle. For non-HTML documents like PDFs, weigh context carefully; they often disrupt flow and are best avoided for on-screen reading. If you must link a PDF on desktop, calling out the format and potentially opening it separately can sometimes help.
 
 ## Accessibility Matters
 
@@ -87,10 +87,10 @@ Every forced new tab contributes to tab overload. Important pages get buried amo
 Teams often cite three reasons for `target="_blank"`. None require it.
 
 ### “We don’t want people to leave our site.”
-If the experience is strong, they’ll come back. Focus on clear way-finding, internal linking, and good information architecture. [Jakob Nielsen’s](https://www.nngroup.com/articles/ten-usability-heuristics/) emphasize user control and freedom; preserve predictable navigation and let users decide how to open links. 
+If the experience is strong, they’ll come back. Focus on clear way-finding, internal linking, and good information architecture. [Jakob Nielsen’s](https://www.nngroup.com/articles/ten-usability-heuristics/) emphasize user control and freedom; preserve predictable navigation and let users decide how to open links.
 
 ### “We don’t want users to lose their place in a form.”  
-Preserve state instead: autosave drafts, warn before navigation, or surface help inline via a well-built dialog or side panel. Use accessible status messages or [live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions) to confirm autosave without stealing focus. 
+Preserve state instead: autosave drafts, warn before navigation, or surface help inline via a well-built dialog or side panel. Use accessible status messages or [live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions) to confirm autosave without stealing focus.
 
 ### “It’s an external link.”  
 Externality alone isn’t a valid reason. Use a small icon or label to set expectations and let users decide whether to branch their workflow. Accessibility checklists recommend indicating when links open new windows and when linking to non-HTML files, but not forcing tabs by default.

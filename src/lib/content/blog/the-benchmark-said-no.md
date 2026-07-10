@@ -46,128 +46,43 @@ additionalReading:
 
 The short version: by last week the series had assembled a pleasingly cheap recipe. Address nodes by stable id. Reply with small anchored patches instead of rewriting the document. Show the model a focused view of the relevant region instead of the whole tree. Refresh that view on every turn of an editing session. Each step was pre-registered, measured, and [shipped in a small open-source library](/blog/barkup-0-3-focused-views). Input costs stopped scaling with document size. Sessions stopped drifting.
 
-Two hard parts remained, and both looked deletable. The model still
-needed to be told *which* nodes an edit concerns (our tasks named
-their target ids, an oracle assumption we flagged in every post).
-And sessions still carried full conversation history, which grows
-without bound and is exactly where the nastiest bug of this series
-once lived. So we pre-registered two more studies to delete them:
-let the model find its own targets, and let sessions forget.
+Two hard parts remained, and both looked deletable. The model still needed to be told *which* nodes an edit concerns (our tasks named their target ids, an oracle assumption we flagged in every post). And sessions still carried full conversation history, which grows without bound and is exactly where the nastiest bug of this series once lived. So we pre-registered two more studies to delete them: let the model find its own targets, and let sessions forget.
 
-Both gates failed. This post is about how they failed, because the
-failure shapes are more useful than the successes would have been.
+Both gates failed. This post is about how they failed, because the failure shapes are more useful than the successes would have been.
 
 ## Study M: the view carries the state, but memory still matters
 
-The setup: our session studies showed that attaching a fresh
-1.5k-token view of the current tree to every turn eliminates drift.
-If the view carries the state, what is the history for? We ran the
-same twelve-edit sessions with no conversation memory at all (every
-turn a fresh, single-turn conversation: view plus instruction) and
-with a two-exchange sliding window.
+The setup: our session studies showed that attaching a fresh 1.5k-token view of the current tree to every turn eliminates drift. If the view carries the state, what is the history for? We ran the same twelve-edit sessions with no conversation memory at all (every turn a fresh, single-turn conversation: view plus instruction) and with a two-exchange sliding window.
 
-The economics worked exactly as predicted. Stateless input is flat:
-about 1,300 tokens at step one and at step twelve, forever, no
-context ceiling, and structurally immune to history-construction
-bugs because there is no history to construct.
+The economics worked exactly as predicted. Stateless input is flat: about 1,300 tokens at step one and at step twelve, forever, no context ceiling, and structurally immune to history-construction bugs because there is no history to construct.
 
-The accuracy did not. Sonnet lost 7 steps to 0 against full history
-(p = 0.016), and sessions ending with a byte-perfect tree dropped
-from 19 of 20 to 13 of 20. Every stateless-only failure was a
-late-session placement edit: a legal patch, validated and applied,
-with the new node in the wrong position. The model saw the same
-child lists in the same view either way. History was providing
-redundancy for positional reasoning that the view alone does not,
-and the two-exchange window recovered only part of it.
+The accuracy did not. Sonnet lost 7 steps to 0 against full history (p = 0.016), and sessions ending with a byte-perfect tree dropped from 19 of 20 to 13 of 20. Every stateless-only failure was a late-session placement edit: a legal patch, validated and applied, with the new node in the wrong position. The model saw the same child lists in the same view either way. History was providing redundancy for positional reasoning that the view alone does not, and the two-exchange window recovered only part of it.
 
-So the guidance is the boring version: keep the history and the
-per-turn view. At twelve-edit lengths, history costs about 55k input
-tokens per session, and deleting it buys you three times the
-corrupted sessions. They cover different failure modes; you want
-both.
+So the guidance is the boring version: keep the history and the per-turn view. At twelve-edit lengths, history costs about 55k input tokens per session, and deleting it buys you three times the corrupted sessions. They cover different failure modes; you want both.
 
 ## Study L: finding the node is the actual job
 
-The setup: we regenerated our large-tree editing tasks with the ids
-stripped out of the instructions. Instead of "the node with id
-n819", the model gets what a person would say: "the image named
-maple-ember", or "the 3rd block inside the section named atlas".
-Every description was programmatically verified to match exactly one
-node, so ambiguity was never the model's problem. Then we compared
-three ways of supplying context: the whole tree in the prompt, a
-skeleton view plus an expand tool the model drives itself, and a
-deliberately dumb keyword retriever feeding the focused view.
+The setup: we regenerated our large-tree editing tasks with the ids stripped out of the instructions. Instead of "the node with id n819", the model gets what a person would say: "the image named maple-ember", or "the 3rd block inside the section named atlas". Every description was programmatically verified to match exactly one node, so ambiguity was never the model's problem. Then we compared three ways of supplying context: the whole tree in the prompt, a skeleton view plus an expand tool the model drives itself, and a deliberately dumb keyword retriever feeding the focused view.
 
-First result: models are decent grounders when they can see
-everything. With the full tree in context, sonnet solved 86.7% and
-gemini 84.4%, against oracle bounds of 95.6% and 91.1%. Call it a 7
-to 9 point tax for describing instead of naming. Real, but far from
-disqualifying.
+First result: models are decent grounders when they can see everything. With the full tree in context, sonnet solved 86.7% and gemini 84.4%, against oracle bounds of 95.6% and 91.1%. Call it a 7 to 9 point tax for describing instead of naming. Real, but far from disqualifying.
 
-Second result, and the one we would most like agent builders to
-read: **the explore-the-tree-yourself pattern is a trap.** On the
-frontier model it actually works, 43 of 45, matching the oracle
-bound. But it took a median of 54 expand calls per task, and all
-those expansions plus their accumulating history cost more input
-tokens than just pasting the entire tree would have. And on the
-cheap model it does not work at all: 51%, with most failures being
-the model wandering the tree until its budget ran out without ever
-producing a patch. Navigation joins whole-tree rewrite in the
-category of techniques that are accurate exactly where you least
-need the savings.
+Second result, and the one we would most like agent builders to read: **the explore-the-tree-yourself pattern is a trap.** On the frontier model it actually works, 43 of 45, matching the oracle bound. But it took a median of 54 expand calls per task, and all those expansions plus their accumulating history cost more input tokens than just pasting the entire tree would have. And on the cheap model it does not work at all: 51%, with most failures being the model wandering the tree until its budget ran out without ever producing a patch. Navigation joins whole-tree rewrite in the category of techniques that are accurate exactly where you least need the savings.
 
-Third result: the keyword retriever landed at 60%, with nearly every
-failure a clean miss (the target region never made it into the
-view). That was the floor by design. The distance between it and the
-oracle is the value your application's retrieval layer has to add.
+Third result: the keyword retriever landed at 60%, with nearly every failure a clean miss (the target region never made it into the view). That was the floor by design. The distance between it and the oracle is the value your application's retrieval layer has to add.
 
 ## What the pair of failures buys
 
-A benchmark series that only ever confirms its own thesis is
-advertising. These two studies are why we trust the rest of ours:
-the same pre-registration discipline that produced "views are free"
-and "sessions need fresh views" also produced "views cannot find
-themselves" and "sessions cannot forget". We published the gates
-before running, and the gates failed, and the honest boundary is
-more useful than the result we wanted:
+A benchmark series that only ever confirms its own thesis is advertising. These two studies are why we trust the rest of ours: the same pre-registration discipline that produced "views are free" and "sessions need fresh views" also produced "views cannot find themselves" and "sessions cannot forget". We published the gates before running, and the gates failed, and the honest boundary is more useful than the result we wanted:
 
 - Stable ids make edits cheap and reliable at any size we tested.
 - Views make the input cost of *known* edits nearly free.
 - History makes sessions hold together; keep it.
-- And the one part you cannot outsource to the codec or the prompt:
-  knowing which nodes the user means. That is retrieval, it is your
-  application's job, and naive keyword matching is not enough.
+- And the one part you cannot outsource to the codec or the prompt: knowing which nodes the user means. That is retrieval, it is your application's job, and naive keyword matching is not enough.
 
-Everything is reproducible from the
-[benchmark repo](https://github.com/kevinpeckham/barkup-bench):
-pre-registrations (BRIEF-L, BRIEF-M, including one disclosed pre-run
-amendment), corpora, unit-tested graders, raw analyses. Combined
-cost of both studies: about fifty dollars, and two hypotheses we
-were fond of.
+Everything is reproducible from the [benchmark repo](https://github.com/kevinpeckham/barkup-bench): pre-registrations (BRIEF-L, BRIEF-M, including one disclosed pre-run amendment), corpora, unit-tested graders, raw analyses. Combined cost of both studies: about fifty dollars, and two hypotheses we were fond of.
 
 ## Update: one week later, one gate opened
 
-We went one rung deeper on each failure, pre-registered as Studies N
-and O. The grounding boundary moved: replace the expand tool with a
-single content search tool (`find_nodes`: a few search words in, the
-five best-matching nodes out, shown in place) and the trap
-disappears. The frontier model matches its id-oracle accuracy at a
-median of one search call, the cheap model jumps from 23 of 45 to 39
-of 45, and input cost lands around a tenth of pasting the tree. The
-statelessness boundary did not move: printing every node's exact
-position on the view rescued almost nothing, so history's
-contribution to placement is not arithmetic the model failed to do.
-The full story, including an embedding retriever that failed to beat
-keyword matching, is in
-[Then We Found the Cheap Part](/blog/then-we-found-the-cheap-part).
+We went one rung deeper on each failure, pre-registered as Studies N and O. The grounding boundary moved: replace the expand tool with a single content search tool (`find_nodes`: a few search words in, the five best-matching nodes out, shown in place) and the trap disappears. The frontier model matches its id-oracle accuracy at a median of one search call, the cheap model jumps from 23 of 45 to 39 of 45, and input cost lands around a tenth of pasting the tree. The statelessness boundary did not move: printing every node's exact position on the view rescued almost nothing, so history's contribution to placement is not arithmetic the model failed to do. The full story, including an embedding retriever that failed to beat keyword matching, is in [Then We Found the Cheap Part](/blog/then-we-found-the-cheap-part).
 
-A week after that: the memory question resolved completely. Study O
-had ruled out positional arithmetic; Study P identified what history
-actually contributes, worked precedent, by faking it. Two canned
-examples of the tricky patch operations, pasted into the system
-prompt from a tree the model never edits, restore stateless sessions
-to full-history accuracy on both models. So the boundary this post
-reported ("sessions cannot forget") stands corrected in the best
-way: sessions can forget everything, provided you teach the dialect
-up front. The whole mechanism hunt is written up in
-[Your Agent Doesn't Need a Memory](/blog/two-examples-replace-a-memory).
+A week after that: the memory question resolved completely. Study O had ruled out positional arithmetic; Study P identified what history actually contributes, worked precedent, by faking it. Two canned examples of the tricky patch operations, pasted into the system prompt from a tree the model never edits, restore stateless sessions to full-history accuracy on both models. So the boundary this post reported ("sessions cannot forget") stands corrected in the best way: sessions can forget everything, provided you teach the dialect up front. The whole mechanism hunt is written up in [Your Agent Doesn't Need a Memory](/blog/two-examples-replace-a-memory).

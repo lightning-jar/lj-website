@@ -38,32 +38,13 @@ additionalReading:
     url: "https://www.npmjs.com/package/@kevinpeckham/barkup"
 ---
 
-[barkup](https://www.npmjs.com/package/@kevinpeckham/barkup) 0.4.0
-is out. It adds one small, heavily measured feature to the `/view`
-module: content search. Version 0.3 shipped focused views, which
-made editing nearly free once your application knew which node ids
-an edit concerned, and it shipped with an honest caveat attached:
-finding those ids was your problem. As of 0.4, the model can find
-them itself, with one tool call, and we can tell you exactly how
-well that works because we
-[benchmarked it before shipping it](/blog/then-we-found-the-cheap-part).
+[barkup](https://www.npmjs.com/package/@kevinpeckham/barkup) 0.4.0 is out. It adds one small, heavily measured feature to the `/view` module: content search. Version 0.3 shipped focused views, which made editing nearly free once your application knew which node ids an edit concerned, and it shipped with an honest caveat attached: finding those ids was your problem. As of 0.4, the model can find them itself, with one tool call, and we can tell you exactly how well that works because we [benchmarked it before shipping it](/blog/then-we-found-the-cheap-part).
 
-The short version of the evidence: give the model a minimal view of
-the tree's root and a `find_nodes` search tool, and it grounds
-plain-language edit requests ("rename the image named maple-ember")
-at oracle-level accuracy on the frontier model we tested and at
-whole-tree accuracy on the cheap one, at a median of a single search
-call and roughly a tenth of the input tokens of pasting the tree.
-The same study also measured the fashionable alternative, an
-embedding retriever, and found it no better than keyword matching on
-structural references. So what shipped is the thing that measured
-well: deterministic, dependency-free keyword search, about thirty
-lines of code, benchmark numbers attached.
+The short version of the evidence: give the model a minimal view of the tree's root and a `find_nodes` search tool, and it grounds plain-language edit requests ("rename the image named maple-ember") at oracle-level accuracy on the frontier model we tested and at whole-tree accuracy on the cheap one, at a median of a single search call and roughly a tenth of the input tokens of pasting the tree. The same study also measured the fashionable alternative, an embedding retriever, and found it no better than keyword matching on structural references. So what shipped is the thing that measured well: deterministic, dependency-free keyword search, about thirty lines of code, benchmark numbers attached.
 
 ## The API
 
-Three new exports in `@kevinpeckham/barkup/view`, alongside the
-existing `renderView` and `VIEW_PROMPT_RULES`:
+Three new exports in `@kevinpeckham/barkup/view`, alongside the existing `renderView` and `VIEW_PROMPT_RULES`:
 
 ```ts
 import {
@@ -88,8 +69,7 @@ if (result !== null && result.ok) {
 }
 ```
 
-Wiring it up as an agent tool is the whole integration. With the
-Vercel AI SDK it looks like this:
+Wiring it up as an agent tool is the whole integration. With the Vercel AI SDK it looks like this:
 
 ```ts
 import { tool } from "ai";
@@ -108,79 +88,26 @@ const find_nodes = tool({
 });
 ```
 
-Append `SEARCH_PROMPT_RULES` to your system prompt (it is the exact
-pre-registered block the benchmark scored), show the model a minimal
-view of the root as its starting context, and let it search. The
-`NO_MATCHES_MESSAGE` export is the exact miss text from the
-benchmark harness; returning it teaches the model to reword rather
-than stall.
+Append `SEARCH_PROMPT_RULES` to your system prompt (it is the exact pre-registered block the benchmark scored), show the model a minimal view of the root as its starting context, and let it search. The `NO_MATCHES_MESSAGE` export is the exact miss text from the benchmark harness; returning it teaches the model to reword rather than stall.
 
 ## The recipe, now in three tiers
 
 The `/view` docs graduated from a caveat to a decision table:
 
-- **Your app knows the ids.** Render the view directly. Studies I
-  and J: accuracy statistically unchanged from full-tree input, at
-  1 to 2% of the tokens.
-- **You only have a human description.** Skeleton view plus
-  `find_nodes`. Study N: 43 of 45 on claude-sonnet-4.5 (equal to its
-  ids-given oracle bound), 39 of 45 on gemini-3.5-flash (equal to
-  its whole-tree score), median one search call.
-- **Your patcher is expensive and your trees are big.** Ground with
-  a cheap model first (full tree in, target ids out), then let the
-  expensive model patch against the focused view. Study N's cross
-  cell: accuracy held while the frontier model's median input
-  dropped to about 1,500 tokens, a 97% reduction.
+- **Your app knows the ids.** Render the view directly. Studies I and J: accuracy statistically unchanged from full-tree input, at 1 to 2% of the tokens.
+- **You only have a human description.** Skeleton view plus `find_nodes`. Study N: 43 of 45 on claude-sonnet-4.5 (equal to its ids-given oracle bound), 39 of 45 on gemini-3.5-flash (equal to its whole-tree score), median one search call.
+- **Your patcher is expensive and your trees are big.** Ground with a cheap model first (full tree in, target ids out), then let the expensive model patch against the focused view. Study N's cross cell: accuracy held while the frontier model's median input dropped to about 1,500 tokens, a 97% reduction.
 
-And the session guidance is unchanged by two further attempts to
-simplify it away: keep the full conversation history AND attach a
-fresh minimal view every turn. Stateless sessions failed the gate in
-Study M and failed it again in Study O with exact positions printed
-on every node.
+And the session guidance is unchanged by two further attempts to simplify it away: keep the full conversation history AND attach a fresh minimal view every turn. Stateless sessions failed the gate in Study M and failed it again in Study O with exact positions printed on every node.
 
 ## What we deliberately did not ship
 
-No embedding index, no vector store, no async retrieval pipeline.
-Study N measured an off-the-shelf embedding retriever against the
-keyword scorer and it added nothing on this task family (target
-coverage 23 of 45 versus 24 of 45), so barkup ships the thing that
-is deterministic, synchronous, and reproducible. If your application
-needs semantic retrieval over prose-heavy trees, you can still do
-it: `renderView` accepts whatever focus ids your retriever produces.
+No embedding index, no vector store, no async retrieval pipeline. Study N measured an off-the-shelf embedding retriever against the keyword scorer and it added nothing on this task family (target coverage 23 of 45 versus 24 of 45), so barkup ships the thing that is deterministic, synchronous, and reproducible. If your application needs semantic retrieval over prose-heavy trees, you can still do it: `renderView` accepts whatever focus ids your retriever produces.
 
-The usual caveats travel with the numbers: two models, a generated
-corpus, trees of 300 to 1000 nodes, and one pre-registered benchmark
-series behind all of it. Everything is reproducible from the
-[benchmark repo](https://github.com/kevinpeckham/barkup-bench),
-including a disclosed tie-ordering divergence between the benched
-scorer and this shipped port (breadth-first versus document order on
-equal scores; the details are in the repo's REPORT.md). If you find
-more of those, we want the issue.
+The usual caveats travel with the numbers: two models, a generated corpus, trees of 300 to 1000 nodes, and one pre-registered benchmark series behind all of it. Everything is reproducible from the [benchmark repo](https://github.com/kevinpeckham/barkup-bench), including a disclosed tie-ordering divergence between the benched scorer and this shipped port (breadth-first versus document order on equal scores; the details are in the repo's REPORT.md). If you find more of those, we want the issue.
 
 ## Update: the fan-out boundary
 
-We owed this release a stress test, and it found a real limit.
-Study Q ran the search-then-patch recipe against fan-out edits
-("set textStyle to serif on every text-atom inside atlas", 2 to 32
-targets per instruction). The single-target economics did not
-survive: a median of six search calls instead of one, a third of
-runs over 100k input tokens, and accuracy well below the whole-tree
-baseline on the cheap model. Even with retrieval taken out of the
-picture entirely, every model tested left fan-out patches partially
-complete. The recipe on this page is a single-target recipe. For
-"every X inside Y" requests, enumerate the targets in your
-application (one call to `findNodes` per your own query logic, or a
-plain tree traversal) and issue one single-target edit per node.
-The numbers are in
-[Your Agent Doesn't Need a Memory](/blog/two-examples-replace-a-memory)
-and the benchmark's REPORT.
+We owed this release a stress test, and it found a real limit. Study Q ran the search-then-patch recipe against fan-out edits ("set textStyle to serif on every text-atom inside atlas", 2 to 32 targets per instruction). The single-target economics did not survive: a median of six search calls instead of one, a third of runs over 100k input tokens, and accuracy well below the whole-tree baseline on the cheap model. Even with retrieval taken out of the picture entirely, every model tested left fan-out patches partially complete. The recipe on this page is a single-target recipe. For "every X inside Y" requests, enumerate the targets in your application (one call to `findNodes` per your own query logic, or a plain tree traversal) and issue one single-target edit per node. The numbers are in [Your Agent Doesn't Need a Memory](/blog/two-examples-replace-a-memory) and the benchmark's REPORT.
 
-Follow-up: Study R measured the decomposition path directly. One
-single-target edit per enumerated node ran 90 of 90 fan-out tasks on
-both models with zero subtask failures (674 of 674), at about a
-third of the input cost of a whole-tree prompt, while prompt-side
-fixes (a worked example, a coverage checklist) failed to close the
-gap. The boundary note above stands, and the workaround it
-recommends is now the best-measured recipe in the series. The
-enumeration step it requires now ships as `selectNodes` in
-[barkup 0.5](/blog/barkup-0-5-deterministic-selection).
+Follow-up: Study R measured the decomposition path directly. One single-target edit per enumerated node ran 90 of 90 fan-out tasks on both models with zero subtask failures (674 of 674), at about a third of the input cost of a whole-tree prompt, while prompt-side fixes (a worked example, a coverage checklist) failed to close the gap. The boundary note above stands, and the workaround it recommends is now the best-measured recipe in the series. The enumeration step it requires now ships as `selectNodes` in [barkup 0.5](/blog/barkup-0-5-deterministic-selection).
