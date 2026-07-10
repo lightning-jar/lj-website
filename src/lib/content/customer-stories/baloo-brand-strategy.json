@@ -1,0 +1,85 @@
+{
+	"order": 11,
+	"draft": true,
+	"banner": {
+		"heading": "Finding Baloo's Brand",
+		"subtitle": "Strategy for a Wellness Brand with a Deeper Purpose",
+		"subheading": "Baloo Living had a beautiful product and a founder with a genuine mission, but it was launching into a crowded weighted-blanket category where nearly every competitor promised the same thing. Lightning Jar partnered with Baloo to define what the brand truly stood for: founder and customer research feeding a complete brand strategy (positioning, brand idea, mission, values, differentiators, and a manifesto), along with a personal brand for the founder."
+	},
+	"meta": {
+		"title": "Finding Baloo's Brand | Customer Story",
+		"description": "Lightning Jar built Baloo Living a complete brand strategy: research-grounded positioning, a brand idea centered on reconnecting with yourself, a full strategic platform and manifesto, and a personal brand for founder Elizabeth Grojean."
+	},
+	"customer": {
+		"id": "baloo-living",
+		"category": "Consumer Wellness",
+		"name": "Baloo Living",
+		"logo": "",
+		"thumb": ""
+	},
+	"excerpt": "Baloo Living had a beautiful product and a founder with a genuine mission, but it was launching into a crowded weighted-blanket category where nearly every competitor promised the same thing. Lightning Jar partnered with Baloo to define what the brand truly stood for: running founder and customer research, then building a complete brand strategy (positioning, brand idea, mission, values, differentiators, and a manifesto), along with a personal brand for the founder. Follow-on work extended that foundation into tone of voice, messaging and content strategy, and a five-year vision, giving a young wellness company a clear, ownable identity to grow from.",
+	"title": "Finding Baloo's Brand: Strategy for a Wellness Brand with a Deeper Purpose",
+	"slug": "baloo-brand-strategy",
+	"thumbnailImage": {
+		"src": "",
+		"alt": "PLACEHOLDER: Baloo Living thumbnail image to be sourced"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"Baloo makes weighted blankets from natural, thoughtfully chosen materials, created by founder Elizabeth Grojean out of a personal wellness journey rather than a business plan. The product resonated deeply with customers, but the market around it was becoming a race to the middle."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"text": [
+				"Dozens of weighted blankets were already on the market, with new ones arriving constantly, and to varying degrees they all worked the same way and promised the same benefits: better sleep, less stress and anxiety. In that environment, functional claims weren't enough. To separate from the pack, Baloo needed to stand for something more than a good night's sleep: a meaning that matched the intention its founder had poured into it and the way customers actually talked about the brand.",
+				"At the same time, Grojean herself was becoming a public face for the company (fielding interviews, investor conversations, and speaking opportunities) and needed a clear personal story to carry into all of them. Baloo needed a partner who could translate a heartfelt but hard-to-articulate purpose into a strategy the whole business could be built on."
+			]
+		},
+		{
+			"heading": "Solution",
+			"subheading": "From Listening to a Foundation",
+			"text": [
+				"Lightning Jar approached Baloo as a brand-strategy engagement, grounded in research and delivered as a usable foundation.",
+				"<strong>Discovery and research.</strong> The work began by listening: in-depth founder interviews to surface Grojean's story and intentions, paired with analysis of how real customers described their experience. Those voices became the raw material for the strategy, and a competitive read of the category clarified where other brands were positioned and where Baloo could stand apart.",
+				"<strong>Brand positioning and the core idea.</strong> From that research, Lightning Jar defined Baloo's positioning around empowerment, an idea that marries function and emotion, because the product doesn't just make you feel a certain way, it actually does something. That crystallized into a brand idea centered on reconnecting with yourself: Baloo as a catalyst for the kind of grounded, present state where genuine wellbeing happens. A purpose far bigger than sleep.",
+				"<strong>A complete strategic foundation.</strong> Lightning Jar built out the full brand platform: a mission focused on empowering personal growth and healing; a set of brand characteristics and values; clearly articulated differentiators (from mindful design and material choices to the brand's giving-back commitments and its people); a positioning statement; and a manifesto to capture the whole thing in Baloo's own voice. All of it was assembled into a brand strategy deck the team could rally around and brief designers from.",
+				"<strong>A personal brand for the founder.</strong> In parallel, Lightning Jar developed a personal brand for Elizabeth Grojean, so she could walk into an interview, a pitch, or a stage with confidence in her own story, and use it as a filter for the opportunities worth saying yes to.",
+				"<strong>Extending the foundation.</strong> With the strategy approved, follow-on work carried it into execution: a tone-of-voice workshop and guidelines to define the brand's personality; consumer research and a messaging and content strategy mapped to Baloo's key channels (website, social, and in-bag collateral); and a five-year vision to chart where the brand and business could grow next."
+			]
+		},
+		{
+			"heading": "Results",
+			"text": [
+				"A crisp, ownable positioning (empowerment and reconnecting with yourself) that lifts Baloo above a commoditized \"better sleep\" category.",
+				"A complete brand strategy platform (idea, mission, values, characteristics, differentiators, positioning statement, and manifesto) the whole company can build and brief from.",
+				"A founder personal brand that gives Elizabeth Grojean a confident, consistent story for press, investors, and speaking.",
+				"A path from strategy to execution (tone of voice, channel messaging and content strategy, and a five-year vision) so the brand foundation actually shapes what customers see.",
+				"A brand rooted in the founder's real intention and customers' real words, rather than borrowed category claims."
+			]
+		}
+	],
+	"testimonials": [],
+	"images": [],
+	"perspectives": [
+		{
+			"quote": [
+				"The Baloo brand was not something we invented. It was already there, in Elizabeth's intention and in the words her customers used without prompting. Our job was to listen closely enough to hear it, then articulate it sharply enough that the whole business could build on it. The best brand strategy is an act of translation, not invention."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal & Chief Technologist",
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/kevin-peckham-sm.webp",
+					"width": "63",
+					"height": "63"
+				}
+			}
+		}
+	],
+	"tags": ["Brand Strategy", "Research", "Wellness", "Messaging"]
+}
