@@ -68,8 +68,8 @@
 			"ctas": {
 				"primary": {
 					"label": "Read the Research",
-					"href": "/blog/stable-ids-are-all-you-need",
-					"title": "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees"
+					"href": "/research",
+					"title": "Research at Lightning Jar"
 				},
 				"secondary": {
 					"label": "Latest Findings",

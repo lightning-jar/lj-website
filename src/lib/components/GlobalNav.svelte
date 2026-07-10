@@ -17,6 +17,7 @@ let navItems: NavItem[] = $state([
 	{ label: "Blog", href: "/blog" },
 	{ label: "About", href: "/about" },
 	{ label: "Services", href: "/services" },
+	{ label: "Research", href: "/research" },
 	{ label: "Testimonials", href: "/testimonials" },
 	{ label: "Customer Stories", href: "/customer-stories" },
 	{ label: "Reading List", href: "/reading-list" },
