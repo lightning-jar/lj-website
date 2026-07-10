@@ -1,6 +1,6 @@
 {
 	"order": 7,
-	"draft": true,
+	"draft": false,
 	"banner": {
 		"heading": "A Modern Design System for TransTrack's Transit Software",
 		"subtitle": "A Reusable Pattern Library, Style Guide, and Code-Based Prototypes for a Cloud EAM Migration",
@@ -21,8 +21,8 @@
 	"title": "A Modern Design System for TransTrack's Transit Software: A Reusable Pattern Library, Style Guide, and Code-Based Prototypes for a Cloud EAM Migration",
 	"slug": "transtrack-design-system",
 	"thumbnailImage": {
-		"src": "",
-		"alt": "PLACEHOLDER: TransTrack design system thumbnail image to be sourced"
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/transtrack-eam-grid-web.webp",
+		"alt": "TransTrack EAM data grid interface from the new design system"
 	},
 	"content": [
 		{
@@ -61,7 +61,14 @@
 		}
 	],
 	"testimonials": [],
-	"images": [],
+	"images": [
+		{
+			"alt": "TransTrack EAM data grid interface from the new design system",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/transtrack-eam-grid-web.webp",
+			"width": "2000",
+			"height": "1250"
+		}
+	],
 	"perspectives": [
 		{
 			"quote": [
