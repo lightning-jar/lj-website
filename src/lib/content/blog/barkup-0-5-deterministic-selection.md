@@ -134,14 +134,32 @@ matching `renderSearch`'s null-on-a-miss philosophy: a scope id can
 go stale between turns exactly like a search that stops matching,
 and selection is data, not an error.
 
-The two utilities now split the grounding problem cleanly. Fuzzy
-`findNodes` grounds human language ("the image named maple-ember").
-Deterministic `selectNodes` grounds programmatic queries ("every
-text-atom inside this section"). Fan-out requests belong to the
-second kind, which is the whole point: the moment a request says
-"every X", your application knows the query, and a query your
-application knows should never be delegated to a model's attention
-span.
+The criteria compose into most of the queries a real application
+asks:
+
+```ts
+// every draft-styled text node, anywhere in the tree
+selectNodes(tree, { type: "text-atom", attributes: { textStyle: "draft" } });
+
+// every node named cta
+selectNodes(tree, { name: "cta" });
+```
+
+There is no scoring, no top-5 cap, and no notion of a best match:
+`selectNodes` returns all matches or none. That is exactly the
+property fan-out needs, and exactly what fuzzy search cannot
+promise.
+
+So the two utilities split the grounding problem cleanly, and the
+rule of thumb is worth stating. When a human phrase needs grounding
+("the banner near the top"), the model plus `findNodes` is the
+measured recipe. When a rule needs enumerating ("every X inside Y"),
+`selectNodes` plus a loop of small single-target edits is, as of
+Study R, the best-measured recipe in the entire series. Fan-out
+requests belong to the second kind, which is the whole point: the
+moment a request says "every X", your application knows the query,
+and a query your application knows should never be delegated to a
+model's attention span.
 
 ## What we deliberately did not ship
 
