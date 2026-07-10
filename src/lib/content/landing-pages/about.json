@@ -1,0 +1,62 @@
+{
+	"meta": {
+		"title": "About Lightning Jar",
+		"description": "Lightning Jar is a design and build technology studio, independent since 2001. We design and build websites, web applications, and custom software, publish open research for developers of LLM applications, and have shipped work for everyone from ambitious startups to Toyota, GE, HBO, and Spotify.",
+		"robotsFollow": true,
+		"analyticsOn": true
+	},
+	"banner": {
+		"heading": "About Lightning Jar",
+		"subheading": "A design and build technology studio, independent since 2001."
+	},
+	"sections": [
+		{
+			"heading": "Who We Are",
+			"text": [
+				"Lightning Jar is a design and build technology studio. We design, build, and steward websites, web applications, and custom software for businesses and organizations, and a growing share of our work is helping teams adapt their marketing technology and sales tools to the era of large language models.",
+				"We have been at this since late 2001, when we started planning the business under our original name, Siite Interactive, and put our first website (just a splash page then) live before the year was out. Today we are a fully remote team, and were one before the pandemic made it fashionable, with roots in Philadelphia, New York, and South Texas."
+			]
+		},
+		{
+			"heading": "What We Believe",
+			"text": [
+				"The first thing we ever published was a line from R. Buckminster Fuller: \"When I am working on a problem I never think about beauty. I only think about how to solve the problem. But when I have finished, if the solution is not beautiful, I know it is wrong.\" Twenty-five years of shifting stacks later, it is still the standard we hold every project to. Frameworks are disposable. The standard is not.",
+				"A few other convictions have survived every reinvention. Good engineering decisions come from evidence, not vibes. Great strategy is the process of asking tough questions, great design the process of making tough decisions, and great implementation the process of making tough compromises. Whatever the technology challenge, there is probably an open-source solution that is the best choice to solve it. And saying no is a superpower: we only take on work where the fit, the timeline, and the goals let us deliver real value."
+			]
+		},
+		{
+			"heading": "A Short History",
+			"text": [
+				"We began operating in earnest in 2002, the same year the world's stored information tipped from mostly analog to mostly digital. Back then, a website was something you had to talk clients into. Since then the ground has moved in waves: the LAMP stack, WordPress, social media, mobile, responsive design, the performance and accessibility reckonings, headless architectures, serverless, and now artificial intelligence, the largest shift we have seen since the web itself.",
+				"The company changed with the industry. We have been as many as twenty people in an office near Grand Central Station in New York, opened an office of a dozen in San Antonio, and went fully remote before the pandemic. More than a hundred people have worked directly for this agency, and together they have built hundreds of websites and web applications. Our founder, Alan Ruthazer, whose leadership and vision started all of it, eventually stepped away from the business.",
+				"Two things never changed: our independence (we never sold, never got absorbed, never became a line item in someone else's holding company) and the Fuller quote."
+			]
+		},
+		{
+			"heading": "Research & Open Source",
+			"text": [
+				"We are not adapting to AI by watching it. We built Replicator, an AI brand operating system where a language model designs marketing documents and drafts copy inside brand-approved rails, and a human finishes each one. Along the way we open-sourced what we learned: barkup, a library for letting LLMs author and edit typed trees as HTML, and barkdown, a Markdown round-trip codec that keeps WYSIWYG editors from quietly eating documents.",
+				"Behind both sits an open, pre-registered benchmark series: more than 13,000 scored model runs and counting, published as found, corrections included. Every barkup feature shipped only after a study backed it. We give the findings back to the community as practical guidance for developers of LLM applications, which is exactly what a twenty-five-year-old studio built on open-source foundations ought to do."
+			]
+		},
+		{
+			"heading": "The Work",
+			"text": [
+				"Over twenty-five years we have shipped work for ambitious startups, nonprofits, public agencies, and some of the largest brands in the world: product data platforms for global spirits companies, e-commerce for technical training, transit websites with real-time bus tracking, and AI document platforms for telecom security leaders.",
+				"Some of the customers, past and present, we have been lucky to work with:"
+			]
+		}
+	],
+	"ctas": {
+		"primary": {
+			"label": "Read Our Customer Stories",
+			"href": "/customer-stories",
+			"title": "Customer Stories"
+		},
+		"secondary": {
+			"label": "Twenty-Five Years of Lightning Jar",
+			"href": "/blog/twenty-five-years",
+			"title": "If the Solution Is Not Beautiful, It Is Wrong: Twenty-Five Years of Lightning Jar"
+		}
+	}
+}

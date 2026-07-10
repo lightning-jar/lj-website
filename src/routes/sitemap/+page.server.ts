@@ -8,6 +8,19 @@ import { technologiesSitemapSection } from "$content/getters/getTechnologiesCont
 import { termsSitemapSection } from "$content/getters/getTermsContent";
 import { testimonialsSitemapSection } from "$content/getters/getTestimonialsContent";
 
+const aboutSection = {
+	name: "About",
+	pages: [
+		{
+			href: "/about",
+			title: "About Lightning Jar",
+			description:
+				"Who we are, what we believe, and twenty-five years of history: a design and build technology studio, independent since 2001.",
+			date: "",
+		},
+	],
+};
+
 const archiveSection = {
 	name: "Archive",
 	pages: [
@@ -47,6 +60,7 @@ const sitemapSection = {
 
 const sitemap = [
 	homeSitemapSection,
+	aboutSection,
 	blogArticlesSitemapSection,
 	builtWithSitemapSection,
 	customerStoriesSitemapSection,
