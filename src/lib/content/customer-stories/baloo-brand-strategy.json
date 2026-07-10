@@ -1,6 +1,6 @@
 {
 	"order": 11,
-	"draft": true,
+	"draft": false,
 	"banner": {
 		"heading": "Finding Baloo's Brand",
 		"subtitle": "Strategy for a Wellness Brand with a Deeper Purpose",
@@ -21,8 +21,8 @@
 	"title": "Finding Baloo's Brand: Strategy for a Wellness Brand with a Deeper Purpose",
 	"slug": "baloo-brand-strategy",
 	"thumbnailImage": {
-		"src": "",
-		"alt": "PLACEHOLDER: Baloo Living thumbnail image to be sourced"
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/baloo-team-web.webp",
+		"alt": "The Baloo Living team"
 	},
 	"content": [
 		{
@@ -62,7 +62,14 @@
 		}
 	],
 	"testimonials": [],
-	"images": [],
+	"images": [
+		{
+			"alt": "The Baloo Living team",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/baloo-team-web.webp",
+			"width": "2000",
+			"height": "1333"
+		}
+	],
 	"perspectives": [
 		{
 			"quote": [
