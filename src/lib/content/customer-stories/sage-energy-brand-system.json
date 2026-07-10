@@ -1,6 +1,6 @@
 {
 	"order": 6,
-	"draft": true,
+	"draft": false,
 	"banner": {
 		"heading": "Five Years and One Brand System for Sage Energy Holdings: Multi-Brand Identity, a SvelteKit Website, and a Self-Service Email Signature Platform",
 		"subheading": "Lightning Jar has served as Sage Energy Holdings' long-term digital partner since 2021, growing from a single website engagement into an integrated brand and technology system that spans four trading divisions, a full corporate website, a self-service email signature platform, brand collateral, and the launch of an entirely new company."
@@ -63,18 +63,7 @@
 			]
 		}
 	],
-	"testimonials": [
-		{
-			"quote": [
-				"[DRAFT QUOTE, PENDING CLIENT APPROVAL] Lightning Jar gave us one brand that can carry four very different businesses. From our website to the signature on every broker's email, everything looks and feels like Sage. And when we launched a whole new company, they built it the same way."
-			],
-			"attribution": {
-				"name": "[Name pending]",
-				"title": "[Title pending]",
-				"organization": "Sage Energy Holdings"
-			}
-		}
-	],
+	"testimonials": [],
 	"images": [
 		{
 			"alt": "Sage Energy Holdings website displayed on a screen",
@@ -91,7 +80,13 @@
 			"attribution": {
 				"name": "Kevin Peckham",
 				"title": "Principal & Chief Technologist",
-				"organization": "Lightning Jar"
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/kevin-peckham-sm.webp",
+					"width": "63",
+					"height": "63"
+				}
 			}
 		}
 	],
