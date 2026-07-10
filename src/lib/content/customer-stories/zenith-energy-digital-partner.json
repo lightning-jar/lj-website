@@ -1,0 +1,85 @@
+{
+	"order": 9,
+	"draft": true,
+	"banner": {
+		"heading": "A Decade as Zenith Energy's Digital Partner",
+		"subtitle": "A Multi-Region Corporate Site, Interactive Sustainability Reports, and a Unified SvelteKit Monorepo",
+		"subheading": "Lightning Jar has been Zenith Energy Terminals' digital partner since the company's earliest days, designing and building its corporate web presence in 2014 and evolving it ever since. Over roughly a decade the relationship has grown from a single responsive website into an integrated program of work: a multi-region corporate site spanning North America and Europe, ongoing content and SEO, the digital expression of Zenith's ESG story, award-quality sustainability reports delivered as both interactive web experiences and print, and, most recently, a modern monorepo platform that unifies the site and reports on one shared codebase."
+	},
+	"meta": {
+		"title": "A Decade as Zenith Energy's Digital Partner | Customer Story",
+		"description": "Lightning Jar has been Zenith Energy Terminals' digital partner for a decade: a multi-region corporate website, ESG messaging, interactive sustainability reports, and a modern SvelteKit monorepo unifying it all."
+	},
+	"customer": {
+		"id": "zenith-energy-terminals",
+		"category": "Energy & Midstream",
+		"name": "Zenith Energy Terminals",
+		"logo": "",
+		"thumb": ""
+	},
+	"excerpt": "Lightning Jar has been Zenith Energy Terminals' digital partner since the company's earliest days, designing and building its corporate web presence in 2014 and evolving it ever since. Over roughly a decade the relationship has grown from a single responsive website into an integrated program of work: a multi-region corporate site spanning North America and Europe, ongoing content and SEO, the digital expression of Zenith's ESG story, award-quality sustainability reports delivered as both interactive web experiences and print, and, most recently, a modern monorepo platform that unifies the site and reports on one shared codebase.",
+	"title": "A Decade as Zenith Energy's Digital Partner: A Multi-Region Corporate Site, Interactive Sustainability Reports, and a Unified SvelteKit Monorepo",
+	"slug": "zenith-energy-digital-partner",
+	"thumbnailImage": {
+		"src": "",
+		"alt": "PLACEHOLDER: Zenith Energy thumbnail image to be sourced"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"Zenith Energy is an independent, third-party bulk liquid storage terminals company founded in 2014. From its Houston headquarters it has grown quickly into a world-class midstream operator, storing crude oil, refined products, asphalt, petrochemicals, and vegetable oils across a portfolio of terminals in North America and Europe. As a pure terminalling business that doesn't own or trade the products it stores, Zenith positions itself as the partner of choice that never competes with its own customers."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"text": [
+				"Growing that fast, across two continents, created a series of digital challenges that arrived in waves. At the outset, a brand-new company needed a credible, professional web presence: responsive, content-managed, and structured to support multiple languages and regions from day one. As Zenith expanded through acquisition, the site had to hold together a North American and a European operation with distinct leadership and messaging under one coherent brand. As environmental stewardship moved to the center of the company's story, its digital presence needed to carry a serious ESG and sustainability message to customers, partners, and investors. And as the company matured, it needed all of this (corporate site and sustainability reporting alike) on a modern, maintainable technical foundation rather than a patchwork accumulated over years.",
+				"Zenith needed a partner who could stay with it through all of that, not just launch a site and leave."
+			]
+		},
+		{
+			"heading": "Solution",
+			"subheading": "Evolving with the Company",
+			"text": [
+				"Across the engagement, Lightning Jar delivered strategy, design, content, and engineering, evolving the work as Zenith's needs changed.",
+				"<strong>Website design and build.</strong> The relationship began with the design and build of Zenith's first corporate website: a responsive, mobile-first experience on a simple content management system, informed by discovery, stakeholder interviews, competitive review, and an SEO foundation, and architected from the start to support multiple languages and regions.",
+				"<strong>A multi-region presence.</strong> As Zenith grew across the Atlantic, Lightning Jar shaped the site to represent both its North American and European terminals under one brand, restructuring navigation and information architecture so shared company-wide messaging (values, sustainability, leadership) lived alongside region-specific terminal and team information without conflict.",
+				"<strong>Content, SEO, and ESG messaging.</strong> Beyond the initial launch, Lightning Jar provided ongoing content updates and search optimization, and, as Zenith sharpened its ESG positioning, translated that messaging into the site: a refreshed landing page built around the company's core values, and dedicated pages for values, team, and sustainability that gave Zenith's commitments to safety and environmental stewardship a permanent home online.",
+				"<strong>Sustainability reports.</strong> Lightning Jar designed and produced Zenith's annual sustainability reporting, including its ESG and 2021 Sustainability reports. These were delivered not just as polished print documents but as interactive, page-by-page web experiences, complete with an interactive terminals map, data visualizations, and a custom component system, so Zenith's sustainability story could be read online as easily as on paper.",
+				"<strong>A modern monorepo platform.</strong> Most recently, Lightning Jar rebuilt Zenith's digital footprint on a unified, modern stack: a SvelteKit and Tailwind monorepo, organized with Turborepo and a shared component library, that brings the corporate website and the sustainability reports together in one maintainable codebase, reducing duplication and setting Zenith up to extend and update its digital presence efficiently for years to come."
+			]
+		},
+		{
+			"heading": "Results",
+			"text": [
+				"A single, decade-long digital partner spanning strategy, design, content, and engineering, through launch, growth, and rebuild.",
+				"A credible, multi-region web presence that represents North American and European operations under one coherent brand.",
+				"Zenith's ESG and sustainability story given a first-class home online, from values and safety pages to full sustainability reports.",
+				"Interactive, web-native sustainability reports that extend the reach of documents that would otherwise live only as PDFs.",
+				"A modern, unified SvelteKit monorepo that consolidates site and reports on one maintainable foundation."
+			]
+		}
+	],
+	"testimonials": [],
+	"images": [],
+	"perspectives": [
+		{
+			"quote": [
+				"Zenith's digital needs arrived in waves: launch, acquisition, ESG, consolidation. The monorepo rebuild is the part I am proudest of, because it took a decade of accumulated work and turned it into one codebase a small team can actually maintain. That is what a long partnership should buy you: less patchwork, not more."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal & Chief Technologist",
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/kevin-peckham-sm.webp",
+					"width": "63",
+					"height": "63"
+				}
+			}
+		}
+	],
+	"tags": ["Websites", "Sustainability", "SvelteKit", "Energy"]
+}
