@@ -181,4 +181,6 @@ both models with zero subtask failures (674 of 674), at about a
 third of the input cost of a whole-tree prompt, while prompt-side
 fixes (a worked example, a coverage checklist) failed to close the
 gap. The boundary note above stands, and the workaround it
-recommends is now the best-measured recipe in the series.
+recommends is now the best-measured recipe in the series. The
+enumeration step it requires now ships as `selectNodes` in
+[barkup 0.5](/blog/barkup-0-5-deterministic-selection).

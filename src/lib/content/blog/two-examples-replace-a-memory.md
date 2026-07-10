@@ -154,7 +154,8 @@ placement. Decomposition did better than we claimed: 90 of 90 tasks
 on both models, including every task with 7 to 32 targets, with 674
 of 674 single-target subtasks succeeding and total input costs about
 a third of showing the whole tree once. The boring answer is now the
-measured answer.
+measured answer, and its enumeration step now ships as `selectNodes`
+in [barkup 0.5](/blog/barkup-0-5-deterministic-selection).
 
 ## What we make of the pair
 
