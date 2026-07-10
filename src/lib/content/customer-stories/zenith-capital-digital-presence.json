@@ -1,0 +1,86 @@
+{
+	"order": 12,
+	"draft": true,
+	"banner": {
+		"heading": "A Modern Digital Presence for Zenith Capital Partners",
+		"subtitle": "Brand Refresh, Custom Website, Investor-Portal Integration, and a SvelteKit Rebuild",
+		"subheading": "Zenith Capital Partners, an energy-focused investment firm, needed a website and brand presence that matched the caliber of the deals and investors it works with. Lightning Jar designed and built a modern, secure, custom website (refreshing the firm's logo and branding, creating a documented design system, writing the messaging, and integrating a clear path to the investor portal), then extended the brand into everyday collateral with a self-service email signature system and a branded presentation template."
+	},
+	"meta": {
+		"title": "A Modern Digital Presence for Zenith Capital Partners | Customer Story",
+		"description": "Lightning Jar designed and built Zenith Capital Partners a modern, secure website with a refreshed logo, documented design system, investor-portal integration, and brand collateral, since rebuilt on SvelteKit as the partnership continues."
+	},
+	"customer": {
+		"id": "zenith-capital-partners",
+		"category": "Investment & Financial Services",
+		"name": "Zenith Capital Partners",
+		"logo": "",
+		"thumb": ""
+	},
+	"excerpt": "Zenith Capital Partners, an energy-focused investment firm, needed a website and brand presence that matched the caliber of the deals and investors it works with. Lightning Jar designed and built a modern, secure, custom website: refreshing the firm's logo and branding, creating a documented design system, writing the messaging, and integrating a clear path to the investor portal. Then it extended the brand into everyday collateral with a self-service email signature system and a branded presentation template. The relationship has since continued into a modern rebuild of the site on a current web stack.",
+	"title": "A Modern Digital Presence for Zenith Capital Partners: Brand Refresh, Custom Website, Investor-Portal Integration, and a SvelteKit Rebuild",
+	"slug": "zenith-capital-digital-presence",
+	"thumbnailImage": {
+		"src": "",
+		"alt": "PLACEHOLDER: Zenith Capital Partners thumbnail image to be sourced"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"Zenith Capital Partners invests with energy: a firm whose credibility rests on how it presents itself to two very different audiences at once, prospective partners bringing deal flow and prospective investors considering where to place capital."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"text": [
+				"The firm's existing website no longer reflected that standard, and a dated, aging site is a real liability in a business built on trust and professionalism.",
+				"Zenith Capital needed more than a cosmetic refresh. It wanted a site that looked modern and polished, was secure and built to current web standards, and actively supported its business goals: surfacing an easy, visible path to the investor portal, telling the firm's story and showing its portfolio, and doing all of it in a way that would be inexpensive to maintain going forward. The brand itself needed updating too, including a logo that would work cleanly across the range of screens people actually use. And it needed to come together quickly, without a heavy ongoing maintenance burden."
+			]
+		},
+		{
+			"heading": "Solution",
+			"subheading": "From Brand to Build to Rebuild",
+			"text": [
+				"Lightning Jar delivered the work as an end-to-end design-and-build engagement, then continued as Zenith Capital's ongoing digital partner.",
+				"<strong>Brand and design system.</strong> Lightning Jar updated Zenith Capital's logo to a more modern, web-friendly mark that holds up across screen sizes, and created a design system (strategic color and typography choices) documented so it could be shared cleanly with third parties, including the firm's investor-portal vendor.",
+				"<strong>Website design and build.</strong> Lightning Jar designed and built the full site: a home page that introduces the firm, showcases key messaging, and puts a visible path to the investor portal front and center, plus portfolio, about, leadership, news, and contact pages, with primary and footer navigation. The build included platform selection and configuration, analytics, security hardening, testing, launch, and DNS migration, with the investor-portal path integrated so the two audiences could each find their way quickly.",
+				"<strong>Messaging and copy.</strong> Working from stakeholder interviews and Zenith's existing materials, Lightning Jar wrote the site's copy and messaging, refined through client review, so the words matched the more modern look, and tuned the home page for search to help grow both deal flow and investor interest.",
+				"<strong>Imagery, icons, and SEO.</strong> Lightning Jar sourced and licensed stock imagery to fit the design, created custom iconography, and executed a search-optimization strategy with ongoing rank monitoring after launch.",
+				"<strong>Brand collateral.</strong> With the site live, Lightning Jar extended the brand into the firm's day-to-day tools: a branded HTML email signature with a self-service experience so employees could set up their own consistent signatures, and a branded PowerPoint presentation template for the decks a capital firm lives on.",
+				"<strong>An ongoing partnership and modern rebuild.</strong> The engagement didn't end at launch. Lightning Jar has continued to support Zenith Capital, most recently rebuilding the website on a current, high-performance stack (SvelteKit and UnoCSS, deployed on Vercel with error monitoring) so the firm's presence stays fast, secure, and easy to evolve."
+			]
+		},
+		{
+			"heading": "Results",
+			"text": [
+				"A modern, professional website that reflects the caliber of an energy-focused investment firm.",
+				"A clear, visible path to the investor portal, serving prospective partners and investors from the first screen.",
+				"A refreshed logo and a documented design system that keeps the brand consistent and is easy to hand to third-party vendors.",
+				"Brand consistency in everyday tools, through a self-service email signature system and a branded presentation template.",
+				"A secure, standards-based build designed to be inexpensive to maintain, since modernized on a current web stack as the partnership continues."
+			]
+		}
+	],
+	"testimonials": [],
+	"images": [],
+	"perspectives": [
+		{
+			"quote": [
+				"For an investment firm, the website is not marketing, it is evidence. Partners and investors are deciding whether to trust you with capital, and a dated site quietly testifies against you. Everything we built for Zenith Capital, from the logo to the investor-portal path to the security hardening, was in service of one thing: a presence that holds up under that scrutiny."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal & Chief Technologist",
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/kevin-peckham-sm.webp",
+					"width": "63",
+					"height": "63"
+				}
+			}
+		}
+	],
+	"tags": ["Websites", "Branding", "Financial Services", "SvelteKit"]
+}
