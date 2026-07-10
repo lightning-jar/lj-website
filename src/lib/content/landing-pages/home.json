@@ -9,7 +9,7 @@
 		{
 			"heading": "Design & Build Technology Studio",
 			"text": [
-				"For nearly 25 years, we've been too busy designing and building websites, web applications, and custom software to put the proper time and attention into our own damn marketing. That's not just an excuse. It is also a point of pride.",
+				"For twenty-five years, we've been too busy designing and building websites, web applications, and custom software to put the proper time and attention into our own damn marketing. That's not just an excuse. It is also a point of pride.",
 				"Now the ground is moving again. We're in a new era defined by large language models, the largest shift we've seen since the web itself. Our answer is the same as it has always been: build, don't wait. Today that means leading with open research and practical guidance for developers of LLM applications."
 			],
 			"ctas": {
@@ -25,30 +25,51 @@
 			"text": [
 				"We first launched in 2002, the same year the \"digital information age\" was said to have officially begun, when the total amount of digitized information in the world exceeded traditional analog information."
 			],
-			"bullets": []
+			"bullets": [],
+			"ctas": {
+				"primary": {
+					"label": "Read the Full History",
+					"href": "/blog/twenty-five-years",
+					"title": "If the Solution Is Not Beautiful, It Is Wrong: Twenty-Five Years of Lightning Jar"
+				}
+			}
 		},
 		{
 			"heading": "Moving at the Speed of Good",
 			"text": [
-				"There's a word for people who move fast and break things: 'toddlers'. We believe good design and great technology solutions require time, intention, and process."
+				"There's a word for people who move fast and break things: \"toddlers\". We believe good design and great technology solutions require time, intention, and process."
 			]
 		},
 		{
 			"heading": "Skeptical of Easy Answers",
 			"text": [
 				"We believe great strategy is the process of asking tough questions. Great design is the process of making tough decisions. Great implementation is the process of making tough compromises."
-			]
+			],
+			"ctas": {
+				"primary": {
+					"label": "Read the Essay",
+					"href": "/blog/questions-decisions-compromises",
+					"title": "Questions, Decisions & Compromises"
+				}
+			}
 		},
 		{
 			"heading": "We Love Open Source Software",
 			"text": [
-				"Open source is an open, collaborative, and community-driven approach to software development. It promotes transparency, innovation, and cost-effectiveness. Whatever your technology challenge, there is probably an open-source solution that is the best choice to solve it. "
-			]
+				"Open source is an open, collaborative, and community-driven approach to software development. It promotes transparency, innovation, and cost-effectiveness. Whatever your technology challenge, there is probably an open-source solution that is the best choice to solve it."
+			],
+			"ctas": {
+				"primary": {
+					"label": "Why Open Source Wins",
+					"href": "/blog/open-source-b2b-advantage",
+					"title": "Why Open Source Beats Proprietary Platforms for B2B Websites"
+				}
+			}
 		},
 		{
 			"heading": "We Believe in Research",
 			"text": [
-				"Good engineering decisions come from evidence, not vibes. That's why we run and publish open-source research for developers of LLM applications: nineteen pre-registered studies and more than 13,000 scored model runs so far, corrections included."
+				"Good engineering decisions come from evidence, not vibes. That's why we run and publish open-source research for developers of LLM applications: a growing series of pre-registered studies, more than 13,000 scored model runs and counting, corrections included."
 			],
 			"ctas": {
 				"primary": {
@@ -66,8 +87,15 @@
 		{
 			"heading": "Saying No is a Superpower",
 			"text": [
-				"It took us a long time to learn how to say no. Now we say it all the time. We don't take on all clients or project requests. We only take the ones that are a good fit for our team, our availability, and our working culture. When the timeline and goals are realistic and when we are certain we can deliver real value."
-			]
+				"It took us a long time to learn how to say no. Now we say it all the time. We don't take on all clients or project requests. We only take the ones that are a good fit for our team, our availability, and our working culture, when the timeline and goals are realistic, and when we are certain we can deliver real value."
+			],
+			"ctas": {
+				"primary": {
+					"label": "See the Work We Said Yes To",
+					"href": "/customer-stories",
+					"title": "Customer Stories"
+				}
+			}
 		}
 	],
 	"ticker": [
