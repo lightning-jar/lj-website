@@ -73,6 +73,7 @@ const pages = [
 	generateSiteMapXMLPage(`/archive/introduction-to-pimcore`, "monthly", 0.25), // home
 	generateSiteMapXMLPage(``, "monthly", 0.25), // home
 	generateSiteMapXMLPage(`/about`, "monthly", 0.25), // about page
+	generateSiteMapXMLPage(`/barkup-bench`, "weekly", 0.25), // barkup-bench research dashboard
 	generateSiteMapXMLPage(`/blog`, "monthly", 0.25), // blog landing page
 	generateSiteMapXMLPage(`/built-with`, "monthly", 0.25), // built with
 	generateSiteMapXMLPage(`/customer-stories`, "monthly", 0.25), // customer stories landing page

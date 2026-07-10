@@ -21,6 +21,19 @@ const aboutSection = {
 	],
 };
 
+const researchSection = {
+	name: "Research",
+	pages: [
+		{
+			href: "/barkup-bench",
+			title: "barkup-bench",
+			description:
+				"Our open, pre-registered benchmark series measuring how LLMs read and edit structured document trees: results dashboard, packages, and the full article series.",
+			date: "",
+		},
+	],
+};
+
 const archiveSection = {
 	name: "Archive",
 	pages: [
@@ -61,6 +74,7 @@ const sitemapSection = {
 const sitemap = [
 	homeSitemapSection,
 	aboutSection,
+	researchSection,
 	blogArticlesSitemapSection,
 	builtWithSitemapSection,
 	customerStoriesSitemapSection,
