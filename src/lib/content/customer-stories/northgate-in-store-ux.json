@@ -1,0 +1,67 @@
+{
+	"order": 7,
+	"draft": true,
+	"banner": {
+		"heading": "Designing the In-Store Digital Experience for Northgate González Market: UX Strategy, Research, and Design Across Financial Services, Produce Supply Chain, and Self-Service Kiosks",
+		"subheading": "Northgate González Market brought in Lightning Jar as its UX strategy and design partner for an ambitious wave of in-store digital initiatives: a customer financial-services platform, a produce supply-chain tool, and self-service ordering kiosks. Lightning Jar owned the research, experience strategy, and design, then handed development-ready specifications to Northgate's engineering and platform teams to build."
+	},
+	"meta": {
+		"title": "In-Store Digital Experience for Northgate González Market | Customer Story",
+		"description": "Lightning Jar served as UX strategy and design partner for Northgate González Market's in-store digital initiatives: the Prospera financial-services platform, a produce supply-chain tool, and self-service cocina ordering kiosks."
+	},
+	"customer": {
+		"id": "northgate-gonzalez-market",
+		"category": "Grocery & Retail",
+		"name": "Northgate González Market",
+		"logo": "",
+		"thumb": ""
+	},
+	"excerpt": "Northgate González Market brought in Lightning Jar as its UX strategy and design partner for an ambitious wave of in-store digital initiatives: a customer financial-services platform, a produce supply-chain tool, and self-service ordering kiosks. Across all three, Lightning Jar owned the research, experience strategy, and design, then handed development-ready specifications to Northgate's engineering and platform teams to build. The work paired deep, on-the-ground research in Northgate's stores with rigorous interaction design, so that technology built for a largely Spanish-speaking, family-oriented customer base felt effortless and welcoming.",
+	"title": "Designing the In-Store Digital Experience for Northgate González Market: UX Strategy, Research, and Design Across Financial Services, Produce Supply Chain, and Self-Service Kiosks",
+	"slug": "northgate-in-store-ux",
+	"thumbnailImage": {
+		"src": "",
+		"alt": "PLACEHOLDER: Northgate González Market thumbnail image to be sourced"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"Northgate González Market is one of California's premier family-owned Latino grocers. Founded in Anaheim in 1980 and now in its third generation of González family ownership, the chain operates dozens of stores and employs thousands of associates across Southern California, built on a promise of an authentic, personal, community-rooted shopping experience."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"text": [
+				"Living up to that promise while modernizing meant taking on several hard digital problems at once, and doing it without compromising the in-store, human feel that defines the brand. Northgate was standing up Prospera, an in-store platform to bring check-cashing and money-transfer services to a customer base that is often underbanked, delivered through both a customer app and an associate-operated tablet. It needed a warehouse-to-store produce inventory system to coordinate ordering across produce managers, central buyers, and warehouse staff. And it wanted frictionless self-order kiosks for its in-store cocina, where customers could build and pay for taco orders, agua frescas, and breakfast items.",
+				"Each initiative served a different user (a shopper, a store associate, a produce buyer, a hungry customer at a kiosk), and each had to work amid the realities of a busy store on a Friday afternoon. Northgate needed a partner who could research those realities firsthand and translate them into designs its engineering teams could build with confidence."
+			]
+		},
+		{
+			"heading": "Solution",
+			"subheading": "Research on the Floor, Designs Ready to Build",
+			"text": [
+				"Over the course of the engagement, Lightning Jar delivered end-to-end UX strategy and design across all three initiatives.",
+				"<strong>Discovery and research.</strong> Lightning Jar embedded in Northgate's world rather than designing from a distance: onsite stakeholder interviews, customer and associate focus groups, and store visits, followed by structured readouts of findings. For Prospera, that included a hands-on \"to-be\" working session at Northgate headquarters to map not just the app but the entire in-store service model around it.",
+				"<strong>Service and experience design.</strong> Beyond screens, Lightning Jar helped design how the Prospera experience would actually play out on the floor: greeters and mobile-cart associates to meet customers where they shop, an express registration flow so enrolled customers skip the long lines, tablet check-in, check-out, and charging logistics, and receipt- and screen-based messaging to prepare customers for the rollout. A service blueprint tuned to Northgate's busiest days and most personal moments.",
+				"<strong>UX design.</strong> Working from the research, Lightning Jar produced user flows and wireframes across every audience: the Prospera customer mobile app and associate tablet app (onboarding and dashboard, check cashing, and money transfers); the produce inventory app for in-store managers, central buyers, and warehouse staff, spanning ordering, order \"massaging,\" inventory, messaging, and reporting; and the cocina ordering kiosk, from welcome screen through food customization, payment, and pickup.",
+				"<strong>Visual design and prototyping.</strong> Lightning Jar delivered visual designs, interaction and motion guidance, button and state definitions, and clickable prototypes, designing each core screen type and interaction so developers had clear styling and behavior to build against.",
+				"<strong>Design-to-engineering handoff.</strong> Because Northgate's own engineering and platform teams handled the build, the handoff was the product. Lightning Jar delivered developer-ready specifications (including annotated design specs via InVision Inspect), walked engineering teams through interactivity, front-end validation, and UI prompts, and provided implementation support, QA review in staging, and user-acceptance-testing plans to keep the built experience faithful to the design."
+			]
+		},
+		{
+			"heading": "Results",
+			"text": [
+				"A single design partner across three very different in-store initiatives (financial services, supply chain, and self-service ordering), each grounded in firsthand store research.",
+				"Development-ready UX and visual designs, flows, prototypes, and specifications that Northgate's engineering and platform teams could build directly.",
+				"Experience and service design that protected Northgate's warm, in-person brand while adding digital capability, meeting customers on the floor rather than replacing the human touch.",
+				"Thoughtful design for an underbanked customer base, making check-cashing and money transfers approachable through both customer and associate experiences.",
+				"A fast, scoped path from ambiguous requirements to a buildable kiosk MVP under a business-critical timeline."
+			]
+		}
+	],
+	"testimonials": [],
+	"images": [],
+	"perspectives": [],
+	"tags": ["UX Strategy", "Research", "Retail", "Financial Services"]
+}
