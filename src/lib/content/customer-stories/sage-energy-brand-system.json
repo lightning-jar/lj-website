@@ -2,8 +2,9 @@
 	"order": 6,
 	"draft": false,
 	"banner": {
-		"heading": "Five Years and One Brand System for Sage Energy Holdings: Multi-Brand Identity, a SvelteKit Website, and a Self-Service Email Signature Platform",
-		"subheading": "Lightning Jar has served as Sage Energy Holdings' long-term digital partner since 2021, growing from a single website engagement into an integrated brand and technology system that spans four trading divisions, a full corporate website, a self-service email signature platform, brand collateral, and the launch of an entirely new company."
+		"heading": "Five Years and One Brand System for Sage Energy Holdings",
+		"subheading": "Lightning Jar has served as Sage Energy Holdings' long-term digital partner since 2021, growing from a single website engagement into an integrated brand and technology system that spans four trading divisions, a full corporate website, a self-service email signature platform, brand collateral, and the launch of an entirely new company.",
+		"subtitle": "Multi-Brand Identity, a SvelteKit Website, and a Self-Service Email Signature Platform"
 	},
 	"meta": {
 		"title": "Five Years and One Brand System for Sage Energy Holdings | Customer Story",
@@ -90,5 +91,10 @@
 			}
 		}
 	],
-	"tags": ["Branding", "Multi-Brand", "SvelteKit", "Energy"]
+	"tags": [
+		"Branding",
+		"Multi-Brand",
+		"SvelteKit",
+		"Energy"
+	]
 }

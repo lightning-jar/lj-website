@@ -26,6 +26,13 @@ let { data } = $props();
       </LinkText>
       <h1 class="display">
         {data.banner?.heading}
+        {#if data.banner?.subtitle}
+          <span
+            class="block text-18px lg:text-22px font-500 mt-2 leading-snug opacity-90"
+          >
+            {data.banner.subtitle}
+          </span>
+        {/if}
       </h1>
       <p class="mb-5 empty:hidden opacity-90">
         {data.banner?.subheading ?? ""}

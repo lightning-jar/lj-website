@@ -34,6 +34,13 @@ let { data } = $props();
         {/if}
         <h3 class="text-24px font-700 font-serif text-maximumYellow mb-3">
           {story?.banner.heading}
+          {#if story?.banner.subtitle}
+            <span
+              class="block text-15px font-400 font-sans text-cultured opacity-85 mt-1 leading-snug"
+            >
+              {story.banner.subtitle}
+            </span>
+          {/if}
         </h3>
 
         <div class="mb-5 w-full">

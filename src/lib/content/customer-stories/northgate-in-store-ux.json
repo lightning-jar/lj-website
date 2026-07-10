@@ -2,8 +2,9 @@
 	"order": 7,
 	"draft": true,
 	"banner": {
-		"heading": "Designing the In-Store Digital Experience for Northgate González Market: UX Strategy, Research, and Design Across Financial Services, Produce Supply Chain, and Self-Service Kiosks",
-		"subheading": "Northgate González Market brought in Lightning Jar as its UX strategy and design partner for an ambitious wave of in-store digital initiatives: a customer financial-services platform, a produce supply-chain tool, and self-service ordering kiosks. Lightning Jar owned the research, experience strategy, and design, then handed development-ready specifications to Northgate's engineering and platform teams to build."
+		"heading": "Designing the In-Store Digital Experience for Northgate González Market",
+		"subheading": "Northgate González Market brought in Lightning Jar as its UX strategy and design partner for an ambitious wave of in-store digital initiatives: a customer financial-services platform, a produce supply-chain tool, and self-service ordering kiosks. Lightning Jar owned the research, experience strategy, and design, then handed development-ready specifications to Northgate's engineering and platform teams to build.",
+		"subtitle": "UX Strategy, Research, and Design Across Financial Services, Produce Supply Chain, and Self-Service Kiosks"
 	},
 	"meta": {
 		"title": "In-Store Digital Experience for Northgate González Market | Customer Story",
@@ -20,8 +21,8 @@
 	"title": "Designing the In-Store Digital Experience for Northgate González Market: UX Strategy, Research, and Design Across Financial Services, Produce Supply Chain, and Self-Service Kiosks",
 	"slug": "northgate-in-store-ux",
 	"thumbnailImage": {
-		"src": "",
-		"alt": "PLACEHOLDER: Northgate González Market thumbnail image to be sourced"
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/northgate-market.webp",
+		"alt": "Produce display inside a Northgate González Market store"
 	},
 	"content": [
 		{
@@ -61,7 +62,19 @@
 		}
 	],
 	"testimonials": [],
-	"images": [],
+	"images": [
+		{
+			"alt": "Produce display inside a Northgate González Market store",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/northgate-market.webp",
+			"width": "1800",
+			"height": "1200"
+		}
+	],
 	"perspectives": [],
-	"tags": ["UX Strategy", "Research", "Retail", "Financial Services"]
+	"tags": [
+		"UX Strategy",
+		"Research",
+		"Retail",
+		"Financial Services"
+	]
 }
