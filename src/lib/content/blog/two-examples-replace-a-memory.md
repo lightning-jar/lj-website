@@ -118,7 +118,8 @@ grew linearly to about 24k tokens by step 36 against the stateless
 recipe's flat 2.1k, which works out to 449k versus 81k input tokens
 per session, a factor of five to six. Both recipes hold; the
 paragraph in your system prompt is now the measured default for
-long sessions.
+long sessions. The full story is in
+[The Thirty-Sixth Edit](/blog/the-thirty-sixth-edit).
 
 ## Study Q: then we asked for eight edits at once
 
