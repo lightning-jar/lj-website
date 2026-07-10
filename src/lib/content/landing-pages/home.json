@@ -10,8 +10,15 @@
 			"heading": "Design & Build Technology Studio",
 			"text": [
 				"For nearly 25 years, we've been too busy designing and building websites, web applications, and custom software to put the proper time and attention into our own damn marketing. That's not just an excuse. It is also a point of pride.",
-				"Now the ground is moving again. We're in a new era defined by large language models, the largest shift we've seen since the web itself. Our answer is the same as it has always been: build, don't wait. Today that means leading with open research and practical guidance for developers of LLM applications. <a href=\"/blog/twenty-five-years\" class=\"text-underline\">Twenty-five years in, here's the whole story.</a>"
-			]
+				"Now the ground is moving again. We're in a new era defined by large language models, the largest shift we've seen since the web itself. Our answer is the same as it has always been: build, don't wait. Today that means leading with open research and practical guidance for developers of LLM applications."
+			],
+			"ctas": {
+				"primary": {
+					"label": "Read Our Story",
+					"href": "/blog/twenty-five-years",
+					"title": "If the Solution Is Not Beautiful, It Is Wrong: Twenty-Five Years of Lightning Jar"
+				}
+			}
 		},
 		{
 			"heading": "Digital From the Beginning",
@@ -41,8 +48,20 @@
 		{
 			"heading": "We Believe in Research",
 			"text": [
-				"Good engineering decisions come from evidence, not vibes. That's why we run and publish open-source research for developers of LLM applications: nineteen pre-registered studies and more than 13,000 scored model runs so far, corrections included. Start with <a href=\"/blog/stable-ids-are-all-you-need\" class=\"text-underline\">Stable IDs Are All You Need</a>."
-			]
+				"Good engineering decisions come from evidence, not vibes. That's why we run and publish open-source research for developers of LLM applications: nineteen pre-registered studies and more than 13,000 scored model runs so far, corrections included."
+			],
+			"ctas": {
+				"primary": {
+					"label": "Read the Research",
+					"href": "/blog/stable-ids-are-all-you-need",
+					"title": "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees"
+				},
+				"secondary": {
+					"label": "Latest Findings",
+					"href": "/blog/the-thirty-sixth-edit",
+					"title": "The Thirty-Sixth Edit: Long LLM Sessions Don't Need Memory Either"
+				}
+			}
 		},
 		{
 			"heading": "Saying No is a Superpower",

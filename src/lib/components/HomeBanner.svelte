@@ -2,12 +2,22 @@
 // components
 import LightningBolt from "$components/LightningBolt.svelte";
 import LightningButton from "$components/LightningButton.svelte";
+import LinkButton from "$components/LinkButton.svelte";
 
 // types
+interface TopicCta {
+	label: string;
+	href: string;
+	title?: string;
+}
 interface Topic {
 	heading: string;
 	text: string[];
 	bullets?: string[];
+	ctas?: {
+		primary?: TopicCta;
+		secondary?: TopicCta;
+	};
 }
 interface Props {
 	topics?: Topic[];
@@ -174,6 +184,39 @@ function handleKeyDown(event: KeyboardEvent) {
               <li class="leading-snug opacity-95">{bullet}</li>
             {/each}
           </ul>
+        {/if}
+
+        <!-- ctas -->
+        {#if topic.ctas?.primary || topic.ctas?.secondary}
+          <div
+            class="{counters.topic === index ? 'flex' : 'hidden'}
+            flex-wrap
+            gap-3
+            mt-2"
+          >
+            {#if topic.ctas.primary}
+              <LinkButton
+                classes="button-accent"
+                link={{
+                  href: topic.ctas.primary.href,
+                  title: topic.ctas.primary.title ?? topic.ctas.primary.label,
+                }}
+              >
+                {topic.ctas.primary.label}
+              </LinkButton>
+            {/if}
+            {#if topic.ctas.secondary}
+              <LinkButton
+                classes="text-yellow-50"
+                link={{
+                  href: topic.ctas.secondary.href,
+                  title: topic.ctas.secondary.title ?? topic.ctas.secondary.label,
+                }}
+              >
+                {topic.ctas.secondary.label}
+              </LinkButton>
+            {/if}
+          </div>
         {/if}
       {/if}
     {/each}
