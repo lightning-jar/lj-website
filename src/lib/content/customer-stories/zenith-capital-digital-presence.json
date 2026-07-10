@@ -1,6 +1,6 @@
 {
 	"order": 12,
-	"draft": true,
+	"draft": false,
 	"banner": {
 		"heading": "A Modern Digital Presence for Zenith Capital Partners",
 		"subtitle": "Brand Refresh, Custom Website, Investor-Portal Integration, and a SvelteKit Rebuild",
