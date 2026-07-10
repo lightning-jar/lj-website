@@ -10,7 +10,7 @@
 		"subheading": "Lightning Jar builds and stewards the PetroSkills e-commerce platform: an OpenDXP and Vue storefront with a bespoke dual checkout that integrates with the client's custom ERP, where buying an in-person course is also registering its attendees."
 	},
 	"meta": {
-		"title": "Training E-Commerce | Customer Story",
+		"title": "Selling Seats, Not SKUs, for PetroSkills | Customer Story",
 		"description": "How Lightning Jar built PetroSkills' e-commerce platform on OpenDXP with a Vue frontend: a bespoke dual checkout for e-learning and scheduled in-person training, integrated with a custom ERP that manages session inventory by time, date, and location."
 	},
 	"customer": {
@@ -20,7 +20,7 @@
 		"logo": "/images/customer-logo-petroskills.png"
 	},
 	"excerpt": "PetroSkills sells training, not widgets: self-paced e-learning alongside scheduled in-person and virtual courses with real dates, locations, instructors, and limited seats. Lightning Jar built their e-commerce platform on OpenDXP with a Vue frontend and a bespoke dual-checkout workflow, integrated with the client's custom ERP so that buying a scheduled course doubles as attendee registration.",
-	"title": "PetroSkills Sells Complex Training Products With a Bespoke OpenDXP and Vue Commerce Platform",
+	"title": "Selling Seats, Not SKUs, for PetroSkills: An OpenDXP and Vue Storefront with ERP-Integrated Dual Checkout",
 	"slug": "petroskills-ecommerce",
 	"thumbnailImage": {
 		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/petroskills-scheduled-training.webp",

@@ -11,7 +11,7 @@
 		"subheading": "Lightning Jar migrated the Corpus Christi Regional Transportation Authority from WordPress to SvelteKit: a faster, safer, more accessible site with a custom real-time bus tracker built on open GTFS data at a fraction of the cost of turnkey systems."
 	},
 	"meta": {
-		"title": "Public Transit | Customer Story",
+		"title": "Leaving WordPress Behind for CCRTA | Customer Story",
 		"description": "How Lightning Jar migrated CCRTA from WordPress to SvelteKit and Hygraph: serverless security against constant automated attacks, accessibility by design, hardened e-commerce, and a custom GTFS-powered bus tracker at a fraction of turnkey cost."
 	},
 	"customer": {
@@ -21,7 +21,7 @@
 		"logo": "/images/customer-logo-ccrta.png"
 	},
 	"excerpt": "The Corpus Christi Regional Transportation Authority needed more than a website refresh: WordPress had become a security liability under constant automated attack, an accessibility sore point, and a ceiling on custom features. Lightning Jar rebuilt the platform on SvelteKit and Hygraph with a serverless architecture, and delivered a real-time bus tracker built on open GTFS data for a fraction of the cost of turnkey transit systems.",
-	"title": "CCRTA Leaves WordPress for SvelteKit: Safer, More Accessible, and Tracking Buses in Real Time",
+	"title": "Leaving WordPress Behind for CCRTA: A SvelteKit Rebuild with a Real-Time GTFS Bus Tracker",
 	"slug": "ccrta-transit-website",
 	"thumbnailImage": {
 		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/ccrta-bus-tracker.webp",
