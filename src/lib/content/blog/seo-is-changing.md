@@ -2,10 +2,10 @@
 title: SEO In The Age of LLMs
 metaTitle: SEO Is Changing
 slug: seo-is-changing
-description: This article looks at the reasons why Lightning Jar is leaving the WordPress platform.
+description: "The search landscape is undergoing its biggest shift since ten blue links. LLMs are changing how people discover, evaluate, and act on information, often without visiting a website at all. Here is what is changing, what still matters, and how to make your content findable, quotable, and measurable in the age of AI assistants."
 date: 2026-01-03
-draft: true
-tags: [wordpress, sveltekit, serverless]
+draft: false
+tags: [seo, llm, ai, marketing]
 image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/vintage-bike.webp
 imageDescription: hands holding spectacles against a digital screen
 author: Kevin Peckham
