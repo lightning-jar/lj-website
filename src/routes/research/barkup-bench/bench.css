@@ -26,6 +26,9 @@
 	margin: 0;
 	padding: 0 0 24px;
 }
+.bench header {
+	max-width: 56rem;
+}
 .bench .mono {
 	font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
 }
@@ -89,6 +92,7 @@
 .bench .takeaway {
 	color: var(--ink-2);
 	font-size: 0.95rem;
+	max-width: 56rem;
 	margin: 0 0 14px;
 }
 .bench .legend {
@@ -206,6 +210,7 @@
 	border-top: 1px solid var(--hairline);
 	color: var(--ink-2);
 	font-size: 0.88rem;
+	max-width: 56rem;
 }
 .bench footer a {
 	color: var(--accent);
