@@ -1,6 +1,6 @@
 {
 	"order": 14,
-	"draft": true,
+	"draft": false,
 	"banner": {
 		"heading": "One Platform, Many Channels",
 		"subtitle": "Architecting BlueLine Rental's Digital Ecosystem",
@@ -21,8 +21,8 @@
 	"title": "One Platform, Many Channels: Architecting BlueLine Rental's Digital Ecosystem",
 	"slug": "blueline-rental-digital-ecosystem",
 	"thumbnailImage": {
-		"src": "",
-		"alt": "PLACEHOLDER: BlueLine Rental thumbnail image to be sourced"
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/construction-equipment.webp",
+		"alt": "Construction equipment on a jobsite"
 	},
 	"content": [
 		{
@@ -81,7 +81,14 @@
 			}
 		}
 	],
-	"images": [],
+	"images": [
+		{
+			"alt": "Construction equipment on a jobsite",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/construction-equipment.webp",
+			"width": "2400",
+			"height": "1590"
+		}
+	],
 	"perspectives": [
 		{
 			"quote": [
