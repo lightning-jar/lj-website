@@ -966,4 +966,71 @@ table("tbl-tokens",
 		]);
 })();
 
+
+// --- Study V: qualitative rewrites (judge-graded) win/loss bars ---
+(function () {
+	const VARMS = ["V-doc-view1", "V-doc-view2", "V-conv-memo", "V-conv-nomemo"];
+	const VNAMES = {
+		"V-doc-view1": "goal in doc · target-only view",
+		"V-doc-view2": "goal's node IN the view",
+		"V-conv-memo": "goal in the application memo",
+		"V-conv-nomemo": "goal said earlier · no memo"
+	};
+	const VCOLOR = { "V-doc-view1": "var(--s-c)", "V-doc-view2": "var(--s-b)", "V-conv-memo": "var(--s-f)", "V-conv-nomemo": "var(--s-e)" };
+	// Primary judge (gpt-5.4): wins / losses / ties vs V-instr control, 30 tasks per cell.
+	const VDATA = [
+		{ model: "sonnet-4.5", cells: {
+			"V-doc-view1": { w: 0, l: 30, t: 0 }, "V-doc-view2": { w: 0, l: 30, t: 0 },
+			"V-conv-memo": { w: 10, l: 2, t: 18 }, "V-conv-nomemo": { w: 0, l: 30, t: 0 }
+		}},
+		{ model: "gemini-3.5-flash", cells: {
+			"V-doc-view1": { w: 0, l: 30, t: 0 }, "V-doc-view2": { w: 0, l: 30, t: 0 },
+			"V-conv-memo": { w: 8, l: 11, t: 11 }, "V-conv-nomemo": { w: 0, l: 30, t: 0 }
+		}}
+	];
+	document.getElementById("legend-16").innerHTML = VARMS.map(c =>
+		'<span class="key"><span class="chip" style="background:' + VCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + VNAMES[c] + '</span>'
+	).join("") + '<span class="key">bar segments: wins · ties · losses vs the explicit-instruction control (primary judge)</span>';
+	const W = 880, ROW = 34, T = 8, B = 40, L = 235, R = 24;
+	const rows = [];
+	for (const m of VDATA) for (const c of VARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+	const H = T + rows.length * ROW + B + 16;
+	const iw = W - L - R;
+	let g = "";
+	for (const tick of [0, 10, 20, 30]) {
+		const x = L + (tick / 30) * iw;
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--grid)" stroke-width="1"/>';
+		g += '<text class="tick-label" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '</text>';
+	}
+	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">judged comparisons vs control (30 per cell): wins, then ties, then losses</text>';
+	let marks = "", hits = "";
+	rows.forEach((row, ri) => {
+		const cy = T + ri * ROW + ROW / 2;
+		g += '<text class="row-label" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + (row.model.includes("gemini") ? "gem" : "son") + '</text>';
+		const c = row.cell;
+		const seg = (from, n, opacity) => {
+			const x1 = L + (from / 30) * iw, wpx = (n / 30) * iw;
+			return '<rect x="' + x1 + '" y="' + (cy - 9) + '" width="' + Math.max(wpx, 0) + '" height="18" fill="' + VCOLOR[row.arm] + '" opacity="' + opacity + '" rx="3"/>';
+		};
+		marks += seg(0, c.w, 1);
+		marks += seg(c.w, c.t, 0.45);
+		marks += seg(c.w + c.t, c.l, 0.15);
+		hits += '<rect x="' + L + '" y="' + (cy - 12) + '" width="' + iw + '" height="24" fill="transparent" data-tip="' + esc(row.arm + " — " + VNAMES[row.arm] + "\n" + row.model + " vs control: " + c.w + " wins / " + c.t + " ties / " + c.l + " losses") + '"/>';
+	});
+	const el = document.getElementById("fig-goals");
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Stacked bars: the memo arm ties or beats the explicit-instruction control; every other arm, including goal-node-in-view, loses nearly all judged comparisons." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
+	table("tbl-goals", ["arm (editor)", "W / T / L (gpt-5.4)", "W / T / L (haiku-4.5)", "proxy Δ thesis coverage"],
+		[
+			["V-doc-view1 (sonnet)", "0 / 0 / 30", "0 / 0 / 30", "+0.00"],
+			["V-doc-view2 (sonnet)", "0 / 0 / 30", "0 / 3 / 27", "+0.75"],
+			["V-conv-memo (sonnet)", "10 / 18 / 2", "13 / 10 / 7", "+1.00"],
+			["V-conv-nomemo (sonnet)", "0 / 0 / 30", "0 / 0 / 30", "+0.00"],
+			["V-doc-view1 (gemini)", "0 / 0 / 30", "0 / 0 / 30", "+0.00"],
+			["V-doc-view2 (gemini)", "0 / 0 / 30", "0 / 3 / 27", "+0.66"],
+			["V-conv-memo (gemini)", "8 / 11 / 11", "6 / 20 / 4", "+1.00"],
+			["V-conv-nomemo (gemini)", "0 / 0 / 30", "0 / 0 / 30", "+0.00"]
+		]);
+})();
+
 }
