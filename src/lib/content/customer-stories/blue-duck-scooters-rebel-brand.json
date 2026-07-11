@@ -1,0 +1,85 @@
+{
+	"order": 13,
+	"draft": true,
+	"banner": {
+		"heading": "Building a Rebel Brand for Blue Duck Scooters",
+		"subtitle": "Positioning, a \"Fly Wild\" Brand Idea, and an Iconoclast Launch Campaign for Micromobility",
+		"subheading": "Blue Duck Scooters was a San Antonio-born dockless electric scooter company, one of the early entrants in a fast-moving, crowded micromobility category. Ahead of its launch, Blue Duck partnered with Lightning Jar to build the brand: a positioning and messaging platform, a distinctive rebel-spirited personality, and a bold, unconventional teaser and launch campaign built around the idea of \"Fly Wild.\""
+	},
+	"meta": {
+		"title": "A Rebel Brand for Blue Duck Scooters | Customer Story",
+		"description": "Ahead of its launch, Blue Duck Scooters partnered with Lightning Jar to build a rebel brand for micromobility: positioning and messaging, the 'Fly Wild' brand idea, an iconoclast teaser campaign, and a later evolution of the visual identity."
+	},
+	"customer": {
+		"id": "blue-duck-scooters",
+		"category": "Micromobility",
+		"name": "Blue Duck Scooters",
+		"logo": "",
+		"thumb": ""
+	},
+	"excerpt": "Blue Duck Scooters was a San Antonio-born dockless electric scooter company, one of the early entrants in a fast-moving, crowded micromobility category. Ahead of its launch, Blue Duck partnered with Lightning Jar to build the brand: a positioning and messaging platform, a distinctive rebel-spirited personality, and a bold, unconventional teaser and launch campaign built around the idea of \"Fly Wild.\" The goal was not to look like another scooter startup, but to arrive with a point of view strong enough to stand out in a category racing to commoditize itself. Lightning Jar later returned to help evolve the brand's visual identity as the company matured.",
+	"title": "Building a Rebel Brand for Blue Duck Scooters: Positioning, a \"Fly Wild\" Brand Idea, and an Iconoclast Launch Campaign for Micromobility",
+	"slug": "blue-duck-scooters-rebel-brand",
+	"thumbnailImage": {
+		"src": "",
+		"alt": "PLACEHOLDER: Blue Duck Scooters thumbnail image to be sourced"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"Blue Duck Scooters was a San Antonio-born dockless electric scooter company, one of the early entrants in a fast-moving, crowded micromobility category, built on Southern roots, a challenger's attitude, and a belief that mobility could feel like freedom rather than a utility."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"text": [
+				"Blue Duck was entering micromobility at the moment it was becoming a gold rush. Well-funded competitors were flooding cities with near-identical scooters, and to most people one dockless scooter looked and felt like any other. In a category defined by sameness and by companies competing mostly on how many scooters they could deploy, a new entrant risked disappearing the instant it launched.",
+				"Blue Duck had something to build on, but an attitude is not yet a brand. To launch, the company needed that spirit translated into a foundation the whole business could build on, a personality that felt like a real point of view rather than a logo and a color, and a launch campaign distinctive enough to make people notice and remember a brand they had never heard of. There was also a competitive-timing problem: telegraphing a launch too loudly, too early, would invite entrenched competitors to react before Blue Duck was even on the street. Blue Duck needed a partner who could give it both a real brand and a way to arrive that turned being the underdog into an advantage."
+			]
+		},
+		{
+			"heading": "Solution",
+			"subheading": "Micromobility, Southern Style",
+			"text": [
+				"Lightning Jar approached Blue Duck as a brand-building and creative engagement, moving from strategic foundation to brand personality to a launch campaign designed to break through.",
+				"<strong>A brand foundation and messaging platform.</strong> Lightning Jar helped define Blue Duck's positioning and messaging: who the brand was for, what it stood for, and how it would talk. The work established a clear point of view that framed Blue Duck as a challenger, \"micromobility, Southern style,\" with a rebel spirit and a belief in the freedom of getting around on your own terms. That foundation gave the young company a consistent way to present itself across everything that followed.",
+				"<strong>A rebel personality, captured in \"Fly Wild.\"</strong> Rather than settle for a tagline, Lightning Jar built a brand idea with a real attitude behind it. \"Fly Wild\" expressed the freedom, independence, and just-slightly-untamed spirit that set Blue Duck apart from utilitarian competitors, and it became the through-line for voice, campaign, and creative.",
+				"<strong>An iconoclast teaser campaign.</strong> Lightning Jar designed a launch approach built to intrigue rather than announce. The teaser concept aligned Blue Duck with a lineage of iconoclasts and originals, people who did things their own way, and deliberately held the brand name back at first, generating curiosity in market while avoiding tipping off competitors to Blue Duck's plans before launch. It was a way to build anticipation and stake out a distinct, rebellious identity at the same time.",
+				"<strong>A content and execution plan.</strong> Beyond strategy, Lightning Jar mapped the creative program that would carry the brand into the world, spanning campaign concepts, out-of-home and social creative, video and motion ideas, and the range of assets a launch needs. The intent throughout was consistency: every touchpoint should feel unmistakably like Blue Duck.",
+				"<strong>A later brand evolution.</strong> As Blue Duck grew and the category matured, Lightning Jar returned to help refresh and evolve the brand's visual identity, updating the look while keeping the challenger spirit that made it distinctive in the first place."
+			]
+		},
+		{
+			"heading": "Results",
+			"text": [
+				"A complete brand foundation for a new micromobility company, from positioning and audience to messaging and personality, ready for the whole business to build on.",
+				"A distinctive brand idea, \"Fly Wild,\" that turned a rebel, Southern-challenger spirit into something ownable in a category full of look-alikes.",
+				"An unconventional teaser and launch campaign designed to build curiosity, stand apart, and avoid tipping off competitors before launch.",
+				"A content and creative plan built to keep every touchpoint recognizably Blue Duck.",
+				"A brand relationship that continued past launch into a later evolution of the visual identity as the company matured."
+			]
+		}
+	],
+	"testimonials": [],
+	"images": [],
+	"perspectives": [
+		{
+			"quote": [
+				"Micromobility was a gold rush where every claim looked identical: same scooters, same promises, same green. In a category competing on deployment counts, the only durable differentiation was a point of view. Fly Wild gave Blue Duck one: mobility as freedom, Southern style, slightly untamed. You cannot commoditize an attitude."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal & Chief Technologist",
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/kevin-peckham-sm.webp",
+					"width": "63",
+					"height": "63"
+				}
+			}
+		}
+	],
+	"tags": ["Brand Strategy", "Campaigns", "Startups", "Mobility"]
+}
