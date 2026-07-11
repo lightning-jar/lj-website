@@ -10,7 +10,7 @@ const COND_NAMES = {
 	D: "HTML + tools", E: "JSON Patch",
 	F: "anchored patch"
 };
-const COLOR = { A: "var(--s-a)", B: "var(--s-b)", C: "var(--s-c)", D: "var(--s-d)", E: "var(--s-e)", F: "var(--s-f)" };
+const COLOR = { A: "#3987e5", B: "#199e70", C: "#c98500", D: "#008300", E: "#9085e9", F: "#e66767" };
 const BUCKET_LABELS = ["~5 nodes", "~20", "~60", "~150"];
 const BUCKET_KEYS = ["xs", "s", "m", "l"];
 
@@ -18,7 +18,7 @@ function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").
 
 function legend(el) {
 	document.getElementById(el).innerHTML = CONDITIONS.map(c =>
-		`<span class="key"><span class="chip" style="background:${COLOR[c]}"></span><span class="code">${c}</span> ${COND_NAMES[c]}</span>`
+		`<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:${COLOR[c]}"></span><span class="font-mono font-700 text-white">${c}</span> ${COND_NAMES[c]}</span>`
 	).join("");
 }
 legend("legend-1"); legend("legend-2"); legend("legend-3");
@@ -56,14 +56,14 @@ function lineChart(mount, opts) {
 	// grid + y ticks
 	for (const tick of opts.ticks) {
 		const y = yOf(tick);
-		g += `<line x1="${L}" x2="${L + iw}" y1="${y}" y2="${y}" stroke="var(--grid)" stroke-width="1"/>`;
-		g += `<text class="tick-label" x="${L - 8}" y="${y + 4}" text-anchor="end">${opts.fmt(tick)}</text>`;
+		g += `<line x1="${L}" x2="${L + iw}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+		g += `<text fill="#c3c9d4" font-size="11.5" x="${L - 8}" y="${y + 4}" text-anchor="end">${opts.fmt(tick)}</text>`;
 	}
 	// x labels
 	BUCKET_LABELS.forEach((lab, i) => {
-		g += `<text class="tick-label" x="${xs[i]}" y="${H - B + 22}" text-anchor="middle">${lab}</text>`;
+		g += `<text fill="#c3c9d4" font-size="11.5" x="${xs[i]}" y="${H - B + 22}" text-anchor="middle">${lab}</text>`;
 	});
-	g += `<text class="axis-label" x="${L + iw / 2}" y="${H - 6}" text-anchor="middle">tree size bucket</text>`;
+	g += `<text fill="#8b93a3" font-size="11" x="${L + iw / 2}" y="${H - 6}" text-anchor="middle">tree size bucket</text>`;
 	let marks = "", hits = "";
 	const endLabels = [];
 	CONDITIONS.forEach((c, ci) => {
@@ -83,7 +83,7 @@ function lineChart(mount, opts) {
 		const path = pts.map((p, i) => `${i === 0 ? "M" : "L"}${p.x},${p.y}`).join(" ");
 		marks += `<path d="${path}" fill="none" stroke="${COLOR[c]}" stroke-width="2" stroke-linejoin="round"/>`;
 		pts.forEach((p, i) => {
-			marks += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="${COLOR[c]}" stroke="var(--surface)" stroke-width="2"/>`;
+			marks += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="${COLOR[c]}" stroke="hsl(217,48%,15%)" stroke-width="2"/>`;
 			hits += `<circle cx="${p.x}" cy="${p.y}" r="13" fill="transparent" data-tip="${esc(opts.tip(c, i, p.v))}"/>`;
 		});
 		endLabels.push({ c, y: pts[pts.length - 1].y + 4, x: pts[pts.length - 1].x + 12 });
@@ -91,9 +91,9 @@ function lineChart(mount, opts) {
 	resolveLabels(endLabels, 15);
 	let labels = "";
 	for (const l of endLabels) {
-		labels += `<text class="series-label" x="${l.x}" y="${l.y}" fill="${COLOR[l.c]}">${l.c} · ${opts.endLabel(l.c)}</text>`;
+		labels += `<text font-size="12" font-weight="700" x="${l.x}" y="${l.y}" fill="${COLOR[l.c]}">${l.c} · ${opts.endLabel(l.c)}</text>`;
 	}
-	const svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(opts.aria)}" style="min-width:640px">${g}${marks}${labels}${hits}</svg>`;
+	const svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(opts.aria)}" style="min-width:640px;display:block">${g}${marks}${labels}${hits}</svg>`;
 	const el = document.getElementById(mount);
 	el.innerHTML = svg;
 	el.querySelectorAll("[data-tip]").forEach(n => {
@@ -133,25 +133,25 @@ lineChart("fig-tokens", {
 	let g = "";
 	for (const tick of [0, 25, 50, 75, 100]) {
 		const x = xOf(tick);
-		g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="var(--grid)" stroke-width="1"/>`;
-		g += `<text class="tick-label" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+		g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+		g += `<text fill="#c3c9d4" font-size="11.5" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
 	}
-	g += `<text class="axis-label" x="${L + iw / 2}" y="${H - 4}" text-anchor="middle">reference-task success (n = 40 per cell)</text>`;
+	g += `<text fill="#8b93a3" font-size="11" x="${L + iw / 2}" y="${H - 4}" text-anchor="middle">reference-task success (n = 40 per cell)</text>`;
 	let marks = "", hits = "";
 	DATA.reference.forEach((row, ri) => {
 		const cy = T + ri * ROW + ROW / 2;
-		g += `<line x1="${L}" x2="${L + iw}" y1="${cy}" y2="${cy}" stroke="var(--hairline)" stroke-width="1"/>`;
-		g += `<text class="row-label" x="${L - 12}" y="${cy + 4}" text-anchor="end">${row.model}</text>`;
+		g += `<line x1="${L}" x2="${L + iw}" y1="${cy}" y2="${cy}" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>`;
+		g += `<text fill="#ffffff" font-size="12.5" x="${L - 12}" y="${cy + 4}" text-anchor="end">${row.model}</text>`;
 		CONDITIONS.forEach(c => {
 			const cell = row.cells[c];
 			const x = xOf(cell.rate);
 			marks += `<line x1="${xOf(cell.low)}" x2="${xOf(cell.high)}" y1="${cy}" y2="${cy}" stroke="${COLOR[c]}" stroke-width="1.5" opacity="0.4"/>`;
-			marks += `<circle cx="${x}" cy="${cy}" r="5.5" fill="${COLOR[c]}" stroke="var(--surface)" stroke-width="2"/>`;
+			marks += `<circle cx="${x}" cy="${cy}" r="5.5" fill="${COLOR[c]}" stroke="hsl(217,48%,15%)" stroke-width="2"/>`;
 			hits += `<circle cx="${x}" cy="${cy}" r="13" fill="transparent" data-tip="${esc(`${c} — ${COND_NAMES[c]}\n${row.model}: ${cell.rate}%\n${cell.ok}/40 · CI [${cell.low}%, ${cell.high}%]`)}"/>`;
 		});
 	});
 	const el = document.getElementById("fig-reference");
-	el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Reference-task success per model and condition; tools conditions collapse for haiku and gemini." style="min-width:640px">${g}${marks}${hits}</svg>`;
+	el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Reference-task success per model and condition; tools conditions collapse for haiku and gemini." style="min-width:640px;display:block">${g}${marks}${hits}</svg>`;
 	el.querySelectorAll("[data-tip]").forEach(n => {
 		n.addEventListener("mousemove", e => showTip(e, n.dataset.tip));
 		n.addEventListener("mouseleave", hideTip);
@@ -165,13 +165,13 @@ lineChart("fig-tokens", {
 		[91, "#3987e5", "#ffffff"], [94, "#256abf", "#ffffff"], [100, "#184f95", "#ffffff"]
 	];
 	const stepOf = v => RAMP.find(([max]) => v <= max);
-	let html = `<table><thead><tr><th scope="col">model</th>${CONDITIONS.map(c => `<th scope="col">${c}</th>`).join("")}</tr></thead><tbody>`;
+	let html = `<table class="border-collapse tabular-nums text-[0.9rem]"><thead><tr><th scope="col" class="px-3.5 py-2 text-left text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">model</th>${CONDITIONS.map(c => `<th scope="col" class="px-3.5 py-2 text-right text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">${c}</th>`).join("")}</tr></thead><tbody>`;
 	for (const row of DATA.perModel) {
-		html += `<tr><td>${row.model}</td>`;
+		html += `<tr><td class="px-3.5 py-2 text-left border-2 border-[hsl(217,48%,15%)]">${row.model}</td>`;
 		for (const c of CONDITIONS) {
 			const v = row.cells[c];
 			const [, bg, ink] = stepOf(v);
-			html += `<td class="cell" style="background:${bg};color:${ink}">${v.toFixed(1)}%</td>`;
+			html += `<td class="font-mono px-3.5 py-2 text-right border-2 border-[hsl(217,48%,15%)]" style="background:${bg};color:${ink}">${v.toFixed(1)}%</td>`;
 		}
 		html += "</tr>";
 	}
@@ -188,25 +188,25 @@ lineChart("fig-tokens", {
 	const iw = W - L - R;
 	const xOf = v => L + (v / 100) * iw;
 	let g = '';
-	g += '<circle cx="' + L + '" cy="16" r="6" fill="var(--surface)" stroke="var(--s-c)" stroke-width="2.5"/><text class="tick-label" x="' + (L + 14) + '" y="20">v1 — tool calls hidden</text>';
-	g += '<circle cx="' + (L + 220) + '" cy="16" r="6.5" fill="var(--s-a)" stroke="var(--surface)" stroke-width="2"/><text class="tick-label" x="' + (L + 234) + '" y="20">v2 — corrected history</text>';
+	g += '<circle cx="' + L + '" cy="16" r="6" fill="hsl(217,48%,15%)" stroke="#c98500" stroke-width="2.5"/><text fill="#c3c9d4" font-size="11.5" x="' + (L + 14) + '" y="20">v1 — tool calls hidden</text>';
+	g += '<circle cx="' + (L + 220) + '" cy="16" r="6.5" fill="#3987e5" stroke="hsl(217,48%,15%)" stroke-width="2"/><text fill="#c3c9d4" font-size="11.5" x="' + (L + 234) + '" y="20">v2 — corrected history</text>';
 	for (const tick of [0, 25, 50, 75, 100]) {
 		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
 	}
 	let hits = '';
 	rows.forEach((row, ri) => {
 		const cy = T + ri * ROW + ROW / 2;
-		g += '<text class="row-label" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
-		g += '<line x1="' + xOf(row.v1.rate) + '" x2="' + xOf(row.v2.rate) + '" y1="' + cy + '" y2="' + cy + '" stroke="var(--s-c)" stroke-width="3" opacity="0.35"/>';
-		g += '<circle cx="' + xOf(row.v1.rate) + '" cy="' + cy + '" r="6" fill="var(--surface)" stroke="var(--s-c)" stroke-width="2.5"/>';
-		g += '<circle cx="' + xOf(row.v2.rate) + '" cy="' + cy + '" r="6.5" fill="var(--s-a)" stroke="var(--surface)" stroke-width="2"/>';
+		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
+		g += '<line x1="' + xOf(row.v1.rate) + '" x2="' + xOf(row.v2.rate) + '" y1="' + cy + '" y2="' + cy + '" stroke="#c98500" stroke-width="3" opacity="0.35"/>';
+		g += '<circle cx="' + xOf(row.v1.rate) + '" cy="' + cy + '" r="6" fill="hsl(217,48%,15%)" stroke="#c98500" stroke-width="2.5"/>';
+		g += '<circle cx="' + xOf(row.v2.rate) + '" cy="' + cy + '" r="6.5" fill="#3987e5" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
 		hits += '<circle cx="' + xOf(row.v1.rate) + '" cy="' + cy + '" r="13" fill="transparent" data-tip="' + esc(row.model + ' v1 (hidden history): ' + row.v1.rate + '% — ' + row.v1.ok + '/' + row.v1.n) + '"/>';
 		hits += '<circle cx="' + xOf(row.v2.rate) + '" cy="' + cy + '" r="13" fill="transparent" data-tip="' + esc(row.model + ' v2 (corrected): ' + row.v2.rate + '% — ' + row.v2.ok + '/' + row.v2.n) + '"/>';
 	});
 	const el = document.getElementById('fig-footgun');
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Reference-edit success per model with tool calls hidden from history versus corrected history." style="min-width:640px">' + g + hits + '</svg>';
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Reference-edit success per model with tool calls hidden from history versus corrected history." style="min-width:640px;display:block">' + g + hits + '</svg>';
 	el.querySelectorAll('[data-tip]').forEach(n => { n.addEventListener('mousemove', e => showTip(e, n.dataset.tip)); n.addEventListener('mouseleave', hideTip); });
 	table('tbl-footgun', ['model', 'v1 (hidden)', 'v2 (corrected)'], DATA.footgun.map(r => [r.model, r.v1.rate + '% (' + r.v1.ok + '/' + r.v1.n + ')', r.v2.rate + '% (' + r.v2.ok + '/' + r.v2.n + ')']));
 })();
@@ -215,8 +215,8 @@ lineChart("fig-tokens", {
 (function () {
 	const el = document.getElementById('legend-4');
 	el.innerHTML = ['A', 'E', 'F'].map(c =>
-		'<span class="key"><span class="chip" style="background:' + COLOR[c] + '"></span><span class="code">' + c + '</span> ' + COND_NAMES[c] + '</span>'
-	).join('') + '<span class="key">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + COLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + COND_NAMES[c] + '</span>'
+	).join('') + '<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
 	const W = 880, H = 380, L = 56, R = 170, T = 16, B = 44;
 	const iw = W - L - R, ih = H - T - B;
 	const SIZES = ['~300 nodes', '~600', '~1000'];
@@ -225,10 +225,10 @@ lineChart("fig-tokens", {
 	let g = '';
 	for (const tick of [0, 25, 50, 75, 100]) {
 		const y = yOf(tick);
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + tick + '%</text>';
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + tick + '%</text>';
 	}
-	SIZES.forEach((lab, i) => { g += '<text class="tick-label" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
+	SIZES.forEach((lab, i) => { g += '<text fill="#c3c9d4" font-size="11.5" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
 	let marks = '', hits = '';
 	const endLabels = [];
 	for (const series of DATA.sizeext) {
@@ -237,7 +237,7 @@ lineChart("fig-tokens", {
 		const pts = series.cells.map((cell, i) => ({ x: xs[i], y: yOf(cell.rate), cell }));
 		marks += '<path d="' + pts.map((p, i) => (i === 0 ? 'M' : 'L') + p.x + ',' + p.y).join(' ') + '" fill="none" stroke="' + COLOR[c] + '" stroke-width="2" stroke-linejoin="round"' + (dashed ? ' stroke-dasharray="6 5"' : '') + '/>';
 		pts.forEach((p, i) => {
-			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + COLOR[c] + '" stroke="var(--surface)" stroke-width="2"/>';
+			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + COLOR[c] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
 			hits += '<circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent" data-tip="' + esc(c + ' — ' + COND_NAMES[c] + ' (' + series.model + ') — ' + SIZES[i] + ': ' + p.cell.rate + '% — ' + p.cell.ok + '/' + p.cell.n + ' · CI [' + p.cell.low + '%, ' + p.cell.high + '%]') + '"/>';
 		});
 		const last = pts[pts.length - 1];
@@ -245,9 +245,9 @@ lineChart("fig-tokens", {
 	}
 	resolveLabels(endLabels, 15);
 	let labels = '';
-	for (const l of endLabels) labels += '<text class="series-label" x="' + l.x + '" y="' + l.y + '" fill="' + COLOR[l.c] + '">' + l.text + '</text>';
+	for (const l of endLabels) labels += '<text font-size="12" font-weight="700" x="' + l.x + '" y="' + l.y + '" fill="' + COLOR[l.c] + '">' + l.text + '</text>';
 	const el2 = document.getElementById('fig-sizeext');
-	el2.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Task success at 300 to 1000 nodes: anchored patches hold for both models while rewrite falls to zero on the small model and positional patches decay." style="min-width:640px">' + g + marks + labels + hits + '</svg>';
+	el2.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Task success at 300 to 1000 nodes: anchored patches hold for both models while rewrite falls to zero on the small model and positional patches decay." style="min-width:640px;display:block">' + g + marks + labels + hits + '</svg>';
 	el2.querySelectorAll('[data-tip]').forEach(n => { n.addEventListener('mousemove', e => showTip(e, n.dataset.tip)); n.addEventListener('mouseleave', hideTip); });
 	table('tbl-sizeext', ['series', ...SIZES], DATA.sizeext.map(s => [s.condition + ' — ' + s.model, ...s.cells.map(c => c.rate + '% (' + c.ok + '/' + c.n + ')')]));
 })();
@@ -268,11 +268,11 @@ lineChart("fig-tokens", {
 		{ model: 'sonnet-4.5', cond: 'FTH', name: 'minimal view (HTML)', tokens: [1281, 1376, 1391], ok: ['15/15', '15/15', '14/15'] },
 		{ model: 'gemini-3.5-flash', cond: 'FTH', name: 'minimal view (HTML)', tokens: [1250, 1344, 1352], ok: ['13/15', '13/15', '14/15'] }
 	];
-	const VCOLOR = { F: 'var(--s-f)', FV: 'var(--s-c)', FT: 'var(--s-b)' };
+	const VCOLOR = { F: '#e66767', FV: '#c98500', FT: '#199e70' };
 	const VNAMES = { F: 'full tree in the prompt', FV: 'focused view (placeholders)', FT: 'minimal view (omission counts)' };
 	document.getElementById('legend-5').innerHTML = ['F', 'FV', 'FT'].map(c =>
-		'<span class="key"><span class="chip" style="background:' + VCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + VNAMES[c] + '</span>'
-	).join('') + '<span class="key">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + VCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + VNAMES[c] + '</span>'
+	).join('') + '<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
 	const W = 880, H = 380, L = 64, R = 175, T = 16, B = 44;
 	const iw = W - L - R, ih = H - T - B;
 	const SIZES = ['~300 nodes', '~600', '~1000'];
@@ -281,11 +281,11 @@ lineChart("fig-tokens", {
 	let g = '';
 	for (const tick of [0, 20000, 40000, 60000, 80000]) {
 		const y = yOf(tick);
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + (tick / 1000) + 'k</text>';
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + (tick / 1000) + 'k</text>';
 	}
-	SIZES.forEach((lab, i) => { g += '<text class="tick-label" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
-	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">median input tokens per task (accuracy statistically identical across all rows)</text>';
+	SIZES.forEach((lab, i) => { g += '<text fill="#c3c9d4" font-size="11.5" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
+	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">median input tokens per task (accuracy statistically identical across all rows)</text>';
 	let marks = '', hits = '';
 	const endLabels = [];
 	for (const s of VDATA) {
@@ -293,7 +293,7 @@ lineChart("fig-tokens", {
 		const pts = s.tokens.map((v, i) => ({ x: xs[i], y: yOf(v), v, i }));
 		marks += '<path d="' + pts.map((p, i) => (i === 0 ? 'M' : 'L') + p.x + ',' + p.y).join(' ') + '" fill="none" stroke="' + VCOLOR[s.cond] + '" stroke-width="2" stroke-linejoin="round"' + (dashed ? ' stroke-dasharray="6 5"' : '') + '/>';
 		pts.forEach(p => {
-			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + VCOLOR[s.cond] + '" stroke="var(--surface)" stroke-width="2"/>';
+			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + VCOLOR[s.cond] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
 			hits += '<circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent" data-tip="' + esc(s.cond + ' — ' + VNAMES[s.cond] + ' (' + s.model + ')\n' + SIZES[p.i] + ': ' + p.v.toLocaleString() + ' input tokens (median)\nsuccess ' + s.ok[p.i]) + '"/>';
 		});
 		const last = pts[pts.length - 1];
@@ -301,9 +301,9 @@ lineChart("fig-tokens", {
 	}
 	resolveLabels(endLabels, 15);
 	let labels = '';
-	for (const l of endLabels) labels += '<text class="series-label" x="' + l.x + '" y="' + l.y + '" fill="' + VCOLOR[l.c] + '">' + l.text + '</text>';
+	for (const l of endLabels) labels += '<text font-size="12" font-weight="700" x="' + l.x + '" y="' + l.y + '" fill="' + VCOLOR[l.c] + '">' + l.text + '</text>';
 	const el = document.getElementById('fig-views');
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Median input tokens by tree size: the full tree grows to 70 to 86 thousand tokens at 1000 nodes while focused and minimal views stay under 4 thousand, with accuracy unchanged." style="min-width:640px">' + g + marks + labels + hits + '</svg>';
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Median input tokens by tree size: the full tree grows to 70 to 86 thousand tokens at 1000 nodes while focused and minimal views stay under 4 thousand, with accuracy unchanged." style="min-width:640px;display:block">' + g + marks + labels + hits + '</svg>';
 	el.querySelectorAll('[data-tip]').forEach(n => { n.addEventListener('mousemove', e => showTip(e, n.dataset.tip)); n.addEventListener('mouseleave', hideTip); });
 	table('tbl-views', ['input shown (model)', ...SIZES.map(s => s + ' — tokens · success')],
 		[...VDATA, ...VEXTRA].map(s => [
@@ -324,11 +324,11 @@ lineChart("fig-tokens", {
 		{ policy: 'K-rewrite', name: 'whole-tree rewrite', model: 'sonnet-4.5', rate: [97.2, 100, 94.4], ok: ['35/36', '36/36', '34/36'], end: '7/10', tokens: '836.0k in + 129.4k out' },
 		{ policy: 'K-rewrite', name: 'whole-tree rewrite', model: 'gemini-3.5-flash', rate: [52.5, 67.5, 69.2], ok: ['21/40', '27/40', '27/39'], end: '2/10', tokens: '971.3k in + 138.1k out' }
 	];
-	const KCOLOR = { 'K-once': 'var(--s-c)', 'K-refresh5': 'var(--s-e)', 'K-view': 'var(--s-f)', 'K-rewrite': 'var(--s-a)' };
+	const KCOLOR = { 'K-once': '#c98500', 'K-refresh5': '#9085e9', 'K-view': '#e66767', 'K-rewrite': '#3987e5' };
 	const KNAMES = { 'K-once': 'tree shown once', 'K-refresh5': 'full refresh @ steps 6/11', 'K-view': 'fresh minimal view every turn', 'K-rewrite': 'whole-tree rewrite (anchor)' };
 	document.getElementById('legend-6').innerHTML = Object.keys(KNAMES).map(p =>
-		'<span class="key"><span class="chip" style="background:' + KCOLOR[p] + '"></span><span class="code">' + p + '</span> ' + KNAMES[p] + '</span>'
-	).join('') + '<span class="key">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + KCOLOR[p] + '"></span><span class="font-mono font-700 text-white">' + p + '</span> ' + KNAMES[p] + '</span>'
+	).join('') + '<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
 	const W = 880, H = 380, L = 56, R = 195, T = 16, B = 44;
 	const iw = W - L - R, ih = H - T - B;
 	const THIRDS = ['steps 1–4', 'steps 5–8', 'steps 9–12'];
@@ -337,11 +337,11 @@ lineChart("fig-tokens", {
 	let g = '';
 	for (const tick of [50, 60, 70, 80, 90, 100]) {
 		const y = yOf(tick);
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + tick + '%</text>';
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + tick + '%</text>';
 	}
-	THIRDS.forEach((lab, i) => { g += '<text class="tick-label" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
-	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">per-step success by session third (step judged on its own edit against the model’s current tree)</text>';
+	THIRDS.forEach((lab, i) => { g += '<text fill="#c3c9d4" font-size="11.5" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
+	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">per-step success by session third (step judged on its own edit against the model’s current tree)</text>';
 	let marks = '', hits = '';
 	const endLabels = [];
 	for (const s of KDATA) {
@@ -349,7 +349,7 @@ lineChart("fig-tokens", {
 		const pts = s.rate.map((v, i) => ({ x: xs[i], y: yOf(v), v, i }));
 		marks += '<path d="' + pts.map((p, i) => (i === 0 ? 'M' : 'L') + p.x + ',' + p.y).join(' ') + '" fill="none" stroke="' + KCOLOR[s.policy] + '" stroke-width="2" stroke-linejoin="round"' + (dashed ? ' stroke-dasharray="6 5"' : '') + '/>';
 		pts.forEach(p => {
-			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + KCOLOR[s.policy] + '" stroke="var(--surface)" stroke-width="2"/>';
+			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + KCOLOR[s.policy] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
 			hits += '<circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent" data-tip="' + esc(s.policy + ' — ' + KNAMES[s.policy] + ' (' + s.model + ')\n' + THIRDS[p.i] + ': ' + p.v + '% (' + s.ok[p.i] + ')\nend-state intact: ' + s.end + ' · ' + s.tokens + '/session') + '"/>';
 		});
 		const last = pts[pts.length - 1];
@@ -357,9 +357,9 @@ lineChart("fig-tokens", {
 	}
 	resolveLabels(endLabels, 15);
 	let labels = '';
-	for (const l of endLabels) labels += '<text class="series-label" x="' + l.x + '" y="' + l.y + '" fill="' + KCOLOR[l.c] + '">' + l.text + '</text>';
+	for (const l of endLabels) labels += '<text font-size="12" font-weight="700" x="' + l.x + '" y="' + l.y + '" fill="' + KCOLOR[l.c] + '">' + l.text + '</text>';
 	const el = document.getElementById('fig-sessions');
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Per-step success across session thirds: serialize-once decays to 83.8 percent on sonnet while per-turn views stay flat near 100 percent; gemini whole-tree rewrite sessions run at 52 to 69 percent." style="min-width:640px">' + g + marks + labels + hits + '</svg>';
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Per-step success across session thirds: serialize-once decays to 83.8 percent on sonnet while per-turn views stay flat near 100 percent; gemini whole-tree rewrite sessions run at 52 to 69 percent." style="min-width:640px;display:block">' + g + marks + labels + hits + '</svg>';
 	el.querySelectorAll('[data-tip]').forEach(n => { n.addEventListener('mousemove', e => showTip(e, n.dataset.tip)); n.addEventListener('mouseleave', hideTip); });
 	table('tbl-sessions', ['policy (model)', ...THIRDS, 'end-state intact', 'mean tokens/session'],
 		KDATA.map(s => [
@@ -378,7 +378,7 @@ lineChart("fig-tokens", {
 		"LG-nav": "grounded · navigate (expand_node)",
 		"LG-lex": "grounded · naive lexical retrieval"
 	};
-	const LCOLOR = { oracle: "var(--s-f)", "LG-full": "var(--s-a)", "LG-nav": "var(--s-e)", "LG-lex": "var(--s-c)" };
+	const LCOLOR = { oracle: "#e66767", "LG-full": "#3987e5", "LG-nav": "#9085e9", "LG-lex": "#c98500" };
 	const LDATA = [
 		{ model: "sonnet-4.5", cells: {
 			oracle: { ok: 43, rate: 95.6, low: 85.2, high: 98.8, note: "" },
@@ -394,7 +394,7 @@ lineChart("fig-tokens", {
 		}}
 	];
 	document.getElementById("legend-7").innerHTML = LCOND.map(c =>
-		'<span class="key"><span class="chip" style="background:' + LCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + LNAMES[c] + '</span>'
+		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + LCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + LNAMES[c] + '</span>'
 	).join("");
 	const W = 880, ROW = 64, T = 8, B = 40, L = 150, R = 24;
 	const H = T + LDATA.length * ROW + B;
@@ -403,24 +403,24 @@ lineChart("fig-tokens", {
 	let g = "";
 	for (const tick of [30, 40, 50, 60, 70, 80, 90, 100]) {
 		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
 	}
-	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">task success on grounded (id-free) instructions, 45 tasks per cell</text>';
+	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">task success on grounded (id-free) instructions, 45 tasks per cell</text>';
 	let marks = "", hits = "";
 	LDATA.forEach((row, ri) => {
 		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="var(--hairline)" stroke-width="1"/>';
-		g += '<text class="row-label" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
 		for (const c of LCOND) {
 			const cell = row.cells[c];
 			marks += '<line x1="' + xOf(cell.low) + '" x2="' + xOf(cell.high) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + LCOLOR[c] + '" stroke-width="1.5" opacity="0.4"/>';
-			marks += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="5.5" fill="' + LCOLOR[c] + '" stroke="var(--surface)" stroke-width="2"/>';
+			marks += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="5.5" fill="' + LCOLOR[c] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
 			hits += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="13" fill="transparent" data-tip="' + esc(c + ' — ' + LNAMES[c] + '\n' + row.model + ': ' + cell.rate + '% (' + cell.ok + '/45) · CI [' + cell.low + '%, ' + cell.high + '%]' + (cell.note ? '\n' + cell.note : '')) + '"/>';
 		}
 	});
 	const el = document.getElementById("fig-grounding");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Grounded-instruction success per model: full-tree grounding sits 7 to 9 points under the oracle bound; navigation matches the oracle on sonnet but collapses on gemini; lexical retrieval is the floor." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Grounded-instruction success per model: full-tree grounding sits 7 to 9 points under the oracle bound; navigation matches the oracle on sonnet but collapses on gemini; lexical retrieval is the floor." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
 	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
 	table("tbl-grounding", ["condition (model)", "success", "median input @ ~1000 nodes", "failure anatomy (pooled)"],
 		[
@@ -445,11 +445,11 @@ lineChart("fig-tokens", {
 		{ policy: "M-stateless", name: "no history at all", model: "sonnet-4.5", rate: [98.8, 95.0, 96.3], ok: ["79/80", "76/80", "77/80"], end: "13/20", shape: "flat ~1.3k per step" },
 		{ policy: "M-stateless", name: "no history at all", model: "gemini-3.5-flash", rate: [98.8, 100, 92.5], ok: ["79/80", "80/80", "74/80"], end: "14/20", shape: "flat ~1.3k per step" }
 	];
-	const MCOLOR = { "K-view": "var(--s-f)", "M-window": "var(--s-e)", "M-stateless": "var(--s-c)" };
+	const MCOLOR = { "K-view": "#e66767", "M-window": "#9085e9", "M-stateless": "#c98500" };
 	const MNAMES = { "K-view": "full history + per-turn view (Study K)", "M-window": "2-exchange window", "M-stateless": "no history at all" };
 	document.getElementById("legend-8").innerHTML = Object.keys(MNAMES).map(p =>
-		'<span class="key"><span class="chip" style="background:' + MCOLOR[p] + '"></span><span class="code">' + p + '</span> ' + MNAMES[p] + '</span>'
-	).join("") + '<span class="key">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + MCOLOR[p] + '"></span><span class="font-mono font-700 text-white">' + p + '</span> ' + MNAMES[p] + '</span>'
+	).join("") + '<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
 	const W = 880, H = 340, L = 56, R = 205, T = 16, B = 44;
 	const iw = W - L - R, ih = H - T - B;
 	const THIRDS = ["steps 1–4", "steps 5–8", "steps 9–12"];
@@ -458,11 +458,11 @@ lineChart("fig-tokens", {
 	let g = "";
 	for (const tick of [88, 92, 96, 100]) {
 		const y = yOf(tick);
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + tick + '%</text>';
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + tick + '%</text>';
 	}
-	THIRDS.forEach((lab, i) => { g += '<text class="tick-label" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
-	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">per-step success by session third (note the zoomed 88–100% scale)</text>';
+	THIRDS.forEach((lab, i) => { g += '<text fill="#c3c9d4" font-size="11.5" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
+	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">per-step success by session third (note the zoomed 88–100% scale)</text>';
 	let marks = "", hits = "";
 	const endLabels = [];
 	for (const s of MDATA) {
@@ -470,7 +470,7 @@ lineChart("fig-tokens", {
 		const pts = s.rate.map((v, i) => ({ x: xs[i], y: yOf(v), v, i }));
 		marks += '<path d="' + pts.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ") + '" fill="none" stroke="' + MCOLOR[s.policy] + '" stroke-width="2" stroke-linejoin="round"' + (dashed ? ' stroke-dasharray="6 5"' : '') + '/>';
 		pts.forEach(p => {
-			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + MCOLOR[s.policy] + '" stroke="var(--surface)" stroke-width="2"/>';
+			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + MCOLOR[s.policy] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
 			hits += '<circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent" data-tip="' + esc(s.policy + ' — ' + MNAMES[s.policy] + ' (' + s.model + ')\n' + THIRDS[p.i] + ': ' + p.v + '% (' + s.ok[p.i] + ')\nend-state intact ' + s.end + ' · input ' + s.shape) + '"/>';
 		});
 		const last = pts[pts.length - 1];
@@ -478,9 +478,9 @@ lineChart("fig-tokens", {
 	}
 	resolveLabels(endLabels, 15);
 	let labels = "";
-	for (const l of endLabels) labels += '<text class="series-label" x="' + l.x + '" y="' + l.y + '" fill="' + MCOLOR[l.c] + '">' + l.text + '</text>';
+	for (const l of endLabels) labels += '<text font-size="12" font-weight="700" x="' + l.x + '" y="' + l.y + '" fill="' + MCOLOR[l.c] + '">' + l.text + '</text>';
 	const el = document.getElementById("fig-memory");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Per-step success across session thirds for full history, a two-exchange window, and no history: statelessness degrades late-session accuracy despite identical per-turn views." style="min-width:640px">' + g + marks + labels + hits + '</svg>';
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Per-step success across session thirds for full history, a two-exchange window, and no history: statelessness degrades late-session accuracy despite identical per-turn views." style="min-width:640px;display:block">' + g + marks + labels + hits + '</svg>';
 	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
 	table("tbl-memory", ["policy (model)", ...THIRDS, "end-state intact", "input per step"],
 		MDATA.map(s => [
@@ -500,7 +500,7 @@ lineChart("fig-tokens", {
 		"N-ground2x": "grounded · cheap model grounds, sonnet patches",
 		"N-embed": "grounded · embedding retrieval (no agent)"
 	};
-	const NCOLOR = { oracle: "var(--s-f)", "LG-full": "var(--s-a)", "N-search": "var(--s-b)", "N-ground2x": "var(--s-e)", "N-embed": "var(--s-c)" };
+	const NCOLOR = { oracle: "#e66767", "LG-full": "#3987e5", "N-search": "#199e70", "N-ground2x": "#9085e9", "N-embed": "#c98500" };
 	const NDATA = [
 		{ model: "sonnet-4.5", cells: {
 			oracle: { ok: 43, rate: 95.6, low: 85.2, high: 98.8, note: "" },
@@ -517,7 +517,7 @@ lineChart("fig-tokens", {
 		}}
 	];
 	document.getElementById("legend-9").innerHTML = NCOND.map(c =>
-		'<span class="key"><span class="chip" style="background:' + NCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + NNAMES[c] + '</span>'
+		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + NCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + NNAMES[c] + '</span>'
 	).join("");
 	const W = 880, ROW = 64, T = 8, B = 40, L = 150, R = 24;
 	const H = T + NDATA.length * ROW + B;
@@ -526,25 +526,25 @@ lineChart("fig-tokens", {
 	let g = "";
 	for (const tick of [30, 40, 50, 60, 70, 80, 90, 100]) {
 		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
 	}
-	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">task success on grounded (id-free) instructions, 45 tasks per cell</text>';
+	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">task success on grounded (id-free) instructions, 45 tasks per cell</text>';
 	let marks = "", hits = "";
 	NDATA.forEach((row, ri) => {
 		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="var(--hairline)" stroke-width="1"/>';
-		g += '<text class="row-label" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
 		for (const c of NCOND) {
 			const cell = row.cells[c];
 			if (!cell) continue;
 			marks += '<line x1="' + xOf(cell.low) + '" x2="' + xOf(cell.high) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + NCOLOR[c] + '" stroke-width="1.5" opacity="0.4"/>';
-			marks += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="5.5" fill="' + NCOLOR[c] + '" stroke="var(--surface)" stroke-width="2"/>';
+			marks += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="5.5" fill="' + NCOLOR[c] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
 			hits += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="13" fill="transparent" data-tip="' + esc(c + ' — ' + NNAMES[c] + '\n' + row.model + ': ' + cell.rate + '% (' + cell.ok + '/45) · CI [' + cell.low + '%, ' + cell.high + '%]' + (cell.note ? '\n' + cell.note : '')) + '"/>';
 		}
 	});
 	const el = document.getElementById("fig-retrieval");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Grounded-instruction success per model on the retrieval ladder: the find_nodes search tool matches the oracle bound on sonnet and full-tree grounding on gemini at a median of one call; embedding retrieval sits at the lexical floor; cheap-model grounding preserves accuracy with 97% less frontier input." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Grounded-instruction success per model on the retrieval ladder: the find_nodes search tool matches the oracle bound on sonnet and full-tree grounding on gemini at a median of one call; embedding retrieval sits at the lexical floor; cheap-model grounding preserves accuracy with 97% less frontier input." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
 	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
 	table("tbl-retrieval", ["condition (model)", "success", "median input @ ~1000 nodes", "mechanism"],
 		[
@@ -567,7 +567,7 @@ lineChart("fig-tokens", {
 		"M-stateless": "no history, plain view (Study M)",
 		"O-stateless": "no history + positions"
 	};
-	const OCOLOR = { "K-view": "var(--s-f)", "O-view": "var(--s-e)", "M-stateless": "var(--s-c)", "O-stateless": "var(--s-b)" };
+	const OCOLOR = { "K-view": "#e66767", "O-view": "#9085e9", "M-stateless": "#c98500", "O-stateless": "#199e70" };
 	const ODATA = [
 		{ model: "sonnet-4.5", cells: {
 			"K-view": { ok: "80/80", rate: 100.0, low: 95.4, high: 100.0, end: "19/20", note: "" },
@@ -583,7 +583,7 @@ lineChart("fig-tokens", {
 		}}
 	];
 	document.getElementById("legend-10").innerHTML = OCOND.map(c =>
-		'<span class="key"><span class="chip" style="background:' + OCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + ONAMES[c] + '</span>'
+		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + OCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + ONAMES[c] + '</span>'
 	).join("");
 	const W = 880, ROW = 64, T = 8, B = 40, L = 150, R = 24;
 	const H = T + ODATA.length * ROW + B;
@@ -592,24 +592,24 @@ lineChart("fig-tokens", {
 	let g = "";
 	for (const tick of [84, 88, 92, 96, 100]) {
 		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
 	}
-	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">late-session (steps 9–12) per-step success — the window where statelessness fails (zoomed 84–100% scale)</text>';
+	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">late-session (steps 9–12) per-step success — the window where statelessness fails (zoomed 84–100% scale)</text>';
 	let marks = "", hits = "";
 	ODATA.forEach((row, ri) => {
 		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="var(--hairline)" stroke-width="1"/>';
-		g += '<text class="row-label" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
 		for (const c of OCOND) {
 			const cell = row.cells[c];
 			marks += '<line x1="' + xOf(cell.low) + '" x2="' + xOf(Math.min(cell.high, 100)) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + OCOLOR[c] + '" stroke-width="1.5" opacity="0.4"/>';
-			marks += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="5.5" fill="' + OCOLOR[c] + '" stroke="var(--surface)" stroke-width="2"/>';
+			marks += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="5.5" fill="' + OCOLOR[c] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
 			hits += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="13" fill="transparent" data-tip="' + esc(c + ' — ' + ONAMES[c] + '\n' + row.model + ' steps 9–12: ' + cell.rate + '% (' + cell.ok + ') · CI [' + cell.low + '%, ' + cell.high + '%]\nend-state intact ' + cell.end + (cell.note ? '\n' + cell.note : '')) + '"/>';
 		}
 	});
 	const el = document.getElementById("fig-positions");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Late-session per-step success for the history-by-positions two-by-two: position annotations barely move stateless accuracy while full history stays at the top; positions plus history is descriptively best but not significantly better." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Late-session per-step success for the history-by-positions two-by-two: position annotations barely move stateless accuracy while full history stays at the top; positions plus history is descriptively best but not significantly better." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
 	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
 	table("tbl-positions", ["policy (model)", "steps 9–12", "placements, steps 5–12", "end-state intact", "input per step"],
 		[
@@ -633,7 +633,7 @@ lineChart("fig-tokens", {
 		"P-system": "no history + examples in system prompt",
 		"M-stateless": "no history, no examples (Study M)"
 	};
-	const PCOLOR = { "K-view": "var(--s-f)", "P-canned": "var(--s-b)", "P-system": "var(--s-e)", "M-stateless": "var(--s-c)" };
+	const PCOLOR = { "K-view": "#e66767", "P-canned": "#199e70", "P-system": "#9085e9", "M-stateless": "#c98500" };
 	const PDATA = [
 		{ model: "sonnet-4.5", cells: {
 			"K-view": { ok: "80/80", rate: 100.0, low: 95.4, high: 100.0, end: "19/20", note: "" },
@@ -649,7 +649,7 @@ lineChart("fig-tokens", {
 		}}
 	];
 	document.getElementById("legend-11").innerHTML = PCOND.map(c =>
-		'<span class="key"><span class="chip" style="background:' + PCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + PNAMES[c] + '</span>'
+		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + PCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + PNAMES[c] + '</span>'
 	).join("");
 	const W = 880, ROW = 64, T = 8, B = 40, L = 150, R = 24;
 	const H = T + PDATA.length * ROW + B;
@@ -658,24 +658,24 @@ lineChart("fig-tokens", {
 	let g = "";
 	for (const tick of [84, 88, 92, 96, 100]) {
 		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
 	}
-	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">late-session (steps 9–12) per-step success (zoomed 84–100% scale)</text>';
+	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">late-session (steps 9–12) per-step success (zoomed 84–100% scale)</text>';
 	let marks = "", hits = "";
 	PDATA.forEach((row, ri) => {
 		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="var(--hairline)" stroke-width="1"/>';
-		g += '<text class="row-label" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
 		for (const c of PCOND) {
 			const cell = row.cells[c];
 			marks += '<line x1="' + xOf(cell.low) + '" x2="' + xOf(Math.min(cell.high, 100)) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + PCOLOR[c] + '" stroke-width="1.5" opacity="0.4"/>';
-			marks += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="5.5" fill="' + PCOLOR[c] + '" stroke="var(--surface)" stroke-width="2"/>';
+			marks += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="5.5" fill="' + PCOLOR[c] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
 			hits += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="13" fill="transparent" data-tip="' + esc(c + ' — ' + PNAMES[c] + '\n' + row.model + ' steps 9–12: ' + cell.rate + '% (' + cell.ok + ') · CI [' + cell.low + '%, ' + cell.high + '%]\nend-state intact ' + cell.end + (cell.note ? '\n' + cell.note : '')) + '"/>';
 		}
 	});
 	const el = document.getElementById("fig-teaching");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Late-session per-step success: stateless sessions with two canned worked examples match full history on both models, in both delivery framings, while plain stateless lags." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Late-session per-step success: stateless sessions with two canned worked examples match full history on both models, in both delivery framings, while plain stateless lags." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
 	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
 	table("tbl-teaching", ["policy (model)", "steps 9–12", "placements, steps 5–12", "end-state intact", "tokens/session"],
 		[
@@ -701,11 +701,11 @@ lineChart("fig-tokens", {
 		{ cond: "Q-search", name: "find_nodes recipe (barkup 0.4, untuned)", model: "gemini-3.5-flash", rate: [85.7, 46.2, 38.9], ok: ["12/14", "6/13", "7/18"] },
 		{ cond: "R-decomp", name: "app-side decomposition (Study R, both models)", model: "both", rate: [100.0, 100.0, 100.0], ok: ["28/28", "26/26", "36/36"] }
 	];
-	const QCOLOR = { "Q-view": "var(--s-e)", "Q-full": "var(--s-a)", "Q-search": "var(--s-b)", "R-decomp": "var(--s-f)" };
+	const QCOLOR = { "Q-view": "#9085e9", "Q-full": "#3987e5", "Q-search": "#199e70", "R-decomp": "#e66767" };
 	const QNAMES = { "Q-view": "oracle retrieval", "Q-full": "whole tree", "Q-search": "search recipe", "R-decomp": "decomposition (Study R)" };
 	document.getElementById("legend-12").innerHTML = Object.keys(QNAMES).map(c =>
-		'<span class="key"><span class="chip" style="background:' + QCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + QNAMES[c] + '</span>'
-	).join("") + '<span class="key">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + QCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + QNAMES[c] + '</span>'
+	).join("") + '<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
 	const W = 880, H = 360, L = 56, R = 215, T = 16, B = 44;
 	const iw = W - L - R, ih = H - T - B;
 	const BINS = ["2–3 targets", "4–6 targets", "7+ targets"];
@@ -714,11 +714,11 @@ lineChart("fig-tokens", {
 	let g = "";
 	for (const tick of [10, 25, 50, 75, 100]) {
 		const y = yOf(tick);
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + tick + '%</text>';
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + tick + '%</text>';
 	}
-	BINS.forEach((lab, i) => { g += '<text class="tick-label" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
-	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">task success by target count (45 fan-out tasks per condition per model)</text>';
+	BINS.forEach((lab, i) => { g += '<text fill="#c3c9d4" font-size="11.5" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
+	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">task success by target count (45 fan-out tasks per condition per model)</text>';
 	let marks = "", hits = "";
 	const endLabels = [];
 	for (const s of QDATA) {
@@ -727,7 +727,7 @@ lineChart("fig-tokens", {
 		const pts = s.rate.map((v, i) => ({ x: xs[i], y: yOf(v), v, i }));
 		marks += '<path d="' + pts.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ") + '" fill="none" stroke="' + QCOLOR[s.cond] + '" stroke-width="' + (both ? 3 : 2) + '" stroke-linejoin="round"' + (dashed ? ' stroke-dasharray="6 5"' : '') + '/>';
 		pts.forEach(p => {
-			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + QCOLOR[s.cond] + '" stroke="var(--surface)" stroke-width="2"/>';
+			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + QCOLOR[s.cond] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
 			hits += '<circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent" data-tip="' + esc(s.cond + ' — ' + s.name + '\n' + BINS[p.i] + ': ' + p.v + '% (' + s.ok[p.i] + ')') + '"/>';
 		});
 		const last = pts[pts.length - 1];
@@ -735,9 +735,9 @@ lineChart("fig-tokens", {
 	}
 	resolveLabels(endLabels, 15);
 	let labels = "";
-	for (const l of endLabels) labels += '<text class="series-label" x="' + l.x + '" y="' + l.y + '" fill="' + QCOLOR[l.c] + '">' + l.text + '</text>';
+	for (const l of endLabels) labels += '<text font-size="12" font-weight="700" x="' + l.x + '" y="' + l.y + '" fill="' + QCOLOR[l.c] + '">' + l.text + '</text>';
 	const el = document.getElementById("fig-fanout");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Fan-out task success falls with target count in every condition: even oracle retrieval drops to about half at seven-plus targets, and the models invert between view and whole-tree strategies." style="min-width:640px">' + g + marks + labels + hits + '</svg>';
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Fan-out task success falls with target count in every condition: even oracle retrieval drops to about half at seven-plus targets, and the models invert between view and whole-tree strategies." style="min-width:640px;display:block">' + g + marks + labels + hits + '</svg>';
 	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
 	table("tbl-fanout", ["condition (model)", "overall", "2–3", "4–6", "7+", "failure anatomy", "median input @ ~1000 nodes"],
 		[
@@ -761,11 +761,11 @@ lineChart("fig-tokens", {
 		{ cond: "S-system", model: "sonnet-4.5", tok: [2124, 2160, 2085, 2120, 2276, 2547, 2190], acc: "357/360 steps" },
 		{ cond: "S-system", model: "gemini-3.5-flash", tok: [2083, 2107, 2031, 2065, 2232, 2485, 2130], acc: "356/360 steps" }
 	];
-	const SCOLOR = { "S-view": "var(--s-f)", "S-system": "var(--s-e)" };
+	const SCOLOR = { "S-view": "#e66767", "S-system": "#9085e9" };
 	const SNAMES = { "S-view": "full history + fresh view per turn (K-view recipe)", "S-system": "no history + two worked examples (P-system recipe)" };
 	document.getElementById("legend-13").innerHTML = Object.keys(SNAMES).map(c =>
-		'<span class="key"><span class="chip" style="background:' + SCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + SNAMES[c] + '</span>'
-	).join("") + '<span class="key">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + SCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + SNAMES[c] + '</span>'
+	).join("") + '<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
 	const W = 880, H = 360, L = 64, R = 170, T = 16, B = 44;
 	const iw = W - L - R, ih = H - T - B;
 	const xOf = s => L + (iw * (s - 1)) / 35;
@@ -773,13 +773,13 @@ lineChart("fig-tokens", {
 	let g = "";
 	for (const tick of [0, 5000, 10000, 15000, 20000, 25000]) {
 		const y = yOf(tick);
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + (tick / 1000) + 'k</text>';
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + (tick / 1000) + 'k</text>';
 	}
 	for (const s of STEPS) {
-		g += '<text class="tick-label" x="' + xOf(s) + '" y="' + (H - B + 22) + '" text-anchor="middle">' + s + '</text>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + xOf(s) + '" y="' + (H - B + 22) + '" text-anchor="middle">' + s + '</text>';
 	}
-	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">median input tokens per step across a 36-edit session (accuracy at parity throughout)</text>';
+	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">median input tokens per step across a 36-edit session (accuracy at parity throughout)</text>';
 	let marks = "", hits = "";
 	const endLabels = [];
 	for (const s of SDATA) {
@@ -787,7 +787,7 @@ lineChart("fig-tokens", {
 		const pts = s.tok.map((v, i) => ({ x: xOf(STEPS[i]), y: yOf(v), v, i }));
 		marks += '<path d="' + pts.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ") + '" fill="none" stroke="' + SCOLOR[s.cond] + '" stroke-width="2" stroke-linejoin="round"' + (dashed ? ' stroke-dasharray="6 5"' : '') + '/>';
 		pts.forEach(p => {
-			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + SCOLOR[s.cond] + '" stroke="var(--surface)" stroke-width="2"/>';
+			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + SCOLOR[s.cond] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
 			hits += '<circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent" data-tip="' + esc(s.cond + ' — ' + SNAMES[s.cond] + '\n' + s.model + ', step ' + STEPS[p.i] + ': median ' + p.v.toLocaleString() + ' input tokens\nsession accuracy: ' + s.acc) + '"/>';
 		});
 		const last = pts[pts.length - 1];
@@ -798,10 +798,10 @@ lineChart("fig-tokens", {
 		if (endLabels[i].y - endLabels[i - 1].y < 14) endLabels[i].y = endLabels[i - 1].y + 14;
 	}
 	for (const lab of endLabels) {
-		g += '<text class="row-label" x="' + lab.x + '" y="' + lab.y + '">' + lab.text + '</text>';
+		g += '<text fill="#ffffff" font-size="12.5" x="' + lab.x + '" y="' + lab.y + '">' + lab.text + '</text>';
 	}
 	const el = document.getElementById("fig-horizon");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Line chart: median input tokens per step over a 36-edit session. Keep-history grows linearly to about 24k tokens by step 36; the stateless worked-examples recipe stays flat at about 2.1k. Accuracy is at parity throughout." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Line chart: median input tokens per step over a 36-edit session. Keep-history grows linearly to about 24k tokens by step 36; the stateless worked-examples recipe stays flat at about 2.1k. Accuracy is at parity throughout." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
 	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
 	table("tbl-horizon", ["recipe (model)", "steps 1–12", "steps 13–24", "steps 25–36", "end-state intact", "input tokens/session"],
 		[
@@ -815,8 +815,8 @@ lineChart("fig-tokens", {
 // --- data tables ---
 function table(mount, head, rows) {
 	document.getElementById(mount).innerHTML =
-		`<table><thead><tr>${head.map(h => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>` +
-		rows.map(r => `<tr>${r.map((v, i) => `<td>${v}</td>`).join("")}</tr>`).join("") +
+		`<table class="border-collapse mt-2.5 text-[0.85rem] tabular-nums"><thead><tr>${head.map((h, i) => `<th scope="col" class="border border-white/14 px-2.5 py-1 text-[#c3c9d4] font-600 ${i === 0 ? "text-left" : "text-right"}">${h}</th>`).join("")}</tr></thead><tbody>` +
+		rows.map(r => `<tr>${r.map((v, i) => `<td class="border border-white/14 px-2.5 py-1 ${i === 0 ? "text-left" : "text-right"}">${v}</td>`).join("")}</tr>`).join("") +
 		"</tbody></table>";
 }
 table("tbl-crossover",
@@ -845,7 +845,7 @@ table("tbl-tokens",
 		"T-system": "stateless + worked examples (P-system recipe)",
 		"T-notes": "stateless + examples + session-notes memo"
 	};
-	const TCOLOR = { "T-history": "var(--s-f)", "T-system": "var(--s-c)", "T-notes": "var(--s-e)" };
+	const TCOLOR = { "T-history": "#e66767", "T-system": "#c98500", "T-notes": "#9085e9" };
 	const TDATA = [
 		{ model: "sonnet-4.5", cells: {
 			"T-history": { cb: 100.0, cbOk: "80/80", ord: 98.1, ordOk: "157/160", end: "17/20" },
@@ -859,8 +859,8 @@ table("tbl-tokens",
 		}}
 	];
 	document.getElementById("legend-14").innerHTML = TARMS.map(c =>
-		'<span class="key"><span class="chip" style="background:' + TCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + TNAMES[c] + '</span>'
-	).join("") + '<span class="key">● = callback steps · ○ = ordinary steps</span>';
+		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + TCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + TNAMES[c] + '</span>'
+	).join("") + '<span class="inline-flex items-center gap-[7px]">● = callback steps · ○ = ordinary steps</span>';
 	const W = 880, ROW = 34, T = 8, B = 40, L = 210, R = 24;
 	const rows = [];
 	for (const m of TDATA) for (const c of TARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
@@ -870,24 +870,24 @@ table("tbl-tokens",
 	let g = "";
 	for (const tick of [0, 25, 50, 75, 100]) {
 		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
 	}
-	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">per-step success — callback steps (filled) vs ordinary self-contained steps (hollow)</text>';
+	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">per-step success — callback steps (filled) vs ordinary self-contained steps (hollow)</text>';
 	let marks = "", hits = "";
 	rows.forEach((row, ri) => {
 		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="var(--hairline)" stroke-width="1"/>';
-		g += '<text class="row-label" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + (row.model.includes("gemini") ? "gem" : "son") + '</text>';
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + (row.model.includes("gemini") ? "gem" : "son") + '</text>';
 		const c = row.cell;
 		marks += '<line x1="' + xOf(Math.min(c.cb, c.ord)) + '" x2="' + xOf(Math.max(c.cb, c.ord)) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + TCOLOR[row.arm] + '" stroke-width="2" opacity="0.45"/>';
-		marks += '<circle cx="' + xOf(c.ord) + '" cy="' + cy + '" r="5.5" fill="var(--surface)" stroke="' + TCOLOR[row.arm] + '" stroke-width="2.5"/>';
-		marks += '<circle cx="' + xOf(c.cb) + '" cy="' + cy + '" r="5.5" fill="' + TCOLOR[row.arm] + '" stroke="var(--surface)" stroke-width="2"/>';
+		marks += '<circle cx="' + xOf(c.ord) + '" cy="' + cy + '" r="5.5" fill="hsl(217,48%,15%)" stroke="' + TCOLOR[row.arm] + '" stroke-width="2.5"/>';
+		marks += '<circle cx="' + xOf(c.cb) + '" cy="' + cy + '" r="5.5" fill="' + TCOLOR[row.arm] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
 		hits += '<circle cx="' + xOf(c.cb) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + " — " + TNAMES[row.arm] + "\n" + row.model + " callback steps: " + c.cb + "% (" + c.cbOk + ")\nend-state intact " + c.end) + '"/>';
 		hits += '<circle cx="' + xOf(c.ord) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + " — " + TNAMES[row.arm] + "\n" + row.model + " ordinary steps: " + c.ord + "% (" + c.ordOk + ")") + '"/>';
 	});
 	const el = document.getElementById("fig-memo");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Dumbbell chart: the stateless recipe scores 100% on ordinary steps but 0% on callback steps; full history and the memo arm score 100% on both." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Dumbbell chart: the stateless recipe scores 100% on ordinary steps but 0% on callback steps; full history and the memo arm score 100% on both." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
 	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
 	table("tbl-memo", ["arm (model)", "callbacks", "fact / rule", "ordinary steps", "end-state intact", "input tokens/session"],
 		[
@@ -909,7 +909,7 @@ table("tbl-tokens",
 		"U-view2": "target + source in view",
 		"U-search": "skeleton + find_nodes (0.4 recipe)"
 	};
-	const UCOLOR = { "U-full": "var(--s-a)", "U-view1": "var(--s-c)", "U-view2": "var(--s-f)", "U-search": "var(--s-b)" };
+	const UCOLOR = { "U-full": "#3987e5", "U-view1": "#c98500", "U-view2": "#e66767", "U-search": "#199e70" };
 	const UDATA = [
 		{ model: "sonnet-4.5", cells: {
 			"U-full": { rate: 93.3, low: 82, high: 98, ok: "42/45", note: "3 structure-reads fumbled at ~1000 nodes" },
@@ -925,7 +925,7 @@ table("tbl-tokens",
 		}}
 	];
 	document.getElementById("legend-15").innerHTML = UARMS.map(c =>
-		'<span class="key"><span class="chip" style="background:' + UCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + UNAMES[c] + '</span>'
+		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + UCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + UNAMES[c] + '</span>'
 	).join("");
 	const W = 880, ROW = 34, T = 8, B = 40, L = 210, R = 24;
 	const rows = [];
@@ -936,22 +936,22 @@ table("tbl-tokens",
 	let g = "";
 	for (const tick of [0, 25, 50, 75, 100]) {
 		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
 	}
-	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">dependent-edit success by arm (45 tasks per cell; Wilson 95% intervals)</text>';
+	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">dependent-edit success by arm (45 tasks per cell; Wilson 95% intervals)</text>';
 	let marks = "", hits = "";
 	rows.forEach((row, ri) => {
 		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="var(--hairline)" stroke-width="1"/>';
-		g += '<text class="row-label" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + (row.model.includes("gemini") ? "gem" : "son") + '</text>';
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + (row.model.includes("gemini") ? "gem" : "son") + '</text>';
 		const c = row.cell;
 		marks += '<line x1="' + xOf(c.low) + '" x2="' + xOf(c.high) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + UCOLOR[row.arm] + '" stroke-width="1.5" opacity="0.4"/>';
-		marks += '<circle cx="' + xOf(c.rate) + '" cy="' + cy + '" r="5.5" fill="' + UCOLOR[row.arm] + '" stroke="var(--surface)" stroke-width="2"/>';
+		marks += '<circle cx="' + xOf(c.rate) + '" cy="' + cy + '" r="5.5" fill="' + UCOLOR[row.arm] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
 		hits += '<circle cx="' + xOf(c.rate) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + " — " + UNAMES[row.arm] + "\n" + row.model + ": " + c.rate + "% (" + c.ok + ") · CI [" + c.low + "%, " + c.high + "%]" + (c.note ? "\n" + c.note : "")) + '"/>';
 	});
 	const el = document.getElementById("fig-dependent");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Dot plot: dependent-edit success. The target-only view sits at 0% on both models; the both-nodes view and the whole tree sit at or near 100%; the search recipe sits at 82 to 84%." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Dot plot: dependent-edit success. The target-only view sits at 0% on both models; the both-nodes view and the whole tree sit at or near 100%; the search recipe sits at 82 to 84%." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
 	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
 	table("tbl-dependent", ["arm (model)", "all", "value-copy", "structure-read", "failure anatomy", "median input"],
 		[

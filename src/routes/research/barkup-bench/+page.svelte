@@ -4,9 +4,8 @@ import { onMount } from "svelte";
 // components
 import LinkButton from "$components/LinkButton.svelte";
 
-// dashboard content transplanted from the results artifact
-import benchBody from "./bench-body.html?raw";
-import "./bench.css";
+// dashboard content and chart data
+import bench from "./bench-content.json";
 
 // props
 let { data } = $props();
@@ -26,6 +25,11 @@ function formatDate(iso: string): string {
 		timeZone: "UTC",
 	});
 }
+
+// shared dashboard styles
+const eyebrowCls =
+	"font-mono text-[0.72rem] tracking-[0.14em] uppercase text-maximumYellow mb-1.5";
+const proseCls = "text-[#c3c9d4] max-w-[56rem]";
 </script>
 
 <div
@@ -41,19 +45,85 @@ function formatDate(iso: string): string {
       and the results are published as found, corrections included.
     </p>
     <p class="opacity-90 mb-4">
-      The series so far: twenty-one studies, more than 15,000 scored model
-      runs, four models, trees from 5 to 1,000 nodes, and editing sessions up
-      to 36 edits long. The findings compress to one sentence: give every node
-      a stable id, never make the model reproduce anything it is not changing,
-      and put everything it must read in front of it. Everything the benchmark
-      validated ships in the open-source barkup library, linked below with the
-      full article series.
+      The series so far: nineteen studies, more than 13,000 scored model runs,
+      four models, trees from 5 to 1,000 nodes, and editing sessions up to 36
+      edits long. The findings compress to one sentence: give every node a
+      stable id, and never make the model reproduce anything it is not
+      changing. Everything the benchmark validated ships in the open-source
+      barkup library, linked below with the full article series.
     </p>
   </header>
 
-  <div class="bench">
-    {@html benchBody}
-    <div id="tooltip" aria-hidden="true"></div>
+  <!-- results dashboard -->
+  <div class="text-16px leading-[1.55] text-white max-w-[1060px] pb-6">
+    <header class="max-w-[56rem]">
+      <p class={eyebrowCls}>{@html bench.header.eyebrow}</p>
+      <h2
+        class="text-[1.55rem] font-600 tracking-[-0.015em] leading-[1.3] mb-2"
+      >
+        {@html bench.header.lede}
+      </h2>
+      <p class="text-[0.92rem] {proseCls}">{@html bench.header.provenance}</p>
+    </header>
+
+    <div
+      class="grid grid-cols-[repeat(auto-fit,minmax(210px,1fr))] gap-3 mt-7.5 mb-3.5"
+    >
+      {#each bench.tiles as tile}
+        <div
+          class="bg-[hsl(217,44%,19%)] border border-white/14 rounded-md px-4.5 pt-4 pb-3.5"
+        >
+          <div
+            class="font-mono tabular-nums text-[1.85rem] font-700 leading-[1.1] tracking-[-0.01em]"
+          >
+            {@html tile.num}
+          </div>
+          <div class="text-[#c3c9d4] text-[0.85rem] mt-1.5">
+            {@html tile.cap}
+          </div>
+        </div>
+      {/each}
+    </div>
+
+    {#each bench.sections as section}
+      <section class="mt-11" id={section.id}>
+        <p class={eyebrowCls}>{@html section.eyebrow}</p>
+        <h2 class="text-[1.22rem] font-600 tracking-[-0.01em] mb-1">
+          {@html section.title}
+        </h2>
+        <p class="text-[0.95rem] {proseCls} mb-3.5">
+          {@html section.takeaway}
+        </p>
+        {#if section.legendId}
+          <div
+            class="flex flex-wrap gap-x-4.5 gap-y-2 mb-2.5 text-[0.85rem] text-[#c3c9d4]"
+            id={section.legendId}
+          ></div>
+        {/if}
+        {#if section.figure}
+          <div
+            class="overflow-x-auto font-mono tabular-nums"
+            id={section.figure.id}
+          ></div>
+        {/if}
+        {#if section.table}
+          <details class="mt-2.5">
+            <summary
+              class="cursor-pointer select-none text-[#c3c9d4] text-[0.85rem]"
+            >
+              {section.table.summary}
+            </summary>
+            <div id={section.table.id}></div>
+          </details>
+        {/if}
+      </section>
+    {/each}
+
+    <footer
+      class="mt-14 pt-4.5 border-t border-white/14 text-[0.88rem] {proseCls}"
+    >
+      {@html bench.footer}
+    </footer>
   </div>
 
   <section class="max-w-article">
@@ -73,7 +143,10 @@ function formatDate(iso: string): string {
             {#each pkg.links as link}
               <LinkButton
                 classes="text-yellow-50"
-                link={{ href: link.href, title: `${pkg.name} on ${link.label}` }}
+                link={{
+                  href: link.href,
+                  title: `${pkg.name} on ${link.label}`,
+                }}
               >
                 {link.label}
               </LinkButton>
@@ -107,3 +180,10 @@ function formatDate(iso: string): string {
     </ol>
   </section>
 </div>
+
+<!-- chart hover tooltip (positioned by bench-charts.js) -->
+<div
+  id="tooltip"
+  aria-hidden="true"
+  class="fixed pointer-events-none bg-[#fcfcfb] text-[#0b0b0b] font-mono text-[12px] leading-[1.45] px-2.5 py-[7px] rounded-[5px] max-w-[300px] opacity-0 transition-opacity duration-100 motion-reduce:transition-none z-10 whitespace-pre"
+></div>
