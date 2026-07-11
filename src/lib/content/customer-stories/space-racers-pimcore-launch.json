@@ -1,6 +1,6 @@
 {
 	"order": 18,
-	"draft": true,
+	"draft": false,
 	"banner": {
 		"heading": "Launching a Preschool Science Brand Online",
 		"subtitle": "Space Racers on Pimcore",
@@ -21,8 +21,8 @@
 	"title": "Launching a Preschool Science Brand Online: Space Racers on Pimcore",
 	"slug": "space-racers-pimcore-launch",
 	"thumbnailImage": {
-		"src": "",
-		"alt": "PLACEHOLDER: Space Racers thumbnail image to be sourced"
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/spaceracers.webp",
+		"alt": "Space Racers animated spaceship cadets"
 	},
 	"content": [
 		{
@@ -63,7 +63,14 @@
 		}
 	],
 	"testimonials": [],
-	"images": [],
+	"images": [
+		{
+			"alt": "Space Racers animated spaceship cadets",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/spaceracers.webp",
+			"width": "2048",
+			"height": "1152"
+		}
+	],
 	"perspectives": [
 		{
 			"quote": [
