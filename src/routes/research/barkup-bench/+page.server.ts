@@ -18,6 +18,7 @@ const seriesSlugs = [
 	"two-examples-replace-a-memory",
 	"barkup-0-5-deterministic-selection",
 	"the-thirty-sixth-edit",
+	"the-two-things-your-agent-cant-see",
 ];
 
 const articles = seriesSlugs
@@ -82,7 +83,7 @@ export function load() {
 		meta: {
 			title: "barkup-bench: Open Research on LLM Tree Editing",
 			description:
-				"barkup-bench is Lightning Jar's open, pre-registered benchmark series measuring how LLMs read and edit structured document trees: nineteen studies, more than 13,000 scored model runs, published as found, corrections included.",
+				"barkup-bench is Lightning Jar's open, pre-registered benchmark series measuring how LLMs read and edit structured document trees: twenty-one studies, more than 15,000 scored model runs, published as found, corrections included.",
 			robotsFollow: true,
 			analyticsOn: true,
 		},

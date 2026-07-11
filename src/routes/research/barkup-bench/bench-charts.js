@@ -836,4 +836,134 @@ table("tbl-tokens",
 	CONDITIONS.map(c => [`${c} — ${COND_NAMES[c]}`, ...DATA.tokens[c].map(v => v.toLocaleString())]));
 
 
+
+// --- Study T: callback dissociation dumbbells ---
+(function () {
+	const TARMS = ["T-history", "T-system", "T-notes"];
+	const TNAMES = {
+		"T-history": "full history (K-view recipe)",
+		"T-system": "stateless + worked examples (P-system recipe)",
+		"T-notes": "stateless + examples + session-notes memo"
+	};
+	const TCOLOR = { "T-history": "var(--s-f)", "T-system": "var(--s-c)", "T-notes": "var(--s-e)" };
+	const TDATA = [
+		{ model: "sonnet-4.5", cells: {
+			"T-history": { cb: 100.0, cbOk: "80/80", ord: 98.1, ordOk: "157/160", end: "17/20" },
+			"T-system": { cb: 0.0, cbOk: "0/80", ord: 100.0, ordOk: "160/160", end: "0/20" },
+			"T-notes": { cb: 100.0, cbOk: "80/80", ord: 99.4, ordOk: "159/160", end: "19/20" }
+		}},
+		{ model: "gemini-3.5-flash", cells: {
+			"T-history": { cb: 100.0, cbOk: "80/80", ord: 99.4, ordOk: "159/160", end: "19/20" },
+			"T-system": { cb: 0.0, cbOk: "0/80", ord: 100.0, ordOk: "160/160", end: "0/20" },
+			"T-notes": { cb: 100.0, cbOk: "80/80", ord: 100.0, ordOk: "160/160", end: "20/20" }
+		}}
+	];
+	document.getElementById("legend-14").innerHTML = TARMS.map(c =>
+		'<span class="key"><span class="chip" style="background:' + TCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + TNAMES[c] + '</span>'
+	).join("") + '<span class="key">● = callback steps · ○ = ordinary steps</span>';
+	const W = 880, ROW = 34, T = 8, B = 40, L = 210, R = 24;
+	const rows = [];
+	for (const m of TDATA) for (const c of TARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+	const H = T + rows.length * ROW + B + 16;
+	const iw = W - L - R;
+	const xOf = v => L + (v / 100) * iw;
+	let g = "";
+	for (const tick of [0, 25, 50, 75, 100]) {
+		const x = xOf(tick);
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--grid)" stroke-width="1"/>';
+		g += '<text class="tick-label" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
+	}
+	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">per-step success — callback steps (filled) vs ordinary self-contained steps (hollow)</text>';
+	let marks = "", hits = "";
+	rows.forEach((row, ri) => {
+		const cy = T + ri * ROW + ROW / 2;
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="var(--hairline)" stroke-width="1"/>';
+		g += '<text class="row-label" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + (row.model.includes("gemini") ? "gem" : "son") + '</text>';
+		const c = row.cell;
+		marks += '<line x1="' + xOf(Math.min(c.cb, c.ord)) + '" x2="' + xOf(Math.max(c.cb, c.ord)) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + TCOLOR[row.arm] + '" stroke-width="2" opacity="0.45"/>';
+		marks += '<circle cx="' + xOf(c.ord) + '" cy="' + cy + '" r="5.5" fill="var(--surface)" stroke="' + TCOLOR[row.arm] + '" stroke-width="2.5"/>';
+		marks += '<circle cx="' + xOf(c.cb) + '" cy="' + cy + '" r="5.5" fill="' + TCOLOR[row.arm] + '" stroke="var(--surface)" stroke-width="2"/>';
+		hits += '<circle cx="' + xOf(c.cb) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + " — " + TNAMES[row.arm] + "\n" + row.model + " callback steps: " + c.cb + "% (" + c.cbOk + ")\nend-state intact " + c.end) + '"/>';
+		hits += '<circle cx="' + xOf(c.ord) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + " — " + TNAMES[row.arm] + "\n" + row.model + " ordinary steps: " + c.ord + "% (" + c.ordOk + ")") + '"/>';
+	});
+	const el = document.getElementById("fig-memo");
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Dumbbell chart: the stateless recipe scores 100% on ordinary steps but 0% on callback steps; full history and the memo arm score 100% on both." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
+	table("tbl-memo", ["arm (model)", "callbacks", "fact / rule", "ordinary steps", "end-state intact", "input tokens/session"],
+		[
+			["T-history (sonnet)", "80/80", "40/40 · 40/40", "157/160", "17/20", "58,222"],
+			["T-system (sonnet)", "0/80", "0/40 · 0/40", "160/160", "0/20", "27,047"],
+			["T-notes (sonnet)", "80/80", "40/40 · 40/40", "159/160", "19/20", "27,515"],
+			["T-history (gemini)", "80/80", "40/40 · 40/40", "159/160", "19/20", "55,751"],
+			["T-system (gemini)", "0/80", "0/40 · 0/40", "160/160", "0/20", "26,245"],
+			["T-notes (gemini)", "80/80", "40/40 · 40/40", "160/160", "20/20", "26,813"]
+		]);
+})();
+
+// --- Study U: dependent-edit dot plot ---
+(function () {
+	const UARMS = ["U-full", "U-view1", "U-view2", "U-search"];
+	const UNAMES = {
+		"U-full": "whole tree in prompt",
+		"U-view1": "target-only minimal view",
+		"U-view2": "target + source in view",
+		"U-search": "skeleton + find_nodes (0.4 recipe)"
+	};
+	const UCOLOR = { "U-full": "var(--s-a)", "U-view1": "var(--s-c)", "U-view2": "var(--s-f)", "U-search": "var(--s-b)" };
+	const UDATA = [
+		{ model: "sonnet-4.5", cells: {
+			"U-full": { rate: 93.3, low: 82, high: 98, ok: "42/45", note: "3 structure-reads fumbled at ~1000 nodes" },
+			"U-view1": { rate: 0, low: 0, high: 8, ok: "0/45", note: "all 45 failures: valid patch, silently invented value" },
+			"U-view2": { rate: 100, low: 92, high: 100, ok: "45/45", note: "median input 1,780 tokens — 25× less than the full tree" },
+			"U-search": { rate: 84.4, low: 71, high: 92, ok: "38/45", note: "median 2 search calls; value-copies 18/24" }
+		}},
+		{ model: "gemini-3.5-flash", cells: {
+			"U-full": { rate: 100, low: 92, high: 100, ok: "45/45", note: "" },
+			"U-view1": { rate: 0, low: 0, high: 8, ok: "0/45", note: "all 45 failures: valid patch, silently invented value" },
+			"U-view2": { rate: 100, low: 92, high: 100, ok: "45/45", note: "median input 1,702 tokens" },
+			"U-search": { rate: 82.2, low: 69, high: 91, ok: "37/45", note: "significantly below U-full (8–0, p = 0.008); value-copies 18/24" }
+		}}
+	];
+	document.getElementById("legend-15").innerHTML = UARMS.map(c =>
+		'<span class="key"><span class="chip" style="background:' + UCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + UNAMES[c] + '</span>'
+	).join("");
+	const W = 880, ROW = 34, T = 8, B = 40, L = 210, R = 24;
+	const rows = [];
+	for (const m of UDATA) for (const c of UARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+	const H = T + rows.length * ROW + B + 16;
+	const iw = W - L - R;
+	const xOf = v => L + (v / 100) * iw;
+	let g = "";
+	for (const tick of [0, 25, 50, 75, 100]) {
+		const x = xOf(tick);
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--grid)" stroke-width="1"/>';
+		g += '<text class="tick-label" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
+	}
+	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">dependent-edit success by arm (45 tasks per cell; Wilson 95% intervals)</text>';
+	let marks = "", hits = "";
+	rows.forEach((row, ri) => {
+		const cy = T + ri * ROW + ROW / 2;
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="var(--hairline)" stroke-width="1"/>';
+		g += '<text class="row-label" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + (row.model.includes("gemini") ? "gem" : "son") + '</text>';
+		const c = row.cell;
+		marks += '<line x1="' + xOf(c.low) + '" x2="' + xOf(c.high) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + UCOLOR[row.arm] + '" stroke-width="1.5" opacity="0.4"/>';
+		marks += '<circle cx="' + xOf(c.rate) + '" cy="' + cy + '" r="5.5" fill="' + UCOLOR[row.arm] + '" stroke="var(--surface)" stroke-width="2"/>';
+		hits += '<circle cx="' + xOf(c.rate) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + " — " + UNAMES[row.arm] + "\n" + row.model + ": " + c.rate + "% (" + c.ok + ") · CI [" + c.low + "%, " + c.high + "%]" + (c.note ? "\n" + c.note : "")) + '"/>';
+	});
+	const el = document.getElementById("fig-dependent");
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Dot plot: dependent-edit success. The target-only view sits at 0% on both models; the both-nodes view and the whole tree sit at or near 100%; the search recipe sits at 82 to 84%." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
+	table("tbl-dependent", ["arm (model)", "all", "value-copy", "structure-read", "failure anatomy", "median input"],
+		[
+			["U-full (sonnet)", "42/45 (93.3%)", "24/24", "18/21", "3 structure-reads wrong", "44,594"],
+			["U-view1 (sonnet)", "0/45 (0%)", "0/24", "0/21", "45/45 valid-but-wrong invented values", "1,559"],
+			["U-view2 (sonnet)", "45/45 (100%)", "24/24", "21/21", "none", "1,780"],
+			["U-search (sonnet)", "38/45 (84.4%)", "18/24", "20/21", "reads missed, median 2 calls", "6,200"],
+			["U-full (gemini)", "45/45 (100%)", "24/24", "21/21", "none", "40,030"],
+			["U-view1 (gemini)", "0/45 (0%)", "0/24", "0/21", "45/45 valid-but-wrong invented values", "1,342"],
+			["U-view2 (gemini)", "45/45 (100%)", "24/24", "21/21", "none", "1,702"],
+			["U-search (gemini)", "37/45 (82.2%)", "18/24", "19/21", "reads missed, median 3 calls", "8,997"]
+		]);
+})();
+
 }

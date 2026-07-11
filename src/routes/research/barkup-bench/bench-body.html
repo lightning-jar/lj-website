@@ -1,9 +1,9 @@
 <div class="wrap">
 <header>
-	<p class="eyebrow">barkup-bench · pre-registered · corrected 2026-07-06 · studies F–S</p>
-	<h2 class="lede">Every id-stable interface works — until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree. Finding where to look costs one search call, and remembering the session costs two worked examples — even 36 edits in.</h2>
+	<p class="eyebrow">barkup-bench · pre-registered · corrected 2026-07-06 · studies F–U</p>
+	<h2 class="lede">Every id-stable interface works — until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree. Finding where to look costs one search call, and remembering the session costs two worked examples plus a memo — even 36 edits in. And the view is a correctness contract: what the model must read, it must be shown.</h2>
 	<p class="provenance">
-		Main study: 200 seeded tasks × 6 conditions × 4 models × 2 regimes, temperature&nbsp;0 (July&nbsp;2026), plus follow-up studies G (tool-history footgun), H (300–1000-node size extension), I/J (focused views: partial-context patches, JSON and HTML renderings), K (12-edit sessions under four serialization policies), L/N (grounding without ids, then the retrieval ladder), M/O/P (session memory, positional views, synthetic history), Q/R (fan-out edits and their fixes), and S (36-edit long sessions). <strong>All numbers below are protocol-v2 corrected</strong> — the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a href="https://github.com/vercel/ai/issues/16840">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted; Wilson&nbsp;95% intervals. Conditions:
+		Main study: 200 seeded tasks × 6 conditions × 4 models × 2 regimes, temperature&nbsp;0 (July&nbsp;2026), plus follow-up studies G (tool-history footgun), H (300–1000-node size extension), I/J (focused views: partial-context patches, JSON and HTML renderings), K (12-edit sessions under four serialization policies), L/N (grounding without ids, then the retrieval ladder), M/O/P (session memory, positional views, synthetic history), Q/R (fan-out edits and their fixes), S (36-edit long sessions), T (conversation-carried context), and U (document-carried dependencies). <strong>All numbers below are protocol-v2 corrected</strong> — the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a href="https://github.com/vercel/ai/issues/16840">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted; Wilson&nbsp;95% intervals. Conditions:
 		<span class="mono">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite,
 		<span class="mono">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite,
 		<span class="mono">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools,
@@ -28,6 +28,8 @@
 	<div class="tile"><div class="num">~½ of N</div><div class="cap">targets actually edited when one prompt asks for N edits — fan-out degrades every strategy, even oracle retrieval (Study Q)</div></div>
 	<div class="tile"><div class="num">90/90</div><div class="cap">fan-out tasks solved by app-side decomposition — 674/674 single-target subtasks, both models, at ⅓ the cost of a whole-tree prompt (Study R)</div></div>
 	<div class="tile"><div class="num">5.6×</div><div class="cap">what keeping history costs vs two worked examples across a 36-edit session (449k vs 81k input tokens) — accuracy at parity, no late-session decay (Study S)</div></div>
+	<div class="tile"><div class="num">0→80/80</div><div class="cap">callback steps ("the codename we settled on") rescued by an app-maintained memo: stateless fails all of them, three note lines recover every one at 1.02× the cost (Study T)</div></div>
+	<div class="tile"><div class="num">0/90</div><div class="cap">dependent edits solved against a target-only view — every failure a valid patch with a silently invented value; both-nodes views go 90/90 at 25× less input than the full tree (Study U)</div></div>
 </div>
 
 <section class="chart" id="sec-crossover">
@@ -167,7 +169,25 @@
 	<details class="datatable"><summary>Data table — per-third success, end-state, and tokens per session by recipe</summary><div id="tbl-horizon"></div></details>
 </section>
 
+<section class="chart" id="sec-memo">
+	<p class="eyebrow">Study T · conversation-carried context</p>
+	<h2>The one thing statelessness can't do — and the three note lines that fix it</h2>
+	<p class="takeaway">Every prior session study used self-contained requests, so Study T built the missing class: callback steps whose required fact lives only in earlier conversation — a declared codename a later rename must use, and a standing rule later inserts must apply unprompted (validated non-derivable from every pre-step tree). The dissociation is total: the stateless worked-examples recipe fails ALL 160 callback steps (0/80 per model) while scoring 160/160 on the ordinary steps of the very same sessions. The registered fix — an app-maintained "Session notes" block, a memo instead of a transcript — recovers 80/80 on both models, ties full history on every paired comparison, beats it on end-state integrity (19–20/20 vs 17–19/20), and costs 1.02× stateless against history's 2.1×. Session guidance, final form: fresh view per turn, two worked examples, and a memo of what the user declared.</p>
+	<div class="legend" id="legend-14"></div>
+	<div class="figure" id="fig-memo"></div>
+	<details class="datatable"><summary>Data table — callback and ordinary steps, end-state, and cost by arm</summary><div id="tbl-memo"></div></details>
+</section>
+
+<section class="chart" id="sec-dependent">
+	<p class="eyebrow">Study U · document-carried dependencies</p>
+	<h2>The view that can't see the answer doesn't fail — it makes something up</h2>
+	<p class="takeaway">Focused views assume the instruction carries every value an edit needs. Study U built the class where it doesn't: dependent edits ("set A's content to the same value as B's", "rename A to B's name") whose needed value is verified absent from the instruction AND from the rendered target-only view. That view failed all 90 cells across both models — and every single failure was a valid patch containing a silently invented value: zero refusals, zero invalid artifacts, 90/90 confident fictions that validate and apply. The fix is one line: put both mentioned nodes in the focus ids. That scores a perfect 90/90 — descriptively better than the whole tree, which fumbled 3 structure-reads at ~1000 nodes on sonnet — at ~1.7k median input tokens, 25× less than the full tree. The shipped search recipe can self-serve reads at 82–84% (median 2–3 calls), significantly short of full-tree parity on gemini (p = 0.008) and weakest on value-copies (75%): search grounds targets at oracle level, but reading values is the application's job. Focus ids = every node the request mentions.</p>
+	<div class="legend" id="legend-15"></div>
+	<div class="figure" id="fig-dependent"></div>
+	<details class="datatable"><summary>Data table — success by arm and kind, failure anatomy, and cost</summary><div id="tbl-dependent"></div></details>
+</section>
+
 <footer>
-	Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a href="https://github.com/kevinpeckham/barkup-bench">barkup-bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G–S addenda). Upstream bug report: <a href="https://github.com/vercel/ai/issues/16840">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts.
+	Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a href="https://github.com/kevinpeckham/barkup-bench">barkup-bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G–U addenda). Upstream bug report: <a href="https://github.com/vercel/ai/issues/16840">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts.
 </footer>
 </div>

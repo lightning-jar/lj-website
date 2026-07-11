@@ -41,12 +41,13 @@ function formatDate(iso: string): string {
       and the results are published as found, corrections included.
     </p>
     <p class="opacity-90 mb-4">
-      The series so far: nineteen studies, more than 13,000 scored model runs,
-      four models, trees from 5 to 1,000 nodes, and editing sessions up to 36
-      edits long. The findings compress to one sentence: give every node a
-      stable id, and never make the model reproduce anything it is not
-      changing. Everything the benchmark validated ships in the open-source
-      barkup library, linked below with the full article series.
+      The series so far: twenty-one studies, more than 15,000 scored model
+      runs, four models, trees from 5 to 1,000 nodes, and editing sessions up
+      to 36 edits long. The findings compress to one sentence: give every node
+      a stable id, never make the model reproduce anything it is not changing,
+      and put everything it must read in front of it. Everything the benchmark
+      validated ships in the open-source barkup library, linked below with the
+      full article series.
     </p>
   </header>
 
