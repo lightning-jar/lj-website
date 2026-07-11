@@ -1,6 +1,6 @@
 {
 	"order": 16,
-	"draft": true,
+	"draft": false,
 	"banner": {
 		"heading": "Pioneering Digital for United Rentals",
 		"subtitle": "The First Commercial Pimcore Implementation in North America, and E-Commerce for Equipment Rental",
