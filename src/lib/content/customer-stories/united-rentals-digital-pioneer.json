@@ -1,5 +1,5 @@
 {
-	"order": 16,
+	"order": 17,
 	"draft": false,
 	"banner": {
 		"heading": "Pioneering Digital for United Rentals",
@@ -89,7 +89,12 @@
 			}
 		}
 	],
-	"tags": ["Pimcore", "eCommerce", "SEO", "B2B"],
+	"tags": [
+		"Pimcore",
+		"eCommerce",
+		"SEO",
+		"B2B"
+	],
 	"notice": {
 		"label": "2026 update",
 		"text": "This is an older customer story, and the solution it describes was built on Pimcore. Since it was published, Pimcore's Community Edition has moved from GPLv3 to the source-available Pimcore Open Core License, and a community fork, OpenDXP, now continues the GPLv3 codebase. Because Pimcore is no longer open source, we no longer recommend it for most new implementations.",
