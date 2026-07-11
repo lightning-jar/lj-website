@@ -28,7 +28,7 @@ function formatDate(iso: string): string {
 
 // shared dashboard styles
 const eyebrowCls =
-	"font-mono text-[0.72rem] tracking-[0.14em] uppercase text-maximumYellow mb-1.5";
+	"font-mono text-12px tracking-[0.14em] uppercase text-maximumYellow mb-1.5";
 const proseCls = "text-[#c3c9d4] max-w-[56rem]";
 </script>
 
@@ -63,7 +63,7 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
       >
         {@html bench.header.lede}
       </h2>
-      <p class="text-[0.92rem] {proseCls}">{@html bench.header.provenance}</p>
+      <p class="text-16px {proseCls}">{@html bench.header.provenance}</p>
     </header>
 
     <div
@@ -78,7 +78,7 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
           >
             {@html tile.num}
           </div>
-          <div class="text-[#c3c9d4] text-[0.85rem] mt-1.5">
+          <div class="text-[#c3c9d4] text-15px mt-1.5">
             {@html tile.cap}
           </div>
         </div>
@@ -91,12 +91,12 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
         <h2 class="text-[1.22rem] font-600 tracking-[-0.01em] mb-1">
           {@html section.title}
         </h2>
-        <p class="text-[0.95rem] {proseCls} mb-3.5">
+        <p class="text-16px {proseCls} mb-3.5">
           {@html section.takeaway}
         </p>
         {#if section.legendId}
           <div
-            class="flex flex-wrap gap-x-4.5 gap-y-2 mb-2.5 text-[0.85rem] text-[#c3c9d4]"
+            class="flex flex-wrap gap-x-4.5 gap-y-2 mb-2.5 text-14px text-[#c3c9d4]"
             id={section.legendId}
           ></div>
         {/if}
@@ -109,7 +109,7 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
         {#if section.table}
           <details class="mt-2.5">
             <summary
-              class="cursor-pointer select-none text-[#c3c9d4] text-[0.85rem]"
+              class="cursor-pointer select-none text-[#c3c9d4] text-14px"
             >
               {section.table.summary}
             </summary>
@@ -120,7 +120,7 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
     {/each}
 
     <footer
-      class="mt-14 pt-4.5 border-t border-white/14 text-[0.88rem] {proseCls}"
+      class="mt-14 pt-4.5 border-t border-white/14 text-15px {proseCls}"
     >
       {@html bench.footer}
     </footer>

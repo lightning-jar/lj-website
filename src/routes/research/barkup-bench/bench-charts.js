@@ -165,7 +165,7 @@ lineChart("fig-tokens", {
 		[91, "#3987e5", "#ffffff"], [94, "#256abf", "#ffffff"], [100, "#184f95", "#ffffff"]
 	];
 	const stepOf = v => RAMP.find(([max]) => v <= max);
-	let html = `<table class="border-collapse tabular-nums text-[0.9rem]"><thead><tr><th scope="col" class="px-3.5 py-2 text-left text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">model</th>${CONDITIONS.map(c => `<th scope="col" class="px-3.5 py-2 text-right text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">${c}</th>`).join("")}</tr></thead><tbody>`;
+	let html = `<table class="border-collapse tabular-nums text-15px"><thead><tr><th scope="col" class="px-3.5 py-2 text-left text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">model</th>${CONDITIONS.map(c => `<th scope="col" class="px-3.5 py-2 text-right text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">${c}</th>`).join("")}</tr></thead><tbody>`;
 	for (const row of DATA.perModel) {
 		html += `<tr><td class="px-3.5 py-2 text-left border-2 border-[hsl(217,48%,15%)]">${row.model}</td>`;
 		for (const c of CONDITIONS) {
@@ -815,7 +815,7 @@ lineChart("fig-tokens", {
 // --- data tables ---
 function table(mount, head, rows) {
 	document.getElementById(mount).innerHTML =
-		`<table class="border-collapse mt-2.5 text-[0.85rem] tabular-nums"><thead><tr>${head.map((h, i) => `<th scope="col" class="border border-white/14 px-2.5 py-1 text-[#c3c9d4] font-600 ${i === 0 ? "text-left" : "text-right"}">${h}</th>`).join("")}</tr></thead><tbody>` +
+		`<table class="border-collapse mt-2.5 text-14px tabular-nums"><thead><tr>${head.map((h, i) => `<th scope="col" class="border border-white/14 px-2.5 py-1 text-[#c3c9d4] font-600 ${i === 0 ? "text-left" : "text-right"}">${h}</th>`).join("")}</tr></thead><tbody>` +
 		rows.map(r => `<tr>${r.map((v, i) => `<td class="border border-white/14 px-2.5 py-1 ${i === 0 ? "text-left" : "text-right"}">${v}</td>`).join("")}</tr>`).join("") +
 		"</tbody></table>";
 }
