@@ -1,13 +1,13 @@
 {
 	"meta": {
-		"description": "Lightning Jar is a design and build technology studio handcrafting websites, web applications and custom AI applications for businesses and organizations.",
+		"description": "Lightning Jar is a design, build, and brand technology studio handcrafting websites, web applications, custom AI applications, and brand systems for businesses and organizations.",
 		"title": "Lightning Jar",
 		"robotsFollow": true,
 		"analyticsOn": true
 	},
 	"topics": [
 		{
-			"heading": "Design & Build Technology Studio",
+			"heading": "Design, Build & Brand Technology Studio",
 			"text": [
 				"For twenty-five years, we've been too busy designing and building websites, web applications, and custom software to put the proper time and attention into our own damn marketing. That's not just an excuse. It is also a point of pride.",
 				"Now the ground is moving again. We're in a new era defined by large language models, the largest shift we've seen since the web itself. Our answer is the same as it has always been: build, don't wait. Today that means leading with open research and practical guidance for developers of LLM applications."
@@ -93,6 +93,24 @@
 					"label": "SEO In The Age of LLMs",
 					"href": "/blog/seo-is-changing",
 					"title": "SEO In The Age of LLMs"
+				}
+			}
+		},
+		{
+			"heading": "Your Brand Is the Experience",
+			"text": [
+				"In the digital age, your brand is not what you say about yourself. It is what customers experience: every page, every search result, every checkout, every reply. The way customers interact with you becomes your brand. That is why we practice brand and digital as one discipline, from positioning and tone of voice to the interfaces that carry them."
+			],
+			"ctas": {
+				"primary": {
+					"label": "See the Brand Work",
+					"href": "/customer-stories/baloo-brand-strategy",
+					"title": "Finding Baloo's Brand"
+				},
+				"secondary": {
+					"label": "Our Services",
+					"href": "/services",
+					"title": "Services"
 				}
 			}
 		},

@@ -15,7 +15,7 @@ const aboutSection = {
 			href: "/about",
 			title: "About Lightning Jar",
 			description:
-				"Who we are, what we believe, and twenty-five years of history: a design and build technology studio, independent since 2001.",
+				"Who we are, what we believe, and twenty-five years of history: a design, build, and brand technology studio, independent since 2001.",
 			date: "",
 		},
 	],

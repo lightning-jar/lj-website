@@ -1,19 +1,19 @@
 {
 	"meta": {
 		"title": "About Lightning Jar",
-		"description": "Lightning Jar is a design and build technology studio, independent since 2001. We design and build websites, web applications, and custom software, publish open research for developers of LLM applications, and have shipped work for everyone from ambitious startups to Toyota, GE, HBO, and Spotify.",
+		"description": "Lightning Jar is a design, build, and brand technology studio, independent since 2001. We design and build websites, web applications, and custom software, publish open research for developers of LLM applications, and have shipped work for everyone from ambitious startups to Toyota, GE, HBO, and Spotify.",
 		"robotsFollow": true,
 		"analyticsOn": true
 	},
 	"banner": {
 		"heading": "About Lightning Jar",
-		"subheading": "A design and build technology studio, independent since 2001."
+		"subheading": "A design, build, and brand technology studio, independent since 2001."
 	},
 	"sections": [
 		{
 			"heading": "Who We Are",
 			"text": [
-				"Lightning Jar is a design and build technology studio. We design, build, and steward websites, web applications, and custom software for businesses and organizations, and a growing share of our work is helping teams adapt their marketing technology and sales tools to the era of large language models.",
+				"Lightning Jar is a design, build, and brand technology studio. We design, build, and steward websites, web applications, and custom software for businesses and organizations, and a growing share of our work is helping teams adapt their marketing technology and sales tools to the era of large language models.",
 				"We have been at this since late 2001, when we started planning the business under our original name, Siite Interactive, and put our first website (just a splash page then) live before the year was out. Today we are a fully remote team, and were one before the pandemic made it fashionable, with roots in Philadelphia, New York, and South Texas. The studio is led by Principal and Chief Technologist Kevin Peckham and Director of Technology Alex Cantu."
 			]
 		},
