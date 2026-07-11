@@ -6,7 +6,7 @@ description: "Study V, the twenty-second in our pre-registered benchmark series 
 date: 2026-07-11T16:00:00Z
 draft: false
 tags: [ai, agents, llm, open-source, barkup, benchmarks]
-image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/rabbit-judge.webp
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/rabbit-judge-02.webp
 imageDescription: A watercolor illustration of a stern rabbit judge in a Victorian suit and cravat, one finger raised, presiding over a handwritten document
 author: Kevin Peckham
 quote:
