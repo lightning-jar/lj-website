@@ -1,6 +1,6 @@
 {
 	"order": 13,
-	"draft": true,
+	"draft": false,
 	"banner": {
 		"heading": "Building a Rebel Brand for Blue Duck Scooters",
 		"subtitle": "Positioning, a \"Fly Wild\" Brand Idea, and an Iconoclast Launch Campaign for Micromobility",
@@ -21,8 +21,8 @@
 	"title": "Building a Rebel Brand for Blue Duck Scooters: Positioning, a \"Fly Wild\" Brand Idea, and an Iconoclast Launch Campaign for Micromobility",
 	"slug": "blue-duck-scooters-rebel-brand",
 	"thumbnailImage": {
-		"src": "",
-		"alt": "PLACEHOLDER: Blue Duck Scooters thumbnail image to be sourced"
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/blue-duck-fly-wild-hero.webp",
+		"alt": "Blue Duck Scooters Fly Wild campaign hero"
 	},
 	"content": [
 		{
@@ -62,7 +62,14 @@
 		}
 	],
 	"testimonials": [],
-	"images": [],
+	"images": [
+		{
+			"alt": "Blue Duck Scooters Fly Wild campaign hero",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/blue-duck-fly-wild-hero.webp",
+			"width": "1600",
+			"height": "900"
+		}
+	],
 	"perspectives": [
 		{
 			"quote": [
