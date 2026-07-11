@@ -976,7 +976,7 @@ table("tbl-tokens",
 		"V-conv-memo": "goal in the application memo",
 		"V-conv-nomemo": "goal said earlier · no memo"
 	};
-	const VCOLOR = { "V-doc-view1": "var(--s-c)", "V-doc-view2": "var(--s-b)", "V-conv-memo": "var(--s-f)", "V-conv-nomemo": "var(--s-e)" };
+	const VCOLOR = { "V-doc-view1": "#c98500", "V-doc-view2": "#199e70", "V-conv-memo": "#e66767", "V-conv-nomemo": "#9085e9" };
 	// Primary judge (gpt-5.4): wins / losses / ties vs V-instr control, 30 tasks per cell.
 	const VDATA = [
 		{ model: "sonnet-4.5", cells: {
@@ -999,22 +999,23 @@ table("tbl-tokens",
 	let g = "";
 	for (const tick of [0, 10, 20, 30]) {
 		const x = L + (tick / 30) * iw;
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--grid)" stroke-width="1"/>';
-		g += '<text class="tick-label" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '</text>';
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '</text>';
 	}
-	g += '<text class="axis-label" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">judged comparisons vs control (30 per cell): wins, then ties, then losses</text>';
+	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">judged comparisons vs control (30 per cell): wins, then ties, then losses</text>';
 	let marks = "", hits = "";
 	rows.forEach((row, ri) => {
 		const cy = T + ri * ROW + ROW / 2;
-		g += '<text class="row-label" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + (row.model.includes("gemini") ? "gem" : "son") + '</text>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + (row.model.includes("gemini") ? "gem" : "son") + '</text>';
 		const c = row.cell;
 		const seg = (from, n, opacity) => {
 			const x1 = L + (from / 30) * iw, wpx = (n / 30) * iw;
 			return '<rect x="' + x1 + '" y="' + (cy - 9) + '" width="' + Math.max(wpx, 0) + '" height="18" fill="' + VCOLOR[row.arm] + '" opacity="' + opacity + '" rx="3"/>';
 		};
 		marks += seg(0, c.w, 1);
-		marks += seg(c.w, c.t, 0.45);
-		marks += seg(c.w + c.t, c.l, 0.15);
+		marks += seg(c.w, c.t, 0.5);
+		const lx = L + ((c.w + c.t) / 30) * iw, lw = (c.l / 30) * iw;
+		marks += '<rect x="' + lx + '" y="' + (cy - 9) + '" width="' + Math.max(lw, 0) + '" height="18" fill="rgba(255,255,255,0.16)" rx="3"/>';
 		hits += '<rect x="' + L + '" y="' + (cy - 12) + '" width="' + iw + '" height="24" fill="transparent" data-tip="' + esc(row.arm + " — " + VNAMES[row.arm] + "\n" + row.model + " vs control: " + c.w + " wins / " + c.t + " ties / " + c.l + " losses") + '"/>';
 	});
 	const el = document.getElementById("fig-goals");
