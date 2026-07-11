@@ -1,5 +1,5 @@
 {
-	"order": 16,
+	"order": 17,
 	"draft": false,
 	"banner": {
 		"heading": "Digital Agency of Record for Avaya",
@@ -90,5 +90,10 @@
 			}
 		}
 	],
-	"tags": ["Agency of Record", "UX Strategy", "Enterprise", "eCommerce"]
+	"tags": [
+		"Agency of Record",
+		"UX Strategy",
+		"Enterprise",
+		"eCommerce"
+	]
 }

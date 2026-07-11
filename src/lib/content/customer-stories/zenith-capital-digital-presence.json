@@ -1,5 +1,5 @@
 {
-	"order": 12,
+	"order": 13,
 	"draft": false,
 	"banner": {
 		"heading": "A Modern Digital Presence for Zenith Capital Partners",
@@ -89,5 +89,10 @@
 			}
 		}
 	],
-	"tags": ["Websites", "Branding", "Financial Services", "SvelteKit"]
+	"tags": [
+		"Websites",
+		"Branding",
+		"Financial Services",
+		"SvelteKit"
+	]
 }

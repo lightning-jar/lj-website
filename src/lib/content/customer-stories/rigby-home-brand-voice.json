@@ -1,0 +1,84 @@
+{
+	"order": 12,
+	"draft": true,
+	"banner": {
+		"heading": "Finding a Bold, Real Voice for a New Home Brand",
+		"subtitle": "Brand Strategy, Tone of Voice, and Content Strategy for Rigby Home",
+		"subheading": "Rigby Home is a direct-to-consumer tableware brand, a curated collection of beautifully designed, functional pieces handcrafted in Portugal, created for people making a home that is authentically their own. Ahead of its launch, Rigby partnered with Lightning Jar to turn a strong brand idea into a brand that could actually go to market: a clear positioning, a distinctive tone of voice, and a messaging and content strategy ready to carry the brand into the world."
+	},
+	"meta": {
+		"title": "A Bold, Real Voice for Rigby Home | Customer Story",
+		"description": "Ahead of its launch, Rigby Home partnered with Lightning Jar on brand strategy and verbal identity: a brand foundation, a tone of voice brought to life as a real character, copywriting guidelines, and a launch-ready messaging and content strategy."
+	},
+	"customer": {
+		"id": "rigby-home",
+		"category": "Home & Tableware",
+		"name": "Rigby Home",
+		"logo": "",
+		"thumb": ""
+	},
+	"excerpt": "Rigby Home is a direct-to-consumer tableware brand, a curated collection of beautifully designed, functional pieces handcrafted in Portugal, created for people making a home that is authentically their own. Ahead of its launch, Rigby partnered with Lightning Jar to turn a strong brand idea into a brand that could actually go to market: a clear positioning, a distinctive tone of voice, and a messaging and content strategy ready to carry the brand into the world. The result gave a young company something rare in a crowded, picture-perfect category: a point of view, and a voice bold and real enough to cut through.",
+	"title": "Finding a Bold, Real Voice for a New Home Brand: Brand Strategy, Tone of Voice, and Content Strategy for Rigby Home",
+	"slug": "rigby-home-brand-voice",
+	"thumbnailImage": {
+		"src": "",
+		"alt": "PLACEHOLDER: Rigby Home thumbnail image to be sourced"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"Rigby Home is a direct-to-consumer tableware brand: a curated collection of beautifully designed, functional pieces handcrafted in Portugal, created for people making a home that is authentically their own."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"text": [
+				"Rigby was entering one of the most visually saturated corners of consumer marketing. Home and tableware brands live on Instagram, where a certain kind of overhead, over-styled, life-removed perfection had become the cliche. For a new brand preparing to launch, blending into that sea of sameness would have been fatal.",
+				"Rigby had a meaningful idea at its core, a belief in helping independent-minded people shape a home that is truly their own. But an idea is not yet a brand. To launch, the company needed that idea translated into a foundation the whole business could build on, a voice that felt like a real person rather than a marketing department, and a concrete plan for what to say and show across the channels where customers would first meet it. And it needed all of that on a timeline, ready for a summer launch. Rigby needed a partner who could take it from a heartfelt concept to a launch-ready brand with a personality customers would remember."
+			]
+		},
+		{
+			"heading": "Solution",
+			"subheading": "From Foundation to Voice to Plan",
+			"text": [
+				"Lightning Jar approached Rigby as a brand strategy and verbal-identity engagement, moving from foundation to voice to a ready-to-use content plan.",
+				"<strong>A brand foundation.</strong> Lightning Jar helped define Rigby's brand framework: a brand idea centered on being \"at home with yourself\" and the freedom that comes with it, a clearly drawn target audience of independent people settling into lives and homes that are uniquely their own, a value proposition offering a fairly priced and beautiful way to create the home they dream of, and a product built around a curated, functional, beautifully made tableware collection.",
+				"<strong>A brand voice, defined in a workshop.</strong> Through a stakeholder workshop, Lightning Jar guided Rigby to its tone of voice, landing on a primary and secondary character: encouraging, but also courageous. Rather than leaving that as adjectives on a page, Lightning Jar brought the voice to life as a vivid, human character with likes, dislikes, and a point of view, someone honest and warm who tells it like it is, cares deeply about design and about you, and never takes herself too seriously. That character became a practical test the team could apply to any piece of copy: would she say this?",
+				"<strong>Copywriting guidelines.</strong> Lightning Jar translated the voice into clear, usable writing principles (be conversational and candid, be a little bold, be opinionated because you care, be encouraging and supportive, and stay humble and human), each illustrated with real example copy the team could learn from.",
+				"<strong>A messaging and content strategy.</strong> Finally, Lightning Jar built the plan for taking the brand to market: a messaging strategy grounded in real consumer drivers, organized into content pillars spanning product, customer-generated content, lifestyle, and brand storytelling. Within each, Lightning Jar developed concrete content ideas for Instagram, website, and blog, a website value proposition, a brand hashtag, and a clear visual direction that rejected the category's over-styled cliches in favor of real, imperfect, in-the-moment imagery of actual life at home."
+			]
+		},
+		{
+			"heading": "Results",
+			"text": [
+				"A complete brand foundation, from brand idea and audience to value proposition and product, ready for the whole company to build on.",
+				"A distinctive, memorable tone of voice, expressed as a real character the team could write in confidently, not just a list of adjectives.",
+				"Practical copywriting guidelines with examples, so anyone creating content could sound like Rigby.",
+				"A launch-ready messaging and content strategy, with content pillars, concrete post and page ideas, a brand hashtag, and a clear visual direction.",
+				"A brand built to stand apart in a picture-perfect category by being bold, honest, and real."
+			]
+		}
+	],
+	"testimonials": [],
+	"images": [],
+	"perspectives": [
+		{
+			"quote": [
+				"Adjectives do not write copy. That is why we turned Rigby's voice into a person: someone honest and warm, who cares about design and about you, and never takes herself too seriously. Once she existed, every draft got the same test: would she say this? A brand voice you can interrogate is a brand voice a team can actually use."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal & Chief Technologist",
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/kevin-peckham-sm.webp",
+					"width": "63",
+					"height": "63"
+				}
+			}
+		}
+	],
+	"tags": ["Brand Strategy", "Tone of Voice", "Content Strategy", "Consumer Products"]
+}

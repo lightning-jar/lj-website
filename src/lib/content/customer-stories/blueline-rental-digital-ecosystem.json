@@ -1,5 +1,5 @@
 {
-	"order": 14,
+	"order": 15,
 	"draft": false,
 	"banner": {
 		"heading": "One Platform, Many Channels",
@@ -107,5 +107,10 @@
 			}
 		}
 	],
-	"tags": ["Architecture", "eCommerce", "PIM", "B2B"]
+	"tags": [
+		"Architecture",
+		"eCommerce",
+		"PIM",
+		"B2B"
+	]
 }

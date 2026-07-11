@@ -1,5 +1,5 @@
 {
-	"order": 13,
+	"order": 14,
 	"draft": false,
 	"banner": {
 		"heading": "A Single Source of Truth",
@@ -88,5 +88,10 @@
 			}
 		}
 	],
-	"tags": ["Pimcore", "PIM", "Data Operations", "Education"]
+	"tags": [
+		"Pimcore",
+		"PIM",
+		"Data Operations",
+		"Education"
+	]
 }
