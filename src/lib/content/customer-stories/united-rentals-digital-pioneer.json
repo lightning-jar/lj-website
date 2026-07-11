@@ -1,0 +1,101 @@
+{
+	"order": 16,
+	"draft": true,
+	"banner": {
+		"heading": "Pioneering Digital for United Rentals",
+		"subtitle": "The First Commercial Pimcore Implementation in North America, and E-Commerce for Equipment Rental",
+		"subheading": "United Rentals is the largest equipment rental company in the world, and its digital front door, UnitedRentals.com, was one of the most ambitious enterprise web platforms in its industry. Beginning in 2011 and launching in 2012, Lightning Jar helped build the site on Pimcore, understood to be the first commercial Pimcore implementation in North America, and then served as United Rentals' digital partner across many years and many projects that followed."
+	},
+	"meta": {
+		"title": "Pioneering Digital for United Rentals | Customer Story",
+		"description": "Beginning in 2011, Lightning Jar helped build UnitedRentals.com on Pimcore, understood to be the first commercial Pimcore implementation in North America, and served as the world's largest equipment rental company's digital partner for years of e-commerce, SEO, and platform operations."
+	},
+	"customer": {
+		"id": "united-rentals",
+		"category": "Equipment Rental",
+		"name": "United Rentals",
+		"logo": "",
+		"thumb": ""
+	},
+	"excerpt": "United Rentals is the largest equipment rental company in the world, and its digital front door, UnitedRentals.com, was one of the most ambitious enterprise web platforms in its industry. Beginning in 2011 and launching in 2012, Lightning Jar helped build the site on Pimcore, understood to be the first commercial Pimcore implementation in North America, and then served as United Rentals' digital partner across many years and many projects that followed. Along the way, the work helped bring a true e-commerce experience to a traditional, relationship-driven B2B category for the first time.",
+	"title": "Pioneering Digital for United Rentals: The First Commercial Pimcore Implementation in North America, and E-Commerce for Equipment Rental",
+	"slug": "united-rentals-digital-pioneer",
+	"thumbnailImage": {
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/boom-lift.webp",
+		"alt": "Boom lift equipment against the sky"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"United Rentals operates at enormous scale: hundreds of locations, an immense equipment catalog, and a customer base of contractors and industrial buyers who increasingly expect to research and transact online."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"text": [
+				"Keeping UnitedRentals.com and its family of digital properties current and competitive was not a one-time project but a permanent commitment. The site had to evolve as fast as the company's positioning, product offerings, e-commerce ambitions, technology, and go-to-market strategy.",
+				"Two challenges ran in parallel. First, United Rentals was making a genuinely pioneering platform choice, building its site on Pimcore, an open-source platform then almost unknown in North American enterprise use, which meant there was no well-worn playbook to follow for architecting, operating, and supporting it at this scale. Second, the equipment rental industry had barely been touched by e-commerce. Renting equipment was a phone-and-relationship business, and bringing an online shopping and checkout experience to it meant reshaping expectations in a category that had never had one. United Rentals needed a partner who could do both the frontier work and the day-to-day operational work, and stay for the long haul."
+			]
+		},
+		{
+			"heading": "Solution",
+			"subheading": "Frontier Work and the Long Haul",
+			"text": [
+				"Lightning Jar functioned as an embedded, cross-functional digital team for United Rentals, spanning strategy, technology operations, and continuous improvement.",
+				"<strong>A rigorously chosen platform.</strong> The Pimcore decision wasn't a hunch. It was the outcome of a formal audit and research project. Lightning Jar evaluated twelve CMS and PIM platforms against United Rentals' needs, and Pimcore rose to the top for concrete reasons: an open-source license, a foundation on the PHP Zend framework the client had already invested resources in, and, decisively, a hands-on benchmark. Three developers each tackled three real implementation challenges across the top three finalists. The Pimcore solution required less time and less code and was rated the easiest to work with, despite an initial learning curve. The pioneering platform choice, in other words, was earned on evidence.",
+				"<strong>A Pimcore-powered platform.</strong> Starting in 2011 and launching in 2012, Lightning Jar helped build UnitedRentals.com on Pimcore, understood to be the first commercial Pimcore implementation in North America, at a time when the platform was barely known in the region. Beyond the build, Lightning Jar owned the ongoing platform operations that keep an enterprise site healthy: Pimcore release management, staging and production environment maintenance, code management through a shared repository, managed-hosting coordination, patching and upgrades, performance optimization, and downtime prevention, plus Pimcore and CMS user support and training for the United Rentals team.",
+				"<strong>Pioneering B2B e-commerce.</strong> Lightning Jar helped bring an e-commerce experience to equipment rental: improving and simplifying the online shopping and checkout flow, working to get deals \"off the street\" faster, and pursuing deeper CRM integration and closed-loop ROI tracking from campaign to checkout. The result introduced consumer-grade convenience to a category that had run on phone calls and paperwork.",
+				"<strong>Search, analytics, and growth.</strong> As the top of United Rentals' sales funnel, search mattered enormously. Lightning Jar ran ongoing SEO and SEM programs (continuous keyword monitoring at national and local levels, competitor tracking, landing-page and conversion optimization, and executive-level reporting) alongside analytics and performance reporting used to refine audiences, diagnose UX and content pain points, and optimize conversion.",
+				"<strong>Continuous enhancement.</strong> Rather than occasional redesigns, Lightning Jar delivered a steady cadence of enhancements and content updates: homepage marquee and campaign messaging, new SEO landing pages, UX and visual design improvements, and new initiatives, coordinated against the marketing calendar and evolving business goals, with the flexibility to reallocate a dedicated team on the fly as priorities shifted.",
+				"<strong>Integration and standards.</strong> Lightning Jar coordinated integration with third-party technology vendors and with United Rentals' ERP, CRM, and other systems, and maintained the digital style guides and brand standards that kept a large, fast-moving property consistent."
+			]
+		},
+		{
+			"heading": "Results",
+			"text": [
+				"A pioneering, Pimcore-powered enterprise platform for the world's largest equipment rental company, chosen through a rigorous twelve-platform evaluation, built in 2011 to 2012, and understood to be the first commercial Pimcore implementation in North America.",
+				"One of the first true e-commerce experiences in the equipment rental industry, bringing online shopping and checkout to a traditionally offline, relationship-driven category.",
+				"A continuously optimized, high-traffic website kept fast, stable, and secure through disciplined Pimcore operations and release management.",
+				"Sustained organic and paid search performance at the top of the sales funnel, backed by analytics and executive reporting.",
+				"A durable, multi-year, many-project partnership that treated the digital platform as a living product, not a one-time build."
+			]
+		}
+	],
+	"testimonials": [],
+	"images": [
+		{
+			"alt": "Boom lift equipment against the sky",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/boom-lift.webp",
+			"width": "2400",
+			"height": "1800"
+		}
+	],
+	"perspectives": [
+		{
+			"quote": [
+				"People ask where our benchmark habit comes from. It comes from 2011. Before United Rentals bet its platform on Pimcore, we evaluated twelve candidates and then had three developers build the same three real challenges on the three finalists. The winner needed less time and less code. We have been settling arguments that way ever since."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal & Chief Technologist",
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/kevin-peckham-sm.webp",
+					"width": "63",
+					"height": "63"
+				}
+			}
+		}
+	],
+	"tags": ["Pimcore", "eCommerce", "SEO", "B2B"],
+	"notice": {
+		"label": "2026 update",
+		"text": "This is an older customer story, and the solution it describes was built on Pimcore. Since it was published, Pimcore's Community Edition has moved from GPLv3 to the source-available Pimcore Open Core License, and a community fork, OpenDXP, now continues the GPLv3 codebase. Because Pimcore is no longer open source, we no longer recommend it for most new implementations.",
+		"link": {
+			"href": "/blog/opendxp-pimcore-fork",
+			"text": "Read our analysis: Pimcore or OpenDXP →"
+		}
+	}
+}
