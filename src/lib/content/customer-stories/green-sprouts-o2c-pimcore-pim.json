@@ -1,6 +1,6 @@
 {
 	"order": 15,
-	"draft": true,
+	"draft": false,
 	"banner": {
 		"heading": "A Single Source of Truth Through Two Rebrands and an Acquisition",
 		"subtitle": "A Pimcore PIM Partnership for Green Sprouts and O2C Brands",
@@ -21,8 +21,8 @@
 	"title": "A Single Source of Truth Through Two Rebrands and an Acquisition: A Pimcore PIM Partnership for Green Sprouts and O2C Brands",
 	"slug": "green-sprouts-o2c-pimcore-pim",
 	"thumbnailImage": {
-		"src": "",
-		"alt": "PLACEHOLDER: Green Sprouts thumbnail image to be sourced"
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/baby-swimming.webp",
+		"alt": "A baby swimming in a pool"
 	},
 	"content": [
 		{
@@ -62,7 +62,14 @@
 		}
 	],
 	"testimonials": [],
-	"images": [],
+	"images": [
+		{
+			"alt": "A baby swimming in a pool",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/baby-swimming.webp",
+			"width": "2400",
+			"height": "1600"
+		}
+	],
 	"perspectives": [
 		{
 			"quote": [
