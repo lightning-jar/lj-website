@@ -92,7 +92,7 @@
 	"perspectives": [
 		{
 			"quote": [
-				"The agencies quoting turnkey localization are selling you a second copy of your website that you rent forever. Because CCRTA's site was already well-structured, we could make translation a property of the rendering pipeline instead: every string translated once, cached, and protected by the same guardrails as the transit data. The whole site, in fourteen languages, for about the price of lunch."
+				"The agencies quoting turnkey localization are selling you a second copy of your website that you rent forever. Because CCRTA's site was already well-structured, we could make translation a property of the rendering pipeline instead: every string translated once, cached, and protected by the same guardrails as the transit data."
 			],
 			"attribution": {
 				"name": "Kevin Peckham",
