@@ -1,6 +1,6 @@
 {
 	"order": 12,
-	"draft": true,
+	"draft": false,
 	"banner": {
 		"heading": "Finding a Bold, Real Voice for a New Home Brand",
 		"subtitle": "Brand Strategy, Tone of Voice, and Content Strategy for Rigby Home",
@@ -21,8 +21,8 @@
 	"title": "Finding a Bold, Real Voice for a New Home Brand: Brand Strategy, Tone of Voice, and Content Strategy for Rigby Home",
 	"slug": "rigby-home-brand-voice",
 	"thumbnailImage": {
-		"src": "",
-		"alt": "PLACEHOLDER: Rigby Home thumbnail image to be sourced"
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/dinnerware.webp",
+		"alt": "Handcrafted Rigby Home dinnerware on a table"
 	},
 	"content": [
 		{
@@ -61,7 +61,14 @@
 		}
 	],
 	"testimonials": [],
-	"images": [],
+	"images": [
+		{
+			"alt": "Handcrafted Rigby Home dinnerware on a table",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/dinnerware.webp",
+			"width": "1920",
+			"height": "850"
+		}
+	],
 	"perspectives": [
 		{
 			"quote": [
