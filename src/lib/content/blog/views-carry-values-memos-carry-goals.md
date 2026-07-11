@@ -4,10 +4,10 @@ metaTitle: "Views Carry Values, Memos Carry Goals | barkup-bench Study V"
 slug: views-carry-values-memos-carry-goals
 description: "Study V, the twenty-second in our pre-registered benchmark series and the first that could not be graded deterministically, asked whether the context fixes from Studies T and U survive qualitative goals like \"rewrite this paragraph to focus on our central thesis.\" To keep our integrity rules intact, the LLM judge had to pass its own pre-registered exam before grading anything, and both judges aced it 50 for 50. The results split cleanly: models that could not know the goal polished the wrong paragraph without complaint, the application memo carried the goal at full parity with an explicit instruction, and the surprise, models shown the document node where the goal lived read it but wrote measurably less focused prose, losing 117 of 120 judged comparisons. Views carry values; memos carry goals."
 date: 2026-07-11T16:00:00Z
-draft: true
+draft: false
 tags: [ai, agents, llm, open-source, barkup, benchmarks]
-image: ""
-imageDescription: ""
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/rabbit-judge.webp
+imageDescription: A watercolor illustration of a stern rabbit judge in a Victorian suit and cravat, one finger raised, presiding over a handwritten document
 author: Kevin Peckham
 quote:
   text: The model that read the thesis wrote about the topic. The model that was told the thesis wrote about the thesis. A judge can see that difference 117 times out of 120; a validator never will.

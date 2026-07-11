@@ -19,6 +19,7 @@ const seriesSlugs = [
 	"barkup-0-5-deterministic-selection",
 	"the-thirty-sixth-edit",
 	"the-two-things-your-agent-cant-see",
+	"views-carry-values-memos-carry-goals",
 ];
 
 const articles = seriesSlugs
