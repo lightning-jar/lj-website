@@ -1,6 +1,6 @@
 {
 	"order": 16,
-	"draft": true,
+	"draft": false,
 	"banner": {
 		"heading": "Digital Agency of Record for Avaya",
 		"subtitle": "Strategy, UX, and Design for an Enterprise Communications Giant's Shift to Solutions and Cloud",
@@ -21,8 +21,8 @@
 	"title": "Digital Agency of Record for Avaya: Strategy, UX, and Design for an Enterprise Communications Giant's Shift to Solutions and Cloud",
 	"slug": "avaya-digital-agency-of-record",
 	"thumbnailImage": {
-		"src": "",
-		"alt": "PLACEHOLDER: Avaya thumbnail image to be sourced"
+		"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/office-communication.webp",
+		"alt": "A team communicating in a modern office"
 	},
 	"content": [
 		{
@@ -64,7 +64,14 @@
 		}
 	],
 	"testimonials": [],
-	"images": [],
+	"images": [
+		{
+			"alt": "A team communicating in a modern office",
+			"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/customer-stories/office-communication.webp",
+			"width": "2400",
+			"height": "1200"
+		}
+	],
 	"perspectives": [
 		{
 			"quote": [
