@@ -1,0 +1,94 @@
+{
+	"order": 18,
+	"draft": true,
+	"banner": {
+		"heading": "Launching a Preschool Science Brand Online",
+		"subtitle": "Space Racers on Pimcore",
+		"subheading": "Space Racers is an animated preschool series about a crew of young spaceship cadets, created to teach space science to young children, that came to US public television and broadcasters around the world in 2014. Lightning Jar designed and built the show's digital home, SpaceRacers.org, as one of its earliest Pimcore implementations: a colorful, video-rich, responsive website with two distinct experiences, one for kids and one for parents and educators, built with young children's safety in mind."
+	},
+	"meta": {
+		"title": "Launching Space Racers on Pimcore | Customer Story",
+		"description": "Lightning Jar designed and built SpaceRacers.org, the digital home of the preschool space-science series, as one of its earliest Pimcore implementations: video-rich, responsive, bilingual, with separate kid and parent experiences and a kids' gate for safety."
+	},
+	"customer": {
+		"id": "space-racers",
+		"category": "Children's Media",
+		"name": "Space Racers",
+		"logo": "",
+		"thumb": ""
+	},
+	"excerpt": "Space Racers is an animated preschool series about a crew of young spaceship cadets, created to teach space science to young children, that came to US public television and broadcasters around the world in 2014. Lightning Jar designed and built the show's digital home, SpaceRacers.org, as one of its earliest Pimcore implementations. The result was a colorful, video-rich, responsive website with two distinct experiences, one for kids and one for parents and educators, built with young children's safety in mind, launched in step with the show's television debut, and supported and grown afterward.",
+	"title": "Launching a Preschool Science Brand Online: Space Racers on Pimcore",
+	"slug": "space-racers-pimcore-launch",
+	"thumbnailImage": {
+		"src": "",
+		"alt": "PLACEHOLDER: Space Racers thumbnail image to be sourced"
+	},
+	"content": [
+		{
+			"heading": "Customer",
+			"text": [
+				"Space Racers is an animated preschool series about a crew of young spaceship cadets at the Stardust Bay Space Academy, created to teach space science to young children and broadcast on US public television and by broadcasters around the world beginning in 2014."
+			]
+		},
+		{
+			"heading": "Challenge",
+			"text": [
+				"A children's television show lives or dies by more than its broadcast slot. For Space Racers, the website had to be a second home for the brand: a place where preschoolers could watch clips and play, and where the parents and educators who guide them could find activities, lesson support, and reasons to trust the show's science. Getting that live in time for a public-television launch, and doing it well, was the challenge.",
+				"It was also a genuinely demanding build. The site had to serve two very different audiences on the same property, one a preschool child and one an adult, each with its own look, tone, and needs. It had to be heavily video-driven, responsive across the phones and tablets families actually use, offer Spanish-language content, and be safe for very young children, including handling what happens when a small child taps a link that would take them off the site. And it needed to run on a content management foundation flexible enough for a small team to keep fresh with new videos, games, and activities over time. Space Racers needed a partner who could take all of that from strategy through design and into a working, launch-ready build."
+			]
+		},
+		{
+			"heading": "Solution",
+			"subheading": "Two Audiences, One Launch Window",
+			"text": [
+				"Lightning Jar owned the work end to end, from discovery and strategy through design, development, and ongoing support.",
+				"<strong>Discovery, strategy, and brand.</strong> The engagement began with discovery, including stakeholder interviews, competitive and comparative review, and a content audit, followed by a technology roadmap and moodboard exploration that set the visual tone and the technical direction for the site.",
+				"<strong>An early Pimcore build.</strong> Lightning Jar built SpaceRacers.org on the LAMP stack (Linux, Apache, MySQL, PHP) with the Zend MVC framework and Pimcore as the CMS, at a time when Pimcore was very new. The site's templates were designed so a small team could manage the parts that change often, like touts, videos, and topic pages, while the page and document tree in Pimcore automatically drove site navigation. Analytics were wired in through Pimcore's Google Analytics integration, and the code was managed in a shared source-control repository.",
+				"<strong>Two audiences, one site.</strong> Lightning Jar designed two coordinated experiences on the same platform: kids' pages with a dark, glowing space theme and light text, and parents and educators' pages with a lighter sky theme, each responsive across desktop, tablet, and mobile, and each with its own navigation and tone.",
+				"<strong>Video at the center.</strong> Because the show is the star, video sat at the heart of the site. Lightning Jar built a video player and episode experience with clips and full episodes managed in Pimcore as objects that referenced the hosted video, so the team could add and organize video content without touching code.",
+				"<strong>Built for young children's safety and reach.</strong> For a preschool audience, Lightning Jar implemented a kids' gate: a full-screen message that intercepts any link leaving the kids' section, implemented so that a child cannot wander off unintentionally while search engines can still crawl the site normally. The build also included Spanish-language content and a full set of SEO elements to help families find the show.",
+				"<strong>Launch and ongoing support.</strong> Lightning Jar sequenced the work to hit the broadcast window, first refreshing the existing teaser site, then launching the full SpaceRacers.org, and trained the Space Racers team to manage content themselves. After launch, Lightning Jar provided hosting and maintenance, monthly analytics readouts, and a path to keep adding new games, activities, and content over time. The new site launched publicly as a mobile-friendly science destination for the series."
+			]
+		},
+		{
+			"heading": "Results",
+			"text": [
+				"A launch-ready digital home for a preschool science brand, live in step with the show's public-television debut.",
+				"One of Lightning Jar's earliest Pimcore builds, delivered full-stack on a LAMP and Zend foundation.",
+				"Two coordinated, responsive experiences on one platform, tuned separately for preschoolers and for parents and educators.",
+				"A video-rich site with episodes and clips managed as content, not code, so a small team could keep it fresh.",
+				"Thoughtful protections for a very young audience, including a kids' gate that keeps children safe without blocking search engines, plus Spanish-language content and SEO for reach."
+			]
+		}
+	],
+	"testimonials": [],
+	"images": [],
+	"perspectives": [
+		{
+			"quote": [
+				"Space Racers had to be two websites wearing one domain: a glowing space playground for a four-year-old and a calm, credible resource for the adult standing behind them. The trick was building both on one Pimcore foundation, so a tiny team could keep every video, game, and lesson current without touching code."
+			],
+			"attribution": {
+				"name": "Kevin Peckham",
+				"title": "Principal & Chief Technologist",
+				"organization": "Lightning Jar",
+				"image": {
+					"alt": "Kevin Peckham",
+					"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/kevin-peckham-sm.webp",
+					"width": "63",
+					"height": "63"
+				}
+			}
+		}
+	],
+	"tags": ["Pimcore", "Websites", "Media", "Video"],
+	"notice": {
+		"label": "2026 update",
+		"text": "This is an older customer story, and the site it describes was built on Pimcore, one of Lightning Jar's earliest Pimcore implementations. Since it was published, Pimcore's Community Edition has moved from GPLv3 to the source-available Pimcore Open Core License, and a community fork, OpenDXP, now continues the GPLv3 codebase. Because Pimcore is no longer open source, we no longer recommend it for most new implementations.",
+		"link": {
+			"href": "/blog/opendxp-pimcore-fork",
+			"text": "Read our analysis: Pimcore or OpenDXP →"
+		}
+	}
+}
