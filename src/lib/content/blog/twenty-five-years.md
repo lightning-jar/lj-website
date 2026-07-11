@@ -28,6 +28,8 @@ additionalReading:
     url: "/blog/replicator-origin"
   - title: "Why We Left WordPress Behind"
     url: "/blog/leaving-wordpress"
+  - title: "barkup-bench: Open Research on LLM Tree Editing"
+    url: "/research/barkup-bench"
 ---
 
 Our first website went live in 2001, under a different name. We were Siite Interactive then, and the [oldest surviving capture of that site](https://web.archive.org/web/20011130030921/http://www.siite.com/), preserved in the Internet Archive from July of 2001, still carries a line we chose to put front and center. It's from R. Buckminster Fuller:
@@ -64,7 +66,7 @@ The defining force of this era is artificial intelligence, and it is the largest
 
 Our answer to a shift this big was the same as it has always been: build, don't wait. We built [Replicator](/customer-stories/replicator-evolution), an AI brand operating system where a language model designs marketing documents and drafts copy inside brand-approved rails, and a human finishes each one by clicking into the page and typing. Along the way we needed a reliable way to hand structured design data to a language model, so we solved that problem too and [open-sourced the result as barkup](https://github.com/kevinpeckham/barkup), a small library for authoring typed trees as the HTML that models are already fluent in. The reasoning behind both is written up across [three](/blog/replicator-origin) [engineering](/blog/ast-as-html) [posts](/blog/content-overlay) on this blog.
 
-We are not adapting to AI by watching it. We are shipping with it, and giving some of what we learn back to the community, which is exactly what a twenty-five-year-old agency built on open-source foundations ought to do.
+We are not adapting to AI by watching it. We are shipping with it, running [an open, pre-registered benchmark series](/research/barkup-bench) on how language models edit structured documents, and giving what we learn back to the community, which is exactly what a twenty-five-year-old agency built on open-source foundations ought to do.
 
 ## The Company Changed Too
 

@@ -39,7 +39,6 @@
 .bench .provenance {
 	color: var(--ink-2);
 	font-size: 0.92rem;
-	max-width: 68ch;
 	margin: 0;
 }
 .bench .provenance a {
@@ -90,7 +89,6 @@
 .bench .takeaway {
 	color: var(--ink-2);
 	font-size: 0.95rem;
-	max-width: 74ch;
 	margin: 0 0 14px;
 }
 .bench .legend {
@@ -208,7 +206,6 @@
 	border-top: 1px solid var(--hairline);
 	color: var(--ink-2);
 	font-size: 0.88rem;
-	max-width: 74ch;
 }
 .bench footer a {
 	color: var(--accent);

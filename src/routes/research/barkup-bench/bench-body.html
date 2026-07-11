@@ -2,15 +2,7 @@
 <header>
 	<p class="eyebrow">barkup-bench · pre-registered · corrected 2026-07-06 · studies F–U</p>
 	<h2 class="lede">Every id-stable interface works — until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree. Finding where to look costs one search call, and remembering the session costs two worked examples plus a memo — even 36 edits in. And the view is a correctness contract: what the model must read, it must be shown.</h2>
-	<p class="provenance">
-		Main study: 200 seeded tasks × 6 conditions × 4 models × 2 regimes, temperature&nbsp;0 (July&nbsp;2026), plus follow-up studies G (tool-history footgun), H (300–1000-node size extension), I/J (focused views: partial-context patches, JSON and HTML renderings), K (12-edit sessions under four serialization policies), L/N (grounding without ids, then the retrieval ladder), M/O/P (session memory, positional views, synthetic history), Q/R (fan-out edits and their fixes), S (36-edit long sessions), T (conversation-carried context), and U (document-carried dependencies). <strong>All numbers below are protocol-v2 corrected</strong> — the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a href="https://github.com/vercel/ai/issues/16840">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted; Wilson&nbsp;95% intervals. Conditions:
-		<span class="mono">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite,
-		<span class="mono">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite,
-		<span class="mono">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools,
-		<span class="mono">D</span>&nbsp;HTML&nbsp;+&nbsp;tools,
-		<span class="mono">E</span>&nbsp;JSON&nbsp;Patch,
-		<span class="mono">F</span>&nbsp;id-anchored&nbsp;patch (pre-registered addendum, BRIEF-F.md).
-	</p>
+	<p class="provenance">Main study: 200 seeded tasks × 6 conditions × 4 models × 2 regimes, temperature&nbsp;0 (July&nbsp;2026), plus follow-up studies G (tool-history footgun), H (300–1000-node size extension), I/J (focused views: partial-context patches, JSON and HTML renderings), K (12-edit sessions under four serialization policies), L/N (grounding without ids, then the retrieval ladder), M/O/P (session memory, positional views, synthetic history), Q/R (fan-out edits and their fixes), S (36-edit long sessions), T (conversation-carried context), and U (document-carried dependencies). <strong>All numbers below are protocol-v2 corrected</strong> — the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a href="https://github.com/vercel/ai/issues/16840">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted; Wilson&nbsp;95% intervals. Conditions: <span class="mono">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite, <span class="mono">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite, <span class="mono">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools, <span class="mono">D</span>&nbsp;HTML&nbsp;+&nbsp;tools, <span class="mono">E</span>&nbsp;JSON&nbsp;Patch, <span class="mono">F</span>&nbsp;id-anchored&nbsp;patch (pre-registered addendum, BRIEF-F.md).</p>
 </header>
 
 <div class="tiles">
@@ -35,9 +27,7 @@
 <section class="chart" id="sec-crossover">
 	<p class="eyebrow">H2 · task success by tree size</p>
 	<h2>At benchmark sizes (5–150 nodes), no interface dominates</h2>
-	<p class="takeaway">Whole-tree rewrite (A, B) leads granular tools (C, D) at every size tested.
-	The gap peaks on small/medium trees and narrows — but never reverses — at ~150 nodes.
-	JSON Patch (E) collapses to 69.6% on large trees — and the pre-registered addendum condition F (id-anchored patches) recovers it exactly to rewrite level at the lowest token cost.</p>
+	<p class="takeaway">Whole-tree rewrite (A, B) leads granular tools (C, D) at every size tested. The gap peaks on small/medium trees and narrows — but never reverses — at ~150 nodes. JSON Patch (E) collapses to 69.6% on large trees — and the pre-registered addendum condition F (id-anchored patches) recovers it exactly to rewrite level at the lowest token cost.</p>
 	<div class="legend" id="legend-1"></div>
 	<div class="figure" id="fig-crossover"></div>
 	<details class="datatable"><summary>Data table — success by condition × size (parity, pooled)</summary><div id="tbl-crossover"></div></details>
@@ -55,9 +45,7 @@
 <section class="chart" id="sec-tokens">
 	<p class="eyebrow">H3 · mean tokens per solved task</p>
 	<h2>Rewrite is cheap where trees are small; HTML is the terser artifact where they're large</h2>
-	<p class="takeaway">Tools arms (C, D) resend a growing conversation every call, so they burn 4–5×
-	more tokens on small/medium trees. At ~150 nodes the whole-artifact arms grow too — and the HTML
-	dialect (A, 15.6k) undercuts JSON rewrite (B, 23.0k) by ~30%: the one place the format measurably matters.</p>
+	<p class="takeaway">Tools arms (C, D) resend a growing conversation every call, so they burn 4–5× more tokens on small/medium trees. At ~150 nodes the whole-artifact arms grow too — and the HTML dialect (A, 15.6k) undercuts JSON rewrite (B, 23.0k) by ~30%: the one place the format measurably matters.</p>
 	<div class="legend" id="legend-3"></div>
 	<div class="figure" id="fig-tokens"></div>
 	<details class="datatable"><summary>Data table — mean total tokens per solved task (parity, pooled)</summary><div id="tbl-tokens"></div></details>
@@ -66,8 +54,7 @@
 <section class="chart" id="sec-heat">
 	<p class="eyebrow">Overall · success per model × condition (parity, 200 tasks each)</p>
 	<h2>Frontier models don't care; smaller models do</h2>
-	<p class="takeaway">Per-cell task success. Down the sonnet-4.5 and gpt-5.4 rows the interface barely
-	matters; down the haiku-4.5 and gemini-3.5-flash rows the tools arms give up 10–17 points against rewrite.</p>
+	<p class="takeaway">Per-cell task success. Down the sonnet-4.5 and gpt-5.4 rows the interface barely matters; down the haiku-4.5 and gemini-3.5-flash rows the tools arms give up 10–17 points against rewrite.</p>
 	<div class="heat" id="fig-heat"></div>
 </section>
 
@@ -187,7 +174,5 @@
 	<details class="datatable"><summary>Data table — success by arm and kind, failure anatomy, and cost</summary><div id="tbl-dependent"></div></details>
 </section>
 
-<footer>
-	Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a href="https://github.com/kevinpeckham/barkup-bench">barkup-bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G–U addenda). Upstream bug report: <a href="https://github.com/vercel/ai/issues/16840">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts.
-</footer>
+<footer>Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a href="https://github.com/kevinpeckham/barkup-bench">barkup-bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G–U addenda). Upstream bug report: <a href="https://github.com/vercel/ai/issues/16840">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts.</footer>
 </div>
