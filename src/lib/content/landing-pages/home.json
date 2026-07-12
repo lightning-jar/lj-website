@@ -42,7 +42,8 @@
 		{
 			"heading": "Skeptical of Easy Answers",
 			"text": [
-				"We believe great strategy is the process of asking tough questions. Great design is the process of making tough decisions. Great implementation is the process of making tough compromises."
+				"We believe great strategy is the process of asking tough questions. Great design is the process of making tough decisions. Great implementation is the process of making tough compromises.",
+				"Easy answers are everywhere. The turnkey proprietary platform looks easy until you factor in the true costs and limitations; a customized open-source solution is usually more flexible, less constrained, and a better price. The LLM-generated brochure looks easy until you try to tweak a sentence, and it never quite matches your brand guidelines anyway. In the LLM age, easy is the easy part. The hard part is the guardrails: custom applications that keep generated collateral on-brand and on-message, and code integrity rules and tooling that keep quickly generated code from becoming a tech-debt nightmare."
 			],
 			"ctas": {
 				"primary": {
