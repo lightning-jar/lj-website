@@ -4,7 +4,7 @@ metaTitle: "F♯ Is Not G♭ | Music Theory as a Data-Modeling Problem"
 slug: f-sharp-is-not-g-flat
 description: "On a piano they are the same key, and in our chord player they are the same frequency. But the moment our circle-of-fifths instrument had to display chord names, the same pitch needed different names in different keys, and a bug report taught us the difference between what a note is and what a note is called. A short essay on encoding domain rules in data and unit tests, from the smallest codebase we maintain."
 date: 2026-07-12T18:00:00Z
-draft: true
+draft: false
 tags: [music, typescript, testing, open-source, side-projects]
 image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/sheet-music.webp
 imageDescription: A watercolor painting of handwritten sheet music

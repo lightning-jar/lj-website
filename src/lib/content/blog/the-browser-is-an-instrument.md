@@ -4,7 +4,7 @@ metaTitle: "The Browser Is an Instrument | Web Audio API Synth"
 slug: the-browser-is-an-instrument
 description: "Fifths, our open-source circle-of-fifths chord player, ships no audio files. Every sound is synthesized in the browser: oscillators for the notes, a gain envelope to stop the clicks, a convolution reverb whose impulse response is generated from decaying noise, and multi-touch press-and-hold playback keyed by pointer id. A tour of what it takes to make a web page feel like an instrument, including the iOS unlock ritual and the tab-visibility etiquette nobody tells you about."
 date: 2026-07-12T20:00:00Z
-draft: true
+draft: false
 tags: [music, web-audio, svelte, open-source, side-projects]
 image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/baby-grand-piano.webp
 imageDescription: A watercolor painting of a baby grand piano
