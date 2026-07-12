@@ -1109,4 +1109,81 @@ table("tbl-tokens",
 		]);
 })();
 
+
+// --- Study X: edit-anaphora carrier dot plot ---
+(function () {
+	const XARMS = ["X-history", "X-window2", "X-lastedit", "X-stateless"];
+	const XNAMES = {
+		"X-history": "full conversation history",
+		"X-window2": "last 2 exchanges",
+		"X-lastedit": "one-line app-side last-edit echo",
+		"X-stateless": "no carrier (skeleton view only)"
+	};
+	const XCOLOR = { "X-history": "#e66767", "X-window2": "#9085e9", "X-lastedit": "#199e70", "X-stateless": "#c98500" };
+	const XDATA = [
+		{ model: "sonnet-4.5", cells: {
+			"X-history": { rate: 100.0, low: 93, high: 100, ok: "48/48", note: "" },
+			"X-window2": { rate: 93.8, low: 83, high: 98, ok: "45/48", note: "repeat 9/12" },
+			"X-lastedit": { rate: 89.6, low: 78, high: 95, ok: "43/48", note: "repeat 7/12 — the compressed-carrier strain point; amend + undo perfect" },
+			"X-stateless": { rate: 0, low: 0, high: 7, ok: "0/48", note: "all 48 failures: valid silently-guessed patches" }
+		}},
+		{ model: "gemini-3.5-flash", cells: {
+			"X-history": { rate: 100.0, low: 93, high: 100, ok: "48/48", note: "" },
+			"X-window2": { rate: 85.4, low: 73, high: 93, ok: "41/48", note: "repeat 5/12 (p = 0.016 vs history)" },
+			"X-lastedit": { rate: 97.9, low: 89, high: 100, ok: "47/48", note: "p = 1.0 vs history" },
+			"X-stateless": { rate: 0, low: 0, high: 7, ok: "0/48", note: "all 48 failures: valid silently-guessed patches" }
+		}},
+		{ model: "opus-4.8", cells: {
+			"X-history": { rate: 95.8, low: 86, high: 99, ok: "46/48", note: "history itself dropped two undos" },
+			"X-window2": { rate: 89.6, low: 78, high: 95, ok: "43/48", note: "repeat 8/12" },
+			"X-lastedit": { rate: 100.0, low: 93, high: 100, ok: "48/48", note: "the echo BEATS the transcript on the production tier" },
+			"X-stateless": { rate: 0, low: 0, high: 7, ok: "0/48", note: "all 48 failures: valid silently-guessed patches" }
+		}}
+	];
+	document.getElementById("legend-18").innerHTML = XARMS.map(c =>
+		'<span class="key"><span class="chip" style="background:' + XCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + XNAMES[c] + '</span>'
+	).join("");
+	const W = 880, ROW = 34, T = 8, B = 40, L = 235, R = 24;
+	const rows = [];
+	for (const m of XDATA) for (const c of XARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+	const H = T + rows.length * ROW + B + 16;
+	const iw = W - L - R;
+	const xOf = v => L + (v / 100) * iw;
+	let g = "";
+	for (const tick of [0, 25, 50, 75, 100]) {
+		const x = xOf(tick);
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
+	}
+	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">anaphora-cell success by carrier (48 cells per arm-model; Wilson 95% intervals)</text>';
+	let marks = "", hits = "";
+	rows.forEach((row, ri) => {
+		const cy = T + ri * ROW + ROW / 2;
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + row.model.replace("-3.5-flash", "").replace("-4.5", "").replace("-4.8", "") + '</text>';
+		const c = row.cell;
+		marks += '<line x1="' + xOf(c.low) + '" x2="' + xOf(c.high) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + XCOLOR[row.arm] + '" stroke-width="1.5" opacity="0.4"/>';
+		marks += '<circle cx="' + xOf(c.rate) + '" cy="' + cy + '" r="5.5" fill="' + XCOLOR[row.arm] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+		hits += '<circle cx="' + xOf(c.rate) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + " — " + XNAMES[row.arm] + "\n" + row.model + ": " + c.rate + "% (" + c.ok + ") · CI [" + c.low + "%, " + c.high + "%]" + (c.note ? "\n" + c.note : "")) + '"/>';
+	});
+	const el = document.getElementById("fig-anaphora");
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Dot plot: without a carrier, anaphora resolution sits at 0% on every model; the one-line last-edit echo ties full history and beats it on opus." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
+	table("tbl-anaphora", ["carrier (model)", "anaphora", "amend", "repeat", "undo", "failure anatomy", "input/session"],
+		[
+			["X-history (sonnet)", "48/48", "24/24", "12/12", "12/12", "—", "53,480"],
+			["X-window2 (sonnet)", "45/48", "24/24", "9/12", "12/12", "3/3 guessed", "29,565"],
+			["X-lastedit (sonnet)", "43/48", "24/24", "7/12", "12/12", "5/5 guessed", "27,795"],
+			["X-stateless (sonnet)", "0/48", "0/24", "0/12", "0/12", "48/48 guessed", "36,563"],
+			["X-history (gemini)", "48/48", "24/24", "12/12", "12/12", "—", "50,530"],
+			["X-window2 (gemini)", "41/48", "24/24", "5/12", "12/12", "7/7 guessed", "27,834"],
+			["X-lastedit (gemini)", "47/48", "23/24", "12/12", "12/12", "1/1 guessed", "26,244"],
+			["X-stateless (gemini)", "0/48", "0/24", "0/12", "0/12", "48/48 guessed", "33,654"],
+			["X-history (opus)", "46/48", "24/24", "12/12", "10/12", "2/2 guessed", "58,091"],
+			["X-window2 (opus)", "43/48", "24/24", "8/12", "11/12", "5/5 guessed", "32,169"],
+			["X-lastedit (opus)", "48/48", "24/24", "12/12", "12/12", "—", "31,827"],
+			["X-stateless (opus)", "0/48", "0/24", "0/12", "0/12", "48/48 guessed", "41,175"]
+		]);
+})();
+
 }

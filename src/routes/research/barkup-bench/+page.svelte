@@ -45,7 +45,7 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
       and the results are published as found, corrections included.
     </p>
     <p class="opacity-90 mb-4">
-      The series so far: twenty-three studies, more than 19,000 scored model
+      The series so far: twenty-four studies, more than 21,000 scored model
       runs, five models, trees from 5 to 1,000 nodes, and editing sessions up
       to 36 edits long. The findings compress to one sentence: give every node
       a stable id, never make the model reproduce anything it is not changing,
