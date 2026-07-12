@@ -56,13 +56,19 @@
 		{
 			"heading": "We Love Open Source Software",
 			"text": [
-				"Open source is an open, collaborative, and community-driven approach to software development. It promotes transparency, innovation, and cost-effectiveness. Whatever your technology challenge, there is probably an open-source solution that is the best choice to solve it."
+				"Open source is an open, collaborative, and community-driven approach to software development. It promotes transparency, innovation, and cost-effectiveness. Whatever your technology challenge, there is probably an open-source solution that is the best choice to solve it.",
+				"That belief shows up in the numbers: two-thirds of the technologies we work with are open source, and this very website runs on an open stack of SvelteKit, UnoCSS, Vite, and Bun (the full inventory lives on our Built With page). It also shows up when it costs something: when Pimcore, a platform we implemented for more than a decade, moved to a source-available license, we backed OpenDXP, the community fork keeping the open codebase alive."
 			],
 			"ctas": {
 				"primary": {
 					"label": "Why Open Source Wins",
 					"href": "/blog/open-source-b2b-advantage",
 					"title": "Why Open Source Beats Proprietary Platforms for B2B Websites"
+				},
+				"secondary": {
+					"label": "Pimcore or OpenDXP",
+					"href": "/blog/opendxp-pimcore-fork",
+					"title": "Pimcore or OpenDXP: A Fork in the Road for Long-Tenured DXP Stacks"
 				}
 			}
 		},
