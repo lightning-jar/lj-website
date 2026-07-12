@@ -6,8 +6,8 @@ description: "Fifths, our open-source circle-of-fifths chord player, ships no au
 date: 2026-07-12T20:00:00Z
 draft: true
 tags: [music, web-audio, svelte, open-source, side-projects]
-image: ""
-imageDescription: "PLACEHOLDER: image pending"
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/baby-grand-piano.webp
+imageDescription: A watercolor painting of a baby grand piano
 author: Kevin Peckham
 quote:
   text: An instrument is a latency budget with a user interface. The browser can meet the budget, but only if you treat the audio graph like an instrument and not like an alert sound.

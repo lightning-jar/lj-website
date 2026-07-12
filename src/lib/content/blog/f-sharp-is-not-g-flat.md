@@ -6,8 +6,8 @@ description: "On a piano they are the same key, and in our chord player they are
 date: 2026-07-12T18:00:00Z
 draft: true
 tags: [music, typescript, testing, open-source, side-projects]
-image: ""
-imageDescription: "PLACEHOLDER: image pending"
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/sheet-music.webp
+imageDescription: A watercolor painting of handwritten sheet music
 author: Kevin Peckham
 quote:
   text: The frequency is a fact about physics. The spelling is a fact about the reader. Modeling them as one value is how you get a bug you can hear but not see.
