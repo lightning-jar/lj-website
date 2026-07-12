@@ -21,6 +21,25 @@
 			}
 		},
 		{
+			"heading": "We Believe in Research",
+			"text": [
+				"Good engineering decisions come from evidence, not vibes. That's why we run and publish open-source research for developers of LLM applications: a growing series of pre-registered studies, more than 15,000 scored model runs and counting, corrections included.",
+				"The flagship is barkup-bench, our open benchmark measuring how language models read and edit structured documents. Every study is pre-registered before a single model is called: twenty-two studies so far, across four models, trees from 5 to 1,000 nodes, and editing sessions up to 36 edits long. Everything the benchmark validates ships in our open-source barkup library, and everything it refutes gets published anyway."
+			],
+			"ctas": {
+				"primary": {
+					"label": "Read the Research",
+					"href": "/research",
+					"title": "Research at Lightning Jar"
+				},
+				"secondary": {
+					"label": "Latest Findings",
+					"href": "/blog/views-carry-values-memos-carry-goals",
+					"title": "Views Carry Values, Memos Carry Goals: Our First Judge-Graded Study"
+				}
+			}
+		},
+		{
 			"heading": "Skeptical of Easy Answers",
 			"text": [
 				"We believe great strategy is the process of asking tough questions. Great design is the process of making tough decisions. Great implementation is the process of making tough compromises."
@@ -43,24 +62,6 @@
 					"label": "Why Open Source Wins",
 					"href": "/blog/open-source-b2b-advantage",
 					"title": "Why Open Source Beats Proprietary Platforms for B2B Websites"
-				}
-			}
-		},
-		{
-			"heading": "We Believe in Research",
-			"text": [
-				"Good engineering decisions come from evidence, not vibes. That's why we run and publish open-source research for developers of LLM applications: a growing series of pre-registered studies, more than 13,000 scored model runs and counting, corrections included."
-			],
-			"ctas": {
-				"primary": {
-					"label": "Read the Research",
-					"href": "/research",
-					"title": "Research at Lightning Jar"
-				},
-				"secondary": {
-					"label": "Latest Findings",
-					"href": "/blog/the-thirty-sixth-edit",
-					"title": "The Thirty-Sixth Edit: Long LLM Sessions Don't Need Memory Either"
 				}
 			}
 		},
