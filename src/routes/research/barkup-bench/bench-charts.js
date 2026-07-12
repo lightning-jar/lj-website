@@ -1034,4 +1034,79 @@ table("tbl-tokens",
 		]);
 })();
 
+
+// --- Study W: agent-maintained memo extraction dumbbells ---
+(function () {
+	const WARMS = ["W-oracle", "W-agent", "W-agent-history"];
+	const WNAMES = {
+		"W-oracle": "harness-written memo (the T ceiling)",
+		"W-agent": "agent-written memo, stateless",
+		"W-agent-history": "agent memo + 32-message window (shipped config)"
+	};
+	const WCOLOR = { "W-oracle": "#e66767", "W-agent": "#199e70", "W-agent-history": "#3987e5" };
+	// Callback success (72 cells; history arm split by recorded window membership).
+	const WDATA = [
+		{ model: "sonnet-4.5", cells: {
+			"W-oracle": { all: 98.6, ok: "71/72" }, "W-agent": { all: 98.6, ok: "71/72" },
+			"W-agent-history": { all: 93.1, ok: "67/72", win: 100.0, winOk: "36/36", post: 86.1, postOk: "31/36" }
+		}},
+		{ model: "gemini-3.5-flash", cells: {
+			"W-oracle": { all: 100.0, ok: "72/72" }, "W-agent": { all: 100.0, ok: "72/72" },
+			"W-agent-history": { all: 98.6, ok: "71/72", win: 100.0, winOk: "36/36", post: 97.2, postOk: "35/36" }
+		}},
+		{ model: "opus-4.8", cells: {
+			"W-oracle": { all: 100.0, ok: "72/72" }, "W-agent": { all: 98.6, ok: "71/72" },
+			"W-agent-history": { all: 100.0, ok: "72/72", win: 100.0, winOk: "36/36", post: 100.0, postOk: "36/36" }
+		}}
+	];
+	document.getElementById("legend-17").innerHTML = WARMS.map(c =>
+		'<span class="key"><span class="chip" style="background:' + WCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + WNAMES[c] + '</span>'
+	).join("") + '<span class="key">history rows: ○ within-window · ● post-truncation</span>';
+	const W = 880, ROW = 34, T = 8, B = 40, L = 250, R = 24;
+	const rows = [];
+	for (const m of WDATA) for (const c of WARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+	const H = T + rows.length * ROW + B + 16;
+	const iw = W - L - R;
+	const xOf = v => L + ((v - 60) / 40) * iw;
+	let g = "";
+	for (const tick of [60, 70, 80, 90, 100]) {
+		const x = xOf(tick);
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
+	}
+	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">callback success (72 cells per arm-model; zoomed 60–100% scale)</text>';
+	let marks = "", hits = "";
+	rows.forEach((row, ri) => {
+		const cy = T + ri * ROW + ROW / 2;
+		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + row.model.replace("-3.5-flash", "").replace("-4.5", "").replace("-4.8", "") + '</text>';
+		const c = row.cell;
+		if (c.win !== undefined) {
+			marks += '<line x1="' + xOf(Math.min(c.win, c.post)) + '" x2="' + xOf(Math.max(c.win, c.post)) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + WCOLOR[row.arm] + '" stroke-width="2" opacity="0.45"/>';
+			marks += '<circle cx="' + xOf(c.win) + '" cy="' + cy + '" r="5.5" fill="hsl(217,48%,15%)" stroke="' + WCOLOR[row.arm] + '" stroke-width="2.5"/>';
+			marks += '<circle cx="' + xOf(c.post) + '" cy="' + cy + '" r="5.5" fill="' + WCOLOR[row.arm] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+			hits += '<circle cx="' + xOf(c.post) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + "\n" + row.model + " POST-TRUNCATION: " + c.post + "% (" + c.postOk + ")") + '"/>';
+			hits += '<circle cx="' + xOf(c.win) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + "\n" + row.model + " within-window: " + c.win + "% (" + c.winOk + ")") + '"/>';
+		} else {
+			marks += '<circle cx="' + xOf(c.all) + '" cy="' + cy + '" r="5.5" fill="' + WCOLOR[row.arm] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+			hits += '<circle cx="' + xOf(c.all) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + " — " + WNAMES[row.arm] + "\n" + row.model + " callbacks: " + c.all + "% (" + c.ok + ")") + '"/>';
+		}
+	});
+	const el = document.getElementById("fig-extraction");
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Dot plot: agent-written memos tie the harness-written oracle on all three models; in the shipped history-window configuration post-truncation callbacks hold, with opus at a perfect 36 of 36." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
+	table("tbl-extraction", ["arm (model)", "callbacks", "post-truncation", "memo recall", "retraction", "noise", "tool calls/session", "input/session"],
+		[
+			["W-oracle (sonnet)", "71/72", "—", "harness", "harness", "—", "—", "84,450"],
+			["W-agent (sonnet)", "71/72", "—", "36/36", "12/12", "0.0", "4.0", "136,983"],
+			["W-agent-history (sonnet)", "67/72", "31/36", "36/36", "12/12", "0.0", "4.0", "370,550"],
+			["W-oracle (gemini)", "72/72", "—", "harness", "harness", "—", "—", "82,323"],
+			["W-agent (gemini)", "72/72", "—", "36/36", "12/12", "0.0", "4.3", "104,628"],
+			["W-agent-history (gemini)", "71/72", "35/36", "36/36", "12/12", "0.0", "4.1", "327,396"],
+			["W-oracle (opus)", "72/72", "—", "harness", "harness", "—", "—", "103,569"],
+			["W-agent (opus)", "71/72", "—", "35/36", "12/12", "0.0", "4.3", "151,950"],
+			["W-agent-history (opus)", "72/72", "36/36", "36/36", "12/12", "0.0", "4.0", "420,899"]
+		]);
+})();
+
 }

@@ -1,8 +1,8 @@
 {
 	"header": {
-		"eyebrow": "barkup-bench · pre-registered · corrected 2026-07-06 · studies F–V",
-		"lede": "Every id-stable interface works — until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree. Finding where to look costs one search call, and remembering the session costs two worked examples plus a memo — even 36 edits in. And the view is a correctness contract: what the model must read, it must be shown. Views carry values; memos carry goals.",
-		"provenance": "Main study: 200 seeded tasks × 6 conditions × 4 models × 2 regimes, temperature&nbsp;0 (July&nbsp;2026), plus follow-up studies G (tool-history footgun), H (300–1000-node size extension), I/J (focused views: partial-context patches, JSON and HTML renderings), K (12-edit sessions under four serialization policies), L/N (grounding without ids, then the retrieval ladder), M/O/P (session memory, positional views, synthetic history), Q/R (fan-out edits and their fixes), S (36-edit long sessions), T (conversation-carried context), U (document-carried dependencies), and V (qualitative rewrites — the series' first judge-graded study, disclosed as its own track). <strong>All numbers below are protocol-v2 corrected</strong> — the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted; Wilson&nbsp;95% intervals. Conditions: <span class=\"font-mono\">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite, <span class=\"font-mono\">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite, <span class=\"font-mono\">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools, <span class=\"font-mono\">D</span>&nbsp;HTML&nbsp;+&nbsp;tools, <span class=\"font-mono\">E</span>&nbsp;JSON&nbsp;Patch, <span class=\"font-mono\">F</span>&nbsp;id-anchored&nbsp;patch (pre-registered addendum, BRIEF-F.md)."
+		"eyebrow": "barkup-bench · pre-registered · corrected 2026-07-06 · studies F–W",
+		"lede": "Every id-stable interface works — until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree. Finding where to look costs one search call, and remembering the session costs two worked examples plus a memo — even 36 edits in. And the view is a correctness contract: what the model must read, it must be shown. Views carry values; memos carry goals — and the agent can be trusted to write the memo itself.",
+		"provenance": "Main study: 200 seeded tasks × 6 conditions × 4 models × 2 regimes, temperature&nbsp;0 (July&nbsp;2026), plus follow-up studies G (tool-history footgun), H (300–1000-node size extension), I/J (focused views: partial-context patches, JSON and HTML renderings), K (12-edit sessions under four serialization policies), L/N (grounding without ids, then the retrieval ladder), M/O/P (session memory, positional views, synthetic history), Q/R (fan-out edits and their fixes), S (36-edit long sessions), T (conversation-carried context), U (document-carried dependencies), V (qualitative rewrites — the series' first judge-graded study, disclosed as its own track), and W (agent-maintained memo extraction, the shipped mechanism verbatim, with claude-opus-4.8 as a third tier). <strong>All numbers below are protocol-v2 corrected</strong> — the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted; Wilson&nbsp;95% intervals. Conditions: <span class=\"font-mono\">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite, <span class=\"font-mono\">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite, <span class=\"font-mono\">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools, <span class=\"font-mono\">D</span>&nbsp;HTML&nbsp;+&nbsp;tools, <span class=\"font-mono\">E</span>&nbsp;JSON&nbsp;Patch, <span class=\"font-mono\">F</span>&nbsp;id-anchored&nbsp;patch (pre-registered addendum, BRIEF-F.md)."
 	},
 	"tiles": [
 		{
@@ -72,6 +72,10 @@
 		{
 			"num": "117/120",
 			"cap": "judged comparisons lost by rewrites that had to READ their goal from the document instead of being told it — while the application memo carried the same goal at full parity (Study V, judge-graded)"
+		},
+		{
+			"num": "36/36",
+			"cap": "declarables recalled per model when the AGENT writes its own memo — retractions 12/12, zero noise notes, ~4 tool calls per session landing exactly on the declarative moments; the laziness hypothesis refuted (Study W)"
 		}
 	],
 	"sections": [
@@ -340,7 +344,21 @@
 				"id": "tbl-goals",
 				"summary": "Data table — win/loss/tie vs the explicit-instruction control, by arm, editor, and judge"
 			}
+		},
+		{
+			"id": "sec-extraction",
+			"eyebrow": "Study W · who writes the memo?",
+			"title": "The agent writes the memo faithfully — even when history makes it redundant",
+			"takeaway": "Studies T and V validated the memo with oracle extraction: the harness knew what to record. What ships in production delegates that judgment to the agent via an update_session_notes tool and a prompt rule, with a 32-message history window also present — and within the window, callbacks succeed via history whether or not the agent records, so a lazy agent's empty memo is invisible until truncation. Study W tested the shipped mechanism verbatim (character-identity ports) on 36-step sessions that cross the window, with a mid-session retraction, on three models including claude-opus-4.8 — the series' first data on the tier the production system runs. Both gates passed. Pure agent extraction ties the oracle exactly (recall 36/36 per model, retractions 12/12, zero noise notes, one drop event in 72 sessions), the tool gets called ~4 times per session at exactly the declarative moments, and the laziness hypothesis is refuted: with history present the recording cadence is unchanged and post-truncation callbacks hold — opus a perfect 36/36, gemini 35/36, sonnet 31/36 (not significant, and not memo-explained: its memo was complete in every failing cell). The over-32-message protection is real protection, not theater. Filled dots: post-truncation callbacks; hollow: within-window.",
+			"legendId": "legend-17",
+			"figure": {
+				"id": "fig-extraction"
+			},
+			"table": {
+				"id": "tbl-extraction",
+				"summary": "Data table — callbacks by arm, window membership, memo fidelity, and cost"
+			}
 		}
 	],
-	"footer": "Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/kevinpeckham/barkup-bench\">barkup-bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G–V addenda). Upstream bug report: <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts."
+	"footer": "Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/kevinpeckham/barkup-bench\">barkup-bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G–W addenda). Upstream bug report: <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts."
 }
