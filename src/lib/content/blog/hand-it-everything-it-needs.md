@@ -22,7 +22,7 @@ glossary:
   - term: Session-notes memo
     definition: A short app-held block recording the facts, standing rules, and goals a user has declared, appended to every request. Replaces conversation history for declared state, carries qualitative goals at full parity, and the agent itself can be trusted to write it.
   - term: Silent failure
-    definition: "The recurring villain of the series: a model that cannot know something does not refuse or error. It produces valid, plausible, confidently wrong output — invented values, obliviously polished paragraphs — that no validator or error log will ever flag."
+    definition: "The recurring villain of the series: a model that cannot know something does not refuse or error. It produces valid, plausible, confidently wrong output (invented values, obliviously polished paragraphs) that no validator or error log will ever flag."
 additionalReading:
   - title: "Stable IDs Are All You Need (the original capstone, at seven studies)"
     url: "/blog/stable-ids-are-all-you-need"
