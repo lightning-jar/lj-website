@@ -22,6 +22,7 @@ let navItems: NavItem[] = $state([
 	{ label: "Customer Stories", href: "/customer-stories" },
 	{ label: "Reading List", href: "/reading-list" },
 	{ label: "Technologies", href: "/technologies" },
+	{ label: "Fun", href: "/fun" },
 ]);
 
 // state

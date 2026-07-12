@@ -21,6 +21,19 @@ const aboutSection = {
 	],
 };
 
+const funSection = {
+	name: "Fun",
+	pages: [
+		{
+			href: "/fun",
+			title: "Fun",
+			description:
+				"Side projects from the studio: open-source experiments, instruments, and toys we built because the itch was there.",
+			date: "",
+		},
+	],
+};
+
 const researchSection = {
 	name: "Research",
 	pages: [
@@ -81,6 +94,7 @@ const sitemapSection = {
 const sitemap = [
 	homeSitemapSection,
 	aboutSection,
+	funSection,
 	researchSection,
 	blogArticlesSitemapSection,
 	builtWithSitemapSection,
