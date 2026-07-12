@@ -52,6 +52,9 @@ additionalReading:
     url: "https://github.com/kevinpeckham/barkup-bench"
 ---
 
+*This was the series capstone at seven studies, kept intact as the historical record, appended updates and all. The synthesis at twenty-three studies, reorganized around the full measured architecture, is [Hand It Everything It Needs](/blog/hand-it-everything-it-needs).*
+
+
 Over the past week we ran seven pre-registered studies, more than 13,000 scored model runs, against one question: what is the most reliable way to let an LLM agent edit structured data? Typed trees, specifically: page layouts, document templates, anything with a schema, nesting, and rules. We tested four models from three vendors, trees from 5 to 1,000 nodes, and editing sessions up to twelve consecutive edits.
 
 The whole thing compresses to one sentence: **give every node a stable id, and never make the model reproduce anything it is not changing.**

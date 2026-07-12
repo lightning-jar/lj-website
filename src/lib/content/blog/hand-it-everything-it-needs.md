@@ -4,10 +4,10 @@ metaTitle: "Hand It Everything It Needs | The barkup-bench Capstone at 23 Studie
 slug: hand-it-everything-it-needs
 description: "The updated capstone of our open benchmark series. Twenty-three pre-registered studies, more than 19,000 scored model runs, five models, one published correction, and several kept self-refutations later, the question \"how should an LLM agent edit structured documents\" has a measured answer with a number on every component: stable ids, anchored patches, focused views for the values an edit must read, one search call for finding targets, two worked examples instead of conversation history, a memo the agent writes itself for facts and goals, and app-side decomposition for bulk edits. The model is a brilliant executor with no context of its own. Hand it everything the request assumes, and almost nothing else."
 date: 2026-07-12T20:00:00Z
-draft: true
+draft: false
 tags: [ai, agents, llm, open-source, barkup, benchmarks]
-image: ""
-imageDescription: ""
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/book-diary.webp
+imageDescription: A watercolor painting of an open, well-worn journal with handwritten pages and a ribbon bookmark, on a cream background
 author: Kevin Peckham
 quote:
   text: The recipe is not a clever prompt. It is a division of labor, and every clause of it has a number attached.

@@ -163,7 +163,8 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
     <h2 class="heading-2">The Full Series</h2>
     <p class="opacity-90 mb-6">
       Every post in the barkup-bench series, in order. Start at the top for
-      the whole story, or jump to the capstone, Stable IDs Are All You Need.
+      the whole story, or jump straight to the current capstone, Hand It
+      Everything It Needs.
     </p>
     <ol class="grid grid-cols-1 gap-4 list-decimal list-outside pl-5">
       {#each data.articles as article}
