@@ -20,6 +20,7 @@ const seriesSlugs = [
 	"the-thirty-sixth-edit",
 	"the-two-things-your-agent-cant-see",
 	"views-carry-values-memos-carry-goals",
+	"who-writes-the-memo",
 ];
 
 const articles = seriesSlugs

@@ -4,10 +4,10 @@ metaTitle: "Who Writes the Memo? | barkup-bench Study W"
 slug: who-writes-the-memo
 description: "Study W, the twenty-third in our pre-registered benchmark series, closed the gap our own briefs had been disclosing for three days: Studies T and V validated the session-notes memo with perfect harness-written extraction, but what shipped to production delegates the writing to the agent itself, through a tool and a prompt rule, with a 32-message history window alongside. That window hides a nasty possibility: callbacks succeed via history whether or not the agent ever writes the memo, so an empty memo is invisible until the conversation scrolls, like a backup nobody has ever tried to restore. We tested the shipped mechanism verbatim on sessions long enough to cross the window, with a mid-session retraction, on three models including the production tier. Both gates passed: the agent records faithfully (recall 36 of 36 per model, retractions handled, zero noise), keeps recording even when history makes the memo redundant, and the post-truncation safety net holds."
 date: 2026-07-12T16:00:00Z
-draft: true
+draft: false
 tags: [ai, agents, llm, open-source, barkup, benchmarks]
-image: ""
-imageDescription: ""
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/lazy-dog.webp
+imageDescription: A watercolor painting of a cream French bulldog fast asleep on its side, on a pale background
 author: Kevin Peckham
 quote:
   text: A memo nobody has ever needed is exactly like a backup nobody has ever restored. We built sessions long enough to need it.
