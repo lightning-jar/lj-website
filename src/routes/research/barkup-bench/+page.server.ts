@@ -21,6 +21,7 @@ const seriesSlugs = [
 	"the-two-things-your-agent-cant-see",
 	"views-carry-values-memos-carry-goals",
 	"who-writes-the-memo",
+	"undo-that",
 	"hand-it-everything-it-needs",
 ];
 

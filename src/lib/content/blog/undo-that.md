@@ -4,10 +4,10 @@ metaTitle: "Undo That | barkup-bench Study X"
 slug: undo-that
 description: "Study X, the twenty-fourth in our pre-registered benchmark series, measured the most common request in any real editing chat and the last one our benchmark had never tested: follow-ups that point at the previous edit. \"Also make that same node bold.\" \"Apply the same change to the footer.\" \"Actually, undo that.\" Without something carrying the word that, the result was the strongest silent failure of the whole series: zero of 144 across three models, every miss a valid, applied, confidently wrong patch. Full history fixes it, but so does something far cheaper: a one-line note the application appends automatically, recording what it just applied, from and to. The echo ties the transcript on every model at half the cost, and on the production tier it beats the transcript outright. The measured stateless session stack is now complete: a fresh view, two worked examples, the memo, and the echo."
 date: 2026-07-12T22:00:00Z
-draft: true
+draft: false
 tags: [ai, agents, llm, open-source, barkup, benchmarks]
-image: ""
-imageDescription: ""
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/bunny-with-megaphone.webp
+imageDescription: A watercolor painting of a rabbit in a plaid scarf and coat making an announcement through a red megaphone, on a cream background
 author: Kevin Peckham
 quote:
   text: The application always knows what it just did. Telling the model costs one line. Not telling it costs 144 silent wrong answers out of 144.
