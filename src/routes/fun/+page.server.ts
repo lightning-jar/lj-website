@@ -9,6 +9,16 @@ const projects = [
 			{ label: "GitHub", href: "https://github.com/kevinpeckham/chord-player" },
 		],
 	},
+	{
+		name: "Numberoo",
+		status: "Live",
+		summary:
+			"A number-naming toy for children, inspired by our principal's son Leo, who came home from kindergarten fascinated by how big numbers could get. Type any number, up to a googol (a one followed by a hundred zeros), and Numberoo names it in English and reads it aloud, from seven to quattuorvigintillion and beyond.",
+		links: [
+			{ label: "Play at numberoo.dev", href: "https://www.numberoo.dev" },
+			{ label: "GitHub", href: "https://github.com/kevinpeckham/numberoo" },
+		],
+	},
 ];
 
 export function load() {
