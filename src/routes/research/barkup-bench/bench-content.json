@@ -1,8 +1,8 @@
 {
 	"header": {
-		"eyebrow": "barkup-bench · pre-registered · corrected 2026-07-06 · studies F–X",
+		"eyebrow": "barkup-bench · pre-registered · corrected 2026-07-06 · studies F–Y",
 		"lede": "Every id-stable interface works — until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree. Finding where to look costs one search call, and remembering the session costs two worked examples plus a memo — even 36 edits in. And the view is a correctness contract: what the model must read, it must be shown. Views carry values; memos carry goals — the agent can be trusted to write the memo itself, and \"undo that\" needs an echo, not a transcript.",
-		"provenance": "Main study: 200 seeded tasks × 6 conditions × 4 models × 2 regimes, temperature&nbsp;0 (July&nbsp;2026), plus follow-up studies G (tool-history footgun), H (300–1000-node size extension), I/J (focused views: partial-context patches, JSON and HTML renderings), K (12-edit sessions under four serialization policies), L/N (grounding without ids, then the retrieval ladder), M/O/P (session memory, positional views, synthetic history), Q/R (fan-out edits and their fixes), S (36-edit long sessions), T (conversation-carried context), U (document-carried dependencies), V (qualitative rewrites — the series' first judge-graded study, disclosed as its own track), W (agent-maintained memo extraction, the shipped mechanism verbatim, with claude-opus-4.8 as a third tier), and X (edit-anaphora: amend, repeat, and undo follow-ups racing four context carriers). <strong>All numbers below are protocol-v2 corrected</strong> — the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted; Wilson&nbsp;95% intervals. Conditions: <span class=\"font-mono\">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite, <span class=\"font-mono\">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite, <span class=\"font-mono\">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools, <span class=\"font-mono\">D</span>&nbsp;HTML&nbsp;+&nbsp;tools, <span class=\"font-mono\">E</span>&nbsp;JSON&nbsp;Patch, <span class=\"font-mono\">F</span>&nbsp;id-anchored&nbsp;patch (pre-registered addendum, BRIEF-F.md)."
+		"provenance": "Main study: 200 seeded tasks × 6 conditions × 4 models × 2 regimes, temperature&nbsp;0 (July&nbsp;2026), plus follow-up studies G (tool-history footgun), H (300–1000-node size extension), I/J (focused views: partial-context patches, JSON and HTML renderings), K (12-edit sessions under four serialization policies), L/N (grounding without ids, then the retrieval ladder), M/O/P (session memory, positional views, synthetic history), Q/R (fan-out edits and their fixes), S (36-edit long sessions), T (conversation-carried context), U (document-carried dependencies), V (qualitative rewrites — the series' first judge-graded study, disclosed as its own track), W (agent-maintained memo extraction, the shipped mechanism verbatim, with claude-opus-4.8 as a third tier), X (edit-anaphora: amend, repeat, and undo follow-ups racing four context carriers), and Y (naturalistic extraction: twin sessions isolating declaration phrasing, with chatter bait for the noise metric). <strong>All numbers below are protocol-v2 corrected</strong> — the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted; Wilson&nbsp;95% intervals. Conditions: <span class=\"font-mono\">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite, <span class=\"font-mono\">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite, <span class=\"font-mono\">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools, <span class=\"font-mono\">D</span>&nbsp;HTML&nbsp;+&nbsp;tools, <span class=\"font-mono\">E</span>&nbsp;JSON&nbsp;Patch, <span class=\"font-mono\">F</span>&nbsp;id-anchored&nbsp;patch (pre-registered addendum, BRIEF-F.md)."
 	},
 	"tiles": [
 		{
@@ -80,6 +80,10 @@
 		{
 			"num": "0/144",
 			"cap": "\"undo that\" follow-ups solved without a context carrier — every failure a valid, silently guessed patch; a one-line app-appended last-edit echo restores history-parity at half the cost and beats history outright on opus (Study X)"
+		},
+		{
+			"num": "0 false notes",
+			"cap": "from 432 conversational chatter baits, while casually phrased declarations (\"scratch that, the codename is X2 now\") extracted at exact parity with formulaic announcements on all three models (Study Y)"
 		}
 	],
 	"sections": [
@@ -376,7 +380,21 @@
 				"id": "tbl-anaphora",
 				"summary": "Data table — anaphora success by carrier, kind, and model, with failure anatomy and cost"
 			}
+		},
+		{
+			"id": "sec-speech",
+			"eyebrow": "Study Y · naturalistic extraction",
+			"title": "The memo survives how people actually talk",
+			"takeaway": "Every declaration in Studies T, V, and W was announced formulaically (\"For later reference: the codename is X\"). Real users declare mid-sentence, bury rules inside other requests, and retract with \"scratch that.\" Study Y isolated phrasing with twin sessions: identical trees, edits, schedules, chatter, and session ids, differing ONLY in declaration rider text — one twin formulaic, one casual from registered pools. Four chatter riders per session (\"the client saw a screenshot and seemed happy\") gave the noise metric real bait for the first time. Both gates passed perfectly on all three models: zero discordant callback cells anywhere between casual and formulaic (every McNemar 0 to 0), recall 36 of 36 and casual retractions 12 of 12 in both stateless arms, and 432 chatter baits produced not one false memo note. Users need no announcement syntax, and the shipped record-only-declarations prompt rule is doing real discrimination work at zero false-positive cost. One disclosed whisper: under the history window, recording cadence softens at the margin (3.8 to 3.9 calls per session vs a flat 4.0 stateless), consistent with Study W's redundancy finding and covered by in-window history. The formulaic arm doubled as a clean Study W replication under added chatter.",
+			"legendId": "legend-19",
+			"figure": {
+				"id": "fig-speech"
+			},
+			"table": {
+				"id": "tbl-speech",
+				"summary": "Data table — callbacks, recall, retractions, noise, and cadence by arm and model"
+			}
 		}
 	],
-	"footer": "Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/kevinpeckham/barkup-bench\">barkup-bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G–X addenda). Upstream bug report: <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts."
+	"footer": "Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/kevinpeckham/barkup-bench\">barkup-bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G–Y addenda). Upstream bug report: <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts."
 }

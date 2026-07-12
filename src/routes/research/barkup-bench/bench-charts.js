@@ -1186,4 +1186,61 @@ table("tbl-tokens",
 		]);
 })();
 
+
+// --- Study Y: naturalistic extraction twin bars ---
+(function () {
+	const YARMS = ["Y-formulaic", "Y-casual", "Y-casual-history"];
+	const YNAMES = {
+		"Y-formulaic": "formulaic declarations (the W control)",
+		"Y-casual": "casual declarations (registered pools)",
+		"Y-casual-history": "casual + the shipped history window"
+	};
+	const YCOLOR = { "Y-formulaic": "#9085e9", "Y-casual": "#199e70", "Y-casual-history": "#3987e5" };
+	// callbacks/48 · recall/36 · retraction/12 · noise per session
+	const YDATA = [
+		{ model: "sonnet-4.5", cells: { "Y-formulaic": [48, 36, 12, 0], "Y-casual": [48, 36, 12, 0], "Y-casual-history": [47, 35, 12, 0] } },
+		{ model: "gemini-3.5-flash", cells: { "Y-formulaic": [48, 36, 12, 0], "Y-casual": [48, 36, 12, 0], "Y-casual-history": [48, 34, 12, 0] } },
+		{ model: "opus-4.8", cells: { "Y-formulaic": [48, 36, 12, 0], "Y-casual": [48, 36, 12, 0], "Y-casual-history": [48, 35, 12, 0] } }
+	];
+	document.getElementById("legend-19").innerHTML = YARMS.map(c =>
+		'<span class="key"><span class="chip" style="background:' + YCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + YNAMES[c] + '</span>'
+	).join("") + '<span class="key">bars: callback success out of 48 · tooltip carries recall, retractions, noise</span>';
+	const W = 880, ROW = 30, T = 8, B = 40, L = 250, R = 24;
+	const rows = [];
+	for (const m of YDATA) for (const c of YARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+	const H = T + rows.length * ROW + B + 12;
+	const iw = W - L - R;
+	const xOf = v => L + (v / 48) * iw;
+	let g = "";
+	for (const tick of [0, 12, 24, 36, 48]) {
+		const x = xOf(tick);
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '</text>';
+	}
+	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">callback cells passed (of 48) — casual and formulaic twins tie exactly on every model</text>';
+	let marks = "", hits = "";
+	rows.forEach((row, ri) => {
+		const cy = T + ri * ROW + ROW / 2;
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + row.model.replace("-3.5-flash", "").replace("-4.5", "").replace("-4.8", "") + '</text>';
+		const [cb, recall, retract, noise] = row.cell;
+		marks += '<rect x="' + L + '" y="' + (cy - 8) + '" width="' + ((cb / 48) * iw) + '" height="16" fill="' + YCOLOR[row.arm] + '" rx="3"/>';
+		hits += '<rect x="' + L + '" y="' + (cy - 11) + '" width="' + iw + '" height="22" fill="transparent" data-tip="' + esc(row.arm + " — " + YNAMES[row.arm] + "\n" + row.model + ": callbacks " + cb + "/48 · recall " + recall + "/36 · retractions " + retract + "/12 · noise " + noise.toFixed(2) + "/session") + '"/>';
+	});
+	const el = document.getElementById("fig-speech");
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Bar chart: casual and formulaic declaration phrasing tie exactly on callback success across all three models, with zero chatter-induced false notes." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
+	table("tbl-speech", ["arm (model)", "callbacks", "recall", "retractions", "noise/session", "tool calls/session"],
+		[
+			["Y-formulaic (sonnet)", "48/48", "36/36", "12/12", "0.00", "4.0"],
+			["Y-casual (sonnet)", "48/48", "36/36", "12/12", "0.00", "4.0"],
+			["Y-casual-history (sonnet)", "47/48", "35/36", "12/12", "0.00", "3.9"],
+			["Y-formulaic (gemini)", "48/48", "36/36", "12/12", "0.00", "4.1"],
+			["Y-casual (gemini)", "48/48", "36/36", "12/12", "0.00", "4.2"],
+			["Y-casual-history (gemini)", "48/48", "34/36", "12/12", "0.00", "3.8"],
+			["Y-formulaic (opus)", "48/48", "36/36", "12/12", "0.00", "4.0"],
+			["Y-casual (opus)", "48/48", "36/36", "12/12", "0.00", "4.0"],
+			["Y-casual-history (opus)", "48/48", "35/36", "12/12", "0.00", "3.9"]
+		]);
+})();
+
 }
