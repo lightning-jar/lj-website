@@ -6,6 +6,8 @@ import LinkButton from "$components/LinkButton.svelte";
 
 // dashboard content and chart data
 import bench from "./bench-content.json";
+// shared headline numbers: src/lib/data/research-stats.json
+import researchStats from "$data/research-stats.json";
 
 // props
 let { data } = $props();
@@ -45,9 +47,10 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
       and the results are published as found, corrections included.
     </p>
     <p class="opacity-90 mb-4">
-      The series so far: twenty-four studies, more than 21,000 scored model
-      runs, five models, trees from 5 to 1,000 nodes, and editing sessions up
-      to 36 edits long. The findings compress to one sentence: give every node
+      The series so far: {researchStats.studiesSpelled} studies, more than
+      {researchStats.scoredRunsDisplay} scored model runs,
+      {researchStats.modelsSpelled} models, trees from 5 to 1,000 nodes, and
+      editing sessions up to 36 edits long. The findings compress to one sentence: give every node
       a stable id, never make the model reproduce anything it is not changing,
       and hand it everything the request assumes: the nodes it must read in
       the view, the goal it must satisfy in the memo. Everything the benchmark

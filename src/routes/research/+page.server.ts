@@ -1,10 +1,16 @@
+// shared headline numbers: src/lib/data/research-stats.json
+import researchStats from "$data/research-stats.json";
+
+const studiesSentenceCase =
+	researchStats.studiesSpelled.charAt(0).toUpperCase() +
+	researchStats.studiesSpelled.slice(1);
+
 const projects = [
 	{
 		name: "barkup-bench",
 		slug: "barkup-bench",
 		status: "Active",
-		summary:
-			"An open, pre-registered benchmark series measuring how large language models read and edit structured document trees. Nineteen studies, more than 13,000 scored model runs, four models, trees from 5 to 1,000 nodes, sessions up to 36 edits. Results published as found, corrections included; every finding shipped into the open-source barkup library.",
+		summary: `An open, pre-registered benchmark series measuring how large language models read and edit structured document trees. ${studiesSentenceCase} studies, more than ${researchStats.scoredRunsDisplay} scored model runs, ${researchStats.modelsSpelled} models, trees from 5 to 1,000 nodes, sessions up to 36 edits. Results published as found, corrections included; every finding shipped into the open-source barkup library.`,
 	},
 ];
 

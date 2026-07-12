@@ -23,8 +23,8 @@
 		{
 			"heading": "We Believe in Research",
 			"text": [
-				"Good engineering decisions come from evidence, not vibes. That's why we run and publish open-source research for developers of LLM applications: a growing series of pre-registered studies, more than 21,000 scored model runs and counting, corrections included.",
-				"The flagship is barkup-bench, our open benchmark measuring how language models read and edit structured documents. Every study is pre-registered before a single model is called: twenty-four studies so far, across four models, trees from 5 to 1,000 nodes, and editing sessions up to 36 edits long. Everything the benchmark validates ships in our open-source barkup library, and everything it refutes gets published anyway."
+				"Good engineering decisions come from evidence, not vibes. That's why we run and publish open-source research for developers of LLM applications: a growing series of pre-registered studies, more than {{researchRuns}} scored model runs and counting, corrections included.",
+				"The flagship is barkup-bench, our open benchmark measuring how language models read and edit structured documents. Every study is pre-registered before a single model is called: {{researchStudies}} studies so far, across {{researchModels}} models, trees from 5 to 1,000 nodes, and editing sessions up to 36 edits long. Everything the benchmark validates ships in our open-source barkup library, and everything it refutes gets published anyway."
 			],
 			"ctas": {
 				"primary": {
