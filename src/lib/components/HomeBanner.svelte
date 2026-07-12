@@ -221,6 +221,25 @@ function handleKeyDown(event: KeyboardEvent) {
       {/if}
     {/each}
 
+    <!-- panel position dots -->
+    {#if topics.length > 1}
+      <nav aria-label="Messages" class="flex items-center gap-2.5 mt-8">
+        {#each topics as topic, index}
+          <button
+            type="button"
+            title={topic.heading}
+            aria-label="Go to message {index + 1} of {topics.length}: {topic.heading}"
+            aria-current={counters.topic === index ? "true" : undefined}
+            onclick={() => (counters.topic = index)}
+            class="w-2.5 h-2.5 rounded-full border transition-colors {counters.topic ===
+            index
+              ? 'bg-maximumYellow border-maximumYellow'
+              : 'bg-transparent border-maximumYellow/50 hover:bg-maximumYellow/40'}"
+          ></button>
+        {/each}
+      </nav>
+    {/if}
+
     <LightningButton
       ariaLabel="go to next topic"
       character="→"
