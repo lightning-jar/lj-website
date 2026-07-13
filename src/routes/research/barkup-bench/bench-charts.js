@@ -1305,4 +1305,67 @@ table("tbl-tokens",
 		]);
 })();
 
+
+
+// --- Study AA: conflict resolution — literal readings by arm (the refuted gradient) ---
+(function () {
+	const AARMS = ["AA-base", "AA-priority", "AA-soft", "AA-memo"];
+	const ANAMES = {
+		"AA-base": "pack as-is (the confirmation arm)",
+		"AA-priority": "+ priority meta-rule (user wins)",
+		"AA-soft": "rules soft-phrased (generally prefer)",
+		"AA-memo": "rules restated in the memo tail"
+	};
+	const ACOLOR = { "AA-base": "#3987e5", "AA-priority": "#9085e9", "AA-soft": "#199e70", "AA-memo": "#c98500" };
+	// literal readings out of 24 (ri form + override enforced)
+	const ADATA = [
+		{ model: "sonnet-4.5", cells: { "AA-base": 10, "AA-priority": 8, "AA-soft": 2, "AA-memo": 10 } },
+		{ model: "gemini-3.5-flash", cells: { "AA-base": 7, "AA-priority": 3, "AA-soft": 0, "AA-memo": 0 } },
+		{ model: "opus-4.8", cells: { "AA-base": 0, "AA-priority": 0, "AA-soft": 0, "AA-memo": 12 } }
+	];
+	// memo-arm literal on opus/sonnet is the countermand trampling (enforced ™), not form-strictness
+	document.getElementById("legend-21").innerHTML = AARMS.map(c =>
+		'<span class="key"><span class="chip" style="background:' + ACOLOR[c] + '"></span><span class="code">' + c + '</span> ' + ANAMES[c] + '</span>'
+	).join("") + '<span class="key">bars: literal/rule-enforced readings out of 24 conflicted cells — the refuted prediction said opus would have the LONGEST base bar; it has none</span>';
+	const W = 880, ROW = 30, T = 8, B = 40, L = 250, R = 24;
+	const rows = [];
+	for (const m of ADATA) for (const c of AARMS) rows.push({ model: m.model, arm: c, v: m.cells[c] });
+	const H = T + rows.length * ROW + B + 12;
+	const iw = W - L - R;
+	const xOf = v => L + (v / 24) * iw;
+	let g = "";
+	for (const tick of [0, 6, 12, 18, 24]) {
+		const x = xOf(tick);
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '</text>';
+	}
+	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">literal readings (of 24 conflicted cells) — memo-arm bars on opus/sonnet are the countermand-trampling footgun, not form-strictness</text>';
+	let marks = "", hits = "";
+	rows.forEach((row, ri) => {
+		const cy = T + ri * ROW + ROW / 2;
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + row.model.replace("-3.5-flash", "").replace("-4.5", "").replace("-4.8", "") + '</text>';
+		if (row.v > 0) marks += '<rect x="' + L + '" y="' + (cy - 8) + '" width="' + ((row.v / 24) * iw) + '" height="16" fill="' + ACOLOR[row.arm] + '" rx="3"/>';
+		else marks += '<circle cx="' + (L + 4) + '" cy="' + cy + '" r="3.5" fill="' + ACOLOR[row.arm] + '"/>';
+		hits += '<rect x="' + L + '" y="' + (cy - 11) + '" width="' + iw + '" height="22" fill="transparent" data-tip="' + esc(row.arm + " — " + ANAMES[row.arm] + "\n" + row.model + ": literal readings " + row.v + "/24 · violations 0 · contamination 0") + '"/>';
+	});
+	const el = document.getElementById("fig-conflict");
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Bar chart: opus took zero literal readings in the confirmation arm, inverting the refuted capability-strictness prediction; soft phrasing collapses literal readings; the memo arm shows the countermand-trampling footgun." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
+	table("tbl-conflict", ["arm (model)", "literal (of 24)", "instruction-favored (of 24)", "countermand honored (of 12)", "violations", "contamination"],
+		[
+			["AA-base (sonnet)", "10", "14", "12/12", "0", "0"],
+			["AA-priority (sonnet)", "8", "16", "12/12", "0", "0"],
+			["AA-soft (sonnet)", "2", "22", "12/12", "0", "0"],
+			["AA-memo (sonnet)", "10", "14", "3/12 ← memo tramples", "0", "0"],
+			["AA-base (gemini)", "7", "17", "12/12", "0", "0"],
+			["AA-priority (gemini)", "3", "21", "12/12", "0", "0"],
+			["AA-soft (gemini)", "0", "24", "12/12", "0", "0"],
+			["AA-memo (gemini)", "0", "24", "12/12", "0", "0"],
+			["AA-base (opus)", "0", "24", "12/12", "0", "0"],
+			["AA-priority (opus)", "0", "24", "12/12", "0", "0"],
+			["AA-soft (opus)", "0", "24", "12/12", "0", "0"],
+			["AA-memo (opus)", "12", "12", "0/12 ← memo tramples", "0", "0"]
+		]);
+})();
+
 }

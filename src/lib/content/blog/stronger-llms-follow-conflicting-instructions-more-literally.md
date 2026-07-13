@@ -2,7 +2,7 @@
 title: "Stronger LLMs Follow Conflicting Instructions More Literally, Not Less"
 metaTitle: "Stronger LLMs Follow Conflicting Instructions More Literally | barkup-bench Study Z"
 slug: stronger-llms-follow-conflicting-instructions-more-literally
-description: "Study Z, the twenty-sixth in our pre-registered benchmark series, finally measured the thing almost every AI document editor does without evidence: shipping a standing context block with every request. Company background, client records, a twelve-rule styleguide. Does the model actually use it? The answer is a clean yes: 216 of 216 on facts and rules across three models, zero cross-client contamination in 324 cells, and no burial effect anywhere in the styleguide. The hazard we found instead lives in the styleguide itself. When a standing rule collides with what the user asked for, models don't break either one. They pick a reading. And the strongest model picks the most literal reading most often."
+description: "Correction, July 13: the headline finding did not survive its own pre-registered confirmation study. Study AA inverted it, and the foreword explains what happened. The original post follows unchanged. Study Z, the twenty-sixth in our pre-registered benchmark series, finally measured the thing almost every AI document editor does without evidence: shipping a standing context block with every request. Company background, client records, a twelve-rule styleguide. Does the model actually use it? The answer is a clean yes: 216 of 216 on facts and rules across three models, zero cross-client contamination in 324 cells, and no burial effect anywhere in the styleguide. The hazard we found instead lives in the styleguide itself. When a standing rule collides with what the user asked for, models don't break either one. They pick a reading. And the strongest model picks the most literal reading most often."
 date: 2026-07-13T16:00:00Z
 draft: false
 tags: [ai, agents, llm, open-source, barkup, benchmarks]
@@ -32,6 +32,18 @@ additionalReading:
     url: "/research/barkup-bench"
   - title: "barkup-bench on GitHub: pre-registration, corpus, and raw analysis"
     url: "https://github.com/kevinpeckham/barkup-bench"
+---
+
+## Correction (July 13, 2026)
+
+**The claim in this post's title did not survive its own pre-registered confirmation study, and we are retracting it.** Within a day of publishing, we registered Study AA to confirm the capability-strictness finding with three conflict kinds and four interventions, 432 cells. It refuted us, and not gently: in the confirmation study's base arm, claude-opus-4.8, the model this post says is the most literal, took the literal reading zero times in 24 conflicted cells, while sonnet took it 10 times and gemini 7. The paired test is significant in the opposite direction from our headline (p = 0.016).
+
+Two things went wrong in our original inference, and both are worth learning from. First, Study Z's aggregate leaned on an arm where opus went fully strict under a sliced-down context; on the arm shaped like production, opus was already the least strict model, and we averaged our way past that detail. Second, which reading a model picks turns out to be composition-sensitive: the identical conflicted instruction that split opus evenly under Study Z's three-rule styleguides read both-obligations 12 of 12 under Study AA's four-rule styleguides. Strictness per model is real (sonnet really did take the strict reading 10 of 12 times on the same template) but it is not a capability gradient, and it is not stable enough to bank on. Test the model you ship on the context you ship.
+
+What survives, confirmed rather than weakened: models never break a conflicted spec (756 conflicted cells across both studies, zero rule violations, zero contamination); the standing-context results that make up most of this post (216 of 216 on facts and rules, the caching economics, the slicing advice) are untouched; and the memo's power to steer which reading wins replicated to the exact number (2 of 12 to 11 of 12, p = 0.004). Study AA also found the fix we should have led with: softening rule wording from "always" to "we generally prefer" collapsed literal readings on every model that had any, and it beat the priority meta-rule we tested, which moved nothing significantly. One new hazard: that same memo steering can trample a user's explicit countermand of a rule, so never restate a rule near a request that may be overriding it.
+
+The original post follows unchanged, headline and all, as the record of what we claimed. The confirmation study is pre-registered and published like everything else: [BRIEF-AA](https://github.com/kevinpeckham/barkup-bench/blob/main/docs/BRIEF-AA.md) and the [REPORT addendum](https://github.com/kevinpeckham/barkup-bench/blob/main/REPORT.md) carry the full numbers.
+
 ---
 
 [barkup-bench](/research/barkup-bench) is our open, pre-registered benchmark series on how LLM agents should edit structured documents. Twenty-five studies in, it has measured views, memos, echoes, worked examples, and the failure modes of each. Study Z turns to something so common it hides in plain sight: the standing context block. If you have built an AI document editor, you probably ship one. Company background, what the business sells, client records, a styleguide. It goes out with every single request, whether the request needs it or not, on the theory that the model will reach into it when a task calls for a fact or a rule.
