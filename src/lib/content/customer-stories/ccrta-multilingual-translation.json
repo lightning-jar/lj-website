@@ -13,7 +13,7 @@
 	},
 	"meta": {
 		"title": "14 Languages in Days, Not Quarters: CCRTA Sitewide Translation | Customer Story",
-		"description": "How Lightning Jar met CCRTA's Title VI language-access mandate with a custom AI translation layer: the entire transit site in fourteen languages, transit proper nouns protected, PDF route-map access solved, continuously monitored — for a fraction of turnkey localization cost."
+		"description": "How Lightning Jar met CCRTA's Title VI language-access mandate with a custom AI translation layer: the entire transit site in fourteen languages, transit proper nouns protected, downloadable translated route-schedule PDFs, continuously monitored — for a fraction of turnkey localization cost."
 	},
 	"customer": {
 		"id": "ccrta",
@@ -21,7 +21,7 @@
 		"name": "CCRTA",
 		"logo": "/images/customer-logo-ccrta.png"
 	},
-	"excerpt": "Under Title VI, transit agencies must provide meaningful access for riders with limited English proficiency, and an upcoming audit put a date on it. While CCRTA evaluated enterprise localization platforms with recurring five-figure fees, Lightning Jar built translation into the site's own rendering pipeline: every page in fourteen languages, stop and route names protected, PDF route-map access solved, and one-time translation compute of a few dollars per language.",
+	"excerpt": "Under Title VI, transit agencies must provide meaningful access for riders with limited English proficiency, and an upcoming audit put a date on it. While CCRTA evaluated enterprise localization platforms with recurring five-figure fees, Lightning Jar built translation into the site's own rendering pipeline: every page in fourteen languages, stop and route names protected, downloadable translated schedule PDFs for every route, and one-time translation compute of a few dollars per language.",
 	"title": "14 Languages in Days, Not Quarters: Sitewide AI Translation for CCRTA's Title VI Mandate",
 	"slug": "ccrta-multilingual-translation",
 	"thumbnailImage": {
@@ -56,9 +56,10 @@
 		},
 		{
 			"heading": "Featured Requirement",
-			"subheading": "Translated Route Maps",
+			"subheading": "Translated Route Maps and Schedules — as Downloadable PDFs",
 			"text": [
-				"The audit's hardest line item — access to translations of PDF route maps — was met without translating a single PDF. Prose documents get an automatic \"read translated version\" view built from the PDF's extracted text; schedule PDFs, which are dense tables no translation preserves, route riders to the equivalent web page for that route — live map, full schedule, stops — already translated like every other page."
+				"The audit's hardest line item was access to translations of the PDF route maps: documents that are individually art-directed, printed months in advance, and exist only in English. Machine-editing those files was never realistic — no automated translation survives hand-drawn artwork and dense timetable tables.",
+				"Instead, every route now offers a downloadable translated schedule PDF in all fourteen languages, generated on the fly from the agency's own transit data: the full timetable keyed to numbered timepoints, the route drawn on a real map, standard rider information in the rider's language, and a scannable QR code that hands off to the live route page for real-time bus positions and service alerts. Because each document is generated rather than stored, it is dated, always current with the published schedule — something the pre-printed English brochures cannot be — and cached at three layers so downloads are instant. Prose documents get an automatic \"read translated version\" view; the English originals remain the authoritative record."
 			]
 		},
 		{
@@ -75,7 +76,7 @@
 				"• One-time translation compute of a few dollars per language for the entire site, versus recurring five-figure annual platform fees.",
 				"• Prototype to production in days, inside the audit window.",
 				"• New and edited content translates itself — no ongoing localization workflow.",
-				"• Audit requirements for PDF route-map access met through equivalent, always-current web content.",
+				"• Downloadable translated schedule PDFs for every route in all fourteen languages — generated on demand from live transit data, always current, with a QR hand-off to the live route page.",
 				"• No consent banner required: the only cookie involved is the rider's own language preference."
 			]
 		}
