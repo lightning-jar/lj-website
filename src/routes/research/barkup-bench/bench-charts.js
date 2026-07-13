@@ -1243,4 +1243,66 @@ table("tbl-tokens",
 		]);
 })();
 
+
+
+// --- Study Z: standing context — combined-task interpretation split ---
+(function () {
+	const ZARMS = ["Z-full", "Z-slice", "Z-memo"];
+	const ZNAMES = {
+		"Z-full": "whole pack in the system prompt (the shipped shape)",
+		"Z-slice": "oracle relevant slice only",
+		"Z-memo": "whole pack + rules distilled into the memo tail"
+	};
+	// stacked: obey-both (green) vs strict-form literal reading (orange); violations were ZERO everywhere
+	const ZCOLOR = { both: "#199e70", strict: "#c98500" };
+	// per model per arm: [obey-both, strict-form] of 12 combined cells
+	const ZDATA = [
+		{ model: "sonnet-4.5", cells: { "Z-full": [2, 10], "Z-slice": [3, 9], "Z-memo": [11, 1] } },
+		{ model: "gemini-3.5-flash", cells: { "Z-full": [3, 9], "Z-slice": [11, 1], "Z-memo": [8, 4] } },
+		{ model: "opus-4.8", cells: { "Z-full": [6, 6], "Z-slice": [0, 12], "Z-memo": [4, 8] } }
+	];
+	document.getElementById("legend-20").innerHTML =
+		'<span class="key"><span class="chip" style="background:' + ZCOLOR.both + '"></span>satisfied BOTH (format + product™ appended)</span>' +
+		'<span class="key"><span class="chip" style="background:' + ZCOLOR.strict + '"></span>obeyed the format rule LITERALLY (exact email | city, no mention)</span>' +
+		'<span class="key">every one of 324 cells landed in one of these two readings — zero rule violations, zero contamination; facts and rules were 100% in every arm</span>';
+	const W = 880, ROW = 30, T = 8, B = 40, L = 250, R = 24;
+	const rows = [];
+	for (const m of ZDATA) for (const c of ZARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+	const H = T + rows.length * ROW + B + 12;
+	const iw = W - L - R;
+	const xOf = v => L + (v / 12) * iw;
+	let g = "";
+	for (const tick of [0, 3, 6, 9, 12]) {
+		const x = xOf(tick);
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '</text>';
+	}
+	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">conflicted combined cells (of 12) by how the model resolved the rule-vs-instruction collision</text>';
+	let marks = "", hits = "";
+	rows.forEach((row, ri) => {
+		const cy = T + ri * ROW + ROW / 2;
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + row.model.replace("-3.5-flash", "").replace("-4.5", "").replace("-4.8", "") + '</text>';
+		const [both, strict] = row.cell;
+		const wBoth = (both / 12) * iw, wStrict = (strict / 12) * iw;
+		if (both > 0) marks += '<rect x="' + L + '" y="' + (cy - 8) + '" width="' + Math.max(wBoth - 2, 1) + '" height="16" fill="' + ZCOLOR.both + '" rx="3"/>';
+		if (strict > 0) marks += '<rect x="' + (L + wBoth) + '" y="' + (cy - 8) + '" width="' + Math.max(wStrict - 2, 1) + '" height="16" fill="' + ZCOLOR.strict + '" rx="3"/>';
+		hits += '<rect x="' + L + '" y="' + (cy - 11) + '" width="' + iw + '" height="22" fill="transparent" data-tip="' + esc(row.arm + " — " + ZNAMES[row.arm] + "\n" + row.model + ": satisfied both " + both + "/12 · literal form reading " + strict + "/12 · violations 0 · contamination 0") + '"/>';
+	});
+	const el = document.getElementById("fig-standing");
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Stacked bar chart: every conflicted cell resolved into one of two clean readings, and the strongest model took the literal rule reading most often; the memo arm shifts sonnet toward satisfying both." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
+	table("tbl-standing", ["arm (model)", "facts", "rules", "combined (registered)", "obeyed both", "literal reading", "input cost vs uncached"],
+		[
+			["Z-full (sonnet)", "12/12", "12/12", "2/12", "2", "10", "\u221224.6%"],
+			["Z-slice (sonnet)", "12/12", "12/12", "3/12", "3", "9", "\u22120.0%"],
+			["Z-memo (sonnet)", "12/12", "12/12", "11/12", "11", "1", "\u221242.5%"],
+			["Z-full (gemini)", "12/12", "12/12", "3/12", "3", "9", "\u22120.0%"],
+			["Z-slice (gemini)", "12/12", "12/12", "11/12", "11", "1", "\u22120.0%"],
+			["Z-memo (gemini)", "12/12", "12/12", "8/12", "8", "4", "\u22120.0%"],
+			["Z-full (opus)", "12/12", "12/12", "6/12", "6", "6", "\u221224.9%"],
+			["Z-slice (opus)", "12/12", "12/12", "0/12", "0", "12", "+10.8%"],
+			["Z-memo (opus)", "12/12", "12/12", "4/12", "4", "8", "\u221243.0%"]
+		]);
+})();
+
 }

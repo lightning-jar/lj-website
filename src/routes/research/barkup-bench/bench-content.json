@@ -1,7 +1,7 @@
 {
 	"header": {
-		"eyebrow": "barkup-bench · pre-registered · corrected 2026-07-06 · studies F–Y",
-		"lede": "Every id-stable interface works — until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree. Finding where to look costs one search call, and remembering the session costs two worked examples plus a memo — even 36 edits in. And the view is a correctness contract: what the model must read, it must be shown. Views carry values; memos carry goals — the agent can be trusted to write the memo itself, and \"undo that\" needs an echo, not a transcript.",
+		"eyebrow": "barkup-bench · pre-registered · corrected 2026-07-06 · studies F–Z",
+		"lede": "Every id-stable interface works — until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree. Finding where to look costs one search call, and remembering the session costs two worked examples plus a memo — even 36 edits in. And the view is a correctness contract: what the model must read, it must be shown. Views carry values; memos carry goals — the agent can be trusted to write the memo itself, and \"undo that\" needs an echo, not a transcript. The standing brand pack simply works — and the rule you forgot you wrote is the one your strongest model obeys most literally.",
 		"provenance": "Main study: 200 seeded tasks × 6 conditions × 4 models × 2 regimes, temperature&nbsp;0 (July&nbsp;2026), plus follow-up studies G (tool-history footgun), H (300–1000-node size extension), I/J (focused views: partial-context patches, JSON and HTML renderings), K (12-edit sessions under four serialization policies), L/N (grounding without ids, then the retrieval ladder), M/O/P (session memory, positional views, synthetic history), Q/R (fan-out edits and their fixes), S (36-edit long sessions), T (conversation-carried context), U (document-carried dependencies), V (qualitative rewrites — the series' first judge-graded study, disclosed as its own track), W (agent-maintained memo extraction, the shipped mechanism verbatim, with claude-opus-4.8 as a third tier), X (edit-anaphora: amend, repeat, and undo follow-ups racing four context carriers), and Y (naturalistic extraction: twin sessions isolating declaration phrasing, with chatter bait for the noise metric). <strong>All numbers below are protocol-v2 corrected</strong> — the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted; Wilson&nbsp;95% intervals. Conditions: <span class=\"font-mono\">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite, <span class=\"font-mono\">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite, <span class=\"font-mono\">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools, <span class=\"font-mono\">D</span>&nbsp;HTML&nbsp;+&nbsp;tools, <span class=\"font-mono\">E</span>&nbsp;JSON&nbsp;Patch, <span class=\"font-mono\">F</span>&nbsp;id-anchored&nbsp;patch (pre-registered addendum, BRIEF-F.md)."
 	},
 	"tiles": [
@@ -84,6 +84,10 @@
 		{
 			"num": "0 false notes",
 			"cap": "from 432 conversational chatter baits, while casually phrased declarations (\"scratch that, the codename is X2 now\") extracted at exact parity with formulaic announcements on all three models (Study Y)"
+		},
+		{
+			"num": "0/324",
+			"cap": "contamination events from same-schema distractor clients while facts and styleguide rules from a ~3.3k-token standing pack scored 216/216 per arm on every model (Study Z)"
 		}
 	],
 	"sections": [
@@ -394,7 +398,21 @@
 				"id": "tbl-speech",
 				"summary": "Data table — callbacks, recall, retractions, noise, and cadence by arm and model"
 			}
+		},
+		{
+			"id": "sec-standing",
+			"eyebrow": "Study Z · standing context",
+			"title": "The brand pack works; the rule you forgot is the hazard",
+			"takeaway": "Production doc editors ship a standing context block with every request — company facts, client records, a styleguide — and nobody had measured whether models actually use it. Study Z planted machine-checkable obligations in twelve seeded org packs (~3.3k tokens: one target client, three same-schema distractors, governing rules rotated head/middle/tail among twelve styleguide rules) and raced three arms: the whole pack, an oracle-picked relevant slice, and the whole pack plus the applicable rules distilled into the session-notes memo. The core answer is emphatic: facts and rules were 216 of 216 per arm — 100% on every model in every arm — with zero cross-client contamination in 324 cells and no burial effect at any styleguide position. Slicing bought nothing on accuracy and forfeited prompt caching (the per-request slice never got a single cache read; the whole pack under the shipped cached-system layout read 64–68% of input from cache, cutting effective input cost 25–43%). The finding lives in a conflict we registered by accident: a contact-format rule written with \"always\" against an instruction clause asking for a product mention. Every model resolved it cleanly into one of two readings — satisfy both, or obey the format literally — with zero violations, and the strict reading scaled WITH capability (opus 26/36 literal readings, sonnet 20, gemini 14). Distilling the rules into the memo did not change competence; it changed which reading wins (sonnet 2/12 → 11/12 satisfying both, p = 0.004). Audit your styleguide for \"always\" and \"exactly\": the failure mode of a conflicted spec is disciplined obedience to the rule you forgot you wrote.",
+			"legendId": "legend-20",
+			"figure": {
+				"id": "fig-standing"
+			},
+			"table": {
+				"id": "tbl-standing",
+				"summary": "Data table — facts, rules, combined-cell readings, and caching by arm and model"
+			}
 		}
 	],
-	"footer": "Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/kevinpeckham/barkup-bench\">barkup-bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G–Y addenda). Upstream bug report: <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts."
+	"footer": "Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/kevinpeckham/barkup-bench\">barkup-bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G–Z addenda). Upstream bug report: <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts."
 }
