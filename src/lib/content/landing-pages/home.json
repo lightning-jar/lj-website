@@ -17,6 +17,11 @@
 					"label": "Read Our Story",
 					"href": "/blog/twenty-five-years",
 					"title": "If the Solution Is Not Beautiful, It Is Wrong: Twenty-Five Years of Lightning Jar"
+				},
+				"secondary": {
+					"label": "Customer Stories",
+					"href": "/customer-stories",
+					"title": "Customer Stories"
 				}
 			}
 		},
