@@ -94,7 +94,8 @@
 		{
 			"heading": "Your Brand Is the Experience",
 			"text": [
-				"In the digital age, your brand is not what you say about yourself. It is what customers experience: every page, every search result, every checkout, every reply. The way customers interact with you becomes your brand. That is why we practice brand and digital as one discipline, from positioning and tone of voice to the interfaces that carry them."
+				"In the digital age, your brand is not what you say about yourself. It is what customers experience: every page, every search result, every checkout, every reply. The way customers interact with you becomes your brand. That is why we practice brand and digital as one discipline, from positioning and tone of voice to the interfaces that carry them.",
+				"And increasingly, the one experiencing your brand is not even human. AI assistants now read your website and describe your business to customers in their own words, and generated collateral carries your name whether or not it sounds like you. That is why we built Replicator, our brand operating system, where a language model designs and drafts inside brand-approved rails: positioning, voice, and guardrails encoded so the brand holds even when a machine is doing the talking."
 			],
 			"ctas": {
 				"primary": {
