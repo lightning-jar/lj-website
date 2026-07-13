@@ -16,7 +16,7 @@ let { articles = [] }: Props = $props();
 {#if articles.length}
   <section class="page-x-padding py-12 border-t border-white/10 w-full">
     <div class="flex items-end justify-between gap-4 mb-6">
-      <h2 class="heading-2">Latest from the blog</h2>
+      <h2 class="heading-2">Latest from our Blog</h2>
       <a
         href="/blog"
         class="text-maximumYellow hover:underline text-15px whitespace-nowrap"
@@ -44,7 +44,7 @@ let { articles = [] }: Props = $props();
           />
           <h3
             id="latest-title-{article.slug}"
-            class="px-3 absolute bottom-0 flex backdrop-blur bg-oxfordDark/80 w-full py-2 font-serif font-700 text-17px"
+            class="px-3 absolute bottom-0 flex backdrop-blur bg-oxfordDark/80 w-full py-2 font-sans font-700 text-17px"
           >
             {article.title}
           </h3>
