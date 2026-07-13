@@ -10,6 +10,22 @@ const projects = [
 		],
 	},
 	{
+		name: "Donut Shooter",
+		status: "Live",
+		summary:
+			"A small browser arcade game: donuts rain from the sky, the shooter follows your mouse, and you click to blast them before they hit the ground. Miss three and it's game over. Under the hood there is no game loop at all: motion runs on closed-form animation curves, and every collision is computed the instant you fire.",
+		links: [
+			{
+				label: "Play at donutshooter.com",
+				href: "https://www.donutshooter.com",
+			},
+			{
+				label: "GitHub",
+				href: "https://github.com/kevinpeckham/donut-shooter",
+			},
+		],
+	},
+	{
 		name: "Numberoo",
 		status: "Live",
 		summary:
