@@ -44,7 +44,7 @@ let { stories = [] }: Props = $props();
           />
           <h3
             id="latest-story-{story.slug}"
-            class="px-3 absolute bottom-0 flex backdrop-blur bg-oxfordDark/80 w-full py-2 font-sans font-700 text-17px"
+            class="px-3 absolute bottom-0 flex backdrop-blur bg-oxfordDark/80 w-full py-2 font-sans font-400 leading-snug text-17px"
           >
             {story.title}
           </h3>
