@@ -55,6 +55,11 @@
 					"label": "Read the Essay",
 					"href": "/blog/questions-decisions-compromises",
 					"title": "Questions, Decisions & Compromises"
+				},
+				"secondary": {
+					"label": "Our Blog",
+					"href": "/blog",
+					"title": "Blog"
 				}
 			}
 		},
