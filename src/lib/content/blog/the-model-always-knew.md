@@ -4,10 +4,10 @@ metaTitle: "The Model Always Knew What It Couldn't See | barkup-bench Study AC"
 slug: the-model-always-knew
 description: "For twenty-eight studies, the villain of our benchmark series was silence. A model missing information never said so: ninety silent inventions, one hundred forty-four silent guesses, one hundred twenty obliviously polished paragraphs, and not one clarifying question anywhere. Study AC finally asked why, by doing the one thing no study had done: it gave the model permission to ask. The answer rearranges how we read every earlier failure. With a one-sentence escape hatch, every model asked on every unsolvable task, 270 of 270, never once asked when it had what it needed, and named the exact missing node every single time. The guessing was never blindness. It was obedience."
 date: 2026-07-13T22:00:00Z
-draft: true
+draft: false
 tags: [ai, agents, llm, open-source, barkup, benchmarks]
-image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/placeholder.webp
-imageDescription: Placeholder pending hero image
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/question-mark.webp
+imageDescription: A watercolor painting of a large soft blue question mark on a cream background
 author: Kevin Peckham
 quote:
   text: The models always saw the gap. They guessed because the protocol demanded a patch, and nothing had ever told them asking was allowed.

@@ -24,6 +24,7 @@ const seriesSlugs = [
 	"undo-that",
 	"hand-it-everything-it-needs",
 	"stronger-llms-follow-conflicting-instructions-more-literally",
+	"the-model-always-knew",
 ];
 
 const articles = seriesSlugs
