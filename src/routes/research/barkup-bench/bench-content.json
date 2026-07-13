@@ -1,7 +1,7 @@
 {
 	"header": {
-		"eyebrow": "barkup-bench · pre-registered · corrected 2026-07-06 · studies F–AB",
-		"lede": "Every id-stable interface works — until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree. Finding where to look costs one search call, and remembering the session costs two worked examples plus a memo — even 36 edits in. And the view is a correctness contract: what the model must read, it must be shown. Views carry values; memos carry goals — the agent can be trusted to write the memo itself, and \"undo that\" needs an echo, not a transcript. The standing brand pack simply works — and when a rule collides with a request, models pick a reading rather than break either; our first claim about WHICH reading was refuted by its own confirmation study a day later.",
+		"eyebrow": "barkup-bench · pre-registered · corrected 2026-07-06 · studies F–AC",
+		"lede": "Every id-stable interface works — until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree. Finding where to look costs one search call, and remembering the session costs two worked examples plus a memo — even 36 edits in. And the view is a correctness contract: what the model must read, it must be shown. Views carry values; memos carry goals — the agent can be trusted to write the memo itself, and \"undo that\" needs an echo, not a transcript. The standing brand pack simply works — and when a rule collides with a request, models pick a reading rather than break either; our first claim about WHICH reading was refuted by its own confirmation study a day later. And the series-long villain fell last: offered one sentence of permission, every model asked instead of guessing, 270/270 — the silence was protocol, not blindness.",
 		"provenance": "Main study: 200 seeded tasks × 6 conditions × 4 models × 2 regimes, temperature&nbsp;0 (July&nbsp;2026), plus follow-up studies G (tool-history footgun), H (300–1000-node size extension), I/J (focused views: partial-context patches, JSON and HTML renderings), K (12-edit sessions under four serialization policies), L/N (grounding without ids, then the retrieval ladder), M/O/P (session memory, positional views, synthetic history), Q/R (fan-out edits and their fixes), S (36-edit long sessions), T (conversation-carried context), U (document-carried dependencies), V (qualitative rewrites — the series' first judge-graded study, disclosed as its own track), W (agent-maintained memo extraction, the shipped mechanism verbatim, with claude-opus-4.8 as a third tier), X (edit-anaphora: amend, repeat, and undo follow-ups racing four context carriers), and Y (naturalistic extraction: twin sessions isolating declaration phrasing, with chatter bait for the noise metric). <strong>All numbers below are protocol-v2 corrected</strong> — the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted; Wilson&nbsp;95% intervals. Conditions: <span class=\"font-mono\">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite, <span class=\"font-mono\">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite, <span class=\"font-mono\">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools, <span class=\"font-mono\">D</span>&nbsp;HTML&nbsp;+&nbsp;tools, <span class=\"font-mono\">E</span>&nbsp;JSON&nbsp;Patch, <span class=\"font-mono\">F</span>&nbsp;id-anchored&nbsp;patch (pre-registered addendum, BRIEF-F.md)."
 	},
 	"tiles": [
@@ -92,6 +92,10 @@
 		{
 			"num": "0/24",
 			"cap": "literal readings by opus-4.8 in Study AA’s confirmation arm — the model our Study Z claim called MOST literal measured least (sonnet 10/24, gemini 7/24); the claim is retracted (Study AA)"
+		},
+		{
+			"num": "270/270",
+			"cap": "asks on provably-unsolvable edits once a one-sentence escape hatch existed — against 0/270 silent wrong patches without it, with zero false asks on the solvable twins (Study AC)"
 		}
 	],
 	"sections": [
@@ -430,7 +434,21 @@
 				"id": "tbl-conflict",
 				"summary": "Data table — readings by arm, kind, and model, with the refuted prediction marked"
 			}
+		},
+		{
+			"id": "sec-ask",
+			"eyebrow": "Study AC · ask versus guess",
+			"title": "The model always knew what it couldn’t see",
+			"takeaway": "Twenty-eight studies of silent failure (90/90 invented values in U, 144/144 silent guesses in X, 120/120 oblivious polishes in V, zero clarifying questions anywhere) never once OFFERED the model a way out. Study AC did, on Study U’s unit-validated construction: the needed value provably absent from the target-only view, provably present in the solvable twin. Two registered hatches — a one-sentence NEED-INFO prompt rule, and an ask_user tool — against a no-hatch control, 810 cells. The control replicated U exactly: 135/135 silent wrong patches. Both hatches flipped it completely: 270/270 asks on unsolvable cells, ZERO false asks and untouched solve rates on the 270 solvable twins, and every single ask named the exact missing node and attribute (\"What is the content attribute value of the text-atom with id n219?\"). The mechanisms were indistinguishable, so the one-sentence version is the whole result. The reframe: the models always saw the gap precisely; they guessed because the protocol demanded a patch and nothing said asking was allowed — obedience, not blindness. Guidance: ship an ask path (one sentence; wire it to a real reply mechanism), keep the context contracts (they make the question unnecessary; the hatch makes residual failures visible), and mind the disclosed caveat: this was measured at a validated hard boundary, not on merely-vague requests — calibration on fuzzy ambiguity is the follow-up.",
+			"legendId": "legend-22",
+			"figure": {
+				"id": "fig-ask"
+			},
+			"table": {
+				"id": "tbl-ask",
+				"summary": "Data table — outcomes by arm, view, and model"
+			}
 		}
 	],
-	"footer": "Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/kevinpeckham/barkup-bench\">barkup-bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G–AB addenda). Upstream bug report: <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts."
+	"footer": "Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/kevinpeckham/barkup-bench\">barkup-bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G–AC addenda). Upstream bug report: <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts."
 }

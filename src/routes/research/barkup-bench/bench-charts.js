@@ -1368,4 +1368,57 @@ table("tbl-tokens",
 		]);
 })();
 
+
+
+// --- Study AC: ask versus guess — the villain flips ---
+(function () {
+	const ROWS = [
+		{ label: "no hatch (the U replication)", key: "base", asked: [0, 0, 0], guessed: [45, 45, 45] },
+		{ label: "NEED-INFO prompt rule", key: "rule", asked: [45, 45, 45], guessed: [0, 0, 0] },
+		{ label: "ask_user tool", key: "tool", asked: [45, 45, 45], guessed: [0, 0, 0] }
+	];
+	const MODELS = ["sonnet-4.5", "gemini-3.5-flash", "opus-4.8"];
+	const CASK = "#199e70", CGUESS = "#e66767";
+	document.getElementById("legend-22").innerHTML =
+		'<span class="key"><span class="chip" style="background:' + CASK + '"></span>asked (named the exact missing node)</span>' +
+		'<span class="key"><span class="chip" style="background:' + CGUESS + '"></span>silent wrong patch (valid, applied, confidently wrong)</span>' +
+		'<span class="key">bars: 45 provably-unsolvable cells per model per arm · solvable twins: zero false asks, solve untouched (in the table)</span>';
+	const W = 880, ROW = 30, T = 8, B = 40, L = 250, R = 24;
+	const rows = [];
+	ROWS.forEach(a => MODELS.forEach((m, mi) => rows.push({ arm: a.label, model: m, asked: a.asked[mi], guessed: a.guessed[mi] })));
+	const H = T + rows.length * ROW + B + 12;
+	const iw = W - L - R;
+	const xOf = v => L + (v / 45) * iw;
+	let g = "";
+	for (const tick of [0, 15, 30, 45]) {
+		const x = xOf(tick);
+		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '</text>';
+	}
+	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">outcomes on 45 unsolvable cells — one sentence of permission flips every silent guess into a precise question</text>';
+	let marks = "", hits = "";
+	rows.forEach((row, ri) => {
+		const cy = T + ri * ROW + ROW / 2;
+		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + " · " + row.arm.split(" (")[0] + '</text>';
+		if (row.asked > 0) marks += '<rect x="' + L + '" y="' + (cy - 8) + '" width="' + ((row.asked / 45) * iw) + '" height="16" fill="' + CASK + '" rx="3"/>';
+		if (row.guessed > 0) marks += '<rect x="' + xOf(row.asked) + '" y="' + (cy - 8) + '" width="' + Math.max((row.guessed / 45) * iw - 2, 1) + '" height="16" fill="' + CGUESS + '" rx="3"/>';
+		hits += '<rect x="' + L + '" y="' + (cy - 11) + '" width="' + iw + '" height="22" fill="transparent" data-tip="' + esc(row.arm + "\n" + row.model + ": asked " + row.asked + "/45 · silent wrong patch " + row.guessed + "/45 · false asks on solvable twins 0/45") + '"/>';
+	});
+	const el = document.getElementById("fig-ask");
+	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Bar chart: without a hatch every model silently guessed on all 45 unsolvable cells; with either escape hatch every model asked on all 45, with zero false asks on solvable twins." style="min-width:640px">' + g + marks + hits + '</svg>';
+	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
+	table("tbl-ask", ["arm (model)", "unsolvable: asked", "unsolvable: silent guess", "solvable: false asks", "solvable: solved"],
+		[
+			["no hatch (sonnet)", "0/45", "45/45", "0/45", "45/45"],
+			["no hatch (gemini)", "0/45", "45/45", "0/45", "45/45"],
+			["no hatch (opus)", "0/45", "45/45", "0/45", "45/45"],
+			["NEED-INFO rule (sonnet)", "45/45", "0/45", "0/45", "45/45"],
+			["NEED-INFO rule (gemini)", "45/45", "0/45", "0/45", "45/45"],
+			["NEED-INFO rule (opus)", "45/45", "0/45", "0/45", "45/45"],
+			["ask_user tool (sonnet)", "45/45", "0/45", "0/45", "45/45"],
+			["ask_user tool (gemini)", "45/45", "0/45", "0/45", "45/45"],
+			["ask_user tool (opus)", "45/45", "0/45", "0/45", "45/45"]
+		]);
+})();
+
 }

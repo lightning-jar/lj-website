@@ -88,7 +88,7 @@ export function load() {
 		meta: {
 			title: "barkup-bench: Open Research on LLM Tree Editing",
 			description:
-				"barkup-bench is Lightning Jar's open, pre-registered benchmark series measuring how LLMs read and edit structured document trees: twenty-eight studies, more than 23,000 scored model runs, published as found, corrections included.",
+				"barkup-bench is Lightning Jar's open, pre-registered benchmark series measuring how LLMs read and edit structured document trees: twenty-nine studies, more than 24,000 scored model runs, published as found, corrections included.",
 			robotsFollow: true,
 			analyticsOn: true,
 		},
