@@ -4,10 +4,10 @@ metaTitle: "The Arcade Game With No Game Loop | Donut Shooter"
 slug: the-arcade-game-with-no-game-loop
 description: "Every game tutorial starts the same way: write the loop, tick sixty times a second, update every position, check every collision. Donut Shooter, our browser arcade game, has no loop at all. Donuts fall on closed-form animation curves, the hit is decided the instant you click, and the moment of visible impact is computed once, at fire time, by bisecting the gap between two known trajectories. An essay on what happens when you treat time as something you can query instead of something you must process."
 date: 2026-07-13T18:00:00Z
-draft: true
+draft: false
 tags: [svelte, javascript, games, open-source, side-projects]
-image: ""
-imageDescription: "PLACEHOLDER: image pending"
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/donut.webp
+imageDescription: A watercolor painting of a frosted donut
 author: Kevin Peckham
 quote:
   text: A game loop watches for the collision. We solved for it. When motion is a formula, "when do these two things meet" stops being surveillance and becomes algebra.
