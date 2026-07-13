@@ -75,7 +75,8 @@
 		{
 			"heading": "Fact vs. Fiction in the Age of LLMs",
 			"text": [
-				"It has never been easier for a business to get swept up in AI hype, and never harder to tell the real opportunities from the noise. We help businesses adapt their marketing technology and sales tools to the LLM era with a customized, research-driven approach: test the claims, filter out the fiction, and invest only in what the evidence supports."
+				"It has never been easier for a business to get swept up in AI hype, and never harder to tell the real opportunities from the noise. We help businesses adapt their marketing technology and sales tools to the LLM era with a customized, research-driven approach: test the claims, filter out the fiction, and invest only in what the evidence supports.",
+				"We know how convincing fiction can be, because our own lab once produced some. An early study in our benchmark series published a dramatic 33-point effect that turned out to be a bug in a popular SDK, so we retracted the finding in public and rebuilt the study. That is the discipline we bring to your stack: the same claims-testing we apply to our own headlines, applied to every vendor pitch, plugin, and platform that wants your budget."
 			],
 			"ctas": {
 				"primary": {
