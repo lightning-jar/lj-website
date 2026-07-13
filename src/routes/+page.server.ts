@@ -19,8 +19,10 @@ const latestArticles = allBlogArticles.slice(0, 6).map((article) => ({
 }));
 
 export function load() {
+	// ticker withheld while hidden; restore by returning ...homeContent
+	const { ticker, ...contentWithoutTicker } = homeContent;
 	return {
-		...homeContent,
+		...contentWithoutTicker,
 		latestArticles,
 	};
 }
