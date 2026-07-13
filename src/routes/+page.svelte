@@ -7,6 +7,7 @@ let { data } = $props();
 </script>
 
 <div>
-	<HomeBanner topics={data.topics} ticker={data.ticker} />
+	<!-- ticker hidden for now: pass ticker={data.ticker} to bring it back -->
+	<HomeBanner topics={data.topics} />
 	<HomeLatestArticles articles={data.latestArticles} />
 </div>

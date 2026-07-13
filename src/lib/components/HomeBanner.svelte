@@ -269,7 +269,8 @@ function handleKeyDown(event: KeyboardEvent) {
 				items-start"
   ></div>
 
-  <!-- ticker -->
+  <!-- ticker (renders only when ticker content is provided) -->
+  {#if ticker.length}
   <aside
     class="
       absolute
@@ -333,4 +334,5 @@ function handleKeyDown(event: KeyboardEvent) {
       </div>
     {/if}
   </aside>
+  {/if}
 </div>
