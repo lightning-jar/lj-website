@@ -6,8 +6,8 @@ description: "When our principal's son came home from kindergarten fascinated by
 date: 2026-07-12T22:00:00Z
 draft: true
 tags: [javascript, typescript, testing, open-source, side-projects, kids]
-image: ""
-imageDescription: "PLACEHOLDER: image pending"
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/calculator.webp
+imageDescription: A watercolor painting of a calculator
 author: Kevin Peckham
 quote:
   text: The bug was never in the arithmetic, because there is no arithmetic. The moment you refuse to convert the string, an entire class of impossible-precision problems stops existing.
