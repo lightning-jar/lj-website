@@ -4,7 +4,7 @@ metaTitle: "The Number That Doesn't Fit in a Number | Numberoo"
 slug: the-number-that-doesnt-fit-in-a-number
 description: "When our principal's son came home from kindergarten fascinated by how big numbers could get, we built him Numberoo: type any number up to a googol and it names it in English, out loud. The catch is that a googol does not fit in a JavaScript number, and the fix is the whole lesson: the app never parses your input at all. The digit string is the data structure. A short essay on picking the representation the problem actually wants, from a 157-line engine with 157 lines of tests."
 date: 2026-07-12T22:00:00Z
-draft: true
+draft: false
 tags: [javascript, typescript, testing, open-source, side-projects, kids]
 image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/calculator.webp
 imageDescription: A watercolor painting of a calculator
