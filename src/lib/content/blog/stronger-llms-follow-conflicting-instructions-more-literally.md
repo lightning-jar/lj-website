@@ -1,7 +1,7 @@
 ---
 title: "Stronger LLMs Follow Conflicting Instructions More Literally, Not Less"
 metaTitle: "Stronger LLMs Follow Conflicting Instructions More Literally | barkup-bench Study Z"
-slug: the-rule-you-forgot-you-wrote
+slug: stronger-llms-follow-conflicting-instructions-more-literally
 description: "Study Z, the twenty-sixth in our pre-registered benchmark series, finally measured the thing almost every AI document editor does without evidence: shipping a standing context block with every request. Company background, client records, a twelve-rule styleguide. Does the model actually use it? The answer is a clean yes: 216 of 216 on facts and rules across three models, zero cross-client contamination in 324 cells, and no burial effect anywhere in the styleguide. The hazard we found instead lives in the styleguide itself. When a standing rule collides with what the user asked for, models don't break either one. They pick a reading. And the strongest model picks the most literal reading most often."
 date: 2026-07-13T16:00:00Z
 draft: false

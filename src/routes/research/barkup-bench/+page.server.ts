@@ -23,7 +23,7 @@ const seriesSlugs = [
 	"who-writes-the-memo",
 	"undo-that",
 	"hand-it-everything-it-needs",
-	"the-rule-you-forgot-you-wrote",
+	"stronger-llms-follow-conflicting-instructions-more-literally",
 ];
 
 const articles = seriesSlugs
