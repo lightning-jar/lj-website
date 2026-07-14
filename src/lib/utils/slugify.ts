@@ -5,10 +5,7 @@ export interface SlugifyOptions {
 	maxLength?: number;
 }
 
-export function slugify(
-	s?: string | number | null,
-	options?: SlugifyOptions,
-): string {
+function slugify(s?: string | number | null, options?: SlugifyOptions): string {
 	const defVal = options?.def ?? "";
 	if (s == null || s === "") return defVal;
 

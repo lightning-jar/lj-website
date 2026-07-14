@@ -52,11 +52,6 @@ export const technologiesSitemapSection = {
 // export all technologies
 export const allTechnologies: Technology[] = await loadAllTechnologiesJson();
 
-// export all technology ids
-export const allTechnologyIds: string[] = allTechnologies
-	.map((technology) => technology?.id || "")
-	.filter(Boolean);
-
 // export all technology super categories
 export const allTechnologySupercategories: TechnologySupercategory[] =
 	await loadAllTechnologySupercategoriesJson();

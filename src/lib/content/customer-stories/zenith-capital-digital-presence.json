@@ -89,10 +89,5 @@
 			}
 		}
 	],
-	"tags": [
-		"Websites",
-		"Branding",
-		"Financial Services",
-		"SvelteKit"
-	]
+	"tags": ["Websites", "Branding", "Financial Services", "SvelteKit"]
 }

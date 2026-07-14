@@ -9,8 +9,7 @@ import researchStats from "$data/research-stats.json";
 const eyebrowCls =
 	"font-mono text-12px tracking-[0.14em] uppercase text-maximumYellow mb-1.5";
 const proseCls = "text-[#c3c9d4] max-w-[56rem]";
-const linkCls =
-	"text-maximumYellow hover:underline underline-offset-3";
+const linkCls = "text-maximumYellow hover:underline underline-offset-3";
 const codeCls =
 	"bg-[hsl(217,44%,19%)] border border-white/14 rounded-md px-4.5 py-4 overflow-x-auto font-mono text-13px leading-[1.6] text-[#dfe4ec] whitespace-pre";
 
@@ -69,7 +68,8 @@ const view = renderView(grammar, storedTree, {
 	{
 		id: "one-search-call",
 		eyebrow: "03 · Grounding · Studies L, N",
-		title: "When the user doesn't name a target, give the model one search call",
+		title:
+			"When the user doesn't name a target, give the model one search call",
 		prose: [
 			`"Fix the typo in the pricing section" names no node. Give the model a skeleton view of the document plus a single deterministic keyword-search tool and it grounds plain-language requests at oracle-level accuracy, at a median of exactly one call and a tenth of the input of showing everything.`,
 			`Two things not to build: off-the-shelf embeddings measured no better than keyword overlap for structural references, and navigation tools (open node, list children) were a trap: oracle accuracy on the frontier model at higher cost than showing the whole document, and collapse on the cheap one.`,
@@ -102,7 +102,8 @@ function searchTool(query: string): string {
 	{
 		id: "memo",
 		eyebrow: "05 · Declared state · Studies T, V, W, Y",
-		title: "Keep an app-held memo of everything the user declares, and let the agent write it",
+		title:
+			"Keep an app-held memo of everything the user declares, and let the agent write it",
 		prose: [
 			`"Rename it to the codename we settled on" fails a stateless editor 100% of the time by construction: the answer lives in a conversation the model no longer sees. A short app-held memo of declared facts, standing rules, and goals, appended to every request, recovered every such callback at 2% extra cost.`,
 			`The memo also carries qualitative goals at full parity with restating them in the request, where merely showing the model the document node the goal lives in lost 117 of 120 judged comparisons. Views carry values; memos carry goals. And you can delegate the writing: agent-extracted memos tied a perfect-oracle baseline on all three models tested, handled retractions, survived casual human phrasing at exact parity, and produced zero false notes from 432 conversational chatter baits.`,

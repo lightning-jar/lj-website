@@ -147,11 +147,5 @@
 		"bun"
 	],
 	"technologies": [],
-	"tags": [
-		"AI",
-		"SaaS",
-		"Design Systems",
-		"SvelteKit",
-		"Open Source"
-	]
+	"tags": ["AI", "SaaS", "Design Systems", "SvelteKit", "Open Source"]
 }

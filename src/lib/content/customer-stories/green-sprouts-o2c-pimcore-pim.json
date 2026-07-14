@@ -88,12 +88,7 @@
 			}
 		}
 	],
-	"tags": [
-		"Pimcore",
-		"PIM",
-		"Data Operations",
-		"Consumer Products"
-	],
+	"tags": ["Pimcore", "PIM", "Data Operations", "Consumer Products"],
 	"notice": {
 		"label": "A note on Pimcore",
 		"text": "This solution is built on Pimcore. Since much of this work was done, Pimcore's Community Edition has moved from GPLv3 to the source-available Pimcore Open Core License, and a community fork, OpenDXP, now continues the GPLv3 codebase. Because Pimcore is no longer open source, we no longer recommend it for most new implementations.",

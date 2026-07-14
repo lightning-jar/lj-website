@@ -48,7 +48,8 @@ const config: VercelConfig = {
 		{ source: "/privacy-policy", destination: "/terms", statusCode: 301 },
 		{
 			source: "/blog/the-rule-you-forgot-you-wrote",
-			destination: "/blog/stronger-llms-follow-conflicting-instructions-more-literally",
+			destination:
+				"/blog/stronger-llms-follow-conflicting-instructions-more-literally",
 			statusCode: 301,
 		},
 		{

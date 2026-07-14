@@ -2,1423 +2,5316 @@
 // Chart rendering for the barkup-bench dashboard, transplanted from the
 // original results artifact. Runs on mount; builds inline SVGs from DATA.
 export function initBenchCharts() {
+	const DATA = {
+		crossover: {
+			A: [
+				{ bucket: "xs", n: 216, ok: 207, rate: 95.8, low: 92.3, high: 97.8 },
+				{ bucket: "s", n: 232, ok: 225, rate: 97, low: 93.9, high: 98.5 },
+				{ bucket: "m", n: 184, ok: 160, rate: 87, low: 81.3, high: 91.1 },
+				{ bucket: "l", n: 168, ok: 143, rate: 85.1, low: 79, high: 89.7 },
+			],
+			B: [
+				{ bucket: "xs", n: 216, ok: 209, rate: 96.8, low: 93.5, high: 98.4 },
+				{ bucket: "s", n: 232, ok: 223, rate: 96.1, low: 92.8, high: 97.9 },
+				{ bucket: "m", n: 184, ok: 165, rate: 89.7, low: 84.4, high: 93.3 },
+				{ bucket: "l", n: 168, ok: 151, rate: 89.9, low: 84.4, high: 93.6 },
+			],
+			C: [
+				{ bucket: "xs", n: 216, ok: 211, rate: 97.7, low: 94.7, high: 99 },
+				{ bucket: "s", n: 232, ok: 225, rate: 97, low: 93.9, high: 98.5 },
+				{ bucket: "m", n: 184, ok: 166, rate: 90.2, low: 85.1, high: 93.7 },
+				{ bucket: "l", n: 168, ok: 149, rate: 88.7, low: 83, high: 92.6 },
+			],
+			D: [
+				{ bucket: "xs", n: 216, ok: 211, rate: 97.7, low: 94.7, high: 99 },
+				{ bucket: "s", n: 232, ok: 224, rate: 96.6, low: 93.3, high: 98.2 },
+				{ bucket: "m", n: 184, ok: 166, rate: 90.2, low: 85.1, high: 93.7 },
+				{ bucket: "l", n: 168, ok: 151, rate: 89.9, low: 84.4, high: 93.6 },
+			],
+			E: [
+				{ bucket: "xs", n: 216, ok: 202, rate: 93.5, low: 89.4, high: 96.1 },
+				{ bucket: "s", n: 232, ok: 218, rate: 94, low: 90.1, high: 96.4 },
+				{ bucket: "m", n: 184, ok: 155, rate: 84.2, low: 78.3, high: 88.8 },
+				{ bucket: "l", n: 168, ok: 117, rate: 69.6, low: 62.3, high: 76.1 },
+			],
+			F: [
+				{ bucket: "xs", n: 216, ok: 210, rate: 97.2, low: 94.1, high: 98.7 },
+				{ bucket: "s", n: 232, ok: 226, rate: 97.4, low: 94.5, high: 98.8 },
+				{ bucket: "m", n: 184, ok: 162, rate: 88, low: 82.6, high: 92 },
+				{ bucket: "l", n: 168, ok: 143, rate: 85.1, low: 79, high: 89.7 },
+			],
+		},
+		tokens: {
+			A: [1137, 2919, 7615, 15638],
+			B: [1250, 3672, 10766, 22961],
+			C: [4958, 14535, 12198, 23733],
+			D: [4915, 13187, 9999, 17451],
+			E: [1284, 2999, 6497, 15412],
+			F: [1170, 2725, 6370, 13155],
+		},
+		reference: [
+			{
+				model: "haiku-4.5",
+				cells: {
+					A: { ok: 34, rate: 85, low: 70.9, high: 92.9 },
+					B: { ok: 35, rate: 87.5, low: 73.9, high: 94.5 },
+					C: { ok: 39, rate: 97.5, low: 87.1, high: 99.6 },
+					D: { ok: 40, rate: 100, low: 91.2, high: 100 },
+					E: { ok: 28, rate: 70, low: 54.6, high: 81.9 },
+					F: { ok: 35, rate: 87.5, low: 73.9, high: 94.5 },
+				},
+			},
+			{
+				model: "sonnet-4.5",
+				cells: {
+					A: { ok: 37, rate: 92.5, low: 80.1, high: 97.4 },
+					B: { ok: 36, rate: 90, low: 76.9, high: 96 },
+					C: { ok: 40, rate: 100, low: 91.2, high: 100 },
+					D: { ok: 40, rate: 100, low: 91.2, high: 100 },
+					E: { ok: 30, rate: 75, low: 59.8, high: 85.8 },
+					F: { ok: 40, rate: 100, low: 91.2, high: 100 },
+				},
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: {
+					A: { ok: 31, rate: 77.5, low: 62.5, high: 87.7 },
+					B: { ok: 34, rate: 85, low: 70.9, high: 92.9 },
+					C: { ok: 27, rate: 67.5, low: 52, high: 79.9 },
+					D: { ok: 30, rate: 75, low: 59.8, high: 85.8 },
+					E: { ok: 30, rate: 75, low: 59.8, high: 85.8 },
+					F: { ok: 33, rate: 82.5, low: 68, high: 91.3 },
+				},
+			},
+			{
+				model: "gpt-5.4",
+				cells: {
+					A: { ok: 39, rate: 97.5, low: 87.1, high: 99.6 },
+					B: { ok: 39, rate: 97.5, low: 87.1, high: 99.6 },
+					C: { ok: 40, rate: 100, low: 91.2, high: 100 },
+					D: { ok: 40, rate: 100, low: 91.2, high: 100 },
+					E: { ok: 31, rate: 77.5, low: 62.5, high: 87.7 },
+					F: { ok: 37, rate: 92.5, low: 80.1, high: 97.4 },
+				},
+			},
+		],
+		perModel: [
+			{
+				model: "haiku-4.5",
+				cells: { A: 91, B: 92.5, C: 95, D: 95, E: 80.5, F: 92 },
+			},
+			{
+				model: "sonnet-4.5",
+				cells: { A: 94.5, B: 94, C: 95.5, D: 96, E: 88.5, F: 93.5 },
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: { A: 86.5, B: 92, C: 88.5, D: 88, E: 87.5, F: 91 },
+			},
+			{
+				model: "gpt-5.4",
+				cells: { A: 95.5, B: 95.5, C: 96.5, D: 97, E: 89.5, F: 94 },
+			},
+		],
+		footgun: [
+			{
+				model: "haiku-4.5",
+				v1: { ok: 23, n: 80, rate: 28.7, low: 20, high: 39.5 },
+				v2: { ok: 79, n: 80, rate: 98.8, low: 93.3, high: 99.8 },
+			},
+			{
+				model: "sonnet-4.5",
+				v1: { ok: 77, n: 80, rate: 96.3, low: 89.5, high: 98.7 },
+				v2: { ok: 80, n: 80, rate: 100, low: 95.4, high: 100 },
+			},
+			{
+				model: "gemini-3.5-flash",
+				v1: { ok: 3, n: 80, rate: 3.8, low: 1.3, high: 10.5 },
+				v2: { ok: 57, n: 80, rate: 71.3, low: 60.5, high: 80 },
+			},
+			{
+				model: "gpt-5.4",
+				v1: { ok: 77, n: 80, rate: 96.3, low: 89.5, high: 98.7 },
+				v2: { ok: 80, n: 80, rate: 100, low: 95.4, high: 100 },
+			},
+		],
+		sizeext: [
+			{
+				model: "sonnet-4.5",
+				condition: "A",
+				cells: [
+					{ bucket: "xl", ok: 15, n: 15, rate: 100, low: 79.6, high: 100 },
+					{ bucket: "xxl", ok: 14, n: 15, rate: 93.3, low: 70.2, high: 98.8 },
+					{ bucket: "xxxl", ok: 12, n: 15, rate: 80, low: 54.8, high: 93 },
+				],
+			},
+			{
+				model: "sonnet-4.5",
+				condition: "E",
+				cells: [
+					{ bucket: "xl", ok: 8, n: 15, rate: 53.3, low: 30.1, high: 75.2 },
+					{ bucket: "xxl", ok: 3, n: 15, rate: 20, low: 7, high: 45.2 },
+					{ bucket: "xxxl", ok: 1, n: 15, rate: 6.7, low: 1.2, high: 29.8 },
+				],
+			},
+			{
+				model: "sonnet-4.5",
+				condition: "F",
+				cells: [
+					{ bucket: "xl", ok: 15, n: 15, rate: 100, low: 79.6, high: 100 },
+					{ bucket: "xxl", ok: 15, n: 15, rate: 100, low: 79.6, high: 100 },
+					{ bucket: "xxxl", ok: 13, n: 15, rate: 86.7, low: 62.1, high: 96.3 },
+				],
+			},
+			{
+				model: "gemini-3.5-flash",
+				condition: "A",
+				cells: [
+					{ bucket: "xl", ok: 9, n: 15, rate: 60, low: 35.7, high: 80.2 },
+					{ bucket: "xxl", ok: 5, n: 15, rate: 33.3, low: 15.2, high: 58.3 },
+					{ bucket: "xxxl", ok: 0, n: 15, rate: 0, low: 0, high: 20.4 },
+				],
+			},
+			{
+				model: "gemini-3.5-flash",
+				condition: "E",
+				cells: [
+					{ bucket: "xl", ok: 8, n: 15, rate: 53.3, low: 30.1, high: 75.2 },
+					{ bucket: "xxl", ok: 3, n: 15, rate: 20, low: 7, high: 45.2 },
+					{ bucket: "xxxl", ok: 2, n: 15, rate: 13.3, low: 3.7, high: 37.9 },
+				],
+			},
+			{
+				model: "gemini-3.5-flash",
+				condition: "F",
+				cells: [
+					{ bucket: "xl", ok: 14, n: 15, rate: 93.3, low: 70.2, high: 98.8 },
+					{ bucket: "xxl", ok: 14, n: 15, rate: 93.3, low: 70.2, high: 98.8 },
+					{ bucket: "xxxl", ok: 13, n: 15, rate: 86.7, low: 62.1, high: 96.3 },
+				],
+			},
+		],
+	};
+	const CONDITIONS = ["A", "B", "C", "D", "E", "F"];
+	const COND_NAMES = {
+		A: "HTML + rewrite",
+		B: "JSON + rewrite",
+		C: "JSON + tools",
+		D: "HTML + tools",
+		E: "JSON Patch",
+		F: "anchored patch",
+	};
+	const COLOR = {
+		A: "#3987e5",
+		B: "#199e70",
+		C: "#c98500",
+		D: "#008300",
+		E: "#9085e9",
+		F: "#e66767",
+	};
+	const BUCKET_LABELS = ["~5 nodes", "~20", "~60", "~150"];
+	const BUCKET_KEYS = ["xs", "s", "m", "l"];
 
-const DATA = {"crossover":{"A":[{"bucket":"xs","n":216,"ok":207,"rate":95.8,"low":92.3,"high":97.8},{"bucket":"s","n":232,"ok":225,"rate":97,"low":93.9,"high":98.5},{"bucket":"m","n":184,"ok":160,"rate":87,"low":81.3,"high":91.1},{"bucket":"l","n":168,"ok":143,"rate":85.1,"low":79,"high":89.7}],"B":[{"bucket":"xs","n":216,"ok":209,"rate":96.8,"low":93.5,"high":98.4},{"bucket":"s","n":232,"ok":223,"rate":96.1,"low":92.8,"high":97.9},{"bucket":"m","n":184,"ok":165,"rate":89.7,"low":84.4,"high":93.3},{"bucket":"l","n":168,"ok":151,"rate":89.9,"low":84.4,"high":93.6}],"C":[{"bucket":"xs","n":216,"ok":211,"rate":97.7,"low":94.7,"high":99},{"bucket":"s","n":232,"ok":225,"rate":97,"low":93.9,"high":98.5},{"bucket":"m","n":184,"ok":166,"rate":90.2,"low":85.1,"high":93.7},{"bucket":"l","n":168,"ok":149,"rate":88.7,"low":83,"high":92.6}],"D":[{"bucket":"xs","n":216,"ok":211,"rate":97.7,"low":94.7,"high":99},{"bucket":"s","n":232,"ok":224,"rate":96.6,"low":93.3,"high":98.2},{"bucket":"m","n":184,"ok":166,"rate":90.2,"low":85.1,"high":93.7},{"bucket":"l","n":168,"ok":151,"rate":89.9,"low":84.4,"high":93.6}],"E":[{"bucket":"xs","n":216,"ok":202,"rate":93.5,"low":89.4,"high":96.1},{"bucket":"s","n":232,"ok":218,"rate":94,"low":90.1,"high":96.4},{"bucket":"m","n":184,"ok":155,"rate":84.2,"low":78.3,"high":88.8},{"bucket":"l","n":168,"ok":117,"rate":69.6,"low":62.3,"high":76.1}],"F":[{"bucket":"xs","n":216,"ok":210,"rate":97.2,"low":94.1,"high":98.7},{"bucket":"s","n":232,"ok":226,"rate":97.4,"low":94.5,"high":98.8},{"bucket":"m","n":184,"ok":162,"rate":88,"low":82.6,"high":92},{"bucket":"l","n":168,"ok":143,"rate":85.1,"low":79,"high":89.7}]},"tokens":{"A":[1137,2919,7615,15638],"B":[1250,3672,10766,22961],"C":[4958,14535,12198,23733],"D":[4915,13187,9999,17451],"E":[1284,2999,6497,15412],"F":[1170,2725,6370,13155]},"reference":[{"model":"haiku-4.5","cells":{"A":{"ok":34,"rate":85,"low":70.9,"high":92.9},"B":{"ok":35,"rate":87.5,"low":73.9,"high":94.5},"C":{"ok":39,"rate":97.5,"low":87.1,"high":99.6},"D":{"ok":40,"rate":100,"low":91.2,"high":100},"E":{"ok":28,"rate":70,"low":54.6,"high":81.9},"F":{"ok":35,"rate":87.5,"low":73.9,"high":94.5}}},{"model":"sonnet-4.5","cells":{"A":{"ok":37,"rate":92.5,"low":80.1,"high":97.4},"B":{"ok":36,"rate":90,"low":76.9,"high":96},"C":{"ok":40,"rate":100,"low":91.2,"high":100},"D":{"ok":40,"rate":100,"low":91.2,"high":100},"E":{"ok":30,"rate":75,"low":59.8,"high":85.8},"F":{"ok":40,"rate":100,"low":91.2,"high":100}}},{"model":"gemini-3.5-flash","cells":{"A":{"ok":31,"rate":77.5,"low":62.5,"high":87.7},"B":{"ok":34,"rate":85,"low":70.9,"high":92.9},"C":{"ok":27,"rate":67.5,"low":52,"high":79.9},"D":{"ok":30,"rate":75,"low":59.8,"high":85.8},"E":{"ok":30,"rate":75,"low":59.8,"high":85.8},"F":{"ok":33,"rate":82.5,"low":68,"high":91.3}}},{"model":"gpt-5.4","cells":{"A":{"ok":39,"rate":97.5,"low":87.1,"high":99.6},"B":{"ok":39,"rate":97.5,"low":87.1,"high":99.6},"C":{"ok":40,"rate":100,"low":91.2,"high":100},"D":{"ok":40,"rate":100,"low":91.2,"high":100},"E":{"ok":31,"rate":77.5,"low":62.5,"high":87.7},"F":{"ok":37,"rate":92.5,"low":80.1,"high":97.4}}}],"perModel":[{"model":"haiku-4.5","cells":{"A":91,"B":92.5,"C":95,"D":95,"E":80.5,"F":92}},{"model":"sonnet-4.5","cells":{"A":94.5,"B":94,"C":95.5,"D":96,"E":88.5,"F":93.5}},{"model":"gemini-3.5-flash","cells":{"A":86.5,"B":92,"C":88.5,"D":88,"E":87.5,"F":91}},{"model":"gpt-5.4","cells":{"A":95.5,"B":95.5,"C":96.5,"D":97,"E":89.5,"F":94}}],"footgun":[{"model":"haiku-4.5","v1":{"ok":23,"n":80,"rate":28.7,"low":20,"high":39.5},"v2":{"ok":79,"n":80,"rate":98.8,"low":93.3,"high":99.8}},{"model":"sonnet-4.5","v1":{"ok":77,"n":80,"rate":96.3,"low":89.5,"high":98.7},"v2":{"ok":80,"n":80,"rate":100,"low":95.4,"high":100}},{"model":"gemini-3.5-flash","v1":{"ok":3,"n":80,"rate":3.8,"low":1.3,"high":10.5},"v2":{"ok":57,"n":80,"rate":71.3,"low":60.5,"high":80}},{"model":"gpt-5.4","v1":{"ok":77,"n":80,"rate":96.3,"low":89.5,"high":98.7},"v2":{"ok":80,"n":80,"rate":100,"low":95.4,"high":100}}],"sizeext":[{"model":"sonnet-4.5","condition":"A","cells":[{"bucket":"xl","ok":15,"n":15,"rate":100,"low":79.6,"high":100},{"bucket":"xxl","ok":14,"n":15,"rate":93.3,"low":70.2,"high":98.8},{"bucket":"xxxl","ok":12,"n":15,"rate":80,"low":54.8,"high":93}]},{"model":"sonnet-4.5","condition":"E","cells":[{"bucket":"xl","ok":8,"n":15,"rate":53.3,"low":30.1,"high":75.2},{"bucket":"xxl","ok":3,"n":15,"rate":20,"low":7,"high":45.2},{"bucket":"xxxl","ok":1,"n":15,"rate":6.7,"low":1.2,"high":29.8}]},{"model":"sonnet-4.5","condition":"F","cells":[{"bucket":"xl","ok":15,"n":15,"rate":100,"low":79.6,"high":100},{"bucket":"xxl","ok":15,"n":15,"rate":100,"low":79.6,"high":100},{"bucket":"xxxl","ok":13,"n":15,"rate":86.7,"low":62.1,"high":96.3}]},{"model":"gemini-3.5-flash","condition":"A","cells":[{"bucket":"xl","ok":9,"n":15,"rate":60,"low":35.7,"high":80.2},{"bucket":"xxl","ok":5,"n":15,"rate":33.3,"low":15.2,"high":58.3},{"bucket":"xxxl","ok":0,"n":15,"rate":0,"low":0,"high":20.4}]},{"model":"gemini-3.5-flash","condition":"E","cells":[{"bucket":"xl","ok":8,"n":15,"rate":53.3,"low":30.1,"high":75.2},{"bucket":"xxl","ok":3,"n":15,"rate":20,"low":7,"high":45.2},{"bucket":"xxxl","ok":2,"n":15,"rate":13.3,"low":3.7,"high":37.9}]},{"model":"gemini-3.5-flash","condition":"F","cells":[{"bucket":"xl","ok":14,"n":15,"rate":93.3,"low":70.2,"high":98.8},{"bucket":"xxl","ok":14,"n":15,"rate":93.3,"low":70.2,"high":98.8},{"bucket":"xxxl","ok":13,"n":15,"rate":86.7,"low":62.1,"high":96.3}]}]};
-const CONDITIONS = ["A", "B", "C", "D", "E", "F"];
-const COND_NAMES = {
-	A: "HTML + rewrite", B: "JSON + rewrite", C: "JSON + tools",
-	D: "HTML + tools", E: "JSON Patch",
-	F: "anchored patch"
-};
-const COLOR = { A: "#3987e5", B: "#199e70", C: "#c98500", D: "#008300", E: "#9085e9", F: "#e66767" };
-const BUCKET_LABELS = ["~5 nodes", "~20", "~60", "~150"];
-const BUCKET_KEYS = ["xs", "s", "m", "l"];
-
-function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
-
-function legend(el) {
-	document.getElementById(el).innerHTML = CONDITIONS.map(c =>
-		`<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:${COLOR[c]}"></span><span class="font-mono font-700 text-white">${c}</span> ${COND_NAMES[c]}</span>`
-	).join("");
-}
-legend("legend-1"); legend("legend-2"); legend("legend-3");
-
-// --- shared tooltip ---
-const tooltip = document.getElementById("tooltip");
-function showTip(evt, text) {
-	tooltip.textContent = text;
-	tooltip.style.opacity = "1";
-	const pad = 14;
-	let x = evt.clientX + pad, y = evt.clientY + pad;
-	const r = tooltip.getBoundingClientRect();
-	if (x + r.width > window.innerWidth - 8) x = evt.clientX - r.width - pad;
-	if (y + r.height > window.innerHeight - 8) y = evt.clientY - r.height - pad;
-	tooltip.style.left = x + "px"; tooltip.style.top = y + "px";
-}
-function hideTip() { tooltip.style.opacity = "0"; }
-
-// Resolve vertical label collisions: keep >= minGap between sorted positions.
-function resolveLabels(items, minGap) {
-	const sorted = [...items].sort((a, b) => a.y - b.y);
-	for (let i = 1; i < sorted.length; i++) {
-		if (sorted[i].y - sorted[i - 1].y < minGap) sorted[i].y = sorted[i - 1].y + minGap;
+	function esc(s) {
+		return String(s)
+			.replace(/&/g, "&amp;")
+			.replace(/</g, "&lt;")
+			.replace(/"/g, "&quot;");
 	}
-	return items;
-}
 
-// --- generic multi-series line chart over the four size buckets ---
-function lineChart(mount, opts) {
-	const W = 880, H = 380, L = 56, R = 120, T = 16, B = 44;
-	const iw = W - L - R, ih = H - T - B;
-	const xs = BUCKET_KEYS.map((_, i) => L + (iw * i) / (BUCKET_KEYS.length - 1));
-	const yOf = v => T + ih - ((v - opts.yMin) / (opts.yMax - opts.yMin)) * ih;
-	let g = "";
-	// grid + y ticks
-	for (const tick of opts.ticks) {
-		const y = yOf(tick);
-		g += `<line x1="${L}" x2="${L + iw}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
-		g += `<text fill="#c3c9d4" font-size="11.5" x="${L - 8}" y="${y + 4}" text-anchor="end">${opts.fmt(tick)}</text>`;
+	function legend(el) {
+		document.getElementById(el).innerHTML = CONDITIONS.map(
+			(c) =>
+				`<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:${COLOR[c]}"></span><span class="font-mono font-700 text-white">${c}</span> ${COND_NAMES[c]}</span>`,
+		).join("");
 	}
-	// x labels
-	BUCKET_LABELS.forEach((lab, i) => {
-		g += `<text fill="#c3c9d4" font-size="11.5" x="${xs[i]}" y="${H - B + 22}" text-anchor="middle">${lab}</text>`;
+	legend("legend-1");
+	legend("legend-2");
+	legend("legend-3");
+
+	// --- shared tooltip ---
+	const tooltip = document.getElementById("tooltip");
+	function showTip(evt, text) {
+		tooltip.textContent = text;
+		tooltip.style.opacity = "1";
+		const pad = 14;
+		let x = evt.clientX + pad,
+			y = evt.clientY + pad;
+		const r = tooltip.getBoundingClientRect();
+		if (x + r.width > window.innerWidth - 8) x = evt.clientX - r.width - pad;
+		if (y + r.height > window.innerHeight - 8) y = evt.clientY - r.height - pad;
+		tooltip.style.left = x + "px";
+		tooltip.style.top = y + "px";
+	}
+	function hideTip() {
+		tooltip.style.opacity = "0";
+	}
+
+	// Resolve vertical label collisions: keep >= minGap between sorted positions.
+	function resolveLabels(items, minGap) {
+		const sorted = [...items].sort((a, b) => a.y - b.y);
+		for (let i = 1; i < sorted.length; i++) {
+			if (sorted[i].y - sorted[i - 1].y < minGap)
+				sorted[i].y = sorted[i - 1].y + minGap;
+		}
+		return items;
+	}
+
+	// --- generic multi-series line chart over the four size buckets ---
+	function lineChart(mount, opts) {
+		const W = 880,
+			H = 380,
+			L = 56,
+			R = 120,
+			T = 16,
+			B = 44;
+		const iw = W - L - R,
+			ih = H - T - B;
+		const xs = BUCKET_KEYS.map(
+			(_, i) => L + (iw * i) / (BUCKET_KEYS.length - 1),
+		);
+		const yOf = (v) =>
+			T + ih - ((v - opts.yMin) / (opts.yMax - opts.yMin)) * ih;
+		let g = "";
+		// grid + y ticks
+		for (const tick of opts.ticks) {
+			const y = yOf(tick);
+			g += `<line x1="${L}" x2="${L + iw}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text fill="#c3c9d4" font-size="11.5" x="${L - 8}" y="${y + 4}" text-anchor="end">${opts.fmt(tick)}</text>`;
+		}
+		// x labels
+		BUCKET_LABELS.forEach((lab, i) => {
+			g += `<text fill="#c3c9d4" font-size="11.5" x="${xs[i]}" y="${H - B + 22}" text-anchor="middle">${lab}</text>`;
+		});
+		g += `<text fill="#8b93a3" font-size="11" x="${L + iw / 2}" y="${H - 6}" text-anchor="middle">tree size bucket</text>`;
+		let marks = "",
+			hits = "";
+		const endLabels = [];
+		CONDITIONS.forEach((c, ci) => {
+			const series = opts.series[c];
+			const jitter = (ci - 2) * 3;
+			const pts = series.map((v, i) => ({
+				x: xs[i] + (opts.jitterCI ? jitter : 0),
+				y: yOf(v.value),
+				v,
+			}));
+			// CI whiskers first (under the line)
+			if (opts.jitterCI) {
+				pts.forEach((p) => {
+					if (p.v.low === undefined) return;
+					const y1 = yOf(p.v.low),
+						y2 = yOf(p.v.high);
+					marks += `<line x1="${p.x}" x2="${p.x}" y1="${y1}" y2="${y2}" stroke="${COLOR[c]}" stroke-width="1.5" opacity="0.45"/>`;
+					marks += `<line x1="${p.x - 3}" x2="${p.x + 3}" y1="${y1}" y2="${y1}" stroke="${COLOR[c]}" stroke-width="1.5" opacity="0.45"/>`;
+					marks += `<line x1="${p.x - 3}" x2="${p.x + 3}" y1="${y2}" y2="${y2}" stroke="${COLOR[c]}" stroke-width="1.5" opacity="0.45"/>`;
+				});
+			}
+			const path = pts
+				.map((p, i) => `${i === 0 ? "M" : "L"}${p.x},${p.y}`)
+				.join(" ");
+			marks += `<path d="${path}" fill="none" stroke="${COLOR[c]}" stroke-width="2" stroke-linejoin="round"/>`;
+			pts.forEach((p, i) => {
+				marks += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="${COLOR[c]}" stroke="hsl(217,48%,15%)" stroke-width="2"/>`;
+				hits += `<circle cx="${p.x}" cy="${p.y}" r="13" fill="transparent" data-tip="${esc(opts.tip(c, i, p.v))}"/>`;
+			});
+			endLabels.push({
+				c,
+				y: pts[pts.length - 1].y + 4,
+				x: pts[pts.length - 1].x + 12,
+			});
+		});
+		resolveLabels(endLabels, 15);
+		let labels = "";
+		for (const l of endLabels) {
+			labels += `<text font-size="12" font-weight="700" x="${l.x}" y="${l.y}" fill="${COLOR[l.c]}">${l.c} · ${opts.endLabel(l.c)}</text>`;
+		}
+		const svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(opts.aria)}" style="min-width:640px;display:block">${g}${marks}${labels}${hits}</svg>`;
+		const el = document.getElementById(mount);
+		el.innerHTML = svg;
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+	}
+
+	// Chart 1 — crossover
+	lineChart("fig-crossover", {
+		series: Object.fromEntries(
+			CONDITIONS.map((c) => [
+				c,
+				DATA.crossover[c].map((d) => ({
+					value: d.rate,
+					low: d.low,
+					high: d.high,
+					n: d.n,
+					ok: d.ok,
+				})),
+			]),
+		),
+		yMin: 60,
+		yMax: 100,
+		ticks: [60, 70, 80, 90, 100],
+		fmt: (v) => v + "%",
+		jitterCI: true,
+		tip: (c, i, v) =>
+			`${c} — ${COND_NAMES[c]}\n${BUCKET_LABELS[i]} bucket: ${v.value}%\n${v.ok}/${v.n} tasks · CI [${v.low}%, ${v.high}%]`,
+		endLabel: (c) => DATA.crossover[c][3].rate + "%",
+		aria: "Task success rate by tree size for the five conditions; rewrite conditions lead at every size.",
 	});
-	g += `<text fill="#8b93a3" font-size="11" x="${L + iw / 2}" y="${H - 6}" text-anchor="middle">tree size bucket</text>`;
-	let marks = "", hits = "";
-	const endLabels = [];
-	CONDITIONS.forEach((c, ci) => {
-		const series = opts.series[c];
-		const jitter = (ci - 2) * 3;
-		const pts = series.map((v, i) => ({ x: xs[i] + (opts.jitterCI ? jitter : 0), y: yOf(v.value), v }));
-		// CI whiskers first (under the line)
-		if (opts.jitterCI) {
-			pts.forEach(p => {
-				if (p.v.low === undefined) return;
-				const y1 = yOf(p.v.low), y2 = yOf(p.v.high);
-				marks += `<line x1="${p.x}" x2="${p.x}" y1="${y1}" y2="${y2}" stroke="${COLOR[c]}" stroke-width="1.5" opacity="0.45"/>`;
-				marks += `<line x1="${p.x - 3}" x2="${p.x + 3}" y1="${y1}" y2="${y1}" stroke="${COLOR[c]}" stroke-width="1.5" opacity="0.45"/>`;
-				marks += `<line x1="${p.x - 3}" x2="${p.x + 3}" y1="${y2}" y2="${y2}" stroke="${COLOR[c]}" stroke-width="1.5" opacity="0.45"/>`;
+
+	// Chart 2 — tokens per solved task
+	lineChart("fig-tokens", {
+		series: Object.fromEntries(
+			CONDITIONS.map((c) => [c, DATA.tokens[c].map((v) => ({ value: v }))]),
+		),
+		yMin: 0,
+		yMax: 24000,
+		ticks: [0, 6000, 12000, 18000, 24000],
+		fmt: (v) => v / 1000 + "k",
+		jitterCI: false,
+		tip: (c, i, v) =>
+			`${c} — ${COND_NAMES[c]}\n${BUCKET_LABELS[i]} bucket: ${v.value.toLocaleString()} tokens\nmean in+out per solved task`,
+		endLabel: (c) => (DATA.tokens[c][3] / 1000).toFixed(1) + "k",
+		aria: "Mean tokens per solved task by tree size; tool conditions cost four to five times more on small and medium trees.",
+	});
+
+	// Chart 3 — reference dot plot
+	(function () {
+		const W = 880,
+			ROW = 64,
+			T = 8,
+			B = 40,
+			L = 150,
+			R = 24;
+		const H = T + DATA.reference.length * ROW + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 25, 50, 75, 100]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text fill="#c3c9d4" font-size="11.5" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+		}
+		g += `<text fill="#8b93a3" font-size="11" x="${L + iw / 2}" y="${H - 4}" text-anchor="middle">reference-task success (n = 40 per cell)</text>`;
+		let marks = "",
+			hits = "";
+		DATA.reference.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g += `<line x1="${L}" x2="${L + iw}" y1="${cy}" y2="${cy}" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>`;
+			g += `<text fill="#ffffff" font-size="12.5" x="${L - 12}" y="${cy + 4}" text-anchor="end">${row.model}</text>`;
+			CONDITIONS.forEach((c) => {
+				const cell = row.cells[c];
+				const x = xOf(cell.rate);
+				marks += `<line x1="${xOf(cell.low)}" x2="${xOf(cell.high)}" y1="${cy}" y2="${cy}" stroke="${COLOR[c]}" stroke-width="1.5" opacity="0.4"/>`;
+				marks += `<circle cx="${x}" cy="${cy}" r="5.5" fill="${COLOR[c]}" stroke="hsl(217,48%,15%)" stroke-width="2"/>`;
+				hits += `<circle cx="${x}" cy="${cy}" r="13" fill="transparent" data-tip="${esc(`${c} — ${COND_NAMES[c]}\n${row.model}: ${cell.rate}%\n${cell.ok}/40 · CI [${cell.low}%, ${cell.high}%]`)}"/>`;
+			});
+		});
+		const el = document.getElementById("fig-reference");
+		el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Reference-task success per model and condition; tools conditions collapse for haiku and gemini." style="min-width:640px;display:block">${g}${marks}${hits}</svg>`;
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+	})();
+
+	// Heatmap — per model × condition (sequential blue ramp, one hue)
+	(function () {
+		const RAMP = [
+			[74, "#cde2fb", "#0b0b0b"],
+			[80, "#9ec5f4", "#0b0b0b"],
+			[86, "#6da7ec", "#0b0b0b"],
+			[91, "#3987e5", "#ffffff"],
+			[94, "#256abf", "#ffffff"],
+			[100, "#184f95", "#ffffff"],
+		];
+		const stepOf = (v) => RAMP.find(([max]) => v <= max);
+		let html = `<table class="border-collapse tabular-nums text-15px"><thead><tr><th scope="col" class="px-3.5 py-2 text-left text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">model</th>${CONDITIONS.map((c) => `<th scope="col" class="px-3.5 py-2 text-right text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">${c}</th>`).join("")}</tr></thead><tbody>`;
+		for (const row of DATA.perModel) {
+			html += `<tr><td class="px-3.5 py-2 text-left border-2 border-[hsl(217,48%,15%)]">${row.model}</td>`;
+			for (const c of CONDITIONS) {
+				const v = row.cells[c];
+				const [, bg, ink] = stepOf(v);
+				html += `<td class="font-mono px-3.5 py-2 text-right border-2 border-[hsl(217,48%,15%)]" style="background:${bg};color:${ink}">${v.toFixed(1)}%</td>`;
+			}
+			html += "</tr>";
+		}
+		html += "</tbody></table>";
+		document.getElementById("fig-heat").innerHTML = html;
+	})();
+
+	// --- Study G footgun dumbbell ---
+	(function () {
+		const W = 880,
+			ROW = 64,
+			T = 40,
+			B = 44,
+			L = 170,
+			R = 30;
+		const rows = [...DATA.footgun].sort((a, b) => a.v1.rate - b.v1.rate);
+		const H = T + rows.length * ROW + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		g +=
+			'<circle cx="' +
+			L +
+			'" cy="16" r="6" fill="hsl(217,48%,15%)" stroke="#c98500" stroke-width="2.5"/><text fill="#c3c9d4" font-size="11.5" x="' +
+			(L + 14) +
+			'" y="20">v1 — tool calls hidden</text>';
+		g +=
+			'<circle cx="' +
+			(L + 220) +
+			'" cy="16" r="6.5" fill="#3987e5" stroke="hsl(217,48%,15%)" stroke-width="2"/><text fill="#c3c9d4" font-size="11.5" x="' +
+			(L + 234) +
+			'" y="20">v2 — corrected history</text>';
+		for (const tick of [0, 25, 50, 75, 100]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"%</text>";
+		}
+		let hits = "";
+		rows.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<text fill="#ffffff" font-size="12.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.model +
+				"</text>";
+			g +=
+				'<line x1="' +
+				xOf(row.v1.rate) +
+				'" x2="' +
+				xOf(row.v2.rate) +
+				'" y1="' +
+				cy +
+				'" y2="' +
+				cy +
+				'" stroke="#c98500" stroke-width="3" opacity="0.35"/>';
+			g +=
+				'<circle cx="' +
+				xOf(row.v1.rate) +
+				'" cy="' +
+				cy +
+				'" r="6" fill="hsl(217,48%,15%)" stroke="#c98500" stroke-width="2.5"/>';
+			g +=
+				'<circle cx="' +
+				xOf(row.v2.rate) +
+				'" cy="' +
+				cy +
+				'" r="6.5" fill="#3987e5" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+			hits +=
+				'<circle cx="' +
+				xOf(row.v1.rate) +
+				'" cy="' +
+				cy +
+				'" r="13" fill="transparent" data-tip="' +
+				esc(
+					row.model +
+						" v1 (hidden history): " +
+						row.v1.rate +
+						"% — " +
+						row.v1.ok +
+						"/" +
+						row.v1.n,
+				) +
+				'"/>';
+			hits +=
+				'<circle cx="' +
+				xOf(row.v2.rate) +
+				'" cy="' +
+				cy +
+				'" r="13" fill="transparent" data-tip="' +
+				esc(
+					row.model +
+						" v2 (corrected): " +
+						row.v2.rate +
+						"% — " +
+						row.v2.ok +
+						"/" +
+						row.v2.n,
+				) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-footgun");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Reference-edit success per model with tool calls hidden from history versus corrected history." style="min-width:640px;display:block">' +
+			g +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-footgun",
+			["model", "v1 (hidden)", "v2 (corrected)"],
+			DATA.footgun.map((r) => [
+				r.model,
+				r.v1.rate + "% (" + r.v1.ok + "/" + r.v1.n + ")",
+				r.v2.rate + "% (" + r.v2.ok + "/" + r.v2.n + ")",
+			]),
+		);
+	})();
+
+	// --- Study H size extension ---
+	(function () {
+		const el = document.getElementById("legend-4");
+		el.innerHTML =
+			["A", "E", "F"]
+				.map(
+					(c) =>
+						'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
+						COLOR[c] +
+						'"></span><span class="font-mono font-700 text-white">' +
+						c +
+						"</span> " +
+						COND_NAMES[c] +
+						"</span>",
+				)
+				.join("") +
+			'<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+		const W = 880,
+			H = 380,
+			L = 56,
+			R = 170,
+			T = 16,
+			B = 44;
+		const iw = W - L - R,
+			ih = H - T - B;
+		const SIZES = ["~300 nodes", "~600", "~1000"];
+		const xs = SIZES.map((_, i) => L + (iw * i) / (SIZES.length - 1));
+		const yOf = (v) => T + ih - (v / 100) * ih;
+		let g = "";
+		for (const tick of [0, 25, 50, 75, 100]) {
+			const y = yOf(tick);
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				y +
+				'" y2="' +
+				y +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 8) +
+				'" y="' +
+				(y + 4) +
+				'" text-anchor="end">' +
+				tick +
+				"%</text>";
+		}
+		SIZES.forEach((lab, i) => {
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				xs[i] +
+				'" y="' +
+				(H - B + 22) +
+				'" text-anchor="middle">' +
+				lab +
+				"</text>";
+		});
+		let marks = "",
+			hits = "";
+		const endLabels = [];
+		for (const series of DATA.sizeext) {
+			const c = series.condition;
+			const dashed = series.model.includes("gemini");
+			const pts = series.cells.map((cell, i) => ({
+				x: xs[i],
+				y: yOf(cell.rate),
+				cell,
+			}));
+			marks +=
+				'<path d="' +
+				pts.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ") +
+				'" fill="none" stroke="' +
+				COLOR[c] +
+				'" stroke-width="2" stroke-linejoin="round"' +
+				(dashed ? ' stroke-dasharray="6 5"' : "") +
+				"/>";
+			pts.forEach((p, i) => {
+				marks +=
+					'<circle cx="' +
+					p.x +
+					'" cy="' +
+					p.y +
+					'" r="4" fill="' +
+					COLOR[c] +
+					'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+				hits +=
+					'<circle cx="' +
+					p.x +
+					'" cy="' +
+					p.y +
+					'" r="12" fill="transparent" data-tip="' +
+					esc(
+						c +
+							" — " +
+							COND_NAMES[c] +
+							" (" +
+							series.model +
+							") — " +
+							SIZES[i] +
+							": " +
+							p.cell.rate +
+							"% — " +
+							p.cell.ok +
+							"/" +
+							p.cell.n +
+							" · CI [" +
+							p.cell.low +
+							"%, " +
+							p.cell.high +
+							"%]",
+					) +
+					'"/>';
+			});
+			const last = pts[pts.length - 1];
+			endLabels.push({
+				c,
+				text: c + " " + (dashed ? "gem" : "son") + " · " + last.cell.rate + "%",
+				x: last.x + 10,
+				y: last.y + 4,
 			});
 		}
-		const path = pts.map((p, i) => `${i === 0 ? "M" : "L"}${p.x},${p.y}`).join(" ");
-		marks += `<path d="${path}" fill="none" stroke="${COLOR[c]}" stroke-width="2" stroke-linejoin="round"/>`;
-		pts.forEach((p, i) => {
-			marks += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="${COLOR[c]}" stroke="hsl(217,48%,15%)" stroke-width="2"/>`;
-			hits += `<circle cx="${p.x}" cy="${p.y}" r="13" fill="transparent" data-tip="${esc(opts.tip(c, i, p.v))}"/>`;
+		resolveLabels(endLabels, 15);
+		let labels = "";
+		for (const l of endLabels)
+			labels +=
+				'<text font-size="12" font-weight="700" x="' +
+				l.x +
+				'" y="' +
+				l.y +
+				'" fill="' +
+				COLOR[l.c] +
+				'">' +
+				l.text +
+				"</text>";
+		const el2 = document.getElementById("fig-sizeext");
+		el2.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Task success at 300 to 1000 nodes: anchored patches hold for both models while rewrite falls to zero on the small model and positional patches decay." style="min-width:640px;display:block">' +
+			g +
+			marks +
+			labels +
+			hits +
+			"</svg>";
+		el2.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
 		});
-		endLabels.push({ c, y: pts[pts.length - 1].y + 4, x: pts[pts.length - 1].x + 12 });
-	});
-	resolveLabels(endLabels, 15);
-	let labels = "";
-	for (const l of endLabels) {
-		labels += `<text font-size="12" font-weight="700" x="${l.x}" y="${l.y}" fill="${COLOR[l.c]}">${l.c} · ${opts.endLabel(l.c)}</text>`;
-	}
-	const svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(opts.aria)}" style="min-width:640px;display:block">${g}${marks}${labels}${hits}</svg>`;
-	const el = document.getElementById(mount);
-	el.innerHTML = svg;
-	el.querySelectorAll("[data-tip]").forEach(n => {
-		n.addEventListener("mousemove", e => showTip(e, n.dataset.tip));
-		n.addEventListener("mouseleave", hideTip);
-	});
-}
+		table(
+			"tbl-sizeext",
+			["series", ...SIZES],
+			DATA.sizeext.map((s) => [
+				s.condition + " — " + s.model,
+				...s.cells.map((c) => c.rate + "% (" + c.ok + "/" + c.n + ")"),
+			]),
+		);
+	})();
 
-// Chart 1 — crossover
-lineChart("fig-crossover", {
-	series: Object.fromEntries(CONDITIONS.map(c => [c, DATA.crossover[c].map(d => ({ value: d.rate, low: d.low, high: d.high, n: d.n, ok: d.ok }))])),
-	yMin: 60, yMax: 100, ticks: [60, 70, 80, 90, 100],
-	fmt: v => v + "%",
-	jitterCI: true,
-	tip: (c, i, v) => `${c} — ${COND_NAMES[c]}\n${BUCKET_LABELS[i]} bucket: ${v.value}%\n${v.ok}/${v.n} tasks · CI [${v.low}%, ${v.high}%]`,
-	endLabel: c => DATA.crossover[c][3].rate + "%",
-	aria: "Task success rate by tree size for the five conditions; rewrite conditions lead at every size."
-});
-
-// Chart 2 — tokens per solved task
-lineChart("fig-tokens", {
-	series: Object.fromEntries(CONDITIONS.map(c => [c, DATA.tokens[c].map(v => ({ value: v }))])),
-	yMin: 0, yMax: 24000, ticks: [0, 6000, 12000, 18000, 24000],
-	fmt: v => (v / 1000) + "k",
-	jitterCI: false,
-	tip: (c, i, v) => `${c} — ${COND_NAMES[c]}\n${BUCKET_LABELS[i]} bucket: ${v.value.toLocaleString()} tokens\nmean in+out per solved task`,
-	endLabel: c => (DATA.tokens[c][3] / 1000).toFixed(1) + "k",
-	aria: "Mean tokens per solved task by tree size; tool conditions cost four to five times more on small and medium trees."
-});
-
-// Chart 3 — reference dot plot
-(function () {
-	const W = 880, ROW = 64, T = 8, B = 40, L = 150, R = 24;
-	const H = T + DATA.reference.length * ROW + B;
-	const iw = W - L - R;
-	const xOf = v => L + (v / 100) * iw;
-	let g = "";
-	for (const tick of [0, 25, 50, 75, 100]) {
-		const x = xOf(tick);
-		g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
-		g += `<text fill="#c3c9d4" font-size="11.5" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
-	}
-	g += `<text fill="#8b93a3" font-size="11" x="${L + iw / 2}" y="${H - 4}" text-anchor="middle">reference-task success (n = 40 per cell)</text>`;
-	let marks = "", hits = "";
-	DATA.reference.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += `<line x1="${L}" x2="${L + iw}" y1="${cy}" y2="${cy}" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>`;
-		g += `<text fill="#ffffff" font-size="12.5" x="${L - 12}" y="${cy + 4}" text-anchor="end">${row.model}</text>`;
-		CONDITIONS.forEach(c => {
-			const cell = row.cells[c];
-			const x = xOf(cell.rate);
-			marks += `<line x1="${xOf(cell.low)}" x2="${xOf(cell.high)}" y1="${cy}" y2="${cy}" stroke="${COLOR[c]}" stroke-width="1.5" opacity="0.4"/>`;
-			marks += `<circle cx="${x}" cy="${cy}" r="5.5" fill="${COLOR[c]}" stroke="hsl(217,48%,15%)" stroke-width="2"/>`;
-			hits += `<circle cx="${x}" cy="${cy}" r="13" fill="transparent" data-tip="${esc(`${c} — ${COND_NAMES[c]}\n${row.model}: ${cell.rate}%\n${cell.ok}/40 · CI [${cell.low}%, ${cell.high}%]`)}"/>`;
-		});
-	});
-	const el = document.getElementById("fig-reference");
-	el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Reference-task success per model and condition; tools conditions collapse for haiku and gemini." style="min-width:640px;display:block">${g}${marks}${hits}</svg>`;
-	el.querySelectorAll("[data-tip]").forEach(n => {
-		n.addEventListener("mousemove", e => showTip(e, n.dataset.tip));
-		n.addEventListener("mouseleave", hideTip);
-	});
-})();
-
-// Heatmap — per model × condition (sequential blue ramp, one hue)
-(function () {
-	const RAMP = [
-		[74, "#cde2fb", "#0b0b0b"], [80, "#9ec5f4", "#0b0b0b"], [86, "#6da7ec", "#0b0b0b"],
-		[91, "#3987e5", "#ffffff"], [94, "#256abf", "#ffffff"], [100, "#184f95", "#ffffff"]
-	];
-	const stepOf = v => RAMP.find(([max]) => v <= max);
-	let html = `<table class="border-collapse tabular-nums text-15px"><thead><tr><th scope="col" class="px-3.5 py-2 text-left text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">model</th>${CONDITIONS.map(c => `<th scope="col" class="px-3.5 py-2 text-right text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">${c}</th>`).join("")}</tr></thead><tbody>`;
-	for (const row of DATA.perModel) {
-		html += `<tr><td class="px-3.5 py-2 text-left border-2 border-[hsl(217,48%,15%)]">${row.model}</td>`;
-		for (const c of CONDITIONS) {
-			const v = row.cells[c];
-			const [, bg, ink] = stepOf(v);
-			html += `<td class="font-mono px-3.5 py-2 text-right border-2 border-[hsl(217,48%,15%)]" style="background:${bg};color:${ink}">${v.toFixed(1)}%</td>`;
-		}
-		html += "</tr>";
-	}
-	html += "</tbody></table>";
-	document.getElementById("fig-heat").innerHTML = html;
-})();
-
-
-// --- Study G footgun dumbbell ---
-(function () {
-	const W = 880, ROW = 64, T = 40, B = 44, L = 170, R = 30;
-	const rows = [...DATA.footgun].sort((a, b) => a.v1.rate - b.v1.rate);
-	const H = T + rows.length * ROW + B;
-	const iw = W - L - R;
-	const xOf = v => L + (v / 100) * iw;
-	let g = '';
-	g += '<circle cx="' + L + '" cy="16" r="6" fill="hsl(217,48%,15%)" stroke="#c98500" stroke-width="2.5"/><text fill="#c3c9d4" font-size="11.5" x="' + (L + 14) + '" y="20">v1 — tool calls hidden</text>';
-	g += '<circle cx="' + (L + 220) + '" cy="16" r="6.5" fill="#3987e5" stroke="hsl(217,48%,15%)" stroke-width="2"/><text fill="#c3c9d4" font-size="11.5" x="' + (L + 234) + '" y="20">v2 — corrected history</text>';
-	for (const tick of [0, 25, 50, 75, 100]) {
-		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
-	}
-	let hits = '';
-	rows.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
-		g += '<line x1="' + xOf(row.v1.rate) + '" x2="' + xOf(row.v2.rate) + '" y1="' + cy + '" y2="' + cy + '" stroke="#c98500" stroke-width="3" opacity="0.35"/>';
-		g += '<circle cx="' + xOf(row.v1.rate) + '" cy="' + cy + '" r="6" fill="hsl(217,48%,15%)" stroke="#c98500" stroke-width="2.5"/>';
-		g += '<circle cx="' + xOf(row.v2.rate) + '" cy="' + cy + '" r="6.5" fill="#3987e5" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-		hits += '<circle cx="' + xOf(row.v1.rate) + '" cy="' + cy + '" r="13" fill="transparent" data-tip="' + esc(row.model + ' v1 (hidden history): ' + row.v1.rate + '% — ' + row.v1.ok + '/' + row.v1.n) + '"/>';
-		hits += '<circle cx="' + xOf(row.v2.rate) + '" cy="' + cy + '" r="13" fill="transparent" data-tip="' + esc(row.model + ' v2 (corrected): ' + row.v2.rate + '% — ' + row.v2.ok + '/' + row.v2.n) + '"/>';
-	});
-	const el = document.getElementById('fig-footgun');
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Reference-edit success per model with tool calls hidden from history versus corrected history." style="min-width:640px;display:block">' + g + hits + '</svg>';
-	el.querySelectorAll('[data-tip]').forEach(n => { n.addEventListener('mousemove', e => showTip(e, n.dataset.tip)); n.addEventListener('mouseleave', hideTip); });
-	table('tbl-footgun', ['model', 'v1 (hidden)', 'v2 (corrected)'], DATA.footgun.map(r => [r.model, r.v1.rate + '% (' + r.v1.ok + '/' + r.v1.n + ')', r.v2.rate + '% (' + r.v2.ok + '/' + r.v2.n + ')']));
-})();
-
-// --- Study H size extension ---
-(function () {
-	const el = document.getElementById('legend-4');
-	el.innerHTML = ['A', 'E', 'F'].map(c =>
-		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + COLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + COND_NAMES[c] + '</span>'
-	).join('') + '<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
-	const W = 880, H = 380, L = 56, R = 170, T = 16, B = 44;
-	const iw = W - L - R, ih = H - T - B;
-	const SIZES = ['~300 nodes', '~600', '~1000'];
-	const xs = SIZES.map((_, i) => L + (iw * i) / (SIZES.length - 1));
-	const yOf = v => T + ih - (v / 100) * ih;
-	let g = '';
-	for (const tick of [0, 25, 50, 75, 100]) {
-		const y = yOf(tick);
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + tick + '%</text>';
-	}
-	SIZES.forEach((lab, i) => { g += '<text fill="#c3c9d4" font-size="11.5" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
-	let marks = '', hits = '';
-	const endLabels = [];
-	for (const series of DATA.sizeext) {
-		const c = series.condition;
-		const dashed = series.model.includes('gemini');
-		const pts = series.cells.map((cell, i) => ({ x: xs[i], y: yOf(cell.rate), cell }));
-		marks += '<path d="' + pts.map((p, i) => (i === 0 ? 'M' : 'L') + p.x + ',' + p.y).join(' ') + '" fill="none" stroke="' + COLOR[c] + '" stroke-width="2" stroke-linejoin="round"' + (dashed ? ' stroke-dasharray="6 5"' : '') + '/>';
-		pts.forEach((p, i) => {
-			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + COLOR[c] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-			hits += '<circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent" data-tip="' + esc(c + ' — ' + COND_NAMES[c] + ' (' + series.model + ') — ' + SIZES[i] + ': ' + p.cell.rate + '% — ' + p.cell.ok + '/' + p.cell.n + ' · CI [' + p.cell.low + '%, ' + p.cell.high + '%]') + '"/>';
-		});
-		const last = pts[pts.length - 1];
-		endLabels.push({ c, text: c + ' ' + (dashed ? 'gem' : 'son') + ' · ' + last.cell.rate + '%', x: last.x + 10, y: last.y + 4 });
-	}
-	resolveLabels(endLabels, 15);
-	let labels = '';
-	for (const l of endLabels) labels += '<text font-size="12" font-weight="700" x="' + l.x + '" y="' + l.y + '" fill="' + COLOR[l.c] + '">' + l.text + '</text>';
-	const el2 = document.getElementById('fig-sizeext');
-	el2.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Task success at 300 to 1000 nodes: anchored patches hold for both models while rewrite falls to zero on the small model and positional patches decay." style="min-width:640px;display:block">' + g + marks + labels + hits + '</svg>';
-	el2.querySelectorAll('[data-tip]').forEach(n => { n.addEventListener('mousemove', e => showTip(e, n.dataset.tip)); n.addEventListener('mouseleave', hideTip); });
-	table('tbl-sizeext', ['series', ...SIZES], DATA.sizeext.map(s => [s.condition + ' — ' + s.model, ...s.cells.map(c => c.rate + '% (' + c.ok + '/' + c.n + ')')]));
-})();
-
-// --- Studies I/J focused views: input tokens by size ---
-(function () {
-	const VDATA = [
-		{ model: 'sonnet-4.5', cond: 'F', name: 'full tree', tokens: [24365, 57585, 85642], ok: ['15/15', '15/15', '13/15'] },
-		{ model: 'gemini-3.5-flash', cond: 'F', name: 'full tree', tokens: [20995, 39999, 70063], ok: ['14/15', '14/15', '13/15'] },
-		{ model: 'sonnet-4.5', cond: 'FV', name: 'focused view', tokens: [2067, 2667, 3500], ok: ['15/15', '14/15', '14/15'] },
-		{ model: 'gemini-3.5-flash', cond: 'FV', name: 'focused view', tokens: [2048, 2577, 3118], ok: ['14/15', '14/15', '14/15'] },
-		{ model: 'sonnet-4.5', cond: 'FT', name: 'minimal view', tokens: [1331, 1491, 1531], ok: ['15/15', '15/15', '15/15'] },
-		{ model: 'gemini-3.5-flash', cond: 'FT', name: 'minimal view', tokens: [1266, 1419, 1451], ok: ['13/15', '14/15', '14/15'] }
-	];
-	const VEXTRA = [
-		{ model: 'sonnet-4.5', cond: 'FVH', name: 'focused view (HTML)', tokens: [1916, 2281, 2669], ok: ['15/15', '14/15', '14/15'] },
-		{ model: 'gemini-3.5-flash', cond: 'FVH', name: 'focused view (HTML)', tokens: [1891, 2282, 2671], ok: ['14/15', '14/15', '14/15'] },
-		{ model: 'sonnet-4.5', cond: 'FTH', name: 'minimal view (HTML)', tokens: [1281, 1376, 1391], ok: ['15/15', '15/15', '14/15'] },
-		{ model: 'gemini-3.5-flash', cond: 'FTH', name: 'minimal view (HTML)', tokens: [1250, 1344, 1352], ok: ['13/15', '13/15', '14/15'] }
-	];
-	const VCOLOR = { F: '#e66767', FV: '#c98500', FT: '#199e70' };
-	const VNAMES = { F: 'full tree in the prompt', FV: 'focused view (placeholders)', FT: 'minimal view (omission counts)' };
-	document.getElementById('legend-5').innerHTML = ['F', 'FV', 'FT'].map(c =>
-		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + VCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + VNAMES[c] + '</span>'
-	).join('') + '<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
-	const W = 880, H = 380, L = 64, R = 175, T = 16, B = 44;
-	const iw = W - L - R, ih = H - T - B;
-	const SIZES = ['~300 nodes', '~600', '~1000'];
-	const xs = SIZES.map((_, i) => L + (iw * i) / (SIZES.length - 1));
-	const yOf = v => T + ih - (v / 90000) * ih;
-	let g = '';
-	for (const tick of [0, 20000, 40000, 60000, 80000]) {
-		const y = yOf(tick);
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + (tick / 1000) + 'k</text>';
-	}
-	SIZES.forEach((lab, i) => { g += '<text fill="#c3c9d4" font-size="11.5" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
-	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">median input tokens per task (accuracy statistically identical across all rows)</text>';
-	let marks = '', hits = '';
-	const endLabels = [];
-	for (const s of VDATA) {
-		const dashed = s.model.includes('gemini');
-		const pts = s.tokens.map((v, i) => ({ x: xs[i], y: yOf(v), v, i }));
-		marks += '<path d="' + pts.map((p, i) => (i === 0 ? 'M' : 'L') + p.x + ',' + p.y).join(' ') + '" fill="none" stroke="' + VCOLOR[s.cond] + '" stroke-width="2" stroke-linejoin="round"' + (dashed ? ' stroke-dasharray="6 5"' : '') + '/>';
-		pts.forEach(p => {
-			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + VCOLOR[s.cond] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-			hits += '<circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent" data-tip="' + esc(s.cond + ' — ' + VNAMES[s.cond] + ' (' + s.model + ')\n' + SIZES[p.i] + ': ' + p.v.toLocaleString() + ' input tokens (median)\nsuccess ' + s.ok[p.i]) + '"/>';
-		});
-		const last = pts[pts.length - 1];
-		endLabels.push({ c: s.cond, text: s.cond + ' ' + (dashed ? 'gem' : 'son') + ' · ' + (last.v >= 10000 ? (last.v / 1000).toFixed(1) + 'k' : (last.v / 1000).toFixed(1) + 'k'), x: last.x + 10, y: last.y + 4 });
-	}
-	resolveLabels(endLabels, 15);
-	let labels = '';
-	for (const l of endLabels) labels += '<text font-size="12" font-weight="700" x="' + l.x + '" y="' + l.y + '" fill="' + VCOLOR[l.c] + '">' + l.text + '</text>';
-	const el = document.getElementById('fig-views');
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Median input tokens by tree size: the full tree grows to 70 to 86 thousand tokens at 1000 nodes while focused and minimal views stay under 4 thousand, with accuracy unchanged." style="min-width:640px;display:block">' + g + marks + labels + hits + '</svg>';
-	el.querySelectorAll('[data-tip]').forEach(n => { n.addEventListener('mousemove', e => showTip(e, n.dataset.tip)); n.addEventListener('mouseleave', hideTip); });
-	table('tbl-views', ['input shown (model)', ...SIZES.map(s => s + ' — tokens · success')],
-		[...VDATA, ...VEXTRA].map(s => [
-			s.cond + ' ' + s.name + ' (' + s.model + ')',
-			...s.tokens.map((v, i) => v.toLocaleString() + ' · ' + s.ok[i])
-		]));
-})();
-
-// --- Study K sessions: drift by session third ---
-(function () {
-	const KDATA = [
-		{ policy: 'K-once', name: 'tree shown once', model: 'sonnet-4.5', rate: [98.8, 92.5, 83.8], ok: ['79/80', '74/80', '67/80'], end: '8/20', tokens: '215.6k in + 0.7k out' },
-		{ policy: 'K-once', name: 'tree shown once', model: 'gemini-3.5-flash', rate: [98.8, 100, 96.3], ok: ['79/80', '80/80', '77/80'], end: '17/20', tokens: '198.3k in + 0.6k out' },
-		{ policy: 'K-refresh5', name: 'full re-serialize @ 6/11', model: 'sonnet-4.5', rate: [98.8, 92.5, 91.3], ok: ['79/80', '74/80', '73/80'], end: '11/20', tokens: '366.6k in + 0.7k out' },
-		{ policy: 'K-refresh5', name: 'full re-serialize @ 6/11', model: 'gemini-3.5-flash', rate: [100, 100, 91.3], ok: ['80/80', '80/80', '73/80'], end: '15/20', tokens: '335.8k in + 0.6k out' },
-		{ policy: 'K-view', name: 'fresh minimal view every turn', model: 'sonnet-4.5', rate: [100, 98.8, 100], ok: ['80/80', '79/80', '80/80'], end: '19/20', tokens: '55.7k in + 0.7k out' },
-		{ policy: 'K-view', name: 'fresh minimal view every turn', model: 'gemini-3.5-flash', rate: [98.8, 100, 98.8], ok: ['79/80', '80/80', '79/80'], end: '19/20', tokens: '53.4k in + 0.7k out' },
-		{ policy: 'K-rewrite', name: 'whole-tree rewrite', model: 'sonnet-4.5', rate: [97.2, 100, 94.4], ok: ['35/36', '36/36', '34/36'], end: '7/10', tokens: '836.0k in + 129.4k out' },
-		{ policy: 'K-rewrite', name: 'whole-tree rewrite', model: 'gemini-3.5-flash', rate: [52.5, 67.5, 69.2], ok: ['21/40', '27/40', '27/39'], end: '2/10', tokens: '971.3k in + 138.1k out' }
-	];
-	const KCOLOR = { 'K-once': '#c98500', 'K-refresh5': '#9085e9', 'K-view': '#e66767', 'K-rewrite': '#3987e5' };
-	const KNAMES = { 'K-once': 'tree shown once', 'K-refresh5': 'full refresh @ steps 6/11', 'K-view': 'fresh minimal view every turn', 'K-rewrite': 'whole-tree rewrite (anchor)' };
-	document.getElementById('legend-6').innerHTML = Object.keys(KNAMES).map(p =>
-		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + KCOLOR[p] + '"></span><span class="font-mono font-700 text-white">' + p + '</span> ' + KNAMES[p] + '</span>'
-	).join('') + '<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
-	const W = 880, H = 380, L = 56, R = 195, T = 16, B = 44;
-	const iw = W - L - R, ih = H - T - B;
-	const THIRDS = ['steps 1–4', 'steps 5–8', 'steps 9–12'];
-	const xs = THIRDS.map((_, i) => L + (iw * i) / (THIRDS.length - 1));
-	const yOf = v => T + ih - ((v - 50) / 50) * ih;
-	let g = '';
-	for (const tick of [50, 60, 70, 80, 90, 100]) {
-		const y = yOf(tick);
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + tick + '%</text>';
-	}
-	THIRDS.forEach((lab, i) => { g += '<text fill="#c3c9d4" font-size="11.5" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
-	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">per-step success by session third (step judged on its own edit against the model’s current tree)</text>';
-	let marks = '', hits = '';
-	const endLabels = [];
-	for (const s of KDATA) {
-		const dashed = s.model.includes('gemini');
-		const pts = s.rate.map((v, i) => ({ x: xs[i], y: yOf(v), v, i }));
-		marks += '<path d="' + pts.map((p, i) => (i === 0 ? 'M' : 'L') + p.x + ',' + p.y).join(' ') + '" fill="none" stroke="' + KCOLOR[s.policy] + '" stroke-width="2" stroke-linejoin="round"' + (dashed ? ' stroke-dasharray="6 5"' : '') + '/>';
-		pts.forEach(p => {
-			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + KCOLOR[s.policy] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-			hits += '<circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent" data-tip="' + esc(s.policy + ' — ' + KNAMES[s.policy] + ' (' + s.model + ')\n' + THIRDS[p.i] + ': ' + p.v + '% (' + s.ok[p.i] + ')\nend-state intact: ' + s.end + ' · ' + s.tokens + '/session') + '"/>';
-		});
-		const last = pts[pts.length - 1];
-		endLabels.push({ c: s.policy, text: s.policy.replace('K-', '') + ' ' + (dashed ? 'gem' : 'son') + ' · ' + last.v + '%', x: last.x + 10, y: last.y + 4 });
-	}
-	resolveLabels(endLabels, 15);
-	let labels = '';
-	for (const l of endLabels) labels += '<text font-size="12" font-weight="700" x="' + l.x + '" y="' + l.y + '" fill="' + KCOLOR[l.c] + '">' + l.text + '</text>';
-	const el = document.getElementById('fig-sessions');
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Per-step success across session thirds: serialize-once decays to 83.8 percent on sonnet while per-turn views stay flat near 100 percent; gemini whole-tree rewrite sessions run at 52 to 69 percent." style="min-width:640px;display:block">' + g + marks + labels + hits + '</svg>';
-	el.querySelectorAll('[data-tip]').forEach(n => { n.addEventListener('mousemove', e => showTip(e, n.dataset.tip)); n.addEventListener('mouseleave', hideTip); });
-	table('tbl-sessions', ['policy (model)', ...THIRDS, 'end-state intact', 'mean tokens/session'],
-		KDATA.map(s => [
-			s.policy + ' ' + s.name + ' (' + s.model + ')',
-			...s.rate.map((v, i) => v + '% (' + s.ok[i] + ')'),
-			s.end, s.tokens
-		]));
-})();
-
-// --- Study L: grounding dot plot ---
-(function () {
-	const LCOND = ["oracle", "LG-full", "LG-nav", "LG-lex"];
-	const LNAMES = {
-		oracle: "oracle bound (ids in instructions, Study I)",
-		"LG-full": "grounded · full tree shown",
-		"LG-nav": "grounded · navigate (expand_node)",
-		"LG-lex": "grounded · naive lexical retrieval"
-	};
-	const LCOLOR = { oracle: "#e66767", "LG-full": "#3987e5", "LG-nav": "#9085e9", "LG-lex": "#c98500" };
-	const LDATA = [
-		{ model: "sonnet-4.5", cells: {
-			oracle: { ok: 43, rate: 95.6, low: 85.2, high: 98.8, note: "" },
-			"LG-full": { ok: 39, rate: 86.7, low: 73.8, high: 93.7, note: "median input 90k @ ~1000 nodes" },
-			"LG-nav": { ok: 43, rate: 95.6, low: 85.2, high: 98.8, note: "median 54 expands; 356k input @ ~1000 nodes" },
-			"LG-lex": { ok: 27, rate: 60.0, low: 45.5, high: 73.0, note: "~2.5k input; 34/38 failures misgrounded" }
-		}},
-		{ model: "gemini-3.5-flash", cells: {
-			oracle: { ok: 41, rate: 91.1, low: 79.3, high: 96.5, note: "" },
-			"LG-full": { ok: 38, rate: 84.4, low: 71.2, high: 92.3, note: "median input 70k @ ~1000 nodes" },
-			"LG-nav": { ok: 23, rate: 51.1, low: 37.0, high: 65.0, note: "budget exhaustion; up to 636k input" },
-			"LG-lex": { ok: 25, rate: 55.6, low: 41.2, high: 69.1, note: "~2.4k input" }
-		}}
-	];
-	document.getElementById("legend-7").innerHTML = LCOND.map(c =>
-		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + LCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + LNAMES[c] + '</span>'
-	).join("");
-	const W = 880, ROW = 64, T = 8, B = 40, L = 150, R = 24;
-	const H = T + LDATA.length * ROW + B;
-	const iw = W - L - R;
-	const xOf = v => L + ((v - 30) / 70) * iw;
-	let g = "";
-	for (const tick of [30, 40, 50, 60, 70, 80, 90, 100]) {
-		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
-	}
-	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">task success on grounded (id-free) instructions, 45 tasks per cell</text>';
-	let marks = "", hits = "";
-	LDATA.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
-		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
-		for (const c of LCOND) {
-			const cell = row.cells[c];
-			marks += '<line x1="' + xOf(cell.low) + '" x2="' + xOf(cell.high) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + LCOLOR[c] + '" stroke-width="1.5" opacity="0.4"/>';
-			marks += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="5.5" fill="' + LCOLOR[c] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-			hits += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="13" fill="transparent" data-tip="' + esc(c + ' — ' + LNAMES[c] + '\n' + row.model + ': ' + cell.rate + '% (' + cell.ok + '/45) · CI [' + cell.low + '%, ' + cell.high + '%]' + (cell.note ? '\n' + cell.note : '')) + '"/>';
-		}
-	});
-	const el = document.getElementById("fig-grounding");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Grounded-instruction success per model: full-tree grounding sits 7 to 9 points under the oracle bound; navigation matches the oracle on sonnet but collapses on gemini; lexical retrieval is the floor." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-grounding", ["condition (model)", "success", "median input @ ~1000 nodes", "failure anatomy (pooled)"],
-		[
-			["oracle — sonnet-4.5", "43/45 (95.6%)", "85,642", "—"],
-			["oracle — gemini-3.5-flash", "41/45 (91.1%)", "70,063", "—"],
-			["LG-full — sonnet-4.5", "39/45 (86.7%)", "90,254", "misgrounded ×8, mechanics ×5 (both models)"],
-			["LG-full — gemini-3.5-flash", "38/45 (84.4%)", "70,054", "(see above)"],
-			["LG-nav — sonnet-4.5", "43/45 (95.6%) · 54 median expands", "355,643", "invalid ×20, misgrounded ×2, mechanics ×2 (both models)"],
-			["LG-nav — gemini-3.5-flash", "23/45 (51.1%) · 58 median expands", "636,030", "(see above)"],
-			["LG-lex — sonnet-4.5", "27/45 (60.0%)", "2,695", "misgrounded ×34, mechanics ×4 (both models)"],
-			["LG-lex — gemini-3.5-flash", "25/45 (55.6%)", "2,659", "(see above)"]
-		]);
-})();
-
-// --- Study M: memory tercile lines ---
-(function () {
-	const MDATA = [
-		{ policy: "K-view", name: "full history + per-turn view", model: "sonnet-4.5", rate: [100, 98.8, 100], ok: ["80/80", "79/80", "80/80"], end: "19/20", shape: "1.2k → 8.1k per step" },
-		{ policy: "K-view", name: "full history + per-turn view", model: "gemini-3.5-flash", rate: [98.8, 100, 98.8], ok: ["79/80", "80/80", "79/80"], end: "19/20", shape: "1.2k → 7.8k per step" },
-		{ policy: "M-window", name: "2-exchange window", model: "sonnet-4.5", rate: [100, 98.8, 95.0], ok: ["80/80", "79/80", "76/80"], end: "16/20", shape: "1.2k → 2.7k per step" },
-		{ policy: "M-window", name: "2-exchange window", model: "gemini-3.5-flash", rate: [100, 98.8, 95.0], ok: ["80/80", "79/80", "76/80"], end: "15/20", shape: "1.2k → 2.6k per step" },
-		{ policy: "M-stateless", name: "no history at all", model: "sonnet-4.5", rate: [98.8, 95.0, 96.3], ok: ["79/80", "76/80", "77/80"], end: "13/20", shape: "flat ~1.3k per step" },
-		{ policy: "M-stateless", name: "no history at all", model: "gemini-3.5-flash", rate: [98.8, 100, 92.5], ok: ["79/80", "80/80", "74/80"], end: "14/20", shape: "flat ~1.3k per step" }
-	];
-	const MCOLOR = { "K-view": "#e66767", "M-window": "#9085e9", "M-stateless": "#c98500" };
-	const MNAMES = { "K-view": "full history + per-turn view (Study K)", "M-window": "2-exchange window", "M-stateless": "no history at all" };
-	document.getElementById("legend-8").innerHTML = Object.keys(MNAMES).map(p =>
-		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + MCOLOR[p] + '"></span><span class="font-mono font-700 text-white">' + p + '</span> ' + MNAMES[p] + '</span>'
-	).join("") + '<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
-	const W = 880, H = 340, L = 56, R = 205, T = 16, B = 44;
-	const iw = W - L - R, ih = H - T - B;
-	const THIRDS = ["steps 1–4", "steps 5–8", "steps 9–12"];
-	const xs = THIRDS.map((_, i) => L + (iw * i) / (THIRDS.length - 1));
-	const yOf = v => T + ih - ((v - 88) / 12) * ih;
-	let g = "";
-	for (const tick of [88, 92, 96, 100]) {
-		const y = yOf(tick);
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + tick + '%</text>';
-	}
-	THIRDS.forEach((lab, i) => { g += '<text fill="#c3c9d4" font-size="11.5" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
-	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">per-step success by session third (note the zoomed 88–100% scale)</text>';
-	let marks = "", hits = "";
-	const endLabels = [];
-	for (const s of MDATA) {
-		const dashed = s.model.includes("gemini");
-		const pts = s.rate.map((v, i) => ({ x: xs[i], y: yOf(v), v, i }));
-		marks += '<path d="' + pts.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ") + '" fill="none" stroke="' + MCOLOR[s.policy] + '" stroke-width="2" stroke-linejoin="round"' + (dashed ? ' stroke-dasharray="6 5"' : '') + '/>';
-		pts.forEach(p => {
-			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + MCOLOR[s.policy] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-			hits += '<circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent" data-tip="' + esc(s.policy + ' — ' + MNAMES[s.policy] + ' (' + s.model + ')\n' + THIRDS[p.i] + ': ' + p.v + '% (' + s.ok[p.i] + ')\nend-state intact ' + s.end + ' · input ' + s.shape) + '"/>';
-		});
-		const last = pts[pts.length - 1];
-		endLabels.push({ c: s.policy, text: s.policy.replace("M-", "").replace("K-", "") + " " + (dashed ? "gem" : "son") + " · " + last.v + "%", x: last.x + 10, y: last.y + 4 });
-	}
-	resolveLabels(endLabels, 15);
-	let labels = "";
-	for (const l of endLabels) labels += '<text font-size="12" font-weight="700" x="' + l.x + '" y="' + l.y + '" fill="' + MCOLOR[l.c] + '">' + l.text + '</text>';
-	const el = document.getElementById("fig-memory");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Per-step success across session thirds for full history, a two-exchange window, and no history: statelessness degrades late-session accuracy despite identical per-turn views." style="min-width:640px;display:block">' + g + marks + labels + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-memory", ["policy (model)", ...THIRDS, "end-state intact", "input per step"],
-		MDATA.map(s => [
-			s.policy + " " + s.name + " (" + s.model + ")",
-			...s.rate.map((v, i) => v + "% (" + s.ok[i] + ")"),
-			s.end, s.shape
-		]));
-})();
-
-// --- Study N: retrieval ladder dot plot ---
-(function () {
-	const NCOND = ["oracle", "LG-full", "N-search", "N-ground2x", "N-embed"];
-	const NNAMES = {
-		oracle: "oracle bound (ids in instructions, Study I)",
-		"LG-full": "grounded · full tree shown (Study L)",
-		"N-search": "grounded · find_nodes search tool",
-		"N-ground2x": "grounded · cheap model grounds, sonnet patches",
-		"N-embed": "grounded · embedding retrieval (no agent)"
-	};
-	const NCOLOR = { oracle: "#e66767", "LG-full": "#3987e5", "N-search": "#199e70", "N-ground2x": "#9085e9", "N-embed": "#c98500" };
-	const NDATA = [
-		{ model: "sonnet-4.5", cells: {
-			oracle: { ok: 43, rate: 95.6, low: 85.2, high: 98.8, note: "" },
-			"LG-full": { ok: 39, rate: 86.7, low: 73.8, high: 93.7, note: "median input 90k @ ~1000 nodes" },
-			"N-search": { ok: 43, rate: 95.6, low: 85.2, high: 98.8, note: "median 1 search call · ~6.5k input @ ~1000 nodes\nsame two failures as the oracle-matching nav arm" },
-			"N-ground2x": { ok: 41, rate: 91.1, low: 79.3, high: 96.5, note: "gemini grounds (45/45 valid) · sonnet-side median input 1,484 tokens (−97.4%)" },
-			"N-embed": { ok: 25, rate: 55.6, low: 41.2, high: 69.1, note: "top-5 target coverage 23/45 — no better than keyword overlap (24/45)" }
-		}},
-		{ model: "gemini-3.5-flash", cells: {
-			oracle: { ok: 41, rate: 91.1, low: 79.3, high: 96.5, note: "" },
-			"LG-full": { ok: 38, rate: 84.4, low: 71.2, high: 92.3, note: "median input 70k @ ~1000 nodes" },
-			"N-search": { ok: 39, rate: 86.7, low: 73.8, high: 93.7, note: "median 1 search call · ~3.7k input @ ~1000 nodes\nvs 23/45 navigating (16–0 paired, p < 0.001)" },
-			"N-embed": { ok: 24, rate: 53.3, low: 39.1, high: 67.1, note: "statistically identical to the lexical floor" }
-		}}
-	];
-	document.getElementById("legend-9").innerHTML = NCOND.map(c =>
-		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + NCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + NNAMES[c] + '</span>'
-	).join("");
-	const W = 880, ROW = 64, T = 8, B = 40, L = 150, R = 24;
-	const H = T + NDATA.length * ROW + B;
-	const iw = W - L - R;
-	const xOf = v => L + ((v - 30) / 70) * iw;
-	let g = "";
-	for (const tick of [30, 40, 50, 60, 70, 80, 90, 100]) {
-		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
-	}
-	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">task success on grounded (id-free) instructions, 45 tasks per cell</text>';
-	let marks = "", hits = "";
-	NDATA.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
-		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
-		for (const c of NCOND) {
-			const cell = row.cells[c];
-			if (!cell) continue;
-			marks += '<line x1="' + xOf(cell.low) + '" x2="' + xOf(cell.high) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + NCOLOR[c] + '" stroke-width="1.5" opacity="0.4"/>';
-			marks += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="5.5" fill="' + NCOLOR[c] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-			hits += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="13" fill="transparent" data-tip="' + esc(c + ' — ' + NNAMES[c] + '\n' + row.model + ': ' + cell.rate + '% (' + cell.ok + '/45) · CI [' + cell.low + '%, ' + cell.high + '%]' + (cell.note ? '\n' + cell.note : '')) + '"/>';
-		}
-	});
-	const el = document.getElementById("fig-retrieval");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Grounded-instruction success per model on the retrieval ladder: the find_nodes search tool matches the oracle bound on sonnet and full-tree grounding on gemini at a median of one call; embedding retrieval sits at the lexical floor; cheap-model grounding preserves accuracy with 97% less frontier input." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-retrieval", ["condition (model)", "success", "median input @ ~1000 nodes", "mechanism"],
-		[
-			["N-search — sonnet-4.5", "43/45 (95.6%)", "6,550", "median 1 find_nodes call; failures: misgrounded ×5, mechanics ×3 (both models)"],
-			["N-search — gemini-3.5-flash", "39/45 (86.7%)", "3,741", "vs LG-nav 23/45: 16–0 paired, p < 0.001"],
-			["N-embed — sonnet-4.5", "25/45 (55.6%)", "3,076", "top-5 covers targets 23/45 vs lexical 24/45; 39/41 failures misgrounded"],
-			["N-embed — gemini-3.5-flash", "24/45 (53.3%)", "2,845", "(see above)"],
-			["N-ground2 — sonnet-4.5", "41/45 (91.1%)", "79,511", "same-model two-stage: accuracy holds, total savings only 18%"],
-			["N-ground2 — gemini-3.5-flash", "37/45 (82.2%)", "71,404", "same-model two-stage: total savings 5%"],
-			["N-ground2x — gemini grounds, sonnet patches", "41/45 (91.1%)", "71,497 total · 1,484 sonnet-side", "grounder coverage identical across tiers (41/45 both)"]
-		]);
-})();
-
-// --- Study O: positional views dot plot ---
-(function () {
-	const OCOND = ["K-view", "O-view", "M-stateless", "O-stateless"];
-	const ONAMES = {
-		"K-view": "full history, plain view (Study K)",
-		"O-view": "full history + positions",
-		"M-stateless": "no history, plain view (Study M)",
-		"O-stateless": "no history + positions"
-	};
-	const OCOLOR = { "K-view": "#e66767", "O-view": "#9085e9", "M-stateless": "#c98500", "O-stateless": "#199e70" };
-	const ODATA = [
-		{ model: "sonnet-4.5", cells: {
-			"K-view": { ok: "80/80", rate: 100.0, low: 95.4, high: 100.0, end: "19/20", note: "" },
-			"O-view": { ok: "79/80", rate: 98.8, low: 93.3, high: 99.8, end: "19/20", note: "1–1 paired vs K-view, p = 1.0" },
-			"M-stateless": { ok: "77/80", rate: 96.3, low: 89.5, high: 98.7, end: "13/20", note: "all stateless-only failures are placements" },
-			"O-stateless": { ok: "77/80", rate: 96.3, low: 89.5, high: 98.7, end: "15/20", note: "3–1 paired vs M-stateless, p = 0.625 — positions printed, still misplaced" }
-		}},
-		{ model: "gemini-3.5-flash", cells: {
-			"K-view": { ok: "79/80", rate: 98.8, low: 93.3, high: 99.8, end: "19/20", note: "" },
-			"O-view": { ok: "80/80", rate: 100.0, low: 95.4, high: 100.0, end: "20/20", note: "best cell in the series; 2–0 vs K-view, p = 0.5 (n.s.)" },
-			"M-stateless": { ok: "74/80", rate: 92.5, low: 84.6, high: 96.5, end: "14/20", note: "" },
-			"O-stateless": { ok: "75/80", rate: 93.8, low: 86.2, high: 97.3, end: "15/20", note: "1–0 paired vs M-stateless, p = 1.0" }
-		}}
-	];
-	document.getElementById("legend-10").innerHTML = OCOND.map(c =>
-		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + OCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + ONAMES[c] + '</span>'
-	).join("");
-	const W = 880, ROW = 64, T = 8, B = 40, L = 150, R = 24;
-	const H = T + ODATA.length * ROW + B;
-	const iw = W - L - R;
-	const xOf = v => L + ((v - 84) / 16) * iw;
-	let g = "";
-	for (const tick of [84, 88, 92, 96, 100]) {
-		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
-	}
-	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">late-session (steps 9–12) per-step success — the window where statelessness fails (zoomed 84–100% scale)</text>';
-	let marks = "", hits = "";
-	ODATA.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
-		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
-		for (const c of OCOND) {
-			const cell = row.cells[c];
-			marks += '<line x1="' + xOf(cell.low) + '" x2="' + xOf(Math.min(cell.high, 100)) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + OCOLOR[c] + '" stroke-width="1.5" opacity="0.4"/>';
-			marks += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="5.5" fill="' + OCOLOR[c] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-			hits += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="13" fill="transparent" data-tip="' + esc(c + ' — ' + ONAMES[c] + '\n' + row.model + ' steps 9–12: ' + cell.rate + '% (' + cell.ok + ') · CI [' + cell.low + '%, ' + cell.high + '%]\nend-state intact ' + cell.end + (cell.note ? '\n' + cell.note : '')) + '"/>';
-		}
-	});
-	const el = document.getElementById("fig-positions");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Late-session per-step success for the history-by-positions two-by-two: position annotations barely move stateless accuracy while full history stays at the top; positions plus history is descriptively best but not significantly better." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-positions", ["policy (model)", "steps 9–12", "placements, steps 5–12", "end-state intact", "input per step"],
-		[
-			["K-view (sonnet)", "100% (80/80)", "59/60", "19/20", "1.2k → 8.1k"],
-			["O-view (sonnet)", "98.8% (79/80)", "59/60", "19/20", "1.3k → 8.8k"],
-			["M-stateless (sonnet)", "96.3% (77/80)", "53/60", "13/20", "flat ~1.3k"],
-			["O-stateless (sonnet)", "96.3% (77/80)", "54/60", "15/20", "flat ~1.4k (+9% for positions)"],
-			["K-view (gemini)", "98.8% (79/80)", "59/60", "19/20", "1.2k → 7.8k"],
-			["O-view (gemini)", "100% (80/80)", "60/60", "20/20", "1.3k → 8.4k"],
-			["M-stateless (gemini)", "92.5% (74/80)", "54/60", "14/20", "flat ~1.2k"],
-			["O-stateless (gemini)", "93.8% (75/80)", "55/60", "15/20", "flat ~1.4k"]
-		]);
-})();
-
-// --- Study P: synthetic history dot plot (late-session window) ---
-(function () {
-	const PCOND = ["K-view", "P-canned", "P-system", "M-stateless"];
-	const PNAMES = {
-		"K-view": "full history (Study K)",
-		"P-canned": "no history + examples as fake turns",
-		"P-system": "no history + examples in system prompt",
-		"M-stateless": "no history, no examples (Study M)"
-	};
-	const PCOLOR = { "K-view": "#e66767", "P-canned": "#199e70", "P-system": "#9085e9", "M-stateless": "#c98500" };
-	const PDATA = [
-		{ model: "sonnet-4.5", cells: {
-			"K-view": { ok: "80/80", rate: 100.0, low: 95.4, high: 100.0, end: "19/20", note: "" },
-			"P-canned": { ok: "79/80", rate: 98.8, low: 93.3, high: 99.8, end: "18/20", note: "vs K-view 1–0, p = 1.0 · vs M-stateless 7–1, p = 0.070" },
-			"P-system": { ok: "78/80", rate: 97.5, low: 91.3, high: 99.3, end: "18/20", note: "vs K-view 2–0, p = 0.5 · ties P-canned" },
-			"M-stateless": { ok: "77/80", rate: 96.3, low: 89.5, high: 98.7, end: "13/20", note: "" }
-		}},
-		{ model: "gemini-3.5-flash", cells: {
-			"K-view": { ok: "79/80", rate: 98.8, low: 93.3, high: 99.8, end: "19/20", note: "" },
-			"P-canned": { ok: "80/80", rate: 100.0, low: 95.4, high: 100.0, end: "20/20", note: "vs M-stateless 7–0, p = 0.016 · 60/60 late placements · output bloat 309 → 55 tok/step" },
-			"P-system": { ok: "79/80", rate: 98.8, low: 93.3, high: 99.8, end: "19/20", note: "vs M-stateless 6–0, p = 0.031" },
-			"M-stateless": { ok: "74/80", rate: 92.5, low: 84.6, high: 96.5, end: "14/20", note: "" }
-		}}
-	];
-	document.getElementById("legend-11").innerHTML = PCOND.map(c =>
-		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + PCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + PNAMES[c] + '</span>'
-	).join("");
-	const W = 880, ROW = 64, T = 8, B = 40, L = 150, R = 24;
-	const H = T + PDATA.length * ROW + B;
-	const iw = W - L - R;
-	const xOf = v => L + ((v - 84) / 16) * iw;
-	let g = "";
-	for (const tick of [84, 88, 92, 96, 100]) {
-		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
-	}
-	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">late-session (steps 9–12) per-step success (zoomed 84–100% scale)</text>';
-	let marks = "", hits = "";
-	PDATA.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
-		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + '</text>';
-		for (const c of PCOND) {
-			const cell = row.cells[c];
-			marks += '<line x1="' + xOf(cell.low) + '" x2="' + xOf(Math.min(cell.high, 100)) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + PCOLOR[c] + '" stroke-width="1.5" opacity="0.4"/>';
-			marks += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="5.5" fill="' + PCOLOR[c] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-			hits += '<circle cx="' + xOf(cell.rate) + '" cy="' + cy + '" r="13" fill="transparent" data-tip="' + esc(c + ' — ' + PNAMES[c] + '\n' + row.model + ' steps 9–12: ' + cell.rate + '% (' + cell.ok + ') · CI [' + cell.low + '%, ' + cell.high + '%]\nend-state intact ' + cell.end + (cell.note ? '\n' + cell.note : '')) + '"/>';
-		}
-	});
-	const el = document.getElementById("fig-teaching");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Late-session per-step success: stateless sessions with two canned worked examples match full history on both models, in both delivery framings, while plain stateless lags." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-teaching", ["policy (model)", "steps 9–12", "placements, steps 5–12", "end-state intact", "tokens/session"],
-		[
-			["K-view (sonnet)", "100% (80/80)", "59/60", "19/20", "55,746 in"],
-			["P-canned (sonnet)", "98.8% (79/80)", "58/60", "18/20", "26,921 in"],
-			["P-system (sonnet)", "97.5% (78/80)", "57/60", "18/20", "26,598 in"],
-			["M-stateless (sonnet)", "96.3% (77/80)", "53/60", "13/20", "17,888 in"],
-			["K-view (gemini)", "98.8% (79/80)", "59/60", "19/20", "53,358 in"],
-			["P-canned (gemini)", "100% (80/80)", "60/60", "20/20", "26,051 in"],
-			["P-system (gemini)", "98.8% (79/80)", "59/60", "19/20", "25,921 in"],
-			["M-stateless (gemini)", "92.5% (74/80)", "54/60", "14/20", "15,752 in + 3,709 out (bloat)"]
-		]);
-})();
-
-// --- Study Q: fan-out collapse lines ---
-(function () {
-	const QDATA = [
-		{ cond: "Q-view", name: "oracle retrieval (all targets in view)", model: "sonnet-4.5", rate: [92.9, 69.2, 50.0], ok: ["13/14", "9/13", "9/18"] },
-		{ cond: "Q-view", name: "oracle retrieval (all targets in view)", model: "gemini-3.5-flash", rate: [92.9, 53.8, 44.4], ok: ["13/14", "7/13", "8/18"] },
-		{ cond: "Q-full", name: "whole tree in prompt", model: "sonnet-4.5", rate: [85.7, 30.8, 33.3], ok: ["12/14", "4/13", "6/18"] },
-		{ cond: "Q-full", name: "whole tree in prompt", model: "gemini-3.5-flash", rate: [100.0, 69.2, 72.2], ok: ["14/14", "9/13", "13/18"] },
-		{ cond: "Q-search", name: "find_nodes recipe (barkup 0.4, untuned)", model: "sonnet-4.5", rate: [85.7, 46.2, 16.7], ok: ["12/14", "6/13", "3/18"] },
-		{ cond: "Q-search", name: "find_nodes recipe (barkup 0.4, untuned)", model: "gemini-3.5-flash", rate: [85.7, 46.2, 38.9], ok: ["12/14", "6/13", "7/18"] },
-		{ cond: "R-decomp", name: "app-side decomposition (Study R, both models)", model: "both", rate: [100.0, 100.0, 100.0], ok: ["28/28", "26/26", "36/36"] }
-	];
-	const QCOLOR = { "Q-view": "#9085e9", "Q-full": "#3987e5", "Q-search": "#199e70", "R-decomp": "#e66767" };
-	const QNAMES = { "Q-view": "oracle retrieval", "Q-full": "whole tree", "Q-search": "search recipe", "R-decomp": "decomposition (Study R)" };
-	document.getElementById("legend-12").innerHTML = Object.keys(QNAMES).map(c =>
-		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + QCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + QNAMES[c] + '</span>'
-	).join("") + '<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
-	const W = 880, H = 360, L = 56, R = 215, T = 16, B = 44;
-	const iw = W - L - R, ih = H - T - B;
-	const BINS = ["2–3 targets", "4–6 targets", "7+ targets"];
-	const xs = BINS.map((_, i) => L + (iw * i) / (BINS.length - 1));
-	const yOf = v => T + ih - ((v - 10) / 90) * ih;
-	let g = "";
-	for (const tick of [10, 25, 50, 75, 100]) {
-		const y = yOf(tick);
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + tick + '%</text>';
-	}
-	BINS.forEach((lab, i) => { g += '<text fill="#c3c9d4" font-size="11.5" x="' + xs[i] + '" y="' + (H - B + 22) + '" text-anchor="middle">' + lab + '</text>'; });
-	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">task success by target count (45 fan-out tasks per condition per model)</text>';
-	let marks = "", hits = "";
-	const endLabels = [];
-	for (const s of QDATA) {
-		const dashed = s.model.includes("gemini");
-		const both = s.model === "both";
-		const pts = s.rate.map((v, i) => ({ x: xs[i], y: yOf(v), v, i }));
-		marks += '<path d="' + pts.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ") + '" fill="none" stroke="' + QCOLOR[s.cond] + '" stroke-width="' + (both ? 3 : 2) + '" stroke-linejoin="round"' + (dashed ? ' stroke-dasharray="6 5"' : '') + '/>';
-		pts.forEach(p => {
-			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + QCOLOR[s.cond] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-			hits += '<circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent" data-tip="' + esc(s.cond + ' — ' + s.name + '\n' + BINS[p.i] + ': ' + p.v + '% (' + s.ok[p.i] + ')') + '"/>';
-		});
-		const last = pts[pts.length - 1];
-		endLabels.push({ c: s.cond, text: (both ? "decomp both" : s.cond.replace("Q-", "") + " " + (dashed ? "gem" : "son")) + " · " + last.v + "%", x: last.x + 10, y: last.y + 4 });
-	}
-	resolveLabels(endLabels, 15);
-	let labels = "";
-	for (const l of endLabels) labels += '<text font-size="12" font-weight="700" x="' + l.x + '" y="' + l.y + '" fill="' + QCOLOR[l.c] + '">' + l.text + '</text>';
-	const el = document.getElementById("fig-fanout");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Fan-out task success falls with target count in every condition: even oracle retrieval drops to about half at seven-plus targets, and the models invert between view and whole-tree strategies." style="min-width:640px;display:block">' + g + marks + labels + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-fanout", ["condition (model)", "overall", "2–3", "4–6", "7+", "failure anatomy", "median input @ ~1000 nodes"],
-		[
-			["Q-view (sonnet)", "31/45 (68.9%)", "13/14", "9/13", "9/18", "partial ×14 (mean coverage 47%)", "2,023"],
-			["Q-view (gemini)", "28/45 (62.2%)", "13/14", "7/13", "8/18", "partial ×17 (mean coverage 35%)", "1,894"],
-			["Q-full (sonnet)", "22/45 (48.9%)", "12/14", "4/13", "6/18", "partial ×14, collateral ×9", "85,628"],
-			["Q-full (gemini)", "36/45 (80.0%)", "14/14", "9/13", "13/18", "partial ×5, collateral ×4", "70,071"],
-			["Q-search (sonnet)", "21/45 (46.7%)", "12/14", "6/13", "3/18", "partial ×21, collateral ×2, invalid ×1 · median 6 calls", "14,514 (18/45 runs > 100k)"],
-			["Q-search (gemini)", "25/45 (55.6%)", "12/14", "6/13", "7/18", "partial ×13, invalid ×5, collateral ×2 · median 6 calls", "24,995 (16/45 runs > 100k)"],
-			["R-decomp (sonnet)", "45/45 (100%)", "14/14", "13/13", "18/18", "none — 337/337 subtasks", "7,974"],
-			["R-decomp (gemini)", "45/45 (100%)", "14/14", "13/13", "18/18", "none — 337/337 subtasks", "7,731"]
-		]);
-})();
-
-// --- Study S: long-session cost divergence lines ---
-(function () {
-	const STEPS = [1, 6, 12, 18, 24, 30, 36];
-	const SDATA = [
-		{ cond: "S-view", model: "sonnet-4.5", tok: [1250, 4693, 8325, 11955, 15855, 20164, 23614], acc: "360/360 steps" },
-		{ cond: "S-view", model: "gemini-3.5-flash", tok: [1216, 4519, 8012, 11522, 15187, 19279, 22581], acc: "359/360 steps" },
-		{ cond: "S-system", model: "sonnet-4.5", tok: [2124, 2160, 2085, 2120, 2276, 2547, 2190], acc: "357/360 steps" },
-		{ cond: "S-system", model: "gemini-3.5-flash", tok: [2083, 2107, 2031, 2065, 2232, 2485, 2130], acc: "356/360 steps" }
-	];
-	const SCOLOR = { "S-view": "#e66767", "S-system": "#9085e9" };
-	const SNAMES = { "S-view": "full history + fresh view per turn (K-view recipe)", "S-system": "no history + two worked examples (P-system recipe)" };
-	document.getElementById("legend-13").innerHTML = Object.keys(SNAMES).map(c =>
-		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + SCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + SNAMES[c] + '</span>'
-	).join("") + '<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
-	const W = 880, H = 360, L = 64, R = 170, T = 16, B = 44;
-	const iw = W - L - R, ih = H - T - B;
-	const xOf = s => L + (iw * (s - 1)) / 35;
-	const yOf = v => T + ih - (v / 25000) * ih;
-	let g = "";
-	for (const tick of [0, 5000, 10000, 15000, 20000, 25000]) {
-		const y = yOf(tick);
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + y + '" y2="' + y + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + (tick / 1000) + 'k</text>';
-	}
-	for (const s of STEPS) {
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + xOf(s) + '" y="' + (H - B + 22) + '" text-anchor="middle">' + s + '</text>';
-	}
-	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">median input tokens per step across a 36-edit session (accuracy at parity throughout)</text>';
-	let marks = "", hits = "";
-	const endLabels = [];
-	for (const s of SDATA) {
-		const dashed = s.model.includes("gemini");
-		const pts = s.tok.map((v, i) => ({ x: xOf(STEPS[i]), y: yOf(v), v, i }));
-		marks += '<path d="' + pts.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ") + '" fill="none" stroke="' + SCOLOR[s.cond] + '" stroke-width="2" stroke-linejoin="round"' + (dashed ? ' stroke-dasharray="6 5"' : '') + '/>';
-		pts.forEach(p => {
-			marks += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + SCOLOR[s.cond] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-			hits += '<circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent" data-tip="' + esc(s.cond + ' — ' + SNAMES[s.cond] + '\n' + s.model + ', step ' + STEPS[p.i] + ': median ' + p.v.toLocaleString() + ' input tokens\nsession accuracy: ' + s.acc) + '"/>';
-		});
-		const last = pts[pts.length - 1];
-		endLabels.push({ text: s.cond.replace("S-", "") + " " + (dashed ? "gem" : "son") + " · " + (last.v / 1000).toFixed(1) + "k", x: last.x + 10, y: last.y + 4 });
-	}
-	endLabels.sort((a, b) => a.y - b.y);
-	for (let i = 1; i < endLabels.length; i += 1) {
-		if (endLabels[i].y - endLabels[i - 1].y < 14) endLabels[i].y = endLabels[i - 1].y + 14;
-	}
-	for (const lab of endLabels) {
-		g += '<text fill="#ffffff" font-size="12.5" x="' + lab.x + '" y="' + lab.y + '">' + lab.text + '</text>';
-	}
-	const el = document.getElementById("fig-horizon");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Line chart: median input tokens per step over a 36-edit session. Keep-history grows linearly to about 24k tokens by step 36; the stateless worked-examples recipe stays flat at about 2.1k. Accuracy is at parity throughout." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-horizon", ["recipe (model)", "steps 1–12", "steps 13–24", "steps 25–36", "end-state intact", "input tokens/session"],
-		[
-			["S-view (sonnet)", "120/120", "120/120", "120/120", "10/10", "449,028"],
-			["S-system (sonnet)", "119/120", "120/120", "118/120", "8/10", "80,890"],
-			["S-view (gemini)", "119/120", "120/120", "120/120", "9/10", "428,920"],
-			["S-system (gemini)", "120/120", "117/120", "119/120", "9/10", "78,788"]
-		]);
-})();
-
-// --- data tables ---
-function table(mount, head, rows) {
-	document.getElementById(mount).innerHTML =
-		`<table class="border-collapse mt-2.5 text-14px tabular-nums"><thead><tr>${head.map((h, i) => `<th scope="col" class="border border-white/14 px-2.5 py-1 text-[#c3c9d4] font-600 ${i === 0 ? "text-left" : "text-right"}">${h}</th>`).join("")}</tr></thead><tbody>` +
-		rows.map(r => `<tr>${r.map((v, i) => `<td class="border border-white/14 px-2.5 py-1 ${i === 0 ? "text-left" : "text-right"}">${v}</td>`).join("")}</tr>`).join("") +
-		"</tbody></table>";
-}
-table("tbl-crossover",
-	["condition", ...BUCKET_LABELS.map(b => b + " (95% CI)")],
-	CONDITIONS.map(c => [
-		`${c} — ${COND_NAMES[c]}`,
-		...DATA.crossover[c].map(d => `${d.rate}% [${d.low}, ${d.high}] · ${d.ok}/${d.n}`)
-	]));
-table("tbl-reference",
-	["model", ...CONDITIONS.map(c => `${c} (95% CI)`)],
-	DATA.reference.map(r => [
-		r.model,
-		...CONDITIONS.map(c => `${r.cells[c].rate}% [${r.cells[c].low}, ${r.cells[c].high}] · ${r.cells[c].ok}/40`)
-	]));
-table("tbl-tokens",
-	["condition", ...BUCKET_LABELS],
-	CONDITIONS.map(c => [`${c} — ${COND_NAMES[c]}`, ...DATA.tokens[c].map(v => v.toLocaleString())]));
-
-
-
-// --- Study T: callback dissociation dumbbells ---
-(function () {
-	const TARMS = ["T-history", "T-system", "T-notes"];
-	const TNAMES = {
-		"T-history": "full history (K-view recipe)",
-		"T-system": "stateless + worked examples (P-system recipe)",
-		"T-notes": "stateless + examples + session-notes memo"
-	};
-	const TCOLOR = { "T-history": "#e66767", "T-system": "#c98500", "T-notes": "#9085e9" };
-	const TDATA = [
-		{ model: "sonnet-4.5", cells: {
-			"T-history": { cb: 100.0, cbOk: "80/80", ord: 98.1, ordOk: "157/160", end: "17/20" },
-			"T-system": { cb: 0.0, cbOk: "0/80", ord: 100.0, ordOk: "160/160", end: "0/20" },
-			"T-notes": { cb: 100.0, cbOk: "80/80", ord: 99.4, ordOk: "159/160", end: "19/20" }
-		}},
-		{ model: "gemini-3.5-flash", cells: {
-			"T-history": { cb: 100.0, cbOk: "80/80", ord: 99.4, ordOk: "159/160", end: "19/20" },
-			"T-system": { cb: 0.0, cbOk: "0/80", ord: 100.0, ordOk: "160/160", end: "0/20" },
-			"T-notes": { cb: 100.0, cbOk: "80/80", ord: 100.0, ordOk: "160/160", end: "20/20" }
-		}}
-	];
-	document.getElementById("legend-14").innerHTML = TARMS.map(c =>
-		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + TCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + TNAMES[c] + '</span>'
-	).join("") + '<span class="inline-flex items-center gap-[7px]">● = callback steps · ○ = ordinary steps</span>';
-	const W = 880, ROW = 34, T = 8, B = 40, L = 210, R = 24;
-	const rows = [];
-	for (const m of TDATA) for (const c of TARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
-	const H = T + rows.length * ROW + B + 16;
-	const iw = W - L - R;
-	const xOf = v => L + (v / 100) * iw;
-	let g = "";
-	for (const tick of [0, 25, 50, 75, 100]) {
-		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
-	}
-	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">per-step success — callback steps (filled) vs ordinary self-contained steps (hollow)</text>';
-	let marks = "", hits = "";
-	rows.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
-		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + (row.model.includes("gemini") ? "gem" : "son") + '</text>';
-		const c = row.cell;
-		marks += '<line x1="' + xOf(Math.min(c.cb, c.ord)) + '" x2="' + xOf(Math.max(c.cb, c.ord)) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + TCOLOR[row.arm] + '" stroke-width="2" opacity="0.45"/>';
-		marks += '<circle cx="' + xOf(c.ord) + '" cy="' + cy + '" r="5.5" fill="hsl(217,48%,15%)" stroke="' + TCOLOR[row.arm] + '" stroke-width="2.5"/>';
-		marks += '<circle cx="' + xOf(c.cb) + '" cy="' + cy + '" r="5.5" fill="' + TCOLOR[row.arm] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-		hits += '<circle cx="' + xOf(c.cb) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + " — " + TNAMES[row.arm] + "\n" + row.model + " callback steps: " + c.cb + "% (" + c.cbOk + ")\nend-state intact " + c.end) + '"/>';
-		hits += '<circle cx="' + xOf(c.ord) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + " — " + TNAMES[row.arm] + "\n" + row.model + " ordinary steps: " + c.ord + "% (" + c.ordOk + ")") + '"/>';
-	});
-	const el = document.getElementById("fig-memo");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Dumbbell chart: the stateless recipe scores 100% on ordinary steps but 0% on callback steps; full history and the memo arm score 100% on both." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-memo", ["arm (model)", "callbacks", "fact / rule", "ordinary steps", "end-state intact", "input tokens/session"],
-		[
-			["T-history (sonnet)", "80/80", "40/40 · 40/40", "157/160", "17/20", "58,222"],
-			["T-system (sonnet)", "0/80", "0/40 · 0/40", "160/160", "0/20", "27,047"],
-			["T-notes (sonnet)", "80/80", "40/40 · 40/40", "159/160", "19/20", "27,515"],
-			["T-history (gemini)", "80/80", "40/40 · 40/40", "159/160", "19/20", "55,751"],
-			["T-system (gemini)", "0/80", "0/40 · 0/40", "160/160", "0/20", "26,245"],
-			["T-notes (gemini)", "80/80", "40/40 · 40/40", "160/160", "20/20", "26,813"]
-		]);
-})();
-
-// --- Study U: dependent-edit dot plot ---
-(function () {
-	const UARMS = ["U-full", "U-view1", "U-view2", "U-search"];
-	const UNAMES = {
-		"U-full": "whole tree in prompt",
-		"U-view1": "target-only minimal view",
-		"U-view2": "target + source in view",
-		"U-search": "skeleton + find_nodes (0.4 recipe)"
-	};
-	const UCOLOR = { "U-full": "#3987e5", "U-view1": "#c98500", "U-view2": "#e66767", "U-search": "#199e70" };
-	const UDATA = [
-		{ model: "sonnet-4.5", cells: {
-			"U-full": { rate: 93.3, low: 82, high: 98, ok: "42/45", note: "3 structure-reads fumbled at ~1000 nodes" },
-			"U-view1": { rate: 0, low: 0, high: 8, ok: "0/45", note: "all 45 failures: valid patch, silently invented value" },
-			"U-view2": { rate: 100, low: 92, high: 100, ok: "45/45", note: "median input 1,780 tokens — 25× less than the full tree" },
-			"U-search": { rate: 84.4, low: 71, high: 92, ok: "38/45", note: "median 2 search calls; value-copies 18/24" }
-		}},
-		{ model: "gemini-3.5-flash", cells: {
-			"U-full": { rate: 100, low: 92, high: 100, ok: "45/45", note: "" },
-			"U-view1": { rate: 0, low: 0, high: 8, ok: "0/45", note: "all 45 failures: valid patch, silently invented value" },
-			"U-view2": { rate: 100, low: 92, high: 100, ok: "45/45", note: "median input 1,702 tokens" },
-			"U-search": { rate: 82.2, low: 69, high: 91, ok: "37/45", note: "significantly below U-full (8–0, p = 0.008); value-copies 18/24" }
-		}}
-	];
-	document.getElementById("legend-15").innerHTML = UARMS.map(c =>
-		'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' + UCOLOR[c] + '"></span><span class="font-mono font-700 text-white">' + c + '</span> ' + UNAMES[c] + '</span>'
-	).join("");
-	const W = 880, ROW = 34, T = 8, B = 40, L = 210, R = 24;
-	const rows = [];
-	for (const m of UDATA) for (const c of UARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
-	const H = T + rows.length * ROW + B + 16;
-	const iw = W - L - R;
-	const xOf = v => L + (v / 100) * iw;
-	let g = "";
-	for (const tick of [0, 25, 50, 75, 100]) {
-		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
-	}
-	g += '<text fill="#8b93a3" font-size="11" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">dependent-edit success by arm (45 tasks per cell; Wilson 95% intervals)</text>';
-	let marks = "", hits = "";
-	rows.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
-		g += '<text fill="#ffffff" font-size="12.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + (row.model.includes("gemini") ? "gem" : "son") + '</text>';
-		const c = row.cell;
-		marks += '<line x1="' + xOf(c.low) + '" x2="' + xOf(c.high) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + UCOLOR[row.arm] + '" stroke-width="1.5" opacity="0.4"/>';
-		marks += '<circle cx="' + xOf(c.rate) + '" cy="' + cy + '" r="5.5" fill="' + UCOLOR[row.arm] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-		hits += '<circle cx="' + xOf(c.rate) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + " — " + UNAMES[row.arm] + "\n" + row.model + ": " + c.rate + "% (" + c.ok + ") · CI [" + c.low + "%, " + c.high + "%]" + (c.note ? "\n" + c.note : "")) + '"/>';
-	});
-	const el = document.getElementById("fig-dependent");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Dot plot: dependent-edit success. The target-only view sits at 0% on both models; the both-nodes view and the whole tree sit at or near 100%; the search recipe sits at 82 to 84%." style="min-width:640px;display:block">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-dependent", ["arm (model)", "all", "value-copy", "structure-read", "failure anatomy", "median input"],
-		[
-			["U-full (sonnet)", "42/45 (93.3%)", "24/24", "18/21", "3 structure-reads wrong", "44,594"],
-			["U-view1 (sonnet)", "0/45 (0%)", "0/24", "0/21", "45/45 valid-but-wrong invented values", "1,559"],
-			["U-view2 (sonnet)", "45/45 (100%)", "24/24", "21/21", "none", "1,780"],
-			["U-search (sonnet)", "38/45 (84.4%)", "18/24", "20/21", "reads missed, median 2 calls", "6,200"],
-			["U-full (gemini)", "45/45 (100%)", "24/24", "21/21", "none", "40,030"],
-			["U-view1 (gemini)", "0/45 (0%)", "0/24", "0/21", "45/45 valid-but-wrong invented values", "1,342"],
-			["U-view2 (gemini)", "45/45 (100%)", "24/24", "21/21", "none", "1,702"],
-			["U-search (gemini)", "37/45 (82.2%)", "18/24", "19/21", "reads missed, median 3 calls", "8,997"]
-		]);
-})();
-
-
-// --- Study V: qualitative rewrites (judge-graded) win/loss bars ---
-(function () {
-	const VARMS = ["V-doc-view1", "V-doc-view2", "V-conv-memo", "V-conv-nomemo"];
-	const VNAMES = {
-		"V-doc-view1": "goal in doc · target-only view",
-		"V-doc-view2": "goal's node IN the view",
-		"V-conv-memo": "goal in the application memo",
-		"V-conv-nomemo": "goal said earlier · no memo"
-	};
-	const VCOLOR = { "V-doc-view1": "#c98500", "V-doc-view2": "#199e70", "V-conv-memo": "#e66767", "V-conv-nomemo": "#9085e9" };
-	// Primary judge (gpt-5.4): wins / losses / ties vs V-instr control, 30 tasks per cell.
-	const VDATA = [
-		{ model: "sonnet-4.5", cells: {
-			"V-doc-view1": { w: 0, l: 30, t: 0 }, "V-doc-view2": { w: 0, l: 30, t: 0 },
-			"V-conv-memo": { w: 10, l: 2, t: 18 }, "V-conv-nomemo": { w: 0, l: 30, t: 0 }
-		}},
-		{ model: "gemini-3.5-flash", cells: {
-			"V-doc-view1": { w: 0, l: 30, t: 0 }, "V-doc-view2": { w: 0, l: 30, t: 0 },
-			"V-conv-memo": { w: 8, l: 11, t: 11 }, "V-conv-nomemo": { w: 0, l: 30, t: 0 }
-		}}
-	];
-	document.getElementById("legend-16").innerHTML = VARMS.map(c =>
-		'<span class="key"><span class="chip" style="background:' + VCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + VNAMES[c] + '</span>'
-	).join("") + '<span class="key">bar segments: wins · ties · losses vs the explicit-instruction control (primary judge)</span>';
-	const W = 880, ROW = 34, T = 8, B = 40, L = 235, R = 24;
-	const rows = [];
-	for (const m of VDATA) for (const c of VARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
-	const H = T + rows.length * ROW + B + 16;
-	const iw = W - L - R;
-	let g = "";
-	for (const tick of [0, 10, 20, 30]) {
-		const x = L + (tick / 30) * iw;
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '</text>';
-	}
-	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">judged comparisons vs control (30 per cell): wins, then ties, then losses</text>';
-	let marks = "", hits = "";
-	rows.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + (row.model.includes("gemini") ? "gem" : "son") + '</text>';
-		const c = row.cell;
-		const seg = (from, n, opacity) => {
-			const x1 = L + (from / 30) * iw, wpx = (n / 30) * iw;
-			return '<rect x="' + x1 + '" y="' + (cy - 9) + '" width="' + Math.max(wpx, 0) + '" height="18" fill="' + VCOLOR[row.arm] + '" opacity="' + opacity + '" rx="3"/>';
+	// --- Studies I/J focused views: input tokens by size ---
+	(function () {
+		const VDATA = [
+			{
+				model: "sonnet-4.5",
+				cond: "F",
+				name: "full tree",
+				tokens: [24365, 57585, 85642],
+				ok: ["15/15", "15/15", "13/15"],
+			},
+			{
+				model: "gemini-3.5-flash",
+				cond: "F",
+				name: "full tree",
+				tokens: [20995, 39999, 70063],
+				ok: ["14/15", "14/15", "13/15"],
+			},
+			{
+				model: "sonnet-4.5",
+				cond: "FV",
+				name: "focused view",
+				tokens: [2067, 2667, 3500],
+				ok: ["15/15", "14/15", "14/15"],
+			},
+			{
+				model: "gemini-3.5-flash",
+				cond: "FV",
+				name: "focused view",
+				tokens: [2048, 2577, 3118],
+				ok: ["14/15", "14/15", "14/15"],
+			},
+			{
+				model: "sonnet-4.5",
+				cond: "FT",
+				name: "minimal view",
+				tokens: [1331, 1491, 1531],
+				ok: ["15/15", "15/15", "15/15"],
+			},
+			{
+				model: "gemini-3.5-flash",
+				cond: "FT",
+				name: "minimal view",
+				tokens: [1266, 1419, 1451],
+				ok: ["13/15", "14/15", "14/15"],
+			},
+		];
+		const VEXTRA = [
+			{
+				model: "sonnet-4.5",
+				cond: "FVH",
+				name: "focused view (HTML)",
+				tokens: [1916, 2281, 2669],
+				ok: ["15/15", "14/15", "14/15"],
+			},
+			{
+				model: "gemini-3.5-flash",
+				cond: "FVH",
+				name: "focused view (HTML)",
+				tokens: [1891, 2282, 2671],
+				ok: ["14/15", "14/15", "14/15"],
+			},
+			{
+				model: "sonnet-4.5",
+				cond: "FTH",
+				name: "minimal view (HTML)",
+				tokens: [1281, 1376, 1391],
+				ok: ["15/15", "15/15", "14/15"],
+			},
+			{
+				model: "gemini-3.5-flash",
+				cond: "FTH",
+				name: "minimal view (HTML)",
+				tokens: [1250, 1344, 1352],
+				ok: ["13/15", "13/15", "14/15"],
+			},
+		];
+		const VCOLOR = { F: "#e66767", FV: "#c98500", FT: "#199e70" };
+		const VNAMES = {
+			F: "full tree in the prompt",
+			FV: "focused view (placeholders)",
+			FT: "minimal view (omission counts)",
 		};
-		marks += seg(0, c.w, 1);
-		marks += seg(c.w, c.t, 0.5);
-		const lx = L + ((c.w + c.t) / 30) * iw, lw = (c.l / 30) * iw;
-		marks += '<rect x="' + lx + '" y="' + (cy - 9) + '" width="' + Math.max(lw, 0) + '" height="18" fill="rgba(255,255,255,0.16)" rx="3"/>';
-		hits += '<rect x="' + L + '" y="' + (cy - 12) + '" width="' + iw + '" height="24" fill="transparent" data-tip="' + esc(row.arm + " — " + VNAMES[row.arm] + "\n" + row.model + " vs control: " + c.w + " wins / " + c.t + " ties / " + c.l + " losses") + '"/>';
-	});
-	const el = document.getElementById("fig-goals");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Stacked bars: the memo arm ties or beats the explicit-instruction control; every other arm, including goal-node-in-view, loses nearly all judged comparisons." style="min-width:640px">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-goals", ["arm (editor)", "W / T / L (gpt-5.4)", "W / T / L (haiku-4.5)", "proxy Δ thesis coverage"],
-		[
-			["V-doc-view1 (sonnet)", "0 / 0 / 30", "0 / 0 / 30", "+0.00"],
-			["V-doc-view2 (sonnet)", "0 / 0 / 30", "0 / 3 / 27", "+0.75"],
-			["V-conv-memo (sonnet)", "10 / 18 / 2", "13 / 10 / 7", "+1.00"],
-			["V-conv-nomemo (sonnet)", "0 / 0 / 30", "0 / 0 / 30", "+0.00"],
-			["V-doc-view1 (gemini)", "0 / 0 / 30", "0 / 0 / 30", "+0.00"],
-			["V-doc-view2 (gemini)", "0 / 0 / 30", "0 / 3 / 27", "+0.66"],
-			["V-conv-memo (gemini)", "8 / 11 / 11", "6 / 20 / 4", "+1.00"],
-			["V-conv-nomemo (gemini)", "0 / 0 / 30", "0 / 0 / 30", "+0.00"]
-		]);
-})();
-
-
-// --- Study W: agent-maintained memo extraction dumbbells ---
-(function () {
-	const WARMS = ["W-oracle", "W-agent", "W-agent-history"];
-	const WNAMES = {
-		"W-oracle": "harness-written memo (the T ceiling)",
-		"W-agent": "agent-written memo, stateless",
-		"W-agent-history": "agent memo + 32-message window (shipped config)"
-	};
-	const WCOLOR = { "W-oracle": "#e66767", "W-agent": "#199e70", "W-agent-history": "#3987e5" };
-	// Callback success (72 cells; history arm split by recorded window membership).
-	const WDATA = [
-		{ model: "sonnet-4.5", cells: {
-			"W-oracle": { all: 98.6, ok: "71/72" }, "W-agent": { all: 98.6, ok: "71/72" },
-			"W-agent-history": { all: 93.1, ok: "67/72", win: 100.0, winOk: "36/36", post: 86.1, postOk: "31/36" }
-		}},
-		{ model: "gemini-3.5-flash", cells: {
-			"W-oracle": { all: 100.0, ok: "72/72" }, "W-agent": { all: 100.0, ok: "72/72" },
-			"W-agent-history": { all: 98.6, ok: "71/72", win: 100.0, winOk: "36/36", post: 97.2, postOk: "35/36" }
-		}},
-		{ model: "opus-4.8", cells: {
-			"W-oracle": { all: 100.0, ok: "72/72" }, "W-agent": { all: 98.6, ok: "71/72" },
-			"W-agent-history": { all: 100.0, ok: "72/72", win: 100.0, winOk: "36/36", post: 100.0, postOk: "36/36" }
-		}}
-	];
-	document.getElementById("legend-17").innerHTML = WARMS.map(c =>
-		'<span class="key"><span class="chip" style="background:' + WCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + WNAMES[c] + '</span>'
-	).join("") + '<span class="key">history rows: ○ within-window · ● post-truncation</span>';
-	const W = 880, ROW = 34, T = 8, B = 40, L = 250, R = 24;
-	const rows = [];
-	for (const m of WDATA) for (const c of WARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
-	const H = T + rows.length * ROW + B + 16;
-	const iw = W - L - R;
-	const xOf = v => L + ((v - 60) / 40) * iw;
-	let g = "";
-	for (const tick of [60, 70, 80, 90, 100]) {
-		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
-	}
-	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">callback success (72 cells per arm-model; zoomed 60–100% scale)</text>';
-	let marks = "", hits = "";
-	rows.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + row.model.replace("-3.5-flash", "").replace("-4.5", "").replace("-4.8", "") + '</text>';
-		const c = row.cell;
-		if (c.win !== undefined) {
-			marks += '<line x1="' + xOf(Math.min(c.win, c.post)) + '" x2="' + xOf(Math.max(c.win, c.post)) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + WCOLOR[row.arm] + '" stroke-width="2" opacity="0.45"/>';
-			marks += '<circle cx="' + xOf(c.win) + '" cy="' + cy + '" r="5.5" fill="hsl(217,48%,15%)" stroke="' + WCOLOR[row.arm] + '" stroke-width="2.5"/>';
-			marks += '<circle cx="' + xOf(c.post) + '" cy="' + cy + '" r="5.5" fill="' + WCOLOR[row.arm] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-			hits += '<circle cx="' + xOf(c.post) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + "\n" + row.model + " POST-TRUNCATION: " + c.post + "% (" + c.postOk + ")") + '"/>';
-			hits += '<circle cx="' + xOf(c.win) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + "\n" + row.model + " within-window: " + c.win + "% (" + c.winOk + ")") + '"/>';
-		} else {
-			marks += '<circle cx="' + xOf(c.all) + '" cy="' + cy + '" r="5.5" fill="' + WCOLOR[row.arm] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-			hits += '<circle cx="' + xOf(c.all) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + " — " + WNAMES[row.arm] + "\n" + row.model + " callbacks: " + c.all + "% (" + c.ok + ")") + '"/>';
+		document.getElementById("legend-5").innerHTML =
+			["F", "FV", "FT"]
+				.map(
+					(c) =>
+						'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
+						VCOLOR[c] +
+						'"></span><span class="font-mono font-700 text-white">' +
+						c +
+						"</span> " +
+						VNAMES[c] +
+						"</span>",
+				)
+				.join("") +
+			'<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+		const W = 880,
+			H = 380,
+			L = 64,
+			R = 175,
+			T = 16,
+			B = 44;
+		const iw = W - L - R,
+			ih = H - T - B;
+		const SIZES = ["~300 nodes", "~600", "~1000"];
+		const xs = SIZES.map((_, i) => L + (iw * i) / (SIZES.length - 1));
+		const yOf = (v) => T + ih - (v / 90000) * ih;
+		let g = "";
+		for (const tick of [0, 20000, 40000, 60000, 80000]) {
+			const y = yOf(tick);
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				y +
+				'" y2="' +
+				y +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 8) +
+				'" y="' +
+				(y + 4) +
+				'" text-anchor="end">' +
+				tick / 1000 +
+				"k</text>";
 		}
-	});
-	const el = document.getElementById("fig-extraction");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Dot plot: agent-written memos tie the harness-written oracle on all three models; in the shipped history-window configuration post-truncation callbacks hold, with opus at a perfect 36 of 36." style="min-width:640px">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-extraction", ["arm (model)", "callbacks", "post-truncation", "memo recall", "retraction", "noise", "tool calls/session", "input/session"],
-		[
-			["W-oracle (sonnet)", "71/72", "—", "harness", "harness", "—", "—", "84,450"],
-			["W-agent (sonnet)", "71/72", "—", "36/36", "12/12", "0.0", "4.0", "136,983"],
-			["W-agent-history (sonnet)", "67/72", "31/36", "36/36", "12/12", "0.0", "4.0", "370,550"],
-			["W-oracle (gemini)", "72/72", "—", "harness", "harness", "—", "—", "82,323"],
-			["W-agent (gemini)", "72/72", "—", "36/36", "12/12", "0.0", "4.3", "104,628"],
-			["W-agent-history (gemini)", "71/72", "35/36", "36/36", "12/12", "0.0", "4.1", "327,396"],
-			["W-oracle (opus)", "72/72", "—", "harness", "harness", "—", "—", "103,569"],
-			["W-agent (opus)", "71/72", "—", "35/36", "12/12", "0.0", "4.3", "151,950"],
-			["W-agent-history (opus)", "72/72", "36/36", "36/36", "12/12", "0.0", "4.0", "420,899"]
-		]);
-})();
+		SIZES.forEach((lab, i) => {
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				xs[i] +
+				'" y="' +
+				(H - B + 22) +
+				'" text-anchor="middle">' +
+				lab +
+				"</text>";
+		});
+		g +=
+			'<text fill="#8b93a3" font-size="11" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 6) +
+			'" text-anchor="middle">median input tokens per task (accuracy statistically identical across all rows)</text>';
+		let marks = "",
+			hits = "";
+		const endLabels = [];
+		for (const s of VDATA) {
+			const dashed = s.model.includes("gemini");
+			const pts = s.tokens.map((v, i) => ({ x: xs[i], y: yOf(v), v, i }));
+			marks +=
+				'<path d="' +
+				pts.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ") +
+				'" fill="none" stroke="' +
+				VCOLOR[s.cond] +
+				'" stroke-width="2" stroke-linejoin="round"' +
+				(dashed ? ' stroke-dasharray="6 5"' : "") +
+				"/>";
+			pts.forEach((p) => {
+				marks +=
+					'<circle cx="' +
+					p.x +
+					'" cy="' +
+					p.y +
+					'" r="4" fill="' +
+					VCOLOR[s.cond] +
+					'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+				hits +=
+					'<circle cx="' +
+					p.x +
+					'" cy="' +
+					p.y +
+					'" r="12" fill="transparent" data-tip="' +
+					esc(
+						s.cond +
+							" — " +
+							VNAMES[s.cond] +
+							" (" +
+							s.model +
+							")\n" +
+							SIZES[p.i] +
+							": " +
+							p.v.toLocaleString() +
+							" input tokens (median)\nsuccess " +
+							s.ok[p.i],
+					) +
+					'"/>';
+			});
+			const last = pts[pts.length - 1];
+			endLabels.push({
+				c: s.cond,
+				text:
+					s.cond +
+					" " +
+					(dashed ? "gem" : "son") +
+					" · " +
+					(last.v >= 10000
+						? (last.v / 1000).toFixed(1) + "k"
+						: (last.v / 1000).toFixed(1) + "k"),
+				x: last.x + 10,
+				y: last.y + 4,
+			});
+		}
+		resolveLabels(endLabels, 15);
+		let labels = "";
+		for (const l of endLabels)
+			labels +=
+				'<text font-size="12" font-weight="700" x="' +
+				l.x +
+				'" y="' +
+				l.y +
+				'" fill="' +
+				VCOLOR[l.c] +
+				'">' +
+				l.text +
+				"</text>";
+		const el = document.getElementById("fig-views");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Median input tokens by tree size: the full tree grows to 70 to 86 thousand tokens at 1000 nodes while focused and minimal views stay under 4 thousand, with accuracy unchanged." style="min-width:640px;display:block">' +
+			g +
+			marks +
+			labels +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-views",
+			["input shown (model)", ...SIZES.map((s) => s + " — tokens · success")],
+			[...VDATA, ...VEXTRA].map((s) => [
+				s.cond + " " + s.name + " (" + s.model + ")",
+				...s.tokens.map((v, i) => v.toLocaleString() + " · " + s.ok[i]),
+			]),
+		);
+	})();
 
+	// --- Study K sessions: drift by session third ---
+	(function () {
+		const KDATA = [
+			{
+				policy: "K-once",
+				name: "tree shown once",
+				model: "sonnet-4.5",
+				rate: [98.8, 92.5, 83.8],
+				ok: ["79/80", "74/80", "67/80"],
+				end: "8/20",
+				tokens: "215.6k in + 0.7k out",
+			},
+			{
+				policy: "K-once",
+				name: "tree shown once",
+				model: "gemini-3.5-flash",
+				rate: [98.8, 100, 96.3],
+				ok: ["79/80", "80/80", "77/80"],
+				end: "17/20",
+				tokens: "198.3k in + 0.6k out",
+			},
+			{
+				policy: "K-refresh5",
+				name: "full re-serialize @ 6/11",
+				model: "sonnet-4.5",
+				rate: [98.8, 92.5, 91.3],
+				ok: ["79/80", "74/80", "73/80"],
+				end: "11/20",
+				tokens: "366.6k in + 0.7k out",
+			},
+			{
+				policy: "K-refresh5",
+				name: "full re-serialize @ 6/11",
+				model: "gemini-3.5-flash",
+				rate: [100, 100, 91.3],
+				ok: ["80/80", "80/80", "73/80"],
+				end: "15/20",
+				tokens: "335.8k in + 0.6k out",
+			},
+			{
+				policy: "K-view",
+				name: "fresh minimal view every turn",
+				model: "sonnet-4.5",
+				rate: [100, 98.8, 100],
+				ok: ["80/80", "79/80", "80/80"],
+				end: "19/20",
+				tokens: "55.7k in + 0.7k out",
+			},
+			{
+				policy: "K-view",
+				name: "fresh minimal view every turn",
+				model: "gemini-3.5-flash",
+				rate: [98.8, 100, 98.8],
+				ok: ["79/80", "80/80", "79/80"],
+				end: "19/20",
+				tokens: "53.4k in + 0.7k out",
+			},
+			{
+				policy: "K-rewrite",
+				name: "whole-tree rewrite",
+				model: "sonnet-4.5",
+				rate: [97.2, 100, 94.4],
+				ok: ["35/36", "36/36", "34/36"],
+				end: "7/10",
+				tokens: "836.0k in + 129.4k out",
+			},
+			{
+				policy: "K-rewrite",
+				name: "whole-tree rewrite",
+				model: "gemini-3.5-flash",
+				rate: [52.5, 67.5, 69.2],
+				ok: ["21/40", "27/40", "27/39"],
+				end: "2/10",
+				tokens: "971.3k in + 138.1k out",
+			},
+		];
+		const KCOLOR = {
+			"K-once": "#c98500",
+			"K-refresh5": "#9085e9",
+			"K-view": "#e66767",
+			"K-rewrite": "#3987e5",
+		};
+		const KNAMES = {
+			"K-once": "tree shown once",
+			"K-refresh5": "full refresh @ steps 6/11",
+			"K-view": "fresh minimal view every turn",
+			"K-rewrite": "whole-tree rewrite (anchor)",
+		};
+		document.getElementById("legend-6").innerHTML =
+			Object.keys(KNAMES)
+				.map(
+					(p) =>
+						'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
+						KCOLOR[p] +
+						'"></span><span class="font-mono font-700 text-white">' +
+						p +
+						"</span> " +
+						KNAMES[p] +
+						"</span>",
+				)
+				.join("") +
+			'<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+		const W = 880,
+			H = 380,
+			L = 56,
+			R = 195,
+			T = 16,
+			B = 44;
+		const iw = W - L - R,
+			ih = H - T - B;
+		const THIRDS = ["steps 1–4", "steps 5–8", "steps 9–12"];
+		const xs = THIRDS.map((_, i) => L + (iw * i) / (THIRDS.length - 1));
+		const yOf = (v) => T + ih - ((v - 50) / 50) * ih;
+		let g = "";
+		for (const tick of [50, 60, 70, 80, 90, 100]) {
+			const y = yOf(tick);
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				y +
+				'" y2="' +
+				y +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 8) +
+				'" y="' +
+				(y + 4) +
+				'" text-anchor="end">' +
+				tick +
+				"%</text>";
+		}
+		THIRDS.forEach((lab, i) => {
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				xs[i] +
+				'" y="' +
+				(H - B + 22) +
+				'" text-anchor="middle">' +
+				lab +
+				"</text>";
+		});
+		g +=
+			'<text fill="#8b93a3" font-size="11" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 6) +
+			'" text-anchor="middle">per-step success by session third (step judged on its own edit against the model’s current tree)</text>';
+		let marks = "",
+			hits = "";
+		const endLabels = [];
+		for (const s of KDATA) {
+			const dashed = s.model.includes("gemini");
+			const pts = s.rate.map((v, i) => ({ x: xs[i], y: yOf(v), v, i }));
+			marks +=
+				'<path d="' +
+				pts.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ") +
+				'" fill="none" stroke="' +
+				KCOLOR[s.policy] +
+				'" stroke-width="2" stroke-linejoin="round"' +
+				(dashed ? ' stroke-dasharray="6 5"' : "") +
+				"/>";
+			pts.forEach((p) => {
+				marks +=
+					'<circle cx="' +
+					p.x +
+					'" cy="' +
+					p.y +
+					'" r="4" fill="' +
+					KCOLOR[s.policy] +
+					'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+				hits +=
+					'<circle cx="' +
+					p.x +
+					'" cy="' +
+					p.y +
+					'" r="12" fill="transparent" data-tip="' +
+					esc(
+						s.policy +
+							" — " +
+							KNAMES[s.policy] +
+							" (" +
+							s.model +
+							")\n" +
+							THIRDS[p.i] +
+							": " +
+							p.v +
+							"% (" +
+							s.ok[p.i] +
+							")\nend-state intact: " +
+							s.end +
+							" · " +
+							s.tokens +
+							"/session",
+					) +
+					'"/>';
+			});
+			const last = pts[pts.length - 1];
+			endLabels.push({
+				c: s.policy,
+				text:
+					s.policy.replace("K-", "") +
+					" " +
+					(dashed ? "gem" : "son") +
+					" · " +
+					last.v +
+					"%",
+				x: last.x + 10,
+				y: last.y + 4,
+			});
+		}
+		resolveLabels(endLabels, 15);
+		let labels = "";
+		for (const l of endLabels)
+			labels +=
+				'<text font-size="12" font-weight="700" x="' +
+				l.x +
+				'" y="' +
+				l.y +
+				'" fill="' +
+				KCOLOR[l.c] +
+				'">' +
+				l.text +
+				"</text>";
+		const el = document.getElementById("fig-sessions");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Per-step success across session thirds: serialize-once decays to 83.8 percent on sonnet while per-turn views stay flat near 100 percent; gemini whole-tree rewrite sessions run at 52 to 69 percent." style="min-width:640px;display:block">' +
+			g +
+			marks +
+			labels +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-sessions",
+			["policy (model)", ...THIRDS, "end-state intact", "mean tokens/session"],
+			KDATA.map((s) => [
+				s.policy + " " + s.name + " (" + s.model + ")",
+				...s.rate.map((v, i) => v + "% (" + s.ok[i] + ")"),
+				s.end,
+				s.tokens,
+			]),
+		);
+	})();
 
-// --- Study X: edit-anaphora carrier dot plot ---
-(function () {
-	const XARMS = ["X-history", "X-window2", "X-lastedit", "X-stateless"];
-	const XNAMES = {
-		"X-history": "full conversation history",
-		"X-window2": "last 2 exchanges",
-		"X-lastedit": "one-line app-side last-edit echo",
-		"X-stateless": "no carrier (skeleton view only)"
-	};
-	const XCOLOR = { "X-history": "#e66767", "X-window2": "#9085e9", "X-lastedit": "#199e70", "X-stateless": "#c98500" };
-	const XDATA = [
-		{ model: "sonnet-4.5", cells: {
-			"X-history": { rate: 100.0, low: 93, high: 100, ok: "48/48", note: "" },
-			"X-window2": { rate: 93.8, low: 83, high: 98, ok: "45/48", note: "repeat 9/12" },
-			"X-lastedit": { rate: 89.6, low: 78, high: 95, ok: "43/48", note: "repeat 7/12 — the compressed-carrier strain point; amend + undo perfect" },
-			"X-stateless": { rate: 0, low: 0, high: 7, ok: "0/48", note: "all 48 failures: valid silently-guessed patches" }
-		}},
-		{ model: "gemini-3.5-flash", cells: {
-			"X-history": { rate: 100.0, low: 93, high: 100, ok: "48/48", note: "" },
-			"X-window2": { rate: 85.4, low: 73, high: 93, ok: "41/48", note: "repeat 5/12 (p = 0.016 vs history)" },
-			"X-lastedit": { rate: 97.9, low: 89, high: 100, ok: "47/48", note: "p = 1.0 vs history" },
-			"X-stateless": { rate: 0, low: 0, high: 7, ok: "0/48", note: "all 48 failures: valid silently-guessed patches" }
-		}},
-		{ model: "opus-4.8", cells: {
-			"X-history": { rate: 95.8, low: 86, high: 99, ok: "46/48", note: "history itself dropped two undos" },
-			"X-window2": { rate: 89.6, low: 78, high: 95, ok: "43/48", note: "repeat 8/12" },
-			"X-lastedit": { rate: 100.0, low: 93, high: 100, ok: "48/48", note: "the echo BEATS the transcript on the production tier" },
-			"X-stateless": { rate: 0, low: 0, high: 7, ok: "0/48", note: "all 48 failures: valid silently-guessed patches" }
-		}}
-	];
-	document.getElementById("legend-18").innerHTML = XARMS.map(c =>
-		'<span class="key"><span class="chip" style="background:' + XCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + XNAMES[c] + '</span>'
-	).join("");
-	const W = 880, ROW = 34, T = 8, B = 40, L = 235, R = 24;
-	const rows = [];
-	for (const m of XDATA) for (const c of XARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
-	const H = T + rows.length * ROW + B + 16;
-	const iw = W - L - R;
-	const xOf = v => L + (v / 100) * iw;
-	let g = "";
-	for (const tick of [0, 25, 50, 75, 100]) {
-		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '%</text>';
+	// --- Study L: grounding dot plot ---
+	(function () {
+		const LCOND = ["oracle", "LG-full", "LG-nav", "LG-lex"];
+		const LNAMES = {
+			oracle: "oracle bound (ids in instructions, Study I)",
+			"LG-full": "grounded · full tree shown",
+			"LG-nav": "grounded · navigate (expand_node)",
+			"LG-lex": "grounded · naive lexical retrieval",
+		};
+		const LCOLOR = {
+			oracle: "#e66767",
+			"LG-full": "#3987e5",
+			"LG-nav": "#9085e9",
+			"LG-lex": "#c98500",
+		};
+		const LDATA = [
+			{
+				model: "sonnet-4.5",
+				cells: {
+					oracle: { ok: 43, rate: 95.6, low: 85.2, high: 98.8, note: "" },
+					"LG-full": {
+						ok: 39,
+						rate: 86.7,
+						low: 73.8,
+						high: 93.7,
+						note: "median input 90k @ ~1000 nodes",
+					},
+					"LG-nav": {
+						ok: 43,
+						rate: 95.6,
+						low: 85.2,
+						high: 98.8,
+						note: "median 54 expands; 356k input @ ~1000 nodes",
+					},
+					"LG-lex": {
+						ok: 27,
+						rate: 60.0,
+						low: 45.5,
+						high: 73.0,
+						note: "~2.5k input; 34/38 failures misgrounded",
+					},
+				},
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: {
+					oracle: { ok: 41, rate: 91.1, low: 79.3, high: 96.5, note: "" },
+					"LG-full": {
+						ok: 38,
+						rate: 84.4,
+						low: 71.2,
+						high: 92.3,
+						note: "median input 70k @ ~1000 nodes",
+					},
+					"LG-nav": {
+						ok: 23,
+						rate: 51.1,
+						low: 37.0,
+						high: 65.0,
+						note: "budget exhaustion; up to 636k input",
+					},
+					"LG-lex": {
+						ok: 25,
+						rate: 55.6,
+						low: 41.2,
+						high: 69.1,
+						note: "~2.4k input",
+					},
+				},
+			},
+		];
+		document.getElementById("legend-7").innerHTML = LCOND.map(
+			(c) =>
+				'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
+				LCOLOR[c] +
+				'"></span><span class="font-mono font-700 text-white">' +
+				c +
+				"</span> " +
+				LNAMES[c] +
+				"</span>",
+		).join("");
+		const W = 880,
+			ROW = 64,
+			T = 8,
+			B = 40,
+			L = 150,
+			R = 24;
+		const H = T + LDATA.length * ROW + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + ((v - 30) / 70) * iw;
+		let g = "";
+		for (const tick of [30, 40, 50, 60, 70, 80, 90, 100]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"%</text>";
+		}
+		g +=
+			'<text fill="#8b93a3" font-size="11" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">task success on grounded (id-free) instructions, 45 tasks per cell</text>';
+		let marks = "",
+			hits = "";
+		LDATA.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				cy +
+				'" y2="' +
+				cy +
+				'" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+			g +=
+				'<text fill="#ffffff" font-size="12.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.model +
+				"</text>";
+			for (const c of LCOND) {
+				const cell = row.cells[c];
+				marks +=
+					'<line x1="' +
+					xOf(cell.low) +
+					'" x2="' +
+					xOf(cell.high) +
+					'" y1="' +
+					cy +
+					'" y2="' +
+					cy +
+					'" stroke="' +
+					LCOLOR[c] +
+					'" stroke-width="1.5" opacity="0.4"/>';
+				marks +=
+					'<circle cx="' +
+					xOf(cell.rate) +
+					'" cy="' +
+					cy +
+					'" r="5.5" fill="' +
+					LCOLOR[c] +
+					'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+				hits +=
+					'<circle cx="' +
+					xOf(cell.rate) +
+					'" cy="' +
+					cy +
+					'" r="13" fill="transparent" data-tip="' +
+					esc(
+						c +
+							" — " +
+							LNAMES[c] +
+							"\n" +
+							row.model +
+							": " +
+							cell.rate +
+							"% (" +
+							cell.ok +
+							"/45) · CI [" +
+							cell.low +
+							"%, " +
+							cell.high +
+							"%]" +
+							(cell.note ? "\n" + cell.note : ""),
+					) +
+					'"/>';
+			}
+		});
+		const el = document.getElementById("fig-grounding");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Grounded-instruction success per model: full-tree grounding sits 7 to 9 points under the oracle bound; navigation matches the oracle on sonnet but collapses on gemini; lexical retrieval is the floor." style="min-width:640px;display:block">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-grounding",
+			[
+				"condition (model)",
+				"success",
+				"median input @ ~1000 nodes",
+				"failure anatomy (pooled)",
+			],
+			[
+				["oracle — sonnet-4.5", "43/45 (95.6%)", "85,642", "—"],
+				["oracle — gemini-3.5-flash", "41/45 (91.1%)", "70,063", "—"],
+				[
+					"LG-full — sonnet-4.5",
+					"39/45 (86.7%)",
+					"90,254",
+					"misgrounded ×8, mechanics ×5 (both models)",
+				],
+				[
+					"LG-full — gemini-3.5-flash",
+					"38/45 (84.4%)",
+					"70,054",
+					"(see above)",
+				],
+				[
+					"LG-nav — sonnet-4.5",
+					"43/45 (95.6%) · 54 median expands",
+					"355,643",
+					"invalid ×20, misgrounded ×2, mechanics ×2 (both models)",
+				],
+				[
+					"LG-nav — gemini-3.5-flash",
+					"23/45 (51.1%) · 58 median expands",
+					"636,030",
+					"(see above)",
+				],
+				[
+					"LG-lex — sonnet-4.5",
+					"27/45 (60.0%)",
+					"2,695",
+					"misgrounded ×34, mechanics ×4 (both models)",
+				],
+				["LG-lex — gemini-3.5-flash", "25/45 (55.6%)", "2,659", "(see above)"],
+			],
+		);
+	})();
+
+	// --- Study M: memory tercile lines ---
+	(function () {
+		const MDATA = [
+			{
+				policy: "K-view",
+				name: "full history + per-turn view",
+				model: "sonnet-4.5",
+				rate: [100, 98.8, 100],
+				ok: ["80/80", "79/80", "80/80"],
+				end: "19/20",
+				shape: "1.2k → 8.1k per step",
+			},
+			{
+				policy: "K-view",
+				name: "full history + per-turn view",
+				model: "gemini-3.5-flash",
+				rate: [98.8, 100, 98.8],
+				ok: ["79/80", "80/80", "79/80"],
+				end: "19/20",
+				shape: "1.2k → 7.8k per step",
+			},
+			{
+				policy: "M-window",
+				name: "2-exchange window",
+				model: "sonnet-4.5",
+				rate: [100, 98.8, 95.0],
+				ok: ["80/80", "79/80", "76/80"],
+				end: "16/20",
+				shape: "1.2k → 2.7k per step",
+			},
+			{
+				policy: "M-window",
+				name: "2-exchange window",
+				model: "gemini-3.5-flash",
+				rate: [100, 98.8, 95.0],
+				ok: ["80/80", "79/80", "76/80"],
+				end: "15/20",
+				shape: "1.2k → 2.6k per step",
+			},
+			{
+				policy: "M-stateless",
+				name: "no history at all",
+				model: "sonnet-4.5",
+				rate: [98.8, 95.0, 96.3],
+				ok: ["79/80", "76/80", "77/80"],
+				end: "13/20",
+				shape: "flat ~1.3k per step",
+			},
+			{
+				policy: "M-stateless",
+				name: "no history at all",
+				model: "gemini-3.5-flash",
+				rate: [98.8, 100, 92.5],
+				ok: ["79/80", "80/80", "74/80"],
+				end: "14/20",
+				shape: "flat ~1.3k per step",
+			},
+		];
+		const MCOLOR = {
+			"K-view": "#e66767",
+			"M-window": "#9085e9",
+			"M-stateless": "#c98500",
+		};
+		const MNAMES = {
+			"K-view": "full history + per-turn view (Study K)",
+			"M-window": "2-exchange window",
+			"M-stateless": "no history at all",
+		};
+		document.getElementById("legend-8").innerHTML =
+			Object.keys(MNAMES)
+				.map(
+					(p) =>
+						'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
+						MCOLOR[p] +
+						'"></span><span class="font-mono font-700 text-white">' +
+						p +
+						"</span> " +
+						MNAMES[p] +
+						"</span>",
+				)
+				.join("") +
+			'<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+		const W = 880,
+			H = 340,
+			L = 56,
+			R = 205,
+			T = 16,
+			B = 44;
+		const iw = W - L - R,
+			ih = H - T - B;
+		const THIRDS = ["steps 1–4", "steps 5–8", "steps 9–12"];
+		const xs = THIRDS.map((_, i) => L + (iw * i) / (THIRDS.length - 1));
+		const yOf = (v) => T + ih - ((v - 88) / 12) * ih;
+		let g = "";
+		for (const tick of [88, 92, 96, 100]) {
+			const y = yOf(tick);
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				y +
+				'" y2="' +
+				y +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 8) +
+				'" y="' +
+				(y + 4) +
+				'" text-anchor="end">' +
+				tick +
+				"%</text>";
+		}
+		THIRDS.forEach((lab, i) => {
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				xs[i] +
+				'" y="' +
+				(H - B + 22) +
+				'" text-anchor="middle">' +
+				lab +
+				"</text>";
+		});
+		g +=
+			'<text fill="#8b93a3" font-size="11" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 6) +
+			'" text-anchor="middle">per-step success by session third (note the zoomed 88–100% scale)</text>';
+		let marks = "",
+			hits = "";
+		const endLabels = [];
+		for (const s of MDATA) {
+			const dashed = s.model.includes("gemini");
+			const pts = s.rate.map((v, i) => ({ x: xs[i], y: yOf(v), v, i }));
+			marks +=
+				'<path d="' +
+				pts.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ") +
+				'" fill="none" stroke="' +
+				MCOLOR[s.policy] +
+				'" stroke-width="2" stroke-linejoin="round"' +
+				(dashed ? ' stroke-dasharray="6 5"' : "") +
+				"/>";
+			pts.forEach((p) => {
+				marks +=
+					'<circle cx="' +
+					p.x +
+					'" cy="' +
+					p.y +
+					'" r="4" fill="' +
+					MCOLOR[s.policy] +
+					'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+				hits +=
+					'<circle cx="' +
+					p.x +
+					'" cy="' +
+					p.y +
+					'" r="12" fill="transparent" data-tip="' +
+					esc(
+						s.policy +
+							" — " +
+							MNAMES[s.policy] +
+							" (" +
+							s.model +
+							")\n" +
+							THIRDS[p.i] +
+							": " +
+							p.v +
+							"% (" +
+							s.ok[p.i] +
+							")\nend-state intact " +
+							s.end +
+							" · input " +
+							s.shape,
+					) +
+					'"/>';
+			});
+			const last = pts[pts.length - 1];
+			endLabels.push({
+				c: s.policy,
+				text:
+					s.policy.replace("M-", "").replace("K-", "") +
+					" " +
+					(dashed ? "gem" : "son") +
+					" · " +
+					last.v +
+					"%",
+				x: last.x + 10,
+				y: last.y + 4,
+			});
+		}
+		resolveLabels(endLabels, 15);
+		let labels = "";
+		for (const l of endLabels)
+			labels +=
+				'<text font-size="12" font-weight="700" x="' +
+				l.x +
+				'" y="' +
+				l.y +
+				'" fill="' +
+				MCOLOR[l.c] +
+				'">' +
+				l.text +
+				"</text>";
+		const el = document.getElementById("fig-memory");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Per-step success across session thirds for full history, a two-exchange window, and no history: statelessness degrades late-session accuracy despite identical per-turn views." style="min-width:640px;display:block">' +
+			g +
+			marks +
+			labels +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-memory",
+			["policy (model)", ...THIRDS, "end-state intact", "input per step"],
+			MDATA.map((s) => [
+				s.policy + " " + s.name + " (" + s.model + ")",
+				...s.rate.map((v, i) => v + "% (" + s.ok[i] + ")"),
+				s.end,
+				s.shape,
+			]),
+		);
+	})();
+
+	// --- Study N: retrieval ladder dot plot ---
+	(function () {
+		const NCOND = ["oracle", "LG-full", "N-search", "N-ground2x", "N-embed"];
+		const NNAMES = {
+			oracle: "oracle bound (ids in instructions, Study I)",
+			"LG-full": "grounded · full tree shown (Study L)",
+			"N-search": "grounded · find_nodes search tool",
+			"N-ground2x": "grounded · cheap model grounds, sonnet patches",
+			"N-embed": "grounded · embedding retrieval (no agent)",
+		};
+		const NCOLOR = {
+			oracle: "#e66767",
+			"LG-full": "#3987e5",
+			"N-search": "#199e70",
+			"N-ground2x": "#9085e9",
+			"N-embed": "#c98500",
+		};
+		const NDATA = [
+			{
+				model: "sonnet-4.5",
+				cells: {
+					oracle: { ok: 43, rate: 95.6, low: 85.2, high: 98.8, note: "" },
+					"LG-full": {
+						ok: 39,
+						rate: 86.7,
+						low: 73.8,
+						high: 93.7,
+						note: "median input 90k @ ~1000 nodes",
+					},
+					"N-search": {
+						ok: 43,
+						rate: 95.6,
+						low: 85.2,
+						high: 98.8,
+						note: "median 1 search call · ~6.5k input @ ~1000 nodes\nsame two failures as the oracle-matching nav arm",
+					},
+					"N-ground2x": {
+						ok: 41,
+						rate: 91.1,
+						low: 79.3,
+						high: 96.5,
+						note: "gemini grounds (45/45 valid) · sonnet-side median input 1,484 tokens (−97.4%)",
+					},
+					"N-embed": {
+						ok: 25,
+						rate: 55.6,
+						low: 41.2,
+						high: 69.1,
+						note: "top-5 target coverage 23/45 — no better than keyword overlap (24/45)",
+					},
+				},
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: {
+					oracle: { ok: 41, rate: 91.1, low: 79.3, high: 96.5, note: "" },
+					"LG-full": {
+						ok: 38,
+						rate: 84.4,
+						low: 71.2,
+						high: 92.3,
+						note: "median input 70k @ ~1000 nodes",
+					},
+					"N-search": {
+						ok: 39,
+						rate: 86.7,
+						low: 73.8,
+						high: 93.7,
+						note: "median 1 search call · ~3.7k input @ ~1000 nodes\nvs 23/45 navigating (16–0 paired, p < 0.001)",
+					},
+					"N-embed": {
+						ok: 24,
+						rate: 53.3,
+						low: 39.1,
+						high: 67.1,
+						note: "statistically identical to the lexical floor",
+					},
+				},
+			},
+		];
+		document.getElementById("legend-9").innerHTML = NCOND.map(
+			(c) =>
+				'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
+				NCOLOR[c] +
+				'"></span><span class="font-mono font-700 text-white">' +
+				c +
+				"</span> " +
+				NNAMES[c] +
+				"</span>",
+		).join("");
+		const W = 880,
+			ROW = 64,
+			T = 8,
+			B = 40,
+			L = 150,
+			R = 24;
+		const H = T + NDATA.length * ROW + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + ((v - 30) / 70) * iw;
+		let g = "";
+		for (const tick of [30, 40, 50, 60, 70, 80, 90, 100]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"%</text>";
+		}
+		g +=
+			'<text fill="#8b93a3" font-size="11" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">task success on grounded (id-free) instructions, 45 tasks per cell</text>';
+		let marks = "",
+			hits = "";
+		NDATA.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				cy +
+				'" y2="' +
+				cy +
+				'" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+			g +=
+				'<text fill="#ffffff" font-size="12.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.model +
+				"</text>";
+			for (const c of NCOND) {
+				const cell = row.cells[c];
+				if (!cell) continue;
+				marks +=
+					'<line x1="' +
+					xOf(cell.low) +
+					'" x2="' +
+					xOf(cell.high) +
+					'" y1="' +
+					cy +
+					'" y2="' +
+					cy +
+					'" stroke="' +
+					NCOLOR[c] +
+					'" stroke-width="1.5" opacity="0.4"/>';
+				marks +=
+					'<circle cx="' +
+					xOf(cell.rate) +
+					'" cy="' +
+					cy +
+					'" r="5.5" fill="' +
+					NCOLOR[c] +
+					'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+				hits +=
+					'<circle cx="' +
+					xOf(cell.rate) +
+					'" cy="' +
+					cy +
+					'" r="13" fill="transparent" data-tip="' +
+					esc(
+						c +
+							" — " +
+							NNAMES[c] +
+							"\n" +
+							row.model +
+							": " +
+							cell.rate +
+							"% (" +
+							cell.ok +
+							"/45) · CI [" +
+							cell.low +
+							"%, " +
+							cell.high +
+							"%]" +
+							(cell.note ? "\n" + cell.note : ""),
+					) +
+					'"/>';
+			}
+		});
+		const el = document.getElementById("fig-retrieval");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Grounded-instruction success per model on the retrieval ladder: the find_nodes search tool matches the oracle bound on sonnet and full-tree grounding on gemini at a median of one call; embedding retrieval sits at the lexical floor; cheap-model grounding preserves accuracy with 97% less frontier input." style="min-width:640px;display:block">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-retrieval",
+			[
+				"condition (model)",
+				"success",
+				"median input @ ~1000 nodes",
+				"mechanism",
+			],
+			[
+				[
+					"N-search — sonnet-4.5",
+					"43/45 (95.6%)",
+					"6,550",
+					"median 1 find_nodes call; failures: misgrounded ×5, mechanics ×3 (both models)",
+				],
+				[
+					"N-search — gemini-3.5-flash",
+					"39/45 (86.7%)",
+					"3,741",
+					"vs LG-nav 23/45: 16–0 paired, p < 0.001",
+				],
+				[
+					"N-embed — sonnet-4.5",
+					"25/45 (55.6%)",
+					"3,076",
+					"top-5 covers targets 23/45 vs lexical 24/45; 39/41 failures misgrounded",
+				],
+				["N-embed — gemini-3.5-flash", "24/45 (53.3%)", "2,845", "(see above)"],
+				[
+					"N-ground2 — sonnet-4.5",
+					"41/45 (91.1%)",
+					"79,511",
+					"same-model two-stage: accuracy holds, total savings only 18%",
+				],
+				[
+					"N-ground2 — gemini-3.5-flash",
+					"37/45 (82.2%)",
+					"71,404",
+					"same-model two-stage: total savings 5%",
+				],
+				[
+					"N-ground2x — gemini grounds, sonnet patches",
+					"41/45 (91.1%)",
+					"71,497 total · 1,484 sonnet-side",
+					"grounder coverage identical across tiers (41/45 both)",
+				],
+			],
+		);
+	})();
+
+	// --- Study O: positional views dot plot ---
+	(function () {
+		const OCOND = ["K-view", "O-view", "M-stateless", "O-stateless"];
+		const ONAMES = {
+			"K-view": "full history, plain view (Study K)",
+			"O-view": "full history + positions",
+			"M-stateless": "no history, plain view (Study M)",
+			"O-stateless": "no history + positions",
+		};
+		const OCOLOR = {
+			"K-view": "#e66767",
+			"O-view": "#9085e9",
+			"M-stateless": "#c98500",
+			"O-stateless": "#199e70",
+		};
+		const ODATA = [
+			{
+				model: "sonnet-4.5",
+				cells: {
+					"K-view": {
+						ok: "80/80",
+						rate: 100.0,
+						low: 95.4,
+						high: 100.0,
+						end: "19/20",
+						note: "",
+					},
+					"O-view": {
+						ok: "79/80",
+						rate: 98.8,
+						low: 93.3,
+						high: 99.8,
+						end: "19/20",
+						note: "1–1 paired vs K-view, p = 1.0",
+					},
+					"M-stateless": {
+						ok: "77/80",
+						rate: 96.3,
+						low: 89.5,
+						high: 98.7,
+						end: "13/20",
+						note: "all stateless-only failures are placements",
+					},
+					"O-stateless": {
+						ok: "77/80",
+						rate: 96.3,
+						low: 89.5,
+						high: 98.7,
+						end: "15/20",
+						note: "3–1 paired vs M-stateless, p = 0.625 — positions printed, still misplaced",
+					},
+				},
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: {
+					"K-view": {
+						ok: "79/80",
+						rate: 98.8,
+						low: 93.3,
+						high: 99.8,
+						end: "19/20",
+						note: "",
+					},
+					"O-view": {
+						ok: "80/80",
+						rate: 100.0,
+						low: 95.4,
+						high: 100.0,
+						end: "20/20",
+						note: "best cell in the series; 2–0 vs K-view, p = 0.5 (n.s.)",
+					},
+					"M-stateless": {
+						ok: "74/80",
+						rate: 92.5,
+						low: 84.6,
+						high: 96.5,
+						end: "14/20",
+						note: "",
+					},
+					"O-stateless": {
+						ok: "75/80",
+						rate: 93.8,
+						low: 86.2,
+						high: 97.3,
+						end: "15/20",
+						note: "1–0 paired vs M-stateless, p = 1.0",
+					},
+				},
+			},
+		];
+		document.getElementById("legend-10").innerHTML = OCOND.map(
+			(c) =>
+				'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
+				OCOLOR[c] +
+				'"></span><span class="font-mono font-700 text-white">' +
+				c +
+				"</span> " +
+				ONAMES[c] +
+				"</span>",
+		).join("");
+		const W = 880,
+			ROW = 64,
+			T = 8,
+			B = 40,
+			L = 150,
+			R = 24;
+		const H = T + ODATA.length * ROW + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + ((v - 84) / 16) * iw;
+		let g = "";
+		for (const tick of [84, 88, 92, 96, 100]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"%</text>";
+		}
+		g +=
+			'<text fill="#8b93a3" font-size="11" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">late-session (steps 9–12) per-step success — the window where statelessness fails (zoomed 84–100% scale)</text>';
+		let marks = "",
+			hits = "";
+		ODATA.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				cy +
+				'" y2="' +
+				cy +
+				'" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+			g +=
+				'<text fill="#ffffff" font-size="12.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.model +
+				"</text>";
+			for (const c of OCOND) {
+				const cell = row.cells[c];
+				marks +=
+					'<line x1="' +
+					xOf(cell.low) +
+					'" x2="' +
+					xOf(Math.min(cell.high, 100)) +
+					'" y1="' +
+					cy +
+					'" y2="' +
+					cy +
+					'" stroke="' +
+					OCOLOR[c] +
+					'" stroke-width="1.5" opacity="0.4"/>';
+				marks +=
+					'<circle cx="' +
+					xOf(cell.rate) +
+					'" cy="' +
+					cy +
+					'" r="5.5" fill="' +
+					OCOLOR[c] +
+					'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+				hits +=
+					'<circle cx="' +
+					xOf(cell.rate) +
+					'" cy="' +
+					cy +
+					'" r="13" fill="transparent" data-tip="' +
+					esc(
+						c +
+							" — " +
+							ONAMES[c] +
+							"\n" +
+							row.model +
+							" steps 9–12: " +
+							cell.rate +
+							"% (" +
+							cell.ok +
+							") · CI [" +
+							cell.low +
+							"%, " +
+							cell.high +
+							"%]\nend-state intact " +
+							cell.end +
+							(cell.note ? "\n" + cell.note : ""),
+					) +
+					'"/>';
+			}
+		});
+		const el = document.getElementById("fig-positions");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Late-session per-step success for the history-by-positions two-by-two: position annotations barely move stateless accuracy while full history stays at the top; positions plus history is descriptively best but not significantly better." style="min-width:640px;display:block">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-positions",
+			[
+				"policy (model)",
+				"steps 9–12",
+				"placements, steps 5–12",
+				"end-state intact",
+				"input per step",
+			],
+			[
+				["K-view (sonnet)", "100% (80/80)", "59/60", "19/20", "1.2k → 8.1k"],
+				["O-view (sonnet)", "98.8% (79/80)", "59/60", "19/20", "1.3k → 8.8k"],
+				[
+					"M-stateless (sonnet)",
+					"96.3% (77/80)",
+					"53/60",
+					"13/20",
+					"flat ~1.3k",
+				],
+				[
+					"O-stateless (sonnet)",
+					"96.3% (77/80)",
+					"54/60",
+					"15/20",
+					"flat ~1.4k (+9% for positions)",
+				],
+				["K-view (gemini)", "98.8% (79/80)", "59/60", "19/20", "1.2k → 7.8k"],
+				["O-view (gemini)", "100% (80/80)", "60/60", "20/20", "1.3k → 8.4k"],
+				[
+					"M-stateless (gemini)",
+					"92.5% (74/80)",
+					"54/60",
+					"14/20",
+					"flat ~1.2k",
+				],
+				[
+					"O-stateless (gemini)",
+					"93.8% (75/80)",
+					"55/60",
+					"15/20",
+					"flat ~1.4k",
+				],
+			],
+		);
+	})();
+
+	// --- Study P: synthetic history dot plot (late-session window) ---
+	(function () {
+		const PCOND = ["K-view", "P-canned", "P-system", "M-stateless"];
+		const PNAMES = {
+			"K-view": "full history (Study K)",
+			"P-canned": "no history + examples as fake turns",
+			"P-system": "no history + examples in system prompt",
+			"M-stateless": "no history, no examples (Study M)",
+		};
+		const PCOLOR = {
+			"K-view": "#e66767",
+			"P-canned": "#199e70",
+			"P-system": "#9085e9",
+			"M-stateless": "#c98500",
+		};
+		const PDATA = [
+			{
+				model: "sonnet-4.5",
+				cells: {
+					"K-view": {
+						ok: "80/80",
+						rate: 100.0,
+						low: 95.4,
+						high: 100.0,
+						end: "19/20",
+						note: "",
+					},
+					"P-canned": {
+						ok: "79/80",
+						rate: 98.8,
+						low: 93.3,
+						high: 99.8,
+						end: "18/20",
+						note: "vs K-view 1–0, p = 1.0 · vs M-stateless 7–1, p = 0.070",
+					},
+					"P-system": {
+						ok: "78/80",
+						rate: 97.5,
+						low: 91.3,
+						high: 99.3,
+						end: "18/20",
+						note: "vs K-view 2–0, p = 0.5 · ties P-canned",
+					},
+					"M-stateless": {
+						ok: "77/80",
+						rate: 96.3,
+						low: 89.5,
+						high: 98.7,
+						end: "13/20",
+						note: "",
+					},
+				},
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: {
+					"K-view": {
+						ok: "79/80",
+						rate: 98.8,
+						low: 93.3,
+						high: 99.8,
+						end: "19/20",
+						note: "",
+					},
+					"P-canned": {
+						ok: "80/80",
+						rate: 100.0,
+						low: 95.4,
+						high: 100.0,
+						end: "20/20",
+						note: "vs M-stateless 7–0, p = 0.016 · 60/60 late placements · output bloat 309 → 55 tok/step",
+					},
+					"P-system": {
+						ok: "79/80",
+						rate: 98.8,
+						low: 93.3,
+						high: 99.8,
+						end: "19/20",
+						note: "vs M-stateless 6–0, p = 0.031",
+					},
+					"M-stateless": {
+						ok: "74/80",
+						rate: 92.5,
+						low: 84.6,
+						high: 96.5,
+						end: "14/20",
+						note: "",
+					},
+				},
+			},
+		];
+		document.getElementById("legend-11").innerHTML = PCOND.map(
+			(c) =>
+				'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
+				PCOLOR[c] +
+				'"></span><span class="font-mono font-700 text-white">' +
+				c +
+				"</span> " +
+				PNAMES[c] +
+				"</span>",
+		).join("");
+		const W = 880,
+			ROW = 64,
+			T = 8,
+			B = 40,
+			L = 150,
+			R = 24;
+		const H = T + PDATA.length * ROW + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + ((v - 84) / 16) * iw;
+		let g = "";
+		for (const tick of [84, 88, 92, 96, 100]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"%</text>";
+		}
+		g +=
+			'<text fill="#8b93a3" font-size="11" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">late-session (steps 9–12) per-step success (zoomed 84–100% scale)</text>';
+		let marks = "",
+			hits = "";
+		PDATA.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				cy +
+				'" y2="' +
+				cy +
+				'" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+			g +=
+				'<text fill="#ffffff" font-size="12.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.model +
+				"</text>";
+			for (const c of PCOND) {
+				const cell = row.cells[c];
+				marks +=
+					'<line x1="' +
+					xOf(cell.low) +
+					'" x2="' +
+					xOf(Math.min(cell.high, 100)) +
+					'" y1="' +
+					cy +
+					'" y2="' +
+					cy +
+					'" stroke="' +
+					PCOLOR[c] +
+					'" stroke-width="1.5" opacity="0.4"/>';
+				marks +=
+					'<circle cx="' +
+					xOf(cell.rate) +
+					'" cy="' +
+					cy +
+					'" r="5.5" fill="' +
+					PCOLOR[c] +
+					'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+				hits +=
+					'<circle cx="' +
+					xOf(cell.rate) +
+					'" cy="' +
+					cy +
+					'" r="13" fill="transparent" data-tip="' +
+					esc(
+						c +
+							" — " +
+							PNAMES[c] +
+							"\n" +
+							row.model +
+							" steps 9–12: " +
+							cell.rate +
+							"% (" +
+							cell.ok +
+							") · CI [" +
+							cell.low +
+							"%, " +
+							cell.high +
+							"%]\nend-state intact " +
+							cell.end +
+							(cell.note ? "\n" + cell.note : ""),
+					) +
+					'"/>';
+			}
+		});
+		const el = document.getElementById("fig-teaching");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Late-session per-step success: stateless sessions with two canned worked examples match full history on both models, in both delivery framings, while plain stateless lags." style="min-width:640px;display:block">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-teaching",
+			[
+				"policy (model)",
+				"steps 9–12",
+				"placements, steps 5–12",
+				"end-state intact",
+				"tokens/session",
+			],
+			[
+				["K-view (sonnet)", "100% (80/80)", "59/60", "19/20", "55,746 in"],
+				["P-canned (sonnet)", "98.8% (79/80)", "58/60", "18/20", "26,921 in"],
+				["P-system (sonnet)", "97.5% (78/80)", "57/60", "18/20", "26,598 in"],
+				[
+					"M-stateless (sonnet)",
+					"96.3% (77/80)",
+					"53/60",
+					"13/20",
+					"17,888 in",
+				],
+				["K-view (gemini)", "98.8% (79/80)", "59/60", "19/20", "53,358 in"],
+				["P-canned (gemini)", "100% (80/80)", "60/60", "20/20", "26,051 in"],
+				["P-system (gemini)", "98.8% (79/80)", "59/60", "19/20", "25,921 in"],
+				[
+					"M-stateless (gemini)",
+					"92.5% (74/80)",
+					"54/60",
+					"14/20",
+					"15,752 in + 3,709 out (bloat)",
+				],
+			],
+		);
+	})();
+
+	// --- Study Q: fan-out collapse lines ---
+	(function () {
+		const QDATA = [
+			{
+				cond: "Q-view",
+				name: "oracle retrieval (all targets in view)",
+				model: "sonnet-4.5",
+				rate: [92.9, 69.2, 50.0],
+				ok: ["13/14", "9/13", "9/18"],
+			},
+			{
+				cond: "Q-view",
+				name: "oracle retrieval (all targets in view)",
+				model: "gemini-3.5-flash",
+				rate: [92.9, 53.8, 44.4],
+				ok: ["13/14", "7/13", "8/18"],
+			},
+			{
+				cond: "Q-full",
+				name: "whole tree in prompt",
+				model: "sonnet-4.5",
+				rate: [85.7, 30.8, 33.3],
+				ok: ["12/14", "4/13", "6/18"],
+			},
+			{
+				cond: "Q-full",
+				name: "whole tree in prompt",
+				model: "gemini-3.5-flash",
+				rate: [100.0, 69.2, 72.2],
+				ok: ["14/14", "9/13", "13/18"],
+			},
+			{
+				cond: "Q-search",
+				name: "find_nodes recipe (barkup 0.4, untuned)",
+				model: "sonnet-4.5",
+				rate: [85.7, 46.2, 16.7],
+				ok: ["12/14", "6/13", "3/18"],
+			},
+			{
+				cond: "Q-search",
+				name: "find_nodes recipe (barkup 0.4, untuned)",
+				model: "gemini-3.5-flash",
+				rate: [85.7, 46.2, 38.9],
+				ok: ["12/14", "6/13", "7/18"],
+			},
+			{
+				cond: "R-decomp",
+				name: "app-side decomposition (Study R, both models)",
+				model: "both",
+				rate: [100.0, 100.0, 100.0],
+				ok: ["28/28", "26/26", "36/36"],
+			},
+		];
+		const QCOLOR = {
+			"Q-view": "#9085e9",
+			"Q-full": "#3987e5",
+			"Q-search": "#199e70",
+			"R-decomp": "#e66767",
+		};
+		const QNAMES = {
+			"Q-view": "oracle retrieval",
+			"Q-full": "whole tree",
+			"Q-search": "search recipe",
+			"R-decomp": "decomposition (Study R)",
+		};
+		document.getElementById("legend-12").innerHTML =
+			Object.keys(QNAMES)
+				.map(
+					(c) =>
+						'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
+						QCOLOR[c] +
+						'"></span><span class="font-mono font-700 text-white">' +
+						c +
+						"</span> " +
+						QNAMES[c] +
+						"</span>",
+				)
+				.join("") +
+			'<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+		const W = 880,
+			H = 360,
+			L = 56,
+			R = 215,
+			T = 16,
+			B = 44;
+		const iw = W - L - R,
+			ih = H - T - B;
+		const BINS = ["2–3 targets", "4–6 targets", "7+ targets"];
+		const xs = BINS.map((_, i) => L + (iw * i) / (BINS.length - 1));
+		const yOf = (v) => T + ih - ((v - 10) / 90) * ih;
+		let g = "";
+		for (const tick of [10, 25, 50, 75, 100]) {
+			const y = yOf(tick);
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				y +
+				'" y2="' +
+				y +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 8) +
+				'" y="' +
+				(y + 4) +
+				'" text-anchor="end">' +
+				tick +
+				"%</text>";
+		}
+		BINS.forEach((lab, i) => {
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				xs[i] +
+				'" y="' +
+				(H - B + 22) +
+				'" text-anchor="middle">' +
+				lab +
+				"</text>";
+		});
+		g +=
+			'<text fill="#8b93a3" font-size="11" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 6) +
+			'" text-anchor="middle">task success by target count (45 fan-out tasks per condition per model)</text>';
+		let marks = "",
+			hits = "";
+		const endLabels = [];
+		for (const s of QDATA) {
+			const dashed = s.model.includes("gemini");
+			const both = s.model === "both";
+			const pts = s.rate.map((v, i) => ({ x: xs[i], y: yOf(v), v, i }));
+			marks +=
+				'<path d="' +
+				pts.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ") +
+				'" fill="none" stroke="' +
+				QCOLOR[s.cond] +
+				'" stroke-width="' +
+				(both ? 3 : 2) +
+				'" stroke-linejoin="round"' +
+				(dashed ? ' stroke-dasharray="6 5"' : "") +
+				"/>";
+			pts.forEach((p) => {
+				marks +=
+					'<circle cx="' +
+					p.x +
+					'" cy="' +
+					p.y +
+					'" r="4" fill="' +
+					QCOLOR[s.cond] +
+					'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+				hits +=
+					'<circle cx="' +
+					p.x +
+					'" cy="' +
+					p.y +
+					'" r="12" fill="transparent" data-tip="' +
+					esc(
+						s.cond +
+							" — " +
+							s.name +
+							"\n" +
+							BINS[p.i] +
+							": " +
+							p.v +
+							"% (" +
+							s.ok[p.i] +
+							")",
+					) +
+					'"/>';
+			});
+			const last = pts[pts.length - 1];
+			endLabels.push({
+				c: s.cond,
+				text:
+					(both
+						? "decomp both"
+						: s.cond.replace("Q-", "") + " " + (dashed ? "gem" : "son")) +
+					" · " +
+					last.v +
+					"%",
+				x: last.x + 10,
+				y: last.y + 4,
+			});
+		}
+		resolveLabels(endLabels, 15);
+		let labels = "";
+		for (const l of endLabels)
+			labels +=
+				'<text font-size="12" font-weight="700" x="' +
+				l.x +
+				'" y="' +
+				l.y +
+				'" fill="' +
+				QCOLOR[l.c] +
+				'">' +
+				l.text +
+				"</text>";
+		const el = document.getElementById("fig-fanout");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Fan-out task success falls with target count in every condition: even oracle retrieval drops to about half at seven-plus targets, and the models invert between view and whole-tree strategies." style="min-width:640px;display:block">' +
+			g +
+			marks +
+			labels +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-fanout",
+			[
+				"condition (model)",
+				"overall",
+				"2–3",
+				"4–6",
+				"7+",
+				"failure anatomy",
+				"median input @ ~1000 nodes",
+			],
+			[
+				[
+					"Q-view (sonnet)",
+					"31/45 (68.9%)",
+					"13/14",
+					"9/13",
+					"9/18",
+					"partial ×14 (mean coverage 47%)",
+					"2,023",
+				],
+				[
+					"Q-view (gemini)",
+					"28/45 (62.2%)",
+					"13/14",
+					"7/13",
+					"8/18",
+					"partial ×17 (mean coverage 35%)",
+					"1,894",
+				],
+				[
+					"Q-full (sonnet)",
+					"22/45 (48.9%)",
+					"12/14",
+					"4/13",
+					"6/18",
+					"partial ×14, collateral ×9",
+					"85,628",
+				],
+				[
+					"Q-full (gemini)",
+					"36/45 (80.0%)",
+					"14/14",
+					"9/13",
+					"13/18",
+					"partial ×5, collateral ×4",
+					"70,071",
+				],
+				[
+					"Q-search (sonnet)",
+					"21/45 (46.7%)",
+					"12/14",
+					"6/13",
+					"3/18",
+					"partial ×21, collateral ×2, invalid ×1 · median 6 calls",
+					"14,514 (18/45 runs > 100k)",
+				],
+				[
+					"Q-search (gemini)",
+					"25/45 (55.6%)",
+					"12/14",
+					"6/13",
+					"7/18",
+					"partial ×13, invalid ×5, collateral ×2 · median 6 calls",
+					"24,995 (16/45 runs > 100k)",
+				],
+				[
+					"R-decomp (sonnet)",
+					"45/45 (100%)",
+					"14/14",
+					"13/13",
+					"18/18",
+					"none — 337/337 subtasks",
+					"7,974",
+				],
+				[
+					"R-decomp (gemini)",
+					"45/45 (100%)",
+					"14/14",
+					"13/13",
+					"18/18",
+					"none — 337/337 subtasks",
+					"7,731",
+				],
+			],
+		);
+	})();
+
+	// --- Study S: long-session cost divergence lines ---
+	(function () {
+		const STEPS = [1, 6, 12, 18, 24, 30, 36];
+		const SDATA = [
+			{
+				cond: "S-view",
+				model: "sonnet-4.5",
+				tok: [1250, 4693, 8325, 11955, 15855, 20164, 23614],
+				acc: "360/360 steps",
+			},
+			{
+				cond: "S-view",
+				model: "gemini-3.5-flash",
+				tok: [1216, 4519, 8012, 11522, 15187, 19279, 22581],
+				acc: "359/360 steps",
+			},
+			{
+				cond: "S-system",
+				model: "sonnet-4.5",
+				tok: [2124, 2160, 2085, 2120, 2276, 2547, 2190],
+				acc: "357/360 steps",
+			},
+			{
+				cond: "S-system",
+				model: "gemini-3.5-flash",
+				tok: [2083, 2107, 2031, 2065, 2232, 2485, 2130],
+				acc: "356/360 steps",
+			},
+		];
+		const SCOLOR = { "S-view": "#e66767", "S-system": "#9085e9" };
+		const SNAMES = {
+			"S-view": "full history + fresh view per turn (K-view recipe)",
+			"S-system": "no history + two worked examples (P-system recipe)",
+		};
+		document.getElementById("legend-13").innerHTML =
+			Object.keys(SNAMES)
+				.map(
+					(c) =>
+						'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
+						SCOLOR[c] +
+						'"></span><span class="font-mono font-700 text-white">' +
+						c +
+						"</span> " +
+						SNAMES[c] +
+						"</span>",
+				)
+				.join("") +
+			'<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+		const W = 880,
+			H = 360,
+			L = 64,
+			R = 170,
+			T = 16,
+			B = 44;
+		const iw = W - L - R,
+			ih = H - T - B;
+		const xOf = (s) => L + (iw * (s - 1)) / 35;
+		const yOf = (v) => T + ih - (v / 25000) * ih;
+		let g = "";
+		for (const tick of [0, 5000, 10000, 15000, 20000, 25000]) {
+			const y = yOf(tick);
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				y +
+				'" y2="' +
+				y +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 8) +
+				'" y="' +
+				(y + 4) +
+				'" text-anchor="end">' +
+				tick / 1000 +
+				"k</text>";
+		}
+		for (const s of STEPS) {
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				xOf(s) +
+				'" y="' +
+				(H - B + 22) +
+				'" text-anchor="middle">' +
+				s +
+				"</text>";
+		}
+		g +=
+			'<text fill="#8b93a3" font-size="11" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 6) +
+			'" text-anchor="middle">median input tokens per step across a 36-edit session (accuracy at parity throughout)</text>';
+		let marks = "",
+			hits = "";
+		const endLabels = [];
+		for (const s of SDATA) {
+			const dashed = s.model.includes("gemini");
+			const pts = s.tok.map((v, i) => ({ x: xOf(STEPS[i]), y: yOf(v), v, i }));
+			marks +=
+				'<path d="' +
+				pts.map((p, i) => (i === 0 ? "M" : "L") + p.x + "," + p.y).join(" ") +
+				'" fill="none" stroke="' +
+				SCOLOR[s.cond] +
+				'" stroke-width="2" stroke-linejoin="round"' +
+				(dashed ? ' stroke-dasharray="6 5"' : "") +
+				"/>";
+			pts.forEach((p) => {
+				marks +=
+					'<circle cx="' +
+					p.x +
+					'" cy="' +
+					p.y +
+					'" r="4" fill="' +
+					SCOLOR[s.cond] +
+					'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+				hits +=
+					'<circle cx="' +
+					p.x +
+					'" cy="' +
+					p.y +
+					'" r="12" fill="transparent" data-tip="' +
+					esc(
+						s.cond +
+							" — " +
+							SNAMES[s.cond] +
+							"\n" +
+							s.model +
+							", step " +
+							STEPS[p.i] +
+							": median " +
+							p.v.toLocaleString() +
+							" input tokens\nsession accuracy: " +
+							s.acc,
+					) +
+					'"/>';
+			});
+			const last = pts[pts.length - 1];
+			endLabels.push({
+				text:
+					s.cond.replace("S-", "") +
+					" " +
+					(dashed ? "gem" : "son") +
+					" · " +
+					(last.v / 1000).toFixed(1) +
+					"k",
+				x: last.x + 10,
+				y: last.y + 4,
+			});
+		}
+		endLabels.sort((a, b) => a.y - b.y);
+		for (let i = 1; i < endLabels.length; i += 1) {
+			if (endLabels[i].y - endLabels[i - 1].y < 14)
+				endLabels[i].y = endLabels[i - 1].y + 14;
+		}
+		for (const lab of endLabels) {
+			g +=
+				'<text fill="#ffffff" font-size="12.5" x="' +
+				lab.x +
+				'" y="' +
+				lab.y +
+				'">' +
+				lab.text +
+				"</text>";
+		}
+		const el = document.getElementById("fig-horizon");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Line chart: median input tokens per step over a 36-edit session. Keep-history grows linearly to about 24k tokens by step 36; the stateless worked-examples recipe stays flat at about 2.1k. Accuracy is at parity throughout." style="min-width:640px;display:block">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-horizon",
+			[
+				"recipe (model)",
+				"steps 1–12",
+				"steps 13–24",
+				"steps 25–36",
+				"end-state intact",
+				"input tokens/session",
+			],
+			[
+				[
+					"S-view (sonnet)",
+					"120/120",
+					"120/120",
+					"120/120",
+					"10/10",
+					"449,028",
+				],
+				[
+					"S-system (sonnet)",
+					"119/120",
+					"120/120",
+					"118/120",
+					"8/10",
+					"80,890",
+				],
+				["S-view (gemini)", "119/120", "120/120", "120/120", "9/10", "428,920"],
+				[
+					"S-system (gemini)",
+					"120/120",
+					"117/120",
+					"119/120",
+					"9/10",
+					"78,788",
+				],
+			],
+		);
+	})();
+
+	// --- data tables ---
+	function table(mount, head, rows) {
+		document.getElementById(mount).innerHTML =
+			`<table class="border-collapse mt-2.5 text-14px tabular-nums"><thead><tr>${head.map((h, i) => `<th scope="col" class="border border-white/14 px-2.5 py-1 text-[#c3c9d4] font-600 ${i === 0 ? "text-left" : "text-right"}">${h}</th>`).join("")}</tr></thead><tbody>` +
+			rows
+				.map(
+					(r) =>
+						`<tr>${r.map((v, i) => `<td class="border border-white/14 px-2.5 py-1 ${i === 0 ? "text-left" : "text-right"}">${v}</td>`).join("")}</tr>`,
+				)
+				.join("") +
+			"</tbody></table>";
 	}
-	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">anaphora-cell success by carrier (48 cells per arm-model; Wilson 95% intervals)</text>';
-	let marks = "", hits = "";
-	rows.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<line x1="' + L + '" x2="' + (L + iw) + '" y1="' + cy + '" y2="' + cy + '" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + row.model.replace("-3.5-flash", "").replace("-4.5", "").replace("-4.8", "") + '</text>';
-		const c = row.cell;
-		marks += '<line x1="' + xOf(c.low) + '" x2="' + xOf(c.high) + '" y1="' + cy + '" y2="' + cy + '" stroke="' + XCOLOR[row.arm] + '" stroke-width="1.5" opacity="0.4"/>';
-		marks += '<circle cx="' + xOf(c.rate) + '" cy="' + cy + '" r="5.5" fill="' + XCOLOR[row.arm] + '" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
-		hits += '<circle cx="' + xOf(c.rate) + '" cy="' + cy + '" r="12" fill="transparent" data-tip="' + esc(row.arm + " — " + XNAMES[row.arm] + "\n" + row.model + ": " + c.rate + "% (" + c.ok + ") · CI [" + c.low + "%, " + c.high + "%]" + (c.note ? "\n" + c.note : "")) + '"/>';
-	});
-	const el = document.getElementById("fig-anaphora");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Dot plot: without a carrier, anaphora resolution sits at 0% on every model; the one-line last-edit echo ties full history and beats it on opus." style="min-width:640px">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-anaphora", ["carrier (model)", "anaphora", "amend", "repeat", "undo", "failure anatomy", "input/session"],
-		[
-			["X-history (sonnet)", "48/48", "24/24", "12/12", "12/12", "—", "53,480"],
-			["X-window2 (sonnet)", "45/48", "24/24", "9/12", "12/12", "3/3 guessed", "29,565"],
-			["X-lastedit (sonnet)", "43/48", "24/24", "7/12", "12/12", "5/5 guessed", "27,795"],
-			["X-stateless (sonnet)", "0/48", "0/24", "0/12", "0/12", "48/48 guessed", "36,563"],
-			["X-history (gemini)", "48/48", "24/24", "12/12", "12/12", "—", "50,530"],
-			["X-window2 (gemini)", "41/48", "24/24", "5/12", "12/12", "7/7 guessed", "27,834"],
-			["X-lastedit (gemini)", "47/48", "23/24", "12/12", "12/12", "1/1 guessed", "26,244"],
-			["X-stateless (gemini)", "0/48", "0/24", "0/12", "0/12", "48/48 guessed", "33,654"],
-			["X-history (opus)", "46/48", "24/24", "12/12", "10/12", "2/2 guessed", "58,091"],
-			["X-window2 (opus)", "43/48", "24/24", "8/12", "11/12", "5/5 guessed", "32,169"],
-			["X-lastedit (opus)", "48/48", "24/24", "12/12", "12/12", "—", "31,827"],
-			["X-stateless (opus)", "0/48", "0/24", "0/12", "0/12", "48/48 guessed", "41,175"]
-		]);
-})();
+	table(
+		"tbl-crossover",
+		["condition", ...BUCKET_LABELS.map((b) => b + " (95% CI)")],
+		CONDITIONS.map((c) => [
+			`${c} — ${COND_NAMES[c]}`,
+			...DATA.crossover[c].map(
+				(d) => `${d.rate}% [${d.low}, ${d.high}] · ${d.ok}/${d.n}`,
+			),
+		]),
+	);
+	table(
+		"tbl-reference",
+		["model", ...CONDITIONS.map((c) => `${c} (95% CI)`)],
+		DATA.reference.map((r) => [
+			r.model,
+			...CONDITIONS.map(
+				(c) =>
+					`${r.cells[c].rate}% [${r.cells[c].low}, ${r.cells[c].high}] · ${r.cells[c].ok}/40`,
+			),
+		]),
+	);
+	table(
+		"tbl-tokens",
+		["condition", ...BUCKET_LABELS],
+		CONDITIONS.map((c) => [
+			`${c} — ${COND_NAMES[c]}`,
+			...DATA.tokens[c].map((v) => v.toLocaleString()),
+		]),
+	);
 
+	// --- Study T: callback dissociation dumbbells ---
+	(function () {
+		const TARMS = ["T-history", "T-system", "T-notes"];
+		const TNAMES = {
+			"T-history": "full history (K-view recipe)",
+			"T-system": "stateless + worked examples (P-system recipe)",
+			"T-notes": "stateless + examples + session-notes memo",
+		};
+		const TCOLOR = {
+			"T-history": "#e66767",
+			"T-system": "#c98500",
+			"T-notes": "#9085e9",
+		};
+		const TDATA = [
+			{
+				model: "sonnet-4.5",
+				cells: {
+					"T-history": {
+						cb: 100.0,
+						cbOk: "80/80",
+						ord: 98.1,
+						ordOk: "157/160",
+						end: "17/20",
+					},
+					"T-system": {
+						cb: 0.0,
+						cbOk: "0/80",
+						ord: 100.0,
+						ordOk: "160/160",
+						end: "0/20",
+					},
+					"T-notes": {
+						cb: 100.0,
+						cbOk: "80/80",
+						ord: 99.4,
+						ordOk: "159/160",
+						end: "19/20",
+					},
+				},
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: {
+					"T-history": {
+						cb: 100.0,
+						cbOk: "80/80",
+						ord: 99.4,
+						ordOk: "159/160",
+						end: "19/20",
+					},
+					"T-system": {
+						cb: 0.0,
+						cbOk: "0/80",
+						ord: 100.0,
+						ordOk: "160/160",
+						end: "0/20",
+					},
+					"T-notes": {
+						cb: 100.0,
+						cbOk: "80/80",
+						ord: 100.0,
+						ordOk: "160/160",
+						end: "20/20",
+					},
+				},
+			},
+		];
+		document.getElementById("legend-14").innerHTML =
+			TARMS.map(
+				(c) =>
+					'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
+					TCOLOR[c] +
+					'"></span><span class="font-mono font-700 text-white">' +
+					c +
+					"</span> " +
+					TNAMES[c] +
+					"</span>",
+			).join("") +
+			'<span class="inline-flex items-center gap-[7px]">● = callback steps · ○ = ordinary steps</span>';
+		const W = 880,
+			ROW = 34,
+			T = 8,
+			B = 40,
+			L = 210,
+			R = 24;
+		const rows = [];
+		for (const m of TDATA)
+			for (const c of TARMS)
+				rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+		const H = T + rows.length * ROW + B + 16;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 25, 50, 75, 100]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"%</text>";
+		}
+		g +=
+			'<text fill="#8b93a3" font-size="11" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">per-step success — callback steps (filled) vs ordinary self-contained steps (hollow)</text>';
+		let marks = "",
+			hits = "";
+		rows.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				cy +
+				'" y2="' +
+				cy +
+				'" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+			g +=
+				'<text fill="#ffffff" font-size="12.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.arm +
+				" · " +
+				(row.model.includes("gemini") ? "gem" : "son") +
+				"</text>";
+			const c = row.cell;
+			marks +=
+				'<line x1="' +
+				xOf(Math.min(c.cb, c.ord)) +
+				'" x2="' +
+				xOf(Math.max(c.cb, c.ord)) +
+				'" y1="' +
+				cy +
+				'" y2="' +
+				cy +
+				'" stroke="' +
+				TCOLOR[row.arm] +
+				'" stroke-width="2" opacity="0.45"/>';
+			marks +=
+				'<circle cx="' +
+				xOf(c.ord) +
+				'" cy="' +
+				cy +
+				'" r="5.5" fill="hsl(217,48%,15%)" stroke="' +
+				TCOLOR[row.arm] +
+				'" stroke-width="2.5"/>';
+			marks +=
+				'<circle cx="' +
+				xOf(c.cb) +
+				'" cy="' +
+				cy +
+				'" r="5.5" fill="' +
+				TCOLOR[row.arm] +
+				'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+			hits +=
+				'<circle cx="' +
+				xOf(c.cb) +
+				'" cy="' +
+				cy +
+				'" r="12" fill="transparent" data-tip="' +
+				esc(
+					row.arm +
+						" — " +
+						TNAMES[row.arm] +
+						"\n" +
+						row.model +
+						" callback steps: " +
+						c.cb +
+						"% (" +
+						c.cbOk +
+						")\nend-state intact " +
+						c.end,
+				) +
+				'"/>';
+			hits +=
+				'<circle cx="' +
+				xOf(c.ord) +
+				'" cy="' +
+				cy +
+				'" r="12" fill="transparent" data-tip="' +
+				esc(
+					row.arm +
+						" — " +
+						TNAMES[row.arm] +
+						"\n" +
+						row.model +
+						" ordinary steps: " +
+						c.ord +
+						"% (" +
+						c.ordOk +
+						")",
+				) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-memo");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Dumbbell chart: the stateless recipe scores 100% on ordinary steps but 0% on callback steps; full history and the memo arm score 100% on both." style="min-width:640px;display:block">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-memo",
+			[
+				"arm (model)",
+				"callbacks",
+				"fact / rule",
+				"ordinary steps",
+				"end-state intact",
+				"input tokens/session",
+			],
+			[
+				[
+					"T-history (sonnet)",
+					"80/80",
+					"40/40 · 40/40",
+					"157/160",
+					"17/20",
+					"58,222",
+				],
+				[
+					"T-system (sonnet)",
+					"0/80",
+					"0/40 · 0/40",
+					"160/160",
+					"0/20",
+					"27,047",
+				],
+				[
+					"T-notes (sonnet)",
+					"80/80",
+					"40/40 · 40/40",
+					"159/160",
+					"19/20",
+					"27,515",
+				],
+				[
+					"T-history (gemini)",
+					"80/80",
+					"40/40 · 40/40",
+					"159/160",
+					"19/20",
+					"55,751",
+				],
+				[
+					"T-system (gemini)",
+					"0/80",
+					"0/40 · 0/40",
+					"160/160",
+					"0/20",
+					"26,245",
+				],
+				[
+					"T-notes (gemini)",
+					"80/80",
+					"40/40 · 40/40",
+					"160/160",
+					"20/20",
+					"26,813",
+				],
+			],
+		);
+	})();
 
-// --- Study Y: naturalistic extraction twin bars ---
-(function () {
-	const YARMS = ["Y-formulaic", "Y-casual", "Y-casual-history"];
-	const YNAMES = {
-		"Y-formulaic": "formulaic declarations (the W control)",
-		"Y-casual": "casual declarations (registered pools)",
-		"Y-casual-history": "casual + the shipped history window"
-	};
-	const YCOLOR = { "Y-formulaic": "#9085e9", "Y-casual": "#199e70", "Y-casual-history": "#3987e5" };
-	// callbacks/48 · recall/36 · retraction/12 · noise per session
-	const YDATA = [
-		{ model: "sonnet-4.5", cells: { "Y-formulaic": [48, 36, 12, 0], "Y-casual": [48, 36, 12, 0], "Y-casual-history": [47, 35, 12, 0] } },
-		{ model: "gemini-3.5-flash", cells: { "Y-formulaic": [48, 36, 12, 0], "Y-casual": [48, 36, 12, 0], "Y-casual-history": [48, 34, 12, 0] } },
-		{ model: "opus-4.8", cells: { "Y-formulaic": [48, 36, 12, 0], "Y-casual": [48, 36, 12, 0], "Y-casual-history": [48, 35, 12, 0] } }
-	];
-	document.getElementById("legend-19").innerHTML = YARMS.map(c =>
-		'<span class="key"><span class="chip" style="background:' + YCOLOR[c] + '"></span><span class="code">' + c + '</span> ' + YNAMES[c] + '</span>'
-	).join("") + '<span class="key">bars: callback success out of 48 · tooltip carries recall, retractions, noise</span>';
-	const W = 880, ROW = 30, T = 8, B = 40, L = 250, R = 24;
-	const rows = [];
-	for (const m of YDATA) for (const c of YARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
-	const H = T + rows.length * ROW + B + 12;
-	const iw = W - L - R;
-	const xOf = v => L + (v / 48) * iw;
-	let g = "";
-	for (const tick of [0, 12, 24, 36, 48]) {
-		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '</text>';
-	}
-	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">callback cells passed (of 48) — casual and formulaic twins tie exactly on every model</text>';
-	let marks = "", hits = "";
-	rows.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + row.model.replace("-3.5-flash", "").replace("-4.5", "").replace("-4.8", "") + '</text>';
-		const [cb, recall, retract, noise] = row.cell;
-		marks += '<rect x="' + L + '" y="' + (cy - 8) + '" width="' + ((cb / 48) * iw) + '" height="16" fill="' + YCOLOR[row.arm] + '" rx="3"/>';
-		hits += '<rect x="' + L + '" y="' + (cy - 11) + '" width="' + iw + '" height="22" fill="transparent" data-tip="' + esc(row.arm + " — " + YNAMES[row.arm] + "\n" + row.model + ": callbacks " + cb + "/48 · recall " + recall + "/36 · retractions " + retract + "/12 · noise " + noise.toFixed(2) + "/session") + '"/>';
-	});
-	const el = document.getElementById("fig-speech");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Bar chart: casual and formulaic declaration phrasing tie exactly on callback success across all three models, with zero chatter-induced false notes." style="min-width:640px">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-speech", ["arm (model)", "callbacks", "recall", "retractions", "noise/session", "tool calls/session"],
-		[
-			["Y-formulaic (sonnet)", "48/48", "36/36", "12/12", "0.00", "4.0"],
-			["Y-casual (sonnet)", "48/48", "36/36", "12/12", "0.00", "4.0"],
-			["Y-casual-history (sonnet)", "47/48", "35/36", "12/12", "0.00", "3.9"],
-			["Y-formulaic (gemini)", "48/48", "36/36", "12/12", "0.00", "4.1"],
-			["Y-casual (gemini)", "48/48", "36/36", "12/12", "0.00", "4.2"],
-			["Y-casual-history (gemini)", "48/48", "34/36", "12/12", "0.00", "3.8"],
-			["Y-formulaic (opus)", "48/48", "36/36", "12/12", "0.00", "4.0"],
-			["Y-casual (opus)", "48/48", "36/36", "12/12", "0.00", "4.0"],
-			["Y-casual-history (opus)", "48/48", "35/36", "12/12", "0.00", "3.9"]
-		]);
-})();
+	// --- Study U: dependent-edit dot plot ---
+	(function () {
+		const UARMS = ["U-full", "U-view1", "U-view2", "U-search"];
+		const UNAMES = {
+			"U-full": "whole tree in prompt",
+			"U-view1": "target-only minimal view",
+			"U-view2": "target + source in view",
+			"U-search": "skeleton + find_nodes (0.4 recipe)",
+		};
+		const UCOLOR = {
+			"U-full": "#3987e5",
+			"U-view1": "#c98500",
+			"U-view2": "#e66767",
+			"U-search": "#199e70",
+		};
+		const UDATA = [
+			{
+				model: "sonnet-4.5",
+				cells: {
+					"U-full": {
+						rate: 93.3,
+						low: 82,
+						high: 98,
+						ok: "42/45",
+						note: "3 structure-reads fumbled at ~1000 nodes",
+					},
+					"U-view1": {
+						rate: 0,
+						low: 0,
+						high: 8,
+						ok: "0/45",
+						note: "all 45 failures: valid patch, silently invented value",
+					},
+					"U-view2": {
+						rate: 100,
+						low: 92,
+						high: 100,
+						ok: "45/45",
+						note: "median input 1,780 tokens — 25× less than the full tree",
+					},
+					"U-search": {
+						rate: 84.4,
+						low: 71,
+						high: 92,
+						ok: "38/45",
+						note: "median 2 search calls; value-copies 18/24",
+					},
+				},
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: {
+					"U-full": { rate: 100, low: 92, high: 100, ok: "45/45", note: "" },
+					"U-view1": {
+						rate: 0,
+						low: 0,
+						high: 8,
+						ok: "0/45",
+						note: "all 45 failures: valid patch, silently invented value",
+					},
+					"U-view2": {
+						rate: 100,
+						low: 92,
+						high: 100,
+						ok: "45/45",
+						note: "median input 1,702 tokens",
+					},
+					"U-search": {
+						rate: 82.2,
+						low: 69,
+						high: 91,
+						ok: "37/45",
+						note: "significantly below U-full (8–0, p = 0.008); value-copies 18/24",
+					},
+				},
+			},
+		];
+		document.getElementById("legend-15").innerHTML = UARMS.map(
+			(c) =>
+				'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
+				UCOLOR[c] +
+				'"></span><span class="font-mono font-700 text-white">' +
+				c +
+				"</span> " +
+				UNAMES[c] +
+				"</span>",
+		).join("");
+		const W = 880,
+			ROW = 34,
+			T = 8,
+			B = 40,
+			L = 210,
+			R = 24;
+		const rows = [];
+		for (const m of UDATA)
+			for (const c of UARMS)
+				rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+		const H = T + rows.length * ROW + B + 16;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 25, 50, 75, 100]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"%</text>";
+		}
+		g +=
+			'<text fill="#8b93a3" font-size="11" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">dependent-edit success by arm (45 tasks per cell; Wilson 95% intervals)</text>';
+		let marks = "",
+			hits = "";
+		rows.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				cy +
+				'" y2="' +
+				cy +
+				'" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+			g +=
+				'<text fill="#ffffff" font-size="12.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.arm +
+				" · " +
+				(row.model.includes("gemini") ? "gem" : "son") +
+				"</text>";
+			const c = row.cell;
+			marks +=
+				'<line x1="' +
+				xOf(c.low) +
+				'" x2="' +
+				xOf(c.high) +
+				'" y1="' +
+				cy +
+				'" y2="' +
+				cy +
+				'" stroke="' +
+				UCOLOR[row.arm] +
+				'" stroke-width="1.5" opacity="0.4"/>';
+			marks +=
+				'<circle cx="' +
+				xOf(c.rate) +
+				'" cy="' +
+				cy +
+				'" r="5.5" fill="' +
+				UCOLOR[row.arm] +
+				'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+			hits +=
+				'<circle cx="' +
+				xOf(c.rate) +
+				'" cy="' +
+				cy +
+				'" r="12" fill="transparent" data-tip="' +
+				esc(
+					row.arm +
+						" — " +
+						UNAMES[row.arm] +
+						"\n" +
+						row.model +
+						": " +
+						c.rate +
+						"% (" +
+						c.ok +
+						") · CI [" +
+						c.low +
+						"%, " +
+						c.high +
+						"%]" +
+						(c.note ? "\n" + c.note : ""),
+				) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-dependent");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Dot plot: dependent-edit success. The target-only view sits at 0% on both models; the both-nodes view and the whole tree sit at or near 100%; the search recipe sits at 82 to 84%." style="min-width:640px;display:block">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-dependent",
+			[
+				"arm (model)",
+				"all",
+				"value-copy",
+				"structure-read",
+				"failure anatomy",
+				"median input",
+			],
+			[
+				[
+					"U-full (sonnet)",
+					"42/45 (93.3%)",
+					"24/24",
+					"18/21",
+					"3 structure-reads wrong",
+					"44,594",
+				],
+				[
+					"U-view1 (sonnet)",
+					"0/45 (0%)",
+					"0/24",
+					"0/21",
+					"45/45 valid-but-wrong invented values",
+					"1,559",
+				],
+				["U-view2 (sonnet)", "45/45 (100%)", "24/24", "21/21", "none", "1,780"],
+				[
+					"U-search (sonnet)",
+					"38/45 (84.4%)",
+					"18/24",
+					"20/21",
+					"reads missed, median 2 calls",
+					"6,200",
+				],
+				["U-full (gemini)", "45/45 (100%)", "24/24", "21/21", "none", "40,030"],
+				[
+					"U-view1 (gemini)",
+					"0/45 (0%)",
+					"0/24",
+					"0/21",
+					"45/45 valid-but-wrong invented values",
+					"1,342",
+				],
+				["U-view2 (gemini)", "45/45 (100%)", "24/24", "21/21", "none", "1,702"],
+				[
+					"U-search (gemini)",
+					"37/45 (82.2%)",
+					"18/24",
+					"19/21",
+					"reads missed, median 3 calls",
+					"8,997",
+				],
+			],
+		);
+	})();
 
+	// --- Study V: qualitative rewrites (judge-graded) win/loss bars ---
+	(function () {
+		const VARMS = [
+			"V-doc-view1",
+			"V-doc-view2",
+			"V-conv-memo",
+			"V-conv-nomemo",
+		];
+		const VNAMES = {
+			"V-doc-view1": "goal in doc · target-only view",
+			"V-doc-view2": "goal's node IN the view",
+			"V-conv-memo": "goal in the application memo",
+			"V-conv-nomemo": "goal said earlier · no memo",
+		};
+		const VCOLOR = {
+			"V-doc-view1": "#c98500",
+			"V-doc-view2": "#199e70",
+			"V-conv-memo": "#e66767",
+			"V-conv-nomemo": "#9085e9",
+		};
+		// Primary judge (gpt-5.4): wins / losses / ties vs V-instr control, 30 tasks per cell.
+		const VDATA = [
+			{
+				model: "sonnet-4.5",
+				cells: {
+					"V-doc-view1": { w: 0, l: 30, t: 0 },
+					"V-doc-view2": { w: 0, l: 30, t: 0 },
+					"V-conv-memo": { w: 10, l: 2, t: 18 },
+					"V-conv-nomemo": { w: 0, l: 30, t: 0 },
+				},
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: {
+					"V-doc-view1": { w: 0, l: 30, t: 0 },
+					"V-doc-view2": { w: 0, l: 30, t: 0 },
+					"V-conv-memo": { w: 8, l: 11, t: 11 },
+					"V-conv-nomemo": { w: 0, l: 30, t: 0 },
+				},
+			},
+		];
+		document.getElementById("legend-16").innerHTML =
+			VARMS.map(
+				(c) =>
+					'<span class="key"><span class="chip" style="background:' +
+					VCOLOR[c] +
+					'"></span><span class="code">' +
+					c +
+					"</span> " +
+					VNAMES[c] +
+					"</span>",
+			).join("") +
+			'<span class="key">bar segments: wins · ties · losses vs the explicit-instruction control (primary judge)</span>';
+		const W = 880,
+			ROW = 34,
+			T = 8,
+			B = 40,
+			L = 235,
+			R = 24;
+		const rows = [];
+		for (const m of VDATA)
+			for (const c of VARMS)
+				rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+		const H = T + rows.length * ROW + B + 16;
+		const iw = W - L - R;
+		let g = "";
+		for (const tick of [0, 10, 20, 30]) {
+			const x = L + (tick / 30) * iw;
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		g +=
+			'<text fill="#c3c9d4" font-size="12" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">judged comparisons vs control (30 per cell): wins, then ties, then losses</text>';
+		let marks = "",
+			hits = "";
+		rows.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.arm +
+				" · " +
+				(row.model.includes("gemini") ? "gem" : "son") +
+				"</text>";
+			const c = row.cell;
+			const seg = (from, n, opacity) => {
+				const x1 = L + (from / 30) * iw,
+					wpx = (n / 30) * iw;
+				return (
+					'<rect x="' +
+					x1 +
+					'" y="' +
+					(cy - 9) +
+					'" width="' +
+					Math.max(wpx, 0) +
+					'" height="18" fill="' +
+					VCOLOR[row.arm] +
+					'" opacity="' +
+					opacity +
+					'" rx="3"/>'
+				);
+			};
+			marks += seg(0, c.w, 1);
+			marks += seg(c.w, c.t, 0.5);
+			const lx = L + ((c.w + c.t) / 30) * iw,
+				lw = (c.l / 30) * iw;
+			marks +=
+				'<rect x="' +
+				lx +
+				'" y="' +
+				(cy - 9) +
+				'" width="' +
+				Math.max(lw, 0) +
+				'" height="18" fill="rgba(255,255,255,0.16)" rx="3"/>';
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				(cy - 12) +
+				'" width="' +
+				iw +
+				'" height="24" fill="transparent" data-tip="' +
+				esc(
+					row.arm +
+						" — " +
+						VNAMES[row.arm] +
+						"\n" +
+						row.model +
+						" vs control: " +
+						c.w +
+						" wins / " +
+						c.t +
+						" ties / " +
+						c.l +
+						" losses",
+				) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-goals");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Stacked bars: the memo arm ties or beats the explicit-instruction control; every other arm, including goal-node-in-view, loses nearly all judged comparisons." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-goals",
+			[
+				"arm (editor)",
+				"W / T / L (gpt-5.4)",
+				"W / T / L (haiku-4.5)",
+				"proxy Δ thesis coverage",
+			],
+			[
+				["V-doc-view1 (sonnet)", "0 / 0 / 30", "0 / 0 / 30", "+0.00"],
+				["V-doc-view2 (sonnet)", "0 / 0 / 30", "0 / 3 / 27", "+0.75"],
+				["V-conv-memo (sonnet)", "10 / 18 / 2", "13 / 10 / 7", "+1.00"],
+				["V-conv-nomemo (sonnet)", "0 / 0 / 30", "0 / 0 / 30", "+0.00"],
+				["V-doc-view1 (gemini)", "0 / 0 / 30", "0 / 0 / 30", "+0.00"],
+				["V-doc-view2 (gemini)", "0 / 0 / 30", "0 / 3 / 27", "+0.66"],
+				["V-conv-memo (gemini)", "8 / 11 / 11", "6 / 20 / 4", "+1.00"],
+				["V-conv-nomemo (gemini)", "0 / 0 / 30", "0 / 0 / 30", "+0.00"],
+			],
+		);
+	})();
 
+	// --- Study W: agent-maintained memo extraction dumbbells ---
+	(function () {
+		const WARMS = ["W-oracle", "W-agent", "W-agent-history"];
+		const WNAMES = {
+			"W-oracle": "harness-written memo (the T ceiling)",
+			"W-agent": "agent-written memo, stateless",
+			"W-agent-history": "agent memo + 32-message window (shipped config)",
+		};
+		const WCOLOR = {
+			"W-oracle": "#e66767",
+			"W-agent": "#199e70",
+			"W-agent-history": "#3987e5",
+		};
+		// Callback success (72 cells; history arm split by recorded window membership).
+		const WDATA = [
+			{
+				model: "sonnet-4.5",
+				cells: {
+					"W-oracle": { all: 98.6, ok: "71/72" },
+					"W-agent": { all: 98.6, ok: "71/72" },
+					"W-agent-history": {
+						all: 93.1,
+						ok: "67/72",
+						win: 100.0,
+						winOk: "36/36",
+						post: 86.1,
+						postOk: "31/36",
+					},
+				},
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: {
+					"W-oracle": { all: 100.0, ok: "72/72" },
+					"W-agent": { all: 100.0, ok: "72/72" },
+					"W-agent-history": {
+						all: 98.6,
+						ok: "71/72",
+						win: 100.0,
+						winOk: "36/36",
+						post: 97.2,
+						postOk: "35/36",
+					},
+				},
+			},
+			{
+				model: "opus-4.8",
+				cells: {
+					"W-oracle": { all: 100.0, ok: "72/72" },
+					"W-agent": { all: 98.6, ok: "71/72" },
+					"W-agent-history": {
+						all: 100.0,
+						ok: "72/72",
+						win: 100.0,
+						winOk: "36/36",
+						post: 100.0,
+						postOk: "36/36",
+					},
+				},
+			},
+		];
+		document.getElementById("legend-17").innerHTML =
+			WARMS.map(
+				(c) =>
+					'<span class="key"><span class="chip" style="background:' +
+					WCOLOR[c] +
+					'"></span><span class="code">' +
+					c +
+					"</span> " +
+					WNAMES[c] +
+					"</span>",
+			).join("") +
+			'<span class="key">history rows: ○ within-window · ● post-truncation</span>';
+		const W = 880,
+			ROW = 34,
+			T = 8,
+			B = 40,
+			L = 250,
+			R = 24;
+		const rows = [];
+		for (const m of WDATA)
+			for (const c of WARMS)
+				rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+		const H = T + rows.length * ROW + B + 16;
+		const iw = W - L - R;
+		const xOf = (v) => L + ((v - 60) / 40) * iw;
+		let g = "";
+		for (const tick of [60, 70, 80, 90, 100]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"%</text>";
+		}
+		g +=
+			'<text fill="#c3c9d4" font-size="12" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">callback success (72 cells per arm-model; zoomed 60–100% scale)</text>';
+		let marks = "",
+			hits = "";
+		rows.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				cy +
+				'" y2="' +
+				cy +
+				'" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.arm +
+				" · " +
+				row.model
+					.replace("-3.5-flash", "")
+					.replace("-4.5", "")
+					.replace("-4.8", "") +
+				"</text>";
+			const c = row.cell;
+			if (c.win !== undefined) {
+				marks +=
+					'<line x1="' +
+					xOf(Math.min(c.win, c.post)) +
+					'" x2="' +
+					xOf(Math.max(c.win, c.post)) +
+					'" y1="' +
+					cy +
+					'" y2="' +
+					cy +
+					'" stroke="' +
+					WCOLOR[row.arm] +
+					'" stroke-width="2" opacity="0.45"/>';
+				marks +=
+					'<circle cx="' +
+					xOf(c.win) +
+					'" cy="' +
+					cy +
+					'" r="5.5" fill="hsl(217,48%,15%)" stroke="' +
+					WCOLOR[row.arm] +
+					'" stroke-width="2.5"/>';
+				marks +=
+					'<circle cx="' +
+					xOf(c.post) +
+					'" cy="' +
+					cy +
+					'" r="5.5" fill="' +
+					WCOLOR[row.arm] +
+					'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+				hits +=
+					'<circle cx="' +
+					xOf(c.post) +
+					'" cy="' +
+					cy +
+					'" r="12" fill="transparent" data-tip="' +
+					esc(
+						row.arm +
+							"\n" +
+							row.model +
+							" POST-TRUNCATION: " +
+							c.post +
+							"% (" +
+							c.postOk +
+							")",
+					) +
+					'"/>';
+				hits +=
+					'<circle cx="' +
+					xOf(c.win) +
+					'" cy="' +
+					cy +
+					'" r="12" fill="transparent" data-tip="' +
+					esc(
+						row.arm +
+							"\n" +
+							row.model +
+							" within-window: " +
+							c.win +
+							"% (" +
+							c.winOk +
+							")",
+					) +
+					'"/>';
+			} else {
+				marks +=
+					'<circle cx="' +
+					xOf(c.all) +
+					'" cy="' +
+					cy +
+					'" r="5.5" fill="' +
+					WCOLOR[row.arm] +
+					'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+				hits +=
+					'<circle cx="' +
+					xOf(c.all) +
+					'" cy="' +
+					cy +
+					'" r="12" fill="transparent" data-tip="' +
+					esc(
+						row.arm +
+							" — " +
+							WNAMES[row.arm] +
+							"\n" +
+							row.model +
+							" callbacks: " +
+							c.all +
+							"% (" +
+							c.ok +
+							")",
+					) +
+					'"/>';
+			}
+		});
+		const el = document.getElementById("fig-extraction");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Dot plot: agent-written memos tie the harness-written oracle on all three models; in the shipped history-window configuration post-truncation callbacks hold, with opus at a perfect 36 of 36." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-extraction",
+			[
+				"arm (model)",
+				"callbacks",
+				"post-truncation",
+				"memo recall",
+				"retraction",
+				"noise",
+				"tool calls/session",
+				"input/session",
+			],
+			[
+				[
+					"W-oracle (sonnet)",
+					"71/72",
+					"—",
+					"harness",
+					"harness",
+					"—",
+					"—",
+					"84,450",
+				],
+				[
+					"W-agent (sonnet)",
+					"71/72",
+					"—",
+					"36/36",
+					"12/12",
+					"0.0",
+					"4.0",
+					"136,983",
+				],
+				[
+					"W-agent-history (sonnet)",
+					"67/72",
+					"31/36",
+					"36/36",
+					"12/12",
+					"0.0",
+					"4.0",
+					"370,550",
+				],
+				[
+					"W-oracle (gemini)",
+					"72/72",
+					"—",
+					"harness",
+					"harness",
+					"—",
+					"—",
+					"82,323",
+				],
+				[
+					"W-agent (gemini)",
+					"72/72",
+					"—",
+					"36/36",
+					"12/12",
+					"0.0",
+					"4.3",
+					"104,628",
+				],
+				[
+					"W-agent-history (gemini)",
+					"71/72",
+					"35/36",
+					"36/36",
+					"12/12",
+					"0.0",
+					"4.1",
+					"327,396",
+				],
+				[
+					"W-oracle (opus)",
+					"72/72",
+					"—",
+					"harness",
+					"harness",
+					"—",
+					"—",
+					"103,569",
+				],
+				[
+					"W-agent (opus)",
+					"71/72",
+					"—",
+					"35/36",
+					"12/12",
+					"0.0",
+					"4.3",
+					"151,950",
+				],
+				[
+					"W-agent-history (opus)",
+					"72/72",
+					"36/36",
+					"36/36",
+					"12/12",
+					"0.0",
+					"4.0",
+					"420,899",
+				],
+			],
+		);
+	})();
 
-// --- Study Z: standing context — combined-task interpretation split ---
-(function () {
-	const ZARMS = ["Z-full", "Z-slice", "Z-memo"];
-	const ZNAMES = {
-		"Z-full": "whole pack in the system prompt (the shipped shape)",
-		"Z-slice": "oracle relevant slice only",
-		"Z-memo": "whole pack + rules distilled into the memo tail"
-	};
-	// stacked: obey-both (green) vs strict-form literal reading (orange); violations were ZERO everywhere
-	const ZCOLOR = { both: "#199e70", strict: "#c98500" };
-	// per model per arm: [obey-both, strict-form] of 12 combined cells
-	const ZDATA = [
-		{ model: "sonnet-4.5", cells: { "Z-full": [2, 10], "Z-slice": [3, 9], "Z-memo": [11, 1] } },
-		{ model: "gemini-3.5-flash", cells: { "Z-full": [3, 9], "Z-slice": [11, 1], "Z-memo": [8, 4] } },
-		{ model: "opus-4.8", cells: { "Z-full": [6, 6], "Z-slice": [0, 12], "Z-memo": [4, 8] } }
-	];
-	document.getElementById("legend-20").innerHTML =
-		'<span class="key"><span class="chip" style="background:' + ZCOLOR.both + '"></span>satisfied BOTH (format + product™ appended)</span>' +
-		'<span class="key"><span class="chip" style="background:' + ZCOLOR.strict + '"></span>obeyed the format rule LITERALLY (exact email | city, no mention)</span>' +
-		'<span class="key">every one of 324 cells landed in one of these two readings — zero rule violations, zero contamination; facts and rules were 100% in every arm</span>';
-	const W = 880, ROW = 30, T = 8, B = 40, L = 250, R = 24;
-	const rows = [];
-	for (const m of ZDATA) for (const c of ZARMS) rows.push({ model: m.model, arm: c, cell: m.cells[c] });
-	const H = T + rows.length * ROW + B + 12;
-	const iw = W - L - R;
-	const xOf = v => L + (v / 12) * iw;
-	let g = "";
-	for (const tick of [0, 3, 6, 9, 12]) {
-		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '</text>';
-	}
-	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">conflicted combined cells (of 12) by how the model resolved the rule-vs-instruction collision</text>';
-	let marks = "", hits = "";
-	rows.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + row.model.replace("-3.5-flash", "").replace("-4.5", "").replace("-4.8", "") + '</text>';
-		const [both, strict] = row.cell;
-		const wBoth = (both / 12) * iw, wStrict = (strict / 12) * iw;
-		if (both > 0) marks += '<rect x="' + L + '" y="' + (cy - 8) + '" width="' + Math.max(wBoth - 2, 1) + '" height="16" fill="' + ZCOLOR.both + '" rx="3"/>';
-		if (strict > 0) marks += '<rect x="' + (L + wBoth) + '" y="' + (cy - 8) + '" width="' + Math.max(wStrict - 2, 1) + '" height="16" fill="' + ZCOLOR.strict + '" rx="3"/>';
-		hits += '<rect x="' + L + '" y="' + (cy - 11) + '" width="' + iw + '" height="22" fill="transparent" data-tip="' + esc(row.arm + " — " + ZNAMES[row.arm] + "\n" + row.model + ": satisfied both " + both + "/12 · literal form reading " + strict + "/12 · violations 0 · contamination 0") + '"/>';
-	});
-	const el = document.getElementById("fig-standing");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Stacked bar chart: every conflicted cell resolved into one of two clean readings, and the strongest model took the literal rule reading most often; the memo arm shifts sonnet toward satisfying both." style="min-width:640px">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-standing", ["arm (model)", "facts", "rules", "combined (registered)", "obeyed both", "literal reading", "input cost vs uncached"],
-		[
-			["Z-full (sonnet)", "12/12", "12/12", "2/12", "2", "10", "\u221224.6%"],
-			["Z-slice (sonnet)", "12/12", "12/12", "3/12", "3", "9", "\u22120.0%"],
-			["Z-memo (sonnet)", "12/12", "12/12", "11/12", "11", "1", "\u221242.5%"],
-			["Z-full (gemini)", "12/12", "12/12", "3/12", "3", "9", "\u22120.0%"],
-			["Z-slice (gemini)", "12/12", "12/12", "11/12", "11", "1", "\u22120.0%"],
-			["Z-memo (gemini)", "12/12", "12/12", "8/12", "8", "4", "\u22120.0%"],
-			["Z-full (opus)", "12/12", "12/12", "6/12", "6", "6", "\u221224.9%"],
-			["Z-slice (opus)", "12/12", "12/12", "0/12", "0", "12", "+10.8%"],
-			["Z-memo (opus)", "12/12", "12/12", "4/12", "4", "8", "\u221243.0%"]
-		]);
-})();
+	// --- Study X: edit-anaphora carrier dot plot ---
+	(function () {
+		const XARMS = ["X-history", "X-window2", "X-lastedit", "X-stateless"];
+		const XNAMES = {
+			"X-history": "full conversation history",
+			"X-window2": "last 2 exchanges",
+			"X-lastedit": "one-line app-side last-edit echo",
+			"X-stateless": "no carrier (skeleton view only)",
+		};
+		const XCOLOR = {
+			"X-history": "#e66767",
+			"X-window2": "#9085e9",
+			"X-lastedit": "#199e70",
+			"X-stateless": "#c98500",
+		};
+		const XDATA = [
+			{
+				model: "sonnet-4.5",
+				cells: {
+					"X-history": {
+						rate: 100.0,
+						low: 93,
+						high: 100,
+						ok: "48/48",
+						note: "",
+					},
+					"X-window2": {
+						rate: 93.8,
+						low: 83,
+						high: 98,
+						ok: "45/48",
+						note: "repeat 9/12",
+					},
+					"X-lastedit": {
+						rate: 89.6,
+						low: 78,
+						high: 95,
+						ok: "43/48",
+						note: "repeat 7/12 — the compressed-carrier strain point; amend + undo perfect",
+					},
+					"X-stateless": {
+						rate: 0,
+						low: 0,
+						high: 7,
+						ok: "0/48",
+						note: "all 48 failures: valid silently-guessed patches",
+					},
+				},
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: {
+					"X-history": {
+						rate: 100.0,
+						low: 93,
+						high: 100,
+						ok: "48/48",
+						note: "",
+					},
+					"X-window2": {
+						rate: 85.4,
+						low: 73,
+						high: 93,
+						ok: "41/48",
+						note: "repeat 5/12 (p = 0.016 vs history)",
+					},
+					"X-lastedit": {
+						rate: 97.9,
+						low: 89,
+						high: 100,
+						ok: "47/48",
+						note: "p = 1.0 vs history",
+					},
+					"X-stateless": {
+						rate: 0,
+						low: 0,
+						high: 7,
+						ok: "0/48",
+						note: "all 48 failures: valid silently-guessed patches",
+					},
+				},
+			},
+			{
+				model: "opus-4.8",
+				cells: {
+					"X-history": {
+						rate: 95.8,
+						low: 86,
+						high: 99,
+						ok: "46/48",
+						note: "history itself dropped two undos",
+					},
+					"X-window2": {
+						rate: 89.6,
+						low: 78,
+						high: 95,
+						ok: "43/48",
+						note: "repeat 8/12",
+					},
+					"X-lastedit": {
+						rate: 100.0,
+						low: 93,
+						high: 100,
+						ok: "48/48",
+						note: "the echo BEATS the transcript on the production tier",
+					},
+					"X-stateless": {
+						rate: 0,
+						low: 0,
+						high: 7,
+						ok: "0/48",
+						note: "all 48 failures: valid silently-guessed patches",
+					},
+				},
+			},
+		];
+		document.getElementById("legend-18").innerHTML = XARMS.map(
+			(c) =>
+				'<span class="key"><span class="chip" style="background:' +
+				XCOLOR[c] +
+				'"></span><span class="code">' +
+				c +
+				"</span> " +
+				XNAMES[c] +
+				"</span>",
+		).join("");
+		const W = 880,
+			ROW = 34,
+			T = 8,
+			B = 40,
+			L = 235,
+			R = 24;
+		const rows = [];
+		for (const m of XDATA)
+			for (const c of XARMS)
+				rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+		const H = T + rows.length * ROW + B + 16;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 25, 50, 75, 100]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"%</text>";
+		}
+		g +=
+			'<text fill="#c3c9d4" font-size="12" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">anaphora-cell success by carrier (48 cells per arm-model; Wilson 95% intervals)</text>';
+		let marks = "",
+			hits = "";
+		rows.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(L + iw) +
+				'" y1="' +
+				cy +
+				'" y2="' +
+				cy +
+				'" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.arm +
+				" · " +
+				row.model
+					.replace("-3.5-flash", "")
+					.replace("-4.5", "")
+					.replace("-4.8", "") +
+				"</text>";
+			const c = row.cell;
+			marks +=
+				'<line x1="' +
+				xOf(c.low) +
+				'" x2="' +
+				xOf(c.high) +
+				'" y1="' +
+				cy +
+				'" y2="' +
+				cy +
+				'" stroke="' +
+				XCOLOR[row.arm] +
+				'" stroke-width="1.5" opacity="0.4"/>';
+			marks +=
+				'<circle cx="' +
+				xOf(c.rate) +
+				'" cy="' +
+				cy +
+				'" r="5.5" fill="' +
+				XCOLOR[row.arm] +
+				'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+			hits +=
+				'<circle cx="' +
+				xOf(c.rate) +
+				'" cy="' +
+				cy +
+				'" r="12" fill="transparent" data-tip="' +
+				esc(
+					row.arm +
+						" — " +
+						XNAMES[row.arm] +
+						"\n" +
+						row.model +
+						": " +
+						c.rate +
+						"% (" +
+						c.ok +
+						") · CI [" +
+						c.low +
+						"%, " +
+						c.high +
+						"%]" +
+						(c.note ? "\n" + c.note : ""),
+				) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-anaphora");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Dot plot: without a carrier, anaphora resolution sits at 0% on every model; the one-line last-edit echo ties full history and beats it on opus." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-anaphora",
+			[
+				"carrier (model)",
+				"anaphora",
+				"amend",
+				"repeat",
+				"undo",
+				"failure anatomy",
+				"input/session",
+			],
+			[
+				[
+					"X-history (sonnet)",
+					"48/48",
+					"24/24",
+					"12/12",
+					"12/12",
+					"—",
+					"53,480",
+				],
+				[
+					"X-window2 (sonnet)",
+					"45/48",
+					"24/24",
+					"9/12",
+					"12/12",
+					"3/3 guessed",
+					"29,565",
+				],
+				[
+					"X-lastedit (sonnet)",
+					"43/48",
+					"24/24",
+					"7/12",
+					"12/12",
+					"5/5 guessed",
+					"27,795",
+				],
+				[
+					"X-stateless (sonnet)",
+					"0/48",
+					"0/24",
+					"0/12",
+					"0/12",
+					"48/48 guessed",
+					"36,563",
+				],
+				[
+					"X-history (gemini)",
+					"48/48",
+					"24/24",
+					"12/12",
+					"12/12",
+					"—",
+					"50,530",
+				],
+				[
+					"X-window2 (gemini)",
+					"41/48",
+					"24/24",
+					"5/12",
+					"12/12",
+					"7/7 guessed",
+					"27,834",
+				],
+				[
+					"X-lastedit (gemini)",
+					"47/48",
+					"23/24",
+					"12/12",
+					"12/12",
+					"1/1 guessed",
+					"26,244",
+				],
+				[
+					"X-stateless (gemini)",
+					"0/48",
+					"0/24",
+					"0/12",
+					"0/12",
+					"48/48 guessed",
+					"33,654",
+				],
+				[
+					"X-history (opus)",
+					"46/48",
+					"24/24",
+					"12/12",
+					"10/12",
+					"2/2 guessed",
+					"58,091",
+				],
+				[
+					"X-window2 (opus)",
+					"43/48",
+					"24/24",
+					"8/12",
+					"11/12",
+					"5/5 guessed",
+					"32,169",
+				],
+				[
+					"X-lastedit (opus)",
+					"48/48",
+					"24/24",
+					"12/12",
+					"12/12",
+					"—",
+					"31,827",
+				],
+				[
+					"X-stateless (opus)",
+					"0/48",
+					"0/24",
+					"0/12",
+					"0/12",
+					"48/48 guessed",
+					"41,175",
+				],
+			],
+		);
+	})();
 
+	// --- Study Y: naturalistic extraction twin bars ---
+	(function () {
+		const YARMS = ["Y-formulaic", "Y-casual", "Y-casual-history"];
+		const YNAMES = {
+			"Y-formulaic": "formulaic declarations (the W control)",
+			"Y-casual": "casual declarations (registered pools)",
+			"Y-casual-history": "casual + the shipped history window",
+		};
+		const YCOLOR = {
+			"Y-formulaic": "#9085e9",
+			"Y-casual": "#199e70",
+			"Y-casual-history": "#3987e5",
+		};
+		// callbacks/48 · recall/36 · retraction/12 · noise per session
+		const YDATA = [
+			{
+				model: "sonnet-4.5",
+				cells: {
+					"Y-formulaic": [48, 36, 12, 0],
+					"Y-casual": [48, 36, 12, 0],
+					"Y-casual-history": [47, 35, 12, 0],
+				},
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: {
+					"Y-formulaic": [48, 36, 12, 0],
+					"Y-casual": [48, 36, 12, 0],
+					"Y-casual-history": [48, 34, 12, 0],
+				},
+			},
+			{
+				model: "opus-4.8",
+				cells: {
+					"Y-formulaic": [48, 36, 12, 0],
+					"Y-casual": [48, 36, 12, 0],
+					"Y-casual-history": [48, 35, 12, 0],
+				},
+			},
+		];
+		document.getElementById("legend-19").innerHTML =
+			YARMS.map(
+				(c) =>
+					'<span class="key"><span class="chip" style="background:' +
+					YCOLOR[c] +
+					'"></span><span class="code">' +
+					c +
+					"</span> " +
+					YNAMES[c] +
+					"</span>",
+			).join("") +
+			'<span class="key">bars: callback success out of 48 · tooltip carries recall, retractions, noise</span>';
+		const W = 880,
+			ROW = 30,
+			T = 8,
+			B = 40,
+			L = 250,
+			R = 24;
+		const rows = [];
+		for (const m of YDATA)
+			for (const c of YARMS)
+				rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+		const H = T + rows.length * ROW + B + 12;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 48) * iw;
+		let g = "";
+		for (const tick of [0, 12, 24, 36, 48]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		g +=
+			'<text fill="#c3c9d4" font-size="12" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">callback cells passed (of 48) — casual and formulaic twins tie exactly on every model</text>';
+		let marks = "",
+			hits = "";
+		rows.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.arm +
+				" · " +
+				row.model
+					.replace("-3.5-flash", "")
+					.replace("-4.5", "")
+					.replace("-4.8", "") +
+				"</text>";
+			const [cb, recall, retract, noise] = row.cell;
+			marks +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				(cy - 8) +
+				'" width="' +
+				(cb / 48) * iw +
+				'" height="16" fill="' +
+				YCOLOR[row.arm] +
+				'" rx="3"/>';
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				(cy - 11) +
+				'" width="' +
+				iw +
+				'" height="22" fill="transparent" data-tip="' +
+				esc(
+					row.arm +
+						" — " +
+						YNAMES[row.arm] +
+						"\n" +
+						row.model +
+						": callbacks " +
+						cb +
+						"/48 · recall " +
+						recall +
+						"/36 · retractions " +
+						retract +
+						"/12 · noise " +
+						noise.toFixed(2) +
+						"/session",
+				) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-speech");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Bar chart: casual and formulaic declaration phrasing tie exactly on callback success across all three models, with zero chatter-induced false notes." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-speech",
+			[
+				"arm (model)",
+				"callbacks",
+				"recall",
+				"retractions",
+				"noise/session",
+				"tool calls/session",
+			],
+			[
+				["Y-formulaic (sonnet)", "48/48", "36/36", "12/12", "0.00", "4.0"],
+				["Y-casual (sonnet)", "48/48", "36/36", "12/12", "0.00", "4.0"],
+				["Y-casual-history (sonnet)", "47/48", "35/36", "12/12", "0.00", "3.9"],
+				["Y-formulaic (gemini)", "48/48", "36/36", "12/12", "0.00", "4.1"],
+				["Y-casual (gemini)", "48/48", "36/36", "12/12", "0.00", "4.2"],
+				["Y-casual-history (gemini)", "48/48", "34/36", "12/12", "0.00", "3.8"],
+				["Y-formulaic (opus)", "48/48", "36/36", "12/12", "0.00", "4.0"],
+				["Y-casual (opus)", "48/48", "36/36", "12/12", "0.00", "4.0"],
+				["Y-casual-history (opus)", "48/48", "35/36", "12/12", "0.00", "3.9"],
+			],
+		);
+	})();
 
+	// --- Study Z: standing context — combined-task interpretation split ---
+	(function () {
+		const ZARMS = ["Z-full", "Z-slice", "Z-memo"];
+		const ZNAMES = {
+			"Z-full": "whole pack in the system prompt (the shipped shape)",
+			"Z-slice": "oracle relevant slice only",
+			"Z-memo": "whole pack + rules distilled into the memo tail",
+		};
+		// stacked: obey-both (green) vs strict-form literal reading (orange); violations were ZERO everywhere
+		const ZCOLOR = { both: "#199e70", strict: "#c98500" };
+		// per model per arm: [obey-both, strict-form] of 12 combined cells
+		const ZDATA = [
+			{
+				model: "sonnet-4.5",
+				cells: { "Z-full": [2, 10], "Z-slice": [3, 9], "Z-memo": [11, 1] },
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: { "Z-full": [3, 9], "Z-slice": [11, 1], "Z-memo": [8, 4] },
+			},
+			{
+				model: "opus-4.8",
+				cells: { "Z-full": [6, 6], "Z-slice": [0, 12], "Z-memo": [4, 8] },
+			},
+		];
+		document.getElementById("legend-20").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			ZCOLOR.both +
+			'"></span>satisfied BOTH (format + product™ appended)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			ZCOLOR.strict +
+			'"></span>obeyed the format rule LITERALLY (exact email | city, no mention)</span>' +
+			'<span class="key">every one of 324 cells landed in one of these two readings — zero rule violations, zero contamination; facts and rules were 100% in every arm</span>';
+		const W = 880,
+			ROW = 30,
+			T = 8,
+			B = 40,
+			L = 250,
+			R = 24;
+		const rows = [];
+		for (const m of ZDATA)
+			for (const c of ZARMS)
+				rows.push({ model: m.model, arm: c, cell: m.cells[c] });
+		const H = T + rows.length * ROW + B + 12;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 12) * iw;
+		let g = "";
+		for (const tick of [0, 3, 6, 9, 12]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		g +=
+			'<text fill="#c3c9d4" font-size="12" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">conflicted combined cells (of 12) by how the model resolved the rule-vs-instruction collision</text>';
+		let marks = "",
+			hits = "";
+		rows.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.arm +
+				" · " +
+				row.model
+					.replace("-3.5-flash", "")
+					.replace("-4.5", "")
+					.replace("-4.8", "") +
+				"</text>";
+			const [both, strict] = row.cell;
+			const wBoth = (both / 12) * iw,
+				wStrict = (strict / 12) * iw;
+			if (both > 0)
+				marks +=
+					'<rect x="' +
+					L +
+					'" y="' +
+					(cy - 8) +
+					'" width="' +
+					Math.max(wBoth - 2, 1) +
+					'" height="16" fill="' +
+					ZCOLOR.both +
+					'" rx="3"/>';
+			if (strict > 0)
+				marks +=
+					'<rect x="' +
+					(L + wBoth) +
+					'" y="' +
+					(cy - 8) +
+					'" width="' +
+					Math.max(wStrict - 2, 1) +
+					'" height="16" fill="' +
+					ZCOLOR.strict +
+					'" rx="3"/>';
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				(cy - 11) +
+				'" width="' +
+				iw +
+				'" height="22" fill="transparent" data-tip="' +
+				esc(
+					row.arm +
+						" — " +
+						ZNAMES[row.arm] +
+						"\n" +
+						row.model +
+						": satisfied both " +
+						both +
+						"/12 · literal form reading " +
+						strict +
+						"/12 · violations 0 · contamination 0",
+				) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-standing");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Stacked bar chart: every conflicted cell resolved into one of two clean readings, and the strongest model took the literal rule reading most often; the memo arm shifts sonnet toward satisfying both." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-standing",
+			[
+				"arm (model)",
+				"facts",
+				"rules",
+				"combined (registered)",
+				"obeyed both",
+				"literal reading",
+				"input cost vs uncached",
+			],
+			[
+				["Z-full (sonnet)", "12/12", "12/12", "2/12", "2", "10", "\u221224.6%"],
+				["Z-slice (sonnet)", "12/12", "12/12", "3/12", "3", "9", "\u22120.0%"],
+				[
+					"Z-memo (sonnet)",
+					"12/12",
+					"12/12",
+					"11/12",
+					"11",
+					"1",
+					"\u221242.5%",
+				],
+				["Z-full (gemini)", "12/12", "12/12", "3/12", "3", "9", "\u22120.0%"],
+				[
+					"Z-slice (gemini)",
+					"12/12",
+					"12/12",
+					"11/12",
+					"11",
+					"1",
+					"\u22120.0%",
+				],
+				["Z-memo (gemini)", "12/12", "12/12", "8/12", "8", "4", "\u22120.0%"],
+				["Z-full (opus)", "12/12", "12/12", "6/12", "6", "6", "\u221224.9%"],
+				["Z-slice (opus)", "12/12", "12/12", "0/12", "0", "12", "+10.8%"],
+				["Z-memo (opus)", "12/12", "12/12", "4/12", "4", "8", "\u221243.0%"],
+			],
+		);
+	})();
 
-// --- Study AA: conflict resolution — literal readings by arm (the refuted gradient) ---
-(function () {
-	const AARMS = ["AA-base", "AA-priority", "AA-soft", "AA-memo"];
-	const ANAMES = {
-		"AA-base": "pack as-is (the confirmation arm)",
-		"AA-priority": "+ priority meta-rule (user wins)",
-		"AA-soft": "rules soft-phrased (generally prefer)",
-		"AA-memo": "rules restated in the memo tail"
-	};
-	const ACOLOR = { "AA-base": "#3987e5", "AA-priority": "#9085e9", "AA-soft": "#199e70", "AA-memo": "#c98500" };
-	// literal readings out of 24 (ri form + override enforced)
-	const ADATA = [
-		{ model: "sonnet-4.5", cells: { "AA-base": 10, "AA-priority": 8, "AA-soft": 2, "AA-memo": 10 } },
-		{ model: "gemini-3.5-flash", cells: { "AA-base": 7, "AA-priority": 3, "AA-soft": 0, "AA-memo": 0 } },
-		{ model: "opus-4.8", cells: { "AA-base": 0, "AA-priority": 0, "AA-soft": 0, "AA-memo": 12 } }
-	];
-	// memo-arm literal on opus/sonnet is the countermand trampling (enforced ™), not form-strictness
-	document.getElementById("legend-21").innerHTML = AARMS.map(c =>
-		'<span class="key"><span class="chip" style="background:' + ACOLOR[c] + '"></span><span class="code">' + c + '</span> ' + ANAMES[c] + '</span>'
-	).join("") + '<span class="key">bars: literal/rule-enforced readings out of 24 conflicted cells — the refuted prediction said opus would have the LONGEST base bar; it has none</span>';
-	const W = 880, ROW = 30, T = 8, B = 40, L = 250, R = 24;
-	const rows = [];
-	for (const m of ADATA) for (const c of AARMS) rows.push({ model: m.model, arm: c, v: m.cells[c] });
-	const H = T + rows.length * ROW + B + 12;
-	const iw = W - L - R;
-	const xOf = v => L + (v / 24) * iw;
-	let g = "";
-	for (const tick of [0, 6, 12, 18, 24]) {
-		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '</text>';
-	}
-	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">literal readings (of 24 conflicted cells) — memo-arm bars on opus/sonnet are the countermand-trampling footgun, not form-strictness</text>';
-	let marks = "", hits = "";
-	rows.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.arm + " · " + row.model.replace("-3.5-flash", "").replace("-4.5", "").replace("-4.8", "") + '</text>';
-		if (row.v > 0) marks += '<rect x="' + L + '" y="' + (cy - 8) + '" width="' + ((row.v / 24) * iw) + '" height="16" fill="' + ACOLOR[row.arm] + '" rx="3"/>';
-		else marks += '<circle cx="' + (L + 4) + '" cy="' + cy + '" r="3.5" fill="' + ACOLOR[row.arm] + '"/>';
-		hits += '<rect x="' + L + '" y="' + (cy - 11) + '" width="' + iw + '" height="22" fill="transparent" data-tip="' + esc(row.arm + " — " + ANAMES[row.arm] + "\n" + row.model + ": literal readings " + row.v + "/24 · violations 0 · contamination 0") + '"/>';
-	});
-	const el = document.getElementById("fig-conflict");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Bar chart: opus took zero literal readings in the confirmation arm, inverting the refuted capability-strictness prediction; soft phrasing collapses literal readings; the memo arm shows the countermand-trampling footgun." style="min-width:640px">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-conflict", ["arm (model)", "literal (of 24)", "instruction-favored (of 24)", "countermand honored (of 12)", "violations", "contamination"],
-		[
-			["AA-base (sonnet)", "10", "14", "12/12", "0", "0"],
-			["AA-priority (sonnet)", "8", "16", "12/12", "0", "0"],
-			["AA-soft (sonnet)", "2", "22", "12/12", "0", "0"],
-			["AA-memo (sonnet)", "10", "14", "3/12 ← memo tramples", "0", "0"],
-			["AA-base (gemini)", "7", "17", "12/12", "0", "0"],
-			["AA-priority (gemini)", "3", "21", "12/12", "0", "0"],
-			["AA-soft (gemini)", "0", "24", "12/12", "0", "0"],
-			["AA-memo (gemini)", "0", "24", "12/12", "0", "0"],
-			["AA-base (opus)", "0", "24", "12/12", "0", "0"],
-			["AA-priority (opus)", "0", "24", "12/12", "0", "0"],
-			["AA-soft (opus)", "0", "24", "12/12", "0", "0"],
-			["AA-memo (opus)", "12", "12", "0/12 ← memo tramples", "0", "0"]
-		]);
-})();
+	// --- Study AA: conflict resolution — literal readings by arm (the refuted gradient) ---
+	(function () {
+		const AARMS = ["AA-base", "AA-priority", "AA-soft", "AA-memo"];
+		const ANAMES = {
+			"AA-base": "pack as-is (the confirmation arm)",
+			"AA-priority": "+ priority meta-rule (user wins)",
+			"AA-soft": "rules soft-phrased (generally prefer)",
+			"AA-memo": "rules restated in the memo tail",
+		};
+		const ACOLOR = {
+			"AA-base": "#3987e5",
+			"AA-priority": "#9085e9",
+			"AA-soft": "#199e70",
+			"AA-memo": "#c98500",
+		};
+		// literal readings out of 24 (ri form + override enforced)
+		const ADATA = [
+			{
+				model: "sonnet-4.5",
+				cells: { "AA-base": 10, "AA-priority": 8, "AA-soft": 2, "AA-memo": 10 },
+			},
+			{
+				model: "gemini-3.5-flash",
+				cells: { "AA-base": 7, "AA-priority": 3, "AA-soft": 0, "AA-memo": 0 },
+			},
+			{
+				model: "opus-4.8",
+				cells: { "AA-base": 0, "AA-priority": 0, "AA-soft": 0, "AA-memo": 12 },
+			},
+		];
+		// memo-arm literal on opus/sonnet is the countermand trampling (enforced ™), not form-strictness
+		document.getElementById("legend-21").innerHTML =
+			AARMS.map(
+				(c) =>
+					'<span class="key"><span class="chip" style="background:' +
+					ACOLOR[c] +
+					'"></span><span class="code">' +
+					c +
+					"</span> " +
+					ANAMES[c] +
+					"</span>",
+			).join("") +
+			'<span class="key">bars: literal/rule-enforced readings out of 24 conflicted cells — the refuted prediction said opus would have the LONGEST base bar; it has none</span>';
+		const W = 880,
+			ROW = 30,
+			T = 8,
+			B = 40,
+			L = 250,
+			R = 24;
+		const rows = [];
+		for (const m of ADATA)
+			for (const c of AARMS)
+				rows.push({ model: m.model, arm: c, v: m.cells[c] });
+		const H = T + rows.length * ROW + B + 12;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 24) * iw;
+		let g = "";
+		for (const tick of [0, 6, 12, 18, 24]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		g +=
+			'<text fill="#c3c9d4" font-size="12" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">literal readings (of 24 conflicted cells) — memo-arm bars on opus/sonnet are the countermand-trampling footgun, not form-strictness</text>';
+		let marks = "",
+			hits = "";
+		rows.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.arm +
+				" · " +
+				row.model
+					.replace("-3.5-flash", "")
+					.replace("-4.5", "")
+					.replace("-4.8", "") +
+				"</text>";
+			if (row.v > 0)
+				marks +=
+					'<rect x="' +
+					L +
+					'" y="' +
+					(cy - 8) +
+					'" width="' +
+					(row.v / 24) * iw +
+					'" height="16" fill="' +
+					ACOLOR[row.arm] +
+					'" rx="3"/>';
+			else
+				marks +=
+					'<circle cx="' +
+					(L + 4) +
+					'" cy="' +
+					cy +
+					'" r="3.5" fill="' +
+					ACOLOR[row.arm] +
+					'"/>';
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				(cy - 11) +
+				'" width="' +
+				iw +
+				'" height="22" fill="transparent" data-tip="' +
+				esc(
+					row.arm +
+						" — " +
+						ANAMES[row.arm] +
+						"\n" +
+						row.model +
+						": literal readings " +
+						row.v +
+						"/24 · violations 0 · contamination 0",
+				) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-conflict");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Bar chart: opus took zero literal readings in the confirmation arm, inverting the refuted capability-strictness prediction; soft phrasing collapses literal readings; the memo arm shows the countermand-trampling footgun." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-conflict",
+			[
+				"arm (model)",
+				"literal (of 24)",
+				"instruction-favored (of 24)",
+				"countermand honored (of 12)",
+				"violations",
+				"contamination",
+			],
+			[
+				["AA-base (sonnet)", "10", "14", "12/12", "0", "0"],
+				["AA-priority (sonnet)", "8", "16", "12/12", "0", "0"],
+				["AA-soft (sonnet)", "2", "22", "12/12", "0", "0"],
+				["AA-memo (sonnet)", "10", "14", "3/12 ← memo tramples", "0", "0"],
+				["AA-base (gemini)", "7", "17", "12/12", "0", "0"],
+				["AA-priority (gemini)", "3", "21", "12/12", "0", "0"],
+				["AA-soft (gemini)", "0", "24", "12/12", "0", "0"],
+				["AA-memo (gemini)", "0", "24", "12/12", "0", "0"],
+				["AA-base (opus)", "0", "24", "12/12", "0", "0"],
+				["AA-priority (opus)", "0", "24", "12/12", "0", "0"],
+				["AA-soft (opus)", "0", "24", "12/12", "0", "0"],
+				["AA-memo (opus)", "12", "12", "0/12 ← memo tramples", "0", "0"],
+			],
+		);
+	})();
 
-
-
-// --- Study AC: ask versus guess — the villain flips ---
-(function () {
-	const ROWS = [
-		{ label: "no hatch (the U replication)", key: "base", asked: [0, 0, 0], guessed: [45, 45, 45] },
-		{ label: "NEED-INFO prompt rule", key: "rule", asked: [45, 45, 45], guessed: [0, 0, 0] },
-		{ label: "ask_user tool", key: "tool", asked: [45, 45, 45], guessed: [0, 0, 0] }
-	];
-	const MODELS = ["sonnet-4.5", "gemini-3.5-flash", "opus-4.8"];
-	const CASK = "#199e70", CGUESS = "#e66767";
-	document.getElementById("legend-22").innerHTML =
-		'<span class="key"><span class="chip" style="background:' + CASK + '"></span>asked (named the exact missing node)</span>' +
-		'<span class="key"><span class="chip" style="background:' + CGUESS + '"></span>silent wrong patch (valid, applied, confidently wrong)</span>' +
-		'<span class="key">bars: 45 provably-unsolvable cells per model per arm · solvable twins: zero false asks, solve untouched (in the table)</span>';
-	const W = 880, ROW = 30, T = 8, B = 40, L = 250, R = 24;
-	const rows = [];
-	ROWS.forEach(a => MODELS.forEach((m, mi) => rows.push({ arm: a.label, model: m, asked: a.asked[mi], guessed: a.guessed[mi] })));
-	const H = T + rows.length * ROW + B + 12;
-	const iw = W - L - R;
-	const xOf = v => L + (v / 45) * iw;
-	let g = "";
-	for (const tick of [0, 15, 30, 45]) {
-		const x = xOf(tick);
-		g += '<line x1="' + x + '" x2="' + x + '" y1="' + T + '" y2="' + (H - B) + '" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + x + '" y="' + (H - B + 20) + '" text-anchor="middle">' + tick + '</text>';
-	}
-	g += '<text fill="#c3c9d4" font-size="12" x="' + (L + iw / 2) + '" y="' + (H - 4) + '" text-anchor="middle">outcomes on 45 unsolvable cells — one sentence of permission flips every silent guess into a precise question</text>';
-	let marks = "", hits = "";
-	rows.forEach((row, ri) => {
-		const cy = T + ri * ROW + ROW / 2;
-		g += '<text fill="#c3c9d4" font-size="11.5" x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end">' + row.model + " · " + row.arm.split(" (")[0] + '</text>';
-		if (row.asked > 0) marks += '<rect x="' + L + '" y="' + (cy - 8) + '" width="' + ((row.asked / 45) * iw) + '" height="16" fill="' + CASK + '" rx="3"/>';
-		if (row.guessed > 0) marks += '<rect x="' + xOf(row.asked) + '" y="' + (cy - 8) + '" width="' + Math.max((row.guessed / 45) * iw - 2, 1) + '" height="16" fill="' + CGUESS + '" rx="3"/>';
-		hits += '<rect x="' + L + '" y="' + (cy - 11) + '" width="' + iw + '" height="22" fill="transparent" data-tip="' + esc(row.arm + "\n" + row.model + ": asked " + row.asked + "/45 · silent wrong patch " + row.guessed + "/45 · false asks on solvable twins 0/45") + '"/>';
-	});
-	const el = document.getElementById("fig-ask");
-	el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Bar chart: without a hatch every model silently guessed on all 45 unsolvable cells; with either escape hatch every model asked on all 45, with zero false asks on solvable twins." style="min-width:640px">' + g + marks + hits + '</svg>';
-	el.querySelectorAll("[data-tip]").forEach(n => { n.addEventListener("mousemove", e => showTip(e, n.dataset.tip)); n.addEventListener("mouseleave", hideTip); });
-	table("tbl-ask", ["arm (model)", "unsolvable: asked", "unsolvable: silent guess", "solvable: false asks", "solvable: solved"],
-		[
-			["no hatch (sonnet)", "0/45", "45/45", "0/45", "45/45"],
-			["no hatch (gemini)", "0/45", "45/45", "0/45", "45/45"],
-			["no hatch (opus)", "0/45", "45/45", "0/45", "45/45"],
-			["NEED-INFO rule (sonnet)", "45/45", "0/45", "0/45", "45/45"],
-			["NEED-INFO rule (gemini)", "45/45", "0/45", "0/45", "45/45"],
-			["NEED-INFO rule (opus)", "45/45", "0/45", "0/45", "45/45"],
-			["ask_user tool (sonnet)", "45/45", "0/45", "0/45", "45/45"],
-			["ask_user tool (gemini)", "45/45", "0/45", "0/45", "45/45"],
-			["ask_user tool (opus)", "45/45", "0/45", "0/45", "45/45"]
-		]);
-})();
-
+	// --- Study AC: ask versus guess — the villain flips ---
+	(function () {
+		const ROWS = [
+			{
+				label: "no hatch (the U replication)",
+				key: "base",
+				asked: [0, 0, 0],
+				guessed: [45, 45, 45],
+			},
+			{
+				label: "NEED-INFO prompt rule",
+				key: "rule",
+				asked: [45, 45, 45],
+				guessed: [0, 0, 0],
+			},
+			{
+				label: "ask_user tool",
+				key: "tool",
+				asked: [45, 45, 45],
+				guessed: [0, 0, 0],
+			},
+		];
+		const MODELS = ["sonnet-4.5", "gemini-3.5-flash", "opus-4.8"];
+		const CASK = "#199e70",
+			CGUESS = "#e66767";
+		document.getElementById("legend-22").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CASK +
+			'"></span>asked (named the exact missing node)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CGUESS +
+			'"></span>silent wrong patch (valid, applied, confidently wrong)</span>' +
+			'<span class="key">bars: 45 provably-unsolvable cells per model per arm · solvable twins: zero false asks, solve untouched (in the table)</span>';
+		const W = 880,
+			ROW = 30,
+			T = 8,
+			B = 40,
+			L = 250,
+			R = 24;
+		const rows = [];
+		ROWS.forEach((a) =>
+			MODELS.forEach((m, mi) =>
+				rows.push({
+					arm: a.label,
+					model: m,
+					asked: a.asked[mi],
+					guessed: a.guessed[mi],
+				}),
+			),
+		);
+		const H = T + rows.length * ROW + B + 12;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 45) * iw;
+		let g = "";
+		for (const tick of [0, 15, 30, 45]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		g +=
+			'<text fill="#c3c9d4" font-size="12" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">outcomes on 45 unsolvable cells — one sentence of permission flips every silent guess into a precise question</text>';
+		let marks = "",
+			hits = "";
+		rows.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.model +
+				" · " +
+				row.arm.split(" (")[0] +
+				"</text>";
+			if (row.asked > 0)
+				marks +=
+					'<rect x="' +
+					L +
+					'" y="' +
+					(cy - 8) +
+					'" width="' +
+					(row.asked / 45) * iw +
+					'" height="16" fill="' +
+					CASK +
+					'" rx="3"/>';
+			if (row.guessed > 0)
+				marks +=
+					'<rect x="' +
+					xOf(row.asked) +
+					'" y="' +
+					(cy - 8) +
+					'" width="' +
+					Math.max((row.guessed / 45) * iw - 2, 1) +
+					'" height="16" fill="' +
+					CGUESS +
+					'" rx="3"/>';
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				(cy - 11) +
+				'" width="' +
+				iw +
+				'" height="22" fill="transparent" data-tip="' +
+				esc(
+					row.arm +
+						"\n" +
+						row.model +
+						": asked " +
+						row.asked +
+						"/45 · silent wrong patch " +
+						row.guessed +
+						"/45 · false asks on solvable twins 0/45",
+				) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-ask");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Bar chart: without a hatch every model silently guessed on all 45 unsolvable cells; with either escape hatch every model asked on all 45, with zero false asks on solvable twins." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-ask",
+			[
+				"arm (model)",
+				"unsolvable: asked",
+				"unsolvable: silent guess",
+				"solvable: false asks",
+				"solvable: solved",
+			],
+			[
+				["no hatch (sonnet)", "0/45", "45/45", "0/45", "45/45"],
+				["no hatch (gemini)", "0/45", "45/45", "0/45", "45/45"],
+				["no hatch (opus)", "0/45", "45/45", "0/45", "45/45"],
+				["NEED-INFO rule (sonnet)", "45/45", "0/45", "0/45", "45/45"],
+				["NEED-INFO rule (gemini)", "45/45", "0/45", "0/45", "45/45"],
+				["NEED-INFO rule (opus)", "45/45", "0/45", "0/45", "45/45"],
+				["ask_user tool (sonnet)", "45/45", "0/45", "0/45", "45/45"],
+				["ask_user tool (gemini)", "45/45", "0/45", "0/45", "45/45"],
+				["ask_user tool (opus)", "45/45", "0/45", "0/45", "45/45"],
+			],
+		);
+	})();
 }

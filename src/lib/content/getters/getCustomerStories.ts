@@ -20,7 +20,7 @@ async function loadAllCustomerStoriesJson() {
 	);
 }
 
-export async function getAllCustomerStories(): Promise<CustomerStory[]> {
+async function getAllCustomerStories(): Promise<CustomerStory[]> {
 	const stories = await loadAllCustomerStoriesJson();
 
 	const published = stories.filter(
@@ -57,9 +57,7 @@ export const allCustomerStorySlugs: string[] = allCustomerStories
 	.map((story) => story?.slug || "")
 	.filter(Boolean);
 
-export const getCustomerStoryIndexBySlug = (
-	slug: string,
-): number | undefined => {
+const getCustomerStoryIndexBySlug = (slug: string): number | undefined => {
 	return allCustomerStorySlugs.indexOf(slug);
 };
 
@@ -72,29 +70,11 @@ export const getNextCustomerStorySlug = (slug: string): string | undefined => {
 	return nextSlug;
 };
 
-export const getPreviousCustomerStorySlug = (
-	slug: string,
-): string | undefined => {
-	const index = getCustomerStoryIndexBySlug(slug);
-	if (index === undefined || index === 0) {
-		return undefined;
-	}
-	return allCustomerStorySlugs[index - 1];
-};
-
 export function getCustomerStoryBySlug(
 	slug: string,
 ): CustomerStory | undefined {
 	return allCustomerStories.find((story) => story.slug === slug);
 }
-
-export const allCustomerStoriesSitemapMeta = allCustomerStories.map((story) => {
-	return {
-		title: story.meta.title || "",
-		description: story.meta.description || "",
-		slug: story.meta.slug || "",
-	};
-});
 
 // for human readable sitemap
 function buildHumanSitemapSection() {

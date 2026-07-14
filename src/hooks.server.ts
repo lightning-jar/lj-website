@@ -2,6 +2,8 @@ import { handleErrorWithSentry, sentryHandle } from "@sentry/sveltekit";
 import { sequence } from "@sveltejs/kit/hooks";
 import type { Config } from "@sveltejs/adapter-vercel";
 
+// adapter-vercel route config, read by the framework
+// fallow-ignore-next-line unused-export
 export const config: Config = {
 	runtime: "nodejs24.x",
 };

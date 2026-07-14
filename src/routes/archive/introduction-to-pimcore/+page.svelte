@@ -163,25 +163,19 @@ const notes = [
     </blockquote>
   </section>
 
-  <section class="max-w-prose">
-    <h2 class="text-24px mb-5 font-serif font-700">Episode Info</h2>
-    <div class="grid grid-cols-[auto_1fr] gap-4 font-mono text-16px">
-      {#each info as item, index}
-        <span class="font-500">{item.heading}</span>
-        <span class="text-15px">{item.text}</span>
-        <hr class="col-span-2" />
-      {/each}
-    </div>
-  </section>
+  {#snippet episodeSection(heading: string, items: typeof info)}
+    <section class="max-w-prose">
+      <h2 class="text-24px mb-5 font-serif font-700">{heading}</h2>
+      <div class="grid grid-cols-[auto_1fr] gap-4 font-mono text-16px">
+        {#each items as item}
+          <span class="font-500">{item.heading}</span>
+          <span class="text-15px">{item.text}</span>
+          <hr class="col-span-2" />
+        {/each}
+      </div>
+    </section>
+  {/snippet}
 
-  <section class="max-w-prose">
-    <h2 class="text-24px mb-5 font-serif font-700">Episode Notes</h2>
-    <div class="grid grid-cols-[auto_1fr] gap-4 font-mono text-16px">
-      {#each notes as item, index}
-        <span class="font-500">{item.heading}</span>
-        <span class="text-15px">{item.text}</span>
-        <hr class="col-span-2" />
-      {/each}
-    </div>
-  </section>
+  {@render episodeSection("Episode Info", info)}
+  {@render episodeSection("Episode Notes", notes)}
 </div>

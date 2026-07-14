@@ -1,0 +1,10 @@
+{
+	"$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+	"ignoreDependencies": ["uno.css", "@sveltejs/kit", "svelte"],
+	"duplicates": {
+		"ignore": ["src/routes/research/barkup-bench/bench-charts.js"]
+	},
+	"health": {
+		"ignore": ["src/routes/research/barkup-bench/bench-charts.js"]
+	}
+}

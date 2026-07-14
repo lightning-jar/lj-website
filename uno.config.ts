@@ -11,7 +11,10 @@ export default defineConfig({
 	content: {
 		pipeline: {
 			// bench-charts.js emits utility classes in generated chart markup
-			include: [/\.(svelte|md|json|html)($|\?)/, /barkup-bench\/bench-charts\.js$/],
+			include: [
+				/\.(svelte|md|json|html)($|\?)/,
+				/barkup-bench\/bench-charts\.js$/,
+			],
 		},
 		filesystem: ["./src/app.html"],
 	},

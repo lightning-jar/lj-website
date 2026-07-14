@@ -1,6 +1,8 @@
 // src/routes/blog/atom.xml/+server.ts
 //
 // Blog-only Atom feed. Prerendered (varlock/env constraint).
+// SvelteKit route option, read by the framework
+// fallow-ignore-next-line unused-export
 export const prerender = true;
 
 import { ENV } from "varlock/env";

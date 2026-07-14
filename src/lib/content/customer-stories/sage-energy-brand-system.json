@@ -91,10 +91,5 @@
 			}
 		}
 	],
-	"tags": [
-		"Branding",
-		"Multi-Brand",
-		"SvelteKit",
-		"Energy"
-	]
+	"tags": ["Branding", "Multi-Brand", "SvelteKit", "Energy"]
 }

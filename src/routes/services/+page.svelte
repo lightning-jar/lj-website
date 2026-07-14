@@ -1,21 +1,9 @@
 <script lang="ts">
 // components
-import LightningButton from "$components/LightningButton.svelte";
+import PanelAdvanceArrow from "$components/PanelAdvanceArrow.svelte";
 
 // props
 let { data } = $props();
-
-// helpers
-function clickLightningButton() {
-	const lightningButton = document.querySelector(
-		"[data-lightning-button]",
-	) as HTMLButtonElement;
-	lightningButton?.click();
-}
-
-function incrementPanel() {
-	activePanel = (activePanel + 1) % panelsCount;
-}
 
 let activePanel = $state(0);
 let panelsCount: number = $derived(data?.services?.length ?? 0);
@@ -64,25 +52,8 @@ let panelsCount: number = $derived(data?.services?.length ?? 0);
       {/if}
     {/each}
 
-    <div
-      class="lg:absolute top-100px left-110% lg:right-4 group flex justify-left w-9 h-9"
-    >
-      <LightningButton
-        character="→"
-        classes="
-          border
-          border-maximumYellow
-          bg-maximumYellow
-          p-10px
-          text-oxford
-          hover:text-oxford
-          hover:bg-transparent
-          hover:!text-maximumYellow"
-        onclick={() => {
-          clickLightningButton();
-          incrementPanel();
-        }}
-      />
-    </div>
+    <PanelAdvanceArrow
+      onadvance={() => (activePanel = (activePanel + 1) % panelsCount)}
+    />
   </div>
 </div>

@@ -16,7 +16,7 @@ export type FeedOptions = {
 	feedTitle: string;
 };
 
-export function escapeXML(s: string): string {
+function escapeXML(s: string): string {
 	return s
 		.replace(/&/g, "&amp;")
 		.replace(/</g, "&lt;")

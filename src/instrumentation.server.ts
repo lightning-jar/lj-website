@@ -1,3 +1,5 @@
+// Loaded by SvelteKit via kit.experimental.instrumentation.server in svelte.config.js.
+// fallow-ignore-file unused-file
 import * as Sentry from "@sentry/sveltekit";
 
 Sentry.init({

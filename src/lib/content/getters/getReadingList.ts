@@ -26,39 +26,6 @@ export const allReadingListArticles: Article[] =
 		}),
 	);
 
-export const allReadingListArticleSlugs: string[] = allReadingListArticles
-	.map((a) => a?.slug || "")
-	.filter(Boolean);
-
-export const getReadingListArticleIndexBySlug = (
-	slug: string,
-): number | undefined => {
-	return allReadingListArticleSlugs.indexOf(slug);
-};
-
-export const getNextCustomerStorySlug = (slug: string): string | undefined => {
-	const index = getReadingListArticleIndexBySlug(slug) || 0;
-	let nextSlug = allReadingListArticleSlugs[index + 1];
-	if (index === undefined || index >= allReadingListArticleSlugs.length - 1) {
-		nextSlug = allReadingListArticleSlugs[0] || "";
-	}
-	return nextSlug;
-};
-
-export function getReadingListArticleBySlug(slug: string): Article | undefined {
-	return allReadingListArticles.find((a) => a.slug === slug);
-}
-
-export const allReadingListArticlesSitemapMeta = allReadingListArticles.map(
-	(a) => {
-		return {
-			title: a.title || "",
-			description: a.summary || "",
-			slug: a.slug || "",
-		};
-	},
-);
-
 // for human readable sitemap
 function buildHumanSitemapSection() {
 	// const _pages: SitemapPage[] = allReadingListArticles.map((a) => {

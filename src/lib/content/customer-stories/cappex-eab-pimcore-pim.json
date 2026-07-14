@@ -88,10 +88,5 @@
 			}
 		}
 	],
-	"tags": [
-		"Pimcore",
-		"PIM",
-		"Data Operations",
-		"Education"
-	]
+	"tags": ["Pimcore", "PIM", "Data Operations", "Education"]
 }

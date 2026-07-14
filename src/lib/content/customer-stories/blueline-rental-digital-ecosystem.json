@@ -107,10 +107,5 @@
 			}
 		}
 	],
-	"tags": [
-		"Architecture",
-		"eCommerce",
-		"PIM",
-		"B2B"
-	]
+	"tags": ["Architecture", "eCommerce", "PIM", "B2B"]
 }

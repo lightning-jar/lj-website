@@ -2,6 +2,8 @@
 //
 // Combined Atom feed: blog posts + reading-list entries. Prerendered so it
 // resolves `varlock/env` at build time (same constraint as /sitemap.xml).
+// SvelteKit route option, read by the framework
+// fallow-ignore-next-line unused-export
 export const prerender = true;
 
 import { ENV } from "varlock/env";

@@ -1,11 +1,5 @@
 // src/lib/sfx.ts
-import {
-	ensureAudioReady,
-	loadDecodedBuffer,
-	playOneShot,
-	setBusVolume,
-	setMasterVolume,
-} from "$lib/audio";
+import { playOneShot } from "$lib/audio";
 
 type SfxDef = {
 	url: string;
@@ -27,19 +21,6 @@ const SFX: Record<string, SfxDef> = {
 		volume: 0.033,
 	},
 };
-
-export async function warmup() {
-	await ensureAudioReady();
-	await Promise.all(Object.values(SFX).map((s) => loadDecodedBuffer(s.url)));
-}
-
-export function setGlobalVolume(v: number) {
-	setMasterVolume(v);
-}
-
-export function setSfxVolume(v: number) {
-	setBusVolume("sfx", v);
-}
 
 export function play(
 	name: keyof typeof SFX,

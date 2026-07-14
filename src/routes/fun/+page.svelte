@@ -1,6 +1,7 @@
 <script lang="ts">
 // components
 import LinkButton from "$components/LinkButton.svelte";
+import ProjectTile from "$components/ProjectTile.svelte";
 
 // props
 let { data } = $props();
@@ -25,18 +26,11 @@ let { data } = $props();
 
   <main class="grid grid-cols-1 gap-10 max-w-article">
     {#each data.projects as project}
-      <article class="border border-white/10 rounded p-6">
-        <div class="flex items-baseline gap-3 mb-2">
-          <h2 class="font-mono text-20px text-maximumYellow">
-            {project.name}
-          </h2>
-          <span
-            class="text-11px uppercase tracking-wider opacity-70 font-mono"
-          >
-            {project.status}
-          </span>
-        </div>
-        <p class="opacity-90 mb-4">{project.summary}</p>
+      <ProjectTile
+        name={project.name}
+        status={project.status}
+        summary={project.summary}
+      >
         <div class="flex flex-wrap gap-3">
           {#each project.links as link}
             <LinkButton
@@ -49,7 +43,7 @@ let { data } = $props();
             </LinkButton>
           {/each}
         </div>
-      </article>
+      </ProjectTile>
     {/each}
   </main>
 </div>

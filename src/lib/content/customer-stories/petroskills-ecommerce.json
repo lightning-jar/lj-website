@@ -126,11 +126,5 @@
 		"bun"
 	],
 	"technologies": [],
-	"tags": [
-		"eCommerce",
-		"Websites",
-		"OpenDXP",
-		"Vue",
-		"Education"
-	]
+	"tags": ["eCommerce", "Websites", "OpenDXP", "Vue", "Education"]
 }

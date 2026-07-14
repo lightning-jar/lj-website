@@ -118,11 +118,5 @@
 		"bun"
 	],
 	"technologies": [],
-	"tags": [
-		"Websites",
-		"Portals",
-		"SaaS",
-		"AI",
-		"SvelteKit"
-	]
+	"tags": ["Websites", "Portals", "SaaS", "AI", "SvelteKit"]
 }

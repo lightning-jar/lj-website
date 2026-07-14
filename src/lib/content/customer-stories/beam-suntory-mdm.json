@@ -95,11 +95,7 @@
 			}
 		}
 	],
-	"tags": [
-		"Pimcore",
-		"PIM",
-		"MDM"
-	],
+	"tags": ["Pimcore", "PIM", "MDM"],
 	"notice": {
 		"label": "2026 update",
 		"text": "This solution was built on Pimcore. Since this story was published, Pimcore's Community Edition has moved from GPLv3 to the source-available Pimcore Open Core License, and a community fork — OpenDXP — now continues the GPLv3 codebase.",

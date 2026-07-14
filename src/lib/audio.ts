@@ -20,7 +20,7 @@ const buses = new Map<string, GainNode>();
 // Cache of decoded buffers
 const bufferCache = new Map<string, AudioBuffer>();
 
-export function getAudioContext(): AudioContext {
+function getAudioContext(): AudioContext {
 	if (typeof window === "undefined") {
 		throw new Error("AudioContext is only available in the browser");
 	}
@@ -42,7 +42,7 @@ export function getAudioContext(): AudioContext {
 	return audioCtx; // TS knows audioCtx was already defined
 }
 
-export function getBus(name: string): GainNode {
+function getBus(name: string): GainNode {
 	const ctx = getAudioContext();
 
 	if (!masterGain) {
@@ -61,29 +61,13 @@ export function getBus(name: string): GainNode {
 	return bus;
 }
 
-export function setMasterVolume(v: number) {
-	getAudioContext(); // initializes masterGain
-
-	if (!masterGain) {
-		throw new Error("Master gain not initialized");
-	}
-
-	const clamped = Math.max(0, Math.min(1, v));
-	masterGain.gain.value = clamped;
-}
-
-export function setBusVolume(name: string, v: number) {
-	const bus = getBus(name);
-	bus.gain.value = Math.max(0, Math.min(1, v));
-}
-
 async function fetchArrayBuffer(url: string): Promise<ArrayBuffer> {
 	const res = await fetch(url);
 	if (!res.ok) throw new Error(`HTTP ${res.status} loading audio: ${url}`);
 	return await res.arrayBuffer();
 }
 
-export async function loadDecodedBuffer(url: string): Promise<AudioBuffer> {
+async function loadDecodedBuffer(url: string): Promise<AudioBuffer> {
 	const cached = bufferCache.get(url);
 	if (cached) {
 		return cached;
@@ -94,15 +78,6 @@ export async function loadDecodedBuffer(url: string): Promise<AudioBuffer> {
 	const decoded = await ctx.decodeAudioData(ab);
 	bufferCache.set(url, decoded);
 	return decoded;
-}
-
-export async function ensureAudioReady(): Promise<void> {
-	const ctx = getAudioContext();
-	if (ctx.state === "suspended") {
-		try {
-			await ctx.resume();
-		} catch {}
-	}
 }
 
 type OneShotOptions = {

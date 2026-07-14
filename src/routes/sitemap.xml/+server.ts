@@ -4,6 +4,8 @@
 // content) and this is the only route that would otherwise resolve
 // `varlock/env` at request time in the Vercel serverless runtime, where
 // varlock has no resolution context and the function crashes.
+// SvelteKit route option, read by the framework
+// fallow-ignore-next-line unused-export
 export const prerender = true;
 
 // env variables

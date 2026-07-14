@@ -89,12 +89,7 @@
 			}
 		}
 	],
-	"tags": [
-		"Pimcore",
-		"Websites",
-		"Media",
-		"Video"
-	],
+	"tags": ["Pimcore", "Websites", "Media", "Video"],
 	"notice": {
 		"label": "2026 update",
 		"text": "This is an older customer story, and the site it describes was built on Pimcore, one of Lightning Jar's earliest Pimcore implementations. Since it was published, Pimcore's Community Edition has moved from GPLv3 to the source-available Pimcore Open Core License, and a community fork, OpenDXP, now continues the GPLv3 codebase. Because Pimcore is no longer open source, we no longer recommend it for most new implementations.",

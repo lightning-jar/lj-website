@@ -54,15 +54,6 @@ export const allBlogArticleSlugs = allBlogArticles
 	.map((article) => article.frontMatter?.slug || "")
 	.filter(Boolean);
 
-export const allBlogArticlesSitemapMeta = allBlogArticles.map((article) => {
-	return {
-		title: article.frontMatter?.metaTitle || "",
-		description: article.frontMatter?.description || "",
-		date: article.frontMatter?.date || "",
-		href: article.frontMatter?.slug ? `/blog/${article.frontMatter.slug}` : "",
-	};
-});
-
 // for human readable sitemap
 function buildHumanSitemapSection() {
 	const pages: SitemapPage[] = allBlogArticles.map((article) => {

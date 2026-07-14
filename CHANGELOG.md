@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-07-14
+
+### Added
+- Test coverage for recent logic: param matchers (`slug`, `notfile`), a kebab-case invariant test over every blog and customer-story slug (the slug matcher 404s anything else), home-page research-stat interpolation, and the shared search-filter helpers. 106 tests total, up from 90.
+- `.fallowrc.json` Fallow configuration. `fallow dead-code` and `fallow dupes` now run clean; `fallow health` scores maintainability 93.7 (good) with an advisory hotspot backlog. Vendored `bench-charts.js` excluded from duplication and health analysis; framework-consumed exports (`prerender`, adapter `config`, `instrumentation.server.ts`) carry inline suppressions.
+- Shared modules extracted from duplicated page code: `SearchTagFilter.svelte` (search + tag chips on `/blog` and `/customer-stories`), `ProjectTile.svelte` (`/research` and `/fun` cards), `PanelAdvanceArrow.svelte` (`/services` and `/testimonials` arrow), and `src/lib/utils/searchFilter.ts` (term matching and tag toggling). Prerendered HTML for all seven touched pages verified identical against the pre-refactor build.
+
+### Changed
+- Dead code removed across the content getters (unused sitemap-meta arrays, reading-list slug helpers including a copy-pasted `getNextCustomerStorySlug` that shadowed the customer-stories one, `allTechnologyIds`), the audio layer (`warmup`, volume setters, `ensureAudioReady`), the unused `src/lib/settings/cdn.ts`, and the unused `Sitemap` type alias. Internal-only helpers un-exported (`escapeXML`, `slugify` named export, audio internals). `parseMarkdown` deduplicated via `transformOutsideCodeSpans` and a shared table-row renderer.
+- Dropped unused devDependencies `@unocss/preset-web-fonts` and `nanoid`.
+
 ## [0.2.0] - 2026-07-14
 
 ### Added

@@ -241,35 +241,32 @@ function escapeLtExceptSafe(s: string): string {
  * Needed wherever escaping runs on text that may contain a code span,
  * e.g. link text like [`code`](url).
  */
-function escapeHtmlPreservingCodeSpans(s: string): string {
+/** Apply a transform to the text between code-span tokens, leaving the tokens intact */
+function transformOutsideCodeSpans(
+	s: string,
+	transform: (segment: string) => string,
+): string {
 	const tokenRe = new RegExp(`${CODE_START}\\d+${CODE_END}`, "g");
 	const parts: string[] = [];
 	let lastIndex = 0;
 	for (;;) {
 		const m = tokenRe.exec(s);
 		if (!m) break;
-		parts.push(escapeHtml(s.slice(lastIndex, m.index)));
+		parts.push(transform(s.slice(lastIndex, m.index)));
 		parts.push(m[0]);
 		lastIndex = m.index + m[0].length;
 	}
-	parts.push(escapeHtml(s.slice(lastIndex)));
+	parts.push(transform(s.slice(lastIndex)));
 	return parts.join("");
+}
+
+function escapeHtmlPreservingCodeSpans(s: string): string {
+	return transformOutsideCodeSpans(s, escapeHtml);
 }
 
 /** Escape raw HTML tags to prevent XSS, preserving allowlisted safe tags */
 function preSanitize(s: string): string {
-	const tokenRe = new RegExp(`${CODE_START}\\d+${CODE_END}`, "g");
-	const parts: string[] = [];
-	let lastIndex = 0;
-	for (;;) {
-		const m = tokenRe.exec(s);
-		if (!m) break;
-		parts.push(escapeLtExceptSafe(s.slice(lastIndex, m.index)));
-		parts.push(m[0]);
-		lastIndex = m.index + m[0].length;
-	}
-	parts.push(escapeLtExceptSafe(s.slice(lastIndex)));
-	return parts.join("");
+	return transformOutsideCodeSpans(s, escapeLtExceptSafe);
 }
 
 /** Convert markdown image syntax to HTML img tags */
@@ -445,17 +442,21 @@ export function parseMarkdownTextToHtml({
 
 		const out: string[] = ["<table>"];
 
-		// Header rows (before separator)
-		if (tableSeparatorIndex > 0) {
-			out.push("<thead>");
-			for (let i = 0; i < tableSeparatorIndex; i++) {
+		const pushRows = (from: number, to: number, tag: "th" | "td") => {
+			for (let i = from; i < to; i++) {
 				out.push("<tr>");
 				for (const cell of tableRows[i]) {
 					const t = applyInlineTransforms(cell, { sanitize, lazyImages });
-					out.push(`<th>${t}</th>`);
+					out.push(`<${tag}>${t}</${tag}>`);
 				}
 				out.push("</tr>");
 			}
+		};
+
+		// Header rows (before separator)
+		if (tableSeparatorIndex > 0) {
+			out.push("<thead>");
+			pushRows(0, tableSeparatorIndex, "th");
 			out.push("</thead>");
 		}
 
@@ -463,14 +464,7 @@ export function parseMarkdownTextToHtml({
 		const bodyStart = tableSeparatorIndex > 0 ? tableSeparatorIndex : 0;
 		if (bodyStart < tableRows.length) {
 			out.push("<tbody>");
-			for (let i = bodyStart; i < tableRows.length; i++) {
-				out.push("<tr>");
-				for (const cell of tableRows[i]) {
-					const t = applyInlineTransforms(cell, { sanitize, lazyImages });
-					out.push(`<td>${t}</td>`);
-				}
-				out.push("</tr>");
-			}
+			pushRows(bodyStart, tableRows.length, "td");
 			out.push("</tbody>");
 		}
 
