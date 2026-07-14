@@ -115,28 +115,28 @@ Bottom line: Optimizing for LLMs means optimizing for extract-ability, verifiabi
 
 ## Make Your Content Findable by LLMs
 
-1) Structure and markup  
+1\) Structure and markup  
 * Use [schema.org](https://schema.org/) (Article, HowTo, FAQPage, Product, Organization, Person, Event, Dataset).  
 * Include explicit definitions, bullet points, numbered steps, pros/cons tables, and key takeaways boxes, great for chunking and quoting.  
 * Provide high-signal elements: abstracts, TL;DRs, summaries, FAQs, and glossaries.
 
-2) Evidence and attribution  
+2\) Evidence and attribution  
 * Support claims with primary data, citations, and links to reputable sources.  
 * Expose data as CSV/JSON where relevant; use well-labeled tables with clear headers and units.  
 * Include author bios, credentials, and last-updated timestamps.
 
-3) Technical accessibility  
+3\) Technical accessibility  
 * Fast pages, clean HTML, stable URLs, strong internal linking.  
 * XML sitemaps for content and media; add a changelog or "What's new" feed.  
 * Consistent canonicalization; avoid thin/duplicative pages.  
 * [Robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro): explicitly permit reputable LLM User-Agents you want; block where appropriate.
 
-4) Content design for synthesis  
+4\) Content design for synthesis  
 * Write modularly: short sections with descriptive H2/H3s that stand alone.  
 * Put definitive statements near the top: definitions, formulas, key steps.  
 * Provide "copy-ready" snippets: code blocks, formulas, checklists, and decision trees.
 
-5) Guardrails and licensing  
+5\) Guardrails and licensing  
 * Add a clear content license and AI usage policy page.  
 * Watermark where appropriate; embed provenance metadata (e.g., [IPTC](https://iptc.org/standards/photo-metadata/) for images).
 

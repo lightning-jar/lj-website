@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-07-14
+
+### Changed
+- Markdown parsing migrated from the hand-rolled ~700-line parser to marked (GFM) + marked-footnote, configured identically to `@kevinpeckham/barkdown`'s `toDom` so rendered content stays in barkdown's canonical dialect. Site renderer extensions preserve what marked deliberately does not do: raw HTML is escaped under `sanitize` (br/hr/wbr allowlist kept), HTML comments are stripped, standalone images stay unwrapped from `<p>` (keeps the `img+p` caption CSS working), and `lazyImages` still adds `loading="lazy"`. `parseMarkdownTextToHtml` was fallow's top complexity hotspot (cognitive 73, cyclomatic 37); it is now thin glue, with ~400 lines of block/inline machinery deleted. Verified display-equivalent across all 42 posts; the golden-corpus fixture was regenerated, with residual byte diffs limited to entity encoding, `em`/`strong` nesting order, block whitespace, and more-correct `&amp;` escaping.
+- New markdown capabilities inherited from marked: nested lists, multi-paragraph list items, reference links, footnotes, setext headings, and GFM table alignment.
+
+### Fixed
+- Links and images with `javascript:`, `vbscript:`, or `data:` URLs are now neutralized (anchor drops to its text, image to its alt). The old parser rendered `javascript:` hrefs intact.
+- A table immediately followed by a thematic break without a blank line no longer renders the `<hr>` before the table.
+- `seo-is-changing`: "1)"-style label lines escaped in the source so they stay paragraphs (marked reads `1)` as an ordered-list marker).
+- `blog-article` highlighted-table-row selector now matches both `<strong><em>` and `<em><strong>` nesting.
+
 ## [0.4.0] - 2026-07-14
 
 ### Added

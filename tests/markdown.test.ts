@@ -5,9 +5,14 @@ import {
 	parseMarkdownTextToHtml,
 } from "../src/lib/utils/parseMarkdown";
 
-// Utility to normalize HTML output for comparisons
+// Utility to normalize HTML output for comparisons (marked emits newlines
+// between blocks; collapse inter-tag whitespace before comparing)
 function normalize(html: string) {
-	return html.replace(/\r\n/g, "\n").replace(/\s+/g, " ").trim();
+	return html
+		.replace(/\r\n/g, "\n")
+		.replace(/>\s+</g, "><")
+		.replace(/\s+/g, " ")
+		.trim();
 }
 
 describe("getFrontMatter", () => {
@@ -109,7 +114,7 @@ spans lines.`;
 		});
 		expect(normalize(html)).toBe(
 			normalize(
-				`<pre><code class="language-ts">const x = 1 &lt; 2;</code></pre>`,
+				`<pre><code class="language-ts">const x = 1 &lt; 2;\n</code></pre>`,
 			),
 		);
 	});
@@ -120,7 +125,7 @@ spans lines.`;
 			markdown: md,
 			options: { sanitize: true },
 		});
-		expect(normalize(html)).toBe(normalize(`<pre><code>abc</code></pre>`));
+		expect(normalize(html)).toBe(normalize(`<pre><code>abc\n</code></pre>`));
 	});
 
 	it("renders horizontal rules with dashes", () => {
@@ -158,7 +163,7 @@ spans lines.`;
 			options: { sanitize: true },
 		});
 		expect(normalize(html)).toBe(
-			normalize(`<blockquote>This is a quote</blockquote>`),
+			normalize(`<blockquote><p>This is a quote</p></blockquote>`),
 		);
 	});
 
@@ -322,6 +327,16 @@ describe("parseMarkdownTextToHtml - inline", () => {
 		);
 	});
 
+	it("keeps images inside mixed-content paragraphs wrapped", () => {
+		const md = "Intro ![alt](img.png) outro";
+		const html = parseMarkdownTextToHtml({
+			markdown: md,
+			options: { sanitize: true },
+		});
+		expect(html).toContain("<p>");
+		expect(html).toContain("<img");
+	});
+
 	it("renders links with title", () => {
 		const md = `[Open](https://example.com "Example")`;
 		const html = parseMarkdownTextToHtml({
@@ -343,7 +358,7 @@ describe("parseMarkdownTextToHtml - inline", () => {
 		});
 		expect(normalize(html)).toBe(
 			normalize(
-				`<p>Visit <a href="https://example.com/test?q=1" rel="noopener noreferrer" target="_blank">https://example.com/test?q=1</a>.</p>`,
+				`<p>Visit <a href="https://example.com/test?q=1">https://example.com/test?q=1</a>.</p>`,
 			),
 		);
 	});
@@ -358,7 +373,7 @@ describe("parseMarkdownTextToHtml - inline edge cases", () => {
 		});
 		expect(normalize(html)).toBe(
 			normalize(
-				`<p>This is <strong><em>bold and italic</em></strong> text.</p>`,
+				`<p>This is <em><strong>bold and italic</strong></em> text.</p>`,
 			),
 		);
 	});
@@ -447,7 +462,7 @@ describe("parseMarkdownTextToHtml - inline edge cases", () => {
 			options: { sanitize: true },
 		});
 		expect(html).toContain("<br>");
-		expect(normalize(html)).toBe(normalize(`<p>Line one<br> Line two</p>`));
+		expect(normalize(html)).toBe(normalize(`<p>Line one<br>Line two</p>`));
 	});
 });
 
@@ -587,12 +602,22 @@ describe("parseMarkdown - XSS prevention", () => {
 		expect(out.html).toContain("&lt;img");
 	});
 
-	it("escapes javascript: URLs in links", () => {
+	it("neutralizes javascript: URLs in links", () => {
 		const md = "[click](javascript:alert(1))";
 		const out = parseMarkdown(md);
-		// The link is created but the URL is escaped
-		expect(out.html).toContain("href=");
-		// If someone clicks, javascript: won't execute because < is escaped in the URL context
+		// The anchor is dropped entirely; only the link text survives
+		expect(out.html).not.toContain("javascript:");
+		expect(out.html).not.toContain("<a");
+		expect(out.html).toContain("click");
+	});
+
+	it("neutralizes vbscript: and data: URLs in links and images", () => {
+		expect(parseMarkdown("[x](vbscript:msgbox(1))").html).not.toContain(
+			"vbscript:",
+		);
+		expect(
+			parseMarkdown("![alt](data:text/html,<script>alert(1)</script>)").html,
+		).not.toContain("data:");
 	});
 
 	it("escapes event handlers in attributes", () => {

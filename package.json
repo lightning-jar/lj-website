@@ -1,7 +1,7 @@
 {
 	"name": "lj-website",
 	"private": true,
-	"version": "0.4.0",
+	"version": "0.5.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
@@ -34,6 +34,8 @@
 	},
 	"dependencies": {
 		"@sentry/sveltekit": "^10.49.0",
+		"marked": "^18.0.0",
+		"marked-footnote": "^1.4.0",
 		"varlock": "1.9.0",
 		"yaml": "^2.8.3"
 	},
