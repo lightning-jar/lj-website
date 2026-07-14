@@ -51,6 +51,13 @@ const researchSection = {
 				"Our open, pre-registered benchmark series measuring how LLMs read and edit structured document trees: results dashboard, packages, and the full article series.",
 			date: "",
 		},
+		{
+			href: "/research/barkup-bench/playbook",
+			title: "The Builder's Playbook",
+			description:
+				"The practical distillation of the benchmark series: ten measured guidelines for building document-editing apps with LLM agents, each with a scenario, a code example, and a link to its chart.",
+			date: "",
+		},
 	],
 };
 

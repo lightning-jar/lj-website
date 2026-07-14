@@ -77,6 +77,7 @@ const pages = [
 	generateSiteMapXMLPage(`/about`, "monthly", 0.25), // about page
 	generateSiteMapXMLPage(`/research`, "weekly", 0.25), // research landing page
 	generateSiteMapXMLPage(`/research/barkup-bench`, "weekly", 0.25), // barkup-bench research dashboard
+	generateSiteMapXMLPage(`/research/barkup-bench/playbook`, "weekly", 0.25), // the builder's playbook
 	generateSiteMapXMLPage(`/blog`, "monthly", 0.25), // blog landing page
 	generateSiteMapXMLPage(`/fun`, "monthly", 0.25), // fun side projects page
 	generateSiteMapXMLPage(`/built-with`, "monthly", 0.25), // built with
