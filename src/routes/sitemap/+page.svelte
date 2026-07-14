@@ -79,6 +79,9 @@ let pagesCount = $derived.by(() => {
                     truncate
                     hover:opacity-100
                     hover:decoration-current"
+                data-sveltekit-reload={/\.(xml|txt)$/.test(page.href ?? "")
+                  ? ""
+                  : undefined}
                 href={page.href}>{page.href}</a
               >
               <div class="truncate">{page.title}</div>

@@ -68,6 +68,9 @@ let {
               <a
                 class="text-maximumYellow opacity-90 hover:opacity-100 transition-all underline underline-offset-4 decoration-maximumYellow/30 hover:decoration-maximumYellow"
                 title={calloutItem?.title}
+                data-sveltekit-reload={/\.(xml|txt)$/.test(calloutItem.href)
+                  ? ""
+                  : undefined}
                 href={calloutItem.href}>{calloutItem?.["data-text"]}</a
               >
             {:else if calloutItem?.["data-text"]}
