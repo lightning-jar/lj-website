@@ -13,7 +13,6 @@ let {
   title="Subscribe via Atom feed"
   rel="alternate"
   type="application/atom+xml"
-  data-sveltekit-reload
   class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-maximumYellow text-maximumYellow text-14px font-700 leading-none hover:bg-maximumYellow hover:text-oxford transition-colors shrink-0"
 >
   <svg
