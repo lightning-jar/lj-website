@@ -24,6 +24,8 @@ glossary:
   - term: Silent failure
     definition: "The recurring villain of the series: a model that cannot know something does not refuse or error. It produces valid, plausible, confidently wrong output (invented values, obliviously polished paragraphs) that no validator or error log will ever flag."
 additionalReading:
+  - title: "The Builder's Playbook: the checklist version of this essay, ten action items with code examples"
+    url: "/research/barkup-bench/playbook"
   - title: "Stable IDs Are All You Need (the original capstone, at seven studies)"
     url: "/blog/stable-ids-are-all-you-need"
   - title: "barkup-bench research dashboard: every chart and data table"
@@ -38,7 +40,7 @@ additionalReading:
 
 A month ago we started measuring a narrow question with broad consequences: what is the most reliable way to let an LLM agent edit structured documents, the typed trees behind page builders, document templates, and CMS content? The method was borrowed from fields that learned it the hard way: every study pre-registered by commit before the first scored model call, pass gates stated in advance, deterministic unit-tested graders, seeded corpora, and results published as found, including the ones that embarrassed us.
 
-Twenty-three studies, more than 19,000 scored runs, and five models later, the answer is not a clever prompt. It is a division of labor. The model is a brilliant executor with no context of its own; the application owns the context. Hand the model everything the request assumes, and almost nothing else. Here is that recipe with a number on every clause, followed by the part we think matters more: what we got wrong along the way, and published anyway.
+Twenty-three studies, more than 19,000 scored runs, and five models later, the answer is not a clever prompt. It is a division of labor. The model is a brilliant executor with no context of its own; the application owns the context. Hand the model everything the request assumes, and almost nothing else. Here is that recipe with a number on every clause, followed by the part we think matters more: what we got wrong along the way, and published anyway. (If you are here to build rather than to read, the checklist version of this essay, with code examples ready to copy, is [The Builder's Playbook](/research/barkup-bench/playbook).)
 
 ## The architecture, one measured clause at a time
 
