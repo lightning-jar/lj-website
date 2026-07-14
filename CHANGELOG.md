@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-07-14
+
+### Changed
+- Home page research panel: secondary CTA now points to The Builder's Playbook (/research/barkup-bench/playbook) instead of the Latest Findings post.
+
 ## [0.6.0] - 2026-07-14
 
 ### Fixed

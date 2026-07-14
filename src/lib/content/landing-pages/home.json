@@ -38,9 +38,9 @@
 					"title": "Research at Lightning Jar"
 				},
 				"secondary": {
-					"label": "Latest Findings",
-					"href": "/blog/undo-that",
-					"title": "Undo That: The One-Line Echo That Replaces a Transcript"
+					"label": "The Builder's Playbook",
+					"href": "/research/barkup-bench/playbook",
+					"title": "The Builder's Playbook: practical applications of the barkup-bench findings"
 				}
 			}
 		},
