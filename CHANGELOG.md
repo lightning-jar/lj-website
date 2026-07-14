@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-07-14
+
+### Fixed
+- `parseMarkdown.ts` contained literal control bytes (raw `\x00` and `\x1f`) inside the unsafe-URL regex character class, which made git treat the file as binary. Replaced with the escaped `\x00-\x1f` text form; behavior unchanged.
+
 ## [0.5.0] - 2026-07-14
 
 ### Changed
