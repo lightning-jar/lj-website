@@ -57,6 +57,17 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
       validated ships in the open-source barkup library, linked below with the
       full article series.
     </p>
+    <p
+      class="border border-maximumYellow/30 bg-maximumYellow/5 rounded-md px-4.5 py-3.5 opacity-90"
+    >
+      Building a document-editing app? The findings are distilled into ten
+      action items with code examples in
+      <a
+        href="/research/barkup-bench/playbook"
+        class="text-maximumYellow hover:underline underline-offset-3 font-600"
+        >The Builder's Playbook</a
+      >.
+    </p>
   </header>
 
   <!-- results dashboard -->
