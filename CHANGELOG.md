@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-07-14
+
+### Added
+- Golden-corpus characterization test (`tests/blogCorpus.test.ts` + committed hash fixture): renders all 42 real blog posts through `parseMarkdown` and fails on any byte-level output change. Regenerate intentionally with `UPDATE_GOLDEN=1 bun test tests/blogCorpus.test.ts`. Groundwork for any future parser change (a barkdown/marked migration was spiked and found display-neutral on the full corpus; see repo discussion).
+
 ## [0.3.0] - 2026-07-14
 
 ### Added
