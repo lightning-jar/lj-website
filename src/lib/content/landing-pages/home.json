@@ -19,9 +19,9 @@
 					"title": "If the Solution Is Not Beautiful, It Is Wrong: Twenty-Five Years of Lightning Jar"
 				},
 				"secondary": {
-					"label": "Customer Stories",
-					"href": "/customer-stories",
-					"title": "Customer Stories"
+					"label": "Our LLM Research",
+					"href": "/research/barkup-bench",
+					"title": "barkup-bench: our open LLM structured-editing benchmark"
 				}
 			}
 		},

@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-07-15
+
+### Changed
+- Home page hero panel: secondary CTA now reads "Our LLM Research" and links to the barkup-bench dashboard (/research/barkup-bench), replacing the Customer Stories link.
+
 ## [0.7.0] - 2026-07-14
 
 ### Changed
