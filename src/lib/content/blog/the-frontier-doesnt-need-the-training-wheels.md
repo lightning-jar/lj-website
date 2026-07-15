@@ -4,10 +4,10 @@ metaTitle: "The Frontier Doesn't Need the Training Wheels | barkup-bench Study A
 slug: the-frontier-doesnt-need-the-training-wheels
 description: "Twenty-nine studies of our benchmark series validated an editing stack on two models, and then the product shipped on a third. That gap has a name in our own findings: serializer advice inverts between models, and per-tier behavior cannot be extrapolated. So Study AD re-ran the entire core stack on claude-opus-4.8, the tier our surfaces actually run, with every corpus, prompt, and grader reused verbatim. Every gate passed, mostly at the top of the prior bands. And the ablation produced the study's real finding: the worked examples that rescued sonnet's stateless sessions are not needed on the frontier tier at all. Bare stateless sessions scored a perfect 240 of 240. The training wheels are for the smaller bikes, and they cost so little you should keep them bolted on anyway."
 date: 2026-07-15T16:00:00Z
-draft: true
+draft: false
 tags: [ai, agents, llm, open-source, barkup, benchmarks]
-image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/training-wheels.webp
-imageDescription: A watercolor painting of a small bicycle with training wheels parked beside a large road bicycle
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/bicycle.webp
+imageDescription: A watercolor painting of a mint green bicycle with a front basket, no training wheels in sight, on a cream background
 author: Kevin Peckham
 quote:
   text: Every gate passed on the model we actually ship. The training wheels turned out to be for the smaller bikes, and they cost so little we kept them anyway.
