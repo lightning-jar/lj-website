@@ -5314,4 +5314,176 @@ export function initBenchCharts() {
 			],
 		);
 	})();
+
+	// --- Study AD: the Opus confirmation — prior bands vs the shipped tier ---
+	(function () {
+		const ROWS = [
+			{
+				label: "patch dialect · main corpus",
+				lo: 91.0,
+				hi: 94.0,
+				opus: 97.0,
+				tip: "condition F, 200 tasks, parity regime\nprior band: gemini 182/200 (91.0%) to gpt-5.4 188/200 (94.0%), 4 tiers\nopus-4.8: 194/200 (97.0%), best F ever measured\ngate ≥182: PASS",
+			},
+			{
+				label: "focused views · FVH",
+				lo: 93.3,
+				hi: 95.6,
+				opus: 100,
+				tip: "HTML focused views, 45 tasks at 300-1000 nodes\nprior band: gemini 42/45 to sonnet 43/45\nopus-4.8: 45/45\ngate ≥40: PASS",
+			},
+			{
+				label: "focused views · FTH",
+				lo: 88.9,
+				hi: 97.8,
+				opus: 100,
+				tip: "HTML minimal views, 45 tasks at 300-1000 nodes\nprior band: gemini 40/45 to sonnet 44/45\nopus-4.8: 45/45\ngate ≥40: PASS",
+			},
+			{
+				label: "search grounding · N-search",
+				lo: 86.7,
+				hi: 95.6,
+				opus: 95.6,
+				tip: "skeleton view + one find_nodes tool, 45 id-free tasks\nprior band: gemini 39/45 to sonnet 43/45 (sonnet = its id-oracle bound)\nopus-4.8: 43/45, the same bound, median ONE search call\ngate ≥39: PASS",
+			},
+			{
+				label: "sessions · intact end states",
+				lo: 90.0,
+				hi: 95.0,
+				opus: 100,
+				tip: "12-edit sessions, 20 per policy\nprior band (surviving recipes): stateless+examples 18/20 (sonnet) to history+views 19/20 (both)\nopus-4.8: 20/20 in ALL THREE policies, including bare stateless (240/240 steps each)\ngate ≥17: PASS",
+			},
+			{
+				label: "fan-out · views",
+				lo: 62.2,
+				hi: 68.9,
+				opus: 80.0,
+				tip: "one instruction, 2-32 targets, oracle views, 45 tasks\nprior band: gemini 28/45 to sonnet 31/45\nopus-4.8: 36/45, but 7+-target tasks still 12/18\ndescriptive: the decomposition fence stands",
+			},
+			{
+				label: "fan-out · full tree",
+				lo: 48.9,
+				hi: 80.0,
+				opus: 88.9,
+				tip: "one instruction, 2-32 targets, whole tree in context, 45 tasks\nprior band: sonnet 22/45 to gemini 36/45 (the Study Q inversion)\nopus-4.8: 40/45, a third mitigation profile (full-tree-leaning, n.s.)\ndescriptive: the decomposition fence stands",
+			},
+		];
+		const CBAND = "#8b93a3",
+			COPUS = "#199e70";
+		document.getElementById("legend-23").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CBAND +
+			'"></span>prior tiers, weakest to best measured (Studies F, I/J, N, K/M/P, Q)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			COPUS +
+			'"></span>claude-opus-4.8, the shipped tier (Study AD)</span>' +
+			'<span class="key">scale starts at 40%; hover a row for exact counts and the gate</span>';
+		const W = 880,
+			ROW = 34,
+			T = 8,
+			B = 42,
+			L = 250,
+			R = 30;
+		const H = T + ROWS.length * ROW + B + 6;
+		const iw = W - L - R;
+		const xOf = (v) => L + ((v - 40) / 60) * iw;
+		let g = "";
+		for (const tick of [40, 50, 60, 70, 80, 90, 100]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"%</text>";
+		}
+		g +=
+			'<text fill="#c3c9d4" font-size="12" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">task success: the gray band is where sonnet and gemini landed; the green dot is the tier the product ships</text>';
+		let marks = "",
+			hits = "";
+		ROWS.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.label +
+				"</text>";
+			marks +=
+				'<rect x="' +
+				xOf(row.lo) +
+				'" y="' +
+				(cy - 5) +
+				'" width="' +
+				Math.max(xOf(row.hi) - xOf(row.lo), 3) +
+				'" height="10" fill="' +
+				CBAND +
+				'" opacity="0.55" rx="5"/>';
+			marks +=
+				'<circle cx="' +
+				xOf(row.opus) +
+				'" cy="' +
+				cy +
+				'" r="6.5" fill="' +
+				COPUS +
+				'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				(cy - 14) +
+				'" width="' +
+				iw +
+				'" height="28" fill="transparent" data-tip="' +
+				esc(row.label + "\n" + row.tip) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-opus");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Band chart: claude-opus-4.8 lands at or above the top of every prior band on the core stack (dialect, views, search, sessions) and raises the fan-out floor without closing it." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-opus",
+			["arm", "prior band", "opus-4.8", "gate"],
+			[
+				["patch dialect, main corpus (n=200)", "182-188/200 (4 tiers)", "194/200", "≥182: PASS"],
+				["focused views FVH (n=45)", "42-43/45", "45/45", "≥40: PASS"],
+				["focused views FTH (n=45)", "40-44/45", "45/45", "≥40: PASS"],
+				["search grounding N-search (n=45)", "39-43/45", "43/45", "≥39: PASS"],
+				["sessions, steps per policy (n=240)", "see Study K/M/P sections", "240/240 in all three policies", "≥95%: PASS"],
+				["sessions, intact end states (n=20)", "18-19/20 (surviving recipes)", "20/20 in all three policies", "≥17: PASS"],
+				["full-tree patches at ~1000 nodes (n=15)", "13/15 both tiers", "14/15", "descriptive"],
+				["fan-out Q-view / Q-full (n=45)", "62.2-68.9% / 48.9-80.0%", "80.0% / 88.9%", "descriptive; fence stands"],
+			],
+		);
+	})();
 }

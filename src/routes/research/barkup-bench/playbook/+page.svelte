@@ -89,6 +89,7 @@ function searchTool(query: string): string {
 		prose: [
 			`What conversation history actually contributes to an editing session is teaching, not memory. Two canned worked examples of your patch dialect's tricky operations, about 900 tokens in the system prompt, restore stateless sessions to full-history accuracy. Measured through 36-edit sessions with no decay: edit 36 solved as well as edit 1, at a flat ~2.1k input tokens per step while keep-everything history grows linearly to 24k.`,
 			`Pick the examples once, for the operations models actually fumble (an insert with a sibling anchor, a move). They are part of your system prompt, not per-session state, which also makes them cacheable under guideline 08.`,
+			`The tier nuance (Study AD): the frontier tier does not need them. On claude-opus-4.8, bare stateless sessions with no examples at all scored 240 of 240, so on frontier models the block is insurance rather than a requirement. Keep it anyway: it is 900 flat tokens, it rescues every tier below the frontier (sonnet without it: 13 of 20 intact end states), and it protects any fallback routing.`,
 		],
 		code: `// System prompt skeleton for a stateless editing turn:
 //   1. dialect rules (what operations exist, how anchors work)
@@ -234,6 +235,16 @@ it>" instead of a patch.`,
         plausible and moves on. So the division of labor is fixed. The
         application owns the context; the model owns the edit. Hand it
         everything the request assumes, and almost nothing else.
+      </p>
+      <p class="text-16px {proseCls} mt-4">
+        A July 2026 note on model tiers: the core of this list (patches,
+        views, search, the session recipes) was re-run end to end on
+        claude-opus-4.8, the tier our own surfaces ship, with every gate
+        passing at or above the prior bands (<a
+          class={linkCls}
+          href="{dash}#sec-opus">Study AD</a
+        >). The guidelines below hold from the budget tiers to the
+        frontier; the one tier-dependent nuance is noted on guideline 04.
       </p>
     </header>
 
