@@ -5486,4 +5486,179 @@ export function initBenchCharts() {
 			],
 		);
 	})();
+
+	// --- Study AE: the calibration ladder — ask rate by ambiguity level ---
+	(function () {
+		const LEVELS = [
+			"L0 precise",
+			"L1 indirect, unique",
+			"L2 discretionary",
+			"L3 two referents",
+			"L4 missing info",
+		];
+		const SERIES = [
+			{
+				name: "opus-4.8",
+				color: "#199e70",
+				asks: [0, 0, 2, 15, 15],
+				note: [
+					"solved 15/15",
+					"solved 15/15",
+					"acted 13, asked 2",
+					"asked 15/15, naming BOTH candidate ids every time",
+					"asked 15/15",
+				],
+			},
+			{
+				name: "sonnet-4.5",
+				color: "#c98500",
+				asks: [0, 0, 0, 1, 15],
+				note: [
+					"solved 15/15",
+					"solved 15/15",
+					"acted 15/15",
+					"asked 1/15; edited BOTH matches 12/15",
+					"asked 15/15",
+				],
+			},
+			{
+				name: "gemini-3.5-flash",
+				color: "#3987e5",
+				asks: [0, 0, 0, 1, 15],
+				note: [
+					"solved 15/15",
+					"solved 15/15",
+					"acted 15/15",
+					"asked 1/15; silently picked one match 9/15",
+					"asked 15/15",
+				],
+			},
+		];
+		document.getElementById("legend-24").innerHTML =
+			SERIES.map(
+				(m) =>
+					'<span class="key"><span class="chip" style="background:' +
+					m.color +
+					'"></span>' +
+					m.name +
+					"</span>",
+			).join("") +
+			'<span class="key">ask rate on 15 cells per level, shipped NEED-INFO rule verbatim · the correct behavior is to ask only at L3 and L4</span>';
+		const W = 880,
+			H = 300,
+			T = 16,
+			B = 58,
+			L = 64,
+			R = 30;
+		const iw = W - L - R;
+		const ih = H - T - B;
+		const xOf = (i) => L + (i / (LEVELS.length - 1)) * iw;
+		const yOf = (v) => T + (1 - v / 15) * ih;
+		let g = "";
+		for (const tick of [0, 5, 10, 15]) {
+			const y = yOf(tick);
+			g +=
+				'<line x1="' +
+				L +
+				'" x2="' +
+				(W - R) +
+				'" y1="' +
+				y +
+				'" y2="' +
+				y +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 10) +
+				'" y="' +
+				(y + 4) +
+				'" text-anchor="end">' +
+				tick +
+				"/15</text>";
+		}
+		LEVELS.forEach((label, i) => {
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				xOf(i) +
+				'" y="' +
+				(H - B + 22) +
+				'" text-anchor="middle">' +
+				label +
+				"</text>";
+		});
+		g +=
+			'<text fill="#c3c9d4" font-size="12" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 6) +
+			'" text-anchor="middle">asks per 15 cells across the ambiguity ladder: flat zero on clear requests, a tier split at two referents, ceiling at missing info</text>';
+		let marks = "",
+			hits = "";
+		for (const series of SERIES) {
+			let path = "";
+			series.asks.forEach((v, i) => {
+				path += (i === 0 ? "M" : "L") + xOf(i) + " " + yOf(v) + " ";
+			});
+			marks +=
+				'<path d="' +
+				path +
+				'" fill="none" stroke="' +
+				series.color +
+				'" stroke-width="2"/>';
+			series.asks.forEach((v, i) => {
+				marks +=
+					'<circle cx="' +
+					xOf(i) +
+					'" cy="' +
+					yOf(v) +
+					'" r="6" fill="' +
+					series.color +
+					'" stroke="hsl(217,48%,15%)" stroke-width="2"/>';
+				hits +=
+					'<rect x="' +
+					(xOf(i) - 18) +
+					'" y="' +
+					(yOf(v) - 14) +
+					'" width="36" height="28" fill="transparent" data-tip="' +
+					esc(
+						series.name +
+							" · " +
+							LEVELS[i] +
+							"\nasked " +
+							v +
+							"/15\n" +
+							series.note[i],
+					) +
+					'"/>';
+			});
+		}
+		const el = document.getElementById("fig-calibration");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Line chart: ask rate across five ambiguity levels. All models at zero asks on clear requests and 15 of 15 on missing info; on two-referent requests opus asks 15 of 15 while sonnet and gemini ask 1 of 15." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-calibration",
+			["level (rule arm)", "sonnet-4.5", "gemini-3.5-flash", "opus-4.8"],
+			[
+				["L0 precise: solved / asked", "15 / 0", "15 / 0", "15 / 0"],
+				["L1 indirect, unique: solved / asked", "15 / 0", "15 / 0", "15 / 0"],
+				["L2 discretionary: acted / asked", "15 / 0", "15 / 0", "13 / 2"],
+				["L3 two referents: asked / edited-both / picked-one", "1 / 12 / 2", "1 / 5 / 9", "15 / 0 / 0"],
+				["L4 missing info: asked", "15", "15", "15"],
+				["resume loop: resumed-solved (of 45)", "45", "45", "45"],
+				["L3 asks naming both candidate ids", "1/1", "1/1", "15/15"],
+			],
+		);
+	})();
 }
