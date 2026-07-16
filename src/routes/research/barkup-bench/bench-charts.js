@@ -212,6 +212,14 @@ export function initBenchCharts() {
 	const BUCKET_LABELS = ["~5 nodes", "~20", "~60", "~150"];
 	const BUCKET_KEYS = ["xs", "s", "m", "l"];
 
+	function figCap(text) {
+		return (
+			'<div style="font-size:12px;line-height:1.5;color:#c3c9d4;text-align:center;margin:8px auto 0;max-width:56rem;white-space:normal">' +
+			text +
+			"</div>"
+		);
+	}
+
 	function esc(s) {
 		return String(s)
 			.replace(/&/g, "&amp;")
@@ -376,7 +384,7 @@ export function initBenchCharts() {
 	});
 
 	// Chart 3 — reference dot plot
-	(function () {
+	(() => {
 		const W = 880,
 			ROW = 64,
 			T = 8,
@@ -416,7 +424,7 @@ export function initBenchCharts() {
 	})();
 
 	// Heatmap — per model × condition (sequential blue ramp, one hue)
-	(function () {
+	(() => {
 		const RAMP = [
 			[74, "#cde2fb", "#0b0b0b"],
 			[80, "#9ec5f4", "#0b0b0b"],
@@ -441,7 +449,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study G footgun dumbbell ---
-	(function () {
+	(() => {
 		const W = 880,
 			ROW = 64,
 			T = 40,
@@ -578,7 +586,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study H size extension ---
-	(function () {
+	(() => {
 		const el = document.getElementById("legend-4");
 		el.innerHTML =
 			["A", "E", "F"]
@@ -741,7 +749,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Studies I/J focused views: input tokens by size ---
-	(function () {
+	(() => {
 		const VDATA = [
 			{
 				model: "sonnet-4.5",
@@ -879,12 +887,8 @@ export function initBenchCharts() {
 				lab +
 				"</text>";
 		});
-		g +=
-			'<text fill="#8b93a3" font-size="11" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 6) +
-			'" text-anchor="middle">median input tokens per task (accuracy statistically identical across all rows)</text>';
+		const figCaption =
+			"median input tokens per task (accuracy statistically identical across all rows)";
 		let marks = "",
 			hits = "";
 		const endLabels = [];
@@ -968,7 +972,8 @@ export function initBenchCharts() {
 			marks +
 			labels +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -984,7 +989,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study K sessions: drift by session third ---
-	(function () {
+	(() => {
 		const KDATA = [
 			{
 				policy: "K-once",
@@ -1128,12 +1133,8 @@ export function initBenchCharts() {
 				lab +
 				"</text>";
 		});
-		g +=
-			'<text fill="#8b93a3" font-size="11" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 6) +
-			'" text-anchor="middle">per-step success by session third (step judged on its own edit against the model’s current tree)</text>';
+		const figCaption =
+			"per-step success by session third (step judged on its own edit against the model’s current tree)";
 		let marks = "",
 			hits = "";
 		const endLabels = [];
@@ -1221,7 +1222,8 @@ export function initBenchCharts() {
 			marks +
 			labels +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -1239,7 +1241,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study L: grounding dot plot ---
-	(function () {
+	(() => {
 		const LCOND = ["oracle", "LG-full", "LG-nav", "LG-lex"];
 		const LNAMES = {
 			oracle: "oracle bound (ids in instructions, Study I)",
@@ -1350,12 +1352,8 @@ export function initBenchCharts() {
 				tick +
 				"%</text>";
 		}
-		g +=
-			'<text fill="#8b93a3" font-size="11" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">task success on grounded (id-free) instructions, 45 tasks per cell</text>';
+		const figCaption =
+			"task success on grounded (id-free) instructions, 45 tasks per cell";
 		let marks = "",
 			hits = "";
 		LDATA.forEach((row, ri) => {
@@ -1436,7 +1434,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -1488,7 +1487,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study M: memory tercile lines ---
-	(function () {
+	(() => {
 		const MDATA = [
 			{
 				policy: "K-view",
@@ -1612,12 +1611,8 @@ export function initBenchCharts() {
 				lab +
 				"</text>";
 		});
-		g +=
-			'<text fill="#8b93a3" font-size="11" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 6) +
-			'" text-anchor="middle">per-step success by session third (note the zoomed 88–100% scale)</text>';
+		const figCaption =
+			"per-step success by session third (note the zoomed 88–100% scale)";
 		let marks = "",
 			hits = "";
 		const endLabels = [];
@@ -1704,7 +1699,8 @@ export function initBenchCharts() {
 			marks +
 			labels +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -1722,7 +1718,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study N: retrieval ladder dot plot ---
-	(function () {
+	(() => {
 		const NCOND = ["oracle", "LG-full", "N-search", "N-ground2x", "N-embed"];
 		const NNAMES = {
 			oracle: "oracle bound (ids in instructions, Study I)",
@@ -1842,12 +1838,8 @@ export function initBenchCharts() {
 				tick +
 				"%</text>";
 		}
-		g +=
-			'<text fill="#8b93a3" font-size="11" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">task success on grounded (id-free) instructions, 45 tasks per cell</text>';
+		const figCaption =
+			"task success on grounded (id-free) instructions, 45 tasks per cell";
 		let marks = "",
 			hits = "";
 		NDATA.forEach((row, ri) => {
@@ -1929,7 +1921,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -1985,7 +1978,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study O: positional views dot plot ---
-	(function () {
+	(() => {
 		const OCOND = ["K-view", "O-view", "M-stateless", "O-stateless"];
 		const ONAMES = {
 			"K-view": "full history, plain view (Study K)",
@@ -2116,12 +2109,8 @@ export function initBenchCharts() {
 				tick +
 				"%</text>";
 		}
-		g +=
-			'<text fill="#8b93a3" font-size="11" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">late-session (steps 9–12) per-step success — the window where statelessness fails (zoomed 84–100% scale)</text>';
+		const figCaption =
+			"late-session (steps 9–12) per-step success — the window where statelessness fails (zoomed 84–100% scale)";
 		let marks = "",
 			hits = "";
 		ODATA.forEach((row, ri) => {
@@ -2203,7 +2192,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -2255,7 +2245,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study P: synthetic history dot plot (late-session window) ---
-	(function () {
+	(() => {
 		const PCOND = ["K-view", "P-canned", "P-system", "M-stateless"];
 		const PNAMES = {
 			"K-view": "full history (Study K)",
@@ -2386,12 +2376,8 @@ export function initBenchCharts() {
 				tick +
 				"%</text>";
 		}
-		g +=
-			'<text fill="#8b93a3" font-size="11" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">late-session (steps 9–12) per-step success (zoomed 84–100% scale)</text>';
+		const figCaption =
+			"late-session (steps 9–12) per-step success (zoomed 84–100% scale)";
 		let marks = "",
 			hits = "";
 		PDATA.forEach((row, ri) => {
@@ -2473,7 +2459,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -2513,7 +2500,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study Q: fan-out collapse lines ---
-	(function () {
+	(() => {
 		const QDATA = [
 			{
 				cond: "Q-view",
@@ -2634,12 +2621,8 @@ export function initBenchCharts() {
 				lab +
 				"</text>";
 		});
-		g +=
-			'<text fill="#8b93a3" font-size="11" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 6) +
-			'" text-anchor="middle">task success by target count (45 fan-out tasks per condition per model)</text>';
+		const figCaption =
+			"task success by target count (45 fan-out tasks per condition per model)";
 		let marks = "",
 			hits = "";
 		const endLabels = [];
@@ -2724,7 +2707,8 @@ export function initBenchCharts() {
 			marks +
 			labels +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -2818,7 +2802,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study S: long-session cost divergence lines ---
-	(function () {
+	(() => {
 		const STEPS = [1, 6, 12, 18, 24, 30, 36];
 		const SDATA = [
 			{
@@ -2907,12 +2891,8 @@ export function initBenchCharts() {
 				s +
 				"</text>";
 		}
-		g +=
-			'<text fill="#8b93a3" font-size="11" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 6) +
-			'" text-anchor="middle">median input tokens per step across a 36-edit session (accuracy at parity throughout)</text>';
+		const figCaption =
+			"median input tokens per step across a 36-edit session (accuracy at parity throughout)";
 		let marks = "",
 			hits = "";
 		const endLabels = [];
@@ -2995,7 +2975,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -3083,7 +3064,7 @@ export function initBenchCharts() {
 	);
 
 	// --- Study T: callback dissociation dumbbells ---
-	(function () {
+	(() => {
 		const TARMS = ["T-history", "T-system", "T-notes"];
 		const TNAMES = {
 			"T-history": "full history (K-view recipe)",
@@ -3196,12 +3177,8 @@ export function initBenchCharts() {
 				tick +
 				"%</text>";
 		}
-		g +=
-			'<text fill="#8b93a3" font-size="11" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">per-step success — callback steps (filled) vs ordinary self-contained steps (hollow)</text>';
+		const figCaption =
+			"per-step success — callback steps (filled) vs ordinary self-contained steps (hollow)";
 		let marks = "",
 			hits = "";
 		rows.forEach((row, ri) => {
@@ -3305,7 +3282,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -3374,7 +3352,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study U: dependent-edit dot plot ---
-	(function () {
+	(() => {
 		const UARMS = ["U-full", "U-view1", "U-view2", "U-search"];
 		const UNAMES = {
 			"U-full": "whole tree in prompt",
@@ -3495,12 +3473,8 @@ export function initBenchCharts() {
 				tick +
 				"%</text>";
 		}
-		g +=
-			'<text fill="#8b93a3" font-size="11" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">dependent-edit success by arm (45 tasks per cell; Wilson 95% intervals)</text>';
+		const figCaption =
+			"dependent-edit success by arm (45 tasks per cell; Wilson 95% intervals)";
 		let marks = "",
 			hits = "";
 		rows.forEach((row, ri) => {
@@ -3581,7 +3555,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -3645,7 +3620,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study V: qualitative rewrites (judge-graded) win/loss bars ---
-	(function () {
+	(() => {
 		const VARMS = [
 			"V-doc-view1",
 			"V-doc-view2",
@@ -3731,12 +3706,8 @@ export function initBenchCharts() {
 				tick +
 				"</text>";
 		}
-		g +=
-			'<text fill="#c3c9d4" font-size="12" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">judged comparisons vs control (30 per cell): wins, then ties, then losses</text>';
+		const figCaption =
+			"judged comparisons vs control (30 per cell): wins, then ties, then losses";
 		let marks = "",
 			hits = "";
 		rows.forEach((row, ri) => {
@@ -3815,7 +3786,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -3842,7 +3814,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study W: agent-maintained memo extraction dumbbells ---
-	(function () {
+	(() => {
 		const WARMS = ["W-oracle", "W-agent", "W-agent-history"];
 		const WNAMES = {
 			"W-oracle": "harness-written memo (the T ceiling)",
@@ -3949,12 +3921,8 @@ export function initBenchCharts() {
 				tick +
 				"%</text>";
 		}
-		g +=
-			'<text fill="#c3c9d4" font-size="12" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">callback success (72 cells per arm-model; zoomed 60–100% scale)</text>';
+		const figCaption =
+			"callback success (72 cells per arm-model; zoomed 60–100% scale)";
 		let marks = "",
 			hits = "";
 		rows.forEach((row, ri) => {
@@ -4086,7 +4054,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -4199,7 +4168,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study X: edit-anaphora carrier dot plot ---
-	(function () {
+	(() => {
 		const XARMS = ["X-history", "X-window2", "X-lastedit", "X-stateless"];
 		const XNAMES = {
 			"X-history": "full conversation history",
@@ -4359,12 +4328,8 @@ export function initBenchCharts() {
 				tick +
 				"%</text>";
 		}
-		g +=
-			'<text fill="#c3c9d4" font-size="12" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">anaphora-cell success by carrier (48 cells per arm-model; Wilson 95% intervals)</text>';
+		const figCaption =
+			"anaphora-cell success by carrier (48 cells per arm-model; Wilson 95% intervals)";
 		let marks = "",
 			hits = "";
 		rows.forEach((row, ri) => {
@@ -4448,7 +4413,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -4578,7 +4544,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study Y: naturalistic extraction twin bars ---
-	(function () {
+	(() => {
 		const YARMS = ["Y-formulaic", "Y-casual", "Y-casual-history"];
 		const YNAMES = {
 			"Y-formulaic": "formulaic declarations (the W control)",
@@ -4664,12 +4630,8 @@ export function initBenchCharts() {
 				tick +
 				"</text>";
 		}
-		g +=
-			'<text fill="#c3c9d4" font-size="12" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">callback cells passed (of 48) — casual and formulaic twins tie exactly on every model</text>';
+		const figCaption =
+			"callback cells passed (of 48) — casual and formulaic twins tie exactly on every model";
 		let marks = "",
 			hits = "";
 		rows.forEach((row, ri) => {
@@ -4734,7 +4696,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -4764,7 +4727,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study Z: standing context — combined-task interpretation split ---
-	(function () {
+	(() => {
 		const ZARMS = ["Z-full", "Z-slice", "Z-memo"];
 		const ZNAMES = {
 			"Z-full": "whole pack in the system prompt (the shipped shape)",
@@ -4831,12 +4794,8 @@ export function initBenchCharts() {
 				tick +
 				"</text>";
 		}
-		g +=
-			'<text fill="#c3c9d4" font-size="12" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">conflicted combined cells (of 12) by how the model resolved the rule-vs-instruction collision</text>';
+		const figCaption =
+			"conflicted combined cells (of 12) by how the model resolved the rule-vs-instruction collision";
 		let marks = "",
 			hits = "";
 		rows.forEach((row, ri) => {
@@ -4911,7 +4870,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -4958,7 +4918,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study AA: conflict resolution — literal readings by arm (the refuted gradient) ---
-	(function () {
+	(() => {
 		const AARMS = ["AA-base", "AA-priority", "AA-soft", "AA-memo"];
 		const ANAMES = {
 			"AA-base": "pack as-is (the confirmation arm)",
@@ -5035,12 +4995,8 @@ export function initBenchCharts() {
 				tick +
 				"</text>";
 		}
-		g +=
-			'<text fill="#c3c9d4" font-size="12" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">literal readings (of 24 conflicted cells) — memo-arm bars on opus/sonnet are the countermand-trampling footgun, not form-strictness</text>';
+		const figCaption =
+			"literal readings (of 24 conflicted cells) — memo-arm bars on opus/sonnet are the countermand-trampling footgun, not form-strictness";
 		let marks = "",
 			hits = "";
 		rows.forEach((row, ri) => {
@@ -5108,7 +5064,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -5141,7 +5098,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study AC: ask versus guess — the villain flips ---
-	(function () {
+	(() => {
 		const ROWS = [
 			{
 				label: "no hatch (the U replication)",
@@ -5215,12 +5172,8 @@ export function initBenchCharts() {
 				tick +
 				"</text>";
 		}
-		g +=
-			'<text fill="#c3c9d4" font-size="12" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">outcomes on 45 unsolvable cells — one sentence of permission flips every silent guess into a precise question</text>';
+		const figCaption =
+			"outcomes on 45 unsolvable cells — one sentence of permission flips every silent guess into a precise question";
 		let marks = "",
 			hits = "";
 		rows.forEach((row, ri) => {
@@ -5287,7 +5240,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -5316,7 +5270,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study AD: the Opus confirmation — prior bands vs the shipped tier ---
-	(function () {
+	(() => {
 		const ROWS = [
 			{
 				label: "patch dialect · main corpus",
@@ -5409,12 +5363,8 @@ export function initBenchCharts() {
 				tick +
 				"%</text>";
 		}
-		g +=
-			'<text fill="#c3c9d4" font-size="12" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">task success: the gray band is where sonnet and gemini landed; the green dot is the tier the product ships</text>';
+		const figCaption =
+			"task success: the gray band is where sonnet and gemini landed; the green dot is the tier the product ships";
 		let marks = "",
 			hits = "";
 		ROWS.forEach((row, ri) => {
@@ -5466,7 +5416,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -5475,20 +5426,45 @@ export function initBenchCharts() {
 			"tbl-opus",
 			["arm", "prior band", "opus-4.8", "gate"],
 			[
-				["patch dialect, main corpus (n=200)", "182-188/200 (4 tiers)", "194/200", "≥182: PASS"],
+				[
+					"patch dialect, main corpus (n=200)",
+					"182-188/200 (4 tiers)",
+					"194/200",
+					"≥182: PASS",
+				],
 				["focused views FVH (n=45)", "42-43/45", "45/45", "≥40: PASS"],
 				["focused views FTH (n=45)", "40-44/45", "45/45", "≥40: PASS"],
 				["search grounding N-search (n=45)", "39-43/45", "43/45", "≥39: PASS"],
-				["sessions, steps per policy (n=240)", "see Study K/M/P sections", "240/240 in all three policies", "≥95%: PASS"],
-				["sessions, intact end states (n=20)", "18-19/20 (surviving recipes)", "20/20 in all three policies", "≥17: PASS"],
-				["full-tree patches at ~1000 nodes (n=15)", "13/15 both tiers", "14/15", "descriptive"],
-				["fan-out Q-view / Q-full (n=45)", "62.2-68.9% / 48.9-80.0%", "80.0% / 88.9%", "descriptive; fence stands"],
+				[
+					"sessions, steps per policy (n=240)",
+					"see Study K/M/P sections",
+					"240/240 in all three policies",
+					"≥95%: PASS",
+				],
+				[
+					"sessions, intact end states (n=20)",
+					"18-19/20 (surviving recipes)",
+					"20/20 in all three policies",
+					"≥17: PASS",
+				],
+				[
+					"full-tree patches at ~1000 nodes (n=15)",
+					"13/15 both tiers",
+					"14/15",
+					"descriptive",
+				],
+				[
+					"fan-out Q-view / Q-full (n=45)",
+					"62.2-68.9% / 48.9-80.0%",
+					"80.0% / 88.9%",
+					"descriptive; fence stands",
+				],
 			],
 		);
 	})();
 
 	// --- Study AE: the calibration ladder — ask rate by ambiguity level ---
-	(function () {
+	(() => {
 		const LEVELS = [
 			"L0 precise",
 			"L1 indirect, unique",
@@ -5586,12 +5562,8 @@ export function initBenchCharts() {
 				label +
 				"</text>";
 		});
-		g +=
-			'<text fill="#c3c9d4" font-size="12" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 6) +
-			'" text-anchor="middle">asks per 15 cells across the ambiguity ladder: flat zero on clear requests, a tier split at two referents, ceiling at missing info</text>';
+		const figCaption =
+			"asks per 15 cells across the ambiguity ladder: flat zero on clear requests, a tier split at two referents, ceiling at missing info";
 		let marks = "",
 			hits = "";
 		for (const series of SERIES) {
@@ -5642,7 +5614,8 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -5654,7 +5627,12 @@ export function initBenchCharts() {
 				["L0 precise: solved / asked", "15 / 0", "15 / 0", "15 / 0"],
 				["L1 indirect, unique: solved / asked", "15 / 0", "15 / 0", "15 / 0"],
 				["L2 discretionary: acted / asked", "15 / 0", "15 / 0", "13 / 2"],
-				["L3 two referents: asked / edited-both / picked-one", "1 / 12 / 2", "1 / 5 / 9", "15 / 0 / 0"],
+				[
+					"L3 two referents: asked / edited-both / picked-one",
+					"1 / 12 / 2",
+					"1 / 5 / 9",
+					"15 / 0 / 0",
+				],
 				["L4 missing info: asked", "15", "15", "15"],
 				["resume loop: resumed-solved (of 45)", "45", "45", "45"],
 				["L3 asks naming both candidate ids", "1/1", "1/1", "15/15"],
@@ -5663,7 +5641,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study AF: restate-before-rewrite — W/L/T vs control (Track 2) ---
-	(function () {
+	(() => {
 		const ROWS = [
 			{
 				editor: "sonnet-4.5",
@@ -5759,12 +5737,8 @@ export function initBenchCharts() {
 				tick +
 				"</text>";
 		}
-		g +=
-			'<text fill="#c3c9d4" font-size="12" x="' +
-			(L + iw / 2) +
-			'" y="' +
-			(H - 4) +
-			'" text-anchor="middle">judged pairs vs an explicit-goal control: restating a READ goal never wins; restating a MEMO goal changes nothing</text>';
+		const figCaption =
+			"judged pairs vs an explicit-goal control: restating a READ goal never wins; restating a MEMO goal changes nothing";
 		let marks = "",
 			hits = "";
 		ROWS.forEach((row, ri) => {
@@ -5808,9 +5782,7 @@ export function initBenchCharts() {
 				'" width="' +
 				iw +
 				'" height="24" fill="transparent" data-tip="' +
-				esc(
-					row.editor + " · " + row.arm + "\n" + row.tip,
-				) +
+				esc(row.editor + " · " + row.arm + "\n" + row.tip) +
 				'"/>';
 		});
 		const el = document.getElementById("fig-restate");
@@ -5823,14 +5795,20 @@ export function initBenchCharts() {
 			g +
 			marks +
 			hits +
-			"</svg>";
+			"</svg>" +
+			figCap(figCaption);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
 		});
 		table(
 			"tbl-restate",
-			["cell (30 pairs)", "primary W/L/T", "sensitivity W/L/T", "GOAL compliance"],
+			[
+				"cell (30 pairs)",
+				"primary W/L/T",
+				"sensitivity W/L/T",
+				"GOAL compliance",
+			],
 			[
 				["sonnet memo+restate", "6/5/19", "7/5/18", "30/30"],
 				["sonnet view+restate", "0/29/1", "0/26/4", "30/30"],
