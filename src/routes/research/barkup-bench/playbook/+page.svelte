@@ -108,6 +108,7 @@ function searchTool(query: string): string {
 		prose: [
 			`"Rename it to the codename we settled on" fails a stateless editor 100% of the time by construction: the answer lives in a conversation the model no longer sees. A short app-held memo of declared facts, standing rules, and goals, appended to every request, recovered every such callback at 2% extra cost.`,
 			`The memo also carries qualitative goals at full parity with restating them in the request, where merely showing the model the document node the goal lives in lost 117 of 120 judged comparisons. Views carry values; memos carry goals. And you can delegate the writing: agent-extracted memos tied a perfect-oracle baseline on all three models tested, handled retractions, survived casual human phrasing at exact parity, and produced zero false notes from 432 conversational chatter baits.`,
+			`One thing NOT to add (Study AF): a clause telling the agent to restate the goal in its own words before a goal-directed rewrite. We measured it at perfect compliance and zero wins in ninety judged comparisons; the model says the goal accurately and then orbits it anyway, and on the memo path the ceremony measures neutral to mildly negative. Prompt clauses that dramatize reasoning are not context that changes it. Put the goal in the memo or the instruction, and stop there; the memo's goal-carriage parity replicated contemporaneously on a third model tier in the same study.`,
 		],
 		code: `## Session notes (app-maintained memo)
 Declared facts, standing rules, and goals from this session --
@@ -126,7 +127,7 @@ Goals:
 - The pricing page should read as reassuring, not salesy.`,
 		codeCaption:
 			"The benchmark-validated block, verbatim including the precedence sentence (guideline 06).",
-		measured: `Memo restores history-parity at 1.02 times stateless cost (<a class="${linkCls}" href="${dash}#sec-memo">chart</a>); goals via memo win 117 of 120 over goals via view (<a class="${linkCls}" href="${dash}#sec-goals">chart</a>); agent-written memos tie the oracle (<a class="${linkCls}" href="${dash}#sec-extraction">chart</a>). Write-ups: <a class="${linkCls}" href="/blog/views-carry-values-memos-carry-goals">Views Carry Values, Memos Carry Goals</a> and <a class="${linkCls}" href="/blog/who-writes-the-memo">Who Writes the Memo?</a>.`,
+		measured: `Memo restores history-parity at 1.02 times stateless cost (<a class="${linkCls}" href="${dash}#sec-memo">chart</a>); goals via memo win 117 of 120 over goals via view (<a class="${linkCls}" href="${dash}#sec-goals">chart</a>); agent-written memos tie the oracle (<a class="${linkCls}" href="${dash}#sec-extraction">chart</a>); restate-first ceremony: 0 wins in 90 at perfect compliance (<a class="${linkCls}" href="${dash}#sec-restate">chart</a>). Write-ups: <a class="${linkCls}" href="/blog/views-carry-values-memos-carry-goals">Views Carry Values, Memos Carry Goals</a>, <a class="${linkCls}" href="/blog/who-writes-the-memo">Who Writes the Memo?</a>, and <a class="${linkCls}" href="/blog/repeating-the-goal-doesnt-make-it-yours">Repeating the Goal Doesn't Make It Yours</a>.`,
 	},
 	{
 		id: "precedence",
@@ -205,7 +206,7 @@ view and not stated in the request, do NOT guess: reply with a single
 line "NEED-INFO: <what is missing and where you would need to read
 it>" instead of a patch.`,
 		codeCaption: "The registered sentence, verbatim.",
-		measured: `Asks on unsolvable tasks: 270 of 270 with the sentence, 0 of 270 without; false asks on solvable twins: zero in 270 (<a class="${linkCls}" href="${dash}#sec-ask">chart</a>). Write-up: <a class="${linkCls}" href="/blog/the-model-always-knew">The Model Always Knew What It Couldn't See</a>.`,
+		measured: `Asks on unsolvable tasks: 270 of 270 with the sentence, 0 of 270 without; false asks on solvable twins: zero in 270 (<a class="${linkCls}" href="${dash}#sec-ask">chart</a>); calibration ladder: zero false asks in 90 clear-request cells, resume loop 135 of 135, ambiguity detection frontier-only (<a class="${linkCls}" href="${dash}#sec-calibration">chart</a>). Write-ups: <a class="${linkCls}" href="/blog/the-model-always-knew">The Model Always Knew What It Couldn't See</a> and <a class="${linkCls}" href="/blog/only-the-frontier-knows-when-to-ask">Only the Frontier Knows When to Ask</a>.`,
 	},
 ];
 </script>
@@ -245,7 +246,8 @@ it>" instead of a patch.`,
           class={linkCls}
           href="{dash}#sec-opus">Study AD</a
         >). The guidelines below hold from the budget tiers to the
-        frontier; the one tier-dependent nuance is noted on guideline 04.
+        frontier; the tier-dependent nuances are noted on guidelines 04
+        and 10.
       </p>
     </header>
 
