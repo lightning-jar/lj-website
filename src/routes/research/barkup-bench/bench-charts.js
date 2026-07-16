@@ -5661,4 +5661,185 @@ export function initBenchCharts() {
 			],
 		);
 	})();
+
+	// --- Study AF: restate-before-rewrite — W/L/T vs control (Track 2) ---
+	(function () {
+		const ROWS = [
+			{
+				editor: "sonnet-4.5",
+				arm: "memo + restate",
+				win: 6,
+				tie: 19,
+				loss: 5,
+				tip: "primary judge 6/5/19 (sign p=1.0)\nsensitivity judge 7/5/18\nStudy V's bare memo had BEATEN control 10-2 here",
+			},
+			{
+				editor: "sonnet-4.5",
+				arm: "view + restate",
+				win: 0,
+				tie: 1,
+				loss: 29,
+				tip: "primary judge 0/29/1\nGOAL-line compliance 30/30: restated the thesis, then orbited it",
+			},
+			{
+				editor: "gemini-3.5-flash",
+				arm: "memo + restate",
+				win: 3,
+				tie: 17,
+				loss: 10,
+				tip: "primary judge 3/10/17 (sign p=.09, not significant)\nsensitivity judge 1/13/16 (p=.0018, control-favored) — the disclosed dissent",
+			},
+			{
+				editor: "gemini-3.5-flash",
+				arm: "view + restate",
+				win: 0,
+				tie: 0,
+				loss: 30,
+				tip: "primary judge 0/30/0\nGOAL-line compliance 30/30",
+			},
+			{
+				editor: "opus-4.8",
+				arm: "memo + restate",
+				win: 2,
+				tie: 19,
+				loss: 9,
+				tip: "primary judge 2/9/19 (sign p=.07, not significant)\nsensitivity judge 5/15/10 (p=.04, control-favored) — the disclosed dissent",
+			},
+			{
+				editor: "opus-4.8",
+				arm: "view + restate",
+				win: 0,
+				tie: 10,
+				loss: 20,
+				tip: "primary judge 0/20/10\nGOAL-line compliance 30/30: even the frontier tier repeats a read goal and then orbits it",
+			},
+		];
+		const CWIN = "#199e70",
+			CTIE = "#8b93a3",
+			CLOSS = "#e66767";
+		document.getElementById("legend-25").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CWIN +
+			'"></span>arm wins</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CTIE +
+			'"></span>tie (order-inconsistent)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CLOSS +
+			'"></span>control wins</span>' +
+			'<span class="key">30 judged pairs per row, primary judge, both presentation orders · JUDGE-GRADED (Track 2), never pooled with the deterministic studies</span>';
+		const W = 880,
+			ROW = 34,
+			T = 8,
+			B = 42,
+			L = 250,
+			R = 24;
+		const H = T + ROWS.length * ROW + B + 6;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 30) * iw;
+		let g = "";
+		for (const tick of [0, 10, 20, 30]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		g +=
+			'<text fill="#c3c9d4" font-size="12" x="' +
+			(L + iw / 2) +
+			'" y="' +
+			(H - 4) +
+			'" text-anchor="middle">judged pairs vs an explicit-goal control: restating a READ goal never wins; restating a MEMO goal changes nothing</text>';
+		let marks = "",
+			hits = "";
+		ROWS.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.editor +
+				" · " +
+				row.arm +
+				"</text>";
+			let x = L;
+			for (const seg of [
+				{ v: row.win, c: CWIN },
+				{ v: row.tie, c: CTIE },
+				{ v: row.loss, c: CLOSS },
+			]) {
+				if (seg.v > 0) {
+					const w = (seg.v / 30) * iw;
+					marks +=
+						'<rect x="' +
+						x +
+						'" y="' +
+						(cy - 8) +
+						'" width="' +
+						Math.max(w - 2, 1) +
+						'" height="16" fill="' +
+						seg.c +
+						'" rx="3"/>';
+					x += w;
+				}
+			}
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				(cy - 12) +
+				'" width="' +
+				iw +
+				'" height="24" fill="transparent" data-tip="' +
+				esc(
+					row.editor + " · " + row.arm + "\n" + row.tip,
+				) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-restate");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Stacked bar chart: restate arms vs explicit-goal control. View-plus-restate loses or ties every pair on all three editors with zero wins; memo-plus-restate is tie-heavy parity." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>";
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-restate",
+			["cell (30 pairs)", "primary W/L/T", "sensitivity W/L/T", "GOAL compliance"],
+			[
+				["sonnet memo+restate", "6/5/19", "7/5/18", "30/30"],
+				["sonnet view+restate", "0/29/1", "0/26/4", "30/30"],
+				["gemini memo+restate", "3/10/17", "1/13/16 (p=.0018)", "30/30"],
+				["gemini view+restate", "0/30/0", "0/26/4", "30/30"],
+				["opus memo+restate", "2/9/19", "5/15/10 (p=.0414)", "30/30"],
+				["opus view+restate", "0/20/10", "0/19/11", "30/30"],
+				["mechanical validity", "270/270 across all arms", "", ""],
+			],
+		);
+	})();
 }
