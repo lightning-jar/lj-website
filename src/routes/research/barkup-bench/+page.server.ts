@@ -28,6 +28,7 @@ const seriesSlugs = [
 	"the-frontier-doesnt-need-the-training-wheels",
 	"only-the-frontier-knows-when-to-ask",
 	"repeating-the-goal-doesnt-make-it-yours",
+	"the-twenty-first-note",
 ];
 
 const articles = seriesSlugs

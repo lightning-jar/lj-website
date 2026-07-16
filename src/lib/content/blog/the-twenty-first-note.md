@@ -4,10 +4,10 @@ metaTitle: "The Twenty-First Note | barkup-bench Study AH"
 slug: the-twenty-first-note
 description: "The session-notes memo is the most load-bearing mechanism our benchmark series ever shipped, and every study that validated it used three to six notes. The shipped implementation caps it at twenty, with a normalize step that silently drops the excess. Study AH filled it up. Below the cap, the memo is flawless at scale: perfect recall from a full memo at every position, standing rules applied with zero cross-contamination, lossless full-replace updates, sixty of sixty. Then a twenty-first declaration arrives, and a note dies every time. In thirty out of thirty cells, on all three models, the note that died was a goal, the one class of information only the memo carries. The block renders goals last, and everything that trims a list eats from the tail. Nobody designed that failure ordering. It fell out of a rendering order, a truncation clamp, and a cap nobody had ever filled."
 date: 2026-07-16T18:00:00Z
-draft: true
+draft: false
 tags: [ai, agents, llm, open-source, barkup, benchmarks]
-image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/jar-of-notes.webp
-imageDescription: A watercolor painting of a glass jar stuffed full of folded paper notes, with one note falling beside it
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/typewriter.webp
+imageDescription: A watercolor painting of a cream vintage typewriter with wildflowers tucked behind the platen
 author: Kevin Peckham
 quote:
   text: Below the cap, flawless. At the cap, a note dies every time, and it is always a goal. Nobody designed that. It fell out of a rendering order and a truncation clamp.
