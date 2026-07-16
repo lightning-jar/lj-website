@@ -4,10 +4,10 @@ metaTitle: "Only the Frontier Knows When to Ask | barkup-bench Study AE"
 slug: only-the-frontier-knows-when-to-ask
 description: "Two studies ago we found that one sentence of permission turns silent guessing into precise questions. This study tried to break that sentence, by walking it down a five-level ladder of ambiguity and by answering the questions it produces. The two failure modes everyone worries about never showed up: zero false asks on ninety clear requests, and a perfect 135 of 135 solves after the user replies. The crack is somewhere stranger. When a request matches two visible nodes equally well, the frontier model asks which one you meant, naming both ids, fifteen times out of fifteen. The mid-tier models, with the same permission in the same prompt, ask once in fifteen. One silently edits both nodes. The other silently picks one. Knowing that a question is the right answer turns out to be a capability."
 date: 2026-07-15T20:00:00Z
-draft: true
+draft: false
 tags: [ai, agents, llm, open-source, barkup, benchmarks]
-image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/crossroads.webp
-imageDescription: A watercolor painting of a wooden signpost with two identical arrows pointing in opposite directions
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/wooden-sign.webp
+imageDescription: A watercolor painting of a blank wooden signpost with arrow points on both ends, pointing two directions at once
 author: Kevin Peckham
 quote:
   text: The tax was zero. The loop was perfect. The crack is that below the frontier, models resolve ambiguity instead of noticing it.

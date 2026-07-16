@@ -26,6 +26,7 @@ const seriesSlugs = [
 	"stronger-llms-follow-conflicting-instructions-more-literally",
 	"the-model-always-knew",
 	"the-frontier-doesnt-need-the-training-wheels",
+	"only-the-frontier-knows-when-to-ask",
 ];
 
 const articles = seriesSlugs
