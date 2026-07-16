@@ -5820,4 +5820,151 @@ export function initBenchCharts() {
 			],
 		);
 	})();
+
+	// --- Study AH: memo saturation — below-cap vs the cap edge ---
+	(function () {
+		const ROWS = [
+			{
+				label: "sonnet-4.5 · below cap",
+				segs: [{ v: 20, c: "#199e70", k: "clean update" }],
+				tip: "K=10 and K=19 full-replace updates: 20/20 clean\nevery old needle preserved, every new declaration recorded",
+			},
+			{
+				label: "sonnet-4.5 · at the cap",
+				segs: [
+					{ v: 3, c: "#c98500", k: "pruned a note itself" },
+					{ v: 7, c: "#e66767", k: "clamp chose the victim" },
+				],
+				tip: "K=20 + a 21st declaration: 10/10 cells lost a note\npruned deliberately 3, over-sent 21 and the shipped clamp cut one 7\nvictim: a GOAL note in 10/10",
+			},
+			{
+				label: "gemini-3.5-flash · below cap",
+				segs: [{ v: 20, c: "#199e70", k: "clean update" }],
+				tip: "K=10 and K=19 full-replace updates: 20/20 clean",
+			},
+			{
+				label: "gemini-3.5-flash · at the cap",
+				segs: [
+					{ v: 8, c: "#c98500", k: "pruned a note itself" },
+					{ v: 2, c: "#e66767", k: "clamp chose the victim" },
+				],
+				tip: "K=20 + a 21st declaration: 10/10 cells lost a note\npruned deliberately 8, clamp cut one 2\nvictim: a GOAL note in 10/10",
+			},
+			{
+				label: "opus-4.8 · below cap",
+				segs: [{ v: 20, c: "#199e70", k: "clean update" }],
+				tip: "K=10 and K=19 full-replace updates: 20/20 clean",
+			},
+			{
+				label: "opus-4.8 · at the cap",
+				segs: [{ v: 10, c: "#e66767", k: "clamp chose the victim" }],
+				tip: "K=20 + a 21st declaration: 10/10 cells lost a note\nover-sent 21 notes every time; the shipped clamp kept the first 20\nvictim: a GOAL note in 10/10",
+			},
+		];
+		document.getElementById("legend-26").innerHTML =
+			'<span class="key"><span class="chip" style="background:#199e70"></span>clean full-replace (nothing lost)</span>' +
+			'<span class="key"><span class="chip" style="background:#c98500"></span>model pruned a note (silent)</span>' +
+			'<span class="key"><span class="chip" style="background:#e66767"></span>shipped clamp cut a note (silent)</span>' +
+			'<span class="key">below cap = 20 update scenarios per model · at the cap = 10 per model · every lost note was a goal · read side (recall/rules at N=20): 90/90, in the table</span>';
+		const W = 880,
+			ROW = 34,
+			T = 8,
+			B = 42,
+			L = 250,
+			R = 24;
+		const H = T + ROWS.length * ROW + B + 6;
+		const iw = W - L - R;
+		let g = "";
+		for (const tick of [0, 5, 10, 15, 20]) {
+			const x = L + (tick / 20) * iw;
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		let marks = "",
+			hits = "";
+		ROWS.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			const denom = row.segs.reduce((s2, seg) => s2 + seg.v, 0) === 20 ? 20 : 10;
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.label +
+				"</text>";
+			let x = L;
+			for (const seg of row.segs) {
+				const w = (seg.v / 20) * iw;
+				marks +=
+					'<rect x="' +
+					x +
+					'" y="' +
+					(cy - 8) +
+					'" width="' +
+					Math.max(w - 2, 1) +
+					'" height="16" fill="' +
+					seg.c +
+					'" rx="3"/>';
+				x += w;
+			}
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				(cy - 12) +
+				'" width="' +
+				iw +
+				'" height="24" fill="transparent" data-tip="' +
+				esc(row.label + " (of " + denom + ")\n" + row.tip) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-saturation");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Stacked bar chart: full-replace memo updates are clean 20 of 20 per model below the cap; at the twenty-note cap every cell loses a note, split between deliberate prunes and the silent clamp, and every lost note was a goal." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"full-replace update outcomes: clean below the cap, a silent loss in every cap-edge cell — and all 30 lost notes were goals, the class only the memo carries",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-saturation",
+			["measure", "sonnet-4.5", "gemini-3.5-flash", "opus-4.8"],
+			[
+				["recall from a FULL 20-note memo (first/middle/last)", "15/15", "15/15", "15/15"],
+				["unprompted rule application, 12-rule memo", "15/15", "15/15", "15/15"],
+				["cross-note contamination events", "0", "0", "0"],
+				["full-replace clean at K=10 and K=19", "20/20", "20/20", "20/20"],
+				["cap edge: cells losing a note", "10/10", "10/10", "10/10"],
+				["cap edge: lost note was a goal", "10/10", "10/10", "10/10"],
+				["edit applied alongside the memo update", "30/30", "30/30", "30/30"],
+			],
+		);
+	})();
 }
