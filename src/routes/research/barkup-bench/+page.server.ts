@@ -29,6 +29,7 @@ const seriesSlugs = [
 	"only-the-frontier-knows-when-to-ask",
 	"repeating-the-goal-doesnt-make-it-yours",
 	"the-twenty-first-note",
+	"it-asked-about-things-it-already-knew",
 ];
 
 const articles = seriesSlugs

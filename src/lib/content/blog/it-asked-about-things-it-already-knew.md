@@ -4,10 +4,10 @@ metaTitle: "It Asked About Things It Already Knew | barkup-bench Study AG"
 slug: it-asked-about-things-it-already-knew
 description: "The ask path had one unmapped border left: dangling references. 'Undo that' against an editor with no context used to produce a valid, silently wrong patch 144 times out of 144. We pointed the shipped permission sentence at it, and the border closed on every tier: 138 of 144 silent guesses became questions that named the missing antecedent precisely. Then the tax check failed on all three models, and the failure is a small masterpiece of letter-following. With an echo supplying everything needed, the node id, the attribute, both values, the models quoted that information back to us and asked anyway, because the sentence says a node that is not visible warrants a question, and the target sat outside a skeleton view. An anchored patch needs only the id. They had the id. They asked. The hatch's famous zero tax turns out to be conditional on the view contract it rides along with, which makes them one system, not two features."
 date: 2026-07-16T22:00:00Z
-draft: true
+draft: false
 tags: [ai, agents, llm, open-source, barkup, benchmarks]
 image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/dog-with-ball.webp
-imageDescription: A watercolor painting of a dog holding a ball in its mouth, looking up expectantly
+imageDescription: A watercolor painting of a golden labrador lying down with a pink ball in its mouth, looking up at the viewer
 author: Kevin Peckham
 quote:
   text: They quoted the node id from the echo, then asked to see the node. The patch needed only the id. The letter of the rule beat the point of the rule, again.
