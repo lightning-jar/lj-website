@@ -214,7 +214,7 @@ export function initBenchCharts() {
 
 	function figCap(text) {
 		return (
-			'<div style="font-size:12px;line-height:1.5;color:#c3c9d4;text-align:center;margin:8px auto 0;max-width:56rem;white-space:normal">' +
+			'<div style="font-size:12px;line-height:1.5;color:#c3c9d4;text-align:left;margin:8px 0 0;max-width:56rem;white-space:normal">' +
 			text +
 			"</div>"
 		);
@@ -291,7 +291,6 @@ export function initBenchCharts() {
 		BUCKET_LABELS.forEach((lab, i) => {
 			g += `<text fill="#c3c9d4" font-size="11.5" x="${xs[i]}" y="${H - B + 22}" text-anchor="middle">${lab}</text>`;
 		});
-		g += `<text fill="#8b93a3" font-size="11" x="${L + iw / 2}" y="${H - 6}" text-anchor="middle">tree size bucket</text>`;
 		let marks = "",
 			hits = "";
 		const endLabels = [];
@@ -335,7 +334,7 @@ export function initBenchCharts() {
 		}
 		const svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(opts.aria)}" style="min-width:640px;display:block">${g}${marks}${labels}${hits}</svg>`;
 		const el = document.getElementById(mount);
-		el.innerHTML = svg;
+		el.innerHTML = svg + figCap("tree size bucket");
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
@@ -400,7 +399,6 @@ export function initBenchCharts() {
 			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
 			g += `<text fill="#c3c9d4" font-size="11.5" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
 		}
-		g += `<text fill="#8b93a3" font-size="11" x="${L + iw / 2}" y="${H - 4}" text-anchor="middle">reference-task success (n = 40 per cell)</text>`;
 		let marks = "",
 			hits = "";
 		DATA.reference.forEach((row, ri) => {
@@ -416,7 +414,9 @@ export function initBenchCharts() {
 			});
 		});
 		const el = document.getElementById("fig-reference");
-		el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Reference-task success per model and condition; tools conditions collapse for haiku and gemini." style="min-width:640px;display:block">${g}${marks}${hits}</svg>`;
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Reference-task success per model and condition; tools conditions collapse for haiku and gemini." style="min-width:640px;display:block">${g}${marks}${hits}</svg>` +
+			figCap("reference-task success (n = 40 per cell)");
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
 			n.addEventListener("mouseleave", hideTip);
