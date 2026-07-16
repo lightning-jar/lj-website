@@ -6116,4 +6116,138 @@ export function initBenchCharts() {
 			],
 		);
 	})();
+
+	// --- Study AG: the anaphora hatch — outcomes on 48 anaphora cells ---
+	(function () {
+		const ROWS = [
+			{ label: "sonnet-4.5 · no hatch", asked: 0, solved: 0, silent: 48, tip: "the Study X replication: every cell a valid silently-guessed patch" },
+			{ label: "sonnet-4.5 · + hatch", asked: 47, solved: 0, silent: 1, tip: "47/48 asks, each naming the dangling antecedent" },
+			{ label: "sonnet-4.5 · echo + hatch", asked: 34, solved: 14, silent: 0, tip: "the echo supplies id, key, and both values — the model quotes them, then asks anyway because the node is not visible in the skeleton view (the visibility clause)" },
+			{ label: "gemini-3.5-flash · no hatch", asked: 0, solved: 0, silent: 48, tip: "the Study X replication: every cell a valid silently-guessed patch" },
+			{ label: "gemini-3.5-flash · + hatch", asked: 43, solved: 0, silent: 5, tip: "43/48 asks on the discourse gap" },
+			{ label: "gemini-3.5-flash · echo + hatch", asked: 36, solved: 12, silent: 0, tip: "36 false asks despite the complete echo — the visibility clause" },
+			{ label: "opus-4.8 · no hatch", asked: 0, solved: 0, silent: 48, tip: "the Study X replication: every cell a valid silently-guessed patch" },
+			{ label: "opus-4.8 · + hatch", asked: 48, solved: 0, silent: 0, tip: "48/48 asks — the discourse gap is letter-covered on every tier" },
+			{ label: "opus-4.8 · echo + hatch", asked: 33, solved: 15, silent: 0, tip: "even the frontier tier obeys the visibility letter: 33 asks despite holding everything needed to patch" },
+		];
+		const CASK = "#3987e5",
+			CSOLVE = "#199e70",
+			CSILENT = "#e66767";
+		document.getElementById("legend-28").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CASK +
+			'"></span>asked</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CSOLVE +
+			'"></span>solved</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CSILENT +
+			'"></span>silent wrong patch</span>' +
+			'<span class="key">48 anaphora cells per row · echo-only (no hatch) solved 48/48 in Study X · ordinary steps: zero false asks in 288 cells</span>';
+		const W = 880,
+			ROW = 30,
+			T = 8,
+			B = 42,
+			L = 250,
+			R = 24;
+		const H = T + ROWS.length * ROW + B + 6;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 48) * iw;
+		let g = "";
+		for (const tick of [0, 12, 24, 36, 48]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		let marks = "",
+			hits = "";
+		ROWS.forEach((row, ri) => {
+			const cy = T + ri * ROW + ROW / 2;
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(cy + 4) +
+				'" text-anchor="end">' +
+				row.label +
+				"</text>";
+			let x = L;
+			for (const seg of [
+				{ v: row.asked, c: CASK },
+				{ v: row.solved, c: CSOLVE },
+				{ v: row.silent, c: CSILENT },
+			]) {
+				if (seg.v > 0) {
+					const w = (seg.v / 48) * iw;
+					marks +=
+						'<rect x="' +
+						x +
+						'" y="' +
+						(cy - 8) +
+						'" width="' +
+						Math.max(w - 2, 1) +
+						'" height="16" fill="' +
+						seg.c +
+						'" rx="3"/>';
+					x += w;
+				}
+			}
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				(cy - 12) +
+				'" width="' +
+				iw +
+				'" height="24" fill="transparent" data-tip="' +
+				esc(row.label + "\n" + row.tip) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-anaphora-hatch");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Stacked bar chart: without the hatch every anaphora cell is a silent wrong patch; with the hatch nearly all become questions on every model; with the echo plus the hatch most cells are asks despite the echo supplying everything, the visibility-clause tax." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"anaphora-cell outcomes: the hatch converts silent guesses into antecedent-naming questions on every tier, and then keeps asking under the echo because the target is not visible in the skeleton view — zero tax holds only where views carry their targets",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-anaphora-hatch",
+			["cell", "sonnet-4.5", "gemini-3.5-flash", "opus-4.8"],
+			[
+				["no hatch: silent wrong patches", "48/48", "48/48", "48/48"],
+				["+ hatch: asked", "47/48", "43/48", "48/48"],
+				["echo + hatch: asked / solved", "34 / 14", "36 / 12", "33 / 15"],
+				["echo only, Study X (no hatch): solved", "48/48", "48/48", "48/48"],
+				["ordinary steps: false asks (both hatch arms)", "0/192", "0/192", "0/192"],
+				["asks by kind (+hatch): amend / repeat / undo", "24 / 12 / 11", "24 / 12 / 7", "24 / 12 / 12"],
+			],
+		);
+	})();
 }
