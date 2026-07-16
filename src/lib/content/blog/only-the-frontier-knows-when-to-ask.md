@@ -6,7 +6,7 @@ description: "Two studies ago we found that one sentence of permission turns sil
 date: 2026-07-15T20:00:00Z
 draft: false
 tags: [ai, agents, llm, open-source, barkup, benchmarks]
-image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/wooden-sign.webp
+image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/wooden-sign-02.webp
 imageDescription: A watercolor painting of a blank wooden signpost with arrow points on both ends, pointing two directions at once
 author: Kevin Peckham
 quote:

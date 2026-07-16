@@ -4,7 +4,7 @@ metaTitle: "Repeating the Goal Doesn't Make It Yours | barkup-bench Study AF"
 slug: repeating-the-goal-doesnt-make-it-yours
 description: "One clause in our shipped prompt rules had been living on an inference: before a goal-directed rewrite, restate the goal in your own words. It sounds like obvious good hygiene, the LLM equivalent of repeating an order back at a drive-through. Study AF measured it with our judge-graded protocol, and the result is the cleanest refutation in the series. Made to restate a goal it had read from the document, every model complied perfectly, ninety times out of ninety, and then lost every single decisive comparison to a model that was simply told the goal. Zero wins. The model says the goal accurately, in its own words, and then writes the wrong paragraph anyway. Where a goal comes from matters more than whether the model says it aloud, and one more obvious-looking prompt clause turns out to be theater."
 date: 2026-07-16T14:00:00Z
-draft: true
+draft: false
 tags: [ai, agents, llm, open-source, barkup, benchmarks]
 image: https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/blog/parrot.webp
 imageDescription: A watercolor painting of a green parrot perched on a branch, beak open mid-phrase
