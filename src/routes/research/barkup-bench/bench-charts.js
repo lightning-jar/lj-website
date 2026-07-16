@@ -5967,4 +5967,153 @@ export function initBenchCharts() {
 			],
 		);
 	})();
+
+	// --- Study AI: the multiplicity hatch — L3 asks, amended vs shipped ---
+	(function () {
+		const ROWS = [
+			{
+				model: "sonnet-4.5",
+				control: 3,
+				rule2: 15,
+				tip: "shipped sentence: 3/15 asks (12 unilateral resolutions)\n+ multiplicity clause: 15/15 asks, every ask naming both candidate ids\nMcNemar p = 5e-4 — complete rescue",
+			},
+			{
+				model: "gemini-3.5-flash",
+				control: 0,
+				rule2: 11,
+				tip: "shipped sentence: 0/15 asks (11 coin-flips, 4 edit-both)\n+ multiplicity clause: 11/15 asks — one short of the ≥12 bar (p = .059)\nresiduals: 4 silent edit-boths; the coin-flips vanished",
+			},
+			{
+				model: "opus-4.8",
+				control: 15,
+				rule2: 15,
+				tip: "already 15/15 with the shipped sentence — the clause adds nothing here\nthe one cost signal: discretionary-request asks rose 2/15 → 5/15 (n.s.)",
+			},
+		];
+		const CCONTROL = "#8b93a3",
+			CRULE2 = "#3987e5";
+		document.getElementById("legend-27").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CCONTROL +
+			'"></span>shipped sentence alone (contemporaneous control)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CRULE2 +
+			'"></span>+ the multiplicity clause</span>' +
+			'<span class="key">asks on 15 two-referent (L3) cells per model · registered detection bar: 12 · zero false asks on clear requests in either arm</span>';
+		const W = 880,
+			GROUP = 56,
+			BAR = 18,
+			T = 8,
+			B = 42,
+			L = 190,
+			R = 24;
+		const H = T + ROWS.length * GROUP + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 15) * iw;
+		let g = "";
+		for (const tick of [0, 5, 10, 15]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		// the registered bar
+		g +=
+			'<line x1="' +
+			xOf(12) +
+			'" x2="' +
+			xOf(12) +
+			'" y1="' +
+			T +
+			'" y2="' +
+			(H - B) +
+			'" stroke="#e66767" stroke-width="1.5" stroke-dasharray="4 4"/>';
+		let marks = "",
+			hits = "";
+		ROWS.forEach((row, ri) => {
+			const top = T + ri * GROUP + 8;
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(top + BAR) +
+				'" text-anchor="end">' +
+				row.model +
+				"</text>";
+			for (const [i, v] of [row.control, row.rule2].entries()) {
+				if (v > 0) {
+					marks +=
+						'<rect x="' +
+						L +
+						'" y="' +
+						(top + i * (BAR + 3)) +
+						'" width="' +
+						(v / 15) * iw +
+						'" height="' +
+						BAR +
+						'" fill="' +
+						(i === 0 ? CCONTROL : CRULE2) +
+						'" rx="3"/>';
+				}
+			}
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				top +
+				'" width="' +
+				iw +
+				'" height="' +
+				(2 * BAR + 3) +
+				'" fill="transparent" data-tip="' +
+				esc(row.model + "\n" + row.tip) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-multiplicity");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Grouped bar chart: with the multiplicity clause sonnet reaches 15 of 15 asks on ambiguous references, gemini reaches 11 of 15 just under the registered bar of 12, and opus stays at 15 of 15 with or without it." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"asks on two-referent requests, shipped sentence vs the amended one; the dashed line is the registered detection bar — the clause rescues sonnet, leaves gemini one short, and changes nothing on the tier the product ships",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-multiplicity",
+			["cell", "sonnet-4.5", "gemini-3.5-flash", "opus-4.8"],
+			[
+				["L3 asked, shipped sentence", "3/15", "0/15", "15/15"],
+				["L3 asked, + multiplicity clause", "15/15", "11/15", "15/15"],
+				["L3 residuals under the clause", "none", "4 edit-both", "none"],
+				["asks naming both candidate ids", "15/15", "11/11", "15/15"],
+				["false asks on clear requests (L0+L1)", "0/30", "0/30", "0/30"],
+				["L2 discretionary asks, control → clause", "0 → 0", "0 → 0", "2 → 5 (n.s.)"],
+				["L4 missing-info asked (clause arm)", "15/15", "15/15", "15/15"],
+			],
+		);
+	})();
 }
