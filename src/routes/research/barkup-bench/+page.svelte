@@ -118,7 +118,7 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
         {/if}
         {#if section.figure}
           <div
-            class="overflow-x-auto font-mono tabular-nums"
+            class="overflow-x-auto font-mono tabular-nums mt-5 mb-5 bg-white/5"
             id={section.figure.id}
           ></div>
         {/if}
