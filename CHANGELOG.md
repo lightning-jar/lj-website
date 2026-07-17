@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-07-17
+
+### Added
+- Deployment-version polling (`kit.version.pollInterval: 60_000` in `svelte.config.js`): hydrated tabs poll `/_app/version.json` every 60s, and after a new deploy the next client-side navigation upgrades to a full page load so long-lived tabs stop running stale bundles. Takes effect for tabs opened on or after the first deploy that includes it.
+
 ## [0.8.0] - 2026-07-15
 
 ### Changed

@@ -44,6 +44,12 @@ const config = {
 				server: true,
 			},
 		},
+
+		// Poll /_app/version.json so long-lived tabs detect new deploys;
+		// the next client-side navigation becomes a full page load on the new bundle.
+		version: {
+			pollInterval: 60_000,
+		},
 	},
 	compilerOptions: {
 		discloseVersion: false,
