@@ -6250,4 +6250,155 @@ export function initBenchCharts() {
 			],
 		);
 	})();
+
+	// --- Study AJ: the correction loop in isolation — recovery by arm ---
+	(function () {
+		const GROUPS = [
+			{
+				model: "sonnet-4.5",
+				vals: [45, 44, 42],
+				tip: "structured 45/45 · codes 44/45 · bare 42/45 — the only gradient, and it is not significant (p=.25)",
+			},
+			{
+				model: "gemini-3.5-flash",
+				vals: [42, 42, 42],
+				tip: "42/45 in every arm, and the three misses are the SAME cells each time (bad anchors) — zero discordant pairs, feedback quality changed nothing",
+			},
+			{
+				model: "opus-4.8",
+				vals: [45, 45, 45],
+				tip: "45/45 in every arm, including from nothing but “the anchored patch was invalid”",
+			},
+		];
+		const CSTRUCT = "#3987e5",
+			CCODES = "#c98500",
+			CBARE = "#8b93a3";
+		const ARMC = [CSTRUCT, CCODES, CBARE];
+		document.getElementById("legend-29").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CSTRUCT +
+			'"></span>full structured issues</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CCODES +
+			'"></span>issue codes only</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CBARE +
+			'"></span>bare “the patch was invalid”</span>' +
+			'<span class="key">45 seeded failures per arm · one feedback message, single-shot reply</span>';
+		const W = 880,
+			BAR = 16,
+			GAP = 4,
+			GH = 3 * BAR + 2 * GAP,
+			GPAD = 18,
+			T = 8,
+			B = 42,
+			L = 150,
+			R = 24;
+		const H = T + GROUPS.length * (GH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 45) * iw;
+		let g = "";
+		for (const tick of [0, 15, 30, 45]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		let marks = "",
+			hits = "";
+		GROUPS.forEach((row, gi) => {
+			const top = T + gi * (GH + GPAD);
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(top + GH / 2 + 4) +
+				'" text-anchor="end">' +
+				row.model +
+				"</text>";
+			row.vals.forEach((v, ai) => {
+				const y = top + ai * (BAR + GAP);
+				const w = Math.max((v / 45) * iw, 1);
+				marks +=
+					'<rect x="' +
+					L +
+					'" y="' +
+					y +
+					'" width="' +
+					w +
+					'" height="' +
+					BAR +
+					'" fill="' +
+					ARMC[ai] +
+					'" rx="3"/>';
+				marks +=
+					'<text fill="#c3c9d4" font-size="11" x="' +
+					(L + w + 8) +
+					'" y="' +
+					(y + BAR - 4) +
+					'">' +
+					v +
+					"/45</text>";
+			});
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				top +
+				'" width="' +
+				iw +
+				'" height="' +
+				GH +
+				'" fill="transparent" data-tip="' +
+				esc(row.model + "\n" + row.tip) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-correction");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Grouped bar chart: single-shot recovery from seeded patch failures is at parity across feedback arms on all three models; opus recovers 45 of 45 in every arm, gemini an identical 42 of 45 in every arm, sonnet shows a non-significant 45 to 44 to 42 gradient." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"single-shot recovery from 45 seeded patch failures, by feedback arm; the structured issues barkup has returned verbatim in every study measure no better than a bare “the patch was invalid” — told a patch failed, models re-derive the edit from the task and the tree",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-correction",
+			["cell", "sonnet-4.5", "gemini-3.5-flash", "opus-4.8"],
+			[
+				["recovered, full structured issues", "45/45", "42/45", "45/45"],
+				["recovered, issue codes only", "44/45", "42/45", "45/45"],
+				["recovered, bare “invalid”", "42/45", "42/45", "45/45"],
+				["structured vs bare, McNemar", "p=.25 n.s.", "0 discordant pairs", "0 discordant pairs"],
+				["bad-anchor class, pooled: structured / codes / bare", "15/18 · 14/18 · 14/18", "—", "—"],
+				["every other class, pooled: structured / codes / bare", "117/117 · 117/117 · 115/117", "—", "—"],
+				["valid-but-wrong, pooled: structured / codes / bare", "3 · 3 · 3", "—", "—"],
+				["still-invalid, pooled: structured / codes / bare", "0 · 1 · 3", "—", "—"],
+			],
+		);
+	})();
 }

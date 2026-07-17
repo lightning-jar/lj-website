@@ -30,6 +30,7 @@ const seriesSlugs = [
 	"repeating-the-goal-doesnt-make-it-yours",
 	"the-twenty-first-note",
 	"it-asked-about-things-it-already-knew",
+	"the-error-message-didnt-matter",
 ];
 
 const articles = seriesSlugs

@@ -31,7 +31,7 @@ const repo = "https://github.com/kevinpeckham/barkup-bench";
 const plays: Play[] = [
 	{
 		id: "ids-and-patches",
-		eyebrow: "01 · The foundation · main matrix + Study H",
+		eyebrow: "01 · The foundation · main matrix + Studies H, AJ",
 		title: "Give every node a permanent id, and edit by anchored patches",
 		prose: [
 			`A user asks your page builder to change one headline in a 1,000-node layout. Whole-document rewrite makes the model reproduce the 999 nodes it is not touching: about $0.88 and ten minutes per solved edit at that size, and cheap-tier models collapse outright. Positional patches (RFC 6902) decay toward 10% because indexes shift under the model's feet. Id-anchored patches were the only interface both model tiers held above roughly 300 nodes, at about $0.26 and four seconds per solved 1,000-node edit.`,
@@ -45,7 +45,7 @@ const plays: Play[] = [
 const result = applyAnchoredPatch(grammar, storedTree, JSON.parse(reply));
 if (!result.ok) return retryWithFeedback(result.issues); // verbatim
 persist(result.node); // the input tree is never mutated`,
-		measured: `Anchored patches held 87 to 100% where whole-document rewrite fell to 0 to 80% on the cheap tier (<a class="${linkCls}" href="${dash}#sec-sizeext">chart</a>). Across the whole series, zero failures were ever caused by a model mangling a stable id. Write-up: <a class="${linkCls}" href="/blog/we-found-the-crossover">We Found the Crossover</a>.`,
+		measured: `Anchored patches held 87 to 100% where whole-document rewrite fell to 0 to 80% on the cheap tier (<a class="${linkCls}" href="${dash}#sec-sizeext">chart</a>). Across the whole series, zero failures were ever caused by a model mangling a stable id. One honest footnote from <a class="${linkCls}" href="${dash}#sec-correction">Study AJ</a>: the "verbatim" in the correction round is for you, not the model. With the feedback text as the only variable, recovery from seeded failures was at parity across all three models whether the model saw the full structured issues, bare codes, or nothing but "the patch was invalid." Keep sending the issues because they cost nothing and make correction logs debuggable, not because the loop depends on them. Write-up: <a class="${linkCls}" href="/blog/we-found-the-crossover">We Found the Crossover</a>.`,
 	},
 	{
 		id: "focused-views",
