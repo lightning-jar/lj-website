@@ -6401,4 +6401,151 @@ export function initBenchCharts() {
 			],
 		);
 	})();
+
+	// --- Study AK: eviction validation — goal survival at the K=20 cap edge ---
+	(function () {
+		const GROUPS = [
+			{
+				model: "sonnet-4.5",
+				vals: [0, 6],
+				tip: "0/10 → 6/10 (p=.0313) — the residue is 4 client-side prunes the app never saw, victims still goals",
+			},
+			{
+				model: "gemini-3.5-flash",
+				vals: [0, 4],
+				tip: "0/10 → 4/10 (n.s., as pre-registered) — gemini prunes client-side in 6 of 10 cells, outside the fix's reach",
+			},
+			{
+				model: "opus-4.8",
+				vals: [0, 10],
+				tip: "0/10 → 10/10 (p=.0020) — 9 designed evictions plus one cell where opus answered the eviction notice by consolidating 21 needles into 11 notes",
+			},
+		];
+		const CCONTROL = "#8b93a3",
+			CEVICT = "#199e70";
+		document.getElementById("legend-30").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CCONTROL +
+			'"></span>silent clamp (control)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CEVICT +
+			'"></span>v3.213.0 eviction pipeline</span>' +
+			'<span class="key">goal-safe cells of 10 at the K=20 cap edge · 19/19 over-cap sends were designed evictions · 60/60 no-op under the cap</span>';
+		const W = 880,
+			BAR = 16,
+			GAP = 4,
+			GH = 2 * BAR + GAP,
+			GPAD = 18,
+			T = 8,
+			B = 42,
+			L = 150,
+			R = 24;
+		const H = T + GROUPS.length * (GH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 10) * iw;
+		let g = "";
+		for (const tick of [0, 5, 10]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		let marks = "",
+			hits = "";
+		GROUPS.forEach((row, gi) => {
+			const top = T + gi * (GH + GPAD);
+			g +=
+				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				(L - 12) +
+				'" y="' +
+				(top + GH / 2 + 4) +
+				'" text-anchor="end">' +
+				row.model +
+				"</text>";
+			row.vals.forEach((v, ai) => {
+				const y = top + ai * (BAR + GAP);
+				const w = Math.max((v / 10) * iw, 2);
+				marks +=
+					'<rect x="' +
+					L +
+					'" y="' +
+					y +
+					'" width="' +
+					w +
+					'" height="' +
+					BAR +
+					'" fill="' +
+					(ai === 0 ? CCONTROL : CEVICT) +
+					'" rx="3"/>';
+				marks +=
+					'<text fill="#c3c9d4" font-size="11" x="' +
+					(L + w + 8) +
+					'" y="' +
+					(y + BAR - 4) +
+					'">' +
+					v +
+					"/10</text>";
+			});
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				top +
+				'" width="' +
+				iw +
+				'" height="' +
+				GH +
+				'" fill="transparent" data-tip="' +
+				esc(row.model + "\n" + row.tip) +
+				'"/>';
+		});
+		const el = document.getElementById("fig-eviction");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" width="100%" role="img" aria-label="Grouped bar chart: goal survival at the memo cap edge rises from zero of ten under the silent clamp to ten of ten on opus, six of ten on sonnet, and four of ten on gemini once the goal-preserving eviction pipeline replaces the clamp." style="min-width:640px">' +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"goal survival at the memo's 20-note cap edge, silent clamp vs the measured eviction pipeline; the fix closes the injury wherever the app receives the over-cap list, and the residue below the frontier is the model pruning a goal before sending — outside any app-side fix's reach",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-eviction",
+			["cell", "sonnet-4.5", "gemini-3.5-flash", "opus-4.8"],
+			[
+				["K=20 goal-safe, silent clamp (control)", "0/10", "0/10", "0/10"],
+				["K=20 goal-safe, eviction pipeline", "6/10", "4/10", "10/10"],
+				["McNemar, eviction vs control", "p=.0313", "p=.1250 n.s.", "p=.0020"],
+				["pathway at K=20: over-sends / client prunes", "6 / 4", "4 / 6", "9 / 0"],
+				["prune victims (outside the fix's reach)", "4 goals", "6 goals", "none"],
+				["designed evictions on over-cap sends (pooled)", "19/19", "—", "—"],
+				["goals evicted by the pipeline (pooled)", "0", "—", "—"],
+				["clean updates under the cap, K=10+K=19", "20/20", "20/20", "20/20"],
+				["reacted to the eviction notice", "0", "0", "1 (consolidated 21 needles into 11 notes)"],
+			],
+		);
+	})();
 }
