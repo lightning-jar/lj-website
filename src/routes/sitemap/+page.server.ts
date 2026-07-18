@@ -1,4 +1,4 @@
-import { blogArticlesSitemapSection } from "$content/getters/getBlogArticles";
+import { getBlogArticlesSitemapSection } from "$content/getters/getBlogArticles";
 import { builtWithSitemapSection } from "$content/getters/getBuiltWithContent";
 import { customerStoriesSitemapSection } from "$content/getters/getCustomerStories";
 import { homeSitemapSection } from "$content/getters/getHomeContent";
@@ -98,24 +98,24 @@ const sitemapSection = {
 	],
 };
 
-const sitemap = [
-	homeSitemapSection,
-	aboutSection,
-	funSection,
-	researchSection,
-	blogArticlesSitemapSection,
-	builtWithSitemapSection,
-	customerStoriesSitemapSection,
-	servicesSitemapSection,
-	technologiesSitemapSection,
-	testimonialsSitemapSection,
-	termsSitemapSection,
-	archiveSection,
-	readingListSitemapSection,
-	sitemapSection,
-];
+export const load = async ({ fetch }) => {
+	const sitemap = [
+		homeSitemapSection,
+		aboutSection,
+		funSection,
+		researchSection,
+		await getBlogArticlesSitemapSection(fetch),
+		builtWithSitemapSection,
+		customerStoriesSitemapSection,
+		servicesSitemapSection,
+		technologiesSitemapSection,
+		testimonialsSitemapSection,
+		termsSitemapSection,
+		archiveSection,
+		readingListSitemapSection,
+		sitemapSection,
+	];
 
-export const load = async () => {
 	return {
 		sitemap: sitemap.sort((a, b) => a.name.localeCompare(b.name)),
 		meta: {

@@ -1,5 +1,8 @@
 // data
-import { allBlogArticles } from "$content/getters/getBlogArticles";
+import { getAllBlogArticles } from "$content/getters/getBlogArticles";
+
+// types
+import type { FrontMatter } from "$types/FrontMatter";
 
 // The benchmark series, in narrative (chronological) order.
 const seriesSlugs = [
@@ -33,22 +36,26 @@ const seriesSlugs = [
 	"the-error-message-didnt-matter",
 ];
 
-const articles = seriesSlugs
-	.map((slug) => {
-		const article = allBlogArticles.find((a) => a.frontMatter?.slug === slug);
-		if (!article) {
-			console.warn(`barkup-bench series post not found: ${slug}`);
-			return null;
-		}
-		const fm = article.frontMatter;
-		return {
-			slug,
-			title: typeof fm?.title === "string" ? fm.title : slug,
-			date: typeof fm?.date === "string" ? fm.date : "",
-		};
-	})
-	.filter((a): a is { slug: string; title: string; date: string } => a !== null)
-	.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+function buildSeriesArticles(allBlogArticles: { frontMatter: FrontMatter }[]) {
+	return seriesSlugs
+		.map((slug) => {
+			const article = allBlogArticles.find((a) => a.frontMatter?.slug === slug);
+			if (!article) {
+				console.warn(`barkup-bench series post not found: ${slug}`);
+				return null;
+			}
+			const fm = article.frontMatter;
+			return {
+				slug,
+				title: typeof fm?.title === "string" ? fm.title : slug,
+				date: typeof fm?.date === "string" ? fm.date : "",
+			};
+		})
+		.filter(
+			(a): a is { slug: string; title: string; date: string } => a !== null,
+		)
+		.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+}
 
 const packages = [
 	{
@@ -88,7 +95,8 @@ const packages = [
 	},
 ];
 
-export function load() {
+export async function load({ fetch }) {
+	const articles = buildSeriesArticles(await getAllBlogArticles(fetch));
 	return {
 		articles,
 		packages,

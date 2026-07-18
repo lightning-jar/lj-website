@@ -19,7 +19,7 @@ const productionUrl =
 	ENV.VERCEL_PROJECT_PRODUCTION_URL || "www.lightningjar.com";
 
 // get data for blog
-import { allBlogArticleSlugs } from "$content/getters/getBlogArticles";
+import { getAllBlogArticleSlugs } from "$content/getters/getBlogArticles";
 import { allCustomerStorySlugs } from "$content/getters/getCustomerStories";
 
 // helper function to create sitemap pages
@@ -57,12 +57,6 @@ function generateSiteMapXML(pages: SitemapXMLPage[]): string {
 	return xml;
 }
 
-// generate sitemap entries for blog detail pages
-const blogArticlePages = allBlogArticleSlugs.map((slug) => {
-	if (!slug) return [];
-	return generateSiteMapXMLPage(`/blog/${slug}`, "monthly", 0.25);
-});
-
 // generate sitemap entries for customer stories detail pages
 const customerStoryPages = allCustomerStorySlugs.map((slug) => {
 	if (!slug) return [];
@@ -71,7 +65,7 @@ const customerStoryPages = allCustomerStorySlugs.map((slug) => {
 
 //
 
-const pages = [
+const staticPages = [
 	generateSiteMapXMLPage(`/archive/introduction-to-pimcore`, "monthly", 0.25), // home
 	generateSiteMapXMLPage(``, "monthly", 0.25), // home
 	generateSiteMapXMLPage(`/about`, "monthly", 0.25), // about page
@@ -87,17 +81,19 @@ const pages = [
 	generateSiteMapXMLPage(`/technologies`, "monthly", 0.25), // technologies landing page
 	generateSiteMapXMLPage(`/terms`, "monthly", 0.25), // terms landing page
 	generateSiteMapXMLPage(`/testimonials`, "monthly", 0.25), // testimonials landing page
-	...blogArticlePages,
 	...customerStoryPages,
 ] as SitemapXMLPage[];
-const sorted = pages.sort((a, b) => a.path.localeCompare(b.path));
-
-const sitemap = generateSiteMapXML(sorted);
 
 // Server endpoint to serve the sitemap
-export const GET: RequestHandler = async () => {
+export const GET: RequestHandler = async ({ fetch }) => {
 	try {
-		return new Response(sitemap);
+		// generate sitemap entries for blog detail pages (CMS, build-time fetch)
+		const blogArticlePages = (await getAllBlogArticleSlugs(fetch)).map((slug) =>
+			generateSiteMapXMLPage(`/blog/${slug}`, "monthly", 0.25),
+		);
+		const pages = [...staticPages, ...blogArticlePages] as SitemapXMLPage[];
+		const sorted = pages.sort((a, b) => a.path.localeCompare(b.path));
+		return new Response(generateSiteMapXML(sorted));
 	} catch (error) {
 		console.error("Error generating sitemap:", error);
 		return new Response("Error generating sitemap", { status: 500 });

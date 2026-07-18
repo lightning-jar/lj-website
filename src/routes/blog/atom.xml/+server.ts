@@ -8,6 +8,7 @@ export const prerender = true;
 import { ENV } from "varlock/env";
 import type { RequestHandler } from "@sveltejs/kit";
 
+import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 import { buildAtomFeed } from "$utils/atomFeed";
 import { buildBlogEntries } from "$utils/feedEntries";
 
@@ -15,13 +16,14 @@ const baseUrl = `https://${
 	ENV.VERCEL_PROJECT_PRODUCTION_URL || "www.lightningjar.com"
 }`;
 
-const atom = buildAtomFeed(buildBlogEntries(baseUrl), {
-	baseUrl,
-	feedSelf: `${baseUrl}/blog/atom.xml`,
-	feedTitle: "Lightning Jar — Blog",
-});
-
-export const GET: RequestHandler = async () =>
-	new Response(atom, {
+export const GET: RequestHandler = async ({ fetch }) => {
+	const articles = await getAllBlogArticles(fetch);
+	const atom = buildAtomFeed(buildBlogEntries(baseUrl, articles), {
+		baseUrl,
+		feedSelf: `${baseUrl}/blog/atom.xml`,
+		feedTitle: "Lightning Jar — Blog",
+	});
+	return new Response(atom, {
 		headers: { "Content-Type": "application/atom+xml; charset=utf-8" },
 	});
+};

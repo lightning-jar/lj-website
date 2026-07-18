@@ -1,36 +1,81 @@
+// Blog content now lives in the replicator CMS (Lightning Jar org) and
+// is fetched at build time via the org-scoped public API — blog routes
+// are prerendered, so "request time" is prerender time. Markdown is
+// still parsed locally by $utils/parseMarkdown so published HTML stays
+// bit-identical to the git-content era.
+
+// env
+import { ENV } from "varlock/env";
+
 // utils
-import { getFrontMatter, parseMarkdownTextToHtml } from "$utils/parseMarkdown";
+import { parseMarkdownTextToHtml } from "$utils/parseMarkdown";
 
 // types
+import type { FrontMatter } from "$types/FrontMatter";
 import type { SitemapPage, SitemapSection } from "$types/Sitemap";
 
-// function get all raw text from blog articles
-async function loadAllText() {
-	const modules: Record<string, { default: string }> = import.meta.glob(
-		"/src/lib/content/blog/**/*.md",
-		{
-			query: "?raw", // get file contents as string
-			eager: true, // import immediately (synchronous result)
-		},
-	);
+type Fetch = typeof globalThis.fetch;
 
-	// modules is an object: { '/src/content/a.txt': '...', '/src/content/sub/b.txt': '...' }
-	return Object.entries(modules).map(
-		([_path, contents]) => contents?.default || "",
-	);
+interface ApiArticleListItem {
+	slug: string;
+	title: string;
+	author: string | null;
+	articleDate: string | null;
+	publishedAt: string | null;
+	featured: boolean;
+	featuredOrder: number | null;
+	imageUrl: string | null;
+	frontMatter: FrontMatter;
 }
 
-async function getArticles() {
-	const rawArticles = await loadAllText();
-	const articles = rawArticles
-		.map((article) => ({
-			frontMatter: getFrontMatter(article),
-			html: parseMarkdownTextToHtml({
-				markdown: article,
-				options: { sanitize: true, lazyImages: true },
-			}),
-		}))
-		.filter((article) => article.frontMatter?.draft !== true);
+interface ApiArticleDetail extends ApiArticleListItem {
+	markdown: string;
+}
+
+export interface BlogArticleListEntry {
+	frontMatter: FrontMatter;
+}
+
+export interface BlogArticleDetail {
+	frontMatter: FrontMatter;
+	html: string;
+	nextArticleSlug?: string;
+	previousArticleSlug?: string;
+}
+
+function apiBase(): string {
+	const value = ENV.BLOG_CMS_BASE_URL;
+	if (!value) throw new Error("BLOG_CMS_BASE_URL is not set");
+	return value.replace(/\/$/, "");
+}
+
+function authHeaders(): HeadersInit {
+	const key = ENV.BLOG_API_KEY;
+	if (!key) throw new Error("BLOG_API_KEY is not set");
+	return { "x-api-key": key };
+}
+
+// Pass SvelteKit's `event.fetch` from the caller's load/GET so caching
+// and origin propagation work; `cache: "force-cache"` lets Vercel's
+// edge layer participate per the CMS contract.
+async function fetchArticleList(fetch: Fetch): Promise<ApiArticleListItem[]> {
+	const res = await fetch(`${apiBase()}/api/public/blog/articles?limit=200`, {
+		headers: authHeaders(),
+		cache: "force-cache",
+	});
+	if (!res.ok) throw new Error(`Blog list fetch failed: ${res.status}`);
+	const data = (await res.json()) as { articles: ApiArticleListItem[] };
+	return data.articles;
+}
+
+// get array of blog articles frontMatter, newest first (same date-desc
+// ordering the git-content getter produced; same-date articles fall
+// back to slug order, matching the old filename-order glob)
+export async function getAllBlogArticles(
+	fetch: Fetch,
+): Promise<BlogArticleListEntry[]> {
+	const list = await fetchArticleList(fetch);
+	const articles = list.map((item) => ({ frontMatter: item.frontMatter }));
 	return articles.sort((a, b) => {
 		const dateA = new Date(
 			a.frontMatter?.date && typeof a.frontMatter.date === "string"
@@ -42,21 +87,60 @@ async function getArticles() {
 				? b.frontMatter.date
 				: "",
 		);
-		return dateB.getTime() - dateA.getTime();
+		const byDate = dateB.getTime() - dateA.getTime();
+		if (byDate !== 0) return byDate;
+		const slugA =
+			typeof a.frontMatter?.slug === "string" ? a.frontMatter.slug : "";
+		const slugB =
+			typeof b.frontMatter?.slug === "string" ? b.frontMatter.slug : "";
+		return slugA.localeCompare(slugB);
 	});
 }
 
-// get array of blog articles html & frontMatter
-export const allBlogArticles = await getArticles();
-
 // get array of article slugs
-export const allBlogArticleSlugs = allBlogArticles
-	.map((article) => article.frontMatter?.slug || "")
-	.filter(Boolean);
+export async function getAllBlogArticleSlugs(fetch: Fetch): Promise<string[]> {
+	const articles = await getAllBlogArticles(fetch);
+	return articles
+		.map((article) => article.frontMatter?.slug || "")
+		.filter(Boolean) as string[];
+}
+
+// get one article with locally-parsed html + next/previous slugs.
+// next/previous are derived from the newest-first list (same as the
+// git-content era) rather than the API's nextSlug/previousSlug, whose
+// strict publishedAt comparison skips same-timestamp siblings.
+export async function getBlogArticleBySlug(
+	fetch: Fetch,
+	slug: string,
+): Promise<BlogArticleDetail | undefined> {
+	if (!slug) return undefined;
+	const slugs = await getAllBlogArticleSlugs(fetch);
+	const index = slugs.indexOf(slug);
+	if (index === -1) return undefined;
+	const res = await fetch(
+		`${apiBase()}/api/public/blog/articles/${encodeURIComponent(slug)}`,
+		{ headers: authHeaders(), cache: "force-cache" },
+	);
+	if (res.status === 404) return undefined;
+	if (!res.ok) throw new Error(`Blog article fetch failed: ${res.status}`);
+	const data = (await res.json()) as { article: ApiArticleDetail };
+	return {
+		frontMatter: data.article.frontMatter,
+		html: parseMarkdownTextToHtml({
+			markdown: data.article.markdown,
+			options: { sanitize: true, lazyImages: true },
+		}),
+		nextArticleSlug: slugs[index + 1],
+		previousArticleSlug: index > 0 ? slugs[index - 1] : undefined,
+	};
+}
 
 // for human readable sitemap
-function buildHumanSitemapSection() {
-	const pages: SitemapPage[] = allBlogArticles.map((article) => {
+export async function getBlogArticlesSitemapSection(
+	fetch: Fetch,
+): Promise<SitemapSection> {
+	const articles = await getAllBlogArticles(fetch);
+	const pages: SitemapPage[] = articles.map((article) => {
 		return {
 			title:
 				article.frontMatter?.metaTitle &&
@@ -86,11 +170,8 @@ function buildHumanSitemapSection() {
 		date: new Date().toISOString(),
 		href: "/blog",
 	};
-	const section: SitemapSection = {
+	return {
 		name: "Blog",
 		pages: [landing, ...pages],
 	};
-	return section;
 }
-
-export const blogArticlesSitemapSection = buildHumanSitemapSection();

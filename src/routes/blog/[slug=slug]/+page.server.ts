@@ -3,25 +3,18 @@ import { error } from "@sveltejs/kit";
 import type { FrontMatter } from "$types/FrontMatter";
 
 // utils
-import {
-	allBlogArticleSlugs,
-	allBlogArticles,
-} from "$content/getters/getBlogArticles";
+import { getBlogArticleBySlug } from "$content/getters/getBlogArticles";
 
-export async function load({ params }) {
+export async function load({ params, fetch }) {
 	const slug = params.slug;
 
-	const index = allBlogArticleSlugs.indexOf(slug);
-	const article = allBlogArticles[index];
-
-	const nextArticleSlug = allBlogArticleSlugs[index + 1];
-	const previousArticleSlug = allBlogArticleSlugs[index - 1];
+	const article = await getBlogArticleBySlug(fetch, slug);
 
 	if (!article) {
 		return error(404, `Page not found`);
 	}
 
-	const { html, frontMatter } = article;
+	const { html, frontMatter, nextArticleSlug, previousArticleSlug } = article;
 	const fm = frontMatter as FrontMatter;
 
 	const meta = {

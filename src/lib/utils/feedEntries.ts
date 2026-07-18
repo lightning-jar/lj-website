@@ -1,8 +1,11 @@
-import { allBlogArticles } from "$content/getters/getBlogArticles";
+import type { BlogArticleListEntry } from "$content/getters/getBlogArticles";
 import { allReadingListArticles } from "$content/getters/getReadingList";
 import { type FeedEntry, str, toIso } from "$utils/atomFeed";
 
-export function buildBlogEntries(baseUrl: string): FeedEntry[] {
+export function buildBlogEntries(
+	baseUrl: string,
+	allBlogArticles: BlogArticleListEntry[],
+): FeedEntry[] {
 	return allBlogArticles.flatMap((a) => {
 		const fm = a.frontMatter ?? {};
 		const slug = str(fm.slug);
