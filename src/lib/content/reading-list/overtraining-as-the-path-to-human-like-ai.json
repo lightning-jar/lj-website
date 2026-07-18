@@ -1,0 +1,27 @@
+{
+	"author": {
+		"name": "Sean Goedecke",
+		"email": "",
+		"mastodon": "",
+		"url": "https://www.seangoedecke.com/"
+	},
+	"comments": [""],
+	"excerpt": "LLMs may fall short of human-like generalization not for lack of data but for lack of grokking — and the untried experiment is a huge model overtrained on a small corpus.",
+	"id": "seangoedecke-overtraining-as-the-path-to-human-like-ai-2026-07-18",
+	"image": {
+		"src": "",
+		"alt": ""
+	},
+	"publishDate": "2026-07-18",
+	"repostDate": "2026-07-18",
+	"slug": "overtraining-as-the-path-to-human-like-ai",
+	"source": {
+		"publicationName": "seangoedecke.com",
+		"publicationUrl": "https://www.seangoedecke.com/"
+	},
+	"summary": "Sean Goedecke argues that today's LLMs generalize worse than humans because they have never been pushed through grokking — the phenomenon where a model trained far past the point of memorizing a constrained dataset eventually snaps onto the deeper, simpler representation underneath it. Feeding a model all the data in the world lets it improve by memorizing more, which relieves the very pressure grokking requires, so the frontier labs' data-maximizing recipe may be steering around the interesting outcome. His proposed experiment inverts the recipe: a massively over-parameterized model overtrained on a deliberately small corpus, at a cost he guesses in the billions and with a long, funding-hostile plateau before any payoff. Speculative by its own admission, but a crisply argued case that one of the most interesting training regimes remains untried.",
+	"tags": ["LLMs", "Machine Learning", "Grokking", "AI Research"],
+	"title": "Overtraining as the Path to Human-like AI",
+	"type": "Blog Article",
+	"url": "https://www.seangoedecke.com/overtraining-as-the-path-to-human-like-ai/"
+}
