@@ -5,7 +5,16 @@ import type { FrontMatter } from "$types/FrontMatter";
 // utils
 import { getBlogArticleBySlug } from "$content/getters/getBlogArticles";
 
-export async function load({ params, fetch }) {
+// Rendered at request time so CMS saves go live without a redeploy —
+// including brand-new slugs; Vercel's edge caches responses on the same
+// TTLs as the CMS API.
+export const prerender = false;
+
+export async function load({ params, fetch, setHeaders }) {
+	setHeaders({
+		"cache-control": "public, s-maxage=300, stale-while-revalidate=3600",
+	});
+
 	const slug = params.slug;
 
 	const article = await getBlogArticleBySlug(fetch, slug);

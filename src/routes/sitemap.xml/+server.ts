@@ -1,12 +1,13 @@
 // src/routes/sitemap.xml/+server.ts
 
-// Prerender at build time: the sitemap is fully static (derived from git
-// content) and this is the only route that would otherwise resolve
-// `varlock/env` at request time in the Vercel serverless runtime, where
-// varlock has no resolution context and the function crashes.
+// Served at request time so newly published CMS articles enter the
+// sitemap without a redeploy. (The old prerender-only constraint —
+// varlock having no request-time resolution context on Vercel — is gone
+// since the 1Password plugin migration.) Edge-cached on the CMS sitemap
+// TTL.
 // SvelteKit route option, read by the framework
 // fallow-ignore-next-line unused-export
-export const prerender = true;
+export const prerender = false;
 
 // env variables
 import { ENV } from "varlock/env";
@@ -93,7 +94,11 @@ export const GET: RequestHandler = async ({ fetch }) => {
 		);
 		const pages = [...staticPages, ...blogArticlePages] as SitemapXMLPage[];
 		const sorted = pages.sort((a, b) => a.path.localeCompare(b.path));
-		return new Response(generateSiteMapXML(sorted));
+		return new Response(generateSiteMapXML(sorted), {
+			headers: {
+				"cache-control": "public, s-maxage=900, stale-while-revalidate=3600",
+			},
+		});
 	} catch (error) {
 		console.error("Error generating sitemap:", error);
 		return new Response("Error generating sitemap", { status: 500 });

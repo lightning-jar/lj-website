@@ -1,6 +1,7 @@
-// Blog content now lives in the replicator CMS (Lightning Jar org) and
-// is fetched at build time via the org-scoped public API — blog routes
-// are prerendered, so "request time" is prerender time. Markdown is
+// Blog content lives in the replicator CMS (Lightning Jar org) and is
+// fetched at request time via the org-scoped public API — blog routes,
+// feeds, and sitemaps are server-rendered with edge caching so CMS
+// saves go live without a redeploy (matching slx-web). Markdown is
 // still parsed locally by $utils/parseMarkdown so published HTML stays
 // bit-identical to the git-content era.
 

@@ -3,8 +3,16 @@ import type { FrontMatter } from "$types/FrontMatter";
 
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 
-export async function load({ fetch }) {
-	// get all blog articles from the CMS (prerendered → build-time fetch)
+// Rendered at request time so CMS saves go live without a redeploy;
+// Vercel's edge caches responses on the same TTLs as the CMS API.
+export const prerender = false;
+
+export async function load({ fetch, setHeaders }) {
+	setHeaders({
+		"cache-control": "public, s-maxage=300, stale-while-revalidate=3600",
+	});
+
+	// get all blog articles from the CMS at request time
 	const rawArticles = await getAllBlogArticles(fetch);
 
 	// reduce articles to front-matter only

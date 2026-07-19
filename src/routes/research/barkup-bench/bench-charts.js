@@ -5822,7 +5822,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study AH: memo saturation — below-cap vs the cap edge ---
-	(function () {
+	(() => {
 		const ROWS = [
 			{
 				label: "sonnet-4.5 · below cap",
@@ -5900,7 +5900,8 @@ export function initBenchCharts() {
 			hits = "";
 		ROWS.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
-			const denom = row.segs.reduce((s2, seg) => s2 + seg.v, 0) === 20 ? 20 : 10;
+			const denom =
+				row.segs.reduce((s2, seg) => s2 + seg.v, 0) === 20 ? 20 : 10;
 			g +=
 				'<text fill="#c3c9d4" font-size="11.5" x="' +
 				(L - 12) +
@@ -5957,8 +5958,18 @@ export function initBenchCharts() {
 			"tbl-saturation",
 			["measure", "sonnet-4.5", "gemini-3.5-flash", "opus-4.8"],
 			[
-				["recall from a FULL 20-note memo (first/middle/last)", "15/15", "15/15", "15/15"],
-				["unprompted rule application, 12-rule memo", "15/15", "15/15", "15/15"],
+				[
+					"recall from a FULL 20-note memo (first/middle/last)",
+					"15/15",
+					"15/15",
+					"15/15",
+				],
+				[
+					"unprompted rule application, 12-rule memo",
+					"15/15",
+					"15/15",
+					"15/15",
+				],
 				["cross-note contamination events", "0", "0", "0"],
 				["full-replace clean at K=10 and K=19", "20/20", "20/20", "20/20"],
 				["cap edge: cells losing a note", "10/10", "10/10", "10/10"],
@@ -5969,7 +5980,7 @@ export function initBenchCharts() {
 	})();
 
 	// --- Study AI: the multiplicity hatch — L3 asks, amended vs shipped ---
-	(function () {
+	(() => {
 		const ROWS = [
 			{
 				model: "sonnet-4.5",
@@ -6111,24 +6122,83 @@ export function initBenchCharts() {
 				["L3 residuals under the clause", "none", "4 edit-both", "none"],
 				["asks naming both candidate ids", "15/15", "11/11", "15/15"],
 				["false asks on clear requests (L0+L1)", "0/30", "0/30", "0/30"],
-				["L2 discretionary asks, control → clause", "0 → 0", "0 → 0", "2 → 5 (n.s.)"],
+				[
+					"L2 discretionary asks, control → clause",
+					"0 → 0",
+					"0 → 0",
+					"2 → 5 (n.s.)",
+				],
 				["L4 missing-info asked (clause arm)", "15/15", "15/15", "15/15"],
 			],
 		);
 	})();
 
 	// --- Study AG: the anaphora hatch — outcomes on 48 anaphora cells ---
-	(function () {
+	(() => {
 		const ROWS = [
-			{ label: "sonnet-4.5 · no hatch", asked: 0, solved: 0, silent: 48, tip: "the Study X replication: every cell a valid silently-guessed patch" },
-			{ label: "sonnet-4.5 · + hatch", asked: 47, solved: 0, silent: 1, tip: "47/48 asks, each naming the dangling antecedent" },
-			{ label: "sonnet-4.5 · echo + hatch", asked: 34, solved: 14, silent: 0, tip: "the echo supplies id, key, and both values — the model quotes them, then asks anyway because the node is not visible in the skeleton view (the visibility clause)" },
-			{ label: "gemini-3.5-flash · no hatch", asked: 0, solved: 0, silent: 48, tip: "the Study X replication: every cell a valid silently-guessed patch" },
-			{ label: "gemini-3.5-flash · + hatch", asked: 43, solved: 0, silent: 5, tip: "43/48 asks on the discourse gap" },
-			{ label: "gemini-3.5-flash · echo + hatch", asked: 36, solved: 12, silent: 0, tip: "36 false asks despite the complete echo — the visibility clause" },
-			{ label: "opus-4.8 · no hatch", asked: 0, solved: 0, silent: 48, tip: "the Study X replication: every cell a valid silently-guessed patch" },
-			{ label: "opus-4.8 · + hatch", asked: 48, solved: 0, silent: 0, tip: "48/48 asks — the discourse gap is letter-covered on every tier" },
-			{ label: "opus-4.8 · echo + hatch", asked: 33, solved: 15, silent: 0, tip: "even the frontier tier obeys the visibility letter: 33 asks despite holding everything needed to patch" },
+			{
+				label: "sonnet-4.5 · no hatch",
+				asked: 0,
+				solved: 0,
+				silent: 48,
+				tip: "the Study X replication: every cell a valid silently-guessed patch",
+			},
+			{
+				label: "sonnet-4.5 · + hatch",
+				asked: 47,
+				solved: 0,
+				silent: 1,
+				tip: "47/48 asks, each naming the dangling antecedent",
+			},
+			{
+				label: "sonnet-4.5 · echo + hatch",
+				asked: 34,
+				solved: 14,
+				silent: 0,
+				tip: "the echo supplies id, key, and both values — the model quotes them, then asks anyway because the node is not visible in the skeleton view (the visibility clause)",
+			},
+			{
+				label: "gemini-3.5-flash · no hatch",
+				asked: 0,
+				solved: 0,
+				silent: 48,
+				tip: "the Study X replication: every cell a valid silently-guessed patch",
+			},
+			{
+				label: "gemini-3.5-flash · + hatch",
+				asked: 43,
+				solved: 0,
+				silent: 5,
+				tip: "43/48 asks on the discourse gap",
+			},
+			{
+				label: "gemini-3.5-flash · echo + hatch",
+				asked: 36,
+				solved: 12,
+				silent: 0,
+				tip: "36 false asks despite the complete echo — the visibility clause",
+			},
+			{
+				label: "opus-4.8 · no hatch",
+				asked: 0,
+				solved: 0,
+				silent: 48,
+				tip: "the Study X replication: every cell a valid silently-guessed patch",
+			},
+			{
+				label: "opus-4.8 · + hatch",
+				asked: 48,
+				solved: 0,
+				silent: 0,
+				tip: "48/48 asks — the discourse gap is letter-covered on every tier",
+			},
+			{
+				label: "opus-4.8 · echo + hatch",
+				asked: 33,
+				solved: 15,
+				silent: 0,
+				tip: "even the frontier tier obeys the visibility letter: 33 asks despite holding everything needed to patch",
+			},
 		];
 		const CASK = "#3987e5",
 			CSOLVE = "#199e70",
@@ -6245,14 +6315,24 @@ export function initBenchCharts() {
 				["+ hatch: asked", "47/48", "43/48", "48/48"],
 				["echo + hatch: asked / solved", "34 / 14", "36 / 12", "33 / 15"],
 				["echo only, Study X (no hatch): solved", "48/48", "48/48", "48/48"],
-				["ordinary steps: false asks (both hatch arms)", "0/192", "0/192", "0/192"],
-				["asks by kind (+hatch): amend / repeat / undo", "24 / 12 / 11", "24 / 12 / 7", "24 / 12 / 12"],
+				[
+					"ordinary steps: false asks (both hatch arms)",
+					"0/192",
+					"0/192",
+					"0/192",
+				],
+				[
+					"asks by kind (+hatch): amend / repeat / undo",
+					"24 / 12 / 11",
+					"24 / 12 / 7",
+					"24 / 12 / 12",
+				],
 			],
 		);
 	})();
 
 	// --- Study AJ: the correction loop in isolation — recovery by arm ---
-	(function () {
+	(() => {
 		const GROUPS = [
 			{
 				model: "sonnet-4.5",
@@ -6393,17 +6473,42 @@ export function initBenchCharts() {
 				["recovered, full structured issues", "45/45", "42/45", "45/45"],
 				["recovered, issue codes only", "44/45", "42/45", "45/45"],
 				["recovered, bare “invalid”", "42/45", "42/45", "45/45"],
-				["structured vs bare, McNemar", "p=.25 n.s.", "0 discordant pairs", "0 discordant pairs"],
-				["bad-anchor class, pooled: structured / codes / bare", "15/18 · 14/18 · 14/18", "—", "—"],
-				["every other class, pooled: structured / codes / bare", "117/117 · 117/117 · 115/117", "—", "—"],
-				["valid-but-wrong, pooled: structured / codes / bare", "3 · 3 · 3", "—", "—"],
-				["still-invalid, pooled: structured / codes / bare", "0 · 1 · 3", "—", "—"],
+				[
+					"structured vs bare, McNemar",
+					"p=.25 n.s.",
+					"0 discordant pairs",
+					"0 discordant pairs",
+				],
+				[
+					"bad-anchor class, pooled: structured / codes / bare",
+					"15/18 · 14/18 · 14/18",
+					"—",
+					"—",
+				],
+				[
+					"every other class, pooled: structured / codes / bare",
+					"117/117 · 117/117 · 115/117",
+					"—",
+					"—",
+				],
+				[
+					"valid-but-wrong, pooled: structured / codes / bare",
+					"3 · 3 · 3",
+					"—",
+					"—",
+				],
+				[
+					"still-invalid, pooled: structured / codes / bare",
+					"0 · 1 · 3",
+					"—",
+					"—",
+				],
 			],
 		);
 	})();
 
 	// --- Study AK: eviction validation — goal survival at the K=20 cap edge ---
-	(function () {
+	(() => {
 		const GROUPS = [
 			{
 				model: "sonnet-4.5",
@@ -6539,12 +6644,27 @@ export function initBenchCharts() {
 				["K=20 goal-safe, silent clamp (control)", "0/10", "0/10", "0/10"],
 				["K=20 goal-safe, eviction pipeline", "6/10", "4/10", "10/10"],
 				["McNemar, eviction vs control", "p=.0313", "p=.1250 n.s.", "p=.0020"],
-				["pathway at K=20: over-sends / client prunes", "6 / 4", "4 / 6", "9 / 0"],
-				["prune victims (outside the fix's reach)", "4 goals", "6 goals", "none"],
+				[
+					"pathway at K=20: over-sends / client prunes",
+					"6 / 4",
+					"4 / 6",
+					"9 / 0",
+				],
+				[
+					"prune victims (outside the fix's reach)",
+					"4 goals",
+					"6 goals",
+					"none",
+				],
 				["designed evictions on over-cap sends (pooled)", "19/19", "—", "—"],
 				["goals evicted by the pipeline (pooled)", "0", "—", "—"],
 				["clean updates under the cap, K=10+K=19", "20/20", "20/20", "20/20"],
-				["reacted to the eviction notice", "0", "0", "1 (consolidated 21 needles into 11 notes)"],
+				[
+					"reacted to the eviction notice",
+					"0",
+					"0",
+					"1 (consolidated 21 needles into 11 notes)",
+				],
 			],
 		);
 	})();

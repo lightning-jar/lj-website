@@ -1,10 +1,12 @@
 // src/routes/atom.xml/+server.ts
 //
-// Combined Atom feed: blog posts + reading-list entries. Prerendered so it
-// resolves `varlock/env` at build time (same constraint as /sitemap.xml).
+// Combined Atom feed: blog posts + reading-list entries. Served at
+// request time so CMS saves (including new articles) appear without a
+// redeploy; runtime varlock resolution works since the 1Password plugin
+// migration. Edge-cached on the CMS sitemap TTL.
 // SvelteKit route option, read by the framework
 // fallow-ignore-next-line unused-export
-export const prerender = true;
+export const prerender = false;
 
 import { ENV } from "varlock/env";
 import type { RequestHandler } from "@sveltejs/kit";
@@ -31,6 +33,9 @@ export const GET: RequestHandler = async ({ fetch }) => {
 		},
 	);
 	return new Response(atom, {
-		headers: { "Content-Type": "application/atom+xml; charset=utf-8" },
+		headers: {
+			"Content-Type": "application/atom+xml; charset=utf-8",
+			"cache-control": "public, s-maxage=900, stale-while-revalidate=3600",
+		},
 	});
 };

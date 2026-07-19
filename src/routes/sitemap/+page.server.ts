@@ -98,7 +98,14 @@ const sitemapSection = {
 	],
 };
 
-export const load = async ({ fetch }) => {
+// Request-time so newly published CMS articles are listed without a
+// redeploy; edge-cached on the CMS sitemap TTL.
+export const prerender = false;
+
+export const load = async ({ fetch, setHeaders }) => {
+	setHeaders({
+		"cache-control": "public, s-maxage=900, stale-while-revalidate=3600",
+	});
 	const sitemap = [
 		homeSitemapSection,
 		aboutSection,
