@@ -73,17 +73,8 @@ let { data } = $props();
 
   <!-- col 1 -->
   <main id="main" class="lg:max-w-article blog-article">
-    {#each data.content ?? [] as item}
-      <section class="max-w-article">
-        <h2>
-          {item.heading}
-        </h2>
-
-        {#each item.text ?? [] as text}
-          <p>{@html text}</p>
-        {/each}
-      </section>
-    {/each}
+    <!-- CMS markdown body, parsed locally with sanitize enabled -->
+    {@html data.html ?? ""}
   </main>
 
   <!-- col 2 -->

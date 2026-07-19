@@ -9,15 +9,29 @@ import {
 	getNextCustomerStorySlug,
 } from "$content/getters/getCustomerStories";
 
-export function load({ params }) {
+// Rendered at request time so CMS saves go live without a redeploy —
+// including brand-new slugs; Vercel's edge caches responses on the same
+// TTLs as the CMS API.
+export const prerender = false;
+
+export async function load({ params, fetch, setHeaders }) {
+	setHeaders({
+		"cache-control": "public, s-maxage=300, stale-while-revalidate=3600",
+	});
+
 	const { slug } = params;
 
-	const story: CustomerStory | undefined = getCustomerStoryBySlug(slug);
-	const nextStorySlug = getNextCustomerStorySlug(slug);
+	const story: CustomerStory | undefined = await getCustomerStoryBySlug(
+		fetch,
+		slug,
+	);
 
 	if (!story) {
 		return error(404, "Story not found");
 	}
+
+	const nextStorySlug = await getNextCustomerStorySlug(fetch, slug);
+
 	return {
 		...story,
 		nextStorySlug,

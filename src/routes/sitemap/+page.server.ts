@@ -1,6 +1,6 @@
 import { getBlogArticlesSitemapSection } from "$content/getters/getBlogArticles";
 import { builtWithSitemapSection } from "$content/getters/getBuiltWithContent";
-import { customerStoriesSitemapSection } from "$content/getters/getCustomerStories";
+import { getCustomerStoriesSitemapSection } from "$content/getters/getCustomerStories";
 import { homeSitemapSection } from "$content/getters/getHomeContent";
 import { readingListSitemapSection } from "$content/getters/getReadingList";
 import { servicesSitemapSection } from "$content/getters/getServicesContent";
@@ -113,7 +113,7 @@ export const load = async ({ fetch, setHeaders }) => {
 		researchSection,
 		await getBlogArticlesSitemapSection(fetch),
 		builtWithSitemapSection,
-		customerStoriesSitemapSection,
+		await getCustomerStoriesSitemapSection(fetch),
 		servicesSitemapSection,
 		technologiesSitemapSection,
 		testimonialsSitemapSection,

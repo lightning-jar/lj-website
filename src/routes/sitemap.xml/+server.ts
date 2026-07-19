@@ -19,9 +19,9 @@ import type { SitemapXMLFrequency, SitemapXMLPage } from "$types/Sitemap";
 const productionUrl =
 	ENV.VERCEL_PROJECT_PRODUCTION_URL || "www.lightningjar.com";
 
-// get data for blog
+// get data for blog + customer stories
 import { getAllBlogArticleSlugs } from "$content/getters/getBlogArticles";
-import { allCustomerStorySlugs } from "$content/getters/getCustomerStories";
+import { getAllCustomerStorySlugs } from "$content/getters/getCustomerStories";
 
 // helper function to create sitemap pages
 function generateSiteMapXMLPage(
@@ -58,14 +58,6 @@ function generateSiteMapXML(pages: SitemapXMLPage[]): string {
 	return xml;
 }
 
-// generate sitemap entries for customer stories detail pages
-const customerStoryPages = allCustomerStorySlugs.map((slug) => {
-	if (!slug) return [];
-	return generateSiteMapXMLPage(`/customer-stories/${slug}`, "monthly", 0.25);
-});
-
-//
-
 const staticPages = [
 	generateSiteMapXMLPage(`/archive/introduction-to-pimcore`, "monthly", 0.25), // home
 	generateSiteMapXMLPage(``, "monthly", 0.25), // home
@@ -82,17 +74,25 @@ const staticPages = [
 	generateSiteMapXMLPage(`/technologies`, "monthly", 0.25), // technologies landing page
 	generateSiteMapXMLPage(`/terms`, "monthly", 0.25), // terms landing page
 	generateSiteMapXMLPage(`/testimonials`, "monthly", 0.25), // testimonials landing page
-	...customerStoryPages,
 ] as SitemapXMLPage[];
 
 // Server endpoint to serve the sitemap
 export const GET: RequestHandler = async ({ fetch }) => {
 	try {
-		// generate sitemap entries for blog detail pages (CMS, build-time fetch)
+		// generate sitemap entries for blog + customer-story detail pages
+		// (CMS, request-time fetch)
 		const blogArticlePages = (await getAllBlogArticleSlugs(fetch)).map((slug) =>
 			generateSiteMapXMLPage(`/blog/${slug}`, "monthly", 0.25),
 		);
-		const pages = [...staticPages, ...blogArticlePages] as SitemapXMLPage[];
+		const customerStoryPages = (await getAllCustomerStorySlugs(fetch)).map(
+			(slug) =>
+				generateSiteMapXMLPage(`/customer-stories/${slug}`, "monthly", 0.25),
+		);
+		const pages = [
+			...staticPages,
+			...blogArticlePages,
+			...customerStoryPages,
+		] as SitemapXMLPage[];
 		const sorted = pages.sort((a, b) => a.path.localeCompare(b.path));
 		return new Response(generateSiteMapXML(sorted), {
 			headers: {

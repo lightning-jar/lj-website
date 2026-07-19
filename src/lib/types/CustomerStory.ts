@@ -1,5 +1,4 @@
 import type { Banner } from "$types/Banner";
-import type { ContentBlock } from "$types/ContentBlock";
 import type { Customer } from "$types/Customer";
 import type { Image } from "$types/Image";
 import type { Link } from "$types/Link";
@@ -15,7 +14,9 @@ export interface CustomerStory {
 	title: string;
 	slug: string;
 	thumbnailImage: Image;
-	content: ContentBlock[];
+	/** Rendered article body (markdown from the CMS, parsed locally).
+	 *  Present on detail fetches only — list entries omit the body. */
+	html?: string;
 	testimonials: Testimonial[];
 	images: Image[];
 	perspectives: Testimonial[];
