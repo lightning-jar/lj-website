@@ -32,14 +32,31 @@ bun run lint         # Lint and fix with Biome
 - **Monitoring**: Sentry (errors), Plausible (analytics)
 
 ### Content System
-All content is stored in git (no database):
-- **Blog posts**: Markdown files in `src/lib/content/blog/` with YAML frontmatter
+Two content sources:
+
+**Replicator CMS** (the `replicator` repo's org-scoped public API at
+`https://replicator.lj.dev`, Lightning Jar org). Fetched at request time
+by server-rendered routes with edge caching — saving in the replicator
+editor goes live without a redeploy:
+- **Blog posts**: collection `blog`, LJ default blog entity
+  (`getBlogArticles.ts`, `BLOG_API_KEY`). The `.md` files still in
+  `src/lib/content/blog/` are frozen pre-migration artifacts — editing
+  them does NOT change the site; deletion is pending Kevin's go-ahead
+  (they still feed `tests/blogCorpus.test.ts`).
+- **Customer stories**: collection `customer-story`, Customer Stories
+  blog entity (`getCustomerStories.ts`, `CUSTOMER_STORIES_API_KEY`).
+  Prose lives in the markdown body; banner/testimonials/perspectives/
+  images/etc. ride in frontmatter.
+- Markdown from the CMS is parsed locally by `parseMarkdown()` so
+  rendering stays under this repo's control. Draft previews:
+  `/blog/preview/[token]` (client-rendered, token-authed, works for both
+  collections' bodies).
+
+**Git** (loaded via getters in `src/lib/content/getters/` using
+`import.meta.glob()`):
 - **Landing pages**: JSON files in `src/lib/content/landing-pages/`
-- **Customer stories**: JSON in `src/lib/content/customer-stories/`
 - **Reading list**: `Article`-shaped JSON in `src/lib/content/reading-list/` (title, author, source, summary, excerpt, tags, url)
 - **Technologies**: JSON in `src/lib/content/technologies/`, grouped by `supercategory` (defined in `src/lib/content/technologySuperCategories/`)
-
-Content is loaded via getter functions in `src/lib/content/getters/` using `import.meta.glob()`. A custom `parseMarkdown()` utility handles frontmatter extraction and HTML conversion.
 
 ### Path Aliases
 ```
