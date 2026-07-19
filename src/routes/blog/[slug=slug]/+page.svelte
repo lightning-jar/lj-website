@@ -1,11 +1,15 @@
 <script lang="ts">
 import { addIntegration } from "@sentry/sveltekit";
 
+import { safeLinkUrl } from "$utils/safeLinkUrl";
+
 let { data } = $props();
 
 let formattedDate = $derived(
 	data.meta?.date ? new Date(data?.meta.date).toLocaleDateString() : "",
 );
+
+let image = $derived(safeLinkUrl(data.image));
 
 import type { ArticleSource } from "$types/ArticleSource";
 
@@ -46,9 +50,9 @@ function getAttributionFromSource(source: ArticleSource): string {
     <div class="w-full">
       <!-- article image (wrapped so it is not an adjacent sibling of the
            first body paragraph, which would trigger the [&_img+p] caption rule) -->
-      {#if data.image}
+      {#if image}
         <div class="mb-8">
-          <img src={data.image} alt={data.title} class="w-full h-auto" />
+          <img src={image} alt={data.title} class="w-full h-auto" />
         </div>
       {/if}
 
@@ -126,15 +130,18 @@ function getAttributionFromSource(source: ArticleSource): string {
           <div
             class="w-full border border-slate-100/10 bg-slate-100/5 rounded px-3 pt-4 pb-5 grid grid-cols-1 gap-3"
           >
-            {#each data.additionalReading as { title, url }}
-              <div>
-                <a
-                  class="text-maximumYellow opacity-90 font-700 leading-tight mb-1 underline underline-offset-4 hover:opacity-100"
-                  href={url}
-                >
-                  {title}
-                </a>
-              </div>
+            {#each data.additionalReading as { title, url } (url)}
+              {@const readingUrl = safeLinkUrl(url)}
+              {#if readingUrl}
+                <div>
+                  <a
+                    class="text-maximumYellow opacity-90 font-700 leading-tight mb-1 underline underline-offset-4 hover:opacity-100"
+                    href={readingUrl}
+                  >
+                    {title}
+                  </a>
+                </div>
+              {/if}
             {/each}
           </div>
         </div>
@@ -147,13 +154,14 @@ function getAttributionFromSource(source: ArticleSource): string {
           <div
             class="w-full border border-slate-100/10 bg-slate-100/5 rounded px-3 pt-4 pb-5 grid grid-cols-1 gap-3"
           >
-            {#each data.sources as source}
-              {#if source.title && source.url}
+            {#each data.sources as source (source.url)}
+              {@const sourceUrl = safeLinkUrl(source.url)}
+              {#if source.title && sourceUrl}
                 {@const attribution = getAttributionFromSource(source)}
                 <div>
                   <a
                     class="block text-maximumYellow opacity-90 font-700 leading-tight mb-2 underline underline-offset-4 hover:opacity-100"
-                    href={source.url}
+                    href={sourceUrl}
                   >
                     {source.title}
                   </a>

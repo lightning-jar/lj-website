@@ -3,6 +3,7 @@ import { page } from "$app/state";
 
 // utils
 import { parseMarkdownTextToHtml } from "$utils/parseMarkdown";
+import { safeLinkUrl } from "$utils/safeLinkUrl";
 
 // types
 import type { ArticleSource } from "$types/ArticleSource";
@@ -70,7 +71,7 @@ let fm = $derived(article?.frontMatter ?? {});
 let title = $derived(
 	typeof fm.title === "string" && fm.title ? fm.title : (article?.title ?? ""),
 );
-let image = $derived(typeof fm.image === "string" ? fm.image : "");
+let image = $derived(safeLinkUrl(fm.image));
 let formattedDate = $derived(
 	typeof fm.date === "string" && fm.date
 		? new Date(fm.date).toLocaleDateString()
@@ -223,14 +224,17 @@ function getAttributionFromSource(source: ArticleSource): string {
               class="w-full border border-slate-100/10 bg-slate-100/5 rounded px-3 pt-4 pb-5 grid grid-cols-1 gap-3"
             >
               {#each fm.additionalReading as { title: readingTitle, url } (url)}
-                <div>
-                  <a
-                    class="text-maximumYellow opacity-90 font-700 leading-tight mb-1 underline underline-offset-4 hover:opacity-100"
-                    href={url}
-                  >
-                    {readingTitle}
-                  </a>
-                </div>
+                {@const readingUrl = safeLinkUrl(url)}
+                {#if readingUrl}
+                  <div>
+                    <a
+                      class="text-maximumYellow opacity-90 font-700 leading-tight mb-1 underline underline-offset-4 hover:opacity-100"
+                      href={readingUrl}
+                    >
+                      {readingTitle}
+                    </a>
+                  </div>
+                {/if}
               {/each}
             </div>
           </div>
@@ -244,12 +248,13 @@ function getAttributionFromSource(source: ArticleSource): string {
               class="w-full border border-slate-100/10 bg-slate-100/5 rounded px-3 pt-4 pb-5 grid grid-cols-1 gap-3"
             >
               {#each fm.sources as source (source.url)}
-                {#if source.title && source.url}
+                {@const sourceUrl = safeLinkUrl(source.url)}
+                {#if source.title && sourceUrl}
                   {@const attribution = getAttributionFromSource(source)}
                   <div>
                     <a
                       class="block text-maximumYellow opacity-90 font-700 leading-tight mb-2 underline underline-offset-4 hover:opacity-100"
-                      href={source.url}
+                      href={sourceUrl}
                     >
                       {source.title}
                     </a>
