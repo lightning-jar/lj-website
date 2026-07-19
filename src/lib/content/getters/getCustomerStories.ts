@@ -44,6 +44,22 @@ function authHeaders(): HeadersInit {
 	return { "x-api-key": key };
 }
 
+// The CMS is moving story SEO fields to top-level `metaTitle` /
+// `description` (aligning customer stories with the editor's surfaced
+// fields); legacy payloads carry a nested `meta: {title, description}`.
+// Normalize both shapes into the `meta: PageMeta` object the rest of
+// the site (layout head, sitemaps) already consumes — top-level fields
+// win when both are present.
+function normalizeMeta(story: CustomerStory): CustomerStory {
+	const raw = story as CustomerStory & {
+		metaTitle?: string | null;
+		description?: string | null;
+	};
+	const title = raw.metaTitle ?? story.meta?.title ?? story.title ?? null;
+	const description = raw.description ?? story.meta?.description ?? null;
+	return { ...story, meta: { ...(story.meta ?? {}), description, title } };
+}
+
 function enrichTechnologies(story: CustomerStory): CustomerStory {
 	const ids = story.featuredTechnologies;
 	if (!Array.isArray(ids) || ids.length === 0) {
@@ -77,7 +93,7 @@ export async function getAllCustomerStories(
 	if (!res.ok) throw new Error(`Customer stories fetch failed: ${res.status}`);
 	const data = (await res.json()) as { articles: ApiArticleListItem[] };
 	return data.articles
-		.map((item) => enrichTechnologies(item.frontMatter))
+		.map((item) => enrichTechnologies(normalizeMeta(item.frontMatter)))
 		.sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 }
 
@@ -101,7 +117,7 @@ export async function getCustomerStoryBySlug(
 	if (!res.ok) throw new Error(`Customer story fetch failed: ${res.status}`);
 	const data = (await res.json()) as { article: ApiArticleDetail };
 	return {
-		...enrichTechnologies(data.article.frontMatter),
+		...enrichTechnologies(normalizeMeta(data.article.frontMatter)),
 		html: parseMarkdownTextToHtml({
 			markdown: data.article.markdown,
 			options: { sanitize: true, lazyImages: true },
