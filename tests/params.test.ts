@@ -1,5 +1,3 @@
-import { readFileSync, readdirSync } from "node:fs";
-import { join } from "node:path";
 import { describe, expect, it } from "bun:test";
 import { match as matchNotFile } from "../src/params/notfile";
 import { match as matchSlug } from "../src/params/slug";
@@ -45,32 +43,10 @@ describe("notfile matcher", () => {
 	});
 });
 
-// The slug matcher gates every /blog/[slug] and /customer-stories/[slug]
-// request: a content slug that fails it 404s in production. Drafts are
-// included since they publish eventually.
-describe("content slugs satisfy the slug matcher", () => {
-	const contentDir = join(import.meta.dir, "../src/lib/content");
-
-	it("every blog article slug is kebab-case", () => {
-		const dir = join(contentDir, "blog");
-		const files = readdirSync(dir).filter((f) => f.endsWith(".md"));
-		expect(files.length).toBeGreaterThan(0);
-		for (const file of files) {
-			const source = readFileSync(join(dir, file), "utf8");
-			const slug = source.match(/^slug:\s*(\S+)\s*$/m)?.[1];
-			expect(slug, `${file} has no slug in frontmatter`).toBeDefined();
-			expect(matchSlug(slug as string), `${file}: "${slug}"`).toBe(true);
-		}
-	});
-
-	it("every customer story slug is kebab-case", () => {
-		const dir = join(contentDir, "customer-stories");
-		const files = readdirSync(dir).filter((f) => f.endsWith(".json"));
-		expect(files.length).toBeGreaterThan(0);
-		for (const file of files) {
-			const story = JSON.parse(readFileSync(join(dir, file), "utf8"));
-			expect(typeof story.slug, `${file} has no slug`).toBe("string");
-			expect(matchSlug(story.slug), `${file}: "${story.slug}"`).toBe(true);
-		}
-	});
-});
+// NOTE: this file used to also verify that every committed blog/customer-
+// story slug satisfied the matcher. That content now lives in the
+// replicator CMS, so slug discipline is an authoring-time concern there:
+// a published slug that isn't kebab-case (e.g. an unedited generated
+// `blog-{nanoid}` slug containing uppercase or underscores) will 404 on
+// this site because the matcher gates /blog/[slug] and
+// /customer-stories/[slug].

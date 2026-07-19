@@ -39,10 +39,10 @@ Two content sources:
 by server-rendered routes with edge caching — saving in the replicator
 editor goes live without a redeploy:
 - **Blog posts**: collection `blog`, LJ default blog entity
-  (`getBlogArticles.ts`, `BLOG_API_KEY`). The `.md` files still in
-  `src/lib/content/blog/` are frozen pre-migration artifacts — editing
-  them does NOT change the site; deletion is pending Kevin's go-ahead
-  (they still feed `tests/blogCorpus.test.ts`).
+  (`getBlogArticles.ts`, `BLOG_API_KEY`). The pre-migration `.md`
+  corpus lives on only as a FROZEN parser-characterization fixture at
+  `tests/fixtures/blog-corpus/` (feeds `tests/blogCorpus.test.ts`) —
+  it is not content and must not gain new posts.
 - **Customer stories**: collection `customer-story`, Customer Stories
   blog entity (`getCustomerStories.ts`, `CUSTOMER_STORIES_API_KEY`).
   Prose lives in the markdown body; banner/testimonials/perspectives/

@@ -3,15 +3,18 @@ import { join } from "node:path";
 import { describe, expect, it } from "bun:test";
 import { parseMarkdown } from "../src/lib/utils/parseMarkdown";
 
-// Characterization test: renders every real blog post and compares a hash of
-// the output against the committed fixture. Any parser change that alters
-// rendered blog HTML fails here, intended or not.
+// Characterization test for parseMarkdown against a FROZEN snapshot of
+// the blog corpus (the 48 posts as of the 2026-07 CMS migration, kept
+// under tests/fixtures/blog-corpus/). Live content moved to the
+// replicator CMS — this corpus no longer tracks it; it exists purely so
+// any parser change that alters rendered HTML fails here, intended or
+// not. Do not add new posts here.
 //
-// To regenerate after an INTENDED rendering change:
+// To regenerate after an INTENDED parser change:
 //   UPDATE_GOLDEN=1 bun test tests/blogCorpus.test.ts
 // then review the fixture diff before committing.
 
-const blogDir = join(import.meta.dir, "../src/lib/content/blog");
+const blogDir = join(import.meta.dir, "fixtures/blog-corpus");
 const fixturePath = join(import.meta.dir, "fixtures/blog-corpus-hashes.json");
 
 function renderAll(): Record<string, string> {
