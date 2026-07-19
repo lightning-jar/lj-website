@@ -34,6 +34,7 @@
 	},
 	"dependencies": {
 		"@sentry/sveltekit": "^10.49.0",
+		"@varlock/1password-plugin": "2.0.0",
 		"marked": "^18.0.0",
 		"marked-footnote": "^1.4.0",
 		"varlock": "1.9.0",

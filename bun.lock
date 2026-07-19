@@ -6,6 +6,7 @@
       "name": "lj-website",
       "dependencies": {
         "@sentry/sveltekit": "^10.49.0",
+        "@varlock/1password-plugin": "2.0.0",
         "marked": "^18.0.0",
         "marked-footnote": "^1.4.0",
         "varlock": "1.9.0",
@@ -437,6 +438,8 @@
     "@unocss/transformer-variant-group": ["@unocss/transformer-variant-group@66.6.8", "", { "dependencies": { "@unocss/core": "66.6.8" } }, "sha512-+t7gJDW3W3z3/f8zBf0DfV2UZyGyFOwG5CIsIj5ofu3VJ91mKD/5ZAH8fD3cryXCBSqslj4yv+8R+BLV07T5AA=="],
 
     "@unocss/vite": ["@unocss/vite@66.6.8", "", { "dependencies": { "@jridgewell/remapping": "^2.3.5", "@unocss/config": "66.6.8", "@unocss/core": "66.6.8", "@unocss/inspector": "66.6.8", "chokidar": "^5.0.0", "magic-string": "^0.30.21", "pathe": "^2.0.3", "tinyglobby": "^0.2.16", "unplugin-utils": "^0.3.1" }, "peerDependencies": { "vite": "^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0 || ^6.0.0-0 || ^7.0.0-0 || ^8.0.0-0" } }, "sha512-bXfEnEHdW7zTGLIYU16MsfKSFy3Q47Pevhrt5f9fOGzC4UI1JGkkoQSfoFpXZGliDrhoSFK4Msz9Jt43Ta4j+w=="],
+
+    "@varlock/1password-plugin": ["@varlock/1password-plugin@2.0.0", "", { "peerDependencies": { "varlock": "^1.8.0" } }, "sha512-wkNrwPCQQePeUbIJp2NzOOgnmGFPPAa75gfoBQllYNAzp4lvTUA+7+b00NqPkGWDTttnA/brstJontjhmF0B7g=="],
 
     "@varlock/vite-integration": ["@varlock/vite-integration@1.2.0", "", { "peerDependencies": { "varlock": "^1.8.0", "vite": ">=5" } }, "sha512-1Y43rm/J/VwRHK8s5Lja44PsGnBvPQ0K96CdSxpXLua+cBQ2PW/IoGyrjPsmxj6kD14cXOcsxn0Mi5EBeyfYwg=="],
 
