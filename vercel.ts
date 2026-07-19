@@ -17,6 +17,20 @@ const config: VercelConfig = {
 			],
 		},
 		{
+			// Draft previews: the shell is client-rendered, so the server
+			// load's setHeaders lands on the data request, not this HTML
+			// response — enforce no-crawl + no-cache at the platform layer.
+			source: "/blog/preview/(.*)",
+			headers: [
+				{
+					key: "X-Robots-Tag",
+					value:
+						"noindex, nofollow, noarchive, nosnippet, notranslate, noimageindex",
+				},
+				{ key: "Cache-Control", value: "private, no-store" },
+			],
+		},
+		{
 			source: "/(.*)",
 			headers: [
 				{
@@ -26,7 +40,7 @@ const config: VercelConfig = {
 				{
 					key: "Content-Security-Policy",
 					value:
-						"default-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; font-src 'self' https://fonts.bunny.net; script-src 'self' 'unsafe-inline' https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; connect-src 'self' https://plausible.io https://*.sentry.io https://*.ingest.sentry.io https://lj-01.nyc3.cdn.digitaloceanspaces.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; block-all-mixed-content; upgrade-insecure-requests",
+						"default-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; font-src 'self' https://fonts.bunny.net; script-src 'self' 'unsafe-inline' https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com https://fypqozx5ulkwvv6l.public.blob.vercel-storage.com; connect-src 'self' https://plausible.io https://*.sentry.io https://*.ingest.sentry.io https://lj-01.nyc3.cdn.digitaloceanspaces.com https://replicator.securelogix.dev; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; block-all-mixed-content; upgrade-insecure-requests",
 				},
 				{ key: "X-Frame-Options", value: "DENY" },
 				{ key: "X-Content-Type-Options", value: "nosniff" },
