@@ -6,6 +6,7 @@ import { parseMarkdownTextToHtml } from "$utils/parseMarkdown";
 import { safeLinkUrl } from "$utils/safeLinkUrl";
 
 // types
+import type { Article } from "$types/Article";
 import type { ArticleSource } from "$types/ArticleSource";
 import type { FrontMatter } from "$types/FrontMatter";
 
@@ -68,6 +69,16 @@ $effect(() => {
 });
 
 let fm = $derived(article?.frontMatter ?? {});
+
+// Reading-list entries are pure metadata (empty markdown body); preview
+// them as the card the /reading-list page renders instead of the
+// article layout.
+let readingListEntry = $derived.by(() => {
+	if (!article || article.markdown.trim() !== "") return null;
+	const entry = article.frontMatter as unknown as Article;
+	if (!entry.summary && !entry.excerpt && !entry.url) return null;
+	return entry;
+});
 let title = $derived(
 	typeof fm.title === "string" && fm.title ? fm.title : (article?.title ?? ""),
 );
@@ -115,6 +126,101 @@ function getAttributionFromSource(source: ArticleSource): string {
     <p class="max-w-prose mt-4 opacity-90">
       The draft could not be loaded. Refresh to try again.
     </p>
+  </div>
+{:else if readingListEntry && article}
+  {@const entry = readingListEntry}
+  <!-- draft banner -->
+  <div
+    class="page-x-padding py-3 bg-maximumYellow text-oxford font-700 flex flex-wrap items-baseline gap-x-3"
+  >
+    <span class="uppercase tracking-wide"
+      >{article.isDraft ? "Draft preview" : "Preview"}</span
+    >
+    <span class="text-14px font-400">
+      status: {article.status} · reading-list entry, shown as its card ·
+      refresh for updates · not for sharing
+    </span>
+  </div>
+
+  <!-- reading-list card, mirroring /reading-list -->
+  <div class="page-x-padding main-y-padding min-h-screen">
+    <article class="max-w-article mb-10">
+      {#if safeLinkUrl(entry.image?.src)}
+        <img
+          src={safeLinkUrl(entry.image?.src)}
+          alt={entry.image?.alt ?? ""}
+          loading="lazy"
+          class="aspect-[5/4] object-cover mb-4 h-160px w-200px rounded overflow-hidden"
+        />
+      {/if}
+
+      <!-- title  -->
+      <h3 class="text-24px font-700 font-serif text-maximumYellow mb-3">
+        {entry.title}
+      </h3>
+
+      <!-- meta -->
+      <div class="flex mb-3 gap-0 text-slate-100/80 gap-2">
+        {#if entry.author?.name}
+          {#if safeLinkUrl(entry.author?.url)}
+            <a href={safeLinkUrl(entry.author?.url)} rel="external"
+              >{entry.author.name}</a
+            >
+          {:else}
+            <div>{entry.author.name}</div>
+          {/if}
+        {/if}
+
+        {#if entry.source?.publicationName}
+          {#if safeLinkUrl(entry.source?.publicationUrl)}
+            <a href={safeLinkUrl(entry.source?.publicationUrl)} rel="external"
+              >{entry.source.publicationName}</a
+            >
+          {:else}
+            <div>{entry.source.publicationName}</div>
+          {/if}
+        {/if}
+
+        {#if entry.publishDate}
+          <span>{entry.publishDate}</span>
+        {/if}
+      </div>
+
+      <div class="mb-5 w-full">
+        {#if entry.summary}
+          <h4 class="mb-2 text-accent">Summary:</h4>
+          <div class="w-full opacity-90 mb-3">
+            {entry.summary}
+          </div>
+        {/if}
+
+        {#if entry.excerpt}
+          <h4 class="mb-2 text-accent">Excerpt:</h4>
+          <div class="w-full opacity-90 italic mb-3">
+            "{entry.excerpt}"
+          </div>
+        {/if}
+
+        {#if entry.tags?.[0]}
+          <div class="mt-2 flex gap-2 text-0.9em text-accent">
+            {#each entry.tags as tag (tag)}
+              <span class="opacity-90">#{tag}</span>
+            {/each}
+          </div>
+        {/if}
+      </div>
+
+      {#if safeLinkUrl(entry.url)}
+        <a
+          class="button-accent"
+          title="read full story"
+          href={safeLinkUrl(entry.url)}
+          rel="external"
+        >
+          Read Full Source
+        </a>
+      {/if}
+    </article>
   </div>
 {:else if article}
   <!-- draft banner -->
