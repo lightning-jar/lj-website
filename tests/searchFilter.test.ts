@@ -1,6 +1,7 @@
 import { describe, expect, it } from "bun:test";
 import {
 	matchesEveryTerm,
+	tagIsActive,
 	searchTermsOf,
 	toggleSearchTerm,
 	uniqueSortedTags,
@@ -50,5 +51,28 @@ describe("toggleSearchTerm", () => {
 	it("removes the tag's term when present, keeping other terms", () => {
 		expect(toggleSearchTerm("svelte pim", "PIM")).toBe("svelte");
 		expect(toggleSearchTerm("svelte", "svelte")).toBe("");
+	});
+});
+
+describe("multi-word tags (word-group semantics)", () => {
+	it("tagIsActive requires every word of the tag", () => {
+		expect(tagIsActive(["machine", "learning"], "Machine Learning")).toBe(true);
+		expect(tagIsActive(["machine"], "Machine Learning")).toBe(false);
+		expect(tagIsActive(["svelte"], "svelte")).toBe(true);
+		expect(tagIsActive([], "svelte")).toBe(false);
+	});
+
+	it("toggleSearchTerm adds all words of a multi-word tag once", () => {
+		expect(toggleSearchTerm("", "Machine Learning")).toBe("machine learning");
+		expect(toggleSearchTerm("machine", "Machine Learning")).toBe(
+			"machine learning",
+		);
+	});
+
+	it("toggleSearchTerm removes all words of an active multi-word tag", () => {
+		expect(
+			toggleSearchTerm("machine learning svelte", "Machine Learning"),
+		).toBe("svelte");
+		expect(toggleSearchTerm("machine learning", "Machine Learning")).toBe("");
 	});
 });

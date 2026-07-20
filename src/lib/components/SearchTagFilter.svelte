@@ -2,6 +2,7 @@
 // Search input + collapsible tag-chip shortcuts for listing pages.
 // The parent owns the search string (bind:search) and the filtering;
 // term/toggle helpers live in $utils/searchFilter.
+import { tagIsActive } from "$utils/searchFilter";
 
 interface Props {
 	search: string;
@@ -24,7 +25,7 @@ let showTags = $state(false);
 
 // how many known tags are currently active in the search box (for the badge)
 const activeTagCount = $derived(
-	allTags.filter((tag) => searchTerms.includes(tag.toLowerCase())).length,
+	allTags.filter((tag) => tagIsActive(searchTerms, tag)).length,
 );
 </script>
 
@@ -61,10 +62,11 @@ const activeTagCount = $derived(
         {#each allTags as tag}
           <button
             type="button"
-            aria-pressed={searchTerms.includes(tag.toLowerCase())}
+            aria-pressed={tagIsActive(searchTerms, tag)}
             onclick={() => toggleTag(tag)}
-            class="rounded-full border border-current px-3 py-1 text-13px transition-colors hover:border-accent {searchTerms.includes(
-              tag.toLowerCase(),
+            class="rounded-full border border-current px-3 py-1 text-13px transition-colors hover:border-accent {tagIsActive(
+              searchTerms,
+              tag,
             )
               ? 'bg-accent text-oxford border-accent font-600'
               : 'text-current/80'}"

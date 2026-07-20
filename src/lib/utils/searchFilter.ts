@@ -21,11 +21,20 @@ export function uniqueSortedTags(tagLists: (string[] | undefined)[]): string[] {
 	);
 }
 
-// add the tag's term to the search string, or remove it if already present
+// a tag counts as active when every one of its words is a search term
+// (tags can be multi-word, e.g. "Machine Learning", while terms are
+// whitespace-split)
+export function tagIsActive(searchTerms: string[], tag: string): boolean {
+	const words = searchTermsOf(tag);
+	return words.length > 0 && words.every((w) => searchTerms.includes(w));
+}
+
+// add the tag's words to the search string, or remove them all if the
+// tag is already active; single-word tags behave as before
 export function toggleSearchTerm(search: string, tag: string): string {
-	const term = tag.toLowerCase();
+	const words = searchTermsOf(tag);
 	const terms = searchTermsOf(search);
-	return terms.includes(term)
-		? terms.filter((t) => t !== term).join(" ")
-		: [...terms, term].join(" ");
+	return tagIsActive(terms, tag)
+		? terms.filter((t) => !words.includes(t)).join(" ")
+		: [...terms, ...words.filter((w) => !terms.includes(w))].join(" ");
 }

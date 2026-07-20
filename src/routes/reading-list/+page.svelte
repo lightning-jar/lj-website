@@ -1,8 +1,54 @@
 <script lang="ts">
 // components
 import FeedBadge from "$components/FeedBadge.svelte";
+import SearchTagFilter from "$components/SearchTagFilter.svelte";
+
+// utils
+import {
+	matchesEveryTerm,
+	searchTermsOf,
+	tagIsActive,
+	toggleSearchTerm,
+	uniqueSortedTags,
+} from "$utils/searchFilter";
 
 let { data } = $props();
+
+let search = $state("");
+
+// unique tags across all entries, alphabetized
+const allTags = $derived(
+	uniqueSortedTags(data.articles.map((a) => a.tags as string[] | undefined)),
+);
+
+// every search term must match somewhere (title, author, publication,
+// summary, excerpt, or a tag — same spirit as the blog, which also
+// matches fields the list doesn't display)
+const searchTerms = $derived(searchTermsOf(search));
+
+const filteredArticles = $derived(
+	data.articles.filter((article) =>
+		matchesEveryTerm(
+			[
+				article.title ?? "",
+				article.author?.name ?? "",
+				article.source?.publicationName ?? "",
+				article.summary ?? "",
+				article.excerpt ?? "",
+				...(article.tags ?? []),
+			],
+			searchTerms,
+		),
+	),
+);
+
+function toggleTag(tag: string) {
+	search = toggleSearchTerm(search, tag);
+}
+
+function clearFilters() {
+	search = "";
+}
 </script>
 
 <svelte:head>
@@ -15,7 +61,7 @@ let { data } = $props();
 </svelte:head>
 
 <div
-  class="page-x-padding main-y-padding pb-6 grid grid-cols-1 gap-12 min-h-screen place-content-start"
+  class="page-x-padding main-y-padding pb-6 grid grid-cols-1 gap-8 min-h-screen place-content-start"
 >
   {#if data?.banner}
     <div class="flex items-start justify-between gap-4">
@@ -31,9 +77,33 @@ let { data } = $props();
     </div>
   {/if}
 
+  <div class="flex flex-col gap-4">
+    <SearchTagFilter
+      bind:search
+      label="Search the reading list"
+      {allTags}
+      {searchTerms}
+      {toggleTag}
+    />
+  </div>
+
+  {#if search.trim()}
+    <p class="text-14px text-current/70">
+      {filteredArticles.length}
+      {filteredArticles.length === 1 ? "entry" : "entries"}
+      <button
+        type="button"
+        onclick={clearFilters}
+        class="ml-2 underline underline-offset-2 hover:text-accent"
+      >
+        Clear filters
+      </button>
+    </p>
+  {/if}
+
   <main>
     <h2 class="sr-only">Select an Entry Below to Read More</h2>
-    {#each data?.articles ?? [] as article, index (article.slug)}
+    {#each filteredArticles as article, index (article.slug)}
       {#if index !== 0}
         <hr class="mb-5 opacity-40" />
       {/if}
@@ -52,7 +122,7 @@ let { data } = $props();
         </h3>
 
         <!-- meta -->
-        <div class="flex text-slate-100/80 gap-2">
+        <div class="flex flex-wrap text-slate-100/80 gap-2 items-baseline">
           <!-- author -->
           {#if article?.author?.name}
             <!-- linked  -->
@@ -79,8 +149,35 @@ let { data } = $props();
           {#if article?.publishDate}
             <span>{article?.publishDate}</span>
           {/if}
+
+          <!-- tags: toggle into the search filter -->
+          {#if article.tags?.[0]}
+            <span class="flex flex-wrap gap-2 text-0.9em text-accent">
+              {#each article.tags as tag (tag)}
+                <button
+                  type="button"
+                  onclick={() => toggleTag(tag)}
+                  class="opacity-90 hover:opacity-100 hover:underline underline-offset-2"
+                  aria-pressed={tagIsActive(searchTerms, tag)}
+                >
+                  #{tag}
+                </button>
+              {/each}
+            </span>
+          {/if}
         </div>
       </article>
+    {:else}
+      <p class="text-current/70 py-8">
+        No entries match your search.
+        <button
+          type="button"
+          onclick={clearFilters}
+          class="underline underline-offset-2 hover:text-accent"
+        >
+          Clear filters
+        </button>
+      </p>
     {/each}
   </main>
 </div>
