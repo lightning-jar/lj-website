@@ -12,6 +12,7 @@ import { ENV } from "varlock/env";
 import type { RequestHandler } from "@sveltejs/kit";
 
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
+import { getAllReadingListArticles } from "$content/getters/getReadingList";
 import { buildAtomFeed } from "$utils/atomFeed";
 import { buildBlogEntries, buildReadingListEntries } from "$utils/feedEntries";
 
@@ -21,10 +22,11 @@ const baseUrl = `https://${
 
 export const GET: RequestHandler = async ({ fetch }) => {
 	const articles = await getAllBlogArticles(fetch);
+	const readingList = await getAllReadingListArticles(fetch);
 	const atom = buildAtomFeed(
 		[
 			...buildBlogEntries(baseUrl, articles),
-			...buildReadingListEntries(baseUrl),
+			...buildReadingListEntries(baseUrl, readingList),
 		],
 		{
 			baseUrl,
