@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-07-20
+
+### Added
+- Hero image for the upcoming "Why We Switched from Google Analytics to Plausible" article: `static/blog/img/muddy-paw-prints.webp` (watercolor paw prints, referenced from the replicator CMS draft).
+
 ## [0.9.0] - 2026-07-17
 
 ### Added
