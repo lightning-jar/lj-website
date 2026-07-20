@@ -47,15 +47,19 @@ editor goes live without a redeploy:
   blog entity (`getCustomerStories.ts`, `CUSTOMER_STORIES_API_KEY`).
   Prose lives in the markdown body; banner/testimonials/perspectives/
   images/etc. ride in frontmatter.
+- **Reading list**: collection `reading-list`, Reading List blog entity
+  (`getReadingList.ts`, `READING_LIST_API_KEY`). Entries are pure
+  frontmatter (`Article` shape) with EMPTY markdown bodies — edited via
+  the replicator editor's frontmatter/JSON surfaces; no per-entry
+  routes on this site.
 - Markdown from the CMS is parsed locally by `parseMarkdown()` so
   rendering stays under this repo's control. Draft previews:
-  `/blog/preview/[token]` (client-rendered, token-authed, works for both
-  collections' bodies).
+  `/blog/preview/[token]` (client-rendered, token-authed, works for
+  prose-bodied collections).
 
 **Git** (loaded via getters in `src/lib/content/getters/` using
 `import.meta.glob()`):
 - **Landing pages**: JSON files in `src/lib/content/landing-pages/`
-- **Reading list**: `Article`-shaped JSON in `src/lib/content/reading-list/` (title, author, source, summary, excerpt, tags, url)
 - **Technologies**: JSON in `src/lib/content/technologies/`, grouped by `supercategory` (defined in `src/lib/content/technologySuperCategories/`)
 
 ### Path Aliases
