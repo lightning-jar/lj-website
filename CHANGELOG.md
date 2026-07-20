@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.11.0] - 2026-07-20
+
+### Removed
+- `static/blog/img/muddy-paw-prints.webp`: the Plausible article's hero image now serves from the replicator image repository (Vercel blob), so the repo copy added in 0.10.0 is unused.
+
 ## [0.10.0] - 2026-07-20
 
 ### Added
