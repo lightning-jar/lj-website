@@ -2,8 +2,8 @@
 // collection "reading-list", Reading List blog entity) and are fetched
 // at request time via the org-scoped public API. Entries are pure
 // metadata: everything rides in frontmatter and the markdown body is
-// empty, so there is no parseMarkdown step and no detail fetch — the
-// list endpoint carries the complete entry.
+// empty, so there is no parseMarkdown step — both the list and detail
+// fetches return complete entries.
 
 // env
 import { ENV } from "varlock/env";
@@ -51,9 +51,38 @@ export async function getAllReadingListArticles(
 		});
 }
 
-// for human readable sitemap — static: the reading list has no
-// per-entry pages, so the section is just the landing link
-function buildHumanSitemapSection() {
+export async function getReadingListArticleBySlug(
+	fetch: Fetch,
+	slug: string,
+): Promise<Article | undefined> {
+	if (!slug) return undefined;
+	const res = await fetch(
+		`${apiBase()}/api/public/blog/articles/${encodeURIComponent(slug)}?collection=reading-list`,
+		{ headers: authHeaders(), cache: "force-cache" },
+	);
+	if (res.status === 404) return undefined;
+	if (!res.ok)
+		throw new Error(`Reading list entry fetch failed: ${res.status}`);
+	const data = (await res.json()) as { article: ApiArticleListItem };
+	return data.article.frontMatter;
+}
+
+export async function getAllReadingListSlugs(fetch: Fetch): Promise<string[]> {
+	const articles = await getAllReadingListArticles(fetch);
+	return articles.map((a) => a.slug || "").filter(Boolean);
+}
+
+// for human readable sitemap
+export async function getReadingListSitemapSection(
+	fetch: Fetch,
+): Promise<SitemapSection> {
+	const articles = await getAllReadingListArticles(fetch);
+	const pages = articles.map((a) => ({
+		title: a.metaTitle || a.title || "",
+		description: a.description || "",
+		date: "",
+		href: a.slug ? `/reading-list/${a.slug}` : "",
+	}));
 	const landing = {
 		title: "Reading List",
 		description: "Things we read and recommend.",
@@ -62,9 +91,7 @@ function buildHumanSitemapSection() {
 	};
 	const section: SitemapSection = {
 		name: "Reading List",
-		pages: [landing],
+		pages: [landing, ...pages],
 	};
 	return section;
 }
-
-export const readingListSitemapSection = buildHumanSitemapSection();

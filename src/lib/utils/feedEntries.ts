@@ -34,7 +34,7 @@ export function buildReadingListEntries(
 		return [
 			{
 				id: `tag:lightningjar.com,2026:reading-list:${a.slug}`,
-				link: a.url || `${baseUrl}/reading-list`,
+				link: `${baseUrl}/reading-list/${a.slug}`,
 				title: a.title || "",
 				updated: toIso(a.repostDate || a.publishDate),
 				summary: a.summary || a.excerpt || "",

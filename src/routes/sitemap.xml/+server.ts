@@ -19,9 +19,10 @@ import type { SitemapXMLFrequency, SitemapXMLPage } from "$types/Sitemap";
 const productionUrl =
 	ENV.VERCEL_PROJECT_PRODUCTION_URL || "www.lightningjar.com";
 
-// get data for blog + customer stories
+// get data for blog + customer stories + reading list
 import { getAllBlogArticleSlugs } from "$content/getters/getBlogArticles";
 import { getAllCustomerStorySlugs } from "$content/getters/getCustomerStories";
+import { getAllReadingListSlugs } from "$content/getters/getReadingList";
 
 // helper function to create sitemap pages
 function generateSiteMapXMLPage(
@@ -88,10 +89,14 @@ export const GET: RequestHandler = async ({ fetch }) => {
 			(slug) =>
 				generateSiteMapXMLPage(`/customer-stories/${slug}`, "monthly", 0.25),
 		);
+		const readingListPages = (await getAllReadingListSlugs(fetch)).map((slug) =>
+			generateSiteMapXMLPage(`/reading-list/${slug}`, "monthly", 0.25),
+		);
 		const pages = [
 			...staticPages,
 			...blogArticlePages,
 			...customerStoryPages,
+			...readingListPages,
 		] as SitemapXMLPage[];
 		const sorted = pages.sort((a, b) => a.path.localeCompare(b.path));
 		return new Response(generateSiteMapXML(sorted), {
