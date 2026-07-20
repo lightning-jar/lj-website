@@ -52,7 +52,7 @@ function getAttributionFromSource(source: ArticleSource): string {
            first body paragraph, which would trigger the [&_img+p] caption rule) -->
       {#if image}
         <div class="mb-8">
-          <img src={image} alt={data.title} class="w-full h-auto" />
+          <img src={image} alt={data.imageDescription || data.title} class="w-full h-auto" />
         </div>
       {/if}
 

@@ -98,10 +98,13 @@ function clearFilters() {
         href="blog/{article.slug}"
         class="aspect-[4/3] w-full border border-current rounded-lg overflow-hidden relative"
       >
+        <!-- Meaningful alt from the article's imageDescription when set;
+             otherwise stay decorative (empty alt + aria-hidden) since the
+             link is already labeled by the title. -->
         <img
-          aria-hidden="true"
+          aria-hidden={article.imageDescription ? undefined : "true"}
           src={article.image}
-          alt=""
+          alt={article.imageDescription ?? ""}
           class="w-full !h-full object-cover"
           loading="lazy"
         />

@@ -41,6 +41,7 @@ export async function load({ params, fetch, setHeaders }) {
 		quote: fm?.quote,
 		glossary: fm?.glossary ?? [],
 		image: fm?.image ?? "",
+		imageDescription: fm?.imageDescription ?? "",
 		html,
 		sources: fm?.sources ?? [],
 		nextArticleSlug,
