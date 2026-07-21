@@ -6,6 +6,7 @@
 // bit-identical to the git-content era.
 
 // utils
+import { matchAuthorProfile } from "$utils/authorMatch";
 import { parseMarkdownTextToHtml } from "$utils/parseMarkdown";
 
 // types
@@ -210,11 +211,8 @@ export async function getBlogAuthorProfile(
 	fetch: Fetch,
 	author: string | null | undefined,
 ): Promise<BlogAuthorProfile | null> {
-	const name = (author ?? "").split("|")[0].trim();
-	if (!name) return null;
 	try {
-		const authors = await getBlogAuthorCatalog(fetch);
-		return authors.find((a) => a.name === name) ?? null;
+		return matchAuthorProfile(await getBlogAuthorCatalog(fetch), author);
 	} catch {
 		// The author section is decorative — never fail the page over it.
 		return null;

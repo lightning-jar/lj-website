@@ -23,6 +23,8 @@ interface PreviewArticle {
 	markdown: string;
 }
 
+import { matchAuthorProfile } from "$utils/authorMatch";
+
 let { data } = $props();
 
 let viewState = $state<"loading" | "ready" | "not-found" | "error">("loading");
@@ -73,9 +75,7 @@ let fm = $derived(article?.frontMatter ?? {});
 // Attribution: match the draft's author name against the CMS author
 // catalog handed over by the server load.
 const authorProfile = $derived(
-	data.authorCatalog.find(
-		(a) => a.name === ((fm.author ?? "") as string).split("|")[0].trim(),
-	) ?? null,
+	matchAuthorProfile(data.authorCatalog, (fm.author ?? "") as string),
 );
 const authorByline = $derived(
 	authorProfile
