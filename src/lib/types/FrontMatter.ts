@@ -6,7 +6,6 @@ export interface FrontMatter {
 	metaTitle?: string;
 	description?: string;
 	date?: string;
-	draft?: boolean;
 	tags?: string[];
 	image?: string;
 	imageDescription?: string;
