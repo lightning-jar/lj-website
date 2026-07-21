@@ -3,8 +3,9 @@
 // fetched at request time via the org-scoped public API. The markdown
 // body is parsed locally by $utils/parseMarkdown; structured fields
 // (banner, testimonials, perspectives, images, …) ride in frontmatter.
-// The curated `order` field drives sorting — the API's date ordering is
-// irrelevant here. Technology enrichment stays local: `technologies`
+// Stories sort by frontmatter `date`, newest first (since 2026-07-21;
+// the former curated `order` field is retired — dates were assigned to
+// reproduce its sequence). Technology enrichment stays local: `technologies`
 // content remains in git.
 
 // env
@@ -82,7 +83,7 @@ function enrichTechnologies(story: CustomerStory): CustomerStory {
 	return { ...story, technologies };
 }
 
-// all stories (list shape, no html), curated-order sorted + enriched
+// all stories (list shape, no html), date-desc sorted + enriched
 export async function getAllCustomerStories(
 	fetch: Fetch,
 ): Promise<CustomerStory[]> {
@@ -94,7 +95,7 @@ export async function getAllCustomerStories(
 	const data = (await res.json()) as { articles: ApiArticleListItem[] };
 	return data.articles
 		.map((item) => enrichTechnologies(normalizeMeta(item.frontMatter)))
-		.sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+		.sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
 }
 
 export async function getAllCustomerStorySlugs(
@@ -125,7 +126,7 @@ export async function getCustomerStoryBySlug(
 	};
 }
 
-// next slug in curated order, wrapping to the first story at the end
+// next slug in display (date-desc) order, wrapping to the first story
 // (same semantics as the git-content era)
 export async function getNextCustomerStorySlug(
 	fetch: Fetch,

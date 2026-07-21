@@ -32,7 +32,6 @@ export interface CustomerStory {
 		text: string;
 		link: { href: string; text: string };
 	};
-	order: number;
+	date?: string;
 	tags?: string[];
-	draft?: boolean;
 }
