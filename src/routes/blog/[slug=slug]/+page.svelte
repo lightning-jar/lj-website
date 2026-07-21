@@ -60,20 +60,30 @@ function getAttributionFromSource(source: ArticleSource): string {
       {@html data.html}
 
       <!-- attribution -->
-      {#if data.meta.author === "Kevin Peckham"}
+      {#if data.authorProfile}
+        {@const byline = [data.authorProfile.title, data.authorProfile.organization]
+          .filter(Boolean)
+          .join(", ")}
         <div
-          data-author={data.meta.author}
-          class="flex gap-5 mt-8 bg-slate-100/10 rounded-full max-w-fit pr-8"
+          data-author={data.authorProfile.name}
+          class="flex gap-5 mt-8 bg-slate-100/10 rounded-full max-w-fit pr-8 {data
+            .authorProfile.imageUrl
+            ? ''
+            : 'pl-8 py-4'}"
         >
-          <img
-            src="https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/kevin-peckham-sm.webp"
-            loading="lazy"
-            alt="cartoonized headshot of Kevin Peckham"
-            class="!aspect-none !rounded-full !w-20 !h-20 overflow-hidden !mb-0"
-          />
+          {#if data.authorProfile.imageUrl}
+            <img
+              src={data.authorProfile.imageUrl}
+              loading="lazy"
+              alt="headshot of {data.authorProfile.name}"
+              class="!aspect-none !rounded-full !w-20 !h-20 overflow-hidden !mb-0"
+            />
+          {/if}
           <div class="grid grid-cols-1 place-content-center text-14px">
-            <div class="font-serif font-700">{data.meta.author}</div>
-            <div>Principal, Lightning Jar</div>
+            <div class="font-serif font-700">{data.authorProfile.name}</div>
+            {#if byline}
+              <div>{byline}</div>
+            {/if}
           </div>
         </div>
       {/if}

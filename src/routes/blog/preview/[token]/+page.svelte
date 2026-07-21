@@ -70,6 +70,21 @@ $effect(() => {
 
 let fm = $derived(article?.frontMatter ?? {});
 
+// Attribution: match the draft's author name against the CMS author
+// catalog handed over by the server load.
+const authorProfile = $derived(
+	data.authorCatalog.find(
+		(a) => a.name === ((fm.author ?? "") as string).split("|")[0].trim(),
+	) ?? null,
+);
+const authorByline = $derived(
+	authorProfile
+		? [authorProfile.title, authorProfile.organization]
+				.filter(Boolean)
+				.join(", ")
+		: "",
+);
+
 // Reading-list entries are pure metadata (empty markdown body); preview
 // them as the card the /reading-list page renders instead of the
 // article layout.
@@ -259,20 +274,26 @@ function getAttributionFromSource(source: ArticleSource): string {
         {@html html}
 
         <!-- attribution -->
-        {#if fm.author === "Kevin Peckham"}
+        {#if authorProfile}
           <div
-            data-author={fm.author}
-            class="flex gap-5 mt-8 bg-slate-100/10 rounded-full max-w-fit pr-8"
+            data-author={authorProfile.name}
+            class="flex gap-5 mt-8 bg-slate-100/10 rounded-full max-w-fit pr-8 {authorProfile.imageUrl
+              ? ''
+              : 'pl-8 py-4'}"
           >
-            <img
-              src="https://lj-01.nyc3.cdn.digitaloceanspaces.com/images/kevin-peckham-sm.webp"
-              loading="lazy"
-              alt="cartoonized headshot of Kevin Peckham"
-              class="!aspect-none !rounded-full !w-20 !h-20 overflow-hidden !mb-0"
-            />
+            {#if authorProfile.imageUrl}
+              <img
+                src={authorProfile.imageUrl}
+                loading="lazy"
+                alt="headshot of {authorProfile.name}"
+                class="!aspect-none !rounded-full !w-20 !h-20 overflow-hidden !mb-0"
+              />
+            {/if}
             <div class="grid grid-cols-1 place-content-center text-14px">
-              <div class="font-serif font-700">{fm.author}</div>
-              <div>Principal, Lightning Jar</div>
+              <div class="font-serif font-700">{authorProfile.name}</div>
+              {#if authorByline}
+                <div>{authorByline}</div>
+              {/if}
             </div>
           </div>
         {/if}

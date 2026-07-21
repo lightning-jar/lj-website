@@ -3,7 +3,10 @@ import { error } from "@sveltejs/kit";
 import type { FrontMatter } from "$types/FrontMatter";
 
 // utils
-import { getBlogArticleBySlug } from "$content/getters/getBlogArticles";
+import {
+	getBlogArticleBySlug,
+	getBlogAuthorProfile,
+} from "$content/getters/getBlogArticles";
 
 // Rendered at request time so CMS saves go live without a redeploy —
 // including brand-new slugs; Vercel's edge caches responses on the same
@@ -34,7 +37,10 @@ export async function load({ params, fetch, setHeaders }) {
 		tags: fm?.tags ?? [],
 	};
 
+	const authorProfile = await getBlogAuthorProfile(fetch, fm?.author);
+
 	return {
+		authorProfile,
 		meta,
 		title: fm?.title ?? "",
 		additionalReading: fm?.additionalReading ?? [],

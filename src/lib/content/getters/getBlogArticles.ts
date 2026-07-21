@@ -5,15 +5,15 @@
 // still parsed locally by $utils/parseMarkdown so published HTML stays
 // bit-identical to the git-content era.
 
-// env
-import { ENV } from "varlock/env";
-
 // utils
 import { parseMarkdownTextToHtml } from "$utils/parseMarkdown";
 
 // types
 import type { FrontMatter } from "$types/FrontMatter";
 import type { SitemapPage, SitemapSection } from "$types/Sitemap";
+
+// env
+import { ENV } from "varlock/env";
 
 type Fetch = typeof globalThis.fetch;
 
@@ -175,4 +175,48 @@ export async function getBlogArticlesSitemapSection(
 		name: "Blog",
 		pages: [landing, ...pages],
 	};
+}
+
+// ---- Authors ---------------------------------------------------------
+
+export interface BlogAuthorProfile {
+	name: string;
+	title: string;
+	organization: string;
+	imageUrl: string | null;
+}
+
+// The org's author catalog from the CMS (name, title, organization,
+// headshot) — drives the article attribution section. Same caching
+// contract as the article fetches.
+export async function getBlogAuthorCatalog(
+	fetch: Fetch,
+): Promise<BlogAuthorProfile[]> {
+	const res = await fetch(`${apiBase()}/api/public/blog/authors`, {
+		headers: authHeaders(),
+		cache: "force-cache",
+	});
+	if (!res.ok) throw new Error(`Blog authors fetch failed: ${res.status}`);
+	const data = (await res.json()) as { authors: BlogAuthorProfile[] };
+	return data.authors;
+}
+
+// Resolve an article's frontmatter `author` string to a catalog
+// profile. The editor writes either a bare name ("Kevin Peckham") or
+// the canonical "Name | Title, Org" byline — match on the name part.
+// Returns null when unknown (the page then renders no author section,
+// matching the old behavior for unmatched authors).
+export async function getBlogAuthorProfile(
+	fetch: Fetch,
+	author: string | null | undefined,
+): Promise<BlogAuthorProfile | null> {
+	const name = (author ?? "").split("|")[0].trim();
+	if (!name) return null;
+	try {
+		const authors = await getBlogAuthorCatalog(fetch);
+		return authors.find((a) => a.name === name) ?? null;
+	} catch {
+		// The author section is decorative — never fail the page over it.
+		return null;
+	}
 }

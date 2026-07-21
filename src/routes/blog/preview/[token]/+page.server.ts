@@ -1,4 +1,7 @@
 // env
+
+import { getBlogAuthorCatalog } from "$content/getters/getBlogArticles";
+
 import { ENV } from "varlock/env";
 
 // Draft previews are dynamic by nature (unguessable tokens, content that
@@ -14,7 +17,7 @@ export const ssr = false;
 const NO_CRAWL =
 	"noindex, nofollow, noarchive, nosnippet, notranslate, noimageindex";
 
-export function load({ setHeaders }) {
+export async function load({ setHeaders, fetch }) {
 	setHeaders({
 		// Belt-and-suspenders no-crawl: the layout emits a robots <meta> from
 		// meta.robotsFollow below, but this response header keeps the shell
@@ -25,7 +28,18 @@ export function load({ setHeaders }) {
 		"cache-control": "private, no-store",
 	});
 
+	// Author catalog for the attribution section: fetched server-side
+	// (the API key stays server-only) and handed to the client, which
+	// matches the draft's author name after the token fetch resolves.
+	let authorCatalog: Awaited<ReturnType<typeof getBlogAuthorCatalog>> = [];
+	try {
+		authorCatalog = await getBlogAuthorCatalog(fetch);
+	} catch {
+		// decorative — never fail the preview shell over it
+	}
+
 	return {
+		authorCatalog,
 		cmsBaseUrl: ENV.BLOG_CMS_BASE_URL ?? "",
 		meta: {
 			title: "Draft Preview",
