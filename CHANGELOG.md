@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.13.0] - 2026-07-22
+
+### Removed
+- `static/blog/img/mailbox.webp`: imported into the replicator image repository (IMG-0006), which now serves the cold-email article's hero image; the staged repo copy is no longer needed.
+
+## [0.12.0] - 2026-07-22
+
+### Added
+- `static/blog/img/mailbox.webp`: temporary staging of the cold-email article's hero image so the replicator image repository can import it from a public URL; will be removed once imported.
+
 ## [0.11.0] - 2026-07-20
 
 ### Removed
