@@ -5,23 +5,33 @@
 			"letters": "G",
 			"track": "Interface reliability",
 			"title": "One hidden SDK default, two very different benchmarks",
-			"eyebrow": "Study G \u00b7 the tool-history footgun",
-			"indexLine": "The original +33pp multi-turn gap was manufactured by conversation histories that omitted the model's own tool calls (the AI SDK v5\u2192v7 response.messages trap).",
+			"eyebrow": "Study G · the tool-history footgun",
+			"indexLine": "The original +33pp multi-turn gap was manufactured by conversation histories that omitted the model's own tool calls (the AI SDK v5→v7 response.messages trap).",
 			"sections": [
 				{
 					"id": "sec-footgun",
-					"eyebrow": "Study G \u00b7 the tool-history footgun",
-					"title": "One hidden SDK default, two very different benchmarks",
-					"takeaway": "The original +33pp multi-turn gap was manufactured by conversation histories that omitted the model's own tool calls (the AI SDK v5\u2192v7 response.messages trap). Same tasks, same prompts; only history construction differs. Under corrected history, all 2,160 Study G cells pass.",
+					"eyebrow": "The tool-history footgun",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": null,
 					"figure": {
 						"kind": "figure",
 						"id": "fig-footgun"
 					},
 					"table": {
-						"summary": "Data table; reference-family tools success, v1 vs v2",
+						"summary": "Reference-family tools success, v1 vs v2",
 						"id": "tbl-footgun"
-					}
+					},
+					"body": [
+						{
+							"heading": "The Manufactured Gap",
+							"html": "The original +33pp multi-turn gap was manufactured by conversation histories that omitted the model's own tool calls (the AI SDK v5→v7 response.messages trap)."
+						},
+						{
+							"heading": "The Correction",
+							"html": "Same tasks, same prompts; only history construction differs. Under corrected history, all 2,160 Study G cells pass."
+						}
+					]
 				}
 			],
 			"published": "2026-07-06",
@@ -31,30 +41,45 @@
 					"href": "/blog/tool-history-footgun"
 				}
 			],
-			"brief": "BRIEF-G.md"
+			"brief": "BRIEF-G.md",
+			"quote": "The +33pp multi-turn gap was manufactured by conversation histories that omitted the model's own tool calls."
 		},
 		{
 			"slug": "h",
 			"letters": "H",
 			"track": "Interface reliability",
 			"title": "The crossover, found: above ~300 nodes, only anchored patches hold",
-			"eyebrow": "Study H \u00b7 300\u20131000 nodes",
+			"eyebrow": "Study H · 300–1000 nodes",
 			"indexLine": "Whole-tree rewrite becomes frontier-only at scale (gemini-flash: 0/15 at ~1000 nodes; sonnet needs a streaming transport and ten minutes per rewrite).",
 			"sections": [
 				{
 					"id": "sec-sizeext",
-					"eyebrow": "Study H \u00b7 300\u20131000 nodes",
-					"title": "The crossover, found: above ~300 nodes, only anchored patches hold",
-					"takeaway": "Whole-tree rewrite becomes frontier-only at scale (gemini-flash: 0/15 at ~1000 nodes; sonnet needs a streaming transport and ten minutes per rewrite). Anchored patches hold 87\u2013100% for both tiers at every size; $0.26 and 4 seconds per solved 1000-node edit. Positional patches decay to ~10%. Solid lines: sonnet-4.5; dashed: gemini-3.5-flash.",
+					"eyebrow": "300–1000 nodes",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-4",
 					"figure": {
 						"kind": "figure",
 						"id": "fig-sizeext"
 					},
 					"table": {
-						"summary": "Data table; success by model \u00d7 condition \u00d7 size (n = 15 per cell)",
+						"summary": "Success by model × condition × size (n = 15 per cell)",
 						"id": "tbl-sizeext"
-					}
+					},
+					"body": [
+						{
+							"heading": "Rewrite Hits a Ceiling",
+							"html": "Whole-tree rewrite becomes frontier-only at scale (gemini-flash: 0/15 at ~1000 nodes; sonnet needs a streaming transport and ten minutes per rewrite)."
+						},
+						{
+							"heading": "Anchored Patches Hold",
+							"html": "Anchored patches hold 87–100% for both tiers at every size; $0.26 and 4 seconds per solved 1000-node edit."
+						},
+						{
+							"heading": "Positional Patches Collapse",
+							"html": "Positional patches decay to ~10%. Solid lines: sonnet-4.5; dashed: gemini-3.5-flash."
+						}
+					]
 				}
 			],
 			"published": "2026-07-07",
@@ -68,30 +93,45 @@
 					"href": "/blog/barkup-0-2-anchored-patches"
 				}
 			],
-			"brief": "BRIEF-H.md"
+			"brief": "BRIEF-H.md",
+			"quote": "Anchored patches hold 87–100% for both tiers at every size; $0.26 and 4 seconds per solved 1000-node edit."
 		},
 		{
 			"slug": "ij",
 			"letters": "I/J",
 			"track": "Views & grounding",
 			"title": "The model doesn't need to see the tree: a ~1.5k-token view matches the full 85k-token input",
-			"eyebrow": "Studies I &amp; J \u00b7 focused views",
+			"eyebrow": "Studies I &amp; J · focused views",
 			"indexLine": "Show only the path to the referenced nodes plus their child lists (everything else collapsed or omitted with a count), and anchored-patch accuracy is statistically unchanged for both models at every size; sonnet on the .",
 			"sections": [
 				{
 					"id": "sec-views",
-					"eyebrow": "Studies I &amp; J \u00b7 focused views",
-					"title": "The model doesn't need to see the tree: a ~1.5k-token view matches the full 85k-token input",
-					"takeaway": "Show only the path to the referenced nodes plus their child lists (everything else collapsed or omitted with a count), and anchored-patch accuracy is statistically unchanged for both models at every size; sonnet on the minimal view went 45/45; while the view's size grows with tree <em>depth</em>, not node count. Rendering the view in barkup's HTML dialect instead of JSON changes nothing on accuracy (p&nbsp;=&nbsp;1.0 in all four paired comparisons) and is 9\u201324% terser; it shipped as <span class=\"font-mono\">barkup/view</span> in 0.3. Caveat: this is the oracle bound; instructions name their target ids. Solid: sonnet-4.5; dashed: gemini-3.5-flash.",
+					"eyebrow": "Focused views",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-5",
 					"figure": {
 						"kind": "figure",
 						"id": "fig-views"
 					},
 					"table": {
-						"summary": "Data table; median input tokens and success by model \u00d7 input \u00d7 size (n = 15 per cell)",
+						"summary": "Median input tokens and success by model × input × size (n = 15 per cell)",
 						"id": "tbl-views"
-					}
+					},
+					"body": [
+						{
+							"heading": "The Minimal View",
+							"html": "Show only the path to the referenced nodes plus their child lists (everything else collapsed or omitted with a count), and anchored-patch accuracy is statistically unchanged for both models at every size; sonnet on the minimal view went 45/45; while the view's size grows with tree <em>depth</em>, not node count."
+						},
+						{
+							"heading": "HTML vs JSON",
+							"html": "Rendering the view in barkup's HTML dialect instead of JSON changes nothing on accuracy (p&nbsp;=&nbsp;1.0 in all four paired comparisons) and is 9–24% terser; it shipped as <span class=\"font-mono\">barkup/view</span> in 0.3."
+						},
+						{
+							"heading": "The Oracle Caveat",
+							"html": "Caveat: this is the oracle bound; instructions name their target ids. Solid: sonnet-4.5; dashed: gemini-3.5-flash."
+						}
+					]
 				}
 			],
 			"published": "2026-07-07",
@@ -105,30 +145,41 @@
 					"href": "/blog/barkup-0-3-focused-views"
 				}
 			],
-			"brief": "BRIEF-I.md"
+			"brief": "BRIEF-I.md",
+			"quote": "The view's size grows with tree depth, not node count."
 		},
 		{
 			"slug": "k",
 			"letters": "K",
 			"track": "Sessions & memory",
 			"title": "Sessions drift unless you re-show the tree; and showing a fresh view every turn is also the cheapest policy",
-			"eyebrow": "Study K \u00b7 12-edit sessions",
+			"eyebrow": "Study K · 12-edit sessions",
 			"indexLine": "Twelve sequential patches against one evolving tree.",
 			"sections": [
 				{
 					"id": "sec-sessions",
-					"eyebrow": "Study K \u00b7 12-edit sessions",
-					"title": "Sessions drift unless you re-show the tree; and showing a fresh view every turn is also the cheapest policy",
-					"takeaway": "Twelve sequential patches against one evolving tree. Shown the tree once, sonnet decays to 83.8% by the last third (stale ordinal placements); with a fresh ~1.5k-token minimal view every turn it stays at 100% (239/240 steps) for a quarter of the tokens; the once-shown tree rides along in history every turn anyway. Whole-tree rewrite as a session protocol fails structurally: gemini silently corrupts state (all 44 failures valid-but-wrong; 2/10 sessions end intact) and one sonnet session deterministically exhausted the 200k context window at step 11. Solid: sonnet-4.5; dashed: gemini-3.5-flash.",
+					"eyebrow": "12-edit sessions",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-6",
 					"figure": {
 						"kind": "figure",
 						"id": "fig-sessions"
 					},
 					"table": {
-						"summary": "Data table; per-step success by session third, end-state, and mean tokens per session",
+						"summary": "Per-step success by session third, end-state, and mean tokens per session",
 						"id": "tbl-sessions"
-					}
+					},
+					"body": [
+						{
+							"heading": "Fresh Views Beat a Stale Tree",
+							"html": "Twelve sequential patches against one evolving tree. Shown the tree once, sonnet decays to 83.8% by the last third (stale ordinal placements); with a fresh ~1.5k-token minimal view every turn it stays at 100% (239/240 steps) for a quarter of the tokens; the once-shown tree rides along in history every turn anyway."
+						},
+						{
+							"heading": "Rewrite Fails as a Protocol",
+							"html": "Whole-tree rewrite as a session protocol fails structurally: gemini silently corrupts state (all 44 failures valid-but-wrong; 2/10 sessions end intact) and one sonnet session deterministically exhausted the 200k context window at step 11. Solid: sonnet-4.5; dashed: gemini-3.5-flash."
+						}
+					]
 				}
 			],
 			"published": "2026-07-08",
@@ -138,30 +189,49 @@
 					"href": "/blog/your-agents-session-is-drifting"
 				}
 			],
-			"brief": "BRIEF-K.md"
+			"brief": "BRIEF-K.md",
+			"quote": "Shown the tree once, sonnet decays by the last third; with a fresh minimal view every turn it stays at 100% for a quarter of the tokens."
 		},
 		{
 			"slug": "l",
 			"letters": "L",
 			"track": "Views & grounding",
-			"title": "Finding the node is the expensive part: grounding costs 7\u20139 points, and navigation is a frontier-only trap",
-			"eyebrow": "Study L \u00b7 grounding without ids",
+			"title": "Finding the node is the expensive part: grounding costs 7–9 points, and navigation is a frontier-only trap",
+			"eyebrow": "Study L · grounding without ids",
 			"indexLine": "Same edits, instructions rewritten without ids (\"the image-atom named 'maple-ember'\"), every description verified to match exactly one node.",
 			"sections": [
 				{
 					"id": "sec-grounding",
-					"eyebrow": "Study L \u00b7 grounding without ids",
-					"title": "Finding the node is the expensive part: grounding costs 7\u20139 points, and navigation is a frontier-only trap",
-					"takeaway": "Same edits, instructions rewritten without ids (\"the image-atom named 'maple-ember'\"), every description verified to match exactly one node. With the full tree in context, models ground at 84\u201387% (vs 91\u201396% with ids). Letting the model navigate a skeleton with an expand tool matches the oracle on sonnet; at a median of 54 expansions, costing MORE than showing everything; and collapses on gemini, mostly by exhausting its budget without an answer. Naive lexical retrieval is the floor it was designed to be. The pre-registered gate failed: no partial-context mechanism was both accurate and cheaper; until Study N (next chart) swapped the expand tool for content search.",
+					"eyebrow": "Grounding without ids",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-7",
 					"figure": {
 						"kind": "figure",
 						"id": "fig-grounding"
 					},
 					"table": {
-						"summary": "Data table; success, input tokens, and failure anatomy by condition (45 tasks per cell)",
+						"summary": "Success, input tokens, and failure anatomy by condition (45 tasks per cell)",
 						"id": "tbl-grounding"
-					}
+					},
+					"body": [
+						{
+							"heading": "Grounding Without Ids",
+							"html": "Same edits, instructions rewritten without ids (\"the image-atom named 'maple-ember'\"), every description verified to match exactly one node."
+						},
+						{
+							"heading": "The Grounding Tax",
+							"html": "With the full tree in context, models ground at 84–87% (vs 91–96% with ids)."
+						},
+						{
+							"heading": "Navigation Is a Frontier-Only Trap",
+							"html": "Letting the model navigate a skeleton with an expand tool matches the oracle on sonnet; at a median of 54 expansions, costing MORE than showing everything; and collapses on gemini, mostly by exhausting its budget without an answer."
+						},
+						{
+							"heading": "The Gate Fails, for Now",
+							"html": "Naive lexical retrieval is the floor it was designed to be. The pre-registered gate failed: no partial-context mechanism was both accurate and cheaper; until Study N (next chart) swapped the expand tool for content search."
+						}
+					]
 				}
 			],
 			"published": "2026-07-08",
@@ -171,30 +241,45 @@
 					"href": "/blog/stable-ids-are-all-you-need"
 				}
 			],
-			"brief": "BRIEF-L.md"
+			"brief": "BRIEF-L.md",
+			"quote": "Naive lexical retrieval is the floor it was designed to be."
 		},
 		{
 			"slug": "n",
 			"letters": "N",
 			"track": "Views & grounding",
 			"title": "Stop walking, start searching: one find_nodes call grounds the edit on both model tiers",
-			"eyebrow": "Study N \u00b7 the retrieval ladder",
+			"eyebrow": "Study N · the retrieval ladder",
 			"indexLine": "Same id-free tasks as Study L; the expand tool replaced by a single content-search tool (a few words in, the 5 best keyword matches out, shown in place).",
 			"sections": [
 				{
 					"id": "sec-retrieval",
-					"eyebrow": "Study N \u00b7 the retrieval ladder",
-					"title": "Stop walking, start searching: one find_nodes call grounds the edit on both model tiers",
-					"takeaway": "Same id-free tasks as Study L; the expand tool replaced by a single content-search tool (a few words in, the 5 best keyword matches out, shown in place). The frontier model matches its id-oracle bound exactly; same 43/45, same two failed tasks; at a <em>median of one search call</em> and ~90% less input; gemini jumps from 23/45 (navigating) to 39/45 (16\u20130 paired, p&nbsp;&lt;&nbsp;0.001), its full-tree score at 3% of the cost. Two more rungs: swapping the keyword matcher for <span class=\"font-mono\">text-embedding-3-small</span> changed nothing (target coverage 23/45 vs 24/45; embeddings can't resolve \"the 3rd block inside atlas\"), and two-stage grounding (gemini reads the tree, names the ids, sonnet patches a focused view) holds 41/45 with the frontier model's median input at 1,484 tokens (\u221297.4%). The Study L gate, re-tested, passes twice.",
+					"eyebrow": "The retrieval ladder",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-9",
 					"figure": {
 						"kind": "figure",
 						"id": "fig-retrieval"
 					},
 					"table": {
-						"summary": "Data table; success, input, and mechanism by condition (45 tasks per cell)",
+						"summary": "Success, input, and mechanism by condition (45 tasks per cell)",
 						"id": "tbl-retrieval"
-					}
+					},
+					"body": [
+						{
+							"heading": "Search Replaces Navigation",
+							"html": "Same id-free tasks as Study L; the expand tool replaced by a single content-search tool (a few words in, the 5 best keyword matches out, shown in place)."
+						},
+						{
+							"heading": "Both Tiers Recover",
+							"html": "The frontier model matches its id-oracle bound exactly; same 43/45, same two failed tasks; at a <em>median of one search call</em> and ~90% less input; gemini jumps from 23/45 (navigating) to 39/45 (16–0 paired, p&nbsp;&lt;&nbsp;0.001), its full-tree score at 3% of the cost."
+						},
+						{
+							"heading": "Two More Rungs",
+							"html": "Two more rungs: swapping the keyword matcher for <span class=\"font-mono\">text-embedding-3-small</span> changed nothing (target coverage 23/45 vs 24/45; embeddings can't resolve \"the 3rd block inside atlas\"), and two-stage grounding (gemini reads the tree, names the ids, sonnet patches a focused view) holds 41/45 with the frontier model's median input at 1,484 tokens (−97.4%). The Study L gate, re-tested, passes twice."
+						}
+					]
 				}
 			],
 			"published": "2026-07-09",
@@ -208,30 +293,45 @@
 					"href": "/blog/barkup-0-4-content-search"
 				}
 			],
-			"brief": "BRIEF-N.md"
+			"brief": "BRIEF-N.md",
+			"quote": "The frontier model matches its id-oracle bound exactly, at a median of one search call and ~90% less input."
 		},
 		{
 			"slug": "m",
 			"letters": "M",
 			"track": "Sessions & memory",
 			"title": "The view carries the state, but history still earns its keep",
-			"eyebrow": "Study M \u00b7 stateless sessions",
+			"eyebrow": "Study M · stateless sessions",
 			"indexLine": "If a fresh view arrives every turn, does the model need conversation history at all? No; statelessness confirmed the constant-cost economics (~1.3k input tokens at step 1 and step 12 alike) but failed the accuracy gate:.",
 			"sections": [
 				{
 					"id": "sec-memory",
-					"eyebrow": "Study M \u00b7 stateless sessions",
-					"title": "The view carries the state, but history still earns its keep",
-					"takeaway": "If a fresh view arrives every turn, does the model need conversation history at all? No; statelessness confirmed the constant-cost economics (~1.3k input tokens at step 1 and step 12 alike) but failed the accuracy gate: sonnet lost 7 steps to 0 against full history (p = 0.016) and end-state integrity dropped from 19/20 sessions to 13\u201314/20, with failures concentrated in late-session placement edits. A 2-exchange window sits in between, leaning inadequate. Guidance at the time: keep the history AND the per-turn view. (Study P, two charts down, found what history was actually providing; and how to replace it.) Solid: sonnet-4.5; dashed: gemini-3.5-flash.",
+					"eyebrow": "Stateless sessions",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-8",
 					"figure": {
 						"kind": "figure",
 						"id": "fig-memory"
 					},
 					"table": {
-						"summary": "Data table; per-step success by session third, end-state, and cost shape",
+						"summary": "Per-step success by session third, end-state, and cost shape",
 						"id": "tbl-memory"
-					}
+					},
+					"body": [
+						{
+							"heading": "The Question",
+							"html": "If a fresh view arrives every turn, does the model need conversation history at all?"
+						},
+						{
+							"heading": "The Answer: Cheaper, but Wrong",
+							"html": "No; statelessness confirmed the constant-cost economics (~1.3k input tokens at step 1 and step 12 alike) but failed the accuracy gate: sonnet lost 7 steps to 0 against full history (p = 0.016) and end-state integrity dropped from 19/20 sessions to 13–14/20, with failures concentrated in late-session placement edits."
+						},
+						{
+							"heading": "The Middle Ground",
+							"html": "A 2-exchange window sits in between, leaning inadequate. Guidance at the time: keep the history AND the per-turn view. (Study P, two charts down, found what history was actually providing; and how to replace it.) Solid: sonnet-4.5; dashed: gemini-3.5-flash."
+						}
+					]
 				}
 			],
 			"published": "2026-07-08",
@@ -241,30 +341,45 @@
 					"href": "/blog/the-benchmark-said-no"
 				}
 			],
-			"brief": "BRIEF-M.md"
+			"brief": "BRIEF-M.md",
+			"quote": "Statelessness confirmed the constant-cost economics but failed the accuracy gate."
 		},
 		{
 			"slug": "o",
 			"letters": "O",
 			"track": "Sessions & memory",
 			"title": "Printing the position on every node does not rescue stateless sessions",
-			"eyebrow": "Study O \u00b7 positional views",
-			"indexLine": "Study M's stateless failures were all placement edits, so Study O annotated every view child with its true 1-based position (plus a prompt line mapping ordinals to anchors) and re-ran the 2\u00d72 of history \u00d7 positions.",
+			"eyebrow": "Study O · positional views",
+			"indexLine": "Study M's stateless failures were all placement edits, so Study O annotated every view child with its true 1-based position (plus a prompt line mapping ordinals to anchors) and re-ran the 2×2 of history × positions.",
 			"sections": [
 				{
 					"id": "sec-positions",
-					"eyebrow": "Study O \u00b7 positional views",
-					"title": "Printing the position on every node does not rescue stateless sessions",
-					"takeaway": "Study M's stateless failures were all placement edits, so Study O annotated every view child with its true 1-based position (plus a prompt line mapping ordinals to anchors) and re-ran the 2\u00d72 of history \u00d7 positions. The rescue failed: stateless accuracy moved 3\u20131 / 1\u20130 vs plain stateless (n.s.), and sessions ending byte-perfect stayed at 15/20 vs full history's 19/20; models misplaced nodes that had the correct position printed on them. Whatever history contributes to placement, it is not arithmetic. Positions <em>with</em> history were descriptively the best cells in the whole series (gemini: 20/20 end-states, 60/60 late placements) but not significantly better than history alone: harmless, possibly mildly helpful, not a substitute for memory. (Study P, next chart, found the actual substitute.)",
+					"eyebrow": "Positional views",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-10",
 					"figure": {
 						"kind": "figure",
 						"id": "fig-positions"
 					},
 					"table": {
-						"summary": "Data table; late-session success, placement class, end-state, and cost by policy",
+						"summary": "Late-session success, placement class, end-state, and cost by policy",
 						"id": "tbl-positions"
-					}
+					},
+					"body": [
+						{
+							"heading": "The Rescue Attempt",
+							"html": "Study M's stateless failures were all placement edits, so Study O annotated every view child with its true 1-based position (plus a prompt line mapping ordinals to anchors) and re-ran the 2×2 of history × positions."
+						},
+						{
+							"heading": "The Rescue Failed",
+							"html": "The rescue failed: stateless accuracy moved 3–1 / 1–0 vs plain stateless (n.s.), and sessions ending byte-perfect stayed at 15/20 vs full history's 19/20; models misplaced nodes that had the correct position printed on them."
+						},
+						{
+							"heading": "Not Arithmetic",
+							"html": "Whatever history contributes to placement, it is not arithmetic. Positions <em>with</em> history were descriptively the best cells in the whole series (gemini: 20/20 end-states, 60/60 late placements) but not significantly better than history alone: harmless, possibly mildly helpful, not a substitute for memory. (Study P, next chart, found the actual substitute.)"
+						}
+					]
 				}
 			],
 			"published": "2026-07-09",
@@ -274,30 +389,49 @@
 					"href": "/blog/the-benchmark-said-no"
 				}
 			],
-			"brief": "BRIEF-O.md"
+			"brief": "BRIEF-O.md",
+			"quote": "Models misplaced nodes that had the correct position printed on them."
 		},
 		{
 			"slug": "p",
 			"letters": "P",
 			"track": "Sessions & memory",
 			"title": "History was a teacher all along: two canned examples replace the whole conversation",
-			"eyebrow": "Study P \u00b7 synthetic history",
+			"eyebrow": "Study P · synthetic history",
 			"indexLine": "If history isn't state (the view carries that) and isn't positional help (Study O), maybe it's worked precedent; and precedent can be faked.",
 			"sections": [
 				{
 					"id": "sec-teaching",
-					"eyebrow": "Study P \u00b7 synthetic history",
-					"title": "History was a teacher all along: two canned examples replace the whole conversation",
-					"takeaway": "If history isn't state (the view carries that) and isn't positional help (Study O), maybe it's worked precedent; and precedent can be faked. Two unit-tested examples (an ordinal insert and a move, on a tree the model never edits, ~900 tokens) restore stateless sessions to full-history accuracy on both models: worst paired difference vs K-view anywhere is 2\u20130 (n.s.), end-states back to 18\u201320/20, and gemini's examples arm goes 60/60 on the late placements that defined the M failure class; with 20/20 byte-perfect endings. The system-prompt framing ties the fake-turns framing, so the value is content, not conversation. Flat ~2.1k input/step forever, half of keep-history's cost at 12 edits, no context ceiling. The session guidance is revised: fresh view per turn + two worked examples in the system prompt.",
+					"eyebrow": "Synthetic history",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-11",
 					"figure": {
 						"kind": "figure",
 						"id": "fig-teaching"
 					},
 					"table": {
-						"summary": "Data table; late-session success, placements, end-state, and cost by policy",
+						"summary": "Late-session success, placements, end-state, and cost by policy",
 						"id": "tbl-teaching"
-					}
+					},
+					"body": [
+						{
+							"heading": "The Hypothesis",
+							"html": "If history isn't state (the view carries that) and isn't positional help (Study O), maybe it's worked precedent; and precedent can be faked."
+						},
+						{
+							"heading": "Precedent, Faked",
+							"html": "Two unit-tested examples (an ordinal insert and a move, on a tree the model never edits, ~900 tokens) restore stateless sessions to full-history accuracy on both models: worst paired difference vs K-view anywhere is 2–0 (n.s.), end-states back to 18–20/20, and gemini's examples arm goes 60/60 on the late placements that defined the M failure class; with 20/20 byte-perfect endings."
+						},
+						{
+							"heading": "Content, Not Conversation",
+							"html": "The system-prompt framing ties the fake-turns framing, so the value is content, not conversation. Flat ~2.1k input/step forever, half of keep-history's cost at 12 edits, no context ceiling."
+						},
+						{
+							"heading": "The Revised Guidance",
+							"html": "The session guidance is revised: fresh view per turn + two worked examples in the system prompt."
+						}
+					]
 				}
 			],
 			"published": "2026-07-09",
@@ -307,30 +441,49 @@
 					"href": "/blog/two-examples-replace-a-memory"
 				}
 			],
-			"brief": "BRIEF-P.md"
+			"brief": "BRIEF-P.md",
+			"quote": "The value is content, not conversation."
 		},
 		{
 			"slug": "q",
 			"letters": "Q",
 			"track": "Views & grounding",
 			"title": "\"Change every X inside Y\" breaks everything; including the oracle",
-			"eyebrow": "Study Q \u00b7 fan-out edits",
-			"indexLine": "One instruction, 2\u201332 targets, on the same large trees.",
+			"eyebrow": "Study Q · fan-out edits",
+			"indexLine": "One instruction, 2–32 targets, on the same large trees.",
 			"sections": [
 				{
 					"id": "sec-fanout",
-					"eyebrow": "Study Q \u00b7 fan-out edits",
-					"title": "\"Change every X inside Y\" breaks everything; including the oracle",
-					"takeaway": "One instruction, 2\u201332 targets, on the same large trees. Even with retrieval solved (every target visible in the view), models finish only part of the set: 62\u201369% overall, ~45% at 7+ targets, failures 100% partial coverage. The 0.4 search recipe fails its gate (median 6 calls instead of 1; a third of runs over 100k input tokens; \u221224 pp vs full tree on gemini). And the series' first model inversion: sonnet is significantly better with a view (p = 0.022), gemini significantly better with the whole tree (p = 0.008); no context strategy is model-independent here. Study R then tested the fixes: prompt-side interventions (a worked fan-out example, a coverage checklist) do NOT rescue it; but decomposition, measured directly, is perfect: the app enumerates targets and issues one single-target edit per node, 90/90 tasks on both models (674/674 subtasks, zero failures) at ~\u2153 the input cost of a whole-tree prompt. The flat line at the top is the recipe. Solid: sonnet-4.5; dashed: gemini-3.5-flash.",
+					"eyebrow": "Fan-out edits",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-12",
 					"figure": {
 						"kind": "figure",
 						"id": "fig-fanout"
 					},
 					"table": {
-						"summary": "Data table; success by condition \u00d7 target count, failure anatomy, and tokens",
+						"summary": "Success by condition × target count, failure anatomy, and tokens",
 						"id": "tbl-fanout"
-					}
+					},
+					"body": [
+						{
+							"heading": "The Fan-Out Problem",
+							"html": "One instruction, 2–32 targets, on the same large trees. Even with retrieval solved (every target visible in the view), models finish only part of the set: 62–69% overall, ~45% at 7+ targets, failures 100% partial coverage."
+						},
+						{
+							"heading": "The Search Recipe Spirals",
+							"html": "The 0.4 search recipe fails its gate (median 6 calls instead of 1; a third of runs over 100k input tokens; −24 pp vs full tree on gemini)."
+						},
+						{
+							"heading": "The First Model Inversion",
+							"html": "And the series' first model inversion: sonnet is significantly better with a view (p = 0.022), gemini significantly better with the whole tree (p = 0.008); no context strategy is model-independent here."
+						},
+						{
+							"heading": "Decomposition Fixes It",
+							"html": "Study R then tested the fixes: prompt-side interventions (a worked fan-out example, a coverage checklist) do NOT rescue it; but decomposition, measured directly, is perfect: the app enumerates targets and issues one single-target edit per node, 90/90 tasks on both models (674/674 subtasks, zero failures) at ~⅓ the input cost of a whole-tree prompt. The flat line at the top is the recipe. Solid: sonnet-4.5; dashed: gemini-3.5-flash."
+						}
+					]
 				}
 			],
 			"published": "2026-07-09",
@@ -340,30 +493,45 @@
 					"href": "/blog/barkup-0-5-deterministic-selection"
 				}
 			],
-			"brief": "BRIEF-Q.md"
+			"brief": "BRIEF-Q.md",
+			"quote": "Even with retrieval solved, models finish only part of the set."
 		},
 		{
 			"slug": "s",
 			"letters": "S",
 			"track": "Sessions & memory",
 			"title": "36 edits later, nothing broke; except the cost curve",
-			"eyebrow": "Study S \u00b7 long sessions",
+			"eyebrow": "Study S · long sessions",
 			"indexLine": "Every prior session study ran 12 edits.",
 			"sections": [
 				{
 					"id": "sec-horizon",
-					"eyebrow": "Study S \u00b7 long sessions",
-					"title": "36 edits later, nothing broke; except the cost curve",
-					"takeaway": "Every prior session study ran 12 edits. Study S ran the two surviving recipes through 36 (10 new sessions, seed committed) and both held: full-history S-view went 719/720 steps across both models, stateless-plus-worked-examples S-system went 713/720 with no late-third decay (98\u201399% at steps 25\u201336; step 36 is taught as well as step 1), McNemar parity everywhere, zero context ceilings, zero blocked steps. What diverges is cost: keep-history's median per-step input grows linearly to ~24k tokens by step 36 while the stateless recipe stays flat at ~2.1k, which compounds to 449k vs 81k input per session; 5.4\u20135.6\u00d7, against a pre-registered prediction of \u22653\u00d7. The gate passed on both models; the worked-examples recipe is the measured default for long sessions. All seven S-system step failures were placement-class (insert/move), the class Studies M/O/P mapped. Solid: sonnet-4.5; dashed: gemini-3.5-flash.",
+					"eyebrow": "Long sessions",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-13",
 					"figure": {
 						"kind": "figure",
 						"id": "fig-horizon"
 					},
 					"table": {
-						"summary": "Data table; per-third success, end-state, and tokens per session by recipe",
+						"summary": "Per-third success, end-state, and tokens per session by recipe",
 						"id": "tbl-horizon"
-					}
+					},
+					"body": [
+						{
+							"heading": "Both Recipes Hold",
+							"html": "Every prior session study ran 12 edits. Study S ran the two surviving recipes through 36 (10 new sessions, seed committed) and both held: full-history S-view went 719/720 steps across both models, stateless-plus-worked-examples S-system went 713/720 with no late-third decay (98–99% at steps 25–36; step 36 is taught as well as step 1), McNemar parity everywhere, zero context ceilings, zero blocked steps."
+						},
+						{
+							"heading": "Cost Is What Diverges",
+							"html": "What diverges is cost: keep-history's median per-step input grows linearly to ~24k tokens by step 36 while the stateless recipe stays flat at ~2.1k, which compounds to 449k vs 81k input per session; 5.4–5.6×, against a pre-registered prediction of ≥3×."
+						},
+						{
+							"heading": "The Verdict",
+							"html": "The gate passed on both models; the worked-examples recipe is the measured default for long sessions. All seven S-system step failures were placement-class (insert/move), the class Studies M/O/P mapped. Solid: sonnet-4.5; dashed: gemini-3.5-flash."
+						}
+					]
 				}
 			],
 			"published": "2026-07-10",
@@ -373,30 +541,49 @@
 					"href": "/blog/the-thirty-sixth-edit"
 				}
 			],
-			"brief": "BRIEF-S.md"
+			"brief": "BRIEF-S.md",
+			"quote": "Step 36 is taught as well as step 1."
 		},
 		{
 			"slug": "t",
 			"letters": "T",
 			"track": "Sessions & memory",
 			"title": "The one thing statelessness can't do; and the three note lines that fix it",
-			"eyebrow": "Study T \u00b7 conversation-carried context",
+			"eyebrow": "Study T · conversation-carried context",
 			"indexLine": "Every prior session study used self-contained requests, so Study T built the missing class: callback steps whose required fact lives only in earlier conversation; a declared codename a later rename must use, and a stand.",
 			"sections": [
 				{
 					"id": "sec-memo",
-					"eyebrow": "Study T \u00b7 conversation-carried context",
-					"title": "The one thing statelessness can't do; and the three note lines that fix it",
-					"takeaway": "Every prior session study used self-contained requests, so Study T built the missing class: callback steps whose required fact lives only in earlier conversation; a declared codename a later rename must use, and a standing rule later inserts must apply unprompted (validated non-derivable from every pre-step tree). The dissociation is total: the stateless worked-examples recipe fails ALL 160 callback steps (0/80 per model) while scoring 160/160 on the ordinary steps of the very same sessions. The registered fix; an app-maintained \"Session notes\" block, a memo instead of a transcript; recovers 80/80 on both models, ties full history on every paired comparison, beats it on end-state integrity (19\u201320/20 vs 17\u201319/20), and costs 1.02\u00d7 stateless against history's 2.1\u00d7. Session guidance, final form: fresh view per turn, two worked examples, and a memo of what the user declared.",
+					"eyebrow": "Conversation-carried context",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-14",
 					"figure": {
 						"kind": "figure",
 						"id": "fig-memo"
 					},
 					"table": {
-						"summary": "Data table; callback and ordinary steps, end-state, and cost by arm",
+						"summary": "Callback and ordinary steps, end-state, and cost by arm",
 						"id": "tbl-memo"
-					}
+					},
+					"body": [
+						{
+							"heading": "The Missing Request Class",
+							"html": "Every prior session study used self-contained requests, so Study T built the missing class: callback steps whose required fact lives only in earlier conversation; a declared codename a later rename must use, and a standing rule later inserts must apply unprompted (validated non-derivable from every pre-step tree)."
+						},
+						{
+							"heading": "A Total Dissociation",
+							"html": "The dissociation is total: the stateless worked-examples recipe fails ALL 160 callback steps (0/80 per model) while scoring 160/160 on the ordinary steps of the very same sessions."
+						},
+						{
+							"heading": "The Memo Fix",
+							"html": "The registered fix; an app-maintained \"Session notes\" block, a memo instead of a transcript; recovers 80/80 on both models, ties full history on every paired comparison, beats it on end-state integrity (19–20/20 vs 17–19/20), and costs 1.02× stateless against history's 2.1×."
+						},
+						{
+							"heading": "Guidance, Final Form",
+							"html": "Session guidance, final form: fresh view per turn, two worked examples, and a memo of what the user declared."
+						}
+					]
 				}
 			],
 			"published": "2026-07-10",
@@ -406,30 +593,49 @@
 					"href": "/blog/the-two-things-your-agent-cant-see"
 				}
 			],
-			"brief": "BRIEF-T.md"
+			"brief": "BRIEF-T.md",
+			"quote": "A memo instead of a transcript recovers every callback, ties full history, and costs 1.02× stateless."
 		},
 		{
 			"slug": "u",
 			"letters": "U",
 			"track": "Views & grounding",
 			"title": "The view that can't see the answer doesn't fail; it makes something up",
-			"eyebrow": "Study U \u00b7 document-carried dependencies",
+			"eyebrow": "Study U · document-carried dependencies",
 			"indexLine": "Focused views assume the instruction carries every value an edit needs.",
 			"sections": [
 				{
 					"id": "sec-dependent",
-					"eyebrow": "Study U \u00b7 document-carried dependencies",
-					"title": "The view that can't see the answer doesn't fail; it makes something up",
-					"takeaway": "Focused views assume the instruction carries every value an edit needs. Study U built the class where it doesn't: dependent edits (\"set A's content to the same value as B's\", \"rename A to B's name\") whose needed value is verified absent from the instruction AND from the rendered target-only view. That view failed all 90 cells across both models; and every single failure was a valid patch containing a silently invented value: zero refusals, zero invalid artifacts, 90/90 confident fictions that validate and apply. The fix is one line: put both mentioned nodes in the focus ids. That scores a perfect 90/90; descriptively better than the whole tree, which fumbled 3 structure-reads at ~1000 nodes on sonnet; at ~1.7k median input tokens, 25\u00d7 less than the full tree. The shipped search recipe can self-serve reads at 82\u201384% (median 2\u20133 calls), significantly short of full-tree parity on gemini (p = 0.008) and weakest on value-copies (75%): search grounds targets at oracle level, but reading values is the application's job. Focus ids = every node the request mentions.",
+					"eyebrow": "Document-carried dependencies",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-15",
 					"figure": {
 						"kind": "figure",
 						"id": "fig-dependent"
 					},
 					"table": {
-						"summary": "Data table; success by arm and kind, failure anatomy, and cost",
+						"summary": "Success by arm and kind, failure anatomy, and cost",
 						"id": "tbl-dependent"
-					}
+					},
+					"body": [
+						{
+							"heading": "Dependent Edits",
+							"html": "Focused views assume the instruction carries every value an edit needs. Study U built the class where it doesn't: dependent edits (\"set A's content to the same value as B's\", \"rename A to B's name\") whose needed value is verified absent from the instruction AND from the rendered target-only view."
+						},
+						{
+							"heading": "Ninety Confident Fictions",
+							"html": "That view failed all 90 cells across both models; and every single failure was a valid patch containing a silently invented value: zero refusals, zero invalid artifacts, 90/90 confident fictions that validate and apply."
+						},
+						{
+							"heading": "The One-Line Fix",
+							"html": "The fix is one line: put both mentioned nodes in the focus ids. That scores a perfect 90/90; descriptively better than the whole tree, which fumbled 3 structure-reads at ~1000 nodes on sonnet; at ~1.7k median input tokens, 25× less than the full tree."
+						},
+						{
+							"heading": "Search Reads Values Badly",
+							"html": "The shipped search recipe can self-serve reads at 82–84% (median 2–3 calls), significantly short of full-tree parity on gemini (p = 0.008) and weakest on value-copies (75%): search grounds targets at oracle level, but reading values is the application's job. Focus ids = every node the request mentions."
+						}
+					]
 				}
 			],
 			"published": "2026-07-10",
@@ -439,29 +645,56 @@
 					"href": "/blog/the-two-things-your-agent-cant-see"
 				}
 			],
-			"brief": "BRIEF-U.md"
+			"brief": "BRIEF-U.md",
+			"quote": "Zero refusals, zero invalid artifacts, 90/90 confident fictions that validate and apply."
 		},
 		{
 			"slug": "v",
 			"letters": "V",
 			"track": "Qualitative (Track 2)",
 			"title": "Views carry values, memos carry goals",
-			"eyebrow": "Study V \u00b7 qualitative rewrites; judge-graded (Track 2)",
+			"eyebrow": "Study V · qualitative rewrites; judge-graded (Track 2)",
 			"indexLine": "The series' first judge-graded study, run under a pre-registered pairwise protocol: both judges (gpt-5.4 primary, haiku-4.5 sensitivity; neither an editor) first had to pass a 50-pair calibration gate with planted verdi.",
 			"sections": [
 				{
 					"id": "sec-goals",
-					"eyebrow": "Study V \u00b7 qualitative rewrites; judge-graded (Track 2)",
-					"title": "Views carry values, memos carry goals",
-					"takeaway": "The series' first judge-graded study, run under a pre-registered pairwise protocol: both judges (gpt-5.4 primary, haiku-4.5 sensitivity; neither an editor) first had to pass a 50-pair calibration gate with planted verdicts, identity probes, and length probes, and both aced it 50/50. The task: \"rewrite this paragraph to focus on our central thesis,\" with the thesis planted in a mission node and the target paragraph deliberately assembled off-thesis. Five arms for where the goal lives. Blind arms lost all 120 comparisons by obliviously polishing the off-topic paragraph; fluent, valid, useless. The T memo carried the goal at full parity with an explicit instruction (sonnet's memo arm actually won 10\u20132 under the primary judge). The surprise that failed the gate: models with the thesis-bearing node IN THE VIEW demonstrably read it (keyword coverage +0.75 vs +0.00 blind) yet lost 117/120; their rewrites orbit the topic where told-outright rewrites anchor the thesis. Study U's view fix moves data perfectly; it moves intent only partway. Judge agreement 83.3% (kappa 0.53); the keyword proxy ranks the arms identically. Guidance: put the nodes an edit must read in the view; put the goal in the instruction or memo, restated outright.",
+					"eyebrow": "Qualitative rewrites; judge-graded (Track 2)",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-16",
 					"figure": {
 						"id": "fig-goals"
 					},
 					"table": {
 						"id": "tbl-goals",
-						"summary": "Data table; win/loss/tie vs the explicit-instruction control, by arm, editor, and judge"
-					}
+						"summary": "Win/loss/tie vs the explicit-instruction control, by arm, editor, and judge"
+					},
+					"body": [
+						{
+							"heading": "The First Judge-Graded Study",
+							"html": "The series' first judge-graded study, run under a pre-registered pairwise protocol: both judges (gpt-5.4 primary, haiku-4.5 sensitivity; neither an editor) first had to pass a 50-pair calibration gate with planted verdicts, identity probes, and length probes, and both aced it 50/50."
+						},
+						{
+							"heading": "The Task",
+							"html": "The task: \"rewrite this paragraph to focus on our central thesis,\" with the thesis planted in a mission node and the target paragraph deliberately assembled off-thesis. Five arms for where the goal lives."
+						},
+						{
+							"heading": "Blind Arms Polish Obliviously",
+							"html": "Blind arms lost all 120 comparisons by obliviously polishing the off-topic paragraph; fluent, valid, useless."
+						},
+						{
+							"heading": "The Memo Carries the Goal",
+							"html": "The T memo carried the goal at full parity with an explicit instruction (sonnet's memo arm actually won 10–2 under the primary judge)."
+						},
+						{
+							"heading": "The Surprise That Failed the Gate",
+							"html": "The surprise that failed the gate: models with the thesis-bearing node IN THE VIEW demonstrably read it (keyword coverage +0.75 vs +0.00 blind) yet lost 117/120; their rewrites orbit the topic where told-outright rewrites anchor the thesis. Study U's view fix moves data perfectly; it moves intent only partway."
+						},
+						{
+							"heading": "The Verdict",
+							"html": "Judge agreement 83.3% (kappa 0.53); the keyword proxy ranks the arms identically. Guidance: put the nodes an edit must read in the view; put the goal in the instruction or memo, restated outright."
+						}
+					]
 				}
 			],
 			"published": "2026-07-11",
@@ -471,29 +704,48 @@
 					"href": "/blog/views-carry-values-memos-carry-goals"
 				}
 			],
-			"brief": "BRIEF-V.md"
+			"brief": "BRIEF-V.md",
+			"quote": "Rewrites orbit the topic where told-outright rewrites anchor the thesis."
 		},
 		{
 			"slug": "w",
 			"letters": "W",
 			"track": "Sessions & memory",
 			"title": "The agent writes the memo faithfully; even when history makes it redundant",
-			"eyebrow": "Study W \u00b7 who writes the memo?",
+			"eyebrow": "Study W · who writes the memo?",
 			"indexLine": "Studies T and V validated the memo with oracle extraction: the harness knew what to record.",
 			"sections": [
 				{
 					"id": "sec-extraction",
-					"eyebrow": "Study W \u00b7 who writes the memo?",
-					"title": "The agent writes the memo faithfully; even when history makes it redundant",
-					"takeaway": "Studies T and V validated the memo with oracle extraction: the harness knew what to record. What ships in production delegates that judgment to the agent via an update_session_notes tool and a prompt rule, with a 32-message history window also present; and within the window, callbacks succeed via history whether or not the agent records, so a lazy agent's empty memo is invisible until truncation. Study W tested the shipped mechanism verbatim (character-identity ports) on 36-step sessions that cross the window, with a mid-session retraction, on three models including claude-opus-4.8; the series' first data on the tier the production system runs. Both gates passed. Pure agent extraction ties the oracle exactly (recall 36/36 per model, retractions 12/12, zero noise notes, one drop event in 72 sessions), the tool gets called ~4 times per session at exactly the declarative moments, and the laziness hypothesis is refuted: with history present the recording cadence is unchanged and post-truncation callbacks hold; opus a perfect 36/36, gemini 35/36, sonnet 31/36 (not significant, and not memo-explained: its memo was complete in every failing cell). The over-32-message protection is real protection, not theater. Filled dots: post-truncation callbacks; hollow: within-window.",
+					"eyebrow": "Who writes the memo?",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-17",
 					"figure": {
 						"id": "fig-extraction"
 					},
 					"table": {
 						"id": "tbl-extraction",
-						"summary": "Data table; callbacks by arm, window membership, memo fidelity, and cost"
-					}
+						"summary": "Callbacks by arm, window membership, memo fidelity, and cost"
+					},
+					"body": [
+						{
+							"heading": "From Oracle to Agent",
+							"html": "Studies T and V validated the memo with oracle extraction: the harness knew what to record. What ships in production delegates that judgment to the agent via an update_session_notes tool and a prompt rule, with a 32-message history window also present; and within the window, callbacks succeed via history whether or not the agent records, so a lazy agent's empty memo is invisible until truncation."
+						},
+						{
+							"heading": "The Shipped Mechanism, Tested Verbatim",
+							"html": "Study W tested the shipped mechanism verbatim (character-identity ports) on 36-step sessions that cross the window, with a mid-session retraction, on three models including claude-opus-4.8; the series' first data on the tier the production system runs."
+						},
+						{
+							"heading": "Both Gates Pass",
+							"html": "Both gates passed. Pure agent extraction ties the oracle exactly (recall 36/36 per model, retractions 12/12, zero noise notes, one drop event in 72 sessions), the tool gets called ~4 times per session at exactly the declarative moments, and the laziness hypothesis is refuted: with history present the recording cadence is unchanged and post-truncation callbacks hold; opus a perfect 36/36, gemini 35/36, sonnet 31/36 (not significant, and not memo-explained: its memo was complete in every failing cell)."
+						},
+						{
+							"heading": "Real Protection, Not Theater",
+							"html": "The over-32-message protection is real protection, not theater. Filled dots: post-truncation callbacks; hollow: within-window."
+						}
+					]
 				}
 			],
 			"published": "2026-07-11",
@@ -503,29 +755,52 @@
 					"href": "/blog/who-writes-the-memo"
 				}
 			],
-			"brief": "BRIEF-W.md"
+			"brief": "BRIEF-W.md",
+			"quote": "The over-32-message protection is real protection, not theater."
 		},
 		{
 			"slug": "x",
 			"letters": "X",
 			"track": "Sessions & memory",
 			"title": "\"Undo that\" needs an echo, not a transcript",
-			"eyebrow": "Study X \u00b7 edit-anaphora",
-			"indexLine": "The last structurally unmeasured request class: follow-ups that point at the previous edit; \"also set that same node's\u2026\", \"apply the same change to X\", \"actually, undo that.\" Anaphora steps ran against skeleton views (a.",
+			"eyebrow": "Study X · edit-anaphora",
+			"indexLine": "The last structurally unmeasured request class: follow-ups that point at the previous edit; \"also set that same node's…\", \"apply the same change to X\", \"actually, undo that.\" Anaphora steps ran against skeleton views (a.",
 			"sections": [
 				{
 					"id": "sec-anaphora",
-					"eyebrow": "Study X \u00b7 edit-anaphora",
-					"title": "\"Undo that\" needs an echo, not a transcript",
-					"takeaway": "The last structurally unmeasured request class: follow-ups that point at the previous edit; \"also set that same node's\u2026\", \"apply the same change to X\", \"actually, undo that.\" Anaphora steps ran against skeleton views (an oracle-focused view would leak the answer), so the carrier under test had to supply the target, the key, AND the value. Without one, no model resolves anything: 0 of 144 across sonnet, gemini, and opus, and every single failure was a valid, applied, silently guessed patch; the strongest silent-failure result in the series. Full history is near-ceiling (48/48, 48/48, 46/48). The winner is the cheapest carrier tested: a one-line last-edit echo the application appends automatically (set \"key\" from old to new on node), which ties history per model at about half the input cost and BEAT history outright on opus-4.8; 48/48 against history's 46/48, with the from/to format carrying every undo on every model. Fine print, disclosed: \"apply the same change to X\" strains compressed carriers model-dependently (sonnet 7/12 with the echo; window-2 leaks on repeat everywhere, significantly on gemini), one more entry in the carrier-advice-is-not-model-independent ledger. The measured stateless session stack is now complete: fresh view per turn, two worked examples, the session-notes memo, and the last-edit echo.",
+					"eyebrow": "Edit-anaphora",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-18",
 					"figure": {
 						"id": "fig-anaphora"
 					},
 					"table": {
 						"id": "tbl-anaphora",
-						"summary": "Data table; anaphora success by carrier, kind, and model, with failure anatomy and cost"
-					}
+						"summary": "Anaphora success by carrier, kind, and model, with failure anatomy and cost"
+					},
+					"body": [
+						{
+							"heading": "The Last Unmeasured Class",
+							"html": "The last structurally unmeasured request class: follow-ups that point at the previous edit; \"also set that same node's…\", \"apply the same change to X\", \"actually, undo that.\" Anaphora steps ran against skeleton views (an oracle-focused view would leak the answer), so the carrier under test had to supply the target, the key, AND the value."
+						},
+						{
+							"heading": "No Carrier, No Chance",
+							"html": "Without one, no model resolves anything: 0 of 144 across sonnet, gemini, and opus, and every single failure was a valid, applied, silently guessed patch; the strongest silent-failure result in the series."
+						},
+						{
+							"heading": "The Echo Wins",
+							"html": "Full history is near-ceiling (48/48, 48/48, 46/48). The winner is the cheapest carrier tested: a one-line last-edit echo the application appends automatically (set \"key\" from old to new on node), which ties history per model at about half the input cost and BEAT history outright on opus-4.8; 48/48 against history's 46/48, with the from/to format carrying every undo on every model."
+						},
+						{
+							"heading": "Fine Print",
+							"html": "Fine print, disclosed: \"apply the same change to X\" strains compressed carriers model-dependently (sonnet 7/12 with the echo; window-2 leaks on repeat everywhere, significantly on gemini), one more entry in the carrier-advice-is-not-model-independent ledger."
+						},
+						{
+							"heading": "The Stack, Complete",
+							"html": "The measured stateless session stack is now complete: fresh view per turn, two worked examples, the session-notes memo, and the last-edit echo."
+						}
+					]
 				}
 			],
 			"published": "2026-07-12",
@@ -535,29 +810,48 @@
 					"href": "/blog/undo-that"
 				}
 			],
-			"brief": "BRIEF-X.md"
+			"brief": "BRIEF-X.md",
+			"quote": "The winner is the cheapest carrier tested: a one-line last-edit echo the application appends automatically."
 		},
 		{
 			"slug": "y",
 			"letters": "Y",
 			"track": "Sessions & memory",
 			"title": "The memo survives how people actually talk",
-			"eyebrow": "Study Y \u00b7 naturalistic extraction",
+			"eyebrow": "Study Y · naturalistic extraction",
 			"indexLine": "Every declaration in Studies T, V, and W was announced formulaically (\"For later reference: the codename is X\").",
 			"sections": [
 				{
 					"id": "sec-speech",
-					"eyebrow": "Study Y \u00b7 naturalistic extraction",
-					"title": "The memo survives how people actually talk",
-					"takeaway": "Every declaration in Studies T, V, and W was announced formulaically (\"For later reference: the codename is X\"). Real users declare mid-sentence, bury rules inside other requests, and retract with \"scratch that.\" Study Y isolated phrasing with twin sessions: identical trees, edits, schedules, chatter, and session ids, differing ONLY in declaration rider text; one twin formulaic, one casual from registered pools. Four chatter riders per session (\"the client saw a screenshot and seemed happy\") gave the noise metric real bait for the first time. Both gates passed perfectly on all three models: zero discordant callback cells anywhere between casual and formulaic (every McNemar 0 to 0), recall 36 of 36 and casual retractions 12 of 12 in both stateless arms, and 432 chatter baits produced not one false memo note. Users need no announcement syntax, and the shipped record-only-declarations prompt rule is doing real discrimination work at zero false-positive cost. One disclosed whisper: under the history window, recording cadence softens at the margin (3.8 to 3.9 calls per session vs a flat 4.0 stateless), consistent with Study W's redundancy finding and covered by in-window history. The formulaic arm doubled as a clean Study W replication under added chatter.",
+					"eyebrow": "Naturalistic extraction",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-19",
 					"figure": {
 						"id": "fig-speech"
 					},
 					"table": {
 						"id": "tbl-speech",
-						"summary": "Data table; callbacks, recall, retractions, noise, and cadence by arm and model"
-					}
+						"summary": "Callbacks, recall, retractions, noise, and cadence by arm and model"
+					},
+					"body": [
+						{
+							"heading": "How People Actually Talk",
+							"html": "Every declaration in Studies T, V, and W was announced formulaically (\"For later reference: the codename is X\"). Real users declare mid-sentence, bury rules inside other requests, and retract with \"scratch that.\""
+						},
+						{
+							"heading": "Twin Sessions",
+							"html": "Study Y isolated phrasing with twin sessions: identical trees, edits, schedules, chatter, and session ids, differing ONLY in declaration rider text; one twin formulaic, one casual from registered pools. Four chatter riders per session (\"the client saw a screenshot and seemed happy\") gave the noise metric real bait for the first time."
+						},
+						{
+							"heading": "Both Gates Pass",
+							"html": "Both gates passed perfectly on all three models: zero discordant callback cells anywhere between casual and formulaic (every McNemar 0 to 0), recall 36 of 36 and casual retractions 12 of 12 in both stateless arms, and 432 chatter baits produced not one false memo note. Users need no announcement syntax, and the shipped record-only-declarations prompt rule is doing real discrimination work at zero false-positive cost."
+						},
+						{
+							"heading": "One Disclosed Whisper",
+							"html": "One disclosed whisper: under the history window, recording cadence softens at the margin (3.8 to 3.9 calls per session vs a flat 4.0 stateless), consistent with Study W's redundancy finding and covered by in-window history. The formulaic arm doubled as a clean Study W replication under added chatter."
+						}
+					]
 				}
 			],
 			"published": "2026-07-12",
@@ -567,29 +861,56 @@
 					"href": "/blog/who-writes-the-memo"
 				}
 			],
-			"brief": "BRIEF-Y.md"
+			"brief": "BRIEF-Y.md",
+			"quote": "432 chatter baits produced not one false memo note. Users need no announcement syntax."
 		},
 		{
 			"slug": "z",
 			"letters": "Z",
 			"track": "Standing context",
 			"title": "The brand pack works; the rule you forgot is the hazard",
-			"eyebrow": "Study Z \u00b7 standing context",
+			"eyebrow": "Study Z · standing context",
 			"indexLine": "Production doc editors ship a standing context block with every request; company facts, client records, a styleguide; and nobody had measured whether models actually use it.",
 			"sections": [
 				{
 					"id": "sec-standing",
-					"eyebrow": "Study Z \u00b7 standing context",
-					"title": "The brand pack works; the rule you forgot is the hazard",
-					"takeaway": "Production doc editors ship a standing context block with every request; company facts, client records, a styleguide; and nobody had measured whether models actually use it. Study Z planted machine-checkable obligations in twelve seeded org packs (~3.3k tokens: one target client, three same-schema distractors, governing rules rotated head/middle/tail among twelve styleguide rules) and raced three arms: the whole pack, an oracle-picked relevant slice, and the whole pack plus the applicable rules distilled into the session-notes memo. The core answer is emphatic: facts and rules were 216 of 216 per arm; 100% on every model in every arm; with zero cross-client contamination in 324 cells and no burial effect at any styleguide position. Slicing bought nothing on accuracy and forfeited prompt caching (the per-request slice never got a single cache read; the whole pack under the shipped cached-system layout read 64\u201368% of input from cache, cutting effective input cost 25\u201343%). The finding lives in a conflict we registered by accident: a contact-format rule written with \"always\" against an instruction clause asking for a product mention. Every model resolved it cleanly into one of two readings; satisfy both, or obey the format literally; with zero violations. Our first read of the split (strictness scales with capability) was REFUTED by its own pre-registered confirmation study a day later: see Study AA below. What stands from Z: distilling the rules into the memo did not change competence; it changed which reading wins (sonnet 2/12 \u2192 11/12 satisfying both, p = 0.004). Audit your styleguide for \"always\" and \"exactly\": the failure mode of a conflicted spec is disciplined obedience to the rule you forgot you wrote.",
+					"eyebrow": "Standing context",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-20",
 					"figure": {
 						"id": "fig-standing"
 					},
 					"table": {
 						"id": "tbl-standing",
-						"summary": "Data table; facts, rules, combined-cell readings, and caching by arm and model"
-					}
+						"summary": "Facts, rules, combined-cell readings, and caching by arm and model"
+					},
+					"body": [
+						{
+							"heading": "Nobody Had Measured the Pack",
+							"html": "Production doc editors ship a standing context block with every request; company facts, client records, a styleguide; and nobody had measured whether models actually use it."
+						},
+						{
+							"heading": "The Setup",
+							"html": "Study Z planted machine-checkable obligations in twelve seeded org packs (~3.3k tokens: one target client, three same-schema distractors, governing rules rotated head/middle/tail among twelve styleguide rules) and raced three arms: the whole pack, an oracle-picked relevant slice, and the whole pack plus the applicable rules distilled into the session-notes memo."
+						},
+						{
+							"heading": "An Emphatic Answer",
+							"html": "The core answer is emphatic: facts and rules were 216 of 216 per arm; 100% on every model in every arm; with zero cross-client contamination in 324 cells and no burial effect at any styleguide position."
+						},
+						{
+							"heading": "Slicing Buys Nothing",
+							"html": "Slicing bought nothing on accuracy and forfeited prompt caching (the per-request slice never got a single cache read; the whole pack under the shipped cached-system layout read 64–68% of input from cache, cutting effective input cost 25–43%)."
+						},
+						{
+							"heading": "The Accidental Conflict",
+							"html": "The finding lives in a conflict we registered by accident: a contact-format rule written with \"always\" against an instruction clause asking for a product mention. Every model resolved it cleanly into one of two readings; satisfy both, or obey the format literally; with zero violations. Our first read of the split (strictness scales with capability) was REFUTED by its own pre-registered confirmation study a day later: see Study AA below."
+						},
+						{
+							"heading": "What Stands from Z",
+							"html": "What stands from Z: distilling the rules into the memo did not change competence; it changed which reading wins (sonnet 2/12 → 11/12 satisfying both, p = 0.004). Audit your styleguide for \"always\" and \"exactly\": the failure mode of a conflicted spec is disciplined obedience to the rule you forgot you wrote."
+						}
+					]
 				}
 			],
 			"published": "2026-07-12",
@@ -599,29 +920,56 @@
 					"href": "/blog/stronger-llms-follow-conflicting-instructions-more-literally"
 				}
 			],
-			"brief": "BRIEF-Z.md"
+			"brief": "BRIEF-Z.md",
+			"quote": "The failure mode of a conflicted spec is disciplined obedience to the rule you forgot you wrote."
 		},
 		{
 			"slug": "aa",
 			"letters": "AA",
 			"track": "Standing context",
 			"title": "We tested our own headline and lost: strictness is not a capability gradient",
-			"eyebrow": "Study AA \u00b7 conflict resolution; the confirmation study that refuted us",
-			"indexLine": "Study Z\u2019s spec-conflict split was an accident with one conflict shape, so Study AA measured it on purpose: three registered conflict kinds (rule vs instruction, an explicit user countermand of a rule, rule vs rule), four.",
+			"eyebrow": "Study AA · conflict resolution; the confirmation study that refuted us",
+			"indexLine": "Study Z’s spec-conflict split was an accident with one conflict shape, so Study AA measured it on purpose: three registered conflict kinds (rule vs instruction, an explicit user countermand of a rule, rule vs rule), four.",
 			"sections": [
 				{
 					"id": "sec-conflict",
-					"eyebrow": "Study AA \u00b7 conflict resolution; the confirmation study that refuted us",
-					"title": "We tested our own headline and lost: strictness is not a capability gradient",
-					"takeaway": "Study Z\u2019s spec-conflict split was an accident with one conflict shape, so Study AA measured it on purpose: three registered conflict kinds (rule vs instruction, an explicit user countermand of a rule, rule vs rule), four arms (base, a priority meta-rule, soft \u201cgenerally prefer\u201d phrasing, rules restated in the memo tail), 432 cells. The confirmation gate predicted opus most literal and measured it LEAST literal; zero strict readings in 24 base cells against sonnet\u2019s 10 and gemini\u2019s 7, significant in the opposite direction (p = 0.016); and the same conflicted template that split opus 6/6 under Z\u2019s three-rule packs read both-obligations 12/12 under AA\u2019s four-rule packs: which reading wins is composition-sensitive, not a model constant. The interventions: the priority meta-rule (\u201cthe user\u2019s request takes precedence\u201d) moved nothing significantly on any model; softening \u201calways\u201d to \u201cwe generally prefer\u201d collapsed literal readings (sonnet 10/24 \u2192 2/24, gemini 7/24 \u2192 0/24); the cheapest fix that works; and memo steering replicated Study Z to the digit (sonnet 2/12 \u2192 11/12, p = 0.004) while revealing a footgun: with a rule restated in the memo, opus enforced the \u2122 mark against the user\u2019s explicit \u201cwritten plain, no trademark symbol\u201d 12 of 12 times (without the memo, all 36 base cells honored the countermand). Rule-vs-rule conflicts resolved by specificity, not styleguide position. The footgun is CLOSED, measured (Study AB, 144 cells): a one-sentence precedence clause inside the memo block; the production system\u2019s shipped mitigation, tested verbatim; restored every trampled countermand (opus 0/12 \u2192 12/12, p = 0.0005; sonnet 3/12 \u2192 11/12) at zero cost to the memo\u2019s steering benefit (satisfy-both stayed 12/12 everywhere), with the injury first replicated to the digit in the control arm. The placement lesson: the same sentence class buried in the styleguide moved nothing; precedence language works at the point of injury, adjacent to the notes it governs. Across 900 conflicted cells in Z, AA, and AB: zero violations, zero contamination; models resolve conflicted specs; the conflict itself is the authoring hazard.",
+					"eyebrow": "Conflict resolution; the confirmation study that refuted us",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-21",
 					"figure": {
 						"id": "fig-conflict"
 					},
 					"table": {
 						"id": "tbl-conflict",
-						"summary": "Data table; readings by arm, kind, and model, with the refuted prediction marked"
-					}
+						"summary": "Readings by arm, kind, and model, with the refuted prediction marked"
+					},
+					"body": [
+						{
+							"heading": "The Setup",
+							"html": "Study Z’s spec-conflict split was an accident with one conflict shape, so Study AA measured it on purpose: three registered conflict kinds (rule vs instruction, an explicit user countermand of a rule, rule vs rule), four arms (base, a priority meta-rule, soft “generally prefer” phrasing, rules restated in the memo tail), 432 cells."
+						},
+						{
+							"heading": "The Prediction, Inverted",
+							"html": "The confirmation gate predicted opus most literal and measured it LEAST literal; zero strict readings in 24 base cells against sonnet’s 10 and gemini’s 7, significant in the opposite direction (p = 0.016); and the same conflicted template that split opus 6/6 under Z’s three-rule packs read both-obligations 12/12 under AA’s four-rule packs: which reading wins is composition-sensitive, not a model constant."
+						},
+						{
+							"heading": "Three Interventions, One That Works",
+							"html": "The interventions: the priority meta-rule (“the user’s request takes precedence”) moved nothing significantly on any model; softening “always” to “we generally prefer” collapsed literal readings (sonnet 10/24 → 2/24, gemini 7/24 → 0/24); the cheapest fix that works; and memo steering replicated Study Z to the digit (sonnet 2/12 → 11/12, p = 0.004) while revealing a footgun: with a rule restated in the memo, opus enforced the ™ mark against the user’s explicit “written plain, no trademark symbol” 12 of 12 times (without the memo, all 36 base cells honored the countermand). Rule-vs-rule conflicts resolved by specificity, not styleguide position."
+						},
+						{
+							"heading": "Study AB Closes the Footgun",
+							"html": "The footgun is CLOSED, measured (Study AB, 144 cells): a one-sentence precedence clause inside the memo block; the production system’s shipped mitigation, tested verbatim; restored every trampled countermand (opus 0/12 → 12/12, p = 0.0005; sonnet 3/12 → 11/12) at zero cost to the memo’s steering benefit (satisfy-both stayed 12/12 everywhere), with the injury first replicated to the digit in the control arm."
+						},
+						{
+							"heading": null,
+							"html": "The placement lesson: the same sentence class buried in the styleguide moved nothing; precedence language works at the point of injury, adjacent to the notes it governs."
+						},
+						{
+							"heading": "The Bottom Line",
+							"html": "Across 900 conflicted cells in Z, AA, and AB: zero violations, zero contamination; models resolve conflicted specs; the conflict itself is the authoring hazard."
+						}
+					]
 				}
 			],
 			"published": "2026-07-13",
@@ -631,29 +979,52 @@
 					"href": "/blog/stronger-llms-follow-conflicting-instructions-more-literally"
 				}
 			],
-			"brief": "BRIEF-AA.md"
+			"brief": "BRIEF-AA.md",
+			"quote": "Which reading wins is composition-sensitive, not a model constant."
 		},
 		{
 			"slug": "ac",
 			"letters": "AC",
 			"track": "Asking & calibration",
-			"title": "The model always knew what it couldn\u2019t see",
-			"eyebrow": "Study AC \u00b7 ask versus guess",
+			"title": "The model always knew what it couldn’t see",
+			"eyebrow": "Study AC · ask versus guess",
 			"indexLine": "Twenty-eight studies of silent failure (90/90 invented values in U, 144/144 silent guesses in X, 120/120 oblivious polishes in V, zero clarifying questions anywhere) never once OFFERED the model a way out.",
 			"sections": [
 				{
 					"id": "sec-ask",
-					"eyebrow": "Study AC \u00b7 ask versus guess",
-					"title": "The model always knew what it couldn\u2019t see",
-					"takeaway": "Twenty-eight studies of silent failure (90/90 invented values in U, 144/144 silent guesses in X, 120/120 oblivious polishes in V, zero clarifying questions anywhere) never once OFFERED the model a way out. Study AC did, on Study U\u2019s unit-validated construction: the needed value provably absent from the target-only view, provably present in the solvable twin. Two registered hatches; a one-sentence NEED-INFO prompt rule, and an ask_user tool; against a no-hatch control, 810 cells. The control replicated U exactly: 135/135 silent wrong patches. Both hatches flipped it completely: 270/270 asks on unsolvable cells, ZERO false asks and untouched solve rates on the 270 solvable twins, and every single ask named the exact missing node and attribute (\"What is the content attribute value of the text-atom with id n219?\"). The mechanisms were indistinguishable, so the one-sentence version is the whole result. The reframe: the models always saw the gap precisely; they guessed because the protocol demanded a patch and nothing said asking was allowed; obedience, not blindness. Guidance: ship an ask path (one sentence; wire it to a real reply mechanism), keep the context contracts (they make the question unnecessary; the hatch makes residual failures visible), and mind the disclosed caveat: this was measured at a validated hard boundary, not on merely-vague requests; calibration on fuzzy ambiguity is the follow-up. The follow-up is now measured: see the Study AE section below.",
+					"eyebrow": "Ask versus guess",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-22",
 					"figure": {
 						"id": "fig-ask"
 					},
 					"table": {
 						"id": "tbl-ask",
-						"summary": "Data table; outcomes by arm, view, and model"
-					}
+						"summary": "Outcomes by arm, view, and model"
+					},
+					"body": [
+						{
+							"heading": "No Way Out, by Design",
+							"html": "Twenty-eight studies of silent failure (90/90 invented values in U, 144/144 silent guesses in X, 120/120 oblivious polishes in V, zero clarifying questions anywhere) never once OFFERED the model a way out."
+						},
+						{
+							"heading": "Two Hatches, One Control",
+							"html": "Study AC did, on Study U’s unit-validated construction: the needed value provably absent from the target-only view, provably present in the solvable twin. Two registered hatches; a one-sentence NEED-INFO prompt rule, and an ask_user tool; against a no-hatch control, 810 cells."
+						},
+						{
+							"heading": "The Flip",
+							"html": "The control replicated U exactly: 135/135 silent wrong patches. Both hatches flipped it completely: 270/270 asks on unsolvable cells, ZERO false asks and untouched solve rates on the 270 solvable twins, and every single ask named the exact missing node and attribute (\"What is the content attribute value of the text-atom with id n219?\")."
+						},
+						{
+							"heading": "Obedience, Not Blindness",
+							"html": "The mechanisms were indistinguishable, so the one-sentence version is the whole result. The reframe: the models always saw the gap precisely; they guessed because the protocol demanded a patch and nothing said asking was allowed; obedience, not blindness."
+						},
+						{
+							"heading": "The Guidance",
+							"html": "Guidance: ship an ask path (one sentence; wire it to a real reply mechanism), keep the context contracts (they make the question unnecessary; the hatch makes residual failures visible), and mind the disclosed caveat: this was measured at a validated hard boundary, not on merely-vague requests; calibration on fuzzy ambiguity is the follow-up. The follow-up is now measured: see the Study AE section below."
+						}
+					]
 				}
 			],
 			"published": "2026-07-13",
@@ -663,29 +1034,52 @@
 					"href": "/blog/the-model-always-knew"
 				}
 			],
-			"brief": "BRIEF-AC.md"
+			"brief": "BRIEF-AC.md",
+			"quote": "They guessed because the protocol demanded a patch and nothing said asking was allowed; obedience, not blindness."
 		},
 		{
 			"slug": "ad",
 			"letters": "AD",
 			"track": "Confirmations & machinery",
 			"title": "The core stack transfers to the tier we actually ship",
-			"eyebrow": "Study AD \u00b7 the Opus confirmation",
+			"eyebrow": "Study AD · the Opus confirmation",
 			"indexLine": "Studies F through U validated the core editing stack on sonnet-4.5 and gemini-3.5-flash, but the downstream template-editing surface runs claude-opus-4.8, a tier whose benchmark data began at Study W.",
 			"sections": [
 				{
 					"id": "sec-opus",
-					"eyebrow": "Study AD \u00b7 the Opus confirmation",
-					"title": "The core stack transfers to the tier we actually ship",
-					"takeaway": "Studies F through U validated the core editing stack on sonnet-4.5 and gemini-3.5-flash, but the downstream template-editing surface runs claude-opus-4.8, a tier whose benchmark data began at Study W. Study Q had already shown that serializer advice inverts between models, so nothing could be assumed. Study AD re-ran the stack on opus with corpora, prompts, and graders reused verbatim: 1,160 cells, gates anchored to the weakest previously passing tier. Every gate passed, mostly at or above the top of the prior bands. The anchored-patch dialect scored 194/200 on the main corpus (the best condition-F number ever measured, and every miss was a tree-reading count question rather than an editing failure), HTML focused views swept 90/90 across 300 to 1000 nodes, search grounding landed exactly on sonnet's oracle bound (43/45, median one call), and all session policies were perfect. The surprise is the ablation: bare stateless sessions, no history and no worked examples, also scored 240/240 steps with 20/20 intact end states. The examples block that rescued sonnet (13/20 without it) is not load-bearing on the frontier tier; it is cheap insurance for every tier below it, and it stays shipped. Fan-out remains the honest boundary, now with a third mitigation profile: opus raised the floor to 80 to 89% but still left a third of the 7-plus-target view tasks partially covered, so the app-side decomposition fence stands unchanged at every tier.",
+					"eyebrow": "The Opus confirmation",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-23",
 					"figure": {
 						"id": "fig-opus"
 					},
 					"table": {
 						"id": "tbl-opus",
-						"summary": "Data table: per-arm results against the prior bands"
-					}
+						"summary": "Per-arm results against the prior bands"
+					},
+					"body": [
+						{
+							"heading": "The Tier We Actually Ship",
+							"html": "Studies F through U validated the core editing stack on sonnet-4.5 and gemini-3.5-flash, but the downstream template-editing surface runs claude-opus-4.8, a tier whose benchmark data began at Study W. Study Q had already shown that serializer advice inverts between models, so nothing could be assumed."
+						},
+						{
+							"heading": "Every Gate Passes",
+							"html": "Study AD re-ran the stack on opus with corpora, prompts, and graders reused verbatim: 1,160 cells, gates anchored to the weakest previously passing tier. Every gate passed, mostly at or above the top of the prior bands."
+						},
+						{
+							"heading": "The Numbers",
+							"html": "The anchored-patch dialect scored 194/200 on the main corpus (the best condition-F number ever measured, and every miss was a tree-reading count question rather than an editing failure), HTML focused views swept 90/90 across 300 to 1000 nodes, search grounding landed exactly on sonnet's oracle bound (43/45, median one call), and all session policies were perfect."
+						},
+						{
+							"heading": "The Ablation Surprise",
+							"html": "The surprise is the ablation: bare stateless sessions, no history and no worked examples, also scored 240/240 steps with 20/20 intact end states. The examples block that rescued sonnet (13/20 without it) is not load-bearing on the frontier tier; it is cheap insurance for every tier below it, and it stays shipped."
+						},
+						{
+							"heading": "Fan-Out Remains the Boundary",
+							"html": "Fan-out remains the honest boundary, now with a third mitigation profile: opus raised the floor to 80 to 89% but still left a third of the 7-plus-target view tasks partially covered, so the app-side decomposition fence stands unchanged at every tier."
+						}
+					]
 				}
 			],
 			"published": "2026-07-15",
@@ -695,29 +1089,52 @@
 					"href": "/blog/the-frontier-doesnt-need-the-training-wheels"
 				}
 			],
-			"brief": "BRIEF-AD.md"
+			"brief": "BRIEF-AD.md",
+			"quote": "The examples block is not load-bearing on the frontier tier; it is cheap insurance for every tier below it."
 		},
 		{
 			"slug": "ae",
 			"letters": "AE",
 			"track": "Asking & calibration",
 			"title": "Only the frontier knows when a question is the right answer",
-			"eyebrow": "Study AE \u00b7 hatch calibration + the resume loop",
+			"eyebrow": "Study AE · hatch calibration + the resume loop",
 			"indexLine": "Study AC left two fears on the record: that the escape hatch would tax clear requests with unnecessary questions, and that an ask might be a dead end.",
 			"sections": [
 				{
 					"id": "sec-calibration",
-					"eyebrow": "Study AE \u00b7 hatch calibration + the resume loop",
-					"title": "Only the frontier knows when a question is the right answer",
-					"takeaway": "Study AC left two fears on the record: that the escape hatch would tax clear requests with unnecessary questions, and that an ask might be a dead end. Study AE measured both on a five-level ambiguity ladder (precise, indirect-but-unique, discretionary, ambiguous-referent, missing-info; every level's defining property unit-validated) with the shipped NEED-INFO sentence frozen verbatim, plus 135 resume cells where the harness answers the model's question in plain text. Both fears refuted at ceiling: zero false asks in 90 clear-request cells with solve rates identical to the no-hatch control, models edit \"make it punchier\" rather than interrogating the user about wording, and the ask-answer-patch loop closed 135 of 135 with zero re-asks and zero wrong integrations. An ask is a reliable two-turn solve, so reply paths can ship with confidence. The gate still fails, and the failure is the finding: when a singular request matches exactly TWO visible nodes, opus-4.8 asks 15/15 and names both candidate ids every time, while sonnet and gemini ask 1/15 each even with the hatch present. They resolve the ambiguity unilaterally instead, in different ways: sonnet edits BOTH matches, gemini silently picks one. The mechanism is textual: the registered sentence covers information that is \"not visible in the view,\" and an ambiguous referent is entirely visible. The frontier tier generalized the rule's intent; the mid tiers applied its letter, the same literalism profile Study AA measured on conflicting specs. Guidance: on the frontier tier the hatch now covers absence AND ambiguity; below it, app-side disambiguation (unique references, deterministic enumeration, selection grounding) remains the only defense, and the obvious multiplicity amendment to the hatch sentence stays unshipped until a registered test passes it.",
+					"eyebrow": "Hatch calibration + the resume loop",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-24",
 					"figure": {
 						"id": "fig-calibration"
 					},
 					"table": {
 						"id": "tbl-calibration",
-						"summary": "Data table: outcomes by level, arm, and model"
-					}
+						"summary": "Outcomes by level, arm, and model"
+					},
+					"body": [
+						{
+							"heading": "Two Fears on the Record",
+							"html": "Study AC left two fears on the record: that the escape hatch would tax clear requests with unnecessary questions, and that an ask might be a dead end. Study AE measured both on a five-level ambiguity ladder (precise, indirect-but-unique, discretionary, ambiguous-referent, missing-info; every level's defining property unit-validated) with the shipped NEED-INFO sentence frozen verbatim, plus 135 resume cells where the harness answers the model's question in plain text."
+						},
+						{
+							"heading": "Both Fears Refuted",
+							"html": "Both fears refuted at ceiling: zero false asks in 90 clear-request cells with solve rates identical to the no-hatch control, models edit \"make it punchier\" rather than interrogating the user about wording, and the ask-answer-patch loop closed 135 of 135 with zero re-asks and zero wrong integrations. An ask is a reliable two-turn solve, so reply paths can ship with confidence."
+						},
+						{
+							"heading": "The Failure Is the Finding",
+							"html": "The gate still fails, and the failure is the finding: when a singular request matches exactly TWO visible nodes, opus-4.8 asks 15/15 and names both candidate ids every time, while sonnet and gemini ask 1/15 each even with the hatch present. They resolve the ambiguity unilaterally instead, in different ways: sonnet edits BOTH matches, gemini silently picks one."
+						},
+						{
+							"heading": "The Mechanism Is Textual",
+							"html": "The mechanism is textual: the registered sentence covers information that is \"not visible in the view,\" and an ambiguous referent is entirely visible. The frontier tier generalized the rule's intent; the mid tiers applied its letter, the same literalism profile Study AA measured on conflicting specs."
+						},
+						{
+							"heading": "The Guidance",
+							"html": "Guidance: on the frontier tier the hatch now covers absence AND ambiguity; below it, app-side disambiguation (unique references, deterministic enumeration, selection grounding) remains the only defense, and the obvious multiplicity amendment to the hatch sentence stays unshipped until a registered test passes it."
+						}
+					]
 				}
 			],
 			"published": "2026-07-15",
@@ -727,29 +1144,56 @@
 					"href": "/blog/only-the-frontier-knows-when-to-ask"
 				}
 			],
-			"brief": "BRIEF-AE.md"
+			"brief": "BRIEF-AE.md",
+			"quote": "An ask is a reliable two-turn solve, so reply paths can ship with confidence."
 		},
 		{
 			"slug": "af",
 			"letters": "AF",
 			"track": "Qualitative (Track 2)",
 			"title": "Saying the goal out loud doesn't make it yours",
-			"eyebrow": "Study AF \u00b7 restate-before-rewrite \u00b7 Track 2, judge-graded",
+			"eyebrow": "Study AF · restate-before-rewrite · Track 2, judge-graded",
 			"indexLine": "One clause in the shipped session-notes rule had been inferred rather than measured: restate a goal from the memo in your own words before a goal-directed rewrite.",
 			"sections": [
 				{
 					"id": "sec-restate",
-					"eyebrow": "Study AF \u00b7 restate-before-rewrite \u00b7 Track 2, judge-graded",
-					"title": "Saying the goal out loud doesn't make it yours",
-					"takeaway": "One clause in the shipped session-notes rule had been inferred rather than measured: restate a goal from the memo in your own words before a goal-directed rewrite. The hope was that forced verbalization would also rescue Study V's sharpest loss, where a model shown the node its goal lives in reads it and still writes measurably less focused prose (117 of 120 judged losses). Study AF measured the clause with Study V's full protocol: both judges re-passed their 50-pair calibration gate before any verdict, 270 contemporaneous edits (all mechanically valid), each restate arm judged against a same-batch explicit-goal control in both presentation orders. The view-side hope is dead, without a single win: 0 wins, 79 losses, 11 ties pooled across three editors including opus. And the failure is not disobedience. GOAL-line compliance was 30 of 30 in every cell: every model read the mission node, restated the thesis accurately in its own words, and then wrote the off-goal paragraph anyway. Verbalization is not the active ingredient; where the goal comes from is. On the memo path the clause measured neutral under the registered primary judge (parity on all three editors) with a disclosed sensitivity dissent toward mild harm (gemini 1 win to 13 losses, opus 5 to 15 under the second judge), and where Study V's bare memo had beaten the control outright on sonnet, memo-plus-restate merely ties. The benchmark's recommendation: remove the clause. The memo itself keeps its goal-carriage parity, contemporaneously replicated here; the ceremony on top of it does nothing measurable. Views carry values, memos carry goals, and no prompt ritual converts one into the other.",
+					"eyebrow": "Restate-before-rewrite · Track 2, judge-graded",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-25",
 					"figure": {
 						"id": "fig-restate"
 					},
 					"table": {
 						"id": "tbl-restate",
-						"summary": "Data table: win / loss / tie by arm, editor, and judge"
-					}
+						"summary": "Win / loss / tie by arm, editor, and judge"
+					},
+					"body": [
+						{
+							"heading": "An Inferred Clause",
+							"html": "One clause in the shipped session-notes rule had been inferred rather than measured: restate a goal from the memo in your own words before a goal-directed rewrite. The hope was that forced verbalization would also rescue Study V's sharpest loss, where a model shown the node its goal lives in reads it and still writes measurably less focused prose (117 of 120 judged losses)."
+						},
+						{
+							"heading": "The Protocol",
+							"html": "Study AF measured the clause with Study V's full protocol: both judges re-passed their 50-pair calibration gate before any verdict, 270 contemporaneous edits (all mechanically valid), each restate arm judged against a same-batch explicit-goal control in both presentation orders."
+						},
+						{
+							"heading": "Dead Without a Single Win",
+							"html": "The view-side hope is dead, without a single win: 0 wins, 79 losses, 11 ties pooled across three editors including opus."
+						},
+						{
+							"heading": "Compliance Was Perfect",
+							"html": "And the failure is not disobedience. GOAL-line compliance was 30 of 30 in every cell: every model read the mission node, restated the thesis accurately in its own words, and then wrote the off-goal paragraph anyway. Verbalization is not the active ingredient; where the goal comes from is."
+						},
+						{
+							"heading": "On the Memo Path",
+							"html": "On the memo path the clause measured neutral under the registered primary judge (parity on all three editors) with a disclosed sensitivity dissent toward mild harm (gemini 1 win to 13 losses, opus 5 to 15 under the second judge), and where Study V's bare memo had beaten the control outright on sonnet, memo-plus-restate merely ties."
+						},
+						{
+							"heading": "The Recommendation",
+							"html": "The benchmark's recommendation: remove the clause. The memo itself keeps its goal-carriage parity, contemporaneously replicated here; the ceremony on top of it does nothing measurable. Views carry values, memos carry goals, and no prompt ritual converts one into the other."
+						}
+					]
 				}
 			],
 			"published": "2026-07-15",
@@ -759,29 +1203,56 @@
 					"href": "/blog/repeating-the-goal-doesnt-make-it-yours"
 				}
 			],
-			"brief": "BRIEF-AF.md"
+			"brief": "BRIEF-AF.md",
+			"quote": "Every model restated the thesis accurately in its own words, and then wrote the off-goal paragraph anyway."
 		},
 		{
 			"slug": "ah",
 			"letters": "AH",
 			"track": "Sessions & memory",
 			"title": "Perfect to the cap. At the cap, the goals die first.",
-			"eyebrow": "Study AH \u00b7 memo saturation",
+			"eyebrow": "Study AH · memo saturation",
 			"indexLine": "Every study that shipped the session-notes memo measured it at three to six notes; the shipped implementation caps it at twenty, with a normalize step that silently drops the excess.",
 			"sections": [
 				{
 					"id": "sec-saturation",
-					"eyebrow": "Study AH \u00b7 memo saturation",
-					"title": "Perfect to the cap. At the cap, the goals die first.",
-					"takeaway": "Every study that shipped the session-notes memo measured it at three to six notes; the shipped implementation caps it at twenty, with a normalize step that silently drops the excess. Study AH filled it up. Below the cap the memo is flawless at scale: recall of any note from a FULL twenty-note memo scored 15 of 15 per model at every position (no burial: first, middle, and last notes all perfect), unprompted rule application from a twelve-rule memo was 15 of 15 per model with zero cross-note contamination, and the agent's full-replace update was lossless wherever the update fit, 60 of 60 clean at ten and nineteen notes with the requested edit landing 90 of 90 alongside. Then a twenty-first declaration arrived at a full memo, and a note died in all 30 cells, silently. The victim was a goal note every single time, on every model. The mechanism is structural: the block renders facts, then rules, then goals, so goals are always the tail of the list, and both loss modes eat the tail: opus over-sent twenty-one notes all ten times and let the shipped clamp keep the first twenty; gemini and sonnet usually pruned a goal themselves. Study V measured goals as the one thing only the memo can carry, which makes this the sharpest possible failure ordering: at capacity, the memo sacrifices its most irreplaceable cargo first, with no error and, in the over-cap cases, no model decision at all. The fix is application-side and filed: evict the oldest fact deterministically instead of clamping, never the goals tail, or surface memo-full to the user; prompt-side mitigations stay unshipped until measured. Below the edge, note-count is a provably safe budget.",
+					"eyebrow": "Memo saturation",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-26",
 					"figure": {
 						"id": "fig-saturation"
 					},
 					"table": {
 						"id": "tbl-saturation",
-						"summary": "Data table: read-side results and the cap-edge taxonomy"
-					}
+						"summary": "Read-side results and the cap-edge taxonomy"
+					},
+					"body": [
+						{
+							"heading": "Filling the Memo Up",
+							"html": "Every study that shipped the session-notes memo measured it at three to six notes; the shipped implementation caps it at twenty, with a normalize step that silently drops the excess. Study AH filled it up."
+						},
+						{
+							"heading": "Flawless Below the Cap",
+							"html": "Below the cap the memo is flawless at scale: recall of any note from a FULL twenty-note memo scored 15 of 15 per model at every position (no burial: first, middle, and last notes all perfect), unprompted rule application from a twelve-rule memo was 15 of 15 per model with zero cross-note contamination, and the agent's full-replace update was lossless wherever the update fit, 60 of 60 clean at ten and nineteen notes with the requested edit landing 90 of 90 alongside."
+						},
+						{
+							"heading": "The Twenty-First Declaration",
+							"html": "Then a twenty-first declaration arrived at a full memo, and a note died in all 30 cells, silently. The victim was a goal note every single time, on every model."
+						},
+						{
+							"heading": "The Mechanism Is Structural",
+							"html": "The mechanism is structural: the block renders facts, then rules, then goals, so goals are always the tail of the list, and both loss modes eat the tail: opus over-sent twenty-one notes all ten times and let the shipped clamp keep the first twenty; gemini and sonnet usually pruned a goal themselves."
+						},
+						{
+							"heading": "The Sharpest Possible Ordering",
+							"html": "Study V measured goals as the one thing only the memo can carry, which makes this the sharpest possible failure ordering: at capacity, the memo sacrifices its most irreplaceable cargo first, with no error and, in the over-cap cases, no model decision at all."
+						},
+						{
+							"heading": "The Fix, Filed",
+							"html": "The fix is application-side and filed: evict the oldest fact deterministically instead of clamping, never the goals tail, or surface memo-full to the user; prompt-side mitigations stay unshipped until measured. Below the edge, note-count is a provably safe budget."
+						}
+					]
 				}
 			],
 			"published": "2026-07-16",
@@ -791,29 +1262,52 @@
 					"href": "/blog/the-twenty-first-note"
 				}
 			],
-			"brief": "BRIEF-AH.md"
+			"brief": "BRIEF-AH.md",
+			"quote": "At capacity, the memo sacrifices its most irreplaceable cargo first."
 		},
 		{
 			"slug": "ai",
 			"letters": "AI",
 			"track": "Asking & calibration",
 			"title": "The obvious fix, measured: it helps exactly where we don't ship",
-			"eyebrow": "Study AI \u00b7 the multiplicity hatch",
+			"eyebrow": "Study AI · the multiplicity hatch",
 			"indexLine": "Study AE left an obvious fix on the table: the shipped ask sentence covers what the model cannot see, so ambiguous references (visible, but two of them) slipped through on the mid tiers.",
 			"sections": [
 				{
 					"id": "sec-multiplicity",
-					"eyebrow": "Study AI \u00b7 the multiplicity hatch",
-					"title": "The obvious fix, measured: it helps exactly where we don't ship",
-					"takeaway": "Study AE left an obvious fix on the table: the shipped ask sentence covers what the model cannot see, so ambiguous references (visible, but two of them) slipped through on the mid tiers. One added sentence covering requests that match more than one node looks like it must work, and this series has now caught two obvious-looking clauses doing nothing (the priority meta-rule in AA, the restate ceremony in AF), so the clause was measured before anyone shipped it: amended sentence versus the shipped one, re-run contemporaneously, across the full five-level ladder on three models. The results split three ways. Sonnet is completely rescued: 3 of 15 asks became 15 of 15, every ask naming both candidate ids, with its silent edit-both habit gone. Gemini improved enormously, 0 of 15 to 11 of 15, but stopped one ask short of the registered detection bar, and its four residual failures all silently edited BOTH matches; the clause converted its coin-flips into asks or edit-boths, never back into correct restraint. And the clause taxed nothing anywhere: zero false asks in 90 clear-request cells, solve rates identical to control, hard boundaries undisturbed. The one cost signal lives on the tier we actually ship: opus, already perfect on ambiguity with the shipped sentence alone, started interrogating discretionary requests slightly more often under the amendment (asks on \"make it punchier\" cells rose from 2 of 15 to 5 of 15, not significant, but the only movement anywhere). So the registered gate fails by a single ask, and the practical verdict is sharper than a pass: the clause stays unshipped on frontier surfaces, where it buys nothing and whispers a cost; it is a large, free, but partial improvement for sub-frontier deployments; and app-side disambiguation remains the actual contract at every tier. Knowing when a question is the right answer keeps measuring as a capability that prompting approaches but does not close.",
+					"eyebrow": "The multiplicity hatch",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-27",
 					"figure": {
 						"id": "fig-multiplicity"
 					},
 					"table": {
 						"id": "tbl-multiplicity",
-						"summary": "Data table: asks by arm, level, and model"
-					}
+						"summary": "Asks by arm, level, and model"
+					},
+					"body": [
+						{
+							"heading": "The Obvious Fix",
+							"html": "Study AE left an obvious fix on the table: the shipped ask sentence covers what the model cannot see, so ambiguous references (visible, but two of them) slipped through on the mid tiers. One added sentence covering requests that match more than one node looks like it must work, and this series has now caught two obvious-looking clauses doing nothing (the priority meta-rule in AA, the restate ceremony in AF), so the clause was measured before anyone shipped it: amended sentence versus the shipped one, re-run contemporaneously, across the full five-level ladder on three models."
+						},
+						{
+							"heading": "A Three-Way Split",
+							"html": "The results split three ways. Sonnet is completely rescued: 3 of 15 asks became 15 of 15, every ask naming both candidate ids, with its silent edit-both habit gone. Gemini improved enormously, 0 of 15 to 11 of 15, but stopped one ask short of the registered detection bar, and its four residual failures all silently edited BOTH matches; the clause converted its coin-flips into asks or edit-boths, never back into correct restraint."
+						},
+						{
+							"heading": "Zero Tax Anywhere",
+							"html": "And the clause taxed nothing anywhere: zero false asks in 90 clear-request cells, solve rates identical to control, hard boundaries undisturbed."
+						},
+						{
+							"heading": "The Cost Signal on Our Tier",
+							"html": "The one cost signal lives on the tier we actually ship: opus, already perfect on ambiguity with the shipped sentence alone, started interrogating discretionary requests slightly more often under the amendment (asks on \"make it punchier\" cells rose from 2 of 15 to 5 of 15, not significant, but the only movement anywhere)."
+						},
+						{
+							"heading": "The Verdict",
+							"html": "So the registered gate fails by a single ask, and the practical verdict is sharper than a pass: the clause stays unshipped on frontier surfaces, where it buys nothing and whispers a cost; it is a large, free, but partial improvement for sub-frontier deployments; and app-side disambiguation remains the actual contract at every tier. Knowing when a question is the right answer keeps measuring as a capability that prompting approaches but does not close."
+						}
+					]
 				}
 			],
 			"published": "2026-07-16",
@@ -823,29 +1317,52 @@
 					"href": "/blog/only-the-frontier-knows-when-to-ask"
 				}
 			],
-			"brief": "BRIEF-AI.md"
+			"brief": "BRIEF-AI.md",
+			"quote": "Knowing when a question is the right answer keeps measuring as a capability that prompting approaches but does not close."
 		},
 		{
 			"slug": "ag",
 			"letters": "AG",
 			"track": "Asking & calibration",
 			"title": "The discourse gap closes on every tier; the visibility clause bites",
-			"eyebrow": "Study AG \u00b7 the anaphora hatch",
+			"eyebrow": "Study AG · the anaphora hatch",
 			"indexLine": "One border of the ask-path map was never tested: Study X's discourse construction, where \"undo that\" against a carrier-less editor failed 0 of 144 with every failure a valid silent guess.",
 			"sections": [
 				{
 					"id": "sec-anaphora-hatch",
-					"eyebrow": "Study AG \u00b7 the anaphora hatch",
-					"title": "The discourse gap closes on every tier; the visibility clause bites",
-					"takeaway": "One border of the ask-path map was never tested: Study X's discourse construction, where \"undo that\" against a carrier-less editor failed 0 of 144 with every failure a valid silent guess. The shipped ask sentence arguably covers it (a dangling referent is \"not stated in the request\"), so Study AG pointed the sentence at it: the carrier-less control, the control plus the shipped hatch, and the last-edit echo plus the hatch, across three models and 1,296 session steps. The control replicated Study X to the digit. With the hatch, 138 of 144 silent guesses became questions, on every tier, and the asks show genuine recognition: \"the request refers to 'that same node' from a prior instruction, but no such node is identified.\" Unlike ambiguity, which only the frontier tier notices, the discourse gap is letter-covered, and every model protects itself. Then the tax check failed on all three models, and the ask texts locate the mechanism precisely. With the echo supplying everything (the node id, the key, both values), models still asked on roughly 70% of anaphora cells, quoting the echo's own node id while refusing to proceed because that node \"is not visible in the current view.\" An anchored patch needs only the id; the echo-without-hatch arm solved 48 of 48 under identical views. This is the sentence's visibility clause colliding with skeleton views: the rule's letter says an unseen node warrants a question, so a fully specified, solvable edit becomes an interrogation. Ordinary steps in the same arm, whose views carry their targets, produced zero false asks in 288 cells. The guidance sharpens into a dependency: the hatch's zero tax is conditional on the focus-ids contract. Views that cover every mentioned node make the hatch free (measured three times now); outline-style protocols need target-carrying views, a self-serve view tool, or a re-scoped sentence that gets its own registered test first.",
+					"eyebrow": "The anaphora hatch",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-28",
 					"figure": {
 						"id": "fig-anaphora-hatch"
 					},
 					"table": {
 						"id": "tbl-anaphora-hatch",
-						"summary": "Data table: anaphora-cell outcomes by arm and model"
-					}
+						"summary": "Anaphora-cell outcomes by arm and model"
+					},
+					"body": [
+						{
+							"heading": "The Untested Border",
+							"html": "One border of the ask-path map was never tested: Study X's discourse construction, where \"undo that\" against a carrier-less editor failed 0 of 144 with every failure a valid silent guess. The shipped ask sentence arguably covers it (a dangling referent is \"not stated in the request\"), so Study AG pointed the sentence at it: the carrier-less control, the control plus the shipped hatch, and the last-edit echo plus the hatch, across three models and 1,296 session steps."
+						},
+						{
+							"heading": "The Hatch Covers Discourse",
+							"html": "The control replicated Study X to the digit. With the hatch, 138 of 144 silent guesses became questions, on every tier, and the asks show genuine recognition: \"the request refers to 'that same node' from a prior instruction, but no such node is identified.\" Unlike ambiguity, which only the frontier tier notices, the discourse gap is letter-covered, and every model protects itself."
+						},
+						{
+							"heading": "The Tax Check Fails",
+							"html": "Then the tax check failed on all three models, and the ask texts locate the mechanism precisely. With the echo supplying everything (the node id, the key, both values), models still asked on roughly 70% of anaphora cells, quoting the echo's own node id while refusing to proceed because that node \"is not visible in the current view.\" An anchored patch needs only the id; the echo-without-hatch arm solved 48 of 48 under identical views."
+						},
+						{
+							"heading": "The Collision",
+							"html": "This is the sentence's visibility clause colliding with skeleton views: the rule's letter says an unseen node warrants a question, so a fully specified, solvable edit becomes an interrogation. Ordinary steps in the same arm, whose views carry their targets, produced zero false asks in 288 cells."
+						},
+						{
+							"heading": "A Dependency, Sharpened",
+							"html": "The guidance sharpens into a dependency: the hatch's zero tax is conditional on the focus-ids contract. Views that cover every mentioned node make the hatch free (measured three times now); outline-style protocols need target-carrying views, a self-serve view tool, or a re-scoped sentence that gets its own registered test first."
+						}
+					]
 				}
 			],
 			"published": "2026-07-16",
@@ -859,29 +1376,52 @@
 					"href": "/blog/undo-that"
 				}
 			],
-			"brief": "BRIEF-AG.md"
+			"brief": "BRIEF-AG.md",
+			"quote": "The rule's letter says an unseen node warrants a question, so a fully specified, solvable edit becomes an interrogation."
 		},
 		{
 			"slug": "aj",
 			"letters": "AJ",
 			"track": "Confirmations & machinery",
 			"title": "The error message didn't matter",
-			"eyebrow": "Study AJ \u00b7 the correction loop in isolation",
+			"eyebrow": "Study AJ · the correction loop in isolation",
 			"indexLine": "Returning barkup's structured validation issues verbatim has been a design commitment in every arm of this series, the closing instruction of playbook guideline 01, and standing guidance in the production codebase, and i.",
 			"sections": [
 				{
 					"id": "sec-correction",
-					"eyebrow": "Study AJ \u00b7 the correction loop in isolation",
-					"title": "The error message didn't matter",
-					"takeaway": "Returning barkup's structured validation issues verbatim has been a design commitment in every arm of this series, the closing instruction of playbook guideline 01, and standing guidance in the production codebase, and it had never once been an experimental variable. Study AJ isolated it. Because correction loops rarely trigger naturally (first-pass validity runs 84 to 99 percent), the loop was seeded: the known-correct patch for each task was corrupted by a registered operator (dangling ids, missing fields, malformed op kinds, bad placement anchors, unknown attributes), injected as the assistant's own prior turn, and confirmed to fail the shipped applier. Then exactly one feedback message went back, the only variable in the study: the full structured issues, bare issue codes, or nothing but \"the anchored patch was invalid.\" The result is parity. Opus recovered all 45 seeded failures in every arm, including from the bare sentence. Gemini scored an identical 42 of 45 in all three arms, and the three misses were the same cells every time, all in the one genuinely hard class (bad placement anchors); feedback quality changed nothing. Sonnet showed the only gradient, 45 to 44 to 42, not significant. Told a patch failed, models simply re-derive the correct edit from the task and the tree. One nuance runs in bare feedback's favor: its extra failures stayed visibly invalid rather than becoming plausible wrong fixes, so thin feedback does not even push toward silent errors. The commitment survives with its rationale corrected: return the issues verbatim because it costs nothing and makes correction logs humane for the people debugging them, not because the loop depends on it. Disclosed caveats: seeded single-op corruptions are a constructed proxy for organic errors, and recovery was single-shot where the shipped loop allows three rounds, which would only narrow the gap further.",
+					"eyebrow": "The correction loop in isolation",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-29",
 					"figure": {
 						"id": "fig-correction"
 					},
 					"table": {
 						"id": "tbl-correction",
-						"summary": "Data table: recovery by arm, model, and corruption class"
-					}
+						"summary": "Recovery by arm, model, and corruption class"
+					},
+					"body": [
+						{
+							"heading": "A Commitment, Never Tested",
+							"html": "Returning barkup's structured validation issues verbatim has been a design commitment in every arm of this series, the closing instruction of playbook guideline 01, and standing guidance in the production codebase, and it had never once been an experimental variable. Study AJ isolated it."
+						},
+						{
+							"heading": "Seeding the Loop",
+							"html": "Because correction loops rarely trigger naturally (first-pass validity runs 84 to 99 percent), the loop was seeded: the known-correct patch for each task was corrupted by a registered operator (dangling ids, missing fields, malformed op kinds, bad placement anchors, unknown attributes), injected as the assistant's own prior turn, and confirmed to fail the shipped applier. Then exactly one feedback message went back, the only variable in the study: the full structured issues, bare issue codes, or nothing but \"the anchored patch was invalid.\""
+						},
+						{
+							"heading": "The Result Is Parity",
+							"html": "The result is parity. Opus recovered all 45 seeded failures in every arm, including from the bare sentence. Gemini scored an identical 42 of 45 in all three arms, and the three misses were the same cells every time, all in the one genuinely hard class (bad placement anchors); feedback quality changed nothing. Sonnet showed the only gradient, 45 to 44 to 42, not significant. Told a patch failed, models simply re-derive the correct edit from the task and the tree."
+						},
+						{
+							"heading": "One Nuance",
+							"html": "One nuance runs in bare feedback's favor: its extra failures stayed visibly invalid rather than becoming plausible wrong fixes, so thin feedback does not even push toward silent errors."
+						},
+						{
+							"heading": "The Commitment Survives",
+							"html": "The commitment survives with its rationale corrected: return the issues verbatim because it costs nothing and makes correction logs humane for the people debugging them, not because the loop depends on it. Disclosed caveats: seeded single-op corruptions are a constructed proxy for organic errors, and recovery was single-shot where the shipped loop allows three rounds, which would only narrow the gap further."
+						}
+					]
 				}
 			],
 			"published": "2026-07-17",
@@ -891,29 +1431,48 @@
 					"href": "/blog/the-error-message-didnt-matter"
 				}
 			],
-			"brief": "BRIEF-AJ.md"
+			"brief": "BRIEF-AJ.md",
+			"quote": "Told a patch failed, models simply re-derive the correct edit from the task and the tree."
 		},
 		{
 			"slug": "ak",
 			"letters": "AK",
 			"track": "Sessions & memory",
 			"title": "The fix works where it can, and the frontier tier invented consolidation",
-			"eyebrow": "Study AK \u00b7 eviction validation",
+			"eyebrow": "Study AK · eviction validation",
 			"indexLine": "Study AH found that a twenty-first declaration at the memo's full cap always kills a note, and the victim is always a goal.",
 			"sections": [
 				{
 					"id": "sec-eviction",
-					"eyebrow": "Study AK \u00b7 eviction validation",
-					"title": "The fix works where it can, and the frontier tier invented consolidation",
-					"takeaway": "Study AH found that a twenty-first declaration at the memo's full cap always kills a note, and the victim is always a goal. The production fix shipped within a day: an app-side eviction that runs before the truncation clamp and removes the oldest fact, then the oldest rule, and never a goal. But shipped-in-response-to-a-finding is not the same as measured, so Study AK applied the Study AB standard and re-ran the injury site with the tool handler as the only variable: the old silent clamp as a contemporaneous control, the eviction pipeline as the treatment. Three results. First, the mechanical guarantee is perfect: in all 19 cells where a model sent an over-cap list, the pipeline admitted the new note, evicted only the oldest fact, and preserved every goal; zero contract violations. Second, the injury closes where the fix can reach it: goal survival at the cap edge went from 0 of 10 to 10 of 10 on opus and 0 to 6 of 10 on sonnet, while the control arm replicated the original injury almost to the digit, every victim still a goal. Third, no new damage: 60 of 60 updates below the cap passed through untouched. The honest boundary was pre-registered and held exactly: the app cannot restore a note the model pruned before sending, and sonnet pruned 4 of 10 and gemini 6 of 10 cap-edge cells client-side, victims still goals; so below the frontier tier the guarantee covers the clamp pathway, not the model's own editing. A prompt-side fence for the prune pathway is filed for future measurement rather than shipped untested. And one unregistered moment worth the price of the study: told via the eviction notice that its update had cost a note, opus alone called the tool again with an eleven-note memo carrying all twenty-one facts, rules, and goals; it consolidated the memo's content into fewer sentences rather than accept a loss. The regression suite now guards the cap edge permanently: goal-safe eviction on the opus baseline, with a hard zero on goals evicted by the pipeline.",
+					"eyebrow": "Eviction validation",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-30",
 					"figure": {
 						"id": "fig-eviction"
 					},
 					"table": {
 						"id": "tbl-eviction",
-						"summary": "Data table: goal survival at the cap edge by arm and model, pathway split, and pipeline guarantees"
-					}
+						"summary": "Goal survival at the cap edge by arm and model, pathway split, and pipeline guarantees"
+					},
+					"body": [
+						{
+							"heading": "The Fix That Shipped in a Day",
+							"html": "Study AH found that a twenty-first declaration at the memo's full cap always kills a note, and the victim is always a goal. The production fix shipped within a day: an app-side eviction that runs before the truncation clamp and removes the oldest fact, then the oldest rule, and never a goal. But shipped-in-response-to-a-finding is not the same as measured, so Study AK applied the Study AB standard and re-ran the injury site with the tool handler as the only variable: the old silent clamp as a contemporaneous control, the eviction pipeline as the treatment."
+						},
+						{
+							"heading": "Three Results",
+							"html": "Three results. First, the mechanical guarantee is perfect: in all 19 cells where a model sent an over-cap list, the pipeline admitted the new note, evicted only the oldest fact, and preserved every goal; zero contract violations. Second, the injury closes where the fix can reach it: goal survival at the cap edge went from 0 of 10 to 10 of 10 on opus and 0 to 6 of 10 on sonnet, while the control arm replicated the original injury almost to the digit, every victim still a goal. Third, no new damage: 60 of 60 updates below the cap passed through untouched."
+						},
+						{
+							"heading": "The Honest Boundary",
+							"html": "The honest boundary was pre-registered and held exactly: the app cannot restore a note the model pruned before sending, and sonnet pruned 4 of 10 and gemini 6 of 10 cap-edge cells client-side, victims still goals; so below the frontier tier the guarantee covers the clamp pathway, not the model's own editing. A prompt-side fence for the prune pathway is filed for future measurement rather than shipped untested."
+						},
+						{
+							"heading": "Opus Invents Consolidation",
+							"html": "And one unregistered moment worth the price of the study: told via the eviction notice that its update had cost a note, opus alone called the tool again with an eleven-note memo carrying all twenty-one facts, rules, and goals; it consolidated the memo's content into fewer sentences rather than accept a loss. The regression suite now guards the cap edge permanently: goal-safe eviction on the opus baseline, with a hard zero on goals evicted by the pipeline."
+						}
+					]
 				}
 			],
 			"published": "2026-07-17",
@@ -923,24 +1482,47 @@
 					"href": "/blog/the-twenty-first-note"
 				}
 			],
-			"brief": "BRIEF-AK.md"
+			"brief": "BRIEF-AK.md",
+			"quote": "Opus consolidated the memo's content into fewer sentences rather than accept a loss."
 		},
 		{
 			"slug": "al",
 			"letters": "AL",
 			"track": "Sessions & memory",
 			"title": "The gate fails on a moved baseline; and unproven does not ship",
-			"eyebrow": "Study AL \u00b7 the prompt-side fence",
+			"eyebrow": "Study AL · the prompt-side fence",
 			"indexLine": "Study AK left one pathway open: the app-side eviction cannot restore a note the model pruned before sending, and the mid tiers pruned goals client-side in 4 to 6 cells of ten.",
 			"sections": [
 				{
 					"id": "sec-fence",
-					"eyebrow": "Study AL \u00b7 the prompt-side fence",
-					"title": "The gate fails on a moved baseline; and unproven does not ship",
-					"takeaway": "Study AK left one pathway open: the app-side eviction cannot restore a note the model pruned before sending, and the mid tiers pruned goals client-side in 4 to 6 cells of ten. AK's interpretation table filed the obvious candidate; one prompt sentence forbidding self-eviction (\"never drop or trim an existing note to make room; the app decides evictions\"); for measurement before shipping, and Study AL is that measurement, with the prompt rule as the only variable against the AK-eviction arm as its contemporaneous control. The fence looked right everywhere the gates could not see: pooled client prunes fell 5 to 1, goal survival rose to 10 of 10 on sonnet and 9 of 10 on gemini, all sixty under-cap updates stayed untouched, and the sentence cost nothing; the models were already sending complete lists; the fence changed which notes survived, not how many tokens moved. But the pre-registered significance gate failed at p = .219, for a reason nobody registered: the control arm did not replicate its own three-day-old baseline. Sonnet's prune rate halved (4 of 10 to 2), gemini's too (6 of 10 to 3); same prompts, same corpus, same handler, temperature 0, the largest drift the series has caught between two measurements of the same construction. Against a five-prune pooled baseline, ten cells per tier cannot clear the bar. So the published verdict is deliberately double-edged: the registered reading (\"the prune pathway is not instruction-closable\") overstates what this run measured, and the honest reading; unproven, not disproven; still ships nothing, because unproven does not ship. What the study bought instead is sharper than a pass: the client-prune baseline itself is unstable week to week, which is the strongest argument yet for the filed alternative; an update shape that cannot express omission at all, so the guarantee stops depending on tier behavior holding still. Two smaller facts round it out: opus pruned for the first time in the series (a fact, not a goal; its goal safety stayed perfect), and consolidation-on-notice recurred, two sightings in two studies.",
+					"eyebrow": "The prompt-side fence",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-30",
 					"figure": null,
-					"table": null
+					"table": null,
+					"body": [
+						{
+							"heading": "Measuring the Filed Fence",
+							"html": "Study AK left one pathway open: the app-side eviction cannot restore a note the model pruned before sending, and the mid tiers pruned goals client-side in 4 to 6 cells of ten. AK's interpretation table filed the obvious candidate; one prompt sentence forbidding self-eviction (\"never drop or trim an existing note to make room; the app decides evictions\"); for measurement before shipping, and Study AL is that measurement, with the prompt rule as the only variable against the AK-eviction arm as its contemporaneous control."
+						},
+						{
+							"heading": "Right Where the Gates Cannot See",
+							"html": "The fence looked right everywhere the gates could not see: pooled client prunes fell 5 to 1, goal survival rose to 10 of 10 on sonnet and 9 of 10 on gemini, all sixty under-cap updates stayed untouched, and the sentence cost nothing; the models were already sending complete lists; the fence changed which notes survived, not how many tokens moved."
+						},
+						{
+							"heading": "A Moved Baseline",
+							"html": "But the pre-registered significance gate failed at p = .219, for a reason nobody registered: the control arm did not replicate its own three-day-old baseline. Sonnet's prune rate halved (4 of 10 to 2), gemini's too (6 of 10 to 3); same prompts, same corpus, same handler, temperature 0, the largest drift the series has caught between two measurements of the same construction. Against a five-prune pooled baseline, ten cells per tier cannot clear the bar."
+						},
+						{
+							"heading": "A Double-Edged Verdict",
+							"html": "So the published verdict is deliberately double-edged: the registered reading (\"the prune pathway is not instruction-closable\") overstates what this run measured, and the honest reading; unproven, not disproven; still ships nothing, because unproven does not ship."
+						},
+						{
+							"heading": "What the Study Bought",
+							"html": "What the study bought instead is sharper than a pass: the client-prune baseline itself is unstable week to week, which is the strongest argument yet for the filed alternative; an update shape that cannot express omission at all, so the guarantee stops depending on tier behavior holding still. Two smaller facts round it out: opus pruned for the first time in the series (a fact, not a goal; its goal safety stayed perfect), and consolidation-on-notice recurred, two sightings in two studies."
+						}
+					]
 				}
 			],
 			"published": "2026-07-18",
@@ -950,24 +1532,43 @@
 					"href": "/blog/the-twenty-first-note"
 				}
 			],
-			"brief": "BRIEF-AL.md"
+			"brief": "BRIEF-AL.md",
+			"quote": "Unproven does not ship."
 		},
 		{
 			"slug": "am",
 			"letters": "AM",
 			"track": "Sessions & memory",
 			"title": "The notice learned to ask for everything back",
-			"eyebrow": "Study AM \u00b7 consolidation-on-notice",
+			"eyebrow": "Study AM · consolidation-on-notice",
 			"indexLine": "Twice in two studies; both times unregistered; opus answered an eviction notice by re-sending the memo compressed into fewer sentences carrying all twenty-one needles: told a note had died, the frontier tier invented l.",
 			"sections": [
 				{
 					"id": "sec-notice",
-					"eyebrow": "Study AM \u00b7 consolidation-on-notice",
-					"title": "The notice learned to ask for everything back",
-					"takeaway": "Twice in two studies; both times unregistered; opus answered an eviction notice by re-sending the memo compressed into fewer sentences carrying all twenty-one needles: told a note had died, the frontier tier invented lossless consolidation rather than accept the loss. Study AM measured the mechanism instead of admiring the anecdote. The intervention surface was chosen by the series' own results: Study AL had just measured the agent-prompt-rule surface failing at the cap edge, and Study AB long ago measured the opposite surface; app-authored text at the point of injury; fixing what buried text could not. The eviction notice is exactly that surface, and it arrives attached to the event that makes it actionable. One sentence appended to it, the notice string the only variable, on a fresh seeded forty-task cap-edge corpus: the same facts, rules, and goals rewritten into fewer, denser notes; nothing needs to be lost. The result is the cleanest pass in the series: opus lossless recovery went from 3 of 40 spontaneous to 40 of 40 invited (p \u2248 3\u00d710\u207b\u00b9\u00b9), every planted needle surviving with kind fidelity 800/800; facts staying facts, rules staying rules, goals staying goals through the rewrite; zero degraded cells on any model, zero re-add churn, and about 570 extra output tokens for the recovery call. The sub-frontier tiers ignore the invitation entirely and harmlessly, so the sentence ships ungated. It shipped as v3.215.0 the same day. And the pass settles a design question beyond the cap: any future omission-proof update protocol now has a measured lossless behavior to beat, because merge-style semantics would structurally break the very consolidation this study just turned into a guarantee.",
+					"eyebrow": "Consolidation-on-notice",
+					"title": "Study Overview",
+					"takeaway": null,
 					"legendId": "legend-30",
 					"figure": null,
-					"table": null
+					"table": null,
+					"body": [
+						{
+							"heading": "The Anecdote",
+							"html": "Twice in two studies; both times unregistered; opus answered an eviction notice by re-sending the memo compressed into fewer sentences carrying all twenty-one needles: told a note had died, the frontier tier invented lossless consolidation rather than accept the loss. Study AM measured the mechanism instead of admiring the anecdote."
+						},
+						{
+							"heading": "Choosing the Surface",
+							"html": "The intervention surface was chosen by the series' own results: Study AL had just measured the agent-prompt-rule surface failing at the cap edge, and Study AB long ago measured the opposite surface; app-authored text at the point of injury; fixing what buried text could not. The eviction notice is exactly that surface, and it arrives attached to the event that makes it actionable. One sentence appended to it, the notice string the only variable, on a fresh seeded forty-task cap-edge corpus: the same facts, rules, and goals rewritten into fewer, denser notes; nothing needs to be lost."
+						},
+						{
+							"heading": "The Cleanest Pass in the Series",
+							"html": "The result is the cleanest pass in the series: opus lossless recovery went from 3 of 40 spontaneous to 40 of 40 invited (p ≈ 3×10⁻¹¹), every planted needle surviving with kind fidelity 800/800; facts staying facts, rules staying rules, goals staying goals through the rewrite; zero degraded cells on any model, zero re-add churn, and about 570 extra output tokens for the recovery call."
+						},
+						{
+							"heading": "Shipped, Ungated",
+							"html": "The sub-frontier tiers ignore the invitation entirely and harmlessly, so the sentence ships ungated. It shipped as v3.215.0 the same day. And the pass settles a design question beyond the cap: any future omission-proof update protocol now has a measured lossless behavior to beat, because merge-style semantics would structurally break the very consolidation this study just turned into a guarantee."
+						}
+					]
 				}
 			],
 			"published": "2026-07-18",
@@ -977,24 +1578,43 @@
 					"href": "/blog/the-twenty-first-note"
 				}
 			],
-			"brief": "BRIEF-AM.md"
+			"brief": "BRIEF-AM.md",
+			"quote": "Told a note had died, the frontier tier invented lossless consolidation rather than accept the loss."
 		},
 		{
 			"slug": "an",
 			"letters": "AN",
 			"track": "Views & grounding",
 			"title": "Ask or act: tool availability dissolves the visibility-clause tax",
-			"eyebrow": "Study AN \u00b7 ask or act \u00b7 1,728 session steps",
+			"eyebrow": "Study AN · ask or act · 1,728 session steps",
 			"indexLine": "With a view tool simply available, the ~70% NEED-INFO tax on fully specified edits vanished on every tier; the tested fetch-before-ask prompt clause was redundant on the frontier and unsafe below it, so it stays unshipped.",
 			"sections": [
 				{
 					"id": "sec-askact",
-					"eyebrow": "Study AN \u00b7 ask or act",
+					"eyebrow": "Ask or act",
 					"title": "Tool availability dissolves the visibility-clause tax",
-					"takeaway": "Study AG left one exposure open: under outline views, the shipped ask rule converted fully specified edits into NEED-INFO about 70% of the time, because the target node was \"not visible\"; even with the last-edit echo supplying id, key, and both values. AN re-ran that construction with a <span class=\"font-mono\">get_template_view</span> tool in hand, four arms, three models, 1,728 session steps. Availability alone settled it: anaphora success rose to 45\u201348/48 with essentially zero asks on every tier, models fetching at most one or two precise views or patching directly from the echo. The registered \"prefer fetching over asking\" clause added nothing where tools existed; and the protection arm showed it is unsafe below the frontier: told to prefer tools, sonnet silently guessed half of its genuinely unanswerable cells and gemini burned 689 tool calls hunting the conversation-borne referent in the tree, while opus asked a perfect 48/48. The clause stays unshipped; the fence is capability-shaped: give tool-bearing surfaces the ask rule freely, and never pair the rule with skeleton views on a surface that lacks the tools.",
+					"takeaway": null,
 					"legendId": null,
 					"figure": null,
-					"table": null
+					"table": null,
+					"body": [
+						{
+							"heading": "The Open Exposure",
+							"html": "Study AG left one exposure open: under outline views, the shipped ask rule converted fully specified edits into NEED-INFO about 70% of the time, because the target node was \"not visible\"; even with the last-edit echo supplying id, key, and both values. AN re-ran that construction with a <span class=\"font-mono\">get_template_view</span> tool in hand, four arms, three models, 1,728 session steps."
+						},
+						{
+							"heading": "Availability Settles It",
+							"html": "Availability alone settled it: anaphora success rose to 45–48/48 with essentially zero asks on every tier, models fetching at most one or two precise views or patching directly from the echo."
+						},
+						{
+							"heading": "Unsafe Below the Frontier",
+							"html": "The registered \"prefer fetching over asking\" clause added nothing where tools existed; and the protection arm showed it is unsafe below the frontier: told to prefer tools, sonnet silently guessed half of its genuinely unanswerable cells and gemini burned 689 tool calls hunting the conversation-borne referent in the tree, while opus asked a perfect 48/48."
+						},
+						{
+							"heading": "The Fence",
+							"html": "The clause stays unshipped; the fence is capability-shaped: give tool-bearing surfaces the ask rule freely, and never pair the rule with skeleton views on a surface that lacks the tools."
+						}
+					]
 				}
 			],
 			"published": "2026-07-22",
@@ -1008,24 +1628,47 @@
 					"href": "/blog/undo-that"
 				}
 			],
-			"brief": "BRIEF-AN.md"
+			"brief": "BRIEF-AN.md",
+			"quote": "Give tool-bearing surfaces the ask rule freely, and never pair it with skeleton views on a surface that lacks the tools."
 		},
 		{
 			"slug": "ao",
 			"letters": "AO",
 			"track": "Agent-surface steering",
 			"title": "Canonical-tag steering: the catalog read is the whole mechanism",
-			"eyebrow": "Study AO \u00b7 canonical-tag steering \u00b7 324 cells",
+			"eyebrow": "Study AO · canonical-tag steering · 324 cells",
 			"indexLine": "Unguided models never match a tag catalog's exact casing (0/36 clean everywhere); with a tags_list tool they consult it unprompted and land canonical on the first attempt; warnings alone cannot recover, and hard gating is unnecessary.",
 			"sections": [
 				{
 					"id": "sec-tags",
-					"eyebrow": "Study AO \u00b7 canonical-tag steering",
+					"eyebrow": "Canonical-tag steering",
 					"title": "The catalog read is the mechanism; warnings alone are not",
-					"takeaway": "Replicator's CMS shipped a warn-only canonical-tag design on its agent publishing surface: a <span class=\"font-mono\">tags_list</span> tool whose description says to copy names exactly, plus advisory lint with did-you-mean suggestions. AO measured the assumption across a 40-tag fixture catalog and 36 drafting tasks. Without guidance, models NEVER matched exact canonical casing; 0/36 clean on all three tiers, so tag drift is structural, not sloppiness. With the tool present, every model consulted it unprompted in 36/36 cells and landed on-catalog topics canonical on the FIRST attempt (Claude tiers 24/24, including every near-collision trap like llm\u2192LLMs and frontend\u2192Front-End); zero warning rounds were needed. Warnings without the tool recovered only 7\u201324/36; the lint can fix slug variants but cannot supply a catalog it never showed. One honest edge: given off-catalog topics, opus returned empty tag lists 12/12 rather than invent; defensible editorial caution the registered non-empty gate mis-scored, filed as a protocol lesson. The shipped design stands: keep tool and lint together, no hard gating needed.",
+					"takeaway": null,
 					"legendId": null,
 					"figure": null,
-					"table": null
+					"table": null,
+					"body": [
+						{
+							"heading": "The Shipped Assumption",
+							"html": "Replicator's CMS shipped a warn-only canonical-tag design on its agent publishing surface: a <span class=\"font-mono\">tags_list</span> tool whose description says to copy names exactly, plus advisory lint with did-you-mean suggestions. AO measured the assumption across a 40-tag fixture catalog and 36 drafting tasks."
+						},
+						{
+							"heading": "Drift Is Structural",
+							"html": "Without guidance, models NEVER matched exact canonical casing; 0/36 clean on all three tiers, so tag drift is structural, not sloppiness."
+						},
+						{
+							"heading": "The Tool Is the Mechanism",
+							"html": "With the tool present, every model consulted it unprompted in 36/36 cells and landed on-catalog topics canonical on the FIRST attempt (Claude tiers 24/24, including every near-collision trap like llm→LLMs and frontend→Front-End); zero warning rounds were needed. Warnings without the tool recovered only 7–24/36; the lint can fix slug variants but cannot supply a catalog it never showed."
+						},
+						{
+							"heading": "One Honest Edge",
+							"html": "One honest edge: given off-catalog topics, opus returned empty tag lists 12/12 rather than invent; defensible editorial caution the registered non-empty gate mis-scored, filed as a protocol lesson."
+						},
+						{
+							"heading": "The Design Stands",
+							"html": "The shipped design stands: keep tool and lint together, no hard gating needed."
+						}
+					]
 				}
 			],
 			"published": "2026-07-23",
@@ -1035,7 +1678,8 @@
 					"href": "/blog/give-the-model-a-tool-not-a-rule"
 				}
 			],
-			"brief": "BRIEF-AO.md"
+			"brief": "BRIEF-AO.md",
+			"quote": "Tag drift is structural, not sloppiness; the catalog read is the whole mechanism."
 		}
 	]
 }

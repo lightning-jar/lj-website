@@ -7,6 +7,13 @@ const eyebrowCls =
 	"font-mono text-[12.5px] tracking-[0.14em] uppercase text-maximumYellow mb-1.5";
 const proseCls = "text-[#e7e9ee] leading-[1.65]";
 
+// The section carrying the study's FIRST chart — a divider renders
+// between its prose and the chart, marking where reading turns into
+// evidence. Studies without charts get no divider.
+const firstFigureSectionId = $derived(
+	data.study.sections.find((s: { figure?: unknown }) => s.figure)?.id,
+);
+
 onMount(async () => {
 	const { initBenchCharts } = await import("../bench-charts.js");
 	initBenchCharts();
@@ -16,7 +23,7 @@ onMount(async () => {
 <div
 	class="page-x-padding main-y-padding grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-x-12 gap-y-16 bg-oxford text-cultured"
 >
-	<div class="max-w-article">
+	<div class="max-w-article blog-article">
 		<nav class="mb-8">
 			<a
 				href="/research/barkup-bench"
@@ -33,13 +40,25 @@ onMount(async () => {
 
 		{#each data.study.sections as section (section.id)}
 			<section class="mt-6" id={section.id}>
-				<p class={eyebrowCls}>{@html section.eyebrow}</p>
-				<h2 class="text-[1.22rem] font-600 tracking-[-0.01em] mb-1">
-					{@html section.title}
-				</h2>
-				<p class="{proseCls} mb-3.5">
-					{@html section.takeaway}
-				</p>
+				<p class="italic">{@html section.eyebrow}</p>
+				<h2>{@html section.title}</h2>
+				{#if section.body}
+					{#each section.body as chunk (chunk.html)}
+						{#if chunk.heading}
+							<h3>{chunk.heading}</h3>
+						{/if}
+						<p>
+							{@html chunk.html}
+						</p>
+					{/each}
+				{:else}
+					<p>
+						{@html section.takeaway}
+					</p>
+				{/if}
+				{#if section.figure && section.id === firstFigureSectionId}
+					<hr class="mt-9 mb-9 border-white/14" />
+				{/if}
 				{#if section.legendId}
 					<div
 						class="chart-legend"
@@ -53,12 +72,11 @@ onMount(async () => {
 					></div>
 				{/if}
 				{#if section.table}
-					<!-- Tables render expanded here; the collapsed <details> was a
-					     space concession from the single-page dashboard era. -->
+					<!-- Tables render expanded (the collapsed details was a space
+					     concession from the single-page dashboard era), introduced
+					     by a real heading in the document outline. -->
 					<div class="mt-4">
-						<p class="chart-caption mb-1.5">
-							{section.table.summary}
-						</p>
+						<h3>{section.table.summary}</h3>
 						<div id={section.table.id}></div>
 					</div>
 				{/if}
@@ -89,6 +107,17 @@ onMount(async () => {
 
 	<aside class="flex lg:justify-end">
 		<div class="max-w-480px lg:w-[320px] grid grid-cols-1 gap-6 place-content-start">
+			{#if data.study.quote}
+				<div
+					class="w-full border border-slate-100/10 bg-slate-100/5 rounded px-3 pt-4 pb-5"
+				>
+					<blockquote
+						class="font-serif font-700 leading-relaxed text-maximumYellow text-20px"
+					>
+						"{data.study.quote}"
+					</blockquote>
+				</div>
+			{/if}
 			{#if data.study.related?.length}
 				<div
 					class="w-full border border-slate-100/10 bg-slate-100/5 rounded px-3 pt-4 pb-5"

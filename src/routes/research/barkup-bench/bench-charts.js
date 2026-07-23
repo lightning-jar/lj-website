@@ -285,11 +285,11 @@ export function initBenchCharts() {
 		for (const tick of opts.ticks) {
 			const y = yOf(tick);
 			g += `<line x1="${L}" x2="${L + iw}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
-			g += `<text fill="#c3c9d4" font-size="11.5" x="${L - 8}" y="${y + 4}" text-anchor="end">${opts.fmt(tick)}</text>`;
+			g += `<text fill="#c3c9d4" class="chart-tick" x="${L - 8}" y="${y + 4}" text-anchor="end">${opts.fmt(tick)}</text>`;
 		}
 		// x labels
 		BUCKET_LABELS.forEach((lab, i) => {
-			g += `<text fill="#c3c9d4" font-size="11.5" x="${xs[i]}" y="${H - B + 22}" text-anchor="middle">${lab}</text>`;
+			g += `<text fill="#c3c9d4" class="chart-tick" x="${xs[i]}" y="${H - B + 22}" text-anchor="middle">${lab}</text>`;
 		});
 		let marks = "",
 			hits = "";
@@ -397,7 +397,7 @@ export function initBenchCharts() {
 		for (const tick of [0, 25, 50, 75, 100]) {
 			const x = xOf(tick);
 			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
-			g += `<text fill="#c3c9d4" font-size="11.5" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+			g += `<text fill="#c3c9d4" class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
 		}
 		let marks = "",
 			hits = "";
@@ -464,13 +464,13 @@ export function initBenchCharts() {
 		g +=
 			'<circle cx="' +
 			L +
-			'" cy="16" r="6" fill="hsl(217,48%,15%)" stroke="#c98500" stroke-width="2.5"/><text fill="#c3c9d4" font-size="11.5" x="' +
+			'" cy="16" r="6" fill="hsl(217,48%,15%)" stroke="#c98500" stroke-width="2.5"/><text fill="#c3c9d4" class="chart-tick" x="' +
 			(L + 14) +
 			'" y="20">v1 · tool calls hidden</text>';
 		g +=
 			'<circle cx="' +
 			(L + 220) +
-			'" cy="16" r="6.5" fill="#3987e5" stroke="hsl(217,48%,15%)" stroke-width="2"/><text fill="#c3c9d4" font-size="11.5" x="' +
+			'" cy="16" r="6.5" fill="#3987e5" stroke="hsl(217,48%,15%)" stroke-width="2"/><text fill="#c3c9d4" class="chart-tick" x="' +
 			(L + 234) +
 			'" y="20">v2 · corrected history</text>';
 		for (const tick of [0, 25, 50, 75, 100]) {
@@ -486,7 +486,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -627,7 +627,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 8) +
 				'" y="' +
 				(y + 4) +
@@ -637,7 +637,7 @@ export function initBenchCharts() {
 		}
 		SIZES.forEach((lab, i) => {
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				xs[i] +
 				'" y="' +
 				(H - B + 22) +
@@ -869,7 +869,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 8) +
 				'" y="' +
 				(y + 4) +
@@ -879,7 +879,7 @@ export function initBenchCharts() {
 		}
 		SIZES.forEach((lab, i) => {
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				xs[i] +
 				'" y="' +
 				(H - B + 22) +
@@ -1115,7 +1115,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 8) +
 				'" y="' +
 				(y + 4) +
@@ -1125,7 +1125,7 @@ export function initBenchCharts() {
 		}
 		THIRDS.forEach((lab, i) => {
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				xs[i] +
 				'" y="' +
 				(H - B + 22) +
@@ -1344,7 +1344,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -1593,7 +1593,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 8) +
 				'" y="' +
 				(y + 4) +
@@ -1603,7 +1603,7 @@ export function initBenchCharts() {
 		}
 		THIRDS.forEach((lab, i) => {
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				xs[i] +
 				'" y="' +
 				(H - B + 22) +
@@ -1830,7 +1830,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -2101,7 +2101,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -2368,7 +2368,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -2603,7 +2603,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 8) +
 				'" y="' +
 				(y + 4) +
@@ -2613,7 +2613,7 @@ export function initBenchCharts() {
 		}
 		BINS.forEach((lab, i) => {
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				xs[i] +
 				'" y="' +
 				(H - B + 22) +
@@ -2873,7 +2873,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 8) +
 				'" y="' +
 				(y + 4) +
@@ -2883,7 +2883,7 @@ export function initBenchCharts() {
 		}
 		for (const s of STEPS) {
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				xOf(s) +
 				'" y="' +
 				(H - B + 22) +
@@ -3169,7 +3169,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -3465,7 +3465,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -3698,7 +3698,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -3713,7 +3713,7 @@ export function initBenchCharts() {
 		rows.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -3913,7 +3913,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -3938,7 +3938,7 @@ export function initBenchCharts() {
 				cy +
 				'" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -4320,7 +4320,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -4345,7 +4345,7 @@ export function initBenchCharts() {
 				cy +
 				'" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -4622,7 +4622,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -4637,7 +4637,7 @@ export function initBenchCharts() {
 		rows.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -4786,7 +4786,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -4801,7 +4801,7 @@ export function initBenchCharts() {
 		rows.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -4987,7 +4987,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -5002,7 +5002,7 @@ export function initBenchCharts() {
 		rows.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -5164,7 +5164,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -5179,7 +5179,7 @@ export function initBenchCharts() {
 		rows.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -5355,7 +5355,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -5370,7 +5370,7 @@ export function initBenchCharts() {
 		ROWS.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -5544,7 +5544,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 10) +
 				'" y="' +
 				(y + 4) +
@@ -5554,7 +5554,7 @@ export function initBenchCharts() {
 		}
 		LEVELS.forEach((label, i) => {
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				xOf(i) +
 				'" y="' +
 				(H - B + 22) +
@@ -5729,7 +5729,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -5744,7 +5744,7 @@ export function initBenchCharts() {
 		ROWS.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -5888,7 +5888,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -5903,7 +5903,7 @@ export function initBenchCharts() {
 			const denom =
 				row.segs.reduce((s2, seg) => s2 + seg.v, 0) === 20 ? 20 : 10;
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -6035,7 +6035,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -6059,7 +6059,7 @@ export function initBenchCharts() {
 		ROWS.forEach((row, ri) => {
 			const top = T + ri * GROUP + 8;
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(top + BAR) +
@@ -6237,7 +6237,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -6250,7 +6250,7 @@ export function initBenchCharts() {
 		ROWS.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -6391,7 +6391,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -6404,7 +6404,7 @@ export function initBenchCharts() {
 		GROUPS.forEach((row, gi) => {
 			const top = T + gi * (GH + GPAD);
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(top + GH / 2 + 4) +
@@ -6562,7 +6562,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -6575,7 +6575,7 @@ export function initBenchCharts() {
 		GROUPS.forEach((row, gi) => {
 			const top = T + gi * (GH + GPAD);
 			g +=
-				'<text fill="#c3c9d4" font-size="11.5" x="' +
+				'<text fill="#c3c9d4" class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(top + GH / 2 + 4) +

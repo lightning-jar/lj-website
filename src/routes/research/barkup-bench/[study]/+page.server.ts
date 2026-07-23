@@ -19,7 +19,7 @@ export function load({ params }) {
 		previous: previous && { slug: previous.slug, letters: previous.letters },
 		next: next && { slug: next.slug, letters: next.letters },
 		meta: {
-			title: `Study ${study.letters}: ${study.title} — barkup-bench`,
+			title: `Study ${study.letters}: ${study.title} · barkup-bench`,
 			description: study.indexLine,
 			robotsFollow: true,
 			analyticsOn: true,

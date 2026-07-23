@@ -153,6 +153,9 @@ export default defineConfig({
 		],
 		// Generated data tables on the research pages.
 		["data-table", "border-collapse tabular-nums text-14px"],
+		// Tick/axis labels inside the generated SVG charts (CSS font-size
+		// on svg <text> overrides the presentational attribute it replaced).
+		["chart-tick", "text-[11.5px]"],
 		[
 			"max-w-article",
 			"max-w-none sm:max-w-[34rem] md:max-w-[36rem] lg:max-w-[38rem] xl:max-w-[40rem] 2xl:max-w-[45rem]",
@@ -223,19 +226,19 @@ export default defineConfig({
 			[&_strong]:(font-700)
 			[&_img]:(w-full h-auto max-w-full my-4)
 			[&_img+p]:(text-13px opacity-70 mt-2 mb-6 leading-snug)
-			[&_table]:(hidden md:block w-full border-collapse text-15px text-left relative border border-slate-100/40 rounded pb-0 overflow-hidden my-4)
-			[&_table_thead]:(flex items-center justify-between text-slate-100)
-			[&_table_thead_tr]:(w-full grid grid-cols-[repeat(auto-fit,_minmax(min(100%,_150px),_1fr))])
-			[&_table_thead_tr_th]:(block bg-blue/40 leading-tight font-700 px-3 py-2 truncate w-full border-b border-slate-100/40)
-			[&_table_thead_tr_th:not(:last-child)]:(border-r)
-			[&_table_tbody]:(grid grid-cols-1)
-			[&_table_tbody_tr]:(w-full grid grid-cols-[repeat(auto-fit,_minmax(min(100%,_150px),_1fr))])
-			[&_table_tbody_tr:has(em)]:(bg-blue/10)
-			[&_table_tbody_tr:has(strong_em)]:(bg-blue/40)
-			[&_table_tbody_tr:has(em_strong)]:(bg-blue/40)
-			[&_table_tbody_tr_td]:(flex bg-blue/0 leading-tight px-3 py-2 w-full border-b border-slate-100/40 opacity-90 text-15px)
-			[&_table_tbody_tr:last-child_td]:(border-b-none pb-3)
-			[&_table_tbody_tr_td:not(:last-child)]:(border-r)
+			[&_table:not(.data-table)]:(hidden md:block w-full border-collapse text-15px text-left relative border border-slate-100/40 rounded pb-0 overflow-hidden my-4)
+			[&_table:not(.data-table)_thead]:(flex items-center justify-between text-slate-100)
+			[&_table:not(.data-table)_thead_tr]:(w-full grid grid-cols-[repeat(auto-fit,_minmax(min(100%,_150px),_1fr))])
+			[&_table:not(.data-table)_thead_tr_th]:(block bg-blue/40 leading-tight font-700 px-3 py-2 truncate w-full border-b border-slate-100/40)
+			[&_table:not(.data-table)_thead_tr_th:not(:last-child)]:(border-r)
+			[&_table:not(.data-table)_tbody]:(grid grid-cols-1)
+			[&_table:not(.data-table)_tbody_tr]:(w-full grid grid-cols-[repeat(auto-fit,_minmax(min(100%,_150px),_1fr))])
+			[&_table:not(.data-table)_tbody_tr:has(em)]:(bg-blue/10)
+			[&_table:not(.data-table)_tbody_tr:has(strong_em)]:(bg-blue/40)
+			[&_table:not(.data-table)_tbody_tr:has(em_strong)]:(bg-blue/40)
+			[&_table:not(.data-table)_tbody_tr_td]:(flex bg-blue/0 leading-tight px-3 py-2 w-full border-b border-slate-100/40 opacity-90 text-15px)
+			[&_table:not(.data-table)_tbody_tr:last-child_td]:(border-b-none pb-3)
+			[&_table:not(.data-table)_tbody_tr_td:not(:last-child)]:(border-r)
 			[&_pre]:(bg-black/40 px-4 pt-4 pb-5 rounded my-4 overflow-x-auto)
 			[&_pre_code]:(font-mono text-13px leading-relaxed text-slate-100/90)
 			[&_:not(pre)>code]:(font-mono text-0.9em bg-black/30 rounded px-1 py-0.5)
