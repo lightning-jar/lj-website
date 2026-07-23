@@ -14,7 +14,7 @@ onMount(async () => {
 </script>
 
 <div
-	class="page-x-padding main-y-padding grid grid-cols-1 gap-16 bg-oxford text-cultured"
+	class="page-x-padding main-y-padding grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-x-12 gap-y-16 bg-oxford text-cultured"
 >
 	<div class="max-w-article">
 		<nav class="text-14px mb-8">
@@ -86,6 +86,59 @@ onMount(async () => {
 			{/if}
 		</footer>
 	</div>
+
+	<aside class="flex lg:justify-end">
+		<div class="max-w-480px lg:w-[320px] grid grid-cols-1 gap-6 place-content-start">
+			{#if data.study.related?.length}
+				<div
+					class="w-full border border-slate-100/10 bg-slate-100/5 rounded px-3 pt-4 pb-5"
+				>
+					<h2 class="font-mono text-13px tracking-[0.12em] uppercase text-maximumYellow mb-3">
+						Related reading
+					</h2>
+					<ul class="grid grid-cols-1 gap-3">
+						{#each data.study.related as article (article.href)}
+							<li class="text-15px leading-snug">
+								<a
+									href={article.href}
+									class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4 hover:text-maximumYellow"
+								>
+									{article.title}
+								</a>
+							</li>
+						{/each}
+					</ul>
+				</div>
+			{/if}
+			<div
+				class="w-full border border-slate-100/10 bg-slate-100/5 rounded px-3 pt-4 pb-5"
+			>
+				<h2 class="font-mono text-13px tracking-[0.12em] uppercase text-maximumYellow mb-3">
+					Primary sources
+				</h2>
+				<ul class="grid grid-cols-1 gap-3 text-15px leading-snug">
+					{#if data.study.brief}
+						<li>
+							<a
+								href="https://github.com/kevinpeckham/barkup-bench/blob/main/docs/{data.study.brief}"
+								class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4 hover:text-maximumYellow"
+							>
+								Pre-registration ({data.study.brief})
+							</a>
+						</li>
+					{/if}
+					<li>
+						<a
+							href="https://github.com/kevinpeckham/barkup-bench/blob/main/REPORT.md"
+							class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4 hover:text-maximumYellow"
+						>
+							Full report (REPORT.md)
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</aside>
 </div>
 
 <!-- chart hover tooltip (positioned by bench-charts.js) -->

@@ -24,7 +24,14 @@
 					}
 				}
 			],
-			"published": "2026-07-06"
+			"published": "2026-07-06",
+			"related": [
+				{
+					"title": "A Deprecated Accessor That Still Typechecks Broke My Benchmark (and Maybe Your Agent)",
+					"href": "/blog/tool-history-footgun"
+				}
+			],
+			"brief": "BRIEF-G.md"
 		},
 		{
 			"slug": "h",
@@ -50,7 +57,18 @@
 					}
 				}
 			],
-			"published": "2026-07-07"
+			"published": "2026-07-07",
+			"related": [
+				{
+					"title": "We Found the Crossover (It Wasn't Where Anyone Looked)",
+					"href": "/blog/we-found-the-crossover"
+				},
+				{
+					"title": "barkup 0.2: We Shipped What the Benchmark Told Us",
+					"href": "/blog/barkup-0-2-anchored-patches"
+				}
+			],
+			"brief": "BRIEF-H.md"
 		},
 		{
 			"slug": "ij",
@@ -76,7 +94,18 @@
 					}
 				}
 			],
-			"published": "2026-07-07"
+			"published": "2026-07-07",
+			"related": [
+				{
+					"title": "The Model Doesn't Need to See Your Tree",
+					"href": "/blog/the-model-doesnt-need-to-see-your-tree"
+				},
+				{
+					"title": "barkup 0.3: Focused Views, or Why the Model Doesn't Need to See Your Tree",
+					"href": "/blog/barkup-0-3-focused-views"
+				}
+			],
+			"brief": "BRIEF-I.md"
 		},
 		{
 			"slug": "k",
@@ -102,7 +131,14 @@
 					}
 				}
 			],
-			"published": "2026-07-08"
+			"published": "2026-07-08",
+			"related": [
+				{
+					"title": "Your Agent's Session Is Drifting (and the Fix Is Cheaper Than the Bug)",
+					"href": "/blog/your-agents-session-is-drifting"
+				}
+			],
+			"brief": "BRIEF-K.md"
 		},
 		{
 			"slug": "l",
@@ -128,7 +164,14 @@
 					}
 				}
 			],
-			"published": "2026-07-08"
+			"published": "2026-07-08",
+			"related": [
+				{
+					"title": "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees",
+					"href": "/blog/stable-ids-are-all-you-need"
+				}
+			],
+			"brief": "BRIEF-L.md"
 		},
 		{
 			"slug": "n",
@@ -154,7 +197,18 @@
 					}
 				}
 			],
-			"published": "2026-07-09"
+			"published": "2026-07-09",
+			"related": [
+				{
+					"title": "Then We Found the Cheap Part: One Search Call Grounds LLM Tree Edits",
+					"href": "/blog/then-we-found-the-cheap-part"
+				},
+				{
+					"title": "barkup 0.4: The Model Finds the Node Now",
+					"href": "/blog/barkup-0-4-content-search"
+				}
+			],
+			"brief": "BRIEF-N.md"
 		},
 		{
 			"slug": "m",
@@ -180,7 +234,14 @@
 					}
 				}
 			],
-			"published": "2026-07-08"
+			"published": "2026-07-08",
+			"related": [
+				{
+					"title": "We Tried to Delete the Hard Parts. The Benchmark Said No.",
+					"href": "/blog/the-benchmark-said-no"
+				}
+			],
+			"brief": "BRIEF-M.md"
 		},
 		{
 			"slug": "o",
@@ -206,7 +267,14 @@
 					}
 				}
 			],
-			"published": "2026-07-09"
+			"published": "2026-07-09",
+			"related": [
+				{
+					"title": "We Tried to Delete the Hard Parts. The Benchmark Said No.",
+					"href": "/blog/the-benchmark-said-no"
+				}
+			],
+			"brief": "BRIEF-O.md"
 		},
 		{
 			"slug": "p",
@@ -232,7 +300,14 @@
 					}
 				}
 			],
-			"published": "2026-07-09"
+			"published": "2026-07-09",
+			"related": [
+				{
+					"title": "Your Agent Doesn't Need a Memory: Two Worked Examples Replace Session History",
+					"href": "/blog/two-examples-replace-a-memory"
+				}
+			],
+			"brief": "BRIEF-P.md"
 		},
 		{
 			"slug": "q",
@@ -258,7 +333,14 @@
 					}
 				}
 			],
-			"published": "2026-07-09"
+			"published": "2026-07-09",
+			"related": [
+				{
+					"title": "barkup 0.5: Your Code Finds the Targets Now",
+					"href": "/blog/barkup-0-5-deterministic-selection"
+				}
+			],
+			"brief": "BRIEF-Q.md"
 		},
 		{
 			"slug": "s",
@@ -284,7 +366,14 @@
 					}
 				}
 			],
-			"published": "2026-07-10"
+			"published": "2026-07-10",
+			"related": [
+				{
+					"title": "The Thirty-Sixth Edit: Long LLM Sessions Don't Need Memory Either",
+					"href": "/blog/the-thirty-sixth-edit"
+				}
+			],
+			"brief": "BRIEF-S.md"
 		},
 		{
 			"slug": "t",
@@ -310,7 +399,14 @@
 					}
 				}
 			],
-			"published": "2026-07-10"
+			"published": "2026-07-10",
+			"related": [
+				{
+					"title": "The Two Things Your Agent Can't See: Memos and Mentioned Nodes",
+					"href": "/blog/the-two-things-your-agent-cant-see"
+				}
+			],
+			"brief": "BRIEF-T.md"
 		},
 		{
 			"slug": "u",
@@ -336,7 +432,14 @@
 					}
 				}
 			],
-			"published": "2026-07-10"
+			"published": "2026-07-10",
+			"related": [
+				{
+					"title": "The Two Things Your Agent Can't See: Memos and Mentioned Nodes",
+					"href": "/blog/the-two-things-your-agent-cant-see"
+				}
+			],
+			"brief": "BRIEF-U.md"
 		},
 		{
 			"slug": "v",
@@ -361,7 +464,14 @@
 					}
 				}
 			],
-			"published": "2026-07-11"
+			"published": "2026-07-11",
+			"related": [
+				{
+					"title": "Views Carry Values, Memos Carry Goals: Our First Judge-Graded Study",
+					"href": "/blog/views-carry-values-memos-carry-goals"
+				}
+			],
+			"brief": "BRIEF-V.md"
 		},
 		{
 			"slug": "w",
@@ -386,7 +496,14 @@
 					}
 				}
 			],
-			"published": "2026-07-11"
+			"published": "2026-07-11",
+			"related": [
+				{
+					"title": "Who Writes the Memo? Auditing the Safety Net We Shipped",
+					"href": "/blog/who-writes-the-memo"
+				}
+			],
+			"brief": "BRIEF-W.md"
 		},
 		{
 			"slug": "x",
@@ -411,7 +528,14 @@
 					}
 				}
 			],
-			"published": "2026-07-12"
+			"published": "2026-07-12",
+			"related": [
+				{
+					"title": "Undo That: The One-Line Echo That Replaces a Transcript",
+					"href": "/blog/undo-that"
+				}
+			],
+			"brief": "BRIEF-X.md"
 		},
 		{
 			"slug": "y",
@@ -436,7 +560,14 @@
 					}
 				}
 			],
-			"published": "2026-07-12"
+			"published": "2026-07-12",
+			"related": [
+				{
+					"title": "Who Writes the Memo? Auditing the Safety Net We Shipped",
+					"href": "/blog/who-writes-the-memo"
+				}
+			],
+			"brief": "BRIEF-Y.md"
 		},
 		{
 			"slug": "z",
@@ -461,7 +592,14 @@
 					}
 				}
 			],
-			"published": "2026-07-12"
+			"published": "2026-07-12",
+			"related": [
+				{
+					"title": "Stronger LLMs Follow Conflicting Instructions More Literally, Not Less",
+					"href": "/blog/stronger-llms-follow-conflicting-instructions-more-literally"
+				}
+			],
+			"brief": "BRIEF-Z.md"
 		},
 		{
 			"slug": "aa",
@@ -486,7 +624,14 @@
 					}
 				}
 			],
-			"published": "2026-07-13"
+			"published": "2026-07-13",
+			"related": [
+				{
+					"title": "Stronger LLMs Follow Conflicting Instructions More Literally, Not Less",
+					"href": "/blog/stronger-llms-follow-conflicting-instructions-more-literally"
+				}
+			],
+			"brief": "BRIEF-AA.md"
 		},
 		{
 			"slug": "ac",
@@ -511,7 +656,14 @@
 					}
 				}
 			],
-			"published": "2026-07-13"
+			"published": "2026-07-13",
+			"related": [
+				{
+					"title": "The Model Always Knew What It Couldn't See",
+					"href": "/blog/the-model-always-knew"
+				}
+			],
+			"brief": "BRIEF-AC.md"
 		},
 		{
 			"slug": "ad",
@@ -536,7 +688,14 @@
 					}
 				}
 			],
-			"published": "2026-07-15"
+			"published": "2026-07-15",
+			"related": [
+				{
+					"title": "The Frontier Doesn't Need the Training Wheels (We Re-Ran Everything to Find Out)",
+					"href": "/blog/the-frontier-doesnt-need-the-training-wheels"
+				}
+			],
+			"brief": "BRIEF-AD.md"
 		},
 		{
 			"slug": "ae",
@@ -561,7 +720,14 @@
 					}
 				}
 			],
-			"published": "2026-07-15"
+			"published": "2026-07-15",
+			"related": [
+				{
+					"title": "Only the Frontier Knows When to Ask",
+					"href": "/blog/only-the-frontier-knows-when-to-ask"
+				}
+			],
+			"brief": "BRIEF-AE.md"
 		},
 		{
 			"slug": "af",
@@ -586,7 +752,14 @@
 					}
 				}
 			],
-			"published": "2026-07-15"
+			"published": "2026-07-15",
+			"related": [
+				{
+					"title": "Repeating the Goal Doesn't Make It Yours",
+					"href": "/blog/repeating-the-goal-doesnt-make-it-yours"
+				}
+			],
+			"brief": "BRIEF-AF.md"
 		},
 		{
 			"slug": "ah",
@@ -611,7 +784,14 @@
 					}
 				}
 			],
-			"published": "2026-07-16"
+			"published": "2026-07-16",
+			"related": [
+				{
+					"title": "The Twenty-First Note: How Three Neutral Components Compose into Silent Data Loss in LLM Memos",
+					"href": "/blog/the-twenty-first-note"
+				}
+			],
+			"brief": "BRIEF-AH.md"
 		},
 		{
 			"slug": "ai",
@@ -636,7 +816,14 @@
 					}
 				}
 			],
-			"published": "2026-07-16"
+			"published": "2026-07-16",
+			"related": [
+				{
+					"title": "Only the Frontier Knows When to Ask",
+					"href": "/blog/only-the-frontier-knows-when-to-ask"
+				}
+			],
+			"brief": "BRIEF-AI.md"
 		},
 		{
 			"slug": "ag",
@@ -661,7 +848,18 @@
 					}
 				}
 			],
-			"published": "2026-07-16"
+			"published": "2026-07-16",
+			"related": [
+				{
+					"title": "It Asked About Things It Already Knew",
+					"href": "/blog/it-asked-about-things-it-already-knew"
+				},
+				{
+					"title": "Undo That: The One-Line Echo That Replaces a Transcript",
+					"href": "/blog/undo-that"
+				}
+			],
+			"brief": "BRIEF-AG.md"
 		},
 		{
 			"slug": "aj",
@@ -686,7 +884,14 @@
 					}
 				}
 			],
-			"published": "2026-07-17"
+			"published": "2026-07-17",
+			"related": [
+				{
+					"title": "The Error Message Didn't Matter",
+					"href": "/blog/the-error-message-didnt-matter"
+				}
+			],
+			"brief": "BRIEF-AJ.md"
 		},
 		{
 			"slug": "ak",
@@ -711,7 +916,14 @@
 					}
 				}
 			],
-			"published": "2026-07-17"
+			"published": "2026-07-17",
+			"related": [
+				{
+					"title": "The Twenty-First Note: How Three Neutral Components Compose into Silent Data Loss in LLM Memos",
+					"href": "/blog/the-twenty-first-note"
+				}
+			],
+			"brief": "BRIEF-AK.md"
 		},
 		{
 			"slug": "al",
@@ -731,7 +943,14 @@
 					"table": null
 				}
 			],
-			"published": "2026-07-18"
+			"published": "2026-07-18",
+			"related": [
+				{
+					"title": "The Twenty-First Note: How Three Neutral Components Compose into Silent Data Loss in LLM Memos",
+					"href": "/blog/the-twenty-first-note"
+				}
+			],
+			"brief": "BRIEF-AL.md"
 		},
 		{
 			"slug": "am",
@@ -751,7 +970,14 @@
 					"table": null
 				}
 			],
-			"published": "2026-07-18"
+			"published": "2026-07-18",
+			"related": [
+				{
+					"title": "The Twenty-First Note: How Three Neutral Components Compose into Silent Data Loss in LLM Memos",
+					"href": "/blog/the-twenty-first-note"
+				}
+			],
+			"brief": "BRIEF-AM.md"
 		},
 		{
 			"slug": "an",
@@ -771,7 +997,18 @@
 					"table": null
 				}
 			],
-			"published": "2026-07-22"
+			"published": "2026-07-22",
+			"related": [
+				{
+					"title": "Give the Model a Tool, Not a Rule",
+					"href": "/blog/give-the-model-a-tool-not-a-rule"
+				},
+				{
+					"title": "Undo That: The One-Line Echo That Replaces a Transcript",
+					"href": "/blog/undo-that"
+				}
+			],
+			"brief": "BRIEF-AN.md"
 		},
 		{
 			"slug": "ao",
@@ -791,7 +1028,14 @@
 					"table": null
 				}
 			],
-			"published": "2026-07-23"
+			"published": "2026-07-23",
+			"related": [
+				{
+					"title": "Give the Model a Tool, Not a Rule",
+					"href": "/blog/give-the-model-a-tool-not-a-rule"
+				}
+			],
+			"brief": "BRIEF-AO.md"
 		}
 	]
 }

@@ -2,6 +2,7 @@
 import { onMount } from "svelte";
 
 // components
+import FeedBadge from "$components/FeedBadge.svelte";
 import LinkButton from "$components/LinkButton.svelte";
 
 // shared headline numbers: src/lib/data/research-stats.json
@@ -74,7 +75,10 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
   class="page-x-padding main-y-padding grid grid-cols-1 gap-12 min-h-screen place-content-start"
 >
   <header class="max-w-article">
-    <h1 class="display">barkup-bench</h1>
+    <div class="flex items-start justify-between gap-4">
+      <h1 class="display">barkup-bench</h1>
+      <FeedBadge href="/research/barkup-bench/atom.xml" />
+    </div>
 
     <!-- headline stats: single source of truth is research-stats.json -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-[1060px] mt-6 mb-2">
