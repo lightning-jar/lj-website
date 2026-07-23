@@ -9,12 +9,13 @@
 // fallow-ignore-next-line unused-export
 export const prerender = false;
 
-// env variables
-import { ENV } from "varlock/env";
-
 // types
 import type { RequestHandler } from "@sveltejs/kit";
 import type { SitemapXMLFrequency, SitemapXMLPage } from "$types/Sitemap";
+
+import { ENV } from "varlock/env";
+// env variables
+import benchStudies from "./../research/barkup-bench/bench-studies.json";
 
 const productionUrl =
 	ENV.VERCEL_PROJECT_PRODUCTION_URL || "www.lightningjar.com";
@@ -66,6 +67,9 @@ const staticPages = [
 	generateSiteMapXMLPage(`/research`, "weekly", 0.25), // research landing page
 	generateSiteMapXMLPage(`/research/barkup-bench`, "weekly", 0.25), // barkup-bench research dashboard
 	generateSiteMapXMLPage(`/research/barkup-bench/playbook`, "weekly", 0.25), // the builder's playbook
+	...benchStudies.studies.map((s) =>
+		generateSiteMapXMLPage(`/research/barkup-bench/${s.slug}`, "monthly", 0.25),
+	), // per-study result pages
 	generateSiteMapXMLPage(`/blog`, "monthly", 0.25), // blog landing page
 	generateSiteMapXMLPage(`/fun`, "monthly", 0.25), // fun side projects page
 	generateSiteMapXMLPage(`/built-with`, "monthly", 0.25), // built with

@@ -8,6 +8,8 @@ import { technologiesSitemapSection } from "$content/getters/getTechnologiesCont
 import { termsSitemapSection } from "$content/getters/getTermsContent";
 import { testimonialsSitemapSection } from "$content/getters/getTestimonialsContent";
 
+import benchStudies from "./../research/barkup-bench/bench-studies.json";
+
 const aboutSection = {
 	name: "About",
 	pages: [
@@ -51,6 +53,12 @@ const researchSection = {
 				"Our open, pre-registered benchmark series measuring how LLMs read and edit structured document trees: results dashboard, packages, and the full article series.",
 			date: "",
 		},
+		...benchStudies.studies.map((s) => ({
+			href: `/research/barkup-bench/${s.slug}`,
+			title: `Study ${s.letters}: ${s.title}`,
+			description: s.indexLine,
+			date: s.published,
+		})),
 		{
 			href: "/research/barkup-bench/playbook",
 			title: "The Builder's Playbook",

@@ -61,6 +61,15 @@ const eyebrowCls =
 const proseCls = "text-[#c3c9d4] max-w-[56rem]";
 </script>
 
+<svelte:head>
+	<link
+		rel="alternate"
+		type="application/atom+xml"
+		title="barkup-bench research feed"
+		href="/research/barkup-bench/atom.xml"
+	/>
+</svelte:head>
+
 <div
   class="page-x-padding main-y-padding grid grid-cols-1 gap-12 min-h-screen place-content-start"
 >
@@ -170,7 +179,12 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
       <p class="text-16px {proseCls} mb-6">
         The main study above set the baseline; everything since has been a
         pre-registered follow-up, each with its own charts, gates, and
-        verdict. Grouped by theme:
+        verdict. Grouped by theme — or
+        <a
+          href="/research/barkup-bench/atom.xml"
+          class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4 hover:text-maximumYellow"
+          >subscribe to the Atom feed</a
+        > to hear about new studies as they publish:
       </p>
       {#each tracks as group (group.track)}
         <h3 class="font-mono text-[13px] tracking-[0.12em] uppercase text-maximumYellow mt-7 mb-2.5">

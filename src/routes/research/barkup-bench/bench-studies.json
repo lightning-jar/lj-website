@@ -23,7 +23,8 @@
 						"id": "tbl-footgun"
 					}
 				}
-			]
+			],
+			"published": "2026-07-06"
 		},
 		{
 			"slug": "h",
@@ -48,7 +49,8 @@
 						"id": "tbl-sizeext"
 					}
 				}
-			]
+			],
+			"published": "2026-07-07"
 		},
 		{
 			"slug": "ij",
@@ -73,7 +75,8 @@
 						"id": "tbl-views"
 					}
 				}
-			]
+			],
+			"published": "2026-07-07"
 		},
 		{
 			"slug": "k",
@@ -98,7 +101,8 @@
 						"id": "tbl-sessions"
 					}
 				}
-			]
+			],
+			"published": "2026-07-08"
 		},
 		{
 			"slug": "l",
@@ -123,7 +127,8 @@
 						"id": "tbl-grounding"
 					}
 				}
-			]
+			],
+			"published": "2026-07-08"
 		},
 		{
 			"slug": "n",
@@ -148,7 +153,8 @@
 						"id": "tbl-retrieval"
 					}
 				}
-			]
+			],
+			"published": "2026-07-09"
 		},
 		{
 			"slug": "m",
@@ -173,7 +179,8 @@
 						"id": "tbl-memory"
 					}
 				}
-			]
+			],
+			"published": "2026-07-08"
 		},
 		{
 			"slug": "o",
@@ -198,7 +205,8 @@
 						"id": "tbl-positions"
 					}
 				}
-			]
+			],
+			"published": "2026-07-09"
 		},
 		{
 			"slug": "p",
@@ -223,7 +231,8 @@
 						"id": "tbl-teaching"
 					}
 				}
-			]
+			],
+			"published": "2026-07-09"
 		},
 		{
 			"slug": "q",
@@ -248,7 +257,8 @@
 						"id": "tbl-fanout"
 					}
 				}
-			]
+			],
+			"published": "2026-07-09"
 		},
 		{
 			"slug": "s",
@@ -273,7 +283,8 @@
 						"id": "tbl-horizon"
 					}
 				}
-			]
+			],
+			"published": "2026-07-10"
 		},
 		{
 			"slug": "t",
@@ -298,7 +309,8 @@
 						"id": "tbl-memo"
 					}
 				}
-			]
+			],
+			"published": "2026-07-10"
 		},
 		{
 			"slug": "u",
@@ -323,7 +335,8 @@
 						"id": "tbl-dependent"
 					}
 				}
-			]
+			],
+			"published": "2026-07-10"
 		},
 		{
 			"slug": "v",
@@ -347,7 +360,8 @@
 						"summary": "Data table \u2014 win/loss/tie vs the explicit-instruction control, by arm, editor, and judge"
 					}
 				}
-			]
+			],
+			"published": "2026-07-11"
 		},
 		{
 			"slug": "w",
@@ -371,7 +385,8 @@
 						"summary": "Data table \u2014 callbacks by arm, window membership, memo fidelity, and cost"
 					}
 				}
-			]
+			],
+			"published": "2026-07-11"
 		},
 		{
 			"slug": "x",
@@ -395,7 +410,8 @@
 						"summary": "Data table \u2014 anaphora success by carrier, kind, and model, with failure anatomy and cost"
 					}
 				}
-			]
+			],
+			"published": "2026-07-12"
 		},
 		{
 			"slug": "y",
@@ -419,7 +435,8 @@
 						"summary": "Data table \u2014 callbacks, recall, retractions, noise, and cadence by arm and model"
 					}
 				}
-			]
+			],
+			"published": "2026-07-12"
 		},
 		{
 			"slug": "z",
@@ -443,7 +460,8 @@
 						"summary": "Data table \u2014 facts, rules, combined-cell readings, and caching by arm and model"
 					}
 				}
-			]
+			],
+			"published": "2026-07-12"
 		},
 		{
 			"slug": "aa",
@@ -467,7 +485,8 @@
 						"summary": "Data table \u2014 readings by arm, kind, and model, with the refuted prediction marked"
 					}
 				}
-			]
+			],
+			"published": "2026-07-13"
 		},
 		{
 			"slug": "ac",
@@ -491,7 +510,8 @@
 						"summary": "Data table \u2014 outcomes by arm, view, and model"
 					}
 				}
-			]
+			],
+			"published": "2026-07-13"
 		},
 		{
 			"slug": "ad",
@@ -515,7 +535,8 @@
 						"summary": "Data table: per-arm results against the prior bands"
 					}
 				}
-			]
+			],
+			"published": "2026-07-15"
 		},
 		{
 			"slug": "ae",
@@ -539,7 +560,8 @@
 						"summary": "Data table: outcomes by level, arm, and model"
 					}
 				}
-			]
+			],
+			"published": "2026-07-15"
 		},
 		{
 			"slug": "af",
@@ -563,7 +585,8 @@
 						"summary": "Data table: win / loss / tie by arm, editor, and judge"
 					}
 				}
-			]
+			],
+			"published": "2026-07-15"
 		},
 		{
 			"slug": "ah",
@@ -587,7 +610,8 @@
 						"summary": "Data table: read-side results and the cap-edge taxonomy"
 					}
 				}
-			]
+			],
+			"published": "2026-07-16"
 		},
 		{
 			"slug": "ai",
@@ -611,7 +635,8 @@
 						"summary": "Data table: asks by arm, level, and model"
 					}
 				}
-			]
+			],
+			"published": "2026-07-16"
 		},
 		{
 			"slug": "ag",
@@ -635,7 +660,8 @@
 						"summary": "Data table: anaphora-cell outcomes by arm and model"
 					}
 				}
-			]
+			],
+			"published": "2026-07-16"
 		},
 		{
 			"slug": "aj",
@@ -659,7 +685,8 @@
 						"summary": "Data table: recovery by arm, model, and corruption class"
 					}
 				}
-			]
+			],
+			"published": "2026-07-17"
 		},
 		{
 			"slug": "ak",
@@ -683,7 +710,8 @@
 						"summary": "Data table: goal survival at the cap edge by arm and model, pathway split, and pipeline guarantees"
 					}
 				}
-			]
+			],
+			"published": "2026-07-17"
 		},
 		{
 			"slug": "al",
@@ -702,7 +730,8 @@
 					"figure": null,
 					"table": null
 				}
-			]
+			],
+			"published": "2026-07-18"
 		},
 		{
 			"slug": "am",
@@ -721,7 +750,8 @@
 					"figure": null,
 					"table": null
 				}
-			]
+			],
+			"published": "2026-07-18"
 		},
 		{
 			"slug": "an",
@@ -740,7 +770,8 @@
 					"figure": null,
 					"table": null
 				}
-			]
+			],
+			"published": "2026-07-22"
 		},
 		{
 			"slug": "ao",
@@ -759,7 +790,8 @@
 					"figure": null,
 					"table": null
 				}
-			]
+			],
+			"published": "2026-07-23"
 		}
 	]
 }
