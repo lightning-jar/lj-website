@@ -3,9 +3,38 @@
 import LinkButton from "$components/LinkButton.svelte";
 import LinkText from "$components/LinkText.svelte";
 
+import { page } from "$app/state";
+
+import { jsonLdScript, LJ_PUBLISHER } from "$utils/jsonLd";
+
 // props
 let { data } = $props();
+
+// Article structured data (about the customer's organization)
+let storyLd = $derived.by(() => {
+	const url = `https://www.lightningjar.com/customer-stories/${page.params.slug}`;
+	return jsonLdScript({
+		"@context": "https://schema.org",
+		"@type": "Article",
+		headline: data.banner?.heading || data.title,
+		description: data.meta?.description || data.excerpt || undefined,
+		image: data.thumbnailImage?.src || undefined,
+		about: data.customer?.name
+			? { "@type": "Organization", name: data.customer.name }
+			: undefined,
+		author: LJ_PUBLISHER,
+		publisher: LJ_PUBLISHER,
+		keywords: data.tags?.length ? data.tags.join(", ") : undefined,
+		mainEntityOfPage: { "@type": "WebPage", "@id": url },
+		url,
+	});
+});
 </script>
+
+<svelte:head>
+  <!-- serializer escapes < -->
+  {@html storyLd}
+</svelte:head>
 
 <!-- skip link  -->
 <a class="sr-only" href="#main">Skip to main content</a>

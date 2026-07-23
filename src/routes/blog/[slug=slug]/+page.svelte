@@ -1,6 +1,9 @@
 <script lang="ts">
 import { addIntegration } from "@sentry/sveltekit";
 
+import { page } from "$app/state";
+
+import { jsonLdScript, LJ_PUBLISHER } from "$utils/jsonLd";
 import { safeLinkUrl } from "$utils/safeLinkUrl";
 
 let { data } = $props();
@@ -10,6 +13,33 @@ let formattedDate = $derived(
 );
 
 let image = $derived(safeLinkUrl(data.image));
+
+// BlogPosting structured data
+let articleLd = $derived.by(() => {
+	const url = `https://www.lightningjar.com/blog/${page.params.slug}`;
+	return jsonLdScript({
+		"@context": "https://schema.org",
+		"@type": "BlogPosting",
+		headline: data.title,
+		description: data.meta?.description || undefined,
+		datePublished: data.meta?.date || undefined,
+		image: image || undefined,
+		author: data.authorProfile
+			? {
+					"@type": "Person",
+					name: data.authorProfile.name,
+					jobTitle: data.authorProfile.title || undefined,
+					worksFor: { "@type": "Organization", name: "Lightning Jar" },
+				}
+			: data.meta?.author
+				? { "@type": "Person", name: data.meta.author }
+				: LJ_PUBLISHER,
+		publisher: LJ_PUBLISHER,
+		keywords: data.meta?.tags?.length ? data.meta.tags.join(", ") : undefined,
+		mainEntityOfPage: { "@type": "WebPage", "@id": url },
+		url,
+	});
+});
 
 import type { ArticleSource } from "$types/ArticleSource";
 
@@ -28,6 +58,11 @@ function getAttributionFromSource(source: ArticleSource): string {
 	return array.join(", ");
 }
 </script>
+
+<svelte:head>
+  <!-- eslint-disable-next-line svelte/no-at-html-tags — serializer escapes < -->
+  {@html articleLd}
+</svelte:head>
 
 <!-- skip link  -->
 <a class="sr-only" href="#main">Skip to main content</a>

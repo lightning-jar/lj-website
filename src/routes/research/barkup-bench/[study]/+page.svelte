@@ -1,7 +1,40 @@
 <script lang="ts">
 import { onMount } from "svelte";
 
+import { jsonLdScript, LJ_PUBLISHER } from "$utils/jsonLd";
+
 let { data } = $props();
+
+// ScholarlyArticle structured data: pre-registered study in the
+// Barkup Bench series, with the registration + report as citations.
+const studyLd = $derived.by(() => {
+	const url = `https://www.lightningjar.com/research/barkup-bench/${data.study.slug}`;
+	return jsonLdScript({
+		"@context": "https://schema.org",
+		"@type": "ScholarlyArticle",
+		headline: `Study ${data.study.letters}: ${data.study.title}`,
+		about:
+			"Pre-registered benchmark study of large language models reading and editing structured document trees",
+		datePublished: data.study.published || undefined,
+		isPartOf: {
+			"@type": "CreativeWorkSeries",
+			name: "Barkup Bench",
+			url: "https://www.lightningjar.com/research/barkup-bench",
+		},
+		author: LJ_PUBLISHER,
+		publisher: LJ_PUBLISHER,
+		citation: [
+			...(data.study.brief
+				? [
+						`https://github.com/kevinpeckham/barkup-bench/blob/main/docs/${data.study.brief}`,
+					]
+				: []),
+			"https://github.com/kevinpeckham/barkup-bench/blob/main/REPORT.md",
+		],
+		mainEntityOfPage: { "@type": "WebPage", "@id": url },
+		url,
+	});
+});
 
 const eyebrowCls =
 	"font-mono text-[12.5px] tracking-[0.14em] uppercase text-maximumYellow mb-1.5";
@@ -35,6 +68,11 @@ onMount(async () => {
 	initBenchCharts();
 });
 </script>
+
+<svelte:head>
+	<!-- serializer escapes < -->
+	{@html studyLd}
+</svelte:head>
 
 <div
 	class="page-x-padding main-y-padding grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-x-12 gap-y-16 bg-oxford text-cultured"
