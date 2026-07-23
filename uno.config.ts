@@ -187,6 +187,11 @@ export default defineConfig({
 			"text-balance font-700 font-display text-maximumYellow mb-3 text-32px lg:text-42px leading-snug",
 		],
 		[
+			// Same treatment as "display" under the semantic heading scale.
+			"heading-1",
+			"text-balance font-700 font-display text-maximumYellow mb-3 text-32px lg:text-42px leading-snug",
+		],
+		[
 			"heading-2",
 			"font-700 text-maximumYellow mb-3 text-20px lg:text-24px font-serif",
 		],

@@ -27,7 +27,7 @@ onMount(async () => {
 		</nav>
 
 		<p class={eyebrowCls}>Study {data.study.letters} · {data.study.track}</p>
-		<h1 class="text-[1.6rem] font-700 tracking-[-0.01em] mb-6">
+		<h1 class="heading-1">
 			{data.study.title}
 		</h1>
 
