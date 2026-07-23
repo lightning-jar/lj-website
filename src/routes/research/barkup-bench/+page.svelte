@@ -4,15 +4,42 @@ import { onMount } from "svelte";
 // components
 import LinkButton from "$components/LinkButton.svelte";
 
-// dashboard content and chart data
-import bench from "./bench-content.json";
 // shared headline numbers: src/lib/data/research-stats.json
 import researchStats from "$data/research-stats.json";
+
+// dashboard content and chart data
+import bench from "./bench-content.json";
+import benchStudies from "./bench-studies.json";
 
 // props
 let { data } = $props();
 
+// Track-grouped study index (insertion order of first appearance).
+const tracks: { track: string; studies: typeof benchStudies.studies }[] = [];
+for (const study of benchStudies.studies) {
+	let group = tracks.find((t) => t.track === study.track);
+	if (!group) {
+		group = { track: study.track, studies: [] };
+		tracks.push(group);
+	}
+	group.studies.push(study);
+}
+
+// Old deep links used #sec-* anchors on this page; those sections now
+// live on per-study pages — forward them.
+const movedAnchors = new Map(
+	benchStudies.studies.flatMap((s) =>
+		s.sections.map((sec) => [sec.id, s.slug] as const),
+	),
+);
+
 onMount(async () => {
+	const hash = location.hash.replace(/^#/, "");
+	const moved = movedAnchors.get(hash);
+	if (moved) {
+		location.replace(`/research/barkup-bench/${moved}#${hash}`);
+		return;
+	}
 	const { initBenchCharts } = await import("./bench-charts.js");
 	initBenchCharts();
 });
@@ -134,6 +161,38 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
         {/if}
       </section>
     {/each}
+
+    <section class="mt-14" id="studies">
+      <p class={eyebrowCls}>The follow-up series · studies G–AO</p>
+      <h2 class="text-[1.22rem] font-600 tracking-[-0.01em] mb-1">
+        Every study, one page each
+      </h2>
+      <p class="text-16px {proseCls} mb-6">
+        The main study above set the baseline; everything since has been a
+        pre-registered follow-up, each with its own charts, gates, and
+        verdict. Grouped by theme:
+      </p>
+      {#each tracks as group (group.track)}
+        <h3 class="font-mono text-[13px] tracking-[0.12em] uppercase text-maximumYellow mt-7 mb-2.5">
+          {group.track}
+        </h3>
+        <ul class="grid grid-cols-1 gap-3">
+          {#each group.studies as study (study.slug)}
+            <li class="text-15px {proseCls}">
+              <a
+                href="/research/barkup-bench/{study.slug}"
+                class="font-600 underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4 hover:text-maximumYellow"
+              >
+                Study {study.letters} · {study.title}
+              </a>
+              <span class="block text-14px text-[#c3c9d4] mt-0.5">
+                {study.indexLine}
+              </span>
+            </li>
+          {/each}
+        </ul>
+      {/each}
+    </section>
 
     <footer
       class="mt-14 pt-4.5 border-t border-white/14 text-15px {proseCls}"

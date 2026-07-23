@@ -2,6 +2,10 @@
 // Chart rendering for the barkup-bench dashboard, transplanted from the
 // original results artifact. Runs on mount; builds inline SVGs from DATA.
 export function initBenchCharts() {
+	// Absent-mount tolerance (per-study pages render a subset of
+	// figures): missing ids write into a detached node instead of throwing.
+	const byId = (id) =>
+		document.getElementById(id) ?? document.createElement("div");
 	const DATA = {
 		crossover: {
 			A: [
@@ -228,7 +232,7 @@ export function initBenchCharts() {
 	}
 
 	function legend(el) {
-		document.getElementById(el).innerHTML = CONDITIONS.map(
+		byId(el).innerHTML = CONDITIONS.map(
 			(c) =>
 				`<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:${COLOR[c]}"></span><span class="font-mono font-700 text-white">${c}</span> ${COND_NAMES[c]}</span>`,
 		).join("");
@@ -238,7 +242,7 @@ export function initBenchCharts() {
 	legend("legend-3");
 
 	// --- shared tooltip ---
-	const tooltip = document.getElementById("tooltip");
+	const tooltip = byId("tooltip");
 	function showTip(evt, text) {
 		tooltip.textContent = text;
 		tooltip.style.opacity = "1";
@@ -333,7 +337,7 @@ export function initBenchCharts() {
 			labels += `<text font-size="12" font-weight="700" x="${l.x}" y="${l.y}" fill="${COLOR[l.c]}">${l.c} · ${opts.endLabel(l.c)}</text>`;
 		}
 		const svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(opts.aria)}" style="min-width:640px;display:block">${g}${marks}${labels}${hits}</svg>`;
-		const el = document.getElementById(mount);
+		const el = byId(mount);
 		el.innerHTML = svg + figCap("tree size bucket");
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
@@ -413,7 +417,7 @@ export function initBenchCharts() {
 				hits += `<circle cx="${x}" cy="${cy}" r="13" fill="transparent" data-tip="${esc(`${c} — ${COND_NAMES[c]}\n${row.model}: ${cell.rate}%\n${cell.ok}/40 · CI [${cell.low}%, ${cell.high}%]`)}"/>`;
 			});
 		});
-		const el = document.getElementById("fig-reference");
+		const el = byId("fig-reference");
 		el.innerHTML =
 			`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Reference-task success per model and condition; tools conditions collapse for haiku and gemini." style="min-width:640px;display:block">${g}${marks}${hits}</svg>` +
 			figCap("reference-task success (n = 40 per cell)");
@@ -445,7 +449,7 @@ export function initBenchCharts() {
 			html += "</tr>";
 		}
 		html += "</tbody></table>";
-		document.getElementById("fig-heat").innerHTML = html;
+		byId("fig-heat").innerHTML = html;
 	})();
 
 	// --- Study G footgun dumbbell ---
@@ -560,7 +564,7 @@ export function initBenchCharts() {
 				) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-footgun");
+		const el = byId("fig-footgun");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -587,7 +591,7 @@ export function initBenchCharts() {
 
 	// --- Study H size extension ---
 	(() => {
-		const el = document.getElementById("legend-4");
+		const el = byId("legend-4");
 		el.innerHTML =
 			["A", "E", "F"]
 				.map(
@@ -722,7 +726,7 @@ export function initBenchCharts() {
 				'">' +
 				l.text +
 				"</text>";
-		const el2 = document.getElementById("fig-sizeext");
+		const el2 = byId("fig-sizeext");
 		el2.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -830,7 +834,7 @@ export function initBenchCharts() {
 			FV: "focused view (placeholders)",
 			FT: "minimal view (omission counts)",
 		};
-		document.getElementById("legend-5").innerHTML =
+		byId("legend-5").innerHTML =
 			["F", "FV", "FT"]
 				.map(
 					(c) =>
@@ -961,7 +965,7 @@ export function initBenchCharts() {
 				'">' +
 				l.text +
 				"</text>";
-		const el = document.getElementById("fig-views");
+		const el = byId("fig-views");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -1076,7 +1080,7 @@ export function initBenchCharts() {
 			"K-view": "fresh minimal view every turn",
 			"K-rewrite": "whole-tree rewrite (anchor)",
 		};
-		document.getElementById("legend-6").innerHTML =
+		byId("legend-6").innerHTML =
 			Object.keys(KNAMES)
 				.map(
 					(p) =>
@@ -1211,7 +1215,7 @@ export function initBenchCharts() {
 				'">' +
 				l.text +
 				"</text>";
-		const el = document.getElementById("fig-sessions");
+		const el = byId("fig-sessions");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -1311,7 +1315,7 @@ export function initBenchCharts() {
 				},
 			},
 		];
-		document.getElementById("legend-7").innerHTML = LCOND.map(
+		byId("legend-7").innerHTML = LCOND.map(
 			(c) =>
 				'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
 				LCOLOR[c] +
@@ -1424,7 +1428,7 @@ export function initBenchCharts() {
 					'"/>';
 			}
 		});
-		const el = document.getElementById("fig-grounding");
+		const el = byId("fig-grounding");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -1554,7 +1558,7 @@ export function initBenchCharts() {
 			"M-window": "2-exchange window",
 			"M-stateless": "no history at all",
 		};
-		document.getElementById("legend-8").innerHTML =
+		byId("legend-8").innerHTML =
 			Object.keys(MNAMES)
 				.map(
 					(p) =>
@@ -1688,7 +1692,7 @@ export function initBenchCharts() {
 				'">' +
 				l.text +
 				"</text>";
-		const el = document.getElementById("fig-memory");
+		const el = byId("fig-memory");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -1797,7 +1801,7 @@ export function initBenchCharts() {
 				},
 			},
 		];
-		document.getElementById("legend-9").innerHTML = NCOND.map(
+		byId("legend-9").innerHTML = NCOND.map(
 			(c) =>
 				'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
 				NCOLOR[c] +
@@ -1911,7 +1915,7 @@ export function initBenchCharts() {
 					'"/>';
 			}
 		});
-		const el = document.getElementById("fig-retrieval");
+		const el = byId("fig-retrieval");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -2068,7 +2072,7 @@ export function initBenchCharts() {
 				},
 			},
 		];
-		document.getElementById("legend-10").innerHTML = OCOND.map(
+		byId("legend-10").innerHTML = OCOND.map(
 			(c) =>
 				'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
 				OCOLOR[c] +
@@ -2182,7 +2186,7 @@ export function initBenchCharts() {
 					'"/>';
 			}
 		});
-		const el = document.getElementById("fig-positions");
+		const el = byId("fig-positions");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -2335,7 +2339,7 @@ export function initBenchCharts() {
 				},
 			},
 		];
-		document.getElementById("legend-11").innerHTML = PCOND.map(
+		byId("legend-11").innerHTML = PCOND.map(
 			(c) =>
 				'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
 				PCOLOR[c] +
@@ -2449,7 +2453,7 @@ export function initBenchCharts() {
 					'"/>';
 			}
 		});
-		const el = document.getElementById("fig-teaching");
+		const el = byId("fig-teaching");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -2564,7 +2568,7 @@ export function initBenchCharts() {
 			"Q-search": "search recipe",
 			"R-decomp": "decomposition (Study R)",
 		};
-		document.getElementById("legend-12").innerHTML =
+		byId("legend-12").innerHTML =
 			Object.keys(QNAMES)
 				.map(
 					(c) =>
@@ -2696,7 +2700,7 @@ export function initBenchCharts() {
 				'">' +
 				l.text +
 				"</text>";
-		const el = document.getElementById("fig-fanout");
+		const el = byId("fig-fanout");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -2835,7 +2839,7 @@ export function initBenchCharts() {
 			"S-view": "full history + fresh view per turn (K-view recipe)",
 			"S-system": "no history + two worked examples (P-system recipe)",
 		};
-		document.getElementById("legend-13").innerHTML =
+		byId("legend-13").innerHTML =
 			Object.keys(SNAMES)
 				.map(
 					(c) =>
@@ -2965,7 +2969,7 @@ export function initBenchCharts() {
 				lab.text +
 				"</text>";
 		}
-		const el = document.getElementById("fig-horizon");
+		const el = byId("fig-horizon");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -3023,7 +3027,7 @@ export function initBenchCharts() {
 
 	// --- data tables ---
 	function table(mount, head, rows) {
-		document.getElementById(mount).innerHTML =
+		byId(mount).innerHTML =
 			`<table class="border-collapse mt-2.5 text-14px tabular-nums"><thead><tr>${head.map((h, i) => `<th scope="col" class="border border-white/14 px-2.5 py-1 text-[#c3c9d4] font-600 ${i === 0 ? "text-left" : "text-right"}">${h}</th>`).join("")}</tr></thead><tbody>` +
 			rows
 				.map(
@@ -3130,7 +3134,7 @@ export function initBenchCharts() {
 				},
 			},
 		];
-		document.getElementById("legend-14").innerHTML =
+		byId("legend-14").innerHTML =
 			TARMS.map(
 				(c) =>
 					'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
@@ -3272,7 +3276,7 @@ export function initBenchCharts() {
 				) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-memo");
+		const el = byId("fig-memo");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -3428,7 +3432,7 @@ export function initBenchCharts() {
 				},
 			},
 		];
-		document.getElementById("legend-15").innerHTML = UARMS.map(
+		byId("legend-15").innerHTML = UARMS.map(
 			(c) =>
 				'<span class="inline-flex items-center gap-[7px]"><span class="inline-block w-3.5 h-1 rounded-sm" style="background:' +
 				UCOLOR[c] +
@@ -3545,7 +3549,7 @@ export function initBenchCharts() {
 				) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-dependent");
+		const el = byId("fig-dependent");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -3660,7 +3664,7 @@ export function initBenchCharts() {
 				},
 			},
 		];
-		document.getElementById("legend-16").innerHTML =
+		byId("legend-16").innerHTML =
 			VARMS.map(
 				(c) =>
 					'<span class="key"><span class="chip" style="background:' +
@@ -3776,7 +3780,7 @@ export function initBenchCharts() {
 				) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-goals");
+		const el = byId("fig-goals");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -3874,7 +3878,7 @@ export function initBenchCharts() {
 				},
 			},
 		];
-		document.getElementById("legend-17").innerHTML =
+		byId("legend-17").innerHTML =
 			WARMS.map(
 				(c) =>
 					'<span class="key"><span class="chip" style="background:' +
@@ -4044,7 +4048,7 @@ export function initBenchCharts() {
 					'"/>';
 			}
 		});
-		const el = document.getElementById("fig-extraction");
+		const el = byId("fig-extraction");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -4283,7 +4287,7 @@ export function initBenchCharts() {
 				},
 			},
 		];
-		document.getElementById("legend-18").innerHTML = XARMS.map(
+		byId("legend-18").innerHTML = XARMS.map(
 			(c) =>
 				'<span class="key"><span class="chip" style="background:' +
 				XCOLOR[c] +
@@ -4403,7 +4407,7 @@ export function initBenchCharts() {
 				) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-anaphora");
+		const el = byId("fig-anaphora");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -4583,7 +4587,7 @@ export function initBenchCharts() {
 				},
 			},
 		];
-		document.getElementById("legend-19").innerHTML =
+		byId("legend-19").innerHTML =
 			YARMS.map(
 				(c) =>
 					'<span class="key"><span class="chip" style="background:' +
@@ -4686,7 +4690,7 @@ export function initBenchCharts() {
 				) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-speech");
+		const el = byId("fig-speech");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -4751,7 +4755,7 @@ export function initBenchCharts() {
 				cells: { "Z-full": [6, 6], "Z-slice": [0, 12], "Z-memo": [4, 8] },
 			},
 		];
-		document.getElementById("legend-20").innerHTML =
+		byId("legend-20").innerHTML =
 			'<span class="key"><span class="chip" style="background:' +
 			ZCOLOR.both +
 			'"></span>satisfied BOTH (format + product™ appended)</span>' +
@@ -4860,7 +4864,7 @@ export function initBenchCharts() {
 				) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-standing");
+		const el = byId("fig-standing");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -4948,7 +4952,7 @@ export function initBenchCharts() {
 			},
 		];
 		// memo-arm literal on opus/sonnet is the countermand trampling (enforced ™), not form-strictness
-		document.getElementById("legend-21").innerHTML =
+		byId("legend-21").innerHTML =
 			AARMS.map(
 				(c) =>
 					'<span class="key"><span class="chip" style="background:' +
@@ -5054,7 +5058,7 @@ export function initBenchCharts() {
 				) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-conflict");
+		const el = byId("fig-conflict");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -5122,7 +5126,7 @@ export function initBenchCharts() {
 		const MODELS = ["sonnet-4.5", "gemini-3.5-flash", "opus-4.8"];
 		const CASK = "#199e70",
 			CGUESS = "#e66767";
-		document.getElementById("legend-22").innerHTML =
+		byId("legend-22").innerHTML =
 			'<span class="key"><span class="chip" style="background:' +
 			CASK +
 			'"></span>asked (named the exact missing node)</span>' +
@@ -5230,7 +5234,7 @@ export function initBenchCharts() {
 				) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-ask");
+		const el = byId("fig-ask");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -5324,7 +5328,7 @@ export function initBenchCharts() {
 		];
 		const CBAND = "#8b93a3",
 			COPUS = "#199e70";
-		document.getElementById("legend-23").innerHTML =
+		byId("legend-23").innerHTML =
 			'<span class="key"><span class="chip" style="background:' +
 			CBAND +
 			'"></span>prior tiers, weakest to best measured (Studies F, I/J, N, K/M/P, Q)</span>' +
@@ -5406,7 +5410,7 @@ export function initBenchCharts() {
 				esc(row.label + "\n" + row.tip) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-opus");
+		const el = byId("fig-opus");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -5510,7 +5514,7 @@ export function initBenchCharts() {
 				],
 			},
 		];
-		document.getElementById("legend-24").innerHTML =
+		byId("legend-24").innerHTML =
 			SERIES.map(
 				(m) =>
 					'<span class="key"><span class="chip" style="background:' +
@@ -5604,7 +5608,7 @@ export function initBenchCharts() {
 					'"/>';
 			});
 		}
-		const el = document.getElementById("fig-calibration");
+		const el = byId("fig-calibration");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -5695,7 +5699,7 @@ export function initBenchCharts() {
 		const CWIN = "#199e70",
 			CTIE = "#8b93a3",
 			CLOSS = "#e66767";
-		document.getElementById("legend-25").innerHTML =
+		byId("legend-25").innerHTML =
 			'<span class="key"><span class="chip" style="background:' +
 			CWIN +
 			'"></span>arm wins</span>' +
@@ -5785,7 +5789,7 @@ export function initBenchCharts() {
 				esc(row.editor + " · " + row.arm + "\n" + row.tip) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-restate");
+		const el = byId("fig-restate");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -5861,7 +5865,7 @@ export function initBenchCharts() {
 				tip: "K=20 + a 21st declaration: 10/10 cells lost a note\nover-sent 21 notes every time; the shipped clamp kept the first 20\nvictim: a GOAL note in 10/10",
 			},
 		];
-		document.getElementById("legend-26").innerHTML =
+		byId("legend-26").innerHTML =
 			'<span class="key"><span class="chip" style="background:#199e70"></span>clean full-replace (nothing lost)</span>' +
 			'<span class="key"><span class="chip" style="background:#c98500"></span>model pruned a note (silent)</span>' +
 			'<span class="key"><span class="chip" style="background:#e66767"></span>shipped clamp cut a note (silent)</span>' +
@@ -5936,7 +5940,7 @@ export function initBenchCharts() {
 				esc(row.label + " (of " + denom + ")\n" + row.tip) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-saturation");
+		const el = byId("fig-saturation");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -6003,7 +6007,7 @@ export function initBenchCharts() {
 		];
 		const CCONTROL = "#8b93a3",
 			CRULE2 = "#3987e5";
-		document.getElementById("legend-27").innerHTML =
+		byId("legend-27").innerHTML =
 			'<span class="key"><span class="chip" style="background:' +
 			CCONTROL +
 			'"></span>shipped sentence alone (contemporaneous control)</span>' +
@@ -6095,7 +6099,7 @@ export function initBenchCharts() {
 				esc(row.model + "\n" + row.tip) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-multiplicity");
+		const el = byId("fig-multiplicity");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -6203,7 +6207,7 @@ export function initBenchCharts() {
 		const CASK = "#3987e5",
 			CSOLVE = "#199e70",
 			CSILENT = "#e66767";
-		document.getElementById("legend-28").innerHTML =
+		byId("legend-28").innerHTML =
 			'<span class="key"><span class="chip" style="background:' +
 			CASK +
 			'"></span>asked</span>' +
@@ -6289,7 +6293,7 @@ export function initBenchCharts() {
 				esc(row.label + "\n" + row.tip) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-anaphora-hatch");
+		const el = byId("fig-anaphora-hatch");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -6354,7 +6358,7 @@ export function initBenchCharts() {
 			CCODES = "#c98500",
 			CBARE = "#8b93a3";
 		const ARMC = [CSTRUCT, CCODES, CBARE];
-		document.getElementById("legend-29").innerHTML =
+		byId("legend-29").innerHTML =
 			'<span class="key"><span class="chip" style="background:' +
 			CSTRUCT +
 			'"></span>full structured issues</span>' +
@@ -6448,7 +6452,7 @@ export function initBenchCharts() {
 				esc(row.model + "\n" + row.tip) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-correction");
+		const el = byId("fig-correction");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +
@@ -6528,7 +6532,7 @@ export function initBenchCharts() {
 		];
 		const CCONTROL = "#8b93a3",
 			CEVICT = "#199e70";
-		document.getElementById("legend-30").innerHTML =
+		byId("legend-30").innerHTML =
 			'<span class="key"><span class="chip" style="background:' +
 			CCONTROL +
 			'"></span>silent clamp (control)</span>' +
@@ -6619,7 +6623,7 @@ export function initBenchCharts() {
 				esc(row.model + "\n" + row.tip) +
 				'"/>';
 		});
-		const el = document.getElementById("fig-eviction");
+		const el = byId("fig-eviction");
 		el.innerHTML =
 			'<svg viewBox="0 0 ' +
 			W +

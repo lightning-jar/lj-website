@@ -45,7 +45,7 @@ const plays: Play[] = [
 const result = applyAnchoredPatch(grammar, storedTree, JSON.parse(reply));
 if (!result.ok) return retryWithFeedback(result.issues); // verbatim
 persist(result.node); // the input tree is never mutated`,
-		measured: `Anchored patches held 87 to 100% where whole-document rewrite fell to 0 to 80% on the cheap tier (<a class="${linkCls}" href="${dash}#sec-sizeext">chart</a>). Across the whole series, zero failures were ever caused by a model mangling a stable id. One honest footnote from <a class="${linkCls}" href="${dash}#sec-correction">Study AJ</a>: the "verbatim" in the correction round is for you, not the model. With the feedback text as the only variable, recovery from seeded failures was at parity across all three models whether the model saw the full structured issues, bare codes, or nothing but "the patch was invalid." Keep sending the issues because they cost nothing and make correction logs debuggable, not because the loop depends on them. Write-up: <a class="${linkCls}" href="/blog/we-found-the-crossover">We Found the Crossover</a>.`,
+		measured: `Anchored patches held 87 to 100% where whole-document rewrite fell to 0 to 80% on the cheap tier (<a class="${linkCls}" href="${dash}/h#sec-sizeext">chart</a>). Across the whole series, zero failures were ever caused by a model mangling a stable id. One honest footnote from <a class="${linkCls}" href="${dash}/aj#sec-correction">Study AJ</a>: the "verbatim" in the correction round is for you, not the model. With the feedback text as the only variable, recovery from seeded failures was at parity across all three models whether the model saw the full structured issues, bare codes, or nothing but "the patch was invalid." Keep sending the issues because they cost nothing and make correction logs debuggable, not because the loop depends on them. Write-up: <a class="${linkCls}" href="/blog/we-found-the-crossover">We Found the Crossover</a>.`,
 	},
 	{
 		id: "focused-views",
@@ -63,7 +63,7 @@ persist(result.node); // the input tree is never mutated`,
 const view = renderView(grammar, storedTree, {
 	focus: [heroHeadlineId, promoCardTitleId],
 });`,
-		measured: `Target-only views: 0 of 90, every failure a silent invention. Views covering both nodes: 90 of 90 at 25 times less input than the full document (<a class="${linkCls}" href="${dash}#sec-dependent">chart</a>). Write-up: <a class="${linkCls}" href="/blog/the-two-things-your-agent-cant-see">The Two Things Your Agent Can't See</a>.`,
+		measured: `Target-only views: 0 of 90, every failure a silent invention. Views covering both nodes: 90 of 90 at 25 times less input than the full document (<a class="${linkCls}" href="${dash}/u#sec-dependent">chart</a>). Write-up: <a class="${linkCls}" href="/blog/the-two-things-your-agent-cant-see">The Two Things Your Agent Can't See</a>.`,
 	},
 	{
 		id: "one-search-call",
@@ -80,7 +80,7 @@ const view = renderView(grammar, storedTree, {
 function searchTool(query: string): string {
 	return renderSearch(grammar, storedTree, findNodes(storedTree, query));
 }`,
-		measured: `Skeleton plus one search call: oracle-level grounding on the frontier tier, median exactly one call (<a class="${linkCls}" href="${dash}#sec-retrieval">chart</a>). Write-up: <a class="${linkCls}" href="/blog/then-we-found-the-cheap-part">Then We Found the Cheap Part</a>.`,
+		measured: `Skeleton plus one search call: oracle-level grounding on the frontier tier, median exactly one call (<a class="${linkCls}" href="${dash}/n#sec-retrieval">chart</a>). Write-up: <a class="${linkCls}" href="/blog/then-we-found-the-cheap-part">Then We Found the Cheap Part</a>.`,
 	},
 	{
 		id: "worked-examples",
@@ -98,7 +98,7 @@ function searchTool(query: string): string {
 //   -- cache breakpoint --
 //   4. fresh focused view of the current tree state
 //   5. the current request (plus memo and echo, guidelines 05-07)`,
-		measured: `Stateless with two examples ties full history through 36-edit sessions at 5 to 6 times less input (<a class="${linkCls}" href="${dash}#sec-horizon">chart</a>). Write-ups: <a class="${linkCls}" href="/blog/two-examples-replace-a-memory">Two Examples Replace a Memory</a> and <a class="${linkCls}" href="/blog/the-thirty-sixth-edit">The Thirty-Sixth Edit</a>.`,
+		measured: `Stateless with two examples ties full history through 36-edit sessions at 5 to 6 times less input (<a class="${linkCls}" href="${dash}/s#sec-horizon">chart</a>). Write-ups: <a class="${linkCls}" href="/blog/two-examples-replace-a-memory">Two Examples Replace a Memory</a> and <a class="${linkCls}" href="/blog/the-thirty-sixth-edit">The Thirty-Sixth Edit</a>.`,
 	},
 	{
 		id: "memo",
@@ -109,7 +109,7 @@ function searchTool(query: string): string {
 			`"Rename it to the codename we settled on" fails a stateless editor 100% of the time by construction: the answer lives in a conversation the model no longer sees. A short app-held memo of declared facts, standing rules, and goals, appended to every request, recovered every such callback at 2% extra cost.`,
 			`The memo also carries qualitative goals at full parity with restating them in the request, where merely showing the model the document node the goal lives in lost 117 of 120 judged comparisons. Views carry values; memos carry goals. And you can delegate the writing: agent-extracted memos tied a perfect-oracle baseline on all three models tested, handled retractions, survived casual human phrasing at exact parity, and produced zero false notes from 432 conversational chatter baits.`,
 			`One thing NOT to add (Study AF): a clause telling the agent to restate the goal in its own words before a goal-directed rewrite. We measured it at perfect compliance and zero wins in ninety judged comparisons; the model says the goal accurately and then orbits it anyway, and on the memo path the ceremony measures neutral to mildly negative. Prompt clauses that dramatize reasoning are not context that changes it. Put the goal in the memo or the instruction, and stop there; the memo's goal-carriage parity replicated contemporaneously on a third model tier in the same study.`,
-			`And mind the cap (Study AH): the memo is measured flawless to twenty notes (recall perfect at every position, rules applied with zero cross-note contamination, full-replace lossless), but when a twenty-first declaration arrives at a full memo, a note dies every time, silently, and in 30 of 30 measured cells the victim was a goal, because the block renders goals last and both the clamp and the models eat the tail. If you enforce a cap, evict the oldest fact deterministically in your update path; never let a silent truncation choose, because it will choose the goals. That eviction policy is now measured, not just designed (<a class="${linkCls}" href="${dash}#sec-eviction">Study AK</a>): every over-cap update became a designed eviction (19 of 19, zero goals evicted), goal survival at the cap edge went 0 to 10 of 10 on opus, and the pipeline is a verified no-op below the cap. The remaining exposure is the model pruning a note before it sends the list, which no app-side code can undo; echo any eviction back to the agent in the tool result, since the one frontier model that read that notice responded by consolidating the memo losslessly. The prompt-side fence for that pathway is now measured too (<a class="${linkCls}" href="${dash}#sec-fence">Study AL</a>): directionally right at zero cost, but its gate failed on a prune baseline that halved between measurements three days apart — unproven, not disproven, so it stays unshipped. And the eviction notice itself became the recovery mechanism (<a class="${linkCls}" href="${dash}#sec-notice">Study AM</a>, shipped v3.215.0): one sentence appended to the notice inviting consolidation turns the frontier tier's occasional spontaneous compression into 40 of 40 lossless cap-edge recoveries — every needle kept, kinds preserved, ~570 extra tokens — while sub-frontier tiers ignore it harmlessly. So the full measured stack at the cap is: deterministic goal-safe eviction, the loss echoed to the agent, and an invitation to consolidate that, on the shipped tier, gets everything back.`,
+			`And mind the cap (Study AH): the memo is measured flawless to twenty notes (recall perfect at every position, rules applied with zero cross-note contamination, full-replace lossless), but when a twenty-first declaration arrives at a full memo, a note dies every time, silently, and in 30 of 30 measured cells the victim was a goal, because the block renders goals last and both the clamp and the models eat the tail. If you enforce a cap, evict the oldest fact deterministically in your update path; never let a silent truncation choose, because it will choose the goals. That eviction policy is now measured, not just designed (<a class="${linkCls}" href="${dash}/ak#sec-eviction">Study AK</a>): every over-cap update became a designed eviction (19 of 19, zero goals evicted), goal survival at the cap edge went 0 to 10 of 10 on opus, and the pipeline is a verified no-op below the cap. The remaining exposure is the model pruning a note before it sends the list, which no app-side code can undo; echo any eviction back to the agent in the tool result, since the one frontier model that read that notice responded by consolidating the memo losslessly. The prompt-side fence for that pathway is now measured too (<a class="${linkCls}" href="${dash}/al#sec-fence">Study AL</a>): directionally right at zero cost, but its gate failed on a prune baseline that halved between measurements three days apart — unproven, not disproven, so it stays unshipped. And the eviction notice itself became the recovery mechanism (<a class="${linkCls}" href="${dash}/am#sec-notice">Study AM</a>, shipped v3.215.0): one sentence appended to the notice inviting consolidation turns the frontier tier's occasional spontaneous compression into 40 of 40 lossless cap-edge recoveries — every needle kept, kinds preserved, ~570 extra tokens — while sub-frontier tiers ignore it harmlessly. So the full measured stack at the cap is: deterministic goal-safe eviction, the loss echoed to the agent, and an invitation to consolidate that, on the shipped tier, gets everything back.`,
 		],
 		code: `## Session notes (app-maintained memo)
 Declared facts, standing rules, and goals from this session --
@@ -128,7 +128,7 @@ Goals:
 - The pricing page should read as reassuring, not salesy.`,
 		codeCaption:
 			"The benchmark-validated block, verbatim including the precedence sentence (guideline 06).",
-		measured: `Memo restores history-parity at 1.02 times stateless cost (<a class="${linkCls}" href="${dash}#sec-memo">chart</a>); goals via memo win 117 of 120 over goals via view (<a class="${linkCls}" href="${dash}#sec-goals">chart</a>); agent-written memos tie the oracle (<a class="${linkCls}" href="${dash}#sec-extraction">chart</a>); restate-first ceremony: 0 wins in 90 at perfect compliance (<a class="${linkCls}" href="${dash}#sec-restate">chart</a>); flawless to the twenty-note cap, where the goals tail dies without a guard (<a class="${linkCls}" href="${dash}#sec-saturation">chart</a>). Write-ups: <a class="${linkCls}" href="/blog/views-carry-values-memos-carry-goals">Views Carry Values, Memos Carry Goals</a>, <a class="${linkCls}" href="/blog/who-writes-the-memo">Who Writes the Memo?</a>, and <a class="${linkCls}" href="/blog/repeating-the-goal-doesnt-make-it-yours">Repeating the Goal Doesn't Make It Yours</a>.`,
+		measured: `Memo restores history-parity at 1.02 times stateless cost (<a class="${linkCls}" href="${dash}/t#sec-memo">chart</a>); goals via memo win 117 of 120 over goals via view (<a class="${linkCls}" href="${dash}/v#sec-goals">chart</a>); agent-written memos tie the oracle (<a class="${linkCls}" href="${dash}/w#sec-extraction">chart</a>); restate-first ceremony: 0 wins in 90 at perfect compliance (<a class="${linkCls}" href="${dash}/af#sec-restate">chart</a>); flawless to the twenty-note cap, where the goals tail dies without a guard (<a class="${linkCls}" href="${dash}/ah#sec-saturation">chart</a>). Write-ups: <a class="${linkCls}" href="/blog/views-carry-values-memos-carry-goals">Views Carry Values, Memos Carry Goals</a>, <a class="${linkCls}" href="/blog/who-writes-the-memo">Who Writes the Memo?</a>, and <a class="${linkCls}" href="/blog/repeating-the-goal-doesnt-make-it-yours">Repeating the Goal Doesn't Make It Yours</a>.`,
 	},
 	{
 		id: "precedence",
@@ -138,7 +138,7 @@ Goals:
 			`The memo steers so strongly it has a failure mode: with a standing rule on file ("always include the trademark symbol") and a user asking for a one-off exception ("written plain, no trademark symbol"), the strongest model enforced the memo against the user 12 times out of 12.`,
 			`One sentence inside the memo block header fixed every case: a direct, explicit instruction in the current request overrides any note here for that request. Placement is the whole trick. The same sentence class buried in a styleguide moved nothing; at the point of injury it restored 0 of 12 to 12 of 12 with zero cost to the memo's legitimate steering. The block in guideline 05 already includes it.`,
 		],
-		measured: `Countermands honored: opus 0 of 12 without the clause, 12 of 12 with it (p = .0005); steering preserved 12 of 12 everywhere (<a class="${linkCls}" href="${dash}#sec-conflict">chart</a>).`,
+		measured: `Countermands honored: opus 0 of 12 without the clause, 12 of 12 with it (p = .0005); steering preserved 12 of 12 everywhere (<a class="${linkCls}" href="${dash}/aa#sec-conflict">chart</a>).`,
 	},
 	{
 		id: "last-edit-echo",
@@ -150,7 +150,7 @@ Goals:
 		],
 		code: `Previous edit (applied by the app): set "content" from "Q3 Draft
 Overview" to "Q3 Final Overview" on the text-atom "headline" (id n214).`,
-		measured: `Echo ties full history overall and beat it on opus, 48 of 48 versus 46 of 48, at half the input (<a class="${linkCls}" href="${dash}#sec-anaphora">chart</a>). Write-up: <a class="${linkCls}" href="/blog/undo-that">Undo That</a>.`,
+		measured: `Echo ties full history overall and beat it on opus, 48 of 48 versus 46 of 48, at half the input (<a class="${linkCls}" href="${dash}/x#sec-anaphora">chart</a>). Write-up: <a class="${linkCls}" href="/blog/undo-that">Undo That</a>.`,
 	},
 	{
 		id: "standing-context",
@@ -171,7 +171,7 @@ Overview" to "Q3 Final Overview" on the text-atom "headline" (id n214).`,
 	},
 	{ role: "system", content: view + memo + echo }, // per-request tail
 ];`,
-		measured: `Facts and rules 216 of 216 per arm, zero contamination in 324 cells; cached layout cut effective input cost 25 to 43% (<a class="${linkCls}" href="${dash}#sec-standing">chart</a>); soft phrasing resolved the conflicts a meta-rule could not (<a class="${linkCls}" href="${dash}#sec-conflict">chart</a>).`,
+		measured: `Facts and rules 216 of 216 per arm, zero contamination in 324 cells; cached layout cut effective input cost 25 to 43% (<a class="${linkCls}" href="${dash}/z#sec-standing">chart</a>); soft phrasing resolved the conflicts a meta-rule could not (<a class="${linkCls}" href="${dash}/aa#sec-conflict">chart</a>).`,
 	},
 	{
 		id: "decompose-fanout",
@@ -191,7 +191,7 @@ const targets = selectNodes(storedTree, {
 for (const id of targets) {
 	await applySingleTargetEdit(id, request); // guideline 02 per call
 }`,
-		measured: `Decomposition: 90 of 90 tasks and 674 of 674 subtasks, at a third of the single-prompt cost (<a class="${linkCls}" href="${dash}#sec-fanout">chart</a>). Write-up: <a class="${linkCls}" href="/blog/barkup-0-5-deterministic-selection">Your Code Finds the Targets Now</a>.`,
+		measured: `Decomposition: 90 of 90 tasks and 674 of 674 subtasks, at a third of the single-prompt cost (<a class="${linkCls}" href="${dash}/q#sec-fanout">chart</a>). Write-up: <a class="${linkCls}" href="/blog/barkup-0-5-deterministic-selection">Your Code Finds the Targets Now</a>.`,
 	},
 	{
 		id: "escape-hatch",
@@ -206,7 +206,7 @@ view and not stated in the request, do NOT guess: reply with a single
 line "NEED-INFO: <what is missing and where you would need to read
 it>" instead of a patch.`,
 		codeCaption: "The registered sentence, verbatim.",
-		measured: `Asks on unsolvable tasks: 270 of 270 with the sentence, 0 of 270 without; false asks on solvable twins: zero in 270 (<a class="${linkCls}" href="${dash}#sec-ask">chart</a>); calibration ladder: zero false asks in 90 clear-request cells, resume loop 135 of 135, ambiguity detection frontier-only (<a class="${linkCls}" href="${dash}#sec-calibration">chart</a>); the multiplicity amendment measured and left unshipped on frontier tiers (<a class="${linkCls}" href="${dash}#sec-multiplicity">chart</a>); the discourse gap covered on every tier, with zero tax conditional on guideline 02 (<a class="${linkCls}" href="${dash}#sec-anaphora-hatch">chart</a>). Write-ups: <a class="${linkCls}" href="/blog/the-model-always-knew">The Model Always Knew What It Couldn't See</a> and <a class="${linkCls}" href="/blog/only-the-frontier-knows-when-to-ask">Only the Frontier Knows When to Ask</a>.`,
+		measured: `Asks on unsolvable tasks: 270 of 270 with the sentence, 0 of 270 without; false asks on solvable twins: zero in 270 (<a class="${linkCls}" href="${dash}/ac#sec-ask">chart</a>); calibration ladder: zero false asks in 90 clear-request cells, resume loop 135 of 135, ambiguity detection frontier-only (<a class="${linkCls}" href="${dash}/ae#sec-calibration">chart</a>); the multiplicity amendment measured and left unshipped on frontier tiers (<a class="${linkCls}" href="${dash}/ai#sec-multiplicity">chart</a>); the discourse gap covered on every tier, with zero tax conditional on guideline 02 (<a class="${linkCls}" href="${dash}/ag#sec-anaphora-hatch">chart</a>). Write-ups: <a class="${linkCls}" href="/blog/the-model-always-knew">The Model Always Knew What It Couldn't See</a> and <a class="${linkCls}" href="/blog/only-the-frontier-knows-when-to-ask">Only the Frontier Knows When to Ask</a>.`,
 	},
 ];
 </script>
@@ -244,7 +244,7 @@ it>" instead of a patch.`,
         claude-opus-4.8, the tier our own surfaces ship, with every gate
         passing at or above the prior bands (<a
           class={linkCls}
-          href="{dash}#sec-opus">Study AD</a
+          href="{dash}/ad#sec-opus">Study AD</a
         >). The guidelines below hold from the budget tiers to the
         frontier; the tier-dependent nuances are noted on guidelines 04
         and 10.

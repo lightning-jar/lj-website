@@ -1,8 +1,9 @@
 // data
-import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 
 // types
 import type { FrontMatter } from "$types/FrontMatter";
+
+import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 
 // The benchmark series, in narrative (chronological) order.
 const seriesSlugs = [
