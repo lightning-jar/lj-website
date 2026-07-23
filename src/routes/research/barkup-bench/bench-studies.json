@@ -16,7 +16,8 @@
 					"legendId": null,
 					"figure": {
 						"kind": "figure",
-						"id": "fig-footgun"
+						"id": "fig-footgun",
+						"title": "Reference-Edit Success by Model, Hidden vs. Corrected Tool History"
 					},
 					"table": {
 						"summary": "Reference-family tools success, v1 vs v2",
@@ -60,7 +61,8 @@
 					"legendId": "legend-4",
 					"figure": {
 						"kind": "figure",
-						"id": "fig-sizeext"
+						"id": "fig-sizeext",
+						"title": "Task Success by Tree Size, Edit Strategy, and Model"
 					},
 					"table": {
 						"summary": "Success by model × condition × size (n = 15 per cell)",
@@ -112,7 +114,8 @@
 					"legendId": "legend-5",
 					"figure": {
 						"kind": "figure",
-						"id": "fig-views"
+						"id": "fig-views",
+						"title": "Median Input Tokens by Tree Size and View"
 					},
 					"table": {
 						"summary": "Median input tokens and success by model × input × size (n = 15 per cell)",
@@ -164,7 +167,8 @@
 					"legendId": "legend-6",
 					"figure": {
 						"kind": "figure",
-						"id": "fig-sessions"
+						"id": "fig-sessions",
+						"title": "Per-Step Success Across Session Thirds, by Strategy and Model"
 					},
 					"table": {
 						"summary": "Per-step success by session third, end-state, and mean tokens per session",
@@ -208,7 +212,8 @@
 					"legendId": "legend-7",
 					"figure": {
 						"kind": "figure",
-						"id": "fig-grounding"
+						"id": "fig-grounding",
+						"title": "Grounded-Instruction Success by Grounding Mode and Model"
 					},
 					"table": {
 						"summary": "Success, input tokens, and failure anatomy by condition (45 tasks per cell)",
@@ -260,7 +265,8 @@
 					"legendId": "legend-9",
 					"figure": {
 						"kind": "figure",
-						"id": "fig-retrieval"
+						"id": "fig-retrieval",
+						"title": "Grounded-Instruction Success Across the Retrieval Ladder, by Model"
 					},
 					"table": {
 						"summary": "Success, input, and mechanism by condition (45 tasks per cell)",
@@ -312,7 +318,8 @@
 					"legendId": "legend-8",
 					"figure": {
 						"kind": "figure",
-						"id": "fig-memory"
+						"id": "fig-memory",
+						"title": "Per-Step Success Across Session Thirds, by History Configuration"
 					},
 					"table": {
 						"summary": "Per-step success by session third, end-state, and cost shape",
@@ -360,7 +367,8 @@
 					"legendId": "legend-10",
 					"figure": {
 						"kind": "figure",
-						"id": "fig-positions"
+						"id": "fig-positions",
+						"title": "Late-Session Per-Step Success, History by Position Annotations"
 					},
 					"table": {
 						"summary": "Late-session success, placement class, end-state, and cost by policy",
@@ -408,7 +416,8 @@
 					"legendId": "legend-11",
 					"figure": {
 						"kind": "figure",
-						"id": "fig-teaching"
+						"id": "fig-teaching",
+						"title": "Late-Session Success with Worked Examples vs. Full History"
 					},
 					"table": {
 						"summary": "Late-session success, placements, end-state, and cost by policy",
@@ -460,7 +469,8 @@
 					"legendId": "legend-12",
 					"figure": {
 						"kind": "figure",
-						"id": "fig-fanout"
+						"id": "fig-fanout",
+						"title": "Fan-Out Success by Target Count and Retrieval Condition"
 					},
 					"table": {
 						"summary": "Success by condition × target count, failure anatomy, and tokens",
@@ -512,7 +522,8 @@
 					"legendId": "legend-13",
 					"figure": {
 						"kind": "figure",
-						"id": "fig-horizon"
+						"id": "fig-horizon",
+						"title": "Median Input Tokens per Step Across a 36-Edit Session"
 					},
 					"table": {
 						"summary": "Per-third success, end-state, and tokens per session by recipe",
@@ -560,7 +571,8 @@
 					"legendId": "legend-14",
 					"figure": {
 						"kind": "figure",
-						"id": "fig-memo"
+						"id": "fig-memo",
+						"title": "Ordinary vs. Callback Step Success, by Session Recipe"
 					},
 					"table": {
 						"summary": "Callback and ordinary steps, end-state, and cost by arm",
@@ -612,7 +624,8 @@
 					"legendId": "legend-15",
 					"figure": {
 						"kind": "figure",
-						"id": "fig-dependent"
+						"id": "fig-dependent",
+						"title": "Dependent-Edit Success by View and Model"
 					},
 					"table": {
 						"summary": "Success by arm and kind, failure anatomy, and cost",
@@ -663,7 +676,8 @@
 					"takeaway": null,
 					"legendId": "legend-16",
 					"figure": {
-						"id": "fig-goals"
+						"id": "fig-goals",
+						"title": "Judged Comparisons by Arm vs. the Explicit-Instruction Control"
 					},
 					"table": {
 						"id": "tbl-goals",
@@ -722,7 +736,8 @@
 					"takeaway": null,
 					"legendId": "legend-17",
 					"figure": {
-						"id": "fig-extraction"
+						"id": "fig-extraction",
+						"title": "Callback Success by Memo Author and Model"
 					},
 					"table": {
 						"id": "tbl-extraction",
@@ -773,7 +788,8 @@
 					"takeaway": null,
 					"legendId": "legend-18",
 					"figure": {
-						"id": "fig-anaphora"
+						"id": "fig-anaphora",
+						"title": "Anaphora Resolution by Carrier and Model"
 					},
 					"table": {
 						"id": "tbl-anaphora",
@@ -828,7 +844,8 @@
 					"takeaway": null,
 					"legendId": "legend-19",
 					"figure": {
-						"id": "fig-speech"
+						"id": "fig-speech",
+						"title": "Callback Success by Declaration Phrasing and Model"
 					},
 					"table": {
 						"id": "tbl-speech",
@@ -879,7 +896,8 @@
 					"takeaway": null,
 					"legendId": "legend-20",
 					"figure": {
-						"id": "fig-standing"
+						"id": "fig-standing",
+						"title": "Conflict Readings by Kind and Model"
 					},
 					"table": {
 						"id": "tbl-standing",
@@ -938,7 +956,8 @@
 					"takeaway": null,
 					"legendId": "legend-21",
 					"figure": {
-						"id": "fig-conflict"
+						"id": "fig-conflict",
+						"title": "Literal Readings out of 24, by Phrasing Arm and Model"
 					},
 					"table": {
 						"id": "tbl-conflict",
@@ -997,7 +1016,8 @@
 					"takeaway": null,
 					"legendId": "legend-22",
 					"figure": {
-						"id": "fig-ask"
+						"id": "fig-ask",
+						"title": "Responses to Unsolvable Requests, by Escape-Hatch Arm and Model"
 					},
 					"table": {
 						"id": "tbl-ask",
@@ -1052,7 +1072,8 @@
 					"takeaway": null,
 					"legendId": "legend-23",
 					"figure": {
-						"id": "fig-opus"
+						"id": "fig-opus",
+						"title": "Claude Opus 4.8 vs. Prior Model Bands, by Stack Layer"
 					},
 					"table": {
 						"id": "tbl-opus",
@@ -1107,7 +1128,8 @@
 					"takeaway": null,
 					"legendId": "legend-24",
 					"figure": {
-						"id": "fig-calibration"
+						"id": "fig-calibration",
+						"title": "Ask Rate Across Five Ambiguity Levels, by Model"
 					},
 					"table": {
 						"id": "tbl-calibration",
@@ -1162,7 +1184,8 @@
 					"takeaway": null,
 					"legendId": "legend-25",
 					"figure": {
-						"id": "fig-restate"
+						"id": "fig-restate",
+						"title": "Judged Comparisons for Restate Arms vs. the Explicit-Goal Control"
 					},
 					"table": {
 						"id": "tbl-restate",
@@ -1221,7 +1244,8 @@
 					"takeaway": null,
 					"legendId": "legend-26",
 					"figure": {
-						"id": "fig-saturation"
+						"id": "fig-saturation",
+						"title": "Memo-Update Integrity Below and at the Twenty-Note Cap, by Model"
 					},
 					"table": {
 						"id": "tbl-saturation",
@@ -1280,7 +1304,8 @@
 					"takeaway": null,
 					"legendId": "legend-27",
 					"figure": {
-						"id": "fig-multiplicity"
+						"id": "fig-multiplicity",
+						"title": "Asks on Ambiguous References, With and Without the Multiplicity Clause"
 					},
 					"table": {
 						"id": "tbl-multiplicity",
@@ -1335,7 +1360,8 @@
 					"takeaway": null,
 					"legendId": "legend-28",
 					"figure": {
-						"id": "fig-anaphora-hatch"
+						"id": "fig-anaphora-hatch",
+						"title": "Anaphora Outcomes by Escape-Hatch Arm and Model"
 					},
 					"table": {
 						"id": "tbl-anaphora-hatch",
@@ -1394,7 +1420,8 @@
 					"takeaway": null,
 					"legendId": "legend-29",
 					"figure": {
-						"id": "fig-correction"
+						"id": "fig-correction",
+						"title": "Single-Shot Recovery by Feedback Arm and Model"
 					},
 					"table": {
 						"id": "tbl-correction",
@@ -1449,7 +1476,8 @@
 					"takeaway": null,
 					"legendId": "legend-30",
 					"figure": {
-						"id": "fig-eviction"
+						"id": "fig-eviction",
+						"title": "Goal Survival at the Memo Cap Edge, by Notice Arm and Model"
 					},
 					"table": {
 						"id": "tbl-eviction",

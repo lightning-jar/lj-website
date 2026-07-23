@@ -7,12 +7,9 @@ const eyebrowCls =
 	"font-mono text-[12.5px] tracking-[0.14em] uppercase text-maximumYellow mb-1.5";
 const proseCls = "text-[#e7e9ee] leading-[1.65]";
 
-// The section carrying the study's FIRST chart — a divider renders
-// between its prose and the chart, marking where reading turns into
-// evidence. Studies without charts get no divider.
-const firstFigureSectionId = $derived(
-	data.study.sections.find((s: { figure?: unknown }) => s.figure)?.id,
-);
+// Evidence blocks (charts, tables) are set off from prose and from
+// each other by dividers: an hr before every chart, and between a
+// chart and its table. Studies without charts get no dividers.
 
 onMount(async () => {
 	const { initBenchCharts } = await import("../bench-charts.js");
@@ -56,8 +53,16 @@ onMount(async () => {
 						{@html section.takeaway}
 					</p>
 				{/if}
-				{#if section.figure && section.id === firstFigureSectionId}
+				{#if section.figure}
+					{@const figureTitle =
+						"title" in section.figure ? section.figure.title : undefined}
 					<hr class="mt-9 mb-9 border-white/14" />
+					<!-- invisible outline boundary: evidence h3s (chart/table)
+					     group under this heading rather than the prose section's -->
+					<h2 class="sr-only">Charts & Tables</h2>
+					{#if figureTitle}
+						<h3>{figureTitle}</h3>
+					{/if}
 				{/if}
 				{#if section.legendId}
 					<div
@@ -72,6 +77,9 @@ onMount(async () => {
 					></div>
 				{/if}
 				{#if section.table}
+					{#if section.figure}
+						<hr class="mt-9 mb-9 border-white/14" />
+					{/if}
 					<!-- Tables render expanded (the collapsed details was a space
 					     concession from the single-page dashboard era), introduced
 					     by a real heading in the document outline. -->
