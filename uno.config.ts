@@ -137,6 +137,9 @@ export default defineConfig({
 		"w-full",
 	],
 	shortcuts: [
+		// Legend/key text above charts and diagrams (used by the research
+		// dashboard's generated markup).
+		["key", "font-600 text-[1.1em]"],
 		[
 			"max-w-article",
 			"max-w-none sm:max-w-[34rem] md:max-w-[36rem] lg:max-w-[38rem] xl:max-w-[40rem] 2xl:max-w-[45rem]",
