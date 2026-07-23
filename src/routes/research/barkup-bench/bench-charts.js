@@ -345,7 +345,7 @@ export function initBenchCharts() {
 		});
 	}
 
-	// Chart 1 — crossover
+	// Chart 1 · crossover
 	lineChart("fig-crossover", {
 		series: Object.fromEntries(
 			CONDITIONS.map((c) => [
@@ -365,12 +365,12 @@ export function initBenchCharts() {
 		fmt: (v) => v + "%",
 		jitterCI: true,
 		tip: (c, i, v) =>
-			`${c} — ${COND_NAMES[c]}\n${BUCKET_LABELS[i]} bucket: ${v.value}%\n${v.ok}/${v.n} tasks · CI [${v.low}%, ${v.high}%]`,
+			`${c} · ${COND_NAMES[c]}\n${BUCKET_LABELS[i]} bucket: ${v.value}%\n${v.ok}/${v.n} tasks · CI [${v.low}%, ${v.high}%]`,
 		endLabel: (c) => DATA.crossover[c][3].rate + "%",
 		aria: "Task success rate by tree size for the five conditions; rewrite conditions lead at every size.",
 	});
 
-	// Chart 2 — tokens per solved task
+	// Chart 2 · tokens per solved task
 	lineChart("fig-tokens", {
 		series: Object.fromEntries(
 			CONDITIONS.map((c) => [c, DATA.tokens[c].map((v) => ({ value: v }))]),
@@ -381,12 +381,12 @@ export function initBenchCharts() {
 		fmt: (v) => v / 1000 + "k",
 		jitterCI: false,
 		tip: (c, i, v) =>
-			`${c} — ${COND_NAMES[c]}\n${BUCKET_LABELS[i]} bucket: ${v.value.toLocaleString()} tokens\nmean in+out per solved task`,
+			`${c} · ${COND_NAMES[c]}\n${BUCKET_LABELS[i]} bucket: ${v.value.toLocaleString()} tokens\nmean in+out per solved task`,
 		endLabel: (c) => (DATA.tokens[c][3] / 1000).toFixed(1) + "k",
 		aria: "Mean tokens per solved task by tree size; tool conditions cost four to five times more on small and medium trees.",
 	});
 
-	// Chart 3 — reference dot plot
+	// Chart 3 · reference dot plot
 	(() => {
 		const W = 880,
 			ROW = 64,
@@ -414,7 +414,7 @@ export function initBenchCharts() {
 				const x = xOf(cell.rate);
 				marks += `<line x1="${xOf(cell.low)}" x2="${xOf(cell.high)}" y1="${cy}" y2="${cy}" stroke="${COLOR[c]}" stroke-width="1.5" opacity="0.4"/>`;
 				marks += `<circle cx="${x}" cy="${cy}" r="5.5" fill="${COLOR[c]}" stroke="hsl(217,48%,15%)" stroke-width="2"/>`;
-				hits += `<circle cx="${x}" cy="${cy}" r="13" fill="transparent" data-tip="${esc(`${c} — ${COND_NAMES[c]}\n${row.model}: ${cell.rate}%\n${cell.ok}/40 · CI [${cell.low}%, ${cell.high}%]`)}"/>`;
+				hits += `<circle cx="${x}" cy="${cy}" r="13" fill="transparent" data-tip="${esc(`${c} · ${COND_NAMES[c]}\n${row.model}: ${cell.rate}%\n${cell.ok}/40 · CI [${cell.low}%, ${cell.high}%]`)}"/>`;
 			});
 		});
 		const el = byId("fig-reference");
@@ -427,7 +427,7 @@ export function initBenchCharts() {
 		});
 	})();
 
-	// Heatmap — per model × condition (sequential blue ramp, one hue)
+	// Heatmap · per model × condition (sequential blue ramp, one hue)
 	(() => {
 		const RAMP = [
 			[74, "#cde2fb", "#0b0b0b"],
@@ -470,13 +470,13 @@ export function initBenchCharts() {
 			L +
 			'" cy="16" r="6" fill="hsl(217,48%,15%)" stroke="#c98500" stroke-width="2.5"/><text fill="#c3c9d4" font-size="11.5" x="' +
 			(L + 14) +
-			'" y="20">v1 — tool calls hidden</text>';
+			'" y="20">v1 · tool calls hidden</text>';
 		g +=
 			'<circle cx="' +
 			(L + 220) +
 			'" cy="16" r="6.5" fill="#3987e5" stroke="hsl(217,48%,15%)" stroke-width="2"/><text fill="#c3c9d4" font-size="11.5" x="' +
 			(L + 234) +
-			'" y="20">v2 — corrected history</text>';
+			'" y="20">v2 · corrected history</text>';
 		for (const tick of [0, 25, 50, 75, 100]) {
 			const x = xOf(tick);
 			g +=
@@ -541,7 +541,7 @@ export function initBenchCharts() {
 					row.model +
 						" v1 (hidden history): " +
 						row.v1.rate +
-						"% — " +
+						"% · " +
 						row.v1.ok +
 						"/" +
 						row.v1.n,
@@ -557,7 +557,7 @@ export function initBenchCharts() {
 					row.model +
 						" v2 (corrected): " +
 						row.v2.rate +
-						"% — " +
+						"% · " +
 						row.v2.ok +
 						"/" +
 						row.v2.n,
@@ -685,15 +685,15 @@ export function initBenchCharts() {
 					'" r="12" fill="transparent" data-tip="' +
 					esc(
 						c +
-							" — " +
+							" · " +
 							COND_NAMES[c] +
 							" (" +
 							series.model +
-							") — " +
+							") · " +
 							SIZES[i] +
 							": " +
 							p.cell.rate +
-							"% — " +
+							"% · " +
 							p.cell.ok +
 							"/" +
 							p.cell.n +
@@ -746,7 +746,7 @@ export function initBenchCharts() {
 			"tbl-sizeext",
 			["series", ...SIZES],
 			DATA.sizeext.map((s) => [
-				s.condition + " — " + s.model,
+				s.condition + " · " + s.model,
 				...s.cells.map((c) => c.rate + "% (" + c.ok + "/" + c.n + ")"),
 			]),
 		);
@@ -924,7 +924,7 @@ export function initBenchCharts() {
 					'" r="12" fill="transparent" data-tip="' +
 					esc(
 						s.cond +
-							" — " +
+							" · " +
 							VNAMES[s.cond] +
 							" (" +
 							s.model +
@@ -984,7 +984,7 @@ export function initBenchCharts() {
 		});
 		table(
 			"tbl-views",
-			["input shown (model)", ...SIZES.map((s) => s + " — tokens · success")],
+			["input shown (model)", ...SIZES.map((s) => s + " · tokens · success")],
 			[...VDATA, ...VEXTRA].map((s) => [
 				s.cond + " " + s.name + " (" + s.model + ")",
 				...s.tokens.map((v, i) => v.toLocaleString() + " · " + s.ok[i]),
@@ -1170,7 +1170,7 @@ export function initBenchCharts() {
 					'" r="12" fill="transparent" data-tip="' +
 					esc(
 						s.policy +
-							" — " +
+							" · " +
 							KNAMES[s.policy] +
 							" (" +
 							s.model +
@@ -1410,7 +1410,7 @@ export function initBenchCharts() {
 					'" r="13" fill="transparent" data-tip="' +
 					esc(
 						c +
-							" — " +
+							" · " +
 							LNAMES[c] +
 							"\n" +
 							row.model +
@@ -1453,39 +1453,39 @@ export function initBenchCharts() {
 				"failure anatomy (pooled)",
 			],
 			[
-				["oracle — sonnet-4.5", "43/45 (95.6%)", "85,642", "—"],
-				["oracle — gemini-3.5-flash", "41/45 (91.1%)", "70,063", "—"],
+				["oracle · sonnet-4.5", "43/45 (95.6%)", "85,642", "-"],
+				["oracle · gemini-3.5-flash", "41/45 (91.1%)", "70,063", "-"],
 				[
-					"LG-full — sonnet-4.5",
+					"LG-full · sonnet-4.5",
 					"39/45 (86.7%)",
 					"90,254",
 					"misgrounded ×8, mechanics ×5 (both models)",
 				],
 				[
-					"LG-full — gemini-3.5-flash",
+					"LG-full · gemini-3.5-flash",
 					"38/45 (84.4%)",
 					"70,054",
 					"(see above)",
 				],
 				[
-					"LG-nav — sonnet-4.5",
+					"LG-nav · sonnet-4.5",
 					"43/45 (95.6%) · 54 median expands",
 					"355,643",
 					"invalid ×20, misgrounded ×2, mechanics ×2 (both models)",
 				],
 				[
-					"LG-nav — gemini-3.5-flash",
+					"LG-nav · gemini-3.5-flash",
 					"23/45 (51.1%) · 58 median expands",
 					"636,030",
 					"(see above)",
 				],
 				[
-					"LG-lex — sonnet-4.5",
+					"LG-lex · sonnet-4.5",
 					"27/45 (60.0%)",
 					"2,695",
 					"misgrounded ×34, mechanics ×4 (both models)",
 				],
-				["LG-lex — gemini-3.5-flash", "25/45 (55.6%)", "2,659", "(see above)"],
+				["LG-lex · gemini-3.5-flash", "25/45 (55.6%)", "2,659", "(see above)"],
 			],
 		);
 	})();
@@ -1648,7 +1648,7 @@ export function initBenchCharts() {
 					'" r="12" fill="transparent" data-tip="' +
 					esc(
 						s.policy +
-							" — " +
+							" · " +
 							MNAMES[s.policy] +
 							" (" +
 							s.model +
@@ -1769,7 +1769,7 @@ export function initBenchCharts() {
 						rate: 55.6,
 						low: 41.2,
 						high: 69.1,
-						note: "top-5 target coverage 23/45 — no better than keyword overlap (24/45)",
+						note: "top-5 target coverage 23/45 · no better than keyword overlap (24/45)",
 					},
 				},
 			},
@@ -1897,7 +1897,7 @@ export function initBenchCharts() {
 					'" r="13" fill="transparent" data-tip="' +
 					esc(
 						c +
-							" — " +
+							" · " +
 							NNAMES[c] +
 							"\n" +
 							row.model +
@@ -1941,38 +1941,38 @@ export function initBenchCharts() {
 			],
 			[
 				[
-					"N-search — sonnet-4.5",
+					"N-search · sonnet-4.5",
 					"43/45 (95.6%)",
 					"6,550",
 					"median 1 find_nodes call; failures: misgrounded ×5, mechanics ×3 (both models)",
 				],
 				[
-					"N-search — gemini-3.5-flash",
+					"N-search · gemini-3.5-flash",
 					"39/45 (86.7%)",
 					"3,741",
 					"vs LG-nav 23/45: 16–0 paired, p < 0.001",
 				],
 				[
-					"N-embed — sonnet-4.5",
+					"N-embed · sonnet-4.5",
 					"25/45 (55.6%)",
 					"3,076",
 					"top-5 covers targets 23/45 vs lexical 24/45; 39/41 failures misgrounded",
 				],
-				["N-embed — gemini-3.5-flash", "24/45 (53.3%)", "2,845", "(see above)"],
+				["N-embed · gemini-3.5-flash", "24/45 (53.3%)", "2,845", "(see above)"],
 				[
-					"N-ground2 — sonnet-4.5",
+					"N-ground2 · sonnet-4.5",
 					"41/45 (91.1%)",
 					"79,511",
 					"same-model two-stage: accuracy holds, total savings only 18%",
 				],
 				[
-					"N-ground2 — gemini-3.5-flash",
+					"N-ground2 · gemini-3.5-flash",
 					"37/45 (82.2%)",
 					"71,404",
 					"same-model two-stage: total savings 5%",
 				],
 				[
-					"N-ground2x — gemini grounds, sonnet patches",
+					"N-ground2x · gemini grounds, sonnet patches",
 					"41/45 (91.1%)",
 					"71,497 total · 1,484 sonnet-side",
 					"grounder coverage identical across tiers (41/45 both)",
@@ -2030,7 +2030,7 @@ export function initBenchCharts() {
 						low: 89.5,
 						high: 98.7,
 						end: "15/20",
-						note: "3–1 paired vs M-stateless, p = 0.625 — positions printed, still misplaced",
+						note: "3–1 paired vs M-stateless, p = 0.625 · positions printed, still misplaced",
 					},
 				},
 			},
@@ -2114,7 +2114,7 @@ export function initBenchCharts() {
 				"%</text>";
 		}
 		const figCaption =
-			"late-session (steps 9–12) per-step success — the window where statelessness fails (zoomed 84–100% scale)";
+			"late-session (steps 9–12) per-step success · the window where statelessness fails (zoomed 84–100% scale)";
 		let marks = "",
 			hits = "";
 		ODATA.forEach((row, ri) => {
@@ -2167,7 +2167,7 @@ export function initBenchCharts() {
 					'" r="13" fill="transparent" data-tip="' +
 					esc(
 						c +
-							" — " +
+							" · " +
 							ONAMES[c] +
 							"\n" +
 							row.model +
@@ -2434,7 +2434,7 @@ export function initBenchCharts() {
 					'" r="13" fill="transparent" data-tip="' +
 					esc(
 						c +
-							" — " +
+							" · " +
 							PNAMES[c] +
 							"\n" +
 							row.model +
@@ -2661,7 +2661,7 @@ export function initBenchCharts() {
 					'" r="12" fill="transparent" data-tip="' +
 					esc(
 						s.cond +
-							" — " +
+							" · " +
 							s.name +
 							"\n" +
 							BINS[p.i] +
@@ -2789,7 +2789,7 @@ export function initBenchCharts() {
 					"14/14",
 					"13/13",
 					"18/18",
-					"none — 337/337 subtasks",
+					"none · 337/337 subtasks",
 					"7,974",
 				],
 				[
@@ -2798,7 +2798,7 @@ export function initBenchCharts() {
 					"14/14",
 					"13/13",
 					"18/18",
-					"none — 337/337 subtasks",
+					"none · 337/337 subtasks",
 					"7,731",
 				],
 			],
@@ -2928,7 +2928,7 @@ export function initBenchCharts() {
 					'" r="12" fill="transparent" data-tip="' +
 					esc(
 						s.cond +
-							" — " +
+							" · " +
 							SNAMES[s.cond] +
 							"\n" +
 							s.model +
@@ -3041,7 +3041,7 @@ export function initBenchCharts() {
 		"tbl-crossover",
 		["condition", ...BUCKET_LABELS.map((b) => b + " (95% CI)")],
 		CONDITIONS.map((c) => [
-			`${c} — ${COND_NAMES[c]}`,
+			`${c} · ${COND_NAMES[c]}`,
 			...DATA.crossover[c].map(
 				(d) => `${d.rate}% [${d.low}, ${d.high}] · ${d.ok}/${d.n}`,
 			),
@@ -3062,7 +3062,7 @@ export function initBenchCharts() {
 		"tbl-tokens",
 		["condition", ...BUCKET_LABELS],
 		CONDITIONS.map((c) => [
-			`${c} — ${COND_NAMES[c]}`,
+			`${c} · ${COND_NAMES[c]}`,
 			...DATA.tokens[c].map((v) => v.toLocaleString()),
 		]),
 	);
@@ -3182,7 +3182,7 @@ export function initBenchCharts() {
 				"%</text>";
 		}
 		const figCaption =
-			"per-step success — callback steps (filled) vs ordinary self-contained steps (hollow)";
+			"per-step success · callback steps (filled) vs ordinary self-contained steps (hollow)";
 		let marks = "",
 			hits = "";
 		rows.forEach((row, ri) => {
@@ -3244,7 +3244,7 @@ export function initBenchCharts() {
 				'" r="12" fill="transparent" data-tip="' +
 				esc(
 					row.arm +
-						" — " +
+						" · " +
 						TNAMES[row.arm] +
 						"\n" +
 						row.model +
@@ -3264,7 +3264,7 @@ export function initBenchCharts() {
 				'" r="12" fill="transparent" data-tip="' +
 				esc(
 					row.arm +
-						" — " +
+						" · " +
 						TNAMES[row.arm] +
 						"\n" +
 						row.model +
@@ -3393,7 +3393,7 @@ export function initBenchCharts() {
 						low: 92,
 						high: 100,
 						ok: "45/45",
-						note: "median input 1,780 tokens — 25× less than the full tree",
+						note: "median input 1,780 tokens · 25× less than the full tree",
 					},
 					"U-search": {
 						rate: 84.4,
@@ -3532,7 +3532,7 @@ export function initBenchCharts() {
 				'" r="12" fill="transparent" data-tip="' +
 				esc(
 					row.arm +
-						" — " +
+						" · " +
 						UNAMES[row.arm] +
 						"\n" +
 						row.model +
@@ -3766,7 +3766,7 @@ export function initBenchCharts() {
 				'" height="24" fill="transparent" data-tip="' +
 				esc(
 					row.arm +
-						" — " +
+						" · " +
 						VNAMES[row.arm] +
 						"\n" +
 						row.model +
@@ -4035,7 +4035,7 @@ export function initBenchCharts() {
 					'" r="12" fill="transparent" data-tip="' +
 					esc(
 						row.arm +
-							" — " +
+							" · " +
 							WNAMES[row.arm] +
 							"\n" +
 							row.model +
@@ -4080,17 +4080,17 @@ export function initBenchCharts() {
 				[
 					"W-oracle (sonnet)",
 					"71/72",
-					"—",
+					"-",
 					"harness",
 					"harness",
-					"—",
-					"—",
+					"-",
+					"-",
 					"84,450",
 				],
 				[
 					"W-agent (sonnet)",
 					"71/72",
-					"—",
+					"-",
 					"36/36",
 					"12/12",
 					"0.0",
@@ -4110,17 +4110,17 @@ export function initBenchCharts() {
 				[
 					"W-oracle (gemini)",
 					"72/72",
-					"—",
+					"-",
 					"harness",
 					"harness",
-					"—",
-					"—",
+					"-",
+					"-",
 					"82,323",
 				],
 				[
 					"W-agent (gemini)",
 					"72/72",
-					"—",
+					"-",
 					"36/36",
 					"12/12",
 					"0.0",
@@ -4140,17 +4140,17 @@ export function initBenchCharts() {
 				[
 					"W-oracle (opus)",
 					"72/72",
-					"—",
+					"-",
 					"harness",
 					"harness",
-					"—",
-					"—",
+					"-",
+					"-",
 					"103,569",
 				],
 				[
 					"W-agent (opus)",
 					"71/72",
-					"—",
+					"-",
 					"35/36",
 					"12/12",
 					"0.0",
@@ -4209,7 +4209,7 @@ export function initBenchCharts() {
 						low: 78,
 						high: 95,
 						ok: "43/48",
-						note: "repeat 7/12 — the compressed-carrier strain point; amend + undo perfect",
+						note: "repeat 7/12 · the compressed-carrier strain point; amend + undo perfect",
 					},
 					"X-stateless": {
 						rate: 0,
@@ -4390,7 +4390,7 @@ export function initBenchCharts() {
 				'" r="12" fill="transparent" data-tip="' +
 				esc(
 					row.arm +
-						" — " +
+						" · " +
 						XNAMES[row.arm] +
 						"\n" +
 						row.model +
@@ -4441,7 +4441,7 @@ export function initBenchCharts() {
 					"24/24",
 					"12/12",
 					"12/12",
-					"—",
+					"-",
 					"53,480",
 				],
 				[
@@ -4477,7 +4477,7 @@ export function initBenchCharts() {
 					"24/24",
 					"12/12",
 					"12/12",
-					"—",
+					"-",
 					"50,530",
 				],
 				[
@@ -4531,7 +4531,7 @@ export function initBenchCharts() {
 					"24/24",
 					"12/12",
 					"12/12",
-					"—",
+					"-",
 					"31,827",
 				],
 				[
@@ -4635,7 +4635,7 @@ export function initBenchCharts() {
 				"</text>";
 		}
 		const figCaption =
-			"callback cells passed (of 48) — casual and formulaic twins tie exactly on every model";
+			"callback cells passed (of 48) · casual and formulaic twins tie exactly on every model";
 		let marks = "",
 			hits = "";
 		rows.forEach((row, ri) => {
@@ -4674,7 +4674,7 @@ export function initBenchCharts() {
 				'" height="22" fill="transparent" data-tip="' +
 				esc(
 					row.arm +
-						" — " +
+						" · " +
 						YNAMES[row.arm] +
 						"\n" +
 						row.model +
@@ -4730,7 +4730,7 @@ export function initBenchCharts() {
 		);
 	})();
 
-	// --- Study Z: standing context — combined-task interpretation split ---
+	// --- Study Z: standing context · combined-task interpretation split ---
 	(() => {
 		const ZARMS = ["Z-full", "Z-slice", "Z-memo"];
 		const ZNAMES = {
@@ -4762,7 +4762,7 @@ export function initBenchCharts() {
 			'<span class="key"><span class="chip" style="background:' +
 			ZCOLOR.strict +
 			'"></span>obeyed the format rule LITERALLY (exact email | city, no mention)</span>' +
-			'<span class="key">every one of 324 cells landed in one of these two readings — zero rule violations, zero contamination; facts and rules were 100% in every arm</span>';
+			'<span class="key">every one of 324 cells landed in one of these two readings · zero rule violations, zero contamination; facts and rules were 100% in every arm</span>';
 		const W = 880,
 			ROW = 30,
 			T = 8,
@@ -4852,7 +4852,7 @@ export function initBenchCharts() {
 				'" height="22" fill="transparent" data-tip="' +
 				esc(
 					row.arm +
-						" — " +
+						" · " +
 						ZNAMES[row.arm] +
 						"\n" +
 						row.model +
@@ -4921,7 +4921,7 @@ export function initBenchCharts() {
 		);
 	})();
 
-	// --- Study AA: conflict resolution — literal readings by arm (the refuted gradient) ---
+	// --- Study AA: conflict resolution · literal readings by arm (the refuted gradient) ---
 	(() => {
 		const AARMS = ["AA-base", "AA-priority", "AA-soft", "AA-memo"];
 		const ANAMES = {
@@ -4963,7 +4963,7 @@ export function initBenchCharts() {
 					ANAMES[c] +
 					"</span>",
 			).join("") +
-			'<span class="key">bars: literal/rule-enforced readings out of 24 conflicted cells — the refuted prediction said opus would have the LONGEST base bar; it has none</span>';
+			'<span class="key">bars: literal/rule-enforced readings out of 24 conflicted cells · the refuted prediction said opus would have the LONGEST base bar; it has none</span>';
 		const W = 880,
 			ROW = 30,
 			T = 8,
@@ -5000,7 +5000,7 @@ export function initBenchCharts() {
 				"</text>";
 		}
 		const figCaption =
-			"literal readings (of 24 conflicted cells) — memo-arm bars on opus/sonnet are the countermand-trampling footgun, not form-strictness";
+			"literal readings (of 24 conflicted cells) · memo-arm bars on opus/sonnet are the countermand-trampling footgun, not form-strictness";
 		let marks = "",
 			hits = "";
 		rows.forEach((row, ri) => {
@@ -5048,7 +5048,7 @@ export function initBenchCharts() {
 				'" height="22" fill="transparent" data-tip="' +
 				esc(
 					row.arm +
-						" — " +
+						" · " +
 						ANAMES[row.arm] +
 						"\n" +
 						row.model +
@@ -5101,7 +5101,7 @@ export function initBenchCharts() {
 		);
 	})();
 
-	// --- Study AC: ask versus guess — the villain flips ---
+	// --- Study AC: ask versus guess · the villain flips ---
 	(() => {
 		const ROWS = [
 			{
@@ -5177,7 +5177,7 @@ export function initBenchCharts() {
 				"</text>";
 		}
 		const figCaption =
-			"outcomes on 45 unsolvable cells — one sentence of permission flips every silent guess into a precise question";
+			"outcomes on 45 unsolvable cells · one sentence of permission flips every silent guess into a precise question";
 		let marks = "",
 			hits = "";
 		rows.forEach((row, ri) => {
@@ -5273,7 +5273,7 @@ export function initBenchCharts() {
 		);
 	})();
 
-	// --- Study AD: the Opus confirmation — prior bands vs the shipped tier ---
+	// --- Study AD: the Opus confirmation · prior bands vs the shipped tier ---
 	(() => {
 		const ROWS = [
 			{
@@ -5467,7 +5467,7 @@ export function initBenchCharts() {
 		);
 	})();
 
-	// --- Study AE: the calibration ladder — ask rate by ambiguity level ---
+	// --- Study AE: the calibration ladder · ask rate by ambiguity level ---
 	(() => {
 		const LEVELS = [
 			"L0 precise",
@@ -5644,7 +5644,7 @@ export function initBenchCharts() {
 		);
 	})();
 
-	// --- Study AF: restate-before-rewrite — W/L/T vs control (Track 2) ---
+	// --- Study AF: restate-before-rewrite · W/L/T vs control (Track 2) ---
 	(() => {
 		const ROWS = [
 			{
@@ -5669,7 +5669,7 @@ export function initBenchCharts() {
 				win: 3,
 				tie: 17,
 				loss: 10,
-				tip: "primary judge 3/10/17 (sign p=.09, not significant)\nsensitivity judge 1/13/16 (p=.0018, control-favored) — the disclosed dissent",
+				tip: "primary judge 3/10/17 (sign p=.09, not significant)\nsensitivity judge 1/13/16 (p=.0018, control-favored) · the disclosed dissent",
 			},
 			{
 				editor: "gemini-3.5-flash",
@@ -5685,7 +5685,7 @@ export function initBenchCharts() {
 				win: 2,
 				tie: 19,
 				loss: 9,
-				tip: "primary judge 2/9/19 (sign p=.07, not significant)\nsensitivity judge 5/15/10 (p=.04, control-favored) — the disclosed dissent",
+				tip: "primary judge 2/9/19 (sign p=.07, not significant)\nsensitivity judge 5/15/10 (p=.04, control-favored) · the disclosed dissent",
 			},
 			{
 				editor: "opus-4.8",
@@ -5825,7 +5825,7 @@ export function initBenchCharts() {
 		);
 	})();
 
-	// --- Study AH: memo saturation — below-cap vs the cap edge ---
+	// --- Study AH: memo saturation · below-cap vs the cap edge ---
 	(() => {
 		const ROWS = [
 			{
@@ -5952,7 +5952,7 @@ export function initBenchCharts() {
 			hits +
 			"</svg>" +
 			figCap(
-				"full-replace update outcomes: clean below the cap, a silent loss in every cap-edge cell — and all 30 lost notes were goals, the class only the memo carries",
+				"full-replace update outcomes: clean below the cap, a silent loss in every cap-edge cell · and all 30 lost notes were goals, the class only the memo carries",
 			);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
@@ -5983,26 +5983,26 @@ export function initBenchCharts() {
 		);
 	})();
 
-	// --- Study AI: the multiplicity hatch — L3 asks, amended vs shipped ---
+	// --- Study AI: the multiplicity hatch · L3 asks, amended vs shipped ---
 	(() => {
 		const ROWS = [
 			{
 				model: "sonnet-4.5",
 				control: 3,
 				rule2: 15,
-				tip: "shipped sentence: 3/15 asks (12 unilateral resolutions)\n+ multiplicity clause: 15/15 asks, every ask naming both candidate ids\nMcNemar p = 5e-4 — complete rescue",
+				tip: "shipped sentence: 3/15 asks (12 unilateral resolutions)\n+ multiplicity clause: 15/15 asks, every ask naming both candidate ids\nMcNemar p = 5e-4 · complete rescue",
 			},
 			{
 				model: "gemini-3.5-flash",
 				control: 0,
 				rule2: 11,
-				tip: "shipped sentence: 0/15 asks (11 coin-flips, 4 edit-both)\n+ multiplicity clause: 11/15 asks — one short of the ≥12 bar (p = .059)\nresiduals: 4 silent edit-boths; the coin-flips vanished",
+				tip: "shipped sentence: 0/15 asks (11 coin-flips, 4 edit-both)\n+ multiplicity clause: 11/15 asks · one short of the ≥12 bar (p = .059)\nresiduals: 4 silent edit-boths; the coin-flips vanished",
 			},
 			{
 				model: "opus-4.8",
 				control: 15,
 				rule2: 15,
-				tip: "already 15/15 with the shipped sentence — the clause adds nothing here\nthe one cost signal: discretionary-request asks rose 2/15 → 5/15 (n.s.)",
+				tip: "already 15/15 with the shipped sentence · the clause adds nothing here\nthe one cost signal: discretionary-request asks rose 2/15 → 5/15 (n.s.)",
 			},
 		];
 		const CCONTROL = "#8b93a3",
@@ -6111,7 +6111,7 @@ export function initBenchCharts() {
 			hits +
 			"</svg>" +
 			figCap(
-				"asks on two-referent requests, shipped sentence vs the amended one; the dashed line is the registered detection bar — the clause rescues sonnet, leaves gemini one short, and changes nothing on the tier the product ships",
+				"asks on two-referent requests, shipped sentence vs the amended one; the dashed line is the registered detection bar · the clause rescues sonnet, leaves gemini one short, and changes nothing on the tier the product ships",
 			);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
@@ -6137,7 +6137,7 @@ export function initBenchCharts() {
 		);
 	})();
 
-	// --- Study AG: the anaphora hatch — outcomes on 48 anaphora cells ---
+	// --- Study AG: the anaphora hatch · outcomes on 48 anaphora cells ---
 	(() => {
 		const ROWS = [
 			{
@@ -6159,7 +6159,7 @@ export function initBenchCharts() {
 				asked: 34,
 				solved: 14,
 				silent: 0,
-				tip: "the echo supplies id, key, and both values — the model quotes them, then asks anyway because the node is not visible in the skeleton view (the visibility clause)",
+				tip: "the echo supplies id, key, and both values · the model quotes them, then asks anyway because the node is not visible in the skeleton view (the visibility clause)",
 			},
 			{
 				label: "gemini-3.5-flash · no hatch",
@@ -6180,7 +6180,7 @@ export function initBenchCharts() {
 				asked: 36,
 				solved: 12,
 				silent: 0,
-				tip: "36 false asks despite the complete echo — the visibility clause",
+				tip: "36 false asks despite the complete echo · the visibility clause",
 			},
 			{
 				label: "opus-4.8 · no hatch",
@@ -6194,7 +6194,7 @@ export function initBenchCharts() {
 				asked: 48,
 				solved: 0,
 				silent: 0,
-				tip: "48/48 asks — the discourse gap is letter-covered on every tier",
+				tip: "48/48 asks · the discourse gap is letter-covered on every tier",
 			},
 			{
 				label: "opus-4.8 · echo + hatch",
@@ -6305,7 +6305,7 @@ export function initBenchCharts() {
 			hits +
 			"</svg>" +
 			figCap(
-				"anaphora-cell outcomes: the hatch converts silent guesses into antecedent-naming questions on every tier, and then keeps asking under the echo because the target is not visible in the skeleton view — zero tax holds only where views carry their targets",
+				"anaphora-cell outcomes: the hatch converts silent guesses into antecedent-naming questions on every tier, and then keeps asking under the echo because the target is not visible in the skeleton view · zero tax holds only where views carry their targets",
 			);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
@@ -6335,18 +6335,18 @@ export function initBenchCharts() {
 		);
 	})();
 
-	// --- Study AJ: the correction loop in isolation — recovery by arm ---
+	// --- Study AJ: the correction loop in isolation · recovery by arm ---
 	(() => {
 		const GROUPS = [
 			{
 				model: "sonnet-4.5",
 				vals: [45, 44, 42],
-				tip: "structured 45/45 · codes 44/45 · bare 42/45 — the only gradient, and it is not significant (p=.25)",
+				tip: "structured 45/45 · codes 44/45 · bare 42/45 · the only gradient, and it is not significant (p=.25)",
 			},
 			{
 				model: "gemini-3.5-flash",
 				vals: [42, 42, 42],
-				tip: "42/45 in every arm, and the three misses are the SAME cells each time (bad anchors) — zero discordant pairs, feedback quality changed nothing",
+				tip: "42/45 in every arm, and the three misses are the SAME cells each time (bad anchors) · zero discordant pairs, feedback quality changed nothing",
 			},
 			{
 				model: "opus-4.8",
@@ -6464,7 +6464,7 @@ export function initBenchCharts() {
 			hits +
 			"</svg>" +
 			figCap(
-				"single-shot recovery from 45 seeded patch failures, by feedback arm; the structured issues barkup has returned verbatim in every study measure no better than a bare “the patch was invalid” — told a patch failed, models re-derive the edit from the task and the tree",
+				"single-shot recovery from 45 seeded patch failures, by feedback arm; the structured issues barkup has returned verbatim in every study measure no better than a bare “the patch was invalid” · told a patch failed, models re-derive the edit from the task and the tree",
 			);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
@@ -6486,48 +6486,48 @@ export function initBenchCharts() {
 				[
 					"bad-anchor class, pooled: structured / codes / bare",
 					"15/18 · 14/18 · 14/18",
-					"—",
-					"—",
+					"-",
+					"-",
 				],
 				[
 					"every other class, pooled: structured / codes / bare",
 					"117/117 · 117/117 · 115/117",
-					"—",
-					"—",
+					"-",
+					"-",
 				],
 				[
 					"valid-but-wrong, pooled: structured / codes / bare",
 					"3 · 3 · 3",
-					"—",
-					"—",
+					"-",
+					"-",
 				],
 				[
 					"still-invalid, pooled: structured / codes / bare",
 					"0 · 1 · 3",
-					"—",
-					"—",
+					"-",
+					"-",
 				],
 			],
 		);
 	})();
 
-	// --- Study AK: eviction validation — goal survival at the K=20 cap edge ---
+	// --- Study AK: eviction validation · goal survival at the K=20 cap edge ---
 	(() => {
 		const GROUPS = [
 			{
 				model: "sonnet-4.5",
 				vals: [0, 6],
-				tip: "0/10 → 6/10 (p=.0313) — the residue is 4 client-side prunes the app never saw, victims still goals",
+				tip: "0/10 → 6/10 (p=.0313) · the residue is 4 client-side prunes the app never saw, victims still goals",
 			},
 			{
 				model: "gemini-3.5-flash",
 				vals: [0, 4],
-				tip: "0/10 → 4/10 (n.s., as pre-registered) — gemini prunes client-side in 6 of 10 cells, outside the fix's reach",
+				tip: "0/10 → 4/10 (n.s., as pre-registered) · gemini prunes client-side in 6 of 10 cells, outside the fix's reach",
 			},
 			{
 				model: "opus-4.8",
 				vals: [0, 10],
-				tip: "0/10 → 10/10 (p=.0020) — 9 designed evictions plus one cell where opus answered the eviction notice by consolidating 21 needles into 11 notes",
+				tip: "0/10 → 10/10 (p=.0020) · 9 designed evictions plus one cell where opus answered the eviction notice by consolidating 21 needles into 11 notes",
 			},
 		];
 		const CCONTROL = "#8b93a3",
@@ -6635,7 +6635,7 @@ export function initBenchCharts() {
 			hits +
 			"</svg>" +
 			figCap(
-				"goal survival at the memo's 20-note cap edge, silent clamp vs the measured eviction pipeline; the fix closes the injury wherever the app receives the over-cap list, and the residue below the frontier is the model pruning a goal before sending — outside any app-side fix's reach",
+				"goal survival at the memo's 20-note cap edge, silent clamp vs the measured eviction pipeline; the fix closes the injury wherever the app receives the over-cap list, and the residue below the frontier is the model pruning a goal before sending · outside any app-side fix's reach",
 			);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
@@ -6660,8 +6660,8 @@ export function initBenchCharts() {
 					"6 goals",
 					"none",
 				],
-				["designed evictions on over-cap sends (pooled)", "19/19", "—", "—"],
-				["goals evicted by the pipeline (pooled)", "0", "—", "—"],
+				["designed evictions on over-cap sends (pooled)", "19/19", "-", "-"],
+				["goals evicted by the pipeline (pooled)", "0", "-", "-"],
 				["clean updates under the cap, K=10+K=19", "20/20", "20/20", "20/20"],
 				[
 					"reacted to the eviction notice",

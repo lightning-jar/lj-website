@@ -26,7 +26,7 @@ for (const study of benchStudies.studies) {
 }
 
 // Old deep links used #sec-* anchors on this page; those sections now
-// live on per-study pages — forward them.
+// live on per-study pages; forward them.
 const movedAnchors = new Map(
 	benchStudies.studies.flatMap((s) =>
 		s.sections.map((sec) => [sec.id, s.slug] as const),
@@ -113,9 +113,14 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
       <h2
         class="text-[1.55rem] font-600 tracking-[-0.015em] leading-[1.3] mb-2"
       >
-        {@html bench.header.lede}
+          {@html bench.header.lede}
       </h2>
-      <p class="text-16px {proseCls}">{@html bench.header.provenance}</p>
+      {#each bench.header.intro as paragraph}
+        <p class="text-16px {proseCls} mb-3">{@html paragraph}</p>
+      {/each}
+      <p class="text-16px {proseCls} mt-5 pt-4 border-t border-white/14">
+        {@html bench.header.provenance}
+      </p>
     </header>
 
     <div
@@ -179,7 +184,7 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
       <p class="text-16px {proseCls} mb-6">
         The main study above set the baseline; everything since has been a
         pre-registered follow-up, each with its own charts, gates, and
-        verdict. Grouped by theme — or
+        verdict. Grouped by theme, or
         <a
           href="/research/barkup-bench/atom.xml"
           class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4 hover:text-maximumYellow"

@@ -1,13 +1,18 @@
 {
 	"header": {
 		"eyebrow": "barkup-bench \u00b7 pre-registered \u00b7 corrected 2026-07-06 \u00b7 studies F\u2013AO",
-		"lede": "Every id-stable interface works \u2014 until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree. Finding where to look costs one search call, and remembering the session costs two worked examples plus a memo \u2014 even 36 edits in. And the view is a correctness contract: what the model must read, it must be shown. Views carry values; memos carry goals \u2014 the agent can be trusted to write the memo itself, and \"undo that\" needs an echo, not a transcript. The standing brand pack simply works \u2014 and when a rule collides with a request, models pick a reading rather than break either; our first claim about WHICH reading was refuted by its own confirmation study a day later. And the series-long villain fell last: offered one sentence of permission, every model asked instead of guessing, 270/270 \u2014 the silence was protocol, not blindness. Then the whole core stack was re-run on the tier the downstream surfaces actually ship, claude-opus-4.8, and every gate passed: the frontier does not need the training wheels, though they cost nothing to keep. And when we probed the ask path for its breaking point, the tax was zero and the answer loop was perfect; the one crack is that below the frontier tier, models silently resolve ambiguous references instead of asking about them. And the one clause we had shipped on faith got its audit: making the model restate a goal it read does nothing, because where a goal comes from matters more than whether the model says it aloud. And the memo passed its stress test everywhere but one place: filled to its twenty-note cap, it silently throws away exactly the thing it exists to remember. Then we measured the obvious fix for the ambiguity gap, and it rescued the model we do not run while adding nothing to the one we do; some gaps are capabilities, not prompts. The last border closed with fine print: the ask sentence covers dangling references on every tier, and its zero tax turns out to presume the very view contract it rides along with. And the oldest habit in the protocol got its control group at last: told nothing but \"that was invalid,\" the models fixed their patches anyway. The error message was for us, not them.",
-		"provenance": "Main study: 200 seeded tasks \u00d7 6 conditions \u00d7 4 models \u00d7 2 regimes, temperature&nbsp;0 (July&nbsp;2026), plus follow-up studies G (tool-history footgun), H (300\u20131000-node size extension), I/J (focused views: partial-context patches, JSON and HTML renderings), K (12-edit sessions under four serialization policies), L/N (grounding without ids, then the retrieval ladder), M/O/P (session memory, positional views, synthetic history), Q/R (fan-out edits and their fixes), S (36-edit long sessions), T (conversation-carried context), U (document-carried dependencies), V (qualitative rewrites \u2014 the series' first judge-graded study, disclosed as its own track), W (agent-maintained memo extraction, the shipped mechanism verbatim, with claude-opus-4.8 as a third tier), X (edit-anaphora: amend, repeat, and undo follow-ups racing four context carriers), and Y (naturalistic extraction: twin sessions isolating declaration phrasing, with chatter bait for the noise metric). <strong>All numbers below are protocol-v2 corrected</strong> \u2014 the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted; Wilson&nbsp;95% intervals. Conditions: <span class=\"font-mono\">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite, <span class=\"font-mono\">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite, <span class=\"font-mono\">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools, <span class=\"font-mono\">D</span>&nbsp;HTML&nbsp;+&nbsp;tools, <span class=\"font-mono\">E</span>&nbsp;JSON&nbsp;Patch, <span class=\"font-mono\">F</span>&nbsp;id-anchored&nbsp;patch (pre-registered addendum, BRIEF-F.md), and AD (the Opus confirmation: the core stack re-run verbatim on claude-opus-4.8, 1,160 cells), and AE (the calibration ladder: five ambiguity levels plus the ask-answer-resume loop, 720 cells), and AF (restate-before-rewrite, judge-graded: 270 contemporaneous edits, both judges re-calibrated 100/100), and AH (memo saturation: recall, rules, and full-replace integrity at the shipped 20-note cap, 270 cells), and AI (the multiplicity hatch: the amended ask sentence vs the shipped one across the full ladder, 450 cells), and AG (the anaphora hatch: the shipped ask sentence on the undo-that construction plus the echo-tax co-check, 1,296 session steps), and AJ (the correction loop in isolation: seeded failures, structured vs codes vs bare feedback, 405 cells), and AK (eviction validation: the goal-preserving eviction re-measured at the Study AH injury site, 120 cells), and AL (the prompt-side fence: an anti-self-eviction sentence vs the AK-eviction arm as contemporaneous control, the prompt rule the only variable, 120 cells), and AM (consolidation-on-notice: an invitation appended to the app's eviction notice, the notice string the only variable, on a fresh 40-task cap-edge corpus, 240 cells), and AN (ask or act: the visibility-clause tax re-measured with a view tool in hand \u2014 tool availability alone dissolves it on every tier, while the tested fetch-before-ask clause proves redundant on the frontier and unsafe below it, 1,728 session steps), and AO (canonical-tag steering: does advisory lint keep agent-written tags on an org's catalog \u2014 the catalog-read tool proves to be the whole mechanism, consulted unprompted in every cell, while unguided models drift 36/36 and lint-only arms cannot recover, 324 cells)."
+		"lede": "Every id-stable interface works, until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree.",
+		"provenance": "Main study: 200 seeded tasks \u00d7 6 conditions \u00d7 4 models \u00d7 2 regimes at temperature&nbsp;0 (July&nbsp;2026). Every follow-up study is pre-registered by commit before its first scored run and published as found, corrections included; the full catalog lives in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"#studies\">study index below</a>, one page per study. <strong>All numbers are protocol-v2 corrected</strong>: the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted, with Wilson&nbsp;95% intervals. Conditions: <span class=\"font-mono\">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite, <span class=\"font-mono\">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite, <span class=\"font-mono\">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools, <span class=\"font-mono\">D</span>&nbsp;HTML&nbsp;+&nbsp;tools, <span class=\"font-mono\">E</span>&nbsp;JSON&nbsp;Patch, and <span class=\"font-mono\">F</span>&nbsp;id-anchored patch.",
+		"intro": [
+			"Finding where to look costs one search call. Remembering the session costs two worked examples plus a memo, even 36 edits in. The view is a correctness contract: what the model must read, it must be shown. Views carry values; memos carry goals. The agent can be trusted to write the memo itself, and \"undo that\" needs an echo, not a transcript.",
+			"The series-long villain fell too. Offered one sentence of permission, every model asked instead of guessing, 270 out of 270. The silence was protocol, not blindness. Re-running the whole core stack on claude-opus-4.8, the tier our surfaces actually ship, passed every gate: the frontier does not need the training wheels, though they cost nothing to keep.",
+			"The late studies closed the borders. Restating a goal the model merely read does nothing; where a goal comes from matters more than saying it aloud. The memo is flawless until its twenty-note cap, where it silently discards exactly what it exists to remember, so the eviction is now deterministic and goal-safe. Some gaps are capabilities, not prompts: the ambiguity fix rescued the model we do not run and added nothing to the one we do. And told nothing but \"that was invalid,\" models fixed their patches anyway. The error message was for us, not them."
+		]
 	},
 	"tiles": [
 		{
 			"num": "\u22122.0pp",
-			"cap": "corrected A&nbsp;vs&nbsp;C overall: 91.9% vs 93.9% \u2014 tools at slight-edge parity, not \u22125.3pp behind"
+			"cap": "corrected A&nbsp;vs&nbsp;C overall: 91.9% vs 93.9%; tools at slight-edge parity, not \u22125.3pp behind"
 		},
 		{
 			"num": "3.8\u219271%",
@@ -15,11 +20,11 @@
 		},
 		{
 			"num": "\u226599.3%",
-			"cap": "first-pass validity in every arm \u2014 HTML and JSON fluency tied"
+			"cap": "first-pass validity in every arm; HTML and JSON fluency tied"
 		},
 		{
 			"num": "87\u2013100%",
-			"cap": "anchored patches (F) at 300\u20131000 nodes, both model tiers \u2014 where rewrite falls to 0\u201380%"
+			"cap": "anchored patches (F) at 300\u20131000 nodes, both model tiers; where rewrite falls to 0\u201380%"
 		},
 		{
 			"num": "4s vs 10min",
@@ -27,23 +32,23 @@
 		},
 		{
 			"num": "\u221298%",
-			"cap": "input tokens with a minimal focused view at ~1000 nodes (85.6k \u2192 1.5k) \u2014 accuracy statistically unchanged (Studies I/J)"
+			"cap": "input tokens with a minimal focused view at ~1000 nodes (85.6k \u2192 1.5k); accuracy statistically unchanged (Studies I/J)"
 		},
 		{
 			"num": "13\u20130",
-			"cap": "late-session paired wins, per-turn views vs serialize-once (sonnet, Study K) \u2014 and views cost 4\u00d7 less"
+			"cap": "late-session paired wins, per-turn views vs serialize-once (sonnet, Study K); and views cost 4\u00d7 less"
 		},
 		{
 			"num": "7\u20139pp",
-			"cap": "the price of grounding a human-style description with the whole tree in context (Study L) \u2014 before the search tool"
+			"cap": "the price of grounding a human-style description with the whole tree in context (Study L); before the search tool"
 		},
 		{
 			"num": "1 call",
-			"cap": "median <span class=\"font-mono\">find_nodes</span> searches to ground an id-free edit \u2014 43/45 sonnet (= its oracle bound), 39/45 gemini, at ~10% of full-tree input (Study N)"
+			"cap": "median <span class=\"font-mono\">find_nodes</span> searches to ground an id-free edit; 43/45 sonnet (= its oracle bound), 39/45 gemini, at ~10% of full-tree input (Study N)"
 		},
 		{
 			"num": "15/20",
-			"cap": "stateless sessions ending byte-perfect even with exact positions printed on every node (history: 19/20) \u2014 memory isn't doing arithmetic (Study O)"
+			"cap": "stateless sessions ending byte-perfect even with exact positions printed on every node (history: 19/20); memory isn't doing arithmetic (Study O)"
 		},
 		{
 			"num": "2 examples",
@@ -51,15 +56,15 @@
 		},
 		{
 			"num": "~\u00bd of N",
-			"cap": "targets actually edited when one prompt asks for N edits \u2014 fan-out degrades every strategy, even oracle retrieval (Study Q)"
+			"cap": "targets actually edited when one prompt asks for N edits; fan-out degrades every strategy, even oracle retrieval (Study Q)"
 		},
 		{
 			"num": "90/90",
-			"cap": "fan-out tasks solved by app-side decomposition \u2014 674/674 single-target subtasks, both models, at \u2153 the cost of a whole-tree prompt (Study R)"
+			"cap": "fan-out tasks solved by app-side decomposition; 674/674 single-target subtasks, both models, at \u2153 the cost of a whole-tree prompt (Study R)"
 		},
 		{
 			"num": "5.6\u00d7",
-			"cap": "what keeping history costs vs two worked examples across a 36-edit session (449k vs 81k input tokens) \u2014 accuracy at parity, no late-session decay (Study S)"
+			"cap": "what keeping history costs vs two worked examples across a 36-edit session (449k vs 81k input tokens); accuracy at parity, no late-session decay (Study S)"
 		},
 		{
 			"num": "0\u219280/80",
@@ -67,19 +72,19 @@
 		},
 		{
 			"num": "0/90",
-			"cap": "dependent edits solved against a target-only view \u2014 every failure a valid patch with a silently invented value; both-nodes views go 90/90 at 25\u00d7 less input than the full tree (Study U)"
+			"cap": "dependent edits solved against a target-only view; every failure a valid patch with a silently invented value; both-nodes views go 90/90 at 25\u00d7 less input than the full tree (Study U)"
 		},
 		{
 			"num": "117/120",
-			"cap": "judged comparisons lost by rewrites that had to READ their goal from the document instead of being told it \u2014 while the application memo carried the same goal at full parity (Study V, judge-graded)"
+			"cap": "judged comparisons lost by rewrites that had to READ their goal from the document instead of being told it; while the application memo carried the same goal at full parity (Study V, judge-graded)"
 		},
 		{
 			"num": "36/36",
-			"cap": "declarables recalled per model when the AGENT writes its own memo \u2014 retractions 12/12, zero noise notes, ~4 tool calls per session landing exactly on the declarative moments; the laziness hypothesis refuted (Study W)"
+			"cap": "declarables recalled per model when the AGENT writes its own memo; retractions 12/12, zero noise notes, ~4 tool calls per session landing exactly on the declarative moments; the laziness hypothesis refuted (Study W)"
 		},
 		{
 			"num": "0/144",
-			"cap": "\"undo that\" follow-ups solved without a context carrier \u2014 every failure a valid, silently guessed patch; a one-line app-appended last-edit echo restores history-parity at half the cost and beats history outright on opus (Study X)"
+			"cap": "\"undo that\" follow-ups solved without a context carrier; every failure a valid, silently guessed patch; a one-line app-appended last-edit echo restores history-parity at half the cost and beats history outright on opus (Study X)"
 		},
 		{
 			"num": "0 false notes",
@@ -91,11 +96,11 @@
 		},
 		{
 			"num": "0/24",
-			"cap": "literal readings by opus-4.8 in Study AA\u2019s confirmation arm \u2014 the model our Study Z claim called MOST literal measured least (sonnet 10/24, gemini 7/24); the claim is retracted (Study AA)"
+			"cap": "literal readings by opus-4.8 in Study AA\u2019s confirmation arm; the model our Study Z claim called MOST literal measured least (sonnet 10/24, gemini 7/24); the claim is retracted (Study AA)"
 		},
 		{
 			"num": "270/270",
-			"cap": "asks on provably-unsolvable edits once a one-sentence escape hatch existed \u2014 against 0/270 silent wrong patches without it, with zero false asks on the solvable twins (Study AC)"
+			"cap": "asks on provably-unsolvable edits once a one-sentence escape hatch existed; against 0/270 silent wrong patches without it, with zero false asks on the solvable twins (Study AC)"
 		},
 		{
 			"num": "720/720",
@@ -107,35 +112,35 @@
 		},
 		{
 			"num": "0/90",
-			"cap": "wins for restate-the-goal-first on view-read rewrites, with PERFECT restatement compliance: the model says the goal, then orbits it anyway \u2014 where a goal comes from beats saying it aloud (Study AF, judge-graded)"
+			"cap": "wins for restate-the-goal-first on view-read rewrites, with PERFECT restatement compliance: the model says the goal, then orbits it anyway; where a goal comes from beats saying it aloud (Study AF, judge-graded)"
 		},
 		{
 			"num": "30/30",
-			"cap": "notes silently lost at the memo's cap edge were GOAL notes, on every model \u2014 the one note class only the memo carries (Study AH)"
+			"cap": "notes silently lost at the memo's cap edge were GOAL notes, on every model; the one note class only the memo carries (Study AH)"
 		},
 		{
 			"num": "3\u219215/15",
-			"cap": "sonnet's asks on ambiguous references with one added sentence \u2014 while gemini stopped one short of the bar and the shipped tier gained nothing, so the clause stays unshipped (Study AI)"
+			"cap": "sonnet's asks on ambiguous references with one added sentence; while gemini stopped one short of the bar and the shipped tier gained nothing, so the clause stays unshipped (Study AI)"
 		},
 		{
 			"num": "138/144",
-			"cap": "silent \"undo that\" guesses converted into questions naming the missing antecedent by the shipped ask sentence, on every tier \u2014 with one measured condition on its zero tax (Study AG)"
+			"cap": "silent \"undo that\" guesses converted into questions naming the missing antecedent by the shipped ask sentence, on every tier; with one measured condition on its zero tax (Study AG)"
 		},
 		{
 			"num": "0/3",
-			"cap": "models where structured error feedback significantly beat a bare \"the patch was invalid\" on seeded-failure recovery \u2014 the verbatim-issues habit is developer UX, not model accuracy (Study AJ)"
+			"cap": "models where structured error feedback significantly beat a bare \"the patch was invalid\" on seeded-failure recovery; the verbatim-issues habit is developer UX, not model accuracy (Study AJ)"
 		},
 		{
 			"num": "0 \u2192 10/10",
-			"cap": "goal survival at the memo's cap edge on opus once the measured eviction pipeline replaced the silent clamp (p=.002; 19/19 over-cap sends became designed evictions, zero goals evicted \u2014 Study AK)"
+			"cap": "goal survival at the memo's cap edge on opus once the measured eviction pipeline replaced the silent clamp (p=.002; 19/19 over-cap sends became designed evictions, zero goals evicted; Study AK)"
 		},
 		{
 			"num": "p = .219",
-			"cap": "the anti-self-eviction fence against the client-prune pathway: directionally right at zero cost (pooled prunes 5\u21921), but the control halved AK's baseline \u2014 unproven, not disproven, and unproven does not ship (Study AL)"
+			"cap": "the anti-self-eviction fence against the client-prune pathway: directionally right at zero cost (pooled prunes 5\u21921), but the control halved AK's baseline; unproven, not disproven, and unproven does not ship (Study AL)"
 		},
 		{
 			"num": "3 \u2192 40/40",
-			"cap": "lossless cap-edge recoveries on opus once the eviction notice invites consolidation \u2014 every needle kept, kind fidelity 800/800, zero degradations, ~570 extra tokens; shipped v3.215.0 (Study AM)"
+			"cap": "lossless cap-edge recoveries on opus once the eviction notice invites consolidation; every needle kept, kind fidelity 800/800, zero degradations, ~570 extra tokens; shipped v3.215.0 (Study AM)"
 		}
 	],
 	"sections": [
@@ -143,14 +148,14 @@
 			"id": "sec-crossover",
 			"eyebrow": "H2 \u00b7 task success by tree size",
 			"title": "At benchmark sizes (5\u2013150 nodes), no interface dominates",
-			"takeaway": "Whole-tree rewrite (A, B) leads granular tools (C, D) at every size tested. The gap peaks on small/medium trees and narrows \u2014 but never reverses \u2014 at ~150 nodes. JSON Patch (E) collapses to 69.6% on large trees \u2014 and the pre-registered addendum condition F (id-anchored patches) recovers it exactly to rewrite level at the lowest token cost.",
+			"takeaway": "Whole-tree rewrite (A, B) leads granular tools (C, D) at every size tested. The gap peaks on small/medium trees and narrows; but never reverses; at ~150 nodes. JSON Patch (E) collapses to 69.6% on large trees; and the pre-registered addendum condition F (id-anchored patches) recovers it exactly to rewrite level at the lowest token cost.",
 			"legendId": "legend-1",
 			"figure": {
 				"kind": "figure",
 				"id": "fig-crossover"
 			},
 			"table": {
-				"summary": "Data table \u2014 success by condition \u00d7 size (parity, pooled)",
+				"summary": "Data table; success by condition \u00d7 size (parity, pooled)",
 				"id": "tbl-crossover"
 			}
 		},
@@ -158,14 +163,14 @@
 			"id": "sec-reference",
 			"eyebrow": "H4 \u00b7 multi-turn reference tasks, by model",
 			"title": "Corrected: multi-turn reference edits are near-parity",
-			"takeaway": "Success on \u201cinsert a node, then edit it by the id from your own output\u201d \u2014 protocol v2. With the model's own tool history visible, every interface is near-parity (A 88.1% vs C 91.3%, n.s.); gemini's residual tools deficit is phase-1 editing accuracy, not follow-up dropout. Zero id-reference failures in any arm, ever. The dramatic v1 gaps live in the footgun chart below.",
+			"takeaway": "Success on \u201cinsert a node, then edit it by the id from your own output\u201d; protocol v2. With the model's own tool history visible, every interface is near-parity (A 88.1% vs C 91.3%, n.s.); gemini's residual tools deficit is phase-1 editing accuracy, not follow-up dropout. Zero id-reference failures in any arm, ever. The dramatic v1 gaps live in the footgun chart below.",
 			"legendId": "legend-2",
 			"figure": {
 				"kind": "figure",
 				"id": "fig-reference"
 			},
 			"table": {
-				"summary": "Data table \u2014 reference-family success by model \u00d7 condition (parity)",
+				"summary": "Data table; reference-family success by model \u00d7 condition (parity)",
 				"id": "tbl-reference"
 			}
 		},
@@ -173,14 +178,14 @@
 			"id": "sec-tokens",
 			"eyebrow": "H3 \u00b7 mean tokens per solved task",
 			"title": "Rewrite is cheap where trees are small; HTML is the terser artifact where they're large",
-			"takeaway": "Tools arms (C, D) resend a growing conversation every call, so they burn 4\u20135\u00d7 more tokens on small/medium trees. At ~150 nodes the whole-artifact arms grow too \u2014 and the HTML dialect (A, 15.6k) undercuts JSON rewrite (B, 23.0k) by ~30%: the one place the format measurably matters.",
+			"takeaway": "Tools arms (C, D) resend a growing conversation every call, so they burn 4\u20135\u00d7 more tokens on small/medium trees. At ~150 nodes the whole-artifact arms grow too; and the HTML dialect (A, 15.6k) undercuts JSON rewrite (B, 23.0k) by ~30%: the one place the format measurably matters.",
 			"legendId": "legend-3",
 			"figure": {
 				"kind": "figure",
 				"id": "fig-tokens"
 			},
 			"table": {
-				"summary": "Data table \u2014 mean total tokens per solved task (parity, pooled)",
+				"summary": "Data table; mean total tokens per solved task (parity, pooled)",
 				"id": "tbl-tokens"
 			}
 		},
