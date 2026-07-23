@@ -178,7 +178,7 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
         </p>
         {#if section.legendId}
           <div
-            class="flex flex-wrap gap-x-4.5 gap-y-2 mb-2.5 text-14px text-[#c3c9d4]"
+            class="chart-legend"
             id={section.legendId}
           ></div>
         {/if}
@@ -191,7 +191,7 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
         {#if section.table}
           <details class="mt-2.5">
             <summary
-              class="cursor-pointer select-none text-[#c3c9d4] text-14px"
+              class="chart-caption cursor-pointer select-none"
             >
               {section.table.summary}
             </summary>

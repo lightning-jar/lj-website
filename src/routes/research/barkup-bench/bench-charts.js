@@ -217,11 +217,7 @@ export function initBenchCharts() {
 	const BUCKET_KEYS = ["xs", "s", "m", "l"];
 
 	function figCap(text) {
-		return (
-			'<div style="font-size:12px;line-height:1.5;color:#c3c9d4;text-align:left;margin:8px 0 0;max-width:56rem;white-space:normal">' +
-			text +
-			"</div>"
-		);
+		return '<div class="chart-caption mt-2 max-w-[56rem]">' + text + "</div>";
 	}
 
 	function esc(s) {
@@ -438,7 +434,7 @@ export function initBenchCharts() {
 			[100, "#184f95", "#ffffff"],
 		];
 		const stepOf = (v) => RAMP.find(([max]) => v <= max);
-		let html = `<table class="border-collapse tabular-nums text-15px"><thead><tr><th scope="col" class="px-3.5 py-2 text-left text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">model</th>${CONDITIONS.map((c) => `<th scope="col" class="px-3.5 py-2 text-right text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">${c}</th>`).join("")}</tr></thead><tbody>`;
+		let html = `<table class="data-table"><thead><tr><th scope="col" class="px-3.5 py-2 text-left text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">model</th>${CONDITIONS.map((c) => `<th scope="col" class="px-3.5 py-2 text-right text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">${c}</th>`).join("")}</tr></thead><tbody>`;
 		for (const row of DATA.perModel) {
 			html += `<tr><td class="px-3.5 py-2 text-left border-2 border-[hsl(217,48%,15%)]">${row.model}</td>`;
 			for (const c of CONDITIONS) {
@@ -3028,7 +3024,7 @@ export function initBenchCharts() {
 	// --- data tables ---
 	function table(mount, head, rows) {
 		byId(mount).innerHTML =
-			`<table class="border-collapse mt-2.5 text-14px tabular-nums"><thead><tr>${head.map((h, i) => `<th scope="col" class="border border-white/14 px-2.5 py-1 text-[#c3c9d4] font-600 ${i === 0 ? "text-left" : "text-right"}">${h}</th>`).join("")}</tr></thead><tbody>` +
+			`<table class="data-table mt-2.5"><thead><tr>${head.map((h, i) => `<th scope="col" class="border border-white/14 px-2.5 py-1 text-[#c3c9d4] font-600 ${i === 0 ? "text-left" : "text-right"}">${h}</th>`).join("")}</tr></thead><tbody>` +
 			rows
 				.map(
 					(r) =>

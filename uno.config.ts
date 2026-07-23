@@ -140,6 +140,19 @@ export default defineConfig({
 		// Legend/key text above charts and diagrams (used by the research
 		// dashboard's generated markup).
 		["key", "font-600 text-[1.1em]"],
+		// Caption text for charts, diagrams, and data tables (margins and
+		// widths stay per use site).
+		[
+			"chart-caption",
+			"text-14px leading-[1.5] text-[#c3c9d4] text-left whitespace-normal",
+		],
+		// The legend row rendered above a chart.
+		[
+			"chart-legend",
+			"flex flex-wrap gap-x-4.5 gap-y-2 mb-2.5 text-14px text-[#c3c9d4]",
+		],
+		// Generated data tables on the research pages.
+		["data-table", "border-collapse tabular-nums text-14px"],
 		[
 			"max-w-article",
 			"max-w-none sm:max-w-[34rem] md:max-w-[36rem] lg:max-w-[38rem] xl:max-w-[40rem] 2xl:max-w-[45rem]",

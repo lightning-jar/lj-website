@@ -42,7 +42,7 @@ onMount(async () => {
 				</p>
 				{#if section.legendId}
 					<div
-						class="flex flex-wrap gap-x-4.5 gap-y-2 mb-2.5 text-14px text-[#c3c9d4]"
+						class="chart-legend"
 						id={section.legendId}
 					></div>
 				{/if}
@@ -56,7 +56,7 @@ onMount(async () => {
 					<!-- Tables render expanded here; the collapsed <details> was a
 					     space concession from the single-page dashboard era. -->
 					<div class="mt-4">
-						<p class="text-[#c3c9d4] text-14px mb-1.5">
+						<p class="chart-caption mb-1.5">
 							{section.table.summary}
 						</p>
 						<div id={section.table.id}></div>
