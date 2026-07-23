@@ -75,6 +75,27 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
 >
   <header class="max-w-article">
     <h1 class="display">barkup-bench</h1>
+
+    <!-- headline stats: single source of truth is research-stats.json -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-[1060px] mt-6 mb-2">
+      {#each [
+        { num: researchStats.studiesDisplay, cap: "pre-registered studies, published as found" },
+        { num: researchStats.scoredRunsDisplay, cap: "scored model runs at temperature 0" },
+        { num: researchStats.modelsDisplay, cap: "models measured across tiers" },
+        { num: "1,000", cap: "nodes in the largest trees; sessions to 36 edits" },
+      ] as tile}
+        <div
+          class="bg-[hsl(217,44%,19%)] border border-white/14 rounded-md px-4.5 pt-4 pb-3.5"
+        >
+          <div
+            class="font-mono tabular-nums text-[1.85rem] font-700 leading-[1.1] tracking-[-0.01em] text-maximumYellow"
+          >
+            {tile.num}
+          </div>
+          <div class="text-[#c3c9d4] text-15px mt-1.5">{tile.cap}</div>
+        </div>
+      {/each}
+    </div>
     <p class="opacity-90 mb-4">
       barkup-bench is our open research project measuring how large language
       models read and edit structured document trees. Every study is
