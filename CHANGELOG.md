@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.15.0] - 2026-07-23
+
+### Removed
+- `static/blog/img/globe.webp`: imported into the replicator image repository (IMG-0007), which now serves the CCRTA transit-website article's hero image; the staged repo copy is no longer needed.
+
 ## [0.14.0] - 2026-07-23
 
 ### Added
