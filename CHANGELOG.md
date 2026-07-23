@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.14.0] - 2026-07-23
+
+### Added
+- `static/blog/img/globe.webp`: temporary staging of the CCRTA bus-tracker article's hero image for import into the replicator image repository; will be removed once imported.
+
 ## [0.13.0] - 2026-07-22
 
 ### Removed
