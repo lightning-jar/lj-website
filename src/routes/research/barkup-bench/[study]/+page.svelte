@@ -53,14 +53,14 @@ onMount(async () => {
 					></div>
 				{/if}
 				{#if section.table}
-					<details class="mt-2.5">
-						<summary
-							class="cursor-pointer select-none text-[#c3c9d4] text-14px"
-						>
+					<!-- Tables render expanded here; the collapsed <details> was a
+					     space concession from the single-page dashboard era. -->
+					<div class="mt-4">
+						<p class="text-[#c3c9d4] text-14px mb-1.5">
 							{section.table.summary}
-						</summary>
+						</p>
 						<div id={section.table.id}></div>
-					</details>
+					</div>
 				{/if}
 			</section>
 		{/each}
