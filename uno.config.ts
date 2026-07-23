@@ -210,6 +210,13 @@ export default defineConfig({
       hover:shadow-current`,
 		],
 		["button-accent", "button text-accent hover:text-oxford hover:bg-accent"],
+		// Compact button (e.g. package links in sidebars). Self-contained
+		// rather than composing `button` so no same-specificity padding
+		// conflicts arise.
+		[
+			"button-small",
+			"inline-flex max-w-fit justify-center items-center gap-2 border border-current opacity-90 text-0.85em px-3 py-1 rounded-sm hover:text-accent hover:opacity-100 hover:shadow hover:shadow-current",
+		],
 
 		["page-x-padding", "px-4 sm:px-6 md:px-7 lg:px-8 xl:px-16 2xl:px-24"],
 		[

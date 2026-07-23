@@ -328,6 +328,7 @@ const proseCls = "text-[#c3c9d4]";
               <div class="flex flex-wrap gap-3">
                 {#each pkg.links as link (link.href)}
                   <LinkButton
+                    base="button-small"
                     classes="text-yellow-50"
                     link={{
                       href: link.href,
