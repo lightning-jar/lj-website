@@ -1,45 +1,54 @@
 {
 	"header": {
-		"eyebrow": "barkup-bench \u00b7 pre-registered \u00b7 corrected 2026-07-06 \u00b7 studies F\u2013AO",
+		"eyebrow": "Barkup Bench · pre-registered · corrected 2026-07-06 · studies F–AO",
 		"lede": "Every id-stable interface works, until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree.",
-		"provenance": "Main study: 200 seeded tasks \u00d7 6 conditions \u00d7 4 models \u00d7 2 regimes at temperature&nbsp;0 (July&nbsp;2026). Every follow-up study is pre-registered by commit before its first scored run and published as found, corrections included; the full catalog lives in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"#studies\">study index below</a>, one page per study. <strong>All numbers are protocol-v2 corrected</strong>: the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted, with Wilson&nbsp;95% intervals. Conditions: <span class=\"font-mono\">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite, <span class=\"font-mono\">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite, <span class=\"font-mono\">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools, <span class=\"font-mono\">D</span>&nbsp;HTML&nbsp;+&nbsp;tools, <span class=\"font-mono\">E</span>&nbsp;JSON&nbsp;Patch, and <span class=\"font-mono\">F</span>&nbsp;id-anchored patch.",
+		"provenance": "Main study: 200 seeded tasks × 6 conditions × 4 models × 2 regimes at temperature&nbsp;0 (July&nbsp;2026). Every follow-up study is pre-registered by commit before its first scored run and published as found, corrections included; the full catalog lives in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"#studies\">study index below</a>, one page per study. <strong>All numbers are protocol-v2 corrected</strong>: the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted, with Wilson&nbsp;95% intervals. Conditions: <span class=\"font-mono\">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite, <span class=\"font-mono\">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite, <span class=\"font-mono\">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools, <span class=\"font-mono\">D</span>&nbsp;HTML&nbsp;+&nbsp;tools, <span class=\"font-mono\">E</span>&nbsp;JSON&nbsp;Patch, and <span class=\"font-mono\">F</span>&nbsp;id-anchored patch.",
 		"intro": [
-			"Finding where to look costs one search call. Remembering the session costs two worked examples plus a memo, even 36 edits in. The view is a correctness contract: what the model must read, it must be shown. Views carry values; memos carry goals. The agent can be trusted to write the memo itself, and \"undo that\" needs an echo, not a transcript.",
-			"The series-long villain fell too. Offered one sentence of permission, every model asked instead of guessing, 270 out of 270. The silence was protocol, not blindness. Re-running the whole core stack on claude-opus-4.8, the tier our surfaces actually ship, passed every gate: the frontier does not need the training wheels, though they cost nothing to keep.",
-			"The late studies closed the borders. Restating a goal the model merely read does nothing; where a goal comes from matters more than saying it aloud. The memo is flawless until its twenty-note cap, where it silently discards exactly what it exists to remember, so the eviction is now deterministic and goal-safe. Some gaps are capabilities, not prompts: the ambiguity fix rescued the model we do not run and added nothing to the one we do. And told nothing but \"that was invalid,\" models fixed their patches anyway. The error message was for us, not them."
+			{
+				"heading": "What the Recipe Costs",
+				"html": "Finding where to look costs one search call. Remembering the session costs two worked examples plus a memo, even 36 edits in. The view is a correctness contract: what the model must read, it must be shown. Views carry values; memos carry goals. The agent can be trusted to write the memo itself, and \"undo that\" needs an echo, not a transcript."
+			},
+			{
+				"heading": "Asking Beats Guessing",
+				"html": "The series-long villain fell too. Offered one sentence of permission, every model asked instead of guessing, 270 out of 270. The silence was protocol, not blindness. Re-running the whole core stack on claude-opus-4.8, the tier our surfaces actually ship, passed every gate: the frontier does not need the training wheels, though they cost nothing to keep."
+			},
+			{
+				"heading": "Where the Late Studies Closed the Borders",
+				"html": "Restating a goal the model merely read does nothing; where a goal comes from matters more than saying it aloud. The memo is flawless until its twenty-note cap, where it silently discards exactly what it exists to remember, so the eviction is now deterministic and goal-safe. Some gaps are capabilities, not prompts: the ambiguity fix rescued the model we do not run and added nothing to the one we do. And told nothing but \"that was invalid,\" models fixed their patches anyway. The error message was for us, not them."
+			}
 		]
 	},
 	"tiles": [
 		{
-			"num": "\u22122.0pp",
-			"cap": "corrected A&nbsp;vs&nbsp;C overall: 91.9% vs 93.9%; tools at slight-edge parity, not \u22125.3pp behind"
+			"num": "−2.0pp",
+			"cap": "corrected A&nbsp;vs&nbsp;C overall: 91.9% vs 93.9%; tools at slight-edge parity, not −5.3pp behind"
 		},
 		{
-			"num": "3.8\u219271%",
+			"num": "3.8→71%",
 			"cap": "gemini-flash multi-turn tools success when its own tool calls become visible in history (the footgun)"
 		},
 		{
-			"num": "\u226599.3%",
+			"num": "≥99.3%",
 			"cap": "first-pass validity in every arm; HTML and JSON fluency tied"
 		},
 		{
-			"num": "87\u2013100%",
-			"cap": "anchored patches (F) at 300\u20131000 nodes, both model tiers; where rewrite falls to 0\u201380%"
+			"num": "87–100%",
+			"cap": "anchored patches (F) at 300–1000 nodes, both model tiers; where rewrite falls to 0–80%"
 		},
 		{
 			"num": "4s vs 10min",
 			"cap": "solved 1000-node edit: F $0.26 + 4s vs rewrite $0.88 + 597s (sonnet)"
 		},
 		{
-			"num": "\u221298%",
-			"cap": "input tokens with a minimal focused view at ~1000 nodes (85.6k \u2192 1.5k); accuracy statistically unchanged (Studies I/J)"
+			"num": "−98%",
+			"cap": "input tokens with a minimal focused view at ~1000 nodes (85.6k → 1.5k); accuracy statistically unchanged (Studies I/J)"
 		},
 		{
-			"num": "13\u20130",
-			"cap": "late-session paired wins, per-turn views vs serialize-once (sonnet, Study K); and views cost 4\u00d7 less"
+			"num": "13–0",
+			"cap": "late-session paired wins, per-turn views vs serialize-once (sonnet, Study K); and views cost 4× less"
 		},
 		{
-			"num": "7\u20139pp",
+			"num": "7–9pp",
 			"cap": "the price of grounding a human-style description with the whole tree in context (Study L); before the search tool"
 		},
 		{
@@ -55,24 +64,24 @@
 			"cap": "replace a session's entire history: ~900 canned tokens in the system prompt restore stateless sessions to full-history accuracy, at half the cost (Study P)"
 		},
 		{
-			"num": "~\u00bd of N",
+			"num": "~½ of N",
 			"cap": "targets actually edited when one prompt asks for N edits; fan-out degrades every strategy, even oracle retrieval (Study Q)"
 		},
 		{
 			"num": "90/90",
-			"cap": "fan-out tasks solved by app-side decomposition; 674/674 single-target subtasks, both models, at \u2153 the cost of a whole-tree prompt (Study R)"
+			"cap": "fan-out tasks solved by app-side decomposition; 674/674 single-target subtasks, both models, at ⅓ the cost of a whole-tree prompt (Study R)"
 		},
 		{
-			"num": "5.6\u00d7",
+			"num": "5.6×",
 			"cap": "what keeping history costs vs two worked examples across a 36-edit session (449k vs 81k input tokens); accuracy at parity, no late-session decay (Study S)"
 		},
 		{
-			"num": "0\u219280/80",
-			"cap": "callback steps (\"the codename we settled on\") rescued by an app-maintained memo: stateless fails all of them, three note lines recover every one at 1.02\u00d7 the cost (Study T)"
+			"num": "0→80/80",
+			"cap": "callback steps (\"the codename we settled on\") rescued by an app-maintained memo: stateless fails all of them, three note lines recover every one at 1.02× the cost (Study T)"
 		},
 		{
 			"num": "0/90",
-			"cap": "dependent edits solved against a target-only view; every failure a valid patch with a silently invented value; both-nodes views go 90/90 at 25\u00d7 less input than the full tree (Study U)"
+			"cap": "dependent edits solved against a target-only view; every failure a valid patch with a silently invented value; both-nodes views go 90/90 at 25× less input than the full tree (Study U)"
 		},
 		{
 			"num": "117/120",
@@ -96,7 +105,7 @@
 		},
 		{
 			"num": "0/24",
-			"cap": "literal readings by opus-4.8 in Study AA\u2019s confirmation arm; the model our Study Z claim called MOST literal measured least (sonnet 10/24, gemini 7/24); the claim is retracted (Study AA)"
+			"cap": "literal readings by opus-4.8 in Study AA’s confirmation arm; the model our Study Z claim called MOST literal measured least (sonnet 10/24, gemini 7/24); the claim is retracted (Study AA)"
 		},
 		{
 			"num": "270/270",
@@ -119,7 +128,7 @@
 			"cap": "notes silently lost at the memo's cap edge were GOAL notes, on every model; the one note class only the memo carries (Study AH)"
 		},
 		{
-			"num": "3\u219215/15",
+			"num": "3→15/15",
 			"cap": "sonnet's asks on ambiguous references with one added sentence; while gemini stopped one short of the bar and the shipped tier gained nothing, so the clause stays unshipped (Study AI)"
 		},
 		{
@@ -131,23 +140,23 @@
 			"cap": "models where structured error feedback significantly beat a bare \"the patch was invalid\" on seeded-failure recovery; the verbatim-issues habit is developer UX, not model accuracy (Study AJ)"
 		},
 		{
-			"num": "0 \u2192 10/10",
+			"num": "0 → 10/10",
 			"cap": "goal survival at the memo's cap edge on opus once the measured eviction pipeline replaced the silent clamp (p=.002; 19/19 over-cap sends became designed evictions, zero goals evicted; Study AK)"
 		},
 		{
 			"num": "p = .219",
-			"cap": "the anti-self-eviction fence against the client-prune pathway: directionally right at zero cost (pooled prunes 5\u21921), but the control halved AK's baseline; unproven, not disproven, and unproven does not ship (Study AL)"
+			"cap": "the anti-self-eviction fence against the client-prune pathway: directionally right at zero cost (pooled prunes 5→1), but the control halved AK's baseline; unproven, not disproven, and unproven does not ship (Study AL)"
 		},
 		{
-			"num": "3 \u2192 40/40",
+			"num": "3 → 40/40",
 			"cap": "lossless cap-edge recoveries on opus once the eviction notice invites consolidation; every needle kept, kind fidelity 800/800, zero degradations, ~570 extra tokens; shipped v3.215.0 (Study AM)"
 		}
 	],
 	"sections": [
 		{
 			"id": "sec-crossover",
-			"eyebrow": "H2 \u00b7 task success by tree size",
-			"title": "At benchmark sizes (5\u2013150 nodes), no interface dominates",
+			"eyebrow": "H2 · task success by tree size",
+			"title": "At benchmark sizes (5–150 nodes), no interface dominates",
 			"takeaway": "Whole-tree rewrite (A, B) leads granular tools (C, D) at every size tested. The gap peaks on small/medium trees and narrows; but never reverses; at ~150 nodes. JSON Patch (E) collapses to 69.6% on large trees; and the pre-registered addendum condition F (id-anchored patches) recovers it exactly to rewrite level at the lowest token cost.",
 			"legendId": "legend-1",
 			"figure": {
@@ -155,30 +164,30 @@
 				"id": "fig-crossover"
 			},
 			"table": {
-				"summary": "Data table; success by condition \u00d7 size (parity, pooled)",
+				"summary": "Data table; success by condition × size (parity, pooled)",
 				"id": "tbl-crossover"
 			}
 		},
 		{
 			"id": "sec-reference",
-			"eyebrow": "H4 \u00b7 multi-turn reference tasks, by model",
+			"eyebrow": "H4 · multi-turn reference tasks, by model",
 			"title": "Corrected: multi-turn reference edits are near-parity",
-			"takeaway": "Success on \u201cinsert a node, then edit it by the id from your own output\u201d; protocol v2. With the model's own tool history visible, every interface is near-parity (A 88.1% vs C 91.3%, n.s.); gemini's residual tools deficit is phase-1 editing accuracy, not follow-up dropout. Zero id-reference failures in any arm, ever. The dramatic v1 gaps live in the footgun chart below.",
+			"takeaway": "Success on “insert a node, then edit it by the id from your own output”; protocol v2. With the model's own tool history visible, every interface is near-parity (A 88.1% vs C 91.3%, n.s.); gemini's residual tools deficit is phase-1 editing accuracy, not follow-up dropout. Zero id-reference failures in any arm, ever. The dramatic v1 gaps live in the footgun chart below.",
 			"legendId": "legend-2",
 			"figure": {
 				"kind": "figure",
 				"id": "fig-reference"
 			},
 			"table": {
-				"summary": "Data table; reference-family success by model \u00d7 condition (parity)",
+				"summary": "Data table; reference-family success by model × condition (parity)",
 				"id": "tbl-reference"
 			}
 		},
 		{
 			"id": "sec-tokens",
-			"eyebrow": "H3 \u00b7 mean tokens per solved task",
+			"eyebrow": "H3 · mean tokens per solved task",
 			"title": "Rewrite is cheap where trees are small; HTML is the terser artifact where they're large",
-			"takeaway": "Tools arms (C, D) resend a growing conversation every call, so they burn 4\u20135\u00d7 more tokens on small/medium trees. At ~150 nodes the whole-artifact arms grow too; and the HTML dialect (A, 15.6k) undercuts JSON rewrite (B, 23.0k) by ~30%: the one place the format measurably matters.",
+			"takeaway": "Tools arms (C, D) resend a growing conversation every call, so they burn 4–5× more tokens on small/medium trees. At ~150 nodes the whole-artifact arms grow too; and the HTML dialect (A, 15.6k) undercuts JSON rewrite (B, 23.0k) by ~30%: the one place the format measurably matters.",
 			"legendId": "legend-3",
 			"figure": {
 				"kind": "figure",
@@ -191,9 +200,9 @@
 		},
 		{
 			"id": "sec-heat",
-			"eyebrow": "Overall \u00b7 success per model \u00d7 condition (parity, 200 tasks each)",
+			"eyebrow": "Overall · success per model × condition (parity, 200 tasks each)",
 			"title": "Frontier models don't care; smaller models do",
-			"takeaway": "Per-cell task success. Down the sonnet-4.5 and gpt-5.4 rows the interface barely matters; down the haiku-4.5 and gemini-3.5-flash rows the tools arms give up 10\u201317 points against rewrite.",
+			"takeaway": "Per-cell task success. Down the sonnet-4.5 and gpt-5.4 rows the interface barely matters; down the haiku-4.5 and gemini-3.5-flash rows the tools arms give up 10–17 points against rewrite.",
 			"legendId": null,
 			"figure": {
 				"kind": "heat",
@@ -202,5 +211,5 @@
 			"table": null
 		}
 	],
-	"footer": "Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/kevinpeckham/barkup-bench\">barkup-bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G\u2013AM addenda). Upstream bug report: <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts. For the practical distillation, ten action items with code examples, see <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"/research/barkup-bench/playbook\">The Builder's Playbook</a>."
+	"footer": "Pre-registered design, corpora, prompts, corrections, and all analyses live in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/kevinpeckham/barkup-bench\">Barkup Bench repository</a> (REPORT.md, including the protocol-v2 correction and the Study G–AM addenda). Upstream bug report: <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>. Reading accuracy (H5) tied across formats and is omitted from the charts. For the practical distillation, ten action items with code examples, see <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"/research/barkup-bench/playbook\">The Builder's Playbook</a>."
 }

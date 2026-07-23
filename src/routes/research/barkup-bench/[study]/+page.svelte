@@ -45,7 +45,7 @@ onMount(async () => {
 				href="/research/barkup-bench"
 				class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4 hover:text-maximumYellow"
 			>
-				← barkup-bench: all studies
+				← Barkup Bench: all studies
 			</a>
 		</nav>
 

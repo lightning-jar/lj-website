@@ -297,7 +297,7 @@ it>" instead of a patch.`,
       <div class="flex flex-wrap gap-3">
         <LinkButton
           classes="text-yellow-50"
-          link={{ href: dash, title: "barkup-bench research dashboard" }}
+          link={{ href: dash, title: "Barkup Bench research dashboard" }}
         >
           The dashboard
         </LinkButton>

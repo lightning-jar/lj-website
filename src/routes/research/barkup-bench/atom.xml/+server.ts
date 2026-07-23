@@ -33,7 +33,7 @@ export const GET: RequestHandler = () => {
 	const atom = buildAtomFeed(entries, {
 		baseUrl,
 		feedSelf: `${baseUrl}/research/barkup-bench/atom.xml`,
-		feedTitle: "Lightning Jar — barkup-bench research",
+		feedTitle: "Lightning Jar — Barkup Bench research",
 	});
 	return new Response(atom, {
 		headers: { "Content-Type": "application/atom+xml; charset=utf-8" },

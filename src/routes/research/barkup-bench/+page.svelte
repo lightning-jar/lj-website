@@ -59,14 +59,14 @@ function formatDate(iso: string): string {
 // shared dashboard styles
 const eyebrowCls =
 	"font-mono text-12px tracking-[0.14em] uppercase text-maximumYellow mb-1.5";
-const proseCls = "text-[#c3c9d4] max-w-[56rem]";
+const proseCls = "text-[#c3c9d4]";
 </script>
 
 <svelte:head>
 	<link
 		rel="alternate"
 		type="application/atom+xml"
-		title="barkup-bench research feed"
+		title="Barkup Bench research feed"
 		href="/research/barkup-bench/atom.xml"
 	/>
 </svelte:head>
@@ -81,42 +81,51 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
   >
   <header>
     <div class="flex items-start justify-between gap-4">
-      <h1 class="display">barkup-bench</h1>
+      <h1 class="display">Barkup Bench</h1>
       <FeedBadge href="/research/barkup-bench/atom.xml" />
     </div>
     <p class="opacity-90 mb-4">
-      barkup-bench is our open research project measuring how large language
+      Barkup Bench is our open research project measuring how large language
       models read and edit structured document trees. Every study is
       pre-registered: the hypotheses, task corpora, prompts, and analysis plan
       are committed to a public repository before a single model is called,
       and the results are published as found, corrections included.
     </p>
+    <h2 class="text-[1.22rem] font-600 tracking-[-0.01em] mt-6 mb-1">
+      The Findings in One Sentence
+    </h2>
     <p class="opacity-90 mb-4">
-      The series so far: {researchStats.studiesSpelled} studies, more than
-      {researchStats.scoredRunsDisplay} scored model runs,
-      {researchStats.modelsSpelled} models, trees from 5 to 1,000 nodes, and
-      editing sessions up to 36 edits long. The findings compress to one sentence: give every node
-      a stable id, never make the model reproduce anything it is not changing,
-      and hand it everything the request assumes: the nodes it must read in
-      the view, the goal it must satisfy in the memo. Everything the benchmark
-      validated ships in the open-source barkup library, linked in the
-      sidebar with the full article series below.
+      Give every node a stable id, never make the model reproduce anything it
+      is not changing, and hand it everything the request assumes: the nodes
+      it must read in the view, the goal it must satisfy in the memo.
+      Everything the benchmark validated ships in the open-source barkup
+      library, linked in the sidebar with the full article series below.
     </p>
   </header>
 
   <!-- results dashboard -->
-  <div class="text-16px leading-[1.55] text-white max-w-[1060px] pb-6">
-    <header class="max-w-[56rem]">
+  <div class="text-16px leading-[1.55] text-white pb-6">
+    <header>
       <p class={eyebrowCls}>{@html bench.header.eyebrow}</p>
       <h2
         class="text-[1.55rem] font-600 tracking-[-0.015em] leading-[1.3] mb-2"
       >
           {@html bench.header.lede}
       </h2>
-      {#each bench.header.intro as paragraph}
-        <p class="text-16px {proseCls} mb-3">{@html paragraph}</p>
+      {#each bench.header.intro as chunk (chunk.html)}
+        {#if chunk.heading}
+          <h3 class="text-[1.05rem] font-600 tracking-[-0.01em] mt-6 mb-1.5">
+            {chunk.heading}
+          </h3>
+        {/if}
+        <p class="text-16px {proseCls} mb-3">{@html chunk.html}</p>
       {/each}
-      <p class="text-16px {proseCls} mt-5 pt-4 border-t border-white/14">
+      <h3
+        class="text-[1.05rem] font-600 tracking-[-0.01em] mt-6 mb-1.5 pt-4 border-t border-white/14"
+      >
+        Methods &amp; Provenance
+      </h3>
+      <p class="text-16px {proseCls}">
         {@html bench.header.provenance}
       </p>
     </header>
@@ -177,7 +186,7 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
     <section class="mt-14" id="studies">
       <p class={eyebrowCls}>The follow-up series · studies G–AO</p>
       <h2 class="text-[1.22rem] font-600 tracking-[-0.01em] mb-1">
-        Every study, one page each
+        Every Study, One Page Each
       </h2>
       <p class="text-16px {proseCls} mb-6">
         The main study above set the baseline; everything since has been a
@@ -219,9 +228,12 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
   </div>
 
   <section class="mt-14">
-    <h2 class="heading-2">The Full Series</h2>
-    <p class="opacity-90 mb-6">
-      Every post in the barkup-bench series, in order. Start at the top for
+    <p class={eyebrowCls}>The article series · every post, in order</p>
+    <h2 class="text-[1.22rem] font-600 tracking-[-0.01em] mb-1">
+      The Full Series
+    </h2>
+    <p class="text-16px {proseCls} mb-6">
+      Every post in the Barkup Bench series, in order. Start at the top for
       the whole story, or jump straight to the current capstone, Hand It
       Everything It Needs.
     </p>
@@ -270,17 +282,26 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
       </div>
 
       <!-- the Builder's Playbook tout -->
-      <p
-        class="border border-maximumYellow/30 bg-maximumYellow/5 rounded-md px-4.5 py-3.5 opacity-90"
+      <div
+        class="border border-maximumYellow/30 bg-maximumYellow/5 rounded-md px-4.5 pt-4 pb-5"
       >
-        Building a document-editing app? The findings are distilled into ten
-        action items with code examples in
-        <a
-          href="/research/barkup-bench/playbook"
-          class="text-maximumYellow hover:underline underline-offset-3 font-600"
-          >The Builder's Playbook</a
-        >.
-      </p>
+        <h3 class="font-serif font-700 text-17px text-maximumYellow mb-2">
+          The Builder's Playbook
+        </h3>
+        <p class="opacity-90 mb-4">
+          Building a document-editing app? The findings are distilled into
+          ten action items with code examples.
+        </p>
+        <LinkButton
+          classes="button-accent"
+          link={{
+            href: "/research/barkup-bench/playbook",
+            title: "The Builder's Playbook",
+          }}
+        >
+          Read the Playbook
+        </LinkButton>
+      </div>
 
       <!-- the packages -->
       <div

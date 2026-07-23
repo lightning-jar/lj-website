@@ -21,7 +21,7 @@
 				"secondary": {
 					"label": "Our LLM Research",
 					"href": "/research/barkup-bench",
-					"title": "barkup-bench: our open LLM structured-editing benchmark"
+					"title": "Barkup Bench: our open LLM structured-editing benchmark"
 				}
 			}
 		},
@@ -29,7 +29,7 @@
 			"heading": "We Believe in Research",
 			"text": [
 				"Good engineering decisions come from evidence, not vibes. That's why we run and publish open-source research for developers of LLM applications: a growing series of pre-registered studies, more than {{researchRuns}} scored model runs and counting, corrections included.",
-				"The flagship is barkup-bench, our open benchmark measuring how language models read and edit structured documents. Every study is pre-registered before a single model is called: {{researchStudies}} studies so far, across {{researchModels}} models, trees from 5 to 1,000 nodes, and editing sessions up to 36 edits long. Everything the benchmark validates ships in our open-source barkup library, and everything it refutes gets published anyway."
+				"The flagship is Barkup Bench, our open benchmark measuring how language models read and edit structured documents. Every study is pre-registered before a single model is called: {{researchStudies}} studies so far, across {{researchModels}} models, trees from 5 to 1,000 nodes, and editing sessions up to 36 edits long. Everything the benchmark validates ships in our open-source barkup library, and everything it refutes gets published anyway."
 			],
 			"ctas": {
 				"primary": {
@@ -40,7 +40,7 @@
 				"secondary": {
 					"label": "The Builder's Playbook",
 					"href": "/research/barkup-bench/playbook",
-					"title": "The Builder's Playbook: practical applications of the barkup-bench findings"
+					"title": "The Builder's Playbook: practical applications of the Barkup Bench findings"
 				}
 			}
 		},

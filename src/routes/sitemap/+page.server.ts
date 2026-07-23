@@ -48,7 +48,7 @@ const researchSection = {
 		},
 		{
 			href: "/research/barkup-bench",
-			title: "barkup-bench",
+			title: "Barkup Bench",
 			description:
 				"Our open, pre-registered benchmark series measuring how LLMs read and edit structured document trees: results dashboard, packages, and the full article series.",
 			date: "",
