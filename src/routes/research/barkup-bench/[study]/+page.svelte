@@ -17,7 +17,7 @@ onMount(async () => {
 	class="page-x-padding main-y-padding grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-x-12 gap-y-16 bg-oxford text-cultured"
 >
 	<div class="max-w-article">
-		<nav class="text-14px mb-8">
+		<nav class="mb-8">
 			<a
 				href="/research/barkup-bench"
 				class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4 hover:text-maximumYellow"
@@ -37,7 +37,7 @@ onMount(async () => {
 				<h2 class="text-[1.22rem] font-600 tracking-[-0.01em] mb-1">
 					{@html section.title}
 				</h2>
-				<p class="text-16px {proseCls} mb-3.5">
+				<p class="{proseCls} mb-3.5">
 					{@html section.takeaway}
 				</p>
 				{#if section.legendId}
@@ -66,7 +66,7 @@ onMount(async () => {
 		{/each}
 
 		<footer
-			class="mt-14 pt-4.5 border-t border-white/14 text-15px {proseCls} flex justify-between gap-4"
+			class="mt-14 pt-4.5 border-t border-white/14 {proseCls} flex justify-between gap-4"
 		>
 			{#if data.previous}
 				<a
@@ -98,7 +98,7 @@ onMount(async () => {
 					</h2>
 					<ul class="grid grid-cols-1 gap-3">
 						{#each data.study.related as article (article.href)}
-							<li class="text-15px leading-snug">
+							<li class="leading-snug">
 								<a
 									href={article.href}
 									class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4 hover:text-maximumYellow"
@@ -116,7 +116,7 @@ onMount(async () => {
 				<h2 class="font-mono text-13px tracking-[0.12em] uppercase text-maximumYellow mb-3">
 					Primary sources
 				</h2>
-				<ul class="grid grid-cols-1 gap-3 text-15px leading-snug">
+				<ul class="grid grid-cols-1 gap-3 leading-snug">
 					{#if data.study.brief}
 						<li>
 							<a
