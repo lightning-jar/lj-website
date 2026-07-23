@@ -72,33 +72,17 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
 </svelte:head>
 
 <div
-  class="page-x-padding main-y-padding grid grid-cols-1 gap-12 min-h-screen place-content-start"
+  class="page-x-padding main-y-padding grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-x-12 gap-y-16 min-h-screen place-content-start"
 >
-  <header class="max-w-article">
+  <!-- main column: article measure on small screens, widening as the
+       viewport grows (charts stop needing horizontal scroll from xl up) -->
+  <div
+    class="max-w-none sm:max-w-[34rem] md:max-w-[38rem] lg:max-w-[42rem] xl:max-w-[48rem] 2xl:max-w-[56rem]"
+  >
+  <header>
     <div class="flex items-start justify-between gap-4">
       <h1 class="display">barkup-bench</h1>
       <FeedBadge href="/research/barkup-bench/atom.xml" />
-    </div>
-
-    <!-- headline stats: single source of truth is research-stats.json -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-[1060px] mt-6 mb-2">
-      {#each [
-        { num: researchStats.studiesDisplay, cap: "pre-registered studies, published as found" },
-        { num: researchStats.scoredRunsDisplay, cap: "scored model runs at temperature 0" },
-        { num: researchStats.modelsDisplay, cap: "models measured across tiers" },
-        { num: "1,000", cap: "nodes in the largest trees; sessions to 36 edits" },
-      ] as tile}
-        <div
-          class="bg-[hsl(217,44%,19%)] border border-white/14 rounded-md px-4.5 pt-4 pb-3.5"
-        >
-          <div
-            class="font-mono tabular-nums text-[1.85rem] font-700 leading-[1.1] tracking-[-0.01em] text-maximumYellow"
-          >
-            {tile.num}
-          </div>
-          <div class="text-[#c3c9d4] text-15px mt-1.5">{tile.cap}</div>
-        </div>
-      {/each}
     </div>
     <p class="opacity-90 mb-4">
       barkup-bench is our open research project measuring how large language
@@ -115,19 +99,8 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
       a stable id, never make the model reproduce anything it is not changing,
       and hand it everything the request assumes: the nodes it must read in
       the view, the goal it must satisfy in the memo. Everything the benchmark
-      validated ships in the open-source barkup library, linked below with the
-      full article series.
-    </p>
-    <p
-      class="border border-maximumYellow/30 bg-maximumYellow/5 rounded-md px-4.5 py-3.5 opacity-90"
-    >
-      Building a document-editing app? The findings are distilled into ten
-      action items with code examples in
-      <a
-        href="/research/barkup-bench/playbook"
-        class="text-maximumYellow hover:underline underline-offset-3 font-600"
-        >The Builder's Playbook</a
-      >.
+      validated ships in the open-source barkup library, linked in the
+      sidebar with the full article series below.
     </p>
   </header>
 
@@ -245,38 +218,7 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
     </footer>
   </div>
 
-  <section class="max-w-article">
-    <h2 class="heading-2">The Packages</h2>
-    <p class="opacity-90 mb-6">
-      Open-source software generated in response to the research, all MIT
-      licensed.
-    </p>
-    <div class="grid grid-cols-1 gap-8">
-      {#each data.packages as pkg}
-        <article>
-          <h3 class="font-mono text-18px text-maximumYellow mb-2">
-            {pkg.name}
-          </h3>
-          <p class="opacity-90 mb-3">{pkg.tagline}</p>
-          <div class="flex flex-wrap gap-3">
-            {#each pkg.links as link}
-              <LinkButton
-                classes="text-yellow-50"
-                link={{
-                  href: link.href,
-                  title: `${pkg.name} on ${link.label}`,
-                }}
-              >
-                {link.label}
-              </LinkButton>
-            {/each}
-          </div>
-        </article>
-      {/each}
-    </div>
-  </section>
-
-  <section class="max-w-article">
+  <section class="mt-14">
     <h2 class="heading-2">The Full Series</h2>
     <p class="opacity-90 mb-6">
       Every post in the barkup-bench series, in order. Start at the top for
@@ -299,6 +241,88 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
       {/each}
     </ol>
   </section>
+  </div>
+
+  <!-- sidebar -->
+  <aside class="flex lg:justify-end">
+    <div
+      class="max-w-480px lg:w-[320px] xl:w-[360px] 2xl:w-[400px] grid grid-cols-1 gap-6 place-content-start"
+    >
+      <!-- headline stats: single source of truth is research-stats.json -->
+      <div class="grid grid-cols-2 gap-3">
+        {#each [
+          { num: researchStats.studiesDisplay, cap: "pre-registered studies, published as found" },
+          { num: researchStats.scoredRunsDisplay, cap: "scored model runs at temperature 0" },
+          { num: researchStats.modelsDisplay, cap: "models measured across tiers" },
+          { num: "1,000", cap: "nodes in the largest trees; sessions to 36 edits" },
+        ] as tile (tile.cap)}
+          <div
+            class="bg-[hsl(217,44%,19%)] border border-white/14 rounded-md px-4.5 pt-4 pb-3.5"
+          >
+            <div
+              class="font-mono tabular-nums text-[1.85rem] font-700 leading-[1.1] tracking-[-0.01em] text-maximumYellow"
+            >
+              {tile.num}
+            </div>
+            <div class="text-[#c3c9d4] text-15px mt-1.5">{tile.cap}</div>
+          </div>
+        {/each}
+      </div>
+
+      <!-- the Builder's Playbook tout -->
+      <p
+        class="border border-maximumYellow/30 bg-maximumYellow/5 rounded-md px-4.5 py-3.5 opacity-90"
+      >
+        Building a document-editing app? The findings are distilled into ten
+        action items with code examples in
+        <a
+          href="/research/barkup-bench/playbook"
+          class="text-maximumYellow hover:underline underline-offset-3 font-600"
+          >The Builder's Playbook</a
+        >.
+      </p>
+
+      <!-- the packages -->
+      <div
+        class="w-full border border-slate-100/10 bg-slate-100/5 rounded px-3 pt-4 pb-5"
+      >
+        <h2
+          class="font-mono text-13px tracking-[0.12em] uppercase text-maximumYellow mb-2"
+        >
+          The Packages
+        </h2>
+        <p class="opacity-90 text-14px mb-5">
+          Open-source software generated in response to the research, all MIT
+          licensed.
+        </p>
+        <div class="grid grid-cols-1 gap-6">
+          {#each data.packages as pkg (pkg.name)}
+            <article>
+              <h3 class="font-mono text-16px text-maximumYellow mb-1.5">
+                {pkg.name}
+              </h3>
+              <p class="opacity-90 text-14px leading-snug mb-3">
+                {pkg.tagline}
+              </p>
+              <div class="flex flex-wrap gap-3">
+                {#each pkg.links as link (link.href)}
+                  <LinkButton
+                    classes="text-yellow-50"
+                    link={{
+                      href: link.href,
+                      title: `${pkg.name} on ${link.label}`,
+                    }}
+                  >
+                    {link.label}
+                  </LinkButton>
+                {/each}
+              </div>
+            </article>
+          {/each}
+        </div>
+      </div>
+    </div>
+  </aside>
 </div>
 
 <!-- chart hover tooltip (positioned by bench-charts.js) -->
