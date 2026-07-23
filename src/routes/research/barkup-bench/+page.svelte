@@ -184,18 +184,18 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
         {/if}
         {#if section.figure}
           <div
-            class="overflow-x-auto font-mono tabular-nums mt-5 mb-5 bg-white/5"
+            class="chart"
             id={section.figure.id}
           ></div>
         {/if}
         {#if section.table}
           <details class="mt-2.5">
             <summary
-              class="chart-caption cursor-pointer select-none"
+              class="table-summary"
             >
               {section.table.summary}
             </summary>
-            <div id={section.table.id}></div>
+            <div class="data-table" id={section.table.id}></div>
           </details>
         {/if}
       </section>
@@ -305,5 +305,5 @@ const proseCls = "text-[#c3c9d4] max-w-[56rem]";
 <div
   id="tooltip"
   aria-hidden="true"
-  class="fixed pointer-events-none bg-[#fcfcfb] text-[#0b0b0b] font-mono text-[12px] leading-[1.45] px-2.5 py-[7px] rounded-[5px] max-w-[300px] opacity-0 transition-opacity duration-100 motion-reduce:transition-none z-10 whitespace-pre"
+  class="fixed pointer-events-none bg-[#fcfcfb] text-[#0b0b0b] font-mono text-[12px] leading-[1.45] px-2.5 py-[7px] rounded-[5px] max-w-[300px] opacity-0 transition-opacity duration-100 motion-reduce:transition-none z-10 whitespace-pre-wrap"
 ></div>

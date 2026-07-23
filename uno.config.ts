@@ -137,25 +137,52 @@ export default defineConfig({
 		"w-full",
 	],
 	shortcuts: [
-		// Legend/key text above charts and diagrams (used by the research
-		// dashboard's generated markup).
-		["key", "font-600 text-[1.1em]"],
-		// Caption text for charts, diagrams, and data tables (margins and
-		// widths stay per use site).
+		// A legend row: color chip + series code + description (generated
+		// markup on the research pages). The series code child gets its
+		// weight here so the generated markup stays bare.
 		[
-			"chart-caption",
-			"text-14px leading-[1.5] text-[#c3c9d4] text-left whitespace-normal",
+			"key",
+			"flex gap-2 flex-wrap items-start opacity-95 [&>.code]:font-600 [&>.note-label]:font-600",
 		],
-		// The legend row rendered above a chart.
+		// The color swatch inside a legend row; background color arrives
+		// inline per series. mt aligns it with the first text line.
+		["chip", "inline-block w-2.5 h-2.5 rounded-sm shrink-0 mt-[0.28em]"],
+		// Caption typography only — font-sans resets the chart container's
+		// font-mono; spacing/width within a chart ride on the `chart`
+		// shortcut's child rules.
+		["chart-caption", "font-sans text-0.95em leading-snug"],
+		// The legend box rendered above a chart.
 		[
 			"chart-legend",
-			"flex flex-wrap gap-x-4.5 gap-y-2 mb-2.5 text-14px text-[#c3c9d4]",
+			"grid grid-cols-1 gap-2 leading-snug rounded-sm bg-white/5 px-4 pt-1 pb-5 mt-3 text-0.85em",
 		],
-		// Generated data tables on the research pages.
-		["data-table", "border-collapse tabular-nums text-14px"],
+		// The scrollable container each generated chart SVG sits in; svg
+		// sizing lives here as child rules so the generated markup carries
+		// no width/style attributes (min-width preserves horizontal scroll
+		// on narrow screens; block kills the inline-svg baseline gap).
+		[
+			"chart",
+			"overflow-x-auto font-mono tabular-nums mt-5 mb-5 bg-white/5 rounded-sm px-4 pt-2 pb-5 [&>svg]:(block w-full h-auto min-w-[640px]) [&_.chart-caption]:(mt-2 max-w-[56rem]) [&_td.heat]:(border-2 border-oxford px-3.5 py-2 text-right) [&_td.heat:first-child]:(text-left font-sans)",
+		],
+		// The clickable summary of a collapsed data-table <details> on the
+		// dashboard — its own identity (was borrowing chart-caption), with
+		// its interaction affordances built in.
+		[
+			"table-summary",
+			"font-sans text-0.95em leading-snug cursor-pointer select-none opacity-90 hover:opacity-100",
+		],
+		// The container each generated data table mounts into — symmetric
+		// with `chart`: chrome on the container, table styles via child
+		// rules on the bare generated <table>. Any non-visible overflow is
+		// what lets the corner rounding clip a border-collapse table; it
+		// also scrolls wide tables instead of breaking the page.
+		[
+			"data-table",
+			"overflow-x-auto mt-2.5 rounded-sm bg-white/5 [&>table]:(w-full border-collapse tabular-nums text-14px) [&_th]:(border border-white/14 px-2.5 py-1 font-400 text-blue-200 text-right leading-snug) [&_thead]:bg-black/10 [&_th:first-child]:text-left [&_td]:(border border-white/14 px-2.5 py-1 text-right) [&_td:first-child]:text-left",
+		],
 		// Tick/axis labels inside the generated SVG charts (CSS font-size
 		// on svg <text> overrides the presentational attribute it replaced).
-		["chart-tick", "text-[11.5px]"],
+		["chart-tick", "opacity-95 fill-current"],
 		[
 			"max-w-article",
 			"max-w-none sm:max-w-[34rem] md:max-w-[36rem] lg:max-w-[38rem] xl:max-w-[40rem] 2xl:max-w-[45rem]",
@@ -226,19 +253,19 @@ export default defineConfig({
 			[&_strong]:(font-700)
 			[&_img]:(w-full h-auto max-w-full my-4)
 			[&_img+p]:(text-13px opacity-70 mt-2 mb-6 leading-snug)
-			[&_table:not(.data-table)]:(hidden md:block w-full border-collapse text-15px text-left relative border border-slate-100/40 rounded pb-0 overflow-hidden my-4)
-			[&_table:not(.data-table)_thead]:(flex items-center justify-between text-slate-100)
-			[&_table:not(.data-table)_thead_tr]:(w-full grid grid-cols-[repeat(auto-fit,_minmax(min(100%,_150px),_1fr))])
-			[&_table:not(.data-table)_thead_tr_th]:(block bg-blue/40 leading-tight font-700 px-3 py-2 truncate w-full border-b border-slate-100/40)
-			[&_table:not(.data-table)_thead_tr_th:not(:last-child)]:(border-r)
-			[&_table:not(.data-table)_tbody]:(grid grid-cols-1)
-			[&_table:not(.data-table)_tbody_tr]:(w-full grid grid-cols-[repeat(auto-fit,_minmax(min(100%,_150px),_1fr))])
-			[&_table:not(.data-table)_tbody_tr:has(em)]:(bg-blue/10)
-			[&_table:not(.data-table)_tbody_tr:has(strong_em)]:(bg-blue/40)
-			[&_table:not(.data-table)_tbody_tr:has(em_strong)]:(bg-blue/40)
-			[&_table:not(.data-table)_tbody_tr_td]:(flex bg-blue/0 leading-tight px-3 py-2 w-full border-b border-slate-100/40 opacity-90 text-15px)
-			[&_table:not(.data-table)_tbody_tr:last-child_td]:(border-b-none pb-3)
-			[&_table:not(.data-table)_tbody_tr_td:not(:last-child)]:(border-r)
+			[&_table:not(.data-table_table)]:(hidden md:block w-full border-collapse text-15px text-left relative border border-slate-100/40 rounded pb-0 overflow-hidden my-4)
+			[&_table:not(.data-table_table)_thead]:(flex items-center justify-between text-slate-100)
+			[&_table:not(.data-table_table)_thead_tr]:(w-full grid grid-cols-[repeat(auto-fit,_minmax(min(100%,_150px),_1fr))])
+			[&_table:not(.data-table_table)_thead_tr_th]:(block bg-blue/40 leading-tight font-700 px-3 py-2 truncate w-full border-b border-slate-100/40)
+			[&_table:not(.data-table_table)_thead_tr_th:not(:last-child)]:(border-r)
+			[&_table:not(.data-table_table)_tbody]:(grid grid-cols-1)
+			[&_table:not(.data-table_table)_tbody_tr]:(w-full grid grid-cols-[repeat(auto-fit,_minmax(min(100%,_150px),_1fr))])
+			[&_table:not(.data-table_table)_tbody_tr:has(em)]:(bg-blue/10)
+			[&_table:not(.data-table_table)_tbody_tr:has(strong_em)]:(bg-blue/40)
+			[&_table:not(.data-table_table)_tbody_tr:has(em_strong)]:(bg-blue/40)
+			[&_table:not(.data-table_table)_tbody_tr_td]:(flex bg-blue/0 leading-tight px-3 py-2 w-full border-b border-slate-100/40 opacity-90 text-15px)
+			[&_table:not(.data-table_table)_tbody_tr:last-child_td]:(border-b-none pb-3)
+			[&_table:not(.data-table_table)_tbody_tr_td:not(:last-child)]:(border-r)
 			[&_pre]:(bg-black/40 px-4 pt-4 pb-5 rounded my-4 overflow-x-auto)
 			[&_pre_code]:(font-mono text-13px leading-relaxed text-slate-100/90)
 			[&_:not(pre)>code]:(font-mono text-0.9em bg-black/30 rounded px-1 py-0.5)

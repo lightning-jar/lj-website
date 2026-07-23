@@ -217,7 +217,7 @@ export function initBenchCharts() {
 	const BUCKET_KEYS = ["xs", "s", "m", "l"];
 
 	function figCap(text) {
-		return '<div class="chart-caption mt-2 max-w-[56rem]">' + text + "</div>";
+		return '<div class="chart-caption">' + text + "</div>";
 	}
 
 	function esc(s) {
@@ -225,6 +225,17 @@ export function initBenchCharts() {
 			.replace(/&/g, "&amp;")
 			.replace(/</g, "&lt;")
 			.replace(/"/g, "&quot;");
+	}
+
+	// A chipless legend note row; `label` is an optional inline heading
+	// (e.g. "bars"), bolded via the key shortcut's .note-label selector.
+	function legendNote(text, label) {
+		return (
+			'<span class="key note">' +
+			(label ? '<span class="note-label">' + label + ":</span> " : "") +
+			text +
+			"</span>"
+		);
 	}
 
 	function legend(el) {
@@ -285,11 +296,11 @@ export function initBenchCharts() {
 		for (const tick of opts.ticks) {
 			const y = yOf(tick);
 			g += `<line x1="${L}" x2="${L + iw}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
-			g += `<text fill="#c3c9d4" class="chart-tick" x="${L - 8}" y="${y + 4}" text-anchor="end">${opts.fmt(tick)}</text>`;
+			g += `<text class="chart-tick" x="${L - 8}" y="${y + 4}" text-anchor="end">${opts.fmt(tick)}</text>`;
 		}
 		// x labels
 		BUCKET_LABELS.forEach((lab, i) => {
-			g += `<text fill="#c3c9d4" class="chart-tick" x="${xs[i]}" y="${H - B + 22}" text-anchor="middle">${lab}</text>`;
+			g += `<text class="chart-tick" x="${xs[i]}" y="${H - B + 22}" text-anchor="middle">${lab}</text>`;
 		});
 		let marks = "",
 			hits = "";
@@ -332,7 +343,7 @@ export function initBenchCharts() {
 		for (const l of endLabels) {
 			labels += `<text font-size="12" font-weight="700" x="${l.x}" y="${l.y}" fill="${COLOR[l.c]}">${l.c} · ${opts.endLabel(l.c)}</text>`;
 		}
-		const svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(opts.aria)}" style="min-width:640px;display:block">${g}${marks}${labels}${hits}</svg>`;
+		const svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.aria)}">${g}${marks}${labels}${hits}</svg>`;
 		const el = byId(mount);
 		el.innerHTML = svg + figCap("tree size bucket");
 		el.querySelectorAll("[data-tip]").forEach((n) => {
@@ -397,7 +408,7 @@ export function initBenchCharts() {
 		for (const tick of [0, 25, 50, 75, 100]) {
 			const x = xOf(tick);
 			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
-			g += `<text fill="#c3c9d4" class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
 		}
 		let marks = "",
 			hits = "";
@@ -415,7 +426,7 @@ export function initBenchCharts() {
 		});
 		const el = byId("fig-reference");
 		el.innerHTML =
-			`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Reference-task success per model and condition; tools conditions collapse for haiku and gemini." style="min-width:640px;display:block">${g}${marks}${hits}</svg>` +
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Reference-task success per model and condition; tools conditions collapse for haiku and gemini.">${g}${marks}${hits}</svg>` +
 			figCap("reference-task success (n = 40 per cell)");
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
@@ -434,13 +445,13 @@ export function initBenchCharts() {
 			[100, "#184f95", "#ffffff"],
 		];
 		const stepOf = (v) => RAMP.find(([max]) => v <= max);
-		let html = `<table class="data-table"><thead><tr><th scope="col" class="px-3.5 py-2 text-left text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">model</th>${CONDITIONS.map((c) => `<th scope="col" class="px-3.5 py-2 text-right text-[#c3c9d4] font-600 border-2 border-[hsl(217,48%,15%)]">${c}</th>`).join("")}</tr></thead><tbody>`;
+		let html = `<table><thead><tr><th scope="col">model</th>${CONDITIONS.map((c) => `<th scope="col">${c}</th>`).join("")}</tr></thead><tbody>`;
 		for (const row of DATA.perModel) {
-			html += `<tr><td class="px-3.5 py-2 text-left border-2 border-[hsl(217,48%,15%)]">${row.model}</td>`;
+			html += `<tr><td class="heat">${row.model}</td>`;
 			for (const c of CONDITIONS) {
 				const v = row.cells[c];
 				const [, bg, ink] = stepOf(v);
-				html += `<td class="font-mono px-3.5 py-2 text-right border-2 border-[hsl(217,48%,15%)]" style="background:${bg};color:${ink}">${v.toFixed(1)}%</td>`;
+				html += `<td class="heat" style="background:${bg};color:${ink}">${v.toFixed(1)}%</td>`;
 			}
 			html += "</tr>";
 		}
@@ -464,13 +475,13 @@ export function initBenchCharts() {
 		g +=
 			'<circle cx="' +
 			L +
-			'" cy="16" r="6" fill="hsl(217,48%,15%)" stroke="#c98500" stroke-width="2.5"/><text fill="#c3c9d4" class="chart-tick" x="' +
+			'" cy="16" r="6" fill="hsl(217,48%,15%)" stroke="#c98500" stroke-width="2.5"/><text class="chart-tick" x="' +
 			(L + 14) +
 			'" y="20">v1 · tool calls hidden</text>';
 		g +=
 			'<circle cx="' +
 			(L + 220) +
-			'" cy="16" r="6.5" fill="#3987e5" stroke="hsl(217,48%,15%)" stroke-width="2"/><text fill="#c3c9d4" class="chart-tick" x="' +
+			'" cy="16" r="6.5" fill="#3987e5" stroke="hsl(217,48%,15%)" stroke-width="2"/><text class="chart-tick" x="' +
 			(L + 234) +
 			'" y="20">v2 · corrected history</text>';
 		for (const tick of [0, 25, 50, 75, 100]) {
@@ -486,7 +497,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -566,7 +577,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Reference-edit success per model with tool calls hidden from history versus corrected history." style="min-width:640px;display:block">' +
+			'" role="img" aria-label="Reference-edit success per model with tool calls hidden from history versus corrected history.">' +
 			g +
 			hits +
 			"</svg>";
@@ -601,7 +612,7 @@ export function initBenchCharts() {
 						"</span>",
 				)
 				.join("") +
-			'<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+			legendNote("solid = sonnet-4.5 · dashed = gemini-3.5-flash");
 		const W = 880,
 			H = 380,
 			L = 56,
@@ -627,7 +638,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 8) +
 				'" y="' +
 				(y + 4) +
@@ -637,7 +648,7 @@ export function initBenchCharts() {
 		}
 		SIZES.forEach((lab, i) => {
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				xs[i] +
 				'" y="' +
 				(H - B + 22) +
@@ -728,7 +739,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Task success at 300 to 1000 nodes: anchored patches hold for both models while rewrite falls to zero on the small model and positional patches decay." style="min-width:640px;display:block">' +
+			'" role="img" aria-label="Task success at 300 to 1000 nodes: anchored patches hold for both models while rewrite falls to zero on the small model and positional patches decay.">' +
 			g +
 			marks +
 			labels +
@@ -843,7 +854,7 @@ export function initBenchCharts() {
 						"</span>",
 				)
 				.join("") +
-			'<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+			legendNote("solid = sonnet-4.5 · dashed = gemini-3.5-flash");
 		const W = 880,
 			H = 380,
 			L = 64,
@@ -869,7 +880,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 8) +
 				'" y="' +
 				(y + 4) +
@@ -879,7 +890,7 @@ export function initBenchCharts() {
 		}
 		SIZES.forEach((lab, i) => {
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				xs[i] +
 				'" y="' +
 				(H - B + 22) +
@@ -967,7 +978,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Median input tokens by tree size: the full tree grows to 70 to 86 thousand tokens at 1000 nodes while focused and minimal views stay under 4 thousand, with accuracy unchanged." style="min-width:640px;display:block">' +
+			'" role="img" aria-label="Median input tokens by tree size: the full tree grows to 70 to 86 thousand tokens at 1000 nodes while focused and minimal views stay under 4 thousand, with accuracy unchanged.">' +
 			g +
 			marks +
 			labels +
@@ -1089,7 +1100,7 @@ export function initBenchCharts() {
 						"</span>",
 				)
 				.join("") +
-			'<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+			legendNote("solid = sonnet-4.5 · dashed = gemini-3.5-flash");
 		const W = 880,
 			H = 380,
 			L = 56,
@@ -1115,7 +1126,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 8) +
 				'" y="' +
 				(y + 4) +
@@ -1125,7 +1136,7 @@ export function initBenchCharts() {
 		}
 		THIRDS.forEach((lab, i) => {
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				xs[i] +
 				'" y="' +
 				(H - B + 22) +
@@ -1217,7 +1228,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Per-step success across session thirds: serialize-once decays to 83.8 percent on sonnet while per-turn views stay flat near 100 percent; gemini whole-tree rewrite sessions run at 52 to 69 percent." style="min-width:640px;display:block">' +
+			'" role="img" aria-label="Per-step success across session thirds: serialize-once decays to 83.8 percent on sonnet while per-turn views stay flat near 100 percent; gemini whole-tree rewrite sessions run at 52 to 69 percent.">' +
 			g +
 			marks +
 			labels +
@@ -1344,7 +1355,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -1430,7 +1441,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Grounded-instruction success per model: full-tree grounding sits 7 to 9 points under the oracle bound; navigation matches the oracle on sonnet but collapses on gemini; lexical retrieval is the floor." style="min-width:640px;display:block">' +
+			'" role="img" aria-label="Grounded-instruction success per model: full-tree grounding sits 7 to 9 points under the oracle bound; navigation matches the oracle on sonnet but collapses on gemini; lexical retrieval is the floor.">' +
 			g +
 			marks +
 			hits +
@@ -1567,7 +1578,7 @@ export function initBenchCharts() {
 						"</span>",
 				)
 				.join("") +
-			'<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+			legendNote("solid = sonnet-4.5 · dashed = gemini-3.5-flash");
 		const W = 880,
 			H = 340,
 			L = 56,
@@ -1593,7 +1604,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 8) +
 				'" y="' +
 				(y + 4) +
@@ -1603,7 +1614,7 @@ export function initBenchCharts() {
 		}
 		THIRDS.forEach((lab, i) => {
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				xs[i] +
 				'" y="' +
 				(H - B + 22) +
@@ -1694,7 +1705,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Per-step success across session thirds for full history, a two-exchange window, and no history: statelessness degrades late-session accuracy despite identical per-turn views." style="min-width:640px;display:block">' +
+			'" role="img" aria-label="Per-step success across session thirds for full history, a two-exchange window, and no history: statelessness degrades late-session accuracy despite identical per-turn views.">' +
 			g +
 			marks +
 			labels +
@@ -1830,7 +1841,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -1917,7 +1928,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Grounded-instruction success per model on the retrieval ladder: the find_nodes search tool matches the oracle bound on sonnet and full-tree grounding on gemini at a median of one call; embedding retrieval sits at the lexical floor; cheap-model grounding preserves accuracy with 97% less frontier input." style="min-width:640px;display:block">' +
+			'" role="img" aria-label="Grounded-instruction success per model on the retrieval ladder: the find_nodes search tool matches the oracle bound on sonnet and full-tree grounding on gemini at a median of one call; embedding retrieval sits at the lexical floor; cheap-model grounding preserves accuracy with 97% less frontier input.">' +
 			g +
 			marks +
 			hits +
@@ -2101,7 +2112,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -2188,7 +2199,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Late-session per-step success for the history-by-positions two-by-two: position annotations barely move stateless accuracy while full history stays at the top; positions plus history is descriptively best but not significantly better." style="min-width:640px;display:block">' +
+			'" role="img" aria-label="Late-session per-step success for the history-by-positions two-by-two: position annotations barely move stateless accuracy while full history stays at the top; positions plus history is descriptively best but not significantly better.">' +
 			g +
 			marks +
 			hits +
@@ -2368,7 +2379,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -2455,7 +2466,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Late-session per-step success: stateless sessions with two canned worked examples match full history on both models, in both delivery framings, while plain stateless lags." style="min-width:640px;display:block">' +
+			'" role="img" aria-label="Late-session per-step success: stateless sessions with two canned worked examples match full history on both models, in both delivery framings, while plain stateless lags.">' +
 			g +
 			marks +
 			hits +
@@ -2577,7 +2588,7 @@ export function initBenchCharts() {
 						"</span>",
 				)
 				.join("") +
-			'<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+			legendNote("solid = sonnet-4.5 · dashed = gemini-3.5-flash");
 		const W = 880,
 			H = 360,
 			L = 56,
@@ -2603,7 +2614,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 8) +
 				'" y="' +
 				(y + 4) +
@@ -2613,7 +2624,7 @@ export function initBenchCharts() {
 		}
 		BINS.forEach((lab, i) => {
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				xs[i] +
 				'" y="' +
 				(H - B + 22) +
@@ -2702,7 +2713,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Fan-out task success falls with target count in every condition: even oracle retrieval drops to about half at seven-plus targets, and the models invert between view and whole-tree strategies." style="min-width:640px;display:block">' +
+			'" role="img" aria-label="Fan-out task success falls with target count in every condition: even oracle retrieval drops to about half at seven-plus targets, and the models invert between view and whole-tree strategies.">' +
 			g +
 			marks +
 			labels +
@@ -2848,7 +2859,7 @@ export function initBenchCharts() {
 						"</span>",
 				)
 				.join("") +
-			'<span class="inline-flex items-center gap-[7px]">solid = sonnet-4.5 · dashed = gemini-3.5-flash</span>';
+			legendNote("solid = sonnet-4.5 · dashed = gemini-3.5-flash");
 		const W = 880,
 			H = 360,
 			L = 64,
@@ -2873,7 +2884,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 8) +
 				'" y="' +
 				(y + 4) +
@@ -2883,7 +2894,7 @@ export function initBenchCharts() {
 		}
 		for (const s of STEPS) {
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				xOf(s) +
 				'" y="' +
 				(H - B + 22) +
@@ -2971,7 +2982,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Line chart: median input tokens per step over a 36-edit session. Keep-history grows linearly to about 24k tokens by step 36; the stateless worked-examples recipe stays flat at about 2.1k. Accuracy is at parity throughout." style="min-width:640px;display:block">' +
+			'" role="img" aria-label="Line chart: median input tokens per step over a 36-edit session. Keep-history grows linearly to about 24k tokens by step 36; the stateless worked-examples recipe stays flat at about 2.1k. Accuracy is at parity throughout.">' +
 			g +
 			marks +
 			hits +
@@ -3024,12 +3035,9 @@ export function initBenchCharts() {
 	// --- data tables ---
 	function table(mount, head, rows) {
 		byId(mount).innerHTML =
-			`<table class="data-table mt-2.5"><thead><tr>${head.map((h, i) => `<th scope="col" class="border border-white/14 px-2.5 py-1 text-[#c3c9d4] font-600 ${i === 0 ? "text-left" : "text-right"}">${h}</th>`).join("")}</tr></thead><tbody>` +
+			`<table><thead><tr>${head.map((h, i) => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>` +
 			rows
-				.map(
-					(r) =>
-						`<tr>${r.map((v, i) => `<td class="border border-white/14 px-2.5 py-1 ${i === 0 ? "text-left" : "text-right"}">${v}</td>`).join("")}</tr>`,
-				)
+				.map((r) => `<tr>${r.map((v) => `<td>${v}</td>`).join("")}</tr>`)
 				.join("") +
 			"</tbody></table>";
 	}
@@ -3140,8 +3148,7 @@ export function initBenchCharts() {
 					"</span> " +
 					TNAMES[c] +
 					"</span>",
-			).join("") +
-			'<span class="inline-flex items-center gap-[7px]">● = callback steps · ○ = ordinary steps</span>';
+			).join("") + legendNote("● = callback steps · ○ = ordinary steps");
 		const W = 880,
 			ROW = 34,
 			T = 8,
@@ -3169,7 +3176,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -3278,7 +3285,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Dumbbell chart: the stateless recipe scores 100% on ordinary steps but 0% on callback steps; full history and the memo arm score 100% on both." style="min-width:640px;display:block">' +
+			'" role="img" aria-label="Dumbbell chart: the stateless recipe scores 100% on ordinary steps but 0% on callback steps; full history and the memo arm score 100% on both.">' +
 			g +
 			marks +
 			hits +
@@ -3465,7 +3472,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -3551,7 +3558,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Dot plot: dependent-edit success. The target-only view sits at 0% on both models; the both-nodes view and the whole tree sit at or near 100%; the search recipe sits at 82 to 84%." style="min-width:640px;display:block">' +
+			'" role="img" aria-label="Dot plot: dependent-edit success. The target-only view sits at 0% on both models; the both-nodes view and the whole tree sit at or near 100%; the search recipe sits at 82 to 84%.">' +
 			g +
 			marks +
 			hits +
@@ -3671,7 +3678,10 @@ export function initBenchCharts() {
 					VNAMES[c] +
 					"</span>",
 			).join("") +
-			'<span class="key">bar segments: wins · ties · losses vs the explicit-instruction control (primary judge)</span>';
+			legendNote(
+				"wins · ties · losses vs the explicit-instruction control (primary judge)",
+				"bar segments",
+			);
 		const W = 880,
 			ROW = 34,
 			T = 8,
@@ -3698,7 +3708,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -3713,7 +3723,7 @@ export function initBenchCharts() {
 		rows.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -3782,7 +3792,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Stacked bars: the memo arm ties or beats the explicit-instruction control; every other arm, including goal-node-in-view, loses nearly all judged comparisons." style="min-width:640px">' +
+			'" role="img" aria-label="Stacked bars: the memo arm ties or beats the explicit-instruction control; every other arm, including goal-node-in-view, loses nearly all judged comparisons.">' +
 			g +
 			marks +
 			hits +
@@ -3885,7 +3895,7 @@ export function initBenchCharts() {
 					WNAMES[c] +
 					"</span>",
 			).join("") +
-			'<span class="key">history rows: ○ within-window · ● post-truncation</span>';
+			legendNote("○ within-window · ● post-truncation", "history rows");
 		const W = 880,
 			ROW = 34,
 			T = 8,
@@ -3913,7 +3923,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -3938,7 +3948,7 @@ export function initBenchCharts() {
 				cy +
 				'" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -4050,7 +4060,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Dot plot: agent-written memos tie the harness-written oracle on all three models; in the shipped history-window configuration post-truncation callbacks hold, with opus at a perfect 36 of 36." style="min-width:640px">' +
+			'" role="img" aria-label="Dot plot: agent-written memos tie the harness-written oracle on all three models; in the shipped history-window configuration post-truncation callbacks hold, with opus at a perfect 36 of 36.">' +
 			g +
 			marks +
 			hits +
@@ -4320,7 +4330,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -4345,7 +4355,7 @@ export function initBenchCharts() {
 				cy +
 				'" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -4409,7 +4419,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Dot plot: without a carrier, anaphora resolution sits at 0% on every model; the one-line last-edit echo ties full history and beats it on opus." style="min-width:640px">' +
+			'" role="img" aria-label="Dot plot: without a carrier, anaphora resolution sits at 0% on every model; the one-line last-edit echo ties full history and beats it on opus.">' +
 			g +
 			marks +
 			hits +
@@ -4594,7 +4604,10 @@ export function initBenchCharts() {
 					YNAMES[c] +
 					"</span>",
 			).join("") +
-			'<span class="key">bars: callback success out of 48 · tooltip carries recall, retractions, noise</span>';
+			legendNote(
+				"callback success out of 48 · tooltip carries recall, retractions, noise",
+				"bars",
+			);
 		const W = 880,
 			ROW = 30,
 			T = 8,
@@ -4622,7 +4635,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -4637,7 +4650,7 @@ export function initBenchCharts() {
 		rows.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -4692,7 +4705,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Bar chart: casual and formulaic declaration phrasing tie exactly on callback success across all three models, with zero chatter-induced false notes." style="min-width:640px">' +
+			'" role="img" aria-label="Bar chart: casual and formulaic declaration phrasing tie exactly on callback success across all three models, with zero chatter-induced false notes.">' +
 			g +
 			marks +
 			hits +
@@ -4758,7 +4771,9 @@ export function initBenchCharts() {
 			'<span class="key"><span class="chip" style="background:' +
 			ZCOLOR.strict +
 			'"></span>obeyed the format rule LITERALLY (exact email | city, no mention)</span>' +
-			'<span class="key">every one of 324 cells landed in one of these two readings · zero rule violations, zero contamination; facts and rules were 100% in every arm</span>';
+			legendNote(
+				"every one of 324 cells landed in one of these two readings · zero rule violations, zero contamination; facts and rules were 100% in every arm",
+			);
 		const W = 880,
 			ROW = 30,
 			T = 8,
@@ -4786,7 +4801,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -4801,7 +4816,7 @@ export function initBenchCharts() {
 		rows.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -4866,7 +4881,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Stacked bar chart: every conflicted cell resolved into one of two clean readings, and the strongest model took the literal rule reading most often; the memo arm shifts sonnet toward satisfying both." style="min-width:640px">' +
+			'" role="img" aria-label="Stacked bar chart: every conflicted cell resolved into one of two clean readings, and the strongest model took the literal rule reading most often; the memo arm shifts sonnet toward satisfying both.">' +
 			g +
 			marks +
 			hits +
@@ -4959,7 +4974,10 @@ export function initBenchCharts() {
 					ANAMES[c] +
 					"</span>",
 			).join("") +
-			'<span class="key">bars: literal/rule-enforced readings out of 24 conflicted cells · the refuted prediction said opus would have the LONGEST base bar; it has none</span>';
+			legendNote(
+				"literal/rule-enforced readings out of 24 conflicted cells · the refuted prediction said opus would have the LONGEST base bar; it has none",
+				"bars",
+			);
 		const W = 880,
 			ROW = 30,
 			T = 8,
@@ -4987,7 +5005,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -5002,7 +5020,7 @@ export function initBenchCharts() {
 		rows.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -5060,7 +5078,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Bar chart: opus took zero literal readings in the confirmation arm, inverting the refuted capability-strictness prediction; soft phrasing collapses literal readings; the memo arm shows the countermand-trampling footgun." style="min-width:640px">' +
+			'" role="img" aria-label="Bar chart: opus took zero literal readings in the confirmation arm, inverting the refuted capability-strictness prediction; soft phrasing collapses literal readings; the memo arm shows the countermand-trampling footgun.">' +
 			g +
 			marks +
 			hits +
@@ -5129,7 +5147,10 @@ export function initBenchCharts() {
 			'<span class="key"><span class="chip" style="background:' +
 			CGUESS +
 			'"></span>silent wrong patch (valid, applied, confidently wrong)</span>' +
-			'<span class="key">bars: 45 provably-unsolvable cells per model per arm · solvable twins: zero false asks, solve untouched (in the table)</span>';
+			legendNote(
+				"45 provably-unsolvable cells per model per arm · solvable twins: zero false asks, solve untouched (in the table)",
+				"bars",
+			);
 		const W = 880,
 			ROW = 30,
 			T = 8,
@@ -5164,7 +5185,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -5179,7 +5200,7 @@ export function initBenchCharts() {
 		rows.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -5236,7 +5257,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Bar chart: without a hatch every model silently guessed on all 45 unsolvable cells; with either escape hatch every model asked on all 45, with zero false asks on solvable twins." style="min-width:640px">' +
+			'" role="img" aria-label="Bar chart: without a hatch every model silently guessed on all 45 unsolvable cells; with either escape hatch every model asked on all 45, with zero false asks on solvable twins.">' +
 			g +
 			marks +
 			hits +
@@ -5331,7 +5352,9 @@ export function initBenchCharts() {
 			'<span class="key"><span class="chip" style="background:' +
 			COPUS +
 			'"></span>claude-opus-4.8, the shipped tier (Study AD)</span>' +
-			'<span class="key">scale starts at 40%; hover a row for exact counts and the gate</span>';
+			legendNote(
+				"scale starts at 40%; hover a row for exact counts and the gate",
+			);
 		const W = 880,
 			ROW = 34,
 			T = 8,
@@ -5355,7 +5378,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -5370,7 +5393,7 @@ export function initBenchCharts() {
 		ROWS.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -5412,7 +5435,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Band chart: claude-opus-4.8 lands at or above the top of every prior band on the core stack (dialect, views, search, sessions) and raises the fan-out floor without closing it." style="min-width:640px">' +
+			'" role="img" aria-label="Band chart: claude-opus-4.8 lands at or above the top of every prior band on the core stack (dialect, views, search, sessions) and raises the fan-out floor without closing it.">' +
 			g +
 			marks +
 			hits +
@@ -5519,7 +5542,9 @@ export function initBenchCharts() {
 					m.name +
 					"</span>",
 			).join("") +
-			'<span class="key">ask rate on 15 cells per level, shipped NEED-INFO rule verbatim · the correct behavior is to ask only at L3 and L4</span>';
+			legendNote(
+				"ask rate on 15 cells per level, shipped NEED-INFO rule verbatim · the correct behavior is to ask only at L3 and L4",
+			);
 		const W = 880,
 			H = 300,
 			T = 16,
@@ -5544,7 +5569,7 @@ export function initBenchCharts() {
 				y +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 10) +
 				'" y="' +
 				(y + 4) +
@@ -5554,7 +5579,7 @@ export function initBenchCharts() {
 		}
 		LEVELS.forEach((label, i) => {
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				xOf(i) +
 				'" y="' +
 				(H - B + 22) +
@@ -5610,7 +5635,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Line chart: ask rate across five ambiguity levels. All models at zero asks on clear requests and 15 of 15 on missing info; on two-referent requests opus asks 15 of 15 while sonnet and gemini ask 1 of 15." style="min-width:640px">' +
+			'" role="img" aria-label="Line chart: ask rate across five ambiguity levels. All models at zero asks on clear requests and 15 of 15 on missing info; on two-referent requests opus asks 15 of 15 while sonnet and gemini ask 1 of 15.">' +
 			g +
 			marks +
 			hits +
@@ -5705,7 +5730,9 @@ export function initBenchCharts() {
 			'<span class="key"><span class="chip" style="background:' +
 			CLOSS +
 			'"></span>control wins</span>' +
-			'<span class="key">30 judged pairs per row, primary judge, both presentation orders · JUDGE-GRADED (Track 2), never pooled with the deterministic studies</span>';
+			legendNote(
+				"30 judged pairs per row, primary judge, both presentation orders · JUDGE-GRADED (Track 2), never pooled with the deterministic studies",
+			);
 		const W = 880,
 			ROW = 34,
 			T = 8,
@@ -5729,7 +5756,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -5744,7 +5771,7 @@ export function initBenchCharts() {
 		ROWS.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -5791,7 +5818,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Stacked bar chart: restate arms vs explicit-goal control. View-plus-restate loses or ties every pair on all three editors with zero wins; memo-plus-restate is tie-heavy parity." style="min-width:640px">' +
+			'" role="img" aria-label="Stacked bar chart: restate arms vs explicit-goal control. View-plus-restate loses or ties every pair on all three editors with zero wins; memo-plus-restate is tie-heavy parity.">' +
 			g +
 			marks +
 			hits +
@@ -5865,7 +5892,9 @@ export function initBenchCharts() {
 			'<span class="key"><span class="chip" style="background:#199e70"></span>clean full-replace (nothing lost)</span>' +
 			'<span class="key"><span class="chip" style="background:#c98500"></span>model pruned a note (silent)</span>' +
 			'<span class="key"><span class="chip" style="background:#e66767"></span>shipped clamp cut a note (silent)</span>' +
-			'<span class="key">below cap = 20 update scenarios per model · at the cap = 10 per model · every lost note was a goal · read side (recall/rules at N=20): 90/90, in the table</span>';
+			legendNote(
+				"below cap = 20 update scenarios per model · at the cap = 10 per model · every lost note was a goal · read side (recall/rules at N=20): 90/90, in the table",
+			);
 		const W = 880,
 			ROW = 34,
 			T = 8,
@@ -5888,7 +5917,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -5903,7 +5932,7 @@ export function initBenchCharts() {
 			const denom =
 				row.segs.reduce((s2, seg) => s2 + seg.v, 0) === 20 ? 20 : 10;
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -5942,7 +5971,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Stacked bar chart: full-replace memo updates are clean 20 of 20 per model below the cap; at the twenty-note cap every cell loses a note, split between deliberate prunes and the silent clamp, and every lost note was a goal." style="min-width:640px">' +
+			'" role="img" aria-label="Stacked bar chart: full-replace memo updates are clean 20 of 20 per model below the cap; at the twenty-note cap every cell loses a note, split between deliberate prunes and the silent clamp, and every lost note was a goal.">' +
 			g +
 			marks +
 			hits +
@@ -6010,7 +6039,9 @@ export function initBenchCharts() {
 			'<span class="key"><span class="chip" style="background:' +
 			CRULE2 +
 			'"></span>+ the multiplicity clause</span>' +
-			'<span class="key">asks on 15 two-referent (L3) cells per model · registered detection bar: 12 · zero false asks on clear requests in either arm</span>';
+			legendNote(
+				"asks on 15 two-referent (L3) cells per model · registered detection bar: 12 · zero false asks on clear requests in either arm",
+			);
 		const W = 880,
 			GROUP = 56,
 			BAR = 18,
@@ -6035,7 +6066,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -6059,7 +6090,7 @@ export function initBenchCharts() {
 		ROWS.forEach((row, ri) => {
 			const top = T + ri * GROUP + 8;
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(top + BAR) +
@@ -6101,7 +6132,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Grouped bar chart: with the multiplicity clause sonnet reaches 15 of 15 asks on ambiguous references, gemini reaches 11 of 15 just under the registered bar of 12, and opus stays at 15 of 15 with or without it." style="min-width:640px">' +
+			'" role="img" aria-label="Grouped bar chart: with the multiplicity clause sonnet reaches 15 of 15 asks on ambiguous references, gemini reaches 11 of 15 just under the registered bar of 12, and opus stays at 15 of 15 with or without it.">' +
 			g +
 			marks +
 			hits +
@@ -6213,7 +6244,9 @@ export function initBenchCharts() {
 			'<span class="key"><span class="chip" style="background:' +
 			CSILENT +
 			'"></span>silent wrong patch</span>' +
-			'<span class="key">48 anaphora cells per row · echo-only (no hatch) solved 48/48 in Study X · ordinary steps: zero false asks in 288 cells</span>';
+			legendNote(
+				"48 anaphora cells per row · echo-only (no hatch) solved 48/48 in Study X · ordinary steps: zero false asks in 288 cells",
+			);
 		const W = 880,
 			ROW = 30,
 			T = 8,
@@ -6237,7 +6270,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -6250,7 +6283,7 @@ export function initBenchCharts() {
 		ROWS.forEach((row, ri) => {
 			const cy = T + ri * ROW + ROW / 2;
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(cy + 4) +
@@ -6295,7 +6328,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Stacked bar chart: without the hatch every anaphora cell is a silent wrong patch; with the hatch nearly all become questions on every model; with the echo plus the hatch most cells are asks despite the echo supplying everything, the visibility-clause tax." style="min-width:640px">' +
+			'" role="img" aria-label="Stacked bar chart: without the hatch every anaphora cell is a silent wrong patch; with the hatch nearly all become questions on every model; with the echo plus the hatch most cells are asks despite the echo supplying everything, the visibility-clause tax.">' +
 			g +
 			marks +
 			hits +
@@ -6364,7 +6397,9 @@ export function initBenchCharts() {
 			'<span class="key"><span class="chip" style="background:' +
 			CBARE +
 			'"></span>bare “the patch was invalid”</span>' +
-			'<span class="key">45 seeded failures per arm · one feedback message, single-shot reply</span>';
+			legendNote(
+				"45 seeded failures per arm · one feedback message, single-shot reply",
+			);
 		const W = 880,
 			BAR = 16,
 			GAP = 4,
@@ -6391,7 +6426,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -6404,7 +6439,7 @@ export function initBenchCharts() {
 		GROUPS.forEach((row, gi) => {
 			const top = T + gi * (GH + GPAD);
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(top + GH / 2 + 4) +
@@ -6454,7 +6489,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Grouped bar chart: single-shot recovery from seeded patch failures is at parity across feedback arms on all three models; opus recovers 45 of 45 in every arm, gemini an identical 42 of 45 in every arm, sonnet shows a non-significant 45 to 44 to 42 gradient." style="min-width:640px">' +
+			'" role="img" aria-label="Grouped bar chart: single-shot recovery from seeded patch failures is at parity across feedback arms on all three models; opus recovers 45 of 45 in every arm, gemini an identical 42 of 45 in every arm, sonnet shows a non-significant 45 to 44 to 42 gradient.">' +
 			g +
 			marks +
 			hits +
@@ -6535,7 +6570,9 @@ export function initBenchCharts() {
 			'<span class="key"><span class="chip" style="background:' +
 			CEVICT +
 			'"></span>v3.213.0 eviction pipeline</span>' +
-			'<span class="key">goal-safe cells of 10 at the K=20 cap edge · 19/19 over-cap sends were designed evictions · 60/60 no-op under the cap</span>';
+			legendNote(
+				"goal-safe cells of 10 at the K=20 cap edge · 19/19 over-cap sends were designed evictions · 60/60 no-op under the cap",
+			);
 		const W = 880,
 			BAR = 16,
 			GAP = 4,
@@ -6562,7 +6599,7 @@ export function initBenchCharts() {
 				(H - B) +
 				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				x +
 				'" y="' +
 				(H - B + 20) +
@@ -6575,7 +6612,7 @@ export function initBenchCharts() {
 		GROUPS.forEach((row, gi) => {
 			const top = T + gi * (GH + GPAD);
 			g +=
-				'<text fill="#c3c9d4" class="chart-tick" x="' +
+				'<text class="chart-tick" x="' +
 				(L - 12) +
 				'" y="' +
 				(top + GH / 2 + 4) +
@@ -6625,7 +6662,7 @@ export function initBenchCharts() {
 			W +
 			" " +
 			H +
-			'" width="100%" role="img" aria-label="Grouped bar chart: goal survival at the memo cap edge rises from zero of ten under the silent clamp to ten of ten on opus, six of ten on sonnet, and four of ten on gemini once the goal-preserving eviction pipeline replaces the clamp." style="min-width:640px">' +
+			'" role="img" aria-label="Grouped bar chart: goal survival at the memo cap edge rises from zero of ten under the silent clamp to ten of ten on opus, six of ten on sonnet, and four of ten on gemini once the goal-preserving eviction pipeline replaces the clamp.">' +
 			g +
 			marks +
 			hits +
@@ -6668,4 +6705,15 @@ export function initBenchCharts() {
 			],
 		);
 	})();
+
+	// Every legend gets a "Legend" heading as its first child. Runs after
+	// the builders above have set each container's innerHTML; idempotent
+	// so re-inits don't stack headings.
+	document.querySelectorAll(".chart-legend").forEach((el) => {
+		if (el.firstElementChild?.tagName !== "H4") {
+			const h = document.createElement("h4");
+			h.textContent = "Legend";
+			el.prepend(h);
+		}
+	});
 }

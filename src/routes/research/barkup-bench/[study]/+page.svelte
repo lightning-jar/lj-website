@@ -11,6 +11,25 @@ const proseCls = "text-[#e7e9ee] leading-[1.65]";
 // each other by dividers: an hr before every chart, and between a
 // chart and its table. Studies without charts get no dividers.
 
+// Chart/table numbers: ordinal of each figure and table within the
+// study, for headings like "Chart AA.1: …" / "Table AA.1: …".
+const figureNumbers = $derived(
+	new Map(
+		data.study.sections
+			.map((s) => s.figure)
+			.filter((f): f is NonNullable<typeof f> => Boolean(f))
+			.map((f, i) => [f.id, i + 1] as const),
+	),
+);
+const tableNumbers = $derived(
+	new Map(
+		data.study.sections
+			.map((s) => s.table)
+			.filter((t): t is NonNullable<typeof t> => Boolean(t))
+			.map((t, i) => [t.id, i + 1] as const),
+	),
+);
+
 onMount(async () => {
 	const { initBenchCharts } = await import("../bench-charts.js");
 	initBenchCharts();
@@ -61,7 +80,10 @@ onMount(async () => {
 					     group under this heading rather than the prose section's -->
 					<h2 class="sr-only">Charts & Tables</h2>
 					{#if figureTitle}
-						<h3>{figureTitle}</h3>
+						<h3>
+							Chart {data.study.letters}.{figureNumbers.get(section.figure.id)}:
+							{figureTitle}
+						</h3>
 					{/if}
 				{/if}
 				{#if section.legendId}
@@ -72,7 +94,7 @@ onMount(async () => {
 				{/if}
 				{#if section.figure}
 					<div
-						class="overflow-x-auto font-mono tabular-nums mt-5 mb-5 bg-white/5"
+						class="chart"
 						id={section.figure.id}
 					></div>
 				{/if}
@@ -84,8 +106,11 @@ onMount(async () => {
 					     concession from the single-page dashboard era), introduced
 					     by a real heading in the document outline. -->
 					<div class="mt-4">
-						<h3>{section.table.summary}</h3>
-						<div id={section.table.id}></div>
+						<h3>
+							Table {data.study.letters}.{tableNumbers.get(section.table.id)}:
+							{section.table.summary}
+						</h3>
+						<div class="data-table" id={section.table.id}></div>
 					</div>
 				{/if}
 			</section>
@@ -182,5 +207,5 @@ onMount(async () => {
 <div
 	id="tooltip"
 	aria-hidden="true"
-	class="fixed pointer-events-none bg-[#fcfcfb] text-[#0b0b0b] font-mono text-[12px] leading-[1.45] px-2.5 py-[7px] rounded-[5px] max-w-[300px] opacity-0 transition-opacity duration-100 motion-reduce:transition-none z-10 whitespace-pre"
+	class="fixed pointer-events-none bg-[#fcfcfb] text-[#0b0b0b] font-mono text-[12px] leading-[1.45] px-2.5 py-[7px] rounded-[5px] max-w-[300px] opacity-0 transition-opacity duration-100 motion-reduce:transition-none z-10 whitespace-pre-wrap"
 ></div>
