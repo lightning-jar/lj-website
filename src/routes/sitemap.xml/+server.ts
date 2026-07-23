@@ -79,6 +79,11 @@ const staticPages = [
 	generateSiteMapXMLPage(`/technologies`, "monthly", 0.25), // technologies landing page
 	generateSiteMapXMLPage(`/terms`, "monthly", 0.25), // terms landing page
 	generateSiteMapXMLPage(`/testimonials`, "monthly", 0.25), // testimonials landing page
+	// atom feeds — discoverable resources in their own right
+	generateSiteMapXMLPage(`/atom.xml`, "weekly", 0.25),
+	generateSiteMapXMLPage(`/blog/atom.xml`, "weekly", 0.25),
+	generateSiteMapXMLPage(`/reading-list/atom.xml`, "weekly", 0.25),
+	generateSiteMapXMLPage(`/research/barkup-bench/atom.xml`, "weekly", 0.25),
 ] as SitemapXMLPage[];
 
 // Server endpoint to serve the sitemap

@@ -10,3 +10,7 @@ Disallow: /_error/     # Error pages
 
 # Sitemap location (update with your domain)
 Sitemap: https://www.lightningjar.com/sitemap.xml
+
+# Agent resources
+# LLM-readable site index: https://www.lightningjar.com/llms.txt
+# MCP server manifest: https://www.lightningjar.com/.well-known/mcp.json

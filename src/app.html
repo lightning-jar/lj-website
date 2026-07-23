@@ -50,23 +50,46 @@
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Lightning Jar",
-        "disambiguatingDescription": "Web Studio",
-        "description": "A design + build web studio that builds websites, apps, custom-software and eCommerce solutions for national and international business clients.",
-        "knowsAbout": "Pimcore",
-        "logo": "https://lightningjar.com/icon.svg",
-        "url": "https://lightningjar.com",
-        "email": "inquiries@lightningjar.com",
+        "disambiguatingDescription": "Design, build, and brand technology studio",
+        "description": "A design, build, and brand technology studio, independent since 2001. Lightning Jar builds websites, web applications, and custom software for national and international business clients; publishes open, pre-registered LLM research (Barkup Bench); and ships open-source libraries for LLM document editing.",
+        "foundingDate": "2001",
+        "knowsAbout": [
+          "SvelteKit",
+          "Svelte",
+          "TypeScript",
+          "Large language models",
+          "LLM agent engineering",
+          "LLM benchmarking",
+          "eCommerce",
+          "Pimcore",
+          "OpenDXP"
+        ],
+        "logo": "https://www.lightningjar.com/icon.svg",
+        "url": "https://www.lightningjar.com",
+        "email": "hello@lightningjar.com",
         "telephone": "(215) 995-6628",
-        "location": {
-          "@type": "Place",
-          "address": {
-            "addressLocality": "Philadelphia",
-            "addressRegion": "PA"
+        "sameAs": [
+          "https://github.com/lightning-jar",
+          "https://github.com/kevinpeckham/barkup",
+          "https://github.com/kevinpeckham/barkup-bench"
+        ],
+        "location": [
+          {
+            "@type": "Place",
+            "address": { "addressLocality": "Philadelphia", "addressRegion": "PA" }
+          },
+          {
+            "@type": "Place",
+            "address": { "addressLocality": "New York", "addressRegion": "NY" }
+          },
+          {
+            "@type": "Place",
+            "address": { "addressRegion": "TX" }
           }
-        },
+        ],
         "areaServed": {
           "@type": "Country",
-          "name:": "United States"
+          "name": "United States"
         },
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
@@ -76,121 +99,39 @@
               "@type": "OfferCatalog",
               "name": "Web Technology Services",
               "itemListElement": [
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Website Development"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Mobile App Development"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "eCommerce Development"
-                  }
-                }
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Development" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Application Development" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "eCommerce Development" } }
+              ]
+            },
+            {
+              "@type": "OfferCatalog",
+              "name": "AI & LLM Engineering",
+              "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "LLM Application Development" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Agent Readiness & Integration" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "LLM Research & Benchmarking" } }
               ]
             },
             {
               "@type": "OfferCatalog",
               "name": "Svelte and SvelteKit Development",
               "itemListElement": [
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Sveltekit Project Consulting"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Svelte Development"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Svelte Support"
-                  }
-                }
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SvelteKit Project Consulting" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Svelte Development" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Svelte Support" } }
               ]
             },
             {
               "@type": "OfferCatalog",
-              "name": "Pimcore Services",
+              "name": "Pimcore and OpenDXP Services",
               "itemListElement": [
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Pimcore Consulting"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Pimcore Development"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Pimcore Support"
-                  }
-                }
-              ]
-            },
-            {
-              "@type": "OfferCatalog",
-              "name": "Digital Design",
-              "itemListElement": [
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "UX Optimization"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "UI Design"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Digital Content"
-                  }
-                }
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pimcore Consulting" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "OpenDXP Migration" } }
               ]
             }
           ]
-        },
-        "foundingDate": "12/30/2002",
-        "foundingLocation": "New York",
-        "naics": "541511",
-        "duns": "191355317",
-        "slogan": "The world is more digital & more mobile every day.",
-        "memberOf": "Pimcore Gold Partner Program",
-        "legalName": "SiiTE Interactive LLC dba Lightning Jar",
-        "alternateName": "SiiTE Interactive",
-        "numberOfEmployees": 12
+        }
       }
     </script>
 
