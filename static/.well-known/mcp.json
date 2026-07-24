@@ -1,10 +1,21 @@
 {
 	"name": "Lightning Jar",
+	"version": "1.0.0",
+	"serverInfo": {
+		"name": "lightning-jar",
+		"version": "1.0.0",
+		"title": "Lightning Jar"
+	},
 	"description": "Public, read-only MCP server for Lightning Jar's site content: blog articles, customer stories, reading list, and the Barkup Bench LLM research series (study data included). Keyless.",
 	"endpoint": "https://www.lightningjar.com/mcp",
 	"transport": "streamable-http",
-	"authentication": { "type": "none" },
-	"capabilities": ["tools"],
+	"authentication": {
+		"type": "none"
+	},
+	"capabilities": [
+		"tools"
+	],
+	"serverCard": "https://www.lightningjar.com/.well-known/mcp/server-card.json",
 	"docs": {
 		"llms": "https://www.lightningjar.com/llms.txt",
 		"site": "https://www.lightningjar.com",

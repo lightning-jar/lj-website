@@ -105,6 +105,26 @@ export async function getAllCustomerStorySlugs(
 	return stories.map((story) => story?.slug || "").filter(Boolean);
 }
 
+// raw markdown + normalized frontmatter, for agent content negotiation
+// (Accept: text/markdown — see hooks.server.ts)
+export async function getCustomerStoryMarkdownBySlug(
+	fetch: Fetch,
+	slug: string,
+): Promise<{ frontMatter: CustomerStory; markdown: string } | undefined> {
+	if (!slug) return undefined;
+	const res = await fetch(
+		`${apiBase()}/api/public/blog/articles/${encodeURIComponent(slug)}?collection=customer-story`,
+		{ headers: authHeaders(), cache: "force-cache" },
+	);
+	if (res.status === 404) return undefined;
+	if (!res.ok) throw new Error(`Customer story fetch failed: ${res.status}`);
+	const data = (await res.json()) as { article: ApiArticleDetail };
+	return {
+		frontMatter: normalizeMeta(data.article.frontMatter),
+		markdown: data.article.markdown,
+	};
+}
+
 export async function getCustomerStoryBySlug(
 	fetch: Fetch,
 	slug: string,

@@ -8,6 +8,26 @@ const config: VercelConfig = {
 	trailingSlash: false,
 	headers: [
 		{
+			// agent discovery (RFC 8288): point agents at the API catalog
+			// and LLM-readable docs from the homepage
+			source: "/",
+			headers: [
+				{
+					key: "Link",
+					value:
+						'</.well-known/api-catalog>; rel="api-catalog", </llms.txt>; rel="service-doc"; type="text/plain", </.well-known/mcp/server-card.json>; rel="service-desc"; type="application/json"',
+				},
+			],
+		},
+		{
+			// the catalog route sets its own content-type; this guards the
+			// static server-card.json media type stays JSON at the edge
+			source: "/.well-known/mcp/server-card.json",
+			headers: [
+				{ key: "Content-Type", value: "application/json; charset=utf-8" },
+			],
+		},
+		{
 			source: "/(atom.xml|blog/atom.xml|reading-list/atom.xml)",
 			headers: [
 				{

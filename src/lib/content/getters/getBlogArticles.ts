@@ -107,6 +107,26 @@ export async function getAllBlogArticleSlugs(fetch: Fetch): Promise<string[]> {
 		.filter(Boolean) as string[];
 }
 
+// raw markdown + frontmatter, for agent content negotiation
+// (Accept: text/markdown — see hooks.server.ts)
+export async function getBlogArticleMarkdownBySlug(
+	fetch: Fetch,
+	slug: string,
+): Promise<{ frontMatter: FrontMatter; markdown: string } | undefined> {
+	if (!slug) return undefined;
+	const res = await fetch(
+		`${apiBase()}/api/public/blog/articles/${encodeURIComponent(slug)}`,
+		{ headers: authHeaders(), cache: "force-cache" },
+	);
+	if (res.status === 404) return undefined;
+	if (!res.ok) throw new Error(`Blog article fetch failed: ${res.status}`);
+	const data = (await res.json()) as { article: ApiArticleDetail };
+	return {
+		frontMatter: data.article.frontMatter,
+		markdown: data.article.markdown,
+	};
+}
+
 // get one article with locally-parsed html + next/previous slugs.
 // next/previous are derived from the newest-first list (same as the
 // git-content era) rather than the API's nextSlug/previousSlug, whose
