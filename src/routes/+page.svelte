@@ -1,6 +1,7 @@
 <script lang="ts">
 import HomeBanner from "$components/HomeBanner.svelte";
 import HomeLatestArticles from "$components/HomeLatestArticles.svelte";
+import HomeLatestResearch from "$components/HomeLatestResearch.svelte";
 import HomeLatestStories from "$components/HomeLatestStories.svelte";
 
 // props
@@ -12,4 +13,5 @@ let { data } = $props();
 	<HomeBanner topics={data.topics} />
 	<HomeLatestArticles articles={data.latestArticles} />
 	<HomeLatestStories stories={data.latestStories} />
+	<HomeLatestResearch studies={data.latestStudies} />
 </div>

@@ -25,6 +25,34 @@ let navItems: NavItem[] = $state([
 	{ label: "Fun", href: "/fun" },
 ]);
 
+// desktop top-nav (lg+): links + dropdown menus
+const desktopLinks = [
+	{ label: "Blog", href: "/blog" },
+	{ label: "Research", href: "/research" },
+];
+const desktopMenus = [
+	{
+		key: "about",
+		label: "About Us",
+		items: [
+			{ label: "About", href: "/about" },
+			{ label: "Services", href: "/services" },
+			{ label: "Testimonials", href: "/testimonials" },
+			{ label: "Technologies", href: "/technologies" },
+			{ label: "Customer Stories", href: "/customer-stories" },
+		],
+	},
+	{
+		key: "more",
+		label: "More",
+		items: [
+			{ label: "Reading List", href: "/reading-list" },
+			{ label: "Fun", href: "/fun" },
+		],
+	},
+];
+let openDesktopMenu: string | null = $state(null);
+
 // state
 let popover: HTMLDivElement | null = $state(null);
 let nav: HTMLElement | null = $state(null);
@@ -103,6 +131,26 @@ function getFirstNavItem(): HTMLAnchorElement | null {
 	return firstNavItem instanceof HTMLAnchorElement ? firstNavItem : null;
 }
 
+function toggleDesktopMenu(key: string) {
+	openDesktopMenu = openDesktopMenu === key ? null : key;
+}
+
+// close an open dropdown when focus or clicks leave the nav
+function handleDesktopMenuFocusOut(e: FocusEvent) {
+	const container = e.currentTarget as HTMLElement;
+	if (!container.contains(e.relatedTarget as Node)) openDesktopMenu = null;
+}
+
+function handleWindowClick(e: MouseEvent) {
+	if (!openDesktopMenu) return;
+	const target = e.target as HTMLElement | null;
+	if (!target?.closest("[data-desktop-menu]")) openDesktopMenu = null;
+}
+
+function handleWindowKeydown(e: KeyboardEvent) {
+	if (e.key === "Escape") openDesktopMenu = null;
+}
+
 function handleKeydown(e: KeyboardEvent) {
 	console.log(e.key);
 	if (e.key === "Tab" && popoverState === "open") {
@@ -117,6 +165,8 @@ function handleKeydown(e: KeyboardEvent) {
 	}
 }
 </script>
+
+<svelte:window onclick={handleWindowClick} onkeydown={handleWindowKeydown} />
 
 <!-- <svelte:document bind:documentElement /> -->
 <header
@@ -139,7 +189,68 @@ function handleKeydown(e: KeyboardEvent) {
 >
   <NavLogoBlock />
 
-  <div>
+  <!-- desktop top-nav (lg+) -->
+  <nav aria-label="Primary" class="hidden lg:flex items-center gap-8">
+    {#each desktopLinks as link}
+      <a
+        href={link.href}
+        class="opacity-90 underline-offset-4 decoration-accent/30 hover:(opacity-100 text-accent)"
+      >
+        {link.label}
+      </a>
+    {/each}
+    {#each desktopMenus as menu}
+      <div
+        class="relative"
+        data-desktop-menu
+        onfocusout={handleDesktopMenuFocusOut}
+      >
+        <button
+          type="button"
+          aria-expanded={openDesktopMenu === menu.key}
+          aria-haspopup="true"
+          class="flex items-center gap-1.5 opacity-90 hover:(opacity-100 text-accent) {openDesktopMenu ===
+          menu.key
+            ? 'text-accent opacity-100'
+            : ''}"
+          onclick={() => toggleDesktopMenu(menu.key)}
+        >
+          {menu.label}
+          <svg
+            class="w-3 h-3 transition-transform {openDesktopMenu === menu.key
+              ? 'rotate-180'
+              : ''}"
+            viewBox="0 0 12 12"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <path d="M2.5 4.5 L6 8 L9.5 4.5" />
+          </svg>
+        </button>
+        {#if openDesktopMenu === menu.key}
+          <div
+            class="absolute right-0 top-full mt-3 min-w-44 grid grid-cols-1 rounded-sm border border-white/14 bg-oxfordDark py-2 shadow-lg z-10"
+          >
+            {#each menu.items as item}
+              <a
+                href={item.href}
+                class="px-4 py-1.5 whitespace-nowrap opacity-90 hover:(opacity-100 text-accent bg-white/5)"
+                onclick={() => {
+                  openDesktopMenu = null;
+                }}
+              >
+                {item.label}
+              </a>
+            {/each}
+          </div>
+        {/if}
+      </div>
+    {/each}
+  </nav>
+
+  <div class="lg:hidden">
     <!-- open menu button -->
     <HamburgerButton
       ariaLabel="Open Menu"

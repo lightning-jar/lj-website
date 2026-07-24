@@ -2,6 +2,7 @@
 import { homeContent } from "$content/getters/getHomeContent";
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 import { getAllCustomerStories } from "$content/getters/getCustomerStories";
+import benchStudies from "./research/barkup-bench/bench-studies.json";
 
 export async function load({ fetch }) {
 	// latest customer stories for the homepage grid (curated order, capped
@@ -31,11 +32,23 @@ export async function load({ fetch }) {
 				: "",
 	}));
 
+	// latest studies for the homepage tiles (file is chronological; newest
+	// last, so reverse and cap at 6)
+	const latestStudies = benchStudies.studies
+		.slice(-6)
+		.reverse()
+		.map((study) => ({
+			slug: study.slug,
+			letters: study.letters,
+			title: study.title,
+		}));
+
 	// ticker withheld while hidden; restore by returning ...homeContent
 	const { ticker, ...contentWithoutTicker } = homeContent;
 	return {
 		...contentWithoutTicker,
 		latestArticles,
 		latestStories,
+		latestStudies,
 	};
 }

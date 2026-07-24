@@ -101,7 +101,9 @@ function handleKeyDown(event: KeyboardEvent) {
   pb-4
   w-full
   grid
-  grid-cols-[minmax(0,460px)_1fr]
+  grid-cols-[minmax(0,640px)_1fr]
+  xl:grid-cols-[minmax(0,48rem)_1fr]
+  2xl:grid-cols-[minmax(0,56rem)_1fr]
   h-full
   items-start
   min-h-[calc(100vh-6rem)]
@@ -118,6 +120,7 @@ function handleKeyDown(event: KeyboardEvent) {
 				relative
 				w-full
 				sm:max-w-lg
+				lg:max-w-none
 				pt-12"
   >
     {#each topics as topic, index}
@@ -147,7 +150,7 @@ function handleKeyDown(event: KeyboardEvent) {
           text-shadow-oxfordDark
           sm:text-48px"
         >
-          <span class="block max-w-400px">{topic.heading}</span>
+          <span class="block w-[calc(100%-64px)]">{topic.heading}</span>
         </svelte:element>
 
         <!-- text -->
