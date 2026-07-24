@@ -4,6 +4,7 @@ import { goto } from "$app/navigation";
 // components
 import HamburgerButton from "$components/HamburgerButton.svelte";
 import NavLogoBlock from "$components/NavLogoBlock.svelte";
+import NavSearch from "$components/NavSearch.svelte";
 
 // content
 type NavItem = {
@@ -154,11 +155,8 @@ function handleWindowKeydown(e: KeyboardEvent) {
 function handleKeydown(e: KeyboardEvent) {
 	console.log(e.key);
 	if (e.key === "Tab" && popoverState === "open") {
-		// if current focus is menuCloseButton
-		if (document.activeElement === closeMenuButton) {
-			focusOnFirstNavItem();
-		}
-		// if current focus is lastNavItem
+		// natural DOM order flows close button → search → nav items;
+		// loop back to the top from the last nav item
 		if (document.activeElement === lastNavItem) {
 			focusOnNavHamburger();
 		}
@@ -248,6 +246,7 @@ function handleKeydown(e: KeyboardEvent) {
         {/if}
       </div>
     {/each}
+    <NavSearch />
   </nav>
 
   <div class="lg:hidden">
@@ -288,6 +287,9 @@ function handleKeydown(e: KeyboardEvent) {
       <h2 id="hamburger-menu-popover-heading" class="sr-only">
         Site Navigation
       </h2>
+      <div class="max-w-md mx-auto w-full pt-4">
+        <NavSearch variant="mobile" onNavigate={togglePopover} />
+      </div>
       <nav
         aria-label="Primary"
         bind:this={nav}

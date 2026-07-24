@@ -3,6 +3,17 @@
 	"subheading": "An alphabetical list of top-level technologies and tools we used to design, build, and / or maintain this website. Because it's nice to know how the sausage is made, but it's even more important to know what's in it.",
 	"technologies": [
 		{
+			"name": "1Password",
+			"category": "Secrets Management",
+			"description": [
+				"1Password is where this site's environment variable values actually live. varlock's 1Password plugin pulls them at build and deploy time, so secrets are never committed and rotate in one place. The committed .env.schema declares what must exist; 1Password holds what it is."
+			],
+			"license": "Proprietary",
+			"link": {
+				"href": "https://1password.com/"
+			}
+		},
+		{
 			"name": "Atkinson Hyperlegible",
 			"category": "Typeface",
 			"description": [
@@ -72,7 +83,7 @@
 			"name": "Claude Code",
 			"category": "AI Coding Agent",
 			"description": [
-				"Claude Code is Anthropic's agentic coding tool: a Claude-powered agent that works in the terminal and editor, reading the codebase, running commands, and making changes under human review. We use it daily to build and maintain this site, from content edits to feature work, with every change reviewed and committed through our normal git workflow. For a studio that publishes open research for developers of LLM applications, using the tools we study is the only honest way to work."
+				"Claude Code is Anthropic's agentic coding tool: a Claude-powered agent that works in the terminal and editor, reading the codebase, running commands, and making changes under human review. We use it daily to build and maintain this site, from content edits to feature work, with every change reviewed and committed through our normal git workflow. For a studio that publishes open research for developers of LLM applications, using the tools we study is the only honest way to work. The site now returns the favor: it serves agents directly through llms.txt and a public MCP endpoint."
 			],
 			"license": "Proprietary",
 			"link": {
@@ -212,14 +223,25 @@
 			}
 		},
 		{
-			"name": "NanoID",
-			"category": "Unique ID Generator",
+			"name": "Marked",
+			"category": "Markdown Parser",
 			"description": [
-				"NanoID is a tiny, secure, URL-friendly unique string ID generator for JavaScript, designed as a modern alternative to UUID. It uses a cryptographically strong random API when available and produces shorter IDs with comparable collision resistance. We use NanoID for generating stable, human-friendly identifiers in URLs, database keys, and client-side state."
+				"Marked is a fast, spec-tested markdown compiler. All prose content on this site arrives from our CMS as markdown and is parsed locally by Marked with a footnote extension, keeping rendering fully under this codebase's control."
 			],
 			"license": "Open Source / MIT",
 			"link": {
-				"href": "https://github.com/ai/nanoid"
+				"href": "https://marked.js.org/"
+			}
+		},
+		{
+			"name": "Model Context Protocol",
+			"category": "Agent Interface",
+			"description": [
+				"The Model Context Protocol is the open standard for connecting AI agents to tools and data. We run a public, keyless MCP server at /mcp — built on mcp-handler and the official TypeScript SDK — so agents can search and read everything on this site in structured form."
+			],
+			"license": "Open Source / MIT",
+			"link": {
+				"href": "https://modelcontextprotocol.io/"
 			}
 		},
 		{
@@ -275,6 +297,17 @@
 			"license": "Proprietary (free tier available)",
 			"link": {
 				"href": "https://www.raycast.com/"
+			}
+		},
+		{
+			"name": "Replicator",
+			"category": "Content Management System",
+			"description": [
+				"Replicator is Lightning Jar's own LLM-powered brand operating system, and it is the content management system behind this site. The blog, customer stories, and reading list are all served live from Replicator's org-scoped content API — saving an edit in its editor goes live here in minutes, with no redeploy. Yes, we eat our own cooking."
+			],
+			"license": "Proprietary",
+			"link": {
+				"href": "https://replicator.lj.dev"
 			}
 		},
 		{
@@ -424,7 +457,7 @@
 			"name": "YAML",
 			"category": "Data Format",
 			"description": [
-				"YAML is a human-friendly data serialization format. Every blog post on this site carries YAML frontmatter (title, date, tags, and more), which we parse with the yaml npm package, one of only three runtime dependencies this site has."
+				"YAML is a human-friendly data serialization format. Every article on this site carries YAML frontmatter (title, date, tags, and more), authored in our Replicator CMS and parsed locally with the yaml npm package when content arrives from its API."
 			],
 			"license": "Open Standard / ISC (yaml package)",
 			"link": {
@@ -440,6 +473,17 @@
 			"license": "Source-available (Zed Public License)",
 			"link": {
 				"href": "https://zed.dev/"
+			}
+		},
+		{
+			"name": "Zod",
+			"category": "Schema Validation",
+			"description": [
+				"Zod is a TypeScript-first schema validation library. We use it to define and validate the inputs of every tool on our public MCP endpoint, so agent requests are checked at runtime against the same schemas that type the code."
+			],
+			"license": "Open Source / MIT",
+			"link": {
+				"href": "https://zod.dev/"
 			}
 		},
 		{
