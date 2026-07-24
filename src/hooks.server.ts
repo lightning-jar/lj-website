@@ -27,14 +27,21 @@ const BASE = "https://www.lightningjar.com";
 // getting HTML. Both variants send Vary: Accept so edge caches keep
 // them apart.
 const markdownForAgents: Handle = async ({ event, resolve }) => {
+	const isHome = event.url.pathname === "/";
 	const route = agentMarkdownRouteFor(event.url.pathname);
-	if (!route) return resolve(event);
+	if (!route && !isHome) return resolve(event);
 
 	const wantsMarkdown =
 		event.request.method === "GET" &&
 		(event.request.headers.get("accept") ?? "").includes("text/markdown");
 
-	if (wantsMarkdown) {
+	// the homepage's markdown representation is the llms.txt site index
+	if (wantsMarkdown && isHome) {
+		const res = await event.fetch("/llms.txt");
+		if (res.ok) return markdownResponse(await res.text());
+	}
+
+	if (wantsMarkdown && route) {
 		const { type, slug } = route;
 		if (type === "blog") {
 			const article = await getBlogArticleMarkdownBySlug(event.fetch, slug);
