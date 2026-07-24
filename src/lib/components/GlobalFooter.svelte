@@ -110,8 +110,20 @@ let {
   </div>
 
   <!-- copyright text-->
-  <div class="font-sans text-xs opacity-80 mb-36">
+  <div class="font-sans text-xs opacity-80">
     &copy; Copyright {new Date().getFullYear()} SiiTE Interactive LLC dba Lightning
     Jar.
+  </div>
+
+  <!-- attribution -->
+  <div class="mb-36">
+    <a
+      class="inline-block font-sans text-xs mt-8 opacity-60 underline-offset-4 hover:color-[#ebf92f] hover:underline hover:opacity-80"
+      href="https://www.lightningjar.com"
+      rel="external"
+      title="visit Lightning Jar website"
+    >
+      website by ⚡️ Lightning Jar
+    </a>
   </div>
 </footer>
