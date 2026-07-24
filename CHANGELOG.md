@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.18.0] - 2026-07-24
+
+### Changed
+- Home page brand-section copy: dropped the "In the digital age" opener flagged by the AI-writing-tells scan; the sentence now leads with "Your brand is not what you say about yourself."
+
 ## [0.17.0] - 2026-07-24
 
 ### Changed
