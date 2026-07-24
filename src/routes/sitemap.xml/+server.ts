@@ -72,6 +72,7 @@ const staticPages = [
 		generateSiteMapXMLPage(`/research/barkup-bench/${s.slug}`, "monthly", 0.25),
 	), // per-study result pages
 	generateSiteMapXMLPage(`/blog`, "monthly", 0.25), // blog landing page
+	generateSiteMapXMLPage(`/feeds`, "monthly", 0.25), // feed index page
 	generateSiteMapXMLPage(`/fun`, "monthly", 0.25), // fun side projects page
 	generateSiteMapXMLPage(`/built-with`, "monthly", 0.25), // built with
 	generateSiteMapXMLPage(`/customer-stories`, "monthly", 0.25), // customer stories landing page
@@ -86,6 +87,7 @@ const staticPages = [
 	// atom feeds — discoverable resources in their own right
 	generateSiteMapXMLPage(`/atom.xml`, "weekly", 0.25),
 	generateSiteMapXMLPage(`/blog/atom.xml`, "weekly", 0.25),
+	generateSiteMapXMLPage(`/customer-stories/atom.xml`, "weekly", 0.25),
 	generateSiteMapXMLPage(`/reading-list/atom.xml`, "weekly", 0.25),
 	generateSiteMapXMLPage(`/research/barkup-bench/atom.xml`, "weekly", 0.25),
 ] as SitemapXMLPage[];

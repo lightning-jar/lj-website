@@ -1,6 +1,28 @@
 import type { BlogArticleListEntry } from "$content/getters/getBlogArticles";
 import type { Article } from "$types/Article";
+import type { CustomerStory } from "$types/CustomerStory";
 import { type FeedEntry, str, toIso } from "$utils/atomFeed";
+
+export function buildCustomerStoryEntries(
+	baseUrl: string,
+	stories: CustomerStory[],
+): FeedEntry[] {
+	return stories.flatMap((story) => {
+		if (!story?.slug) return [];
+		const url = `${baseUrl}/customer-stories/${story.slug}`;
+		return [
+			{
+				id: url,
+				title: story.banner?.heading || story.title || "",
+				link: url,
+				updated: toIso(story.date),
+				summary: story.excerpt || "",
+				authorName: "Lightning Jar",
+				category: "Customer Stories",
+			},
+		];
+	});
+}
 
 export function buildBlogEntries(
 	baseUrl: string,
@@ -22,6 +44,34 @@ export function buildBlogEntries(
 				category: "Blog",
 			},
 		];
+	});
+}
+
+interface StudyFeedSource {
+	letters: string;
+	slug: string;
+	title: string;
+	indexLine: string;
+	published: string;
+}
+
+// one entry per barkup-bench study; shared by the research feed and the
+// combined /atom.xml feed
+export function buildStudyEntries(
+	baseUrl: string,
+	studies: StudyFeedSource[],
+): FeedEntry[] {
+	return studies.map((s) => {
+		const url = `${baseUrl}/research/barkup-bench/${s.slug}`;
+		return {
+			id: url,
+			title: `Study ${s.letters}: ${s.title}`,
+			link: url,
+			updated: toIso(s.published),
+			summary: s.indexLine,
+			authorName: "Lightning Jar",
+			category: "Research",
+		};
 	});
 }
 

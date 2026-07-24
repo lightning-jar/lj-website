@@ -28,7 +28,8 @@ const config: VercelConfig = {
 			],
 		},
 		{
-			source: "/(atom.xml|blog/atom.xml|reading-list/atom.xml)",
+			source:
+				"/(atom.xml|blog/atom.xml|customer-stories/atom.xml|reading-list/atom.xml|research/barkup-bench/atom.xml)",
 			headers: [
 				{
 					key: "Content-Type",

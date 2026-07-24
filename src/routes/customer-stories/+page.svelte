@@ -1,5 +1,6 @@
 <script lang="ts">
 // components
+import FeedBadge from "$components/FeedBadge.svelte";
 import LinkButton from "$components/LinkButton.svelte";
 import SearchTagFilter from "$components/SearchTagFilter.svelte";
 import {
@@ -53,14 +54,17 @@ function clearFilters() {
   class="page-x-padding main-y-padding pb-6 grid grid-cols-1 gap-12 min-h-screen place-content-start"
 >
   {#if data?.banner}
-    <header class="max-w-prose">
-      <h1 class="display">
-        {data.banner?.heading}
-      </h1>
-      <p class="max-w-prose mb-5 empty:hidden">
-        {data.banner?.subheading ?? ""}
-      </p>
-    </header>
+    <div class="flex items-start justify-between gap-4">
+      <header class="max-w-prose">
+        <h1 class="display">
+          {data.banner?.heading}
+        </h1>
+        <p class="max-w-prose mb-5 empty:hidden">
+          {data.banner?.subheading ?? ""}
+        </p>
+      </header>
+      <FeedBadge href="/customer-stories/atom.xml" />
+    </div>
   {/if}
 
   <div class="flex flex-col gap-4">

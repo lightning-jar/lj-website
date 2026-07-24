@@ -7,7 +7,8 @@
 // fallow-ignore-next-line unused-export
 export const prerender = true;
 
-import { buildAtomFeed, toIso } from "$utils/atomFeed";
+import { buildAtomFeed } from "$utils/atomFeed";
+import { buildStudyEntries } from "$utils/feedEntries";
 
 import type { RequestHandler } from "@sveltejs/kit";
 
@@ -16,20 +17,7 @@ import benchStudies from "../bench-studies.json";
 const baseUrl = "https://www.lightningjar.com";
 
 export const GET: RequestHandler = () => {
-	const entries = [...benchStudies.studies]
-		.sort((a, b) => b.published.localeCompare(a.published))
-		.map((s) => {
-			const url = `${baseUrl}/research/barkup-bench/${s.slug}`;
-			return {
-				id: url,
-				title: `Study ${s.letters}: ${s.title}`,
-				link: url,
-				updated: toIso(s.published),
-				summary: s.indexLine,
-				authorName: "Lightning Jar",
-				category: "Research",
-			};
-		});
+	const entries = buildStudyEntries(baseUrl, benchStudies.studies);
 	const atom = buildAtomFeed(entries, {
 		baseUrl,
 		feedSelf: `${baseUrl}/research/barkup-bench/atom.xml`,

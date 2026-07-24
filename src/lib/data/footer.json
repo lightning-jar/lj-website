@@ -63,8 +63,8 @@
 			"data-text": "Reading List"
 		},
 		{
-			"href": "/atom.xml",
-			"data-text": "Atom Feed"
+			"href": "/feeds",
+			"data-text": "Feeds"
 		}
 	]
 }
