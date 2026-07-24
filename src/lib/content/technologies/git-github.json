@@ -1,0 +1,19 @@
+{
+	"id": "git-github",
+	"name": "Git & GitHub",
+	"shortDescription": "Version control and collaboration platform underpinning every project: history, review, and CI/CD.",
+	"description": [
+		"Git is the distributed version control system under every line of code we ship; GitHub is where that history lives and where collaboration happens — pull requests, code review, issues, and CI/CD via Actions. Content-as-code workflows make this more than developer plumbing: for our git-resident content, publishing is a commit, and every change to a client's site carries a reviewable history."
+	],
+	"license": "Open Source (Git) / Proprietary (GitHub)",
+	"category": "Version Control & CI/CD",
+	"link": {
+		"href": "https://github.com"
+	},
+	"useCases": [
+		"Reviewable, revertible history for every code and content change",
+		"Pull-request workflows for human and AI-agent contributions alike",
+		"CI/CD pipelines and deploy-on-push via GitHub integrations"
+	],
+	"supercategory": "backend-runtime"
+}

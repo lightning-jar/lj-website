@@ -93,6 +93,11 @@ const config: VercelConfig = {
 			statusCode: 301,
 		},
 		{
+			source: "/technologies/ljx",
+			destination: "/technologies/replicator",
+			statusCode: 301,
+		},
+		{
 			source: "/blog/introduction-to-pimcore",
 			destination: "/archive/introduction-to-pimcore",
 			statusCode: 301,

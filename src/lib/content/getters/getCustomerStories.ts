@@ -67,7 +67,11 @@ function enrichTechnologies(story: CustomerStory): CustomerStory {
 		return { ...story, technologies: [] };
 	}
 
-	const technologies = ids.map((id) => {
+	// legacy CMS ids that were renamed in the technologies content
+	const LEGACY_TECH_IDS: Record<string, string> = { ljx: "replicator" };
+
+	const technologies = ids.map((rawId) => {
+		const id = LEGACY_TECH_IDS[rawId] ?? rawId;
 		const tech = allTechnologies.find((t) => t.id === id);
 		if (!tech) {
 			console.warn(`Technology with id ${id} not found`);

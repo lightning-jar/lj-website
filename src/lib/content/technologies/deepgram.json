@@ -1,0 +1,19 @@
+{
+	"id": "deepgram",
+	"name": "Deepgram",
+	"shortDescription": "Speech-to-text API with fast, accurate transcription models built for developer integration.",
+	"description": [
+		"Deepgram provides speech-to-text as a clean developer API: fast, accurate transcription models with word-level timestamps, diarization, and streaming support. It powers the voice features in Replicator, turning spoken input into text that the rest of an LLM pipeline can work with — transcription as infrastructure rather than a product bolted on."
+	],
+	"license": "Proprietary (usage-based)",
+	"category": "Speech-to-Text API",
+	"link": {
+		"href": "https://deepgram.com/"
+	},
+	"useCases": [
+		"Voice input for LLM-powered editing and content workflows",
+		"Accurate transcription with word-level timestamps and diarization",
+		"Streaming speech-to-text for responsive voice interfaces"
+	],
+	"supercategory": "ai-llm"
+}

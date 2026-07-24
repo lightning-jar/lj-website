@@ -1,0 +1,20 @@
+{
+	"id": "replicator",
+	"name": "Replicator",
+	"shortDescription": "Our LLM-powered brand operating system: CMS, brand voice, and content APIs behind this site and client sites.",
+	"description": [
+		"Replicator is Lightning Jar's own LLM-powered brand operating system — the successor to our earlier in-house CMS. It stores prose as canonical markdown, serves it through org-scoped public content APIs with edge caching, and pairs editing surfaces (including in-place, on-page editing) with LLM assistance that's grounded in each organization's brand voice.",
+		"It runs the blog, customer stories, and reading list on this site and powers client content platforms — saving an edit in the Replicator editor goes live on the site in minutes, with no redeploy. Yes, we eat our own cooking."
+	],
+	"license": "Proprietary",
+	"category": "Content Management / Brand OS",
+	"link": {
+		"href": "https://replicator.lj.dev"
+	},
+	"useCases": [
+		"CMS-backed marketing sites with request-time content and edge caching",
+		"Org-scoped public content APIs feeding multiple properties",
+		"Brand-voice-grounded LLM assistance inside the editing workflow"
+	],
+	"supercategory": "content-management-pim"
+}
