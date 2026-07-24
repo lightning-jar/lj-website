@@ -1,0 +1,19 @@
+{
+	"id": "happy-dom",
+	"name": "Happy DOM",
+	"shortDescription": "Fast JavaScript DOM implementation letting component and parser tests run without a browser.",
+	"description": [
+		"Happy DOM is a fast JavaScript implementation of the browser DOM for server-side environments. We pair it with Bun's test runner so component and markdown-parsing tests exercise real DOM behavior — querying, serialization, sanitization — at unit-test speed, reserving full-browser Playwright runs for the flows that genuinely need one."
+	],
+	"license": "Open Source / MIT",
+	"category": "Test Environment / DOM Simulation",
+	"link": {
+		"href": "https://github.com/capricorn86/happy-dom"
+	},
+	"useCases": [
+		"DOM-dependent unit tests in Bun without launching a browser",
+		"Markdown parser characterization tests over real DOM serialization",
+		"Fast CI feedback for component and sanitization logic"
+	],
+	"supercategory": "monitoring-testing"
+}

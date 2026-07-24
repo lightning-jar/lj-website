@@ -1,0 +1,19 @@
+{
+	"id": "vite",
+	"name": "Vite",
+	"shortDescription": "Fast frontend build tool powering dev servers and optimized production bundles across our projects.",
+	"description": [
+		"Vite is the build tool under every project we ship: instant dev-server startup, hot module replacement, and optimized production bundles via Rolldown. SvelteKit rides on it, our env tooling and Sentry instrumentation plug into it, and it stays out of the way — which is the highest compliment build tooling can earn."
+	],
+	"license": "Open Source / MIT",
+	"category": "Build Tool",
+	"link": {
+		"href": "https://vite.dev/"
+	},
+	"useCases": [
+		"Development servers with instant startup and hot module replacement",
+		"Optimized, code-split production bundles for SvelteKit apps",
+		"Plugin pipeline for env validation, instrumentation, and CSS tooling"
+	],
+	"supercategory": "core-web-foundations"
+}

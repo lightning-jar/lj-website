@@ -1,0 +1,19 @@
+{
+	"id": "resend",
+	"name": "Resend",
+	"shortDescription": "Developer-first transactional email API with React/HTML templates and strong deliverability tooling.",
+	"description": [
+		"Resend is our transactional email layer: authentication flows, notifications, and product email delivered through a clean API with proper domain authentication (SPF, DKIM, DMARC) and deliverability visibility. It replaces the old choice between wrestling SMTP yourself and adopting a heavyweight marketing suite you didn't want."
+	],
+	"license": "Proprietary (free tier available)",
+	"category": "Transactional Email",
+	"link": {
+		"href": "https://resend.com/"
+	},
+	"useCases": [
+		"Authentication and account emails (magic links, verification, resets)",
+		"Product notifications and workflow alerts",
+		"Domain authentication and deliverability monitoring"
+	],
+	"supercategory": "api-integration"
+}

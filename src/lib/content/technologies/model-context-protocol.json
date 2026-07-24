@@ -1,0 +1,19 @@
+{
+	"id": "model-context-protocol",
+	"name": "Model Context Protocol (MCP)",
+	"shortDescription": "Open standard connecting AI agents to tools and data; we build and run public MCP servers.",
+	"description": [
+		"The Model Context Protocol is the open standard for giving AI agents structured access to tools and data. We run public MCP servers on our own properties — this site included — and build them for clients as part of agent-readiness work: search, content, and domain actions exposed to any MCP-capable agent, with authentication only where it belongs."
+	],
+	"license": "Open Source / MIT",
+	"category": "Agent Interface Standard",
+	"link": {
+		"href": "https://modelcontextprotocol.io/"
+	},
+	"useCases": [
+		"Public read-only MCP servers that make site content agent-consumable",
+		"Authenticated MCP tools over product APIs for customer workflows",
+		"Agent-readiness audits: discovery manifests, server cards, tool design"
+	],
+	"supercategory": "ai-llm"
+}

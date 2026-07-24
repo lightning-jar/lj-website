@@ -1,0 +1,19 @@
+{
+	"id": "marked",
+	"name": "Marked",
+	"shortDescription": "Fast, spec-tested markdown compiler powering bit-identical rendering across our CMS-driven sites.",
+	"description": [
+		"Marked is the markdown engine behind our content architecture: Replicator stores prose as markdown, and each site parses it locally with Marked (plus a footnote extension), keeping rendering fully under the site's control. Editors get a portable, future-proof format; sites get bit-identical HTML they own end to end."
+	],
+	"license": "Open Source / MIT",
+	"category": "Markdown Parser",
+	"link": {
+		"href": "https://marked.js.org/"
+	},
+	"useCases": [
+		"Parsing CMS-delivered markdown into site-controlled HTML",
+		"Custom renderers for brand-specific typography and link policies",
+		"Footnotes and extensions without forking the parser"
+	],
+	"supercategory": "content-management-pim"
+}

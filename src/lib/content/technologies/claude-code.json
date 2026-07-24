@@ -1,0 +1,19 @@
+{
+	"id": "claude-code",
+	"name": "Claude Code",
+	"shortDescription": "Anthropic's agentic coding tool; a daily part of how we build, review, and maintain software.",
+	"description": [
+		"Claude Code is Anthropic's agentic coding tool: a Claude-powered agent that works in the terminal and editor, reading the codebase, running commands, and making changes under human review. We use it daily across our projects, with every change reviewed and committed through our normal git workflow. For a studio that publishes open research on LLM behavior, using the tools we study is the only honest way to work."
+	],
+	"license": "Proprietary",
+	"category": "AI Coding Agent",
+	"link": {
+		"href": "https://claude.com/claude-code"
+	},
+	"useCases": [
+		"Feature development and refactoring under human review",
+		"Codebase-wide audits: accessibility, SEO, dependency hygiene",
+		"Content operations: publishing, migrations, structured-data upkeep"
+	],
+	"supercategory": "ai-llm"
+}
