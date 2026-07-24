@@ -47,6 +47,7 @@ zone for rollback:
 | TXT   | `@`                 | `v=spf1 include:_spf.google.com ~all`            | SPF |
 | TXT   | `_dmarc`            | `v=DMARC1; p=reject;`                            | DMARC |
 | TXT   | `google._domainkey` | *(copy full value from DO panel)*                | DKIM |
+| TXT   | `_github-challenge-lightning-jar-org` | `f7277f7918`                   | GitHub org domain verification (one-time check, already passed; carried over so re-verification never becomes a chore) |
 
 ⚠️ The one real footgun: the two Vercel records must be **DNS only**
 (grey cloud). Proxied (orange-cloud) records would put Cloudflare in
