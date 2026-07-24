@@ -1,0 +1,19 @@
+{
+	"id": "exe-dev",
+	"name": "exe.dev",
+	"shortDescription": "Cloud Linux VMs built for running coding agents — sandboxed, internet-addressable, with scoped GitHub access.",
+	"description": [
+		"exe.dev provides Linux VMs on the internet, quickly — SSH and HTTPS in, proxied endpoints out — designed as sandboxes for agentic development. We run Claude Code sessions in exe.dev VMs with scoped GitHub access through its integration proxy, so agents work in a real environment with real tools while credentials and blast radius stay contained. This very page was authored from one."
+	],
+	"license": "Proprietary (subscription)",
+	"category": "Agent Development Environment",
+	"link": {
+		"href": "https://exe.dev/"
+	},
+	"useCases": [
+		"Sandboxed VMs for long-running agentic coding sessions",
+		"Scoped GitHub access for agents via integration proxy, no raw credentials",
+		"Instant HTTPS endpoints for previewing work-in-progress services"
+	],
+	"supercategory": "ai-llm"
+}

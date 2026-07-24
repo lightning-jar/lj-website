@@ -1,0 +1,19 @@
+{
+	"id": "herdr",
+	"name": "Herdr",
+	"shortDescription": "Terminal multiplexer for orchestrating multiple coding agents, with persistent sessions and agent-state views.",
+	"description": [
+		"Herdr is a terminal-based multiplexer built for running several coding agents at once — Claude Code sessions side by side in real terminal panes, with at-a-glance state (working, blocked, done, idle), persistent sessions that survive disconnects, and remote attach over SSH. No Electron, no account, no telemetry: it meets an agent-heavy workflow exactly where it already lives, in the terminal."
+	],
+	"license": "Open Source",
+	"category": "Agent Orchestration / Terminal Multiplexer",
+	"link": {
+		"href": "https://herdr.dev/"
+	},
+	"useCases": [
+		"Running multiple concurrent coding-agent sessions in one terminal",
+		"Monitoring agent state across sessions: blocked, working, done, idle",
+		"Reattaching to persistent agent sessions from another machine or mobile"
+	],
+	"supercategory": "ai-llm"
+}

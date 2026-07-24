@@ -1,0 +1,19 @@
+{
+	"id": "mosh",
+	"name": "Mosh",
+	"shortDescription": "Mobile shell that keeps SSH sessions alive across network changes, sleep, and flaky connections.",
+	"description": [
+		"Mosh (mobile shell) is a remote-terminal replacement for interactive SSH that survives what kills ordinary connections: changing networks, laptop sleep, and high-latency links. Sessions roam and reconnect on their own, and local echo keeps typing responsive even when the network isn't. It's how we stay attached to long-running sessions on remote development VMs without babysitting the connection."
+	],
+	"license": "Open Source / GPLv3",
+	"category": "Remote Terminal",
+	"link": {
+		"href": "https://mosh.org/"
+	},
+	"useCases": [
+		"Persistent connections to development VMs across network changes and sleep",
+		"Responsive typing on high-latency or unreliable links",
+		"Long-running remote sessions that survive without a babysat SSH pipe"
+	],
+	"supercategory": "backend-runtime"
+}
