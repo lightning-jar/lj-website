@@ -31,6 +31,26 @@ $effect(() => {
 
 // derive page metadata from $page
 let pageMeta = $derived((page.data?.meta as PageMeta) ?? {});
+
+// social cards (Open Graph / Twitter)
+const SITE = "https://www.lightningjar.com";
+const DEFAULT_OG_IMAGE = `${SITE}/og-image.png`;
+let ogTitle = $derived(pageMeta?.title || "Lightning Jar");
+let ogDescription = $derived(pageMeta?.description ?? "");
+let ogUrl = $derived(
+	`${SITE}${page.url.pathname === "/" ? "" : page.url.pathname}`,
+);
+// article heroes ride in via pageMeta.ogImage; anything non-absolute
+// falls back to the branded default card
+let ogImage = $derived.by(() => {
+	const url = pageMeta?.ogImage?.url;
+	return url && /^https:\/\//.test(url) ? url : DEFAULT_OG_IMAGE;
+});
+let ogType = $derived(
+	/^\/(blog|customer-stories|reading-list)\/[^/]+$/.test(page.url.pathname)
+		? "article"
+		: "website",
+);
 </script>
 
 <svelte:head>
@@ -60,10 +80,30 @@ let pageMeta = $derived((page.data?.meta as PageMeta) ?? {});
     type="application/atom+xml"
   />
 
+  <!-- social cards -->
+  <meta property="og:site_name" content="Lightning Jar" />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:title" content={ogTitle} />
+  {#if ogDescription}
+    <meta property="og:description" content={ogDescription} />
+  {/if}
+  <meta property="og:url" content={ogUrl} />
+  <meta property="og:image" content={ogImage} />
+  {#if ogImage === DEFAULT_OG_IMAGE}
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+  {/if}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={ogTitle} />
+  {#if ogDescription}
+    <meta name="twitter:description" content={ogDescription} />
+  {/if}
+  <meta name="twitter:image" content={ogImage} />
+
   <!-- robots -->
   {#if data.isProduction && pageMeta?.robotsFollow !== false}
     <meta
-      content="index, follow max-image-preview:large, max-snippet:-1, max-video-preview:-1 "
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
       name="robots"
     />
   {:else}
@@ -72,47 +112,6 @@ let pageMeta = $derived((page.data?.meta as PageMeta) ?? {});
       name="robots"
     />
   {/if}
-
-  <!-- open graph image-->
-  <!-- {#if pageMeta?.ogImage?.url}
-		{@const og = pageMeta.ogImage}
-		<meta
-			content="en_US"
-			property="og:locale" />
-		<meta
-			content="article"
-			property="og:type" />
-		<meta
-			content={pageMeta?.shortTitle}
-			property="og:title" />
-		<meta
-			content="https://www.securelogix.com/{data.pathname}"
-			property="og:url" />
-		<meta
-			content="SecureLogix"
-			property="og:site_name" />
-		<meta
-			content={data.version}
-			property="article:modified_time" />
-		<meta
-			content={og.url}
-			property="og:image" />
-		{#if og.width}
-			<meta
-				content={og.width.toString()}
-				property="og:image:width" />
-		{/if}
-		{#if og.height}
-			<meta
-				content={og.height.toString()}
-				property="og:image:height" />
-		{/if}
-		{#if og.mimeType}
-			<meta
-				content={og.mimeType}
-				property="og:image:type" />
-		{/if}
-	{/if} -->
 </svelte:head>
 
 <SvelteAnnounceFix />

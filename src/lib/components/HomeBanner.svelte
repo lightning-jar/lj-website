@@ -124,13 +124,15 @@ function handleKeyDown(event: KeyboardEvent) {
 				pt-12"
   >
     {#each topics as topic, index}
-      {@const headingTag = index === 0 ? "h1" : "h2"}
+      <!-- only the first (default-visible) headline is a real heading;
+           the rotating alternates are styled text, keeping the document
+           outline clean for crawlers and screen readers -->
+      {@const headingTag = index === 0 ? "h1" : "p"}
       {#if index > -1}
         <!-- heading -->
 
         <svelte:element
           this={headingTag}
-          title="If you don't like this headline, feel free to edit it."
           class="{counters.topic === index ? 'flex' : 'hidden'}
           font-display
           text-34px

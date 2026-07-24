@@ -35,6 +35,9 @@ export async function load({ params, fetch, setHeaders }) {
 		author: fm?.author ?? "",
 		date: fm?.date ?? "",
 		tags: fm?.tags ?? [],
+		// hero as social-card image (layout falls back to the default card
+		// when absent or non-absolute)
+		ogImage: fm?.image ? { url: fm.image } : undefined,
 	};
 
 	const authorProfile = await getBlogAuthorProfile(fetch, fm?.author);

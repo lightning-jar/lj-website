@@ -34,6 +34,14 @@ export async function load({ params, fetch, setHeaders }) {
 
 	return {
 		...story,
+		meta: {
+			...(story.meta ?? {}),
+			// thumbnail as social-card image (layout falls back to the
+			// default card when absent or non-absolute)
+			ogImage: story.thumbnailImage?.src
+				? { url: story.thumbnailImage.src }
+				: undefined,
+		},
 		nextStorySlug,
 	};
 }
