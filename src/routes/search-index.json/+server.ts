@@ -3,6 +3,7 @@ import { json } from "@sveltejs/kit";
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 import { getAllCustomerStories } from "$content/getters/getCustomerStories";
 import { getAllReadingListArticles } from "$content/getters/getReadingList";
+import { allTechnologies } from "$content/getters/getTechnologiesContent";
 import type { SearchRecord } from "$utils/siteSearch";
 
 import benchStudies from "../research/barkup-bench/bench-studies.json";
@@ -59,6 +60,15 @@ export const GET: RequestHandler = async ({ fetch }) => {
 				blurb: blurb(entry.summary ?? entry.excerpt),
 				tags: entry.tags ?? [],
 				url: `/reading-list/${entry.slug}`,
+			}),
+		),
+		...allTechnologies.map(
+			(tech): SearchRecord => ({
+				type: "technology",
+				title: tech.name,
+				blurb: blurb(tech.shortDescription),
+				tags: [tech.category, tech.supercategory ?? ""].filter(Boolean),
+				url: `/technologies/${tech.id}`,
 			}),
 		),
 	];

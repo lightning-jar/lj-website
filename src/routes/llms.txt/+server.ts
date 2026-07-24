@@ -1,6 +1,7 @@
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 import { getAllCustomerStories } from "$content/getters/getCustomerStories";
 import { getAllReadingListArticles } from "$content/getters/getReadingList";
+import { allTechnologies } from "$content/getters/getTechnologiesContent";
 
 import benchStudies from "../research/barkup-bench/bench-studies.json";
 
@@ -72,6 +73,13 @@ export const GET: RequestHandler = async ({ fetch }) => {
 	lines.push("", "## Reading List", "");
 	for (const e of readingList) {
 		lines.push(`- [${e.title}](${BASE}/reading-list/${e.slug}): ${e.excerpt}`);
+	}
+
+	lines.push("", "## Technologies", "");
+	for (const t of allTechnologies) {
+		lines.push(
+			`- [${t.name}](${BASE}/technologies/${t.id}): ${t.shortDescription ?? ""}`,
+		);
 	}
 
 	lines.push(

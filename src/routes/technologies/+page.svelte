@@ -21,73 +21,27 @@ let { data } = $props();
         <p class="mb-5">{section.description}</p>
         <div class="grid grid-cols-1">
           {#each data.technologies.filter((tech) => tech.supercategory === section.id) ?? [] as technology}
-            <details class="group border-t border-slate-100/15 last:border-b">
-              <summary
-                class="flex flex-wrap items-baseline gap-x-3 gap-y-1 py-3 cursor-pointer list-none marker:content-none [&::-webkit-details-marker]:hidden"
+            <a
+              href="/technologies/{technology.id}"
+              class="group border-t border-slate-100/15 last:border-b flex flex-wrap items-baseline gap-x-3 gap-y-1 py-3"
+            >
+              <span
+                class="text-maximumYellow/70 group-hover:translate-x-1 transition-transform mr-1 select-none"
+                aria-hidden="true">&rsaquo;</span
               >
-                <span
-                  class="text-maximumYellow/70 group-open:rotate-90 transition-transform mr-1 select-none"
-                  aria-hidden="true">&rsaquo;</span
-                >
-                <h3
-                  id={technology.id}
-                  class="text-19px font-serif text-maximumYellow font-700 opacity-95 scroll-mt-24"
-                >
-                  {technology.name}
-                </h3>
-                <span class="opacity-80 italic text-15px">
-                  {technology.category}
-                </span>
-                <span class="w-full opacity-70 text-15px leading-snug">
-                  {technology.shortDescription}
-                </span>
-              </summary>
-
-              <div class="pb-5 pt-1 pl-5">
-                <!--description -->
-                <p class="opacity-90 mb-3">
-                  {(technology.description ?? []).join(" ")}
-                </p>
-                <!-- website link -->
-                {#if technology?.link?.href}
-                  <p class="opacity-90 mb-3">
-                    <a
-                      href={technology.link.href}
-                      rel="external"
-                      title="go to {technology.name} website"
-                      class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4"
-                    >
-                      Visit {technology.name} &rarr;
-                    </a>
-                  </p>
-                {/if}
-                <!-- related article -->
-                {#if technology.relatedArticle}
-                  <p class="opacity-90 mb-3">
-                    Related reading:
-                    <a
-                      href={technology.relatedArticle.href}
-                      class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4"
-                    >
-                      {technology.relatedArticle.title}
-                    </a>
-                  </p>
-                {/if}
-                <!-- use cases -->
-                <div class="opacity-90">
-                  <h4 class="font-700 mb-2 leading-none text-maximumYellow">
-                    Use Cases:
-                  </h4>
-                  <ul class="grid grid-cols-1 gap-1 pl-0 ml-0">
-                    {#each technology.useCases ?? [] as useCase}
-                      <li class="leading-tight list-disc list-inside ml-0">
-                        {useCase}
-                      </li>
-                    {/each}
-                  </ul>
-                </div>
-              </div>
-            </details>
+              <h3
+                id={technology.id}
+                class="text-19px font-serif text-maximumYellow font-700 opacity-95 scroll-mt-24 group-hover:opacity-100 group-hover:underline decoration-maximumYellow/40 underline-offset-4"
+              >
+                {technology.name}
+              </h3>
+              <span class="opacity-80 italic text-15px">
+                {technology.category}
+              </span>
+              <span class="w-full opacity-70 text-15px leading-snug">
+                {technology.shortDescription}
+              </span>
+            </a>
           {/each}
         </div>
       </section>
@@ -126,7 +80,7 @@ let { data } = $props();
           {#each data.technologies as technology}
             <li class="leading-tight">
               <a
-                href="#{technology.id}"
+                href="/technologies/{technology.id}"
                 class="opacity-90 underline decoration-current hover:(text-maximumYellow opacity-100) underline-offset-4"
               >
                 {technology.name}

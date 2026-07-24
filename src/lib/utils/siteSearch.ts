@@ -9,7 +9,8 @@ export type SearchRecordType =
 	| "blog"
 	| "customer-story"
 	| "reading-list"
-	| "study";
+	| "study"
+	| "technology";
 
 export interface SearchRecord {
 	type: SearchRecordType;
@@ -24,6 +25,7 @@ export const SEARCH_TYPE_LABELS: Record<SearchRecordType, string> = {
 	study: "Research",
 	"customer-story": "Customer Stories",
 	"reading-list": "Reading List",
+	technology: "Technologies",
 };
 
 // every term must match somewhere in title/blurb/tags; records whose

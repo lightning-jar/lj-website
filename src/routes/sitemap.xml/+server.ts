@@ -24,6 +24,7 @@ const productionUrl =
 import { getAllBlogArticleSlugs } from "$content/getters/getBlogArticles";
 import { getAllCustomerStorySlugs } from "$content/getters/getCustomerStories";
 import { getAllReadingListSlugs } from "$content/getters/getReadingList";
+import { allTechnologies } from "$content/getters/getTechnologiesContent";
 
 // helper function to create sitemap pages
 function generateSiteMapXMLPage(
@@ -77,6 +78,9 @@ const staticPages = [
 	generateSiteMapXMLPage(`/reading-list`, "monthly", 0.25), // reading list landing page
 	generateSiteMapXMLPage(`/services`, "monthly", 0.25), // services landing page
 	generateSiteMapXMLPage(`/technologies`, "monthly", 0.25), // technologies landing page
+	...allTechnologies.map((tech) =>
+		generateSiteMapXMLPage(`/technologies/${tech.id}`, "monthly", 0.25),
+	), // per-technology detail pages
 	generateSiteMapXMLPage(`/terms`, "monthly", 0.25), // terms landing page
 	generateSiteMapXMLPage(`/testimonials`, "monthly", 0.25), // testimonials landing page
 	// atom feeds — discoverable resources in their own right

@@ -167,10 +167,10 @@ let storyLd = $derived.by(() => {
             class="px-4 pt-5 pb-6 w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 place-items-center place-content-center overflow-hidden gap-4 border rounded border-slate-100/40"
           >
             {#each data.technologies ?? [] as item}
-              {#if item?.logo?.src && item?.link?.href}
+              {#if item?.logo?.src && item?.id}
                 <a
                   aria-label={item.name}
-                  href={item.link.href}
+                  href="/technologies/{item.id}"
                   class="w-full overflow-hidden aspect-4/3 flex justify-center items-center rounded bg-slate-100/5 hover:bg-slate-100/10 hover:outline-2 !outline-maximumYellow focus-visible:outline-2 focus-visible:bg-slate-100/10"
                 >
                   <img

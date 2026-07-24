@@ -36,7 +36,35 @@ async function loadAllTechnologySupercategoriesJson() {
 // export landing page content
 export const technologiesLandingPageContent = page;
 
-// export sitemap section
+// export all technologies
+export const allTechnologies: Technology[] = await loadAllTechnologiesJson();
+
+// export all technology super categories
+export const allTechnologySupercategories: TechnologySupercategory[] =
+	await loadAllTechnologySupercategoriesJson();
+
+// detail-page lookups
+export function getTechnologyById(id: string): Technology | undefined {
+	return allTechnologies.find((tech) => tech.id === id);
+}
+
+export function getTechnologySupercategory(
+	id: string | undefined,
+): TechnologySupercategory | undefined {
+	return allTechnologySupercategories.find((sc) => sc.id === id);
+}
+
+// same-supercategory siblings, for the detail page's related list
+export function getRelatedTechnologies(technology: Technology): Technology[] {
+	if (!technology.supercategory) return [];
+	return allTechnologies.filter(
+		(tech) =>
+			tech.supercategory === technology.supercategory &&
+			tech.id !== technology.id,
+	);
+}
+
+// export sitemap section (landing + one page per technology)
 export const technologiesSitemapSection = {
 	name: "Technologies",
 	pages: [
@@ -46,12 +74,11 @@ export const technologiesSitemapSection = {
 			title: page.meta.title,
 			date: "",
 		},
+		...allTechnologies.map((tech) => ({
+			href: `/technologies/${tech.id}`,
+			description: tech.shortDescription ?? "",
+			title: tech.name,
+			date: "",
+		})),
 	],
 };
-
-// export all technologies
-export const allTechnologies: Technology[] = await loadAllTechnologiesJson();
-
-// export all technology super categories
-export const allTechnologySupercategories: TechnologySupercategory[] =
-	await loadAllTechnologySupercategoriesJson();
