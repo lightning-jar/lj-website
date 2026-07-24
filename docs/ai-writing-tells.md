@@ -66,3 +66,9 @@ The companion pattern file `docs/ai-writing-tells.grep` holds the greppable
 subset (sections 1-3). Current-era posts live in the replicator CMS; export
 their markdown (article_get via the replicator MCP) to files first, then run
 the same grep. Review every hit in context before editing anything.
+
+Known-noisy patterns (from the July 2026 full-corpus scan): `robust` mostly
+hits the legitimate engineering sense on this blog and `not just` casts a
+wide net on purpose; both need human triage every run. The fixture corpus is
+FROZEN test data; when a scan finds a tell in a fixture, the fix target is
+the live CMS article, never the fixture file.

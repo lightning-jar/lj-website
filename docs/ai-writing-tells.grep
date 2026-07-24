@@ -5,7 +5,7 @@ worth sitting
 \bdelve
 \bseamless
 \brobust\b
-\bleverag(e[sd]?|ing)\b
+(^|[^-])leverag(e[sd]?|ing)\b
 \bcutting.edge
 \bgame.chang
 \brevolutioniz
@@ -39,8 +39,8 @@ whether you.?re an? \w
 \bdive into
 \bmoreover\b
 \bfurthermore\b
-not just \w[^.]{0,40}, but
-isn.?t just
+\bnot just\b
+(is|are|was|were)n.?t just
 elephant in the room
 double.edged sword
 \bin the world of\b

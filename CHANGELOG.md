@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.17.0] - 2026-07-24
+
+### Changed
+- Tuned `docs/ai-writing-tells.grep` from the first full-corpus scan: leverage pattern no longer matches hyphenated adjectives, the "not just / isn't just" family broadened to catch all copula forms; doc notes known-noisy patterns and the frozen-fixture rule.
+
 ## [0.16.0] - 2026-07-24
 
 ### Added
