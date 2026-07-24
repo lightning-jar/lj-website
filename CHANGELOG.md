@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.19.0] - 2026-07-24
+
+### Changed
+- AI-tells grep: the "isn't just" pattern family now also catches "doesn't/don't/didn't just" (missed catch found by the customer-stories scan).
+
 ## [0.18.0] - 2026-07-24
 
 ### Changed
