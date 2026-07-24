@@ -103,6 +103,13 @@ const sitemapSection = {
 			description: "",
 			date: "",
 		},
+		{
+			href: "/feeds",
+			title: "Feeds",
+			description:
+				"All five Atom feeds, described: everything combined, blog, customer stories, research, and reading list.",
+			date: "",
+		},
 	],
 };
 
