@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.16.0] - 2026-07-24
+
+### Added
+- `docs/ai-writing-tells.md` + `docs/ai-writing-tells.grep`: a reviewed list of AI-slop writing tells (banned house-style items, vocabulary, phrases, structural patterns) with a greppable pattern file for scanning articles before publish; referenced from CLAUDE.md's new Editorial Style section.
+
 ## [0.15.0] - 2026-07-23
 
 ### Removed

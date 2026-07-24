@@ -100,6 +100,10 @@ Common utility shortcuts defined in `uno.config.ts`:
 - `GlobalFooter.svelte` - Footer with contact info and links
 - `LightningButton.svelte` - Branded CTA button with lightning bolt animation
 
+## Editorial Style
+
+Blog copy follows house rules: no em/en dashes in prose, plain phrasing over clever fragments. Before publishing an article, scan it against `docs/ai-writing-tells.md` (pattern file: `docs/ai-writing-tells.grep`) and review every hit in context.
+
 ## Code Style
 
 - **Formatting**: Biome with tabs, double quotes, trailing commas
