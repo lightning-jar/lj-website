@@ -9,7 +9,7 @@ Lightning Jar website - a static-first, content-driven marketing site built with
 ## Commands
 
 ```bash
-bun dev              # Start dev server (localhost:5173)
+bun dev              # Start dev server (localhost:5193, pinned/strict)
 bun build            # Production build → .vercel/output
 bun preview          # Preview production build locally
 bun test             # Run tests (Bun test runner)

@@ -22,6 +22,13 @@ export default defineConfig({
 	],
 	assetsInclude: ["**/*.svg", "**/*.txt"],
 	server: {
+		// Pin the dev server to a distinct port (same convention as
+		// replicator's 5183) so other projects grabbing Vite's default
+		// 5173/5174 can't collide with it; strictPort fails fast instead
+		// of silently drifting, which would break pinned dev origins
+		// (reverse proxies, tunnels).
+		port: 5193,
+		strictPort: true,
 		// Extra dev-server hostnames (comma-separated), e.g. a remote dev
 		// box's proxy + tailnet names. Vite's own
 		// __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS only carries ONE host, so
