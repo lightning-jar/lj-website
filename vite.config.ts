@@ -21,4 +21,11 @@ export default defineConfig({
 		sveltekit(),
 	],
 	assetsInclude: ["**/*.svg", "**/*.txt"],
+	server: {
+		// Extra dev-server hostnames (comma-separated), e.g. a remote dev
+		// box's proxy + tailnet names. Vite's own
+		// __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS only carries ONE host, so
+		// multi-host setups opt in here. Unset = Vite's default host check.
+		allowedHosts: process.env.DEV_ALLOWED_HOSTS?.split(",").filter(Boolean),
+	},
 });
