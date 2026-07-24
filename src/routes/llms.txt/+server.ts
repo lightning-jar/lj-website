@@ -31,6 +31,8 @@ export const GET: RequestHandler = async ({ fetch }) => {
 		"",
 		`- [MCP endpoint](${BASE}/mcp): public, keyless, read-only Model Context Protocol server (streamable HTTP, stateless) with search and read tools over everything listed here`,
 		`- [MCP manifest](${BASE}/.well-known/mcp.json): discovery metadata for the endpoint`,
+		`- [Agent skills](${BASE}/.well-known/agent-skills/index.json): downloadable SKILL.md packages, starting with how to query Barkup Bench data`,
+		`- [API catalog](${BASE}/.well-known/api-catalog): RFC 9727 linkset of machine-readable endpoints`,
 		"",
 		"## Company",
 		"",

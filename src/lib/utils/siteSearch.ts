@@ -49,6 +49,21 @@ export function filterSearchIndex(
 		.map(({ record }) => record);
 }
 
+// one index fetch per page lifetime, shared by NavSearch and the
+// WebMCP tools (client-side only)
+let indexPromise: Promise<SearchRecord[]> | null = null;
+
+export function loadSearchIndex(): Promise<SearchRecord[]> {
+	indexPromise ??= fetch("/search-index.json")
+		.then((res) => (res.ok ? res.json() : { records: [] }))
+		.then((data: { records: SearchRecord[] }) => data.records ?? [])
+		.catch(() => {
+			indexPromise = null;
+			return [];
+		});
+	return indexPromise;
+}
+
 // group filtered results for display, in SEARCH_TYPE_LABELS order
 export function groupSearchResults(
 	results: SearchRecord[],

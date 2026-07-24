@@ -1,6 +1,8 @@
 <script lang="ts">
 import { createAttachmentKey } from "svelte/attachments";
 
+import { goto } from "$app/navigation";
+
 // import child page data
 import { page } from "$app/state";
 
@@ -16,8 +18,16 @@ import BackToTop from "$components/BackToTop.svelte";
 // types
 import type { PageMeta } from "$types/PageMeta";
 
+import { initWebMcp } from "$utils/webMcp";
+
 // props
 let { children, data } = $props();
+
+// WebMCP: register site tools for in-browser agents (feature-detected,
+// no-op in browsers without the experimental API)
+$effect(() => {
+	initWebMcp((path) => goto(path));
+});
 
 // derive page metadata from $page
 let pageMeta = $derived((page.data?.meta as PageMeta) ?? {});

@@ -20,3 +20,4 @@ Content-Signal: search=yes, ai-input=yes, ai-train=yes
 # MCP server manifest: https://www.lightningjar.com/.well-known/mcp.json
 # MCP server card: https://www.lightningjar.com/.well-known/mcp/server-card.json
 # API catalog (RFC 9727): https://www.lightningjar.com/.well-known/api-catalog
+# Agent skills index: https://www.lightningjar.com/.well-known/agent-skills/index.json

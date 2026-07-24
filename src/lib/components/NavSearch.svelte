@@ -1,25 +1,10 @@
-<script lang="ts" module>
-// one index fetch per page lifetime, shared across desktop and mobile
-let indexPromise: Promise<SearchRecord[]> | null = null;
-
-function loadIndex(): Promise<SearchRecord[]> {
-	indexPromise ??= fetch("/search-index.json")
-		.then((res) => (res.ok ? res.json() : { records: [] }))
-		.then((data: { records: SearchRecord[] }) => data.records ?? [])
-		.catch(() => {
-			indexPromise = null;
-			return [];
-		});
-	return indexPromise;
-}
-</script>
-
 <script lang="ts">
 import { goto } from "$app/navigation";
 
 import {
 	filterSearchIndex,
 	groupSearchResults,
+	loadSearchIndex,
 	type SearchRecord,
 } from "$utils/siteSearch";
 
@@ -42,7 +27,7 @@ let results = $derived(filterSearchIndex(records, query));
 let groups = $derived(groupSearchResults(results));
 
 async function ensureIndex() {
-	records = await loadIndex();
+	records = await loadSearchIndex();
 }
 
 function openPanel() {
