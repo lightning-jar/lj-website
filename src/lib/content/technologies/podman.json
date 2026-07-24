@@ -1,0 +1,19 @@
+{
+	"id": "podman",
+	"name": "Podman",
+	"shortDescription": "Daemonless, rootless container engine — Docker-compatible CLI without the root-owned daemon.",
+	"description": [
+		"Podman is a container engine that runs OCI containers without a central root-owned daemon: containers run as ordinary user processes, rootless by default, with a CLI that's drop-in familiar to anyone who knows Docker. That security posture matters most exactly where we use containers — sandboxing services and agent workloads on shared development machines — and pods give it a natural on-ramp to Kubernetes shapes when needed."
+	],
+	"license": "Open Source / Apache-2.0",
+	"category": "Container Engine",
+	"link": {
+		"href": "https://podman.io/"
+	},
+	"useCases": [
+		"Rootless containers for services on shared development VMs",
+		"Docker-compatible workflows without a privileged daemon",
+		"Local pods that mirror Kubernetes deployment shapes"
+	],
+	"supercategory": "backend-runtime"
+}

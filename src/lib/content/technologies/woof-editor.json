@@ -1,0 +1,20 @@
+{
+	"id": "woof-editor",
+	"name": "woof-editor (beta)",
+	"shortDescription": "Our contenteditable markdown editor for Svelte 5, backed by barkdown's round-trip codec — WYSIWYG that never drifts on save.",
+	"description": [
+		"woof-editor is our open-source contenteditable markdown editor for Svelte 5, built on barkdown's round-trip codec: every keystroke serializes back to the canonical markdown the codec would produce from the DOM, so save-and-reload never drifts. Where traditional markdown WYSIWYGs round-trip lossily — accumulating whitespace changes, quote-style drift, and list-marker churn on every save — woof-editor inherits barkdown's property-tested guarantee that DOM-to-markdown inverts marked's parse.",
+		"It ships with menus, a link popover, and footnote support, and it's the editing surface that pairs naturally with a CMS storing canonical markdown. Currently in beta on npm as @kevinpeckham/woof-editor."
+	],
+	"license": "Open Source / MIT",
+	"category": "Markdown Editor Component",
+	"link": {
+		"href": "https://www.npmjs.com/package/@kevinpeckham/woof-editor"
+	},
+	"useCases": [
+		"WYSIWYG markdown editing in Svelte 5 apps with zero round-trip drift",
+		"CMS editors that store canonical markdown as the source of truth",
+		"Portable content workflows that survive edit → serialize → parse → render"
+	],
+	"supercategory": "content-management-pim"
+}
