@@ -1,63 +1,18 @@
+import { API_CATALOG, API_CATALOG_CONTENT_TYPE } from "$utils/apiCatalog";
+
 import type { RequestHandler } from "./$types";
 
 // API catalog (RFC 9727): linkset advertising this site's public,
 // keyless agent-facing endpoints. Static content, but served from a
-// route so the application/linkset+json media type is guaranteed.
+// route so the linkset media type (with its RFC 9727 profile
+// parameter, §4.2) is guaranteed. Catalog content and rationale live
+// in $utils/apiCatalog, where tests pin the RFC shape.
 export const prerender = false;
 
-const BASE = "https://www.lightningjar.com";
-
-const catalog = {
-	linkset: [
-		{
-			anchor: `${BASE}/mcp`,
-			"service-desc": [
-				{
-					href: `${BASE}/.well-known/mcp/server-card.json`,
-					type: "application/json",
-					title: "MCP server card (streamable HTTP, keyless, read-only)",
-				},
-			],
-			"service-doc": [
-				{
-					href: `${BASE}/llms.txt`,
-					type: "text/plain",
-					title: "LLM-readable site index and endpoint documentation",
-				},
-			],
-		},
-		{
-			anchor: `${BASE}/search-index.json`,
-			"service-doc": [
-				{
-					href: `${BASE}/llms.txt`,
-					type: "text/plain",
-					title: "Site search index: all content records as JSON",
-				},
-			],
-		},
-		{
-			anchor: `${BASE}/sitemap.xml`,
-			alternate: [
-				{ href: `${BASE}/atom.xml`, type: "application/atom+xml" },
-				{ href: `${BASE}/blog/atom.xml`, type: "application/atom+xml" },
-				{
-					href: `${BASE}/reading-list/atom.xml`,
-					type: "application/atom+xml",
-				},
-				{
-					href: `${BASE}/research/barkup-bench/atom.xml`,
-					type: "application/atom+xml",
-				},
-			],
-		},
-	],
-};
-
 export const GET: RequestHandler = () =>
-	new Response(JSON.stringify(catalog, null, "\t"), {
+	new Response(JSON.stringify(API_CATALOG, null, "\t"), {
 		headers: {
-			"content-type": "application/linkset+json",
+			"content-type": API_CATALOG_CONTENT_TYPE,
 			"cache-control": "public, s-maxage=86400, stale-while-revalidate=86400",
 		},
 	});

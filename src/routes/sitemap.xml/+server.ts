@@ -116,6 +116,7 @@ export const GET: RequestHandler = async ({ fetch }) => {
 		const sorted = pages.sort((a, b) => a.path.localeCompare(b.path));
 		return new Response(generateSiteMapXML(sorted), {
 			headers: {
+				"content-type": "application/xml; charset=utf-8",
 				"cache-control": "public, s-maxage=900, stale-while-revalidate=3600",
 			},
 		});

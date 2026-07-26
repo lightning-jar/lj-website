@@ -1,5 +1,4 @@
 {
-	"$schema": "https://modelcontextprotocol.io/schemas/draft/server-card.json",
 	"serverInfo": {
 		"name": "lightning-jar",
 		"version": "1.0.0",
@@ -10,8 +9,12 @@
 		"type": "streamable-http",
 		"endpoint": "https://www.lightningjar.com/mcp"
 	},
-	"authentication": { "type": "none" },
-	"capabilities": { "tools": {} },
+	"authentication": {
+		"type": "none"
+	},
+	"capabilities": {
+		"tools": {}
+	},
 	"documentation": "https://www.lightningjar.com/llms.txt",
 	"contact": "hello@lightningjar.com"
 }
