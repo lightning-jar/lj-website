@@ -146,7 +146,8 @@ export const load = async ({ fetch, setHeaders }) => {
 			title: "Sitemap",
 			shortTitle: "Sitemap Map",
 			url: "/sitemap",
-			description: "",
+			description:
+				"Every page on lightningjar.com in one place: blog articles, customer stories, research studies, technologies, packages, and feeds.",
 			keywords: [],
 			robotsFollow: true,
 			analyticsOn: true,
