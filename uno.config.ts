@@ -44,6 +44,30 @@ export default defineConfig({
 				"#svelte-announcer { position: absolute; left: 0; top: 0; clip: rect(0 0 0 0); clip-path: inset(50%); overflow: hidden; white-space: nowrap; width: 1px; height: 1px }",
 		},
 		{
+			// Metric-matched local fallbacks for the two web fonts, so text
+			// laid out before the webfont arrives occupies the same space and
+			// the swap causes no layout shift (CLS). Overrides computed from
+			// @capsizecss/metrics against Arial (fontaine formulas).
+			layer: "preflights",
+			getCSS: () =>
+				`@font-face {
+        font-family: "Atkinson Hyperlegible Fallback";
+        src: local("Arial");
+        size-adjust: 99.37%;
+        ascent-override: 95.6%;
+        descent-override: 29.18%;
+        line-gap-override: 0%;
+      }
+      @font-face {
+        font-family: "Bungee Shade Fallback";
+        src: local("Arial");
+        size-adjust: 161.06%;
+        ascent-override: 63.33%;
+        descent-override: 18.63%;
+        line-gap-override: 0%;
+      }`,
+		},
+		{
 			layer: "preflights",
 			getCSS: () =>
 				`@keyframes rumble {
@@ -83,6 +107,13 @@ export default defineConfig({
 		}),
 	],
 	theme: {
+		// full stacks with the metric-matched fallbacks (declared in the
+		// preflight above) slotted right after each webfont; `font` is the
+		// wind4 theme key (fontFamily is ignored by presetWind4)
+		font: {
+			display: '"Bungee Shade", "Bungee Shade Fallback", cursive',
+			sans: '"Atkinson Hyperlegible", "Atkinson Hyperlegible Fallback", ui-sans-serif, system-ui, sans-serif',
+		},
 		colors: {
 			accent: "var(--accent)",
 			oxfordBlue: "hsl(217, 48%, 15%)",

@@ -93,7 +93,7 @@ function clearFilters() {
   <div
     class="grid max-w-420px sm-max-w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5"
   >
-    {#each filteredArticles as article}
+    {#each filteredArticles as article, index}
       <a
         aria-labelledby="title-{article.slug}"
         href="blog/{article.slug}"
@@ -101,13 +101,15 @@ function clearFilters() {
       >
         <!-- Meaningful alt from the article's imageDescription when set;
              otherwise stay decorative (empty alt + aria-hidden) since the
-             link is already labeled by the title. -->
+             link is already labeled by the title. First-row images load
+             eagerly (one is the LCP element); the rest stay lazy. -->
         <img
           aria-hidden={article.imageDescription ? undefined : "true"}
           src={article.image}
           alt={article.imageDescription ?? ""}
           class="w-full !h-full object-cover"
-          loading="lazy"
+          loading={index < 3 ? "eager" : "lazy"}
+          fetchpriority={index === 0 ? "high" : undefined}
         />
         <h3
           id="title-{article.slug}"
