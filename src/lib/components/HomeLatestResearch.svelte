@@ -19,6 +19,7 @@ let { studies = [] }: Props = $props();
       <h2 class="heading-2">Latest Research</h2>
       <a
         href="/research/barkup-bench"
+        aria-label="View all research studies"
         class="text-maximumYellow hover:underline text-15px whitespace-nowrap"
         >View all →</a
       >

@@ -19,6 +19,7 @@ let { stories = [] }: Props = $props();
       <h2 class="heading-2">Latest Customer Stories</h2>
       <a
         href="/customer-stories"
+        aria-label="View all customer stories"
         class="text-maximumYellow hover:underline text-15px whitespace-nowrap"
         >View all →</a
       >

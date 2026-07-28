@@ -228,19 +228,25 @@ function handleKeyDown(event: KeyboardEvent) {
 
     <!-- panel position dots -->
     {#if topics.length > 1}
-      <nav aria-label="Messages" class="flex items-center gap-2.5 mt-8">
+      <nav aria-label="Messages" class="flex items-center gap-0.5 mt-8">
         {#each topics as topic, index}
+          <!-- 24px hit area (WCAG 2.5.8 / Lighthouse touch-target
+               minimum); the visual dot is the inner span -->
           <button
             type="button"
             title={topic.heading}
             aria-label="Go to message {index + 1} of {topics.length}: {topic.heading}"
             aria-current={counters.topic === index ? "true" : undefined}
             onclick={() => (counters.topic = index)}
-            class="w-2.5 h-2.5 rounded-full border transition-colors {counters.topic ===
-            index
-              ? 'bg-maximumYellow border-maximumYellow'
-              : 'bg-transparent border-maximumYellow/50 hover:bg-maximumYellow/40'}"
-          ></button>
+            class="group w-6 h-6 flex items-center justify-center"
+          >
+            <span
+              class="w-2.5 h-2.5 rounded-full border transition-colors {counters.topic ===
+              index
+                ? 'bg-maximumYellow border-maximumYellow'
+                : 'bg-transparent border-maximumYellow/50 group-hover:bg-maximumYellow/40'}"
+            ></span>
+          </button>
         {/each}
       </nav>
     {/if}

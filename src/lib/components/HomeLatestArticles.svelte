@@ -19,6 +19,7 @@ let { articles = [] }: Props = $props();
       <h2 class="heading-2">Latest from our Blog</h2>
       <a
         href="/blog"
+        aria-label="View all blog articles"
         class="text-maximumYellow hover:underline text-15px whitespace-nowrap"
         >View all →</a
       >
