@@ -1,22 +1,44 @@
 <!--
 @component
-Customer stores page
+Sitemap page
 -->
 <script lang="ts">
-// TODO: fix filtering and categories and tags
+// components
+import SearchTagFilter from "$components/SearchTagFilter.svelte";
+import { matchesEveryTerm, searchTermsOf } from "$utils/searchFilter";
 
 // data
 let { data } = $props();
 
-// components
-// import PageBanner from "$components/PageBanner.svelte";
+// search (blog-page pattern, minus tags: the box is the whole filter)
+let search = $state("");
+const searchTerms = $derived(searchTermsOf(search));
 
-const eyebrow = null;
+// every search term must match somewhere (href, title, description, or
+// the section name); sections with no matching pages are hidden
+const filteredSitemap = $derived(
+	data.sitemap
+		.map((section) => ({
+			...section,
+			pages: section.pages.filter((page) =>
+				matchesEveryTerm(
+					[
+						page.href ?? "",
+						page.title ?? "",
+						page.description ?? "",
+						section.name,
+					],
+					searchTerms,
+				),
+			),
+		}))
+		.filter((section) => section.pages.length > 0),
+);
 
-// count all pages
+// count all visible pages
 let pagesCount = $derived.by(() => {
 	let count = 0;
-	for (const section of data.sitemap) {
+	for (const section of filteredSitemap) {
 		count += section.pages.length;
 	}
 	return count;
@@ -30,13 +52,29 @@ let pagesCount = $derived.by(() => {
 ></PageBanner> -->
 
 <main class="page-x-padding main-y-padding font-mono text-15px">
+  <div class="mb-10">
+    <SearchTagFilter
+      bind:search
+      label="Search pages"
+      allTags={[]}
+      {searchTerms}
+      toggleTag={() => {}}
+    />
+    {#if search.trim()}
+      <p class="mt-3 text-14px text-current/70">
+        {pagesCount}
+        {pagesCount === 1 ? "page matches" : "pages match"}
+      </p>
+    {/if}
+  </div>
+
   <section class="mb-16">
     <div class="flex items-baseline gap-4">
       <h2 class="font-800 text-[1.25rem] mb-4">All Sections</h2>
       <span>- {pagesCount} pages</span>
     </div>
     <ul class="grid grid-cols-1 gap-4">
-      {#each data.sitemap as section}
+      {#each filteredSitemap as section}
         <li>
           <a
             class="underline underline-offset-4 decoration-richBlack/40 opacity-90 hover:opacity-100 hover:decoration-current"
@@ -54,7 +92,7 @@ let pagesCount = $derived.by(() => {
   <div
     class="w-full grid grid-cols-1 gap-16 place-content-start place-items-start"
   >
-    {#each data.sitemap as section}
+    {#each filteredSitemap as section}
       <section
         class="w-full"
         id={section.name.toLowerCase().replace(/ /g, "-")}
