@@ -2,6 +2,7 @@
 import { homeContent } from "$content/getters/getHomeContent";
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 import { getAllCustomerStories } from "$content/getters/getCustomerStories";
+import { getAllReadingListArticles } from "$content/getters/getReadingList";
 import benchStudies from "./research/barkup-bench/bench-studies.json";
 
 // Request-time (not prerendered): the Latest tiles stay current with
@@ -15,9 +16,10 @@ export async function load({ fetch, setHeaders }) {
 		"cache-control": "public, s-maxage=300, stale-while-revalidate=3600",
 	});
 
-	const [allStories, allArticles] = await Promise.all([
+	const [allStories, allArticles, allReading] = await Promise.all([
 		getAllCustomerStories(fetch),
 		getAllBlogArticles(fetch),
+		getAllReadingListArticles(fetch),
 	]);
 
 	// latest customer stories for the homepage grid (curated order, capped
@@ -55,11 +57,20 @@ export async function load({ fetch, setHeaders }) {
 			title: study.title,
 		}));
 
+	// latest reading-list entries for the homepage tiles (getter is
+	// repostDate-sorted newest first, capped at 6)
+	const latestReading = allReading.slice(0, 6).map((entry) => ({
+		url: entry.url ?? "",
+		title: entry.title,
+		publication: entry.source?.publicationName ?? "",
+	}));
+
 	// ticker withheld while hidden; restore by returning ...homeContent
 	const { ticker, ...contentWithoutTicker } = homeContent;
 	return {
 		...contentWithoutTicker,
 		latestArticles,
+		latestReading,
 		latestStories,
 		latestStudies,
 	};
