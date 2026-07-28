@@ -154,7 +154,7 @@ export default defineConfig({
 		// The legend box rendered above a chart.
 		[
 			"chart-legend",
-			"grid grid-cols-1 gap-2 leading-snug rounded-sm bg-white/5 px-4 pt-1 pb-5 mt-3 text-0.85em",
+			"grid grid-cols-1 gap-2 leading-snug rounded-sm bg-white/5 px-4 pt-1 pb-5 mt-3 text-0.85em [&>.legend-title]:(font-600 mt-2)",
 		],
 		// The scrollable container each generated chart SVG sits in; svg
 		// sizing lives here as child rules so the generated markup carries

@@ -440,7 +440,7 @@ export function initBenchCharts() {
 			[74, "#cde2fb", "#0b0b0b"],
 			[80, "#9ec5f4", "#0b0b0b"],
 			[86, "#6da7ec", "#0b0b0b"],
-			[91, "#3987e5", "#ffffff"],
+			[91, "#3987e5", "#0b0b0b"],
 			[94, "#256abf", "#ffffff"],
 			[100, "#184f95", "#ffffff"],
 		];
@@ -6706,12 +6706,14 @@ export function initBenchCharts() {
 		);
 	})();
 
-	// Every legend gets a "Legend" heading as its first child. Runs after
-	// the builders above have set each container's innerHTML; idempotent
-	// so re-inits don't stack headings.
+	// Every legend gets a "Legend" label as its first child — a styled
+	// paragraph, not a heading, so legends don't skip levels in the
+	// document outline. Runs after the builders above have set each
+	// container's innerHTML; idempotent so re-inits don't stack labels.
 	document.querySelectorAll(".chart-legend").forEach((el) => {
-		if (el.firstElementChild?.tagName !== "H4") {
-			const h = document.createElement("h4");
+		if (!el.firstElementChild?.classList?.contains("legend-title")) {
+			const h = document.createElement("p");
+			h.className = "legend-title";
 			h.textContent = "Legend";
 			el.prepend(h);
 		}

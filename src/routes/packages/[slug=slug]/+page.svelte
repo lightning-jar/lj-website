@@ -5,10 +5,8 @@ let { data } = $props();
 let pkg = $derived(data.pkg);
 </script>
 
-<!-- skip link -->
-<a class="sr-only" href="#main">Skip to main content</a>
-
-<div
+<main
+  id="main"
   class="page-x-padding pt-8 pb-24 grid grid-cols-1 gap-8 lg:gap-12 lg:grid-cols-[minmax(0,_640px)_1fr]"
 >
   <div>
@@ -28,7 +26,7 @@ let pkg = $derived(data.pkg);
       </div>
     </header>
 
-    <main id="main">
+    <div>
       <!-- description -->
       {#each pkg.description ?? [] as paragraph}
         <p class="opacity-90 mb-4 max-w-prose">{paragraph}</p>
@@ -92,7 +90,7 @@ let pkg = $derived(data.pkg);
           </ul>
         </section>
       {/if}
-    </main>
+    </div>
   </div>
 
   <!-- sidebar -->
@@ -141,4 +139,4 @@ let pkg = $derived(data.pkg);
       {/if}
     </div>
   </aside>
-</div>
+</main>

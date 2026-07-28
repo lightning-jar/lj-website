@@ -74,7 +74,8 @@ onMount(async () => {
 	{@html studyLd}
 </svelte:head>
 
-<div
+<main
+	id="main"
 	class="page-x-padding main-y-padding grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-x-12 gap-y-16 bg-oxford text-cultured"
 >
 	<div class="max-w-article blog-article">
@@ -131,9 +132,16 @@ onMount(async () => {
 					></div>
 				{/if}
 				{#if section.figure}
+					<!-- horizontally scrollable on narrow screens, so it must be
+					     keyboard-focusable with an accessible name
+					     (svelte a11y lint doesn't model scrollable regions) -->
+					<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 					<div
 						class="chart"
 						id={section.figure.id}
+						role="region"
+						aria-label="Chart: {section.title}"
+						tabindex="0"
 					></div>
 				{/if}
 				{#if section.table}
@@ -239,7 +247,7 @@ onMount(async () => {
 			</div>
 		</div>
 	</aside>
-</div>
+</main>
 
 <!-- chart hover tooltip (positioned by bench-charts.js) -->
 <div

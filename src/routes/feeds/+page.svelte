@@ -4,14 +4,15 @@ import FeedBadge from "$components/FeedBadge.svelte";
 let { data } = $props();
 </script>
 
-<div class="page-x-padding main-y-padding !pb-8">
+<main id="main">
+<header class="page-x-padding main-y-padding !pb-8">
   <h1 class="display max-w-article">Feeds</h1>
   <p class="max-w-article">
     Everything Lightning Jar publishes is available by Atom feed — follow
     in any feed reader, no algorithm in between. Subscribe to a single
     stream, or take everything at once.
   </p>
-</div>
+</header>
 
 <div class="page-x-padding pb-24">
   <div class="grid grid-cols-1 gap-5 max-w-article">
@@ -33,3 +34,4 @@ let { data } = $props();
     {/each}
   </div>
 </div>
+</main>

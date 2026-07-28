@@ -116,6 +116,8 @@ let ogType = $derived(
 
 <SvelteAnnounceFix />
 
+<a class="sr-only" href="#main">Skip to main content</a>
+
 <GlobalNav />
 
 <!-- children -->

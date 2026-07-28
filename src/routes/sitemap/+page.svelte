@@ -51,7 +51,11 @@ let pagesCount = $derived.by(() => {
   text="A directory of pages on this website."
 ></PageBanner> -->
 
-<main class="page-x-padding main-y-padding font-mono text-15px">
+<main id="main" class="page-x-padding main-y-padding font-mono text-15px">
+  <header class="mb-10">
+    <h1 class="display font-sans mb-4">Sitemap</h1>
+  </header>
+
   <div class="mb-10">
     <SearchTagFilter
       bind:search

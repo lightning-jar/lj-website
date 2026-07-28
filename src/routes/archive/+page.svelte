@@ -1,4 +1,4 @@
-<div class="page-x-padding min-h-screen">
+<main id="main" class="page-x-padding min-h-screen">
   <div class="main-y-padding pb-6">
     <h1 class="display">Archive</h1>
     <p class="max-w-prose">Explore older content from our archives.</p>
@@ -22,4 +22,4 @@
       >
     </article>
   </div>
-</div>
+</main>

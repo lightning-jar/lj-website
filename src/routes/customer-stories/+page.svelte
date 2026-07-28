@@ -50,7 +50,8 @@ function clearFilters() {
 }
 </script>
 
-<div
+<main
+  id="main"
   class="page-x-padding main-y-padding pb-6 grid grid-cols-1 gap-12 min-h-screen place-content-start"
 >
   {#if data?.banner}
@@ -92,7 +93,7 @@ function clearFilters() {
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_260px] gap-12">
-    <main>
+    <div>
       <h2 class="sr-only">Select a Customer Story Below to Read More</h2>
     {#each filteredStories as story}
       <article class="max-w-article mb-10">
@@ -164,7 +165,7 @@ function clearFilters() {
         </button>
       </p>
     {/each}
-    </main>
+    </div>
 
     {#if data?.clients?.length}
       <aside>
@@ -181,4 +182,4 @@ function clearFilters() {
       </aside>
     {/if}
   </div>
-</div>
+</main>

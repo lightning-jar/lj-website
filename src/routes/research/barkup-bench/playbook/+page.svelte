@@ -211,7 +211,8 @@ it>" instead of a patch.`,
 ];
 </script>
 
-<div
+<main
+  id="main"
   class="page-x-padding main-y-padding grid grid-cols-1 gap-12 min-h-screen place-content-start"
 >
   <div class="text-16px leading-[1.55] text-white max-w-[1060px] pb-6">
@@ -310,4 +311,4 @@ it>" instead of a patch.`,
       </div>
     </footer>
   </div>
-</div>
+</main>

@@ -37,9 +37,8 @@ let storyLd = $derived.by(() => {
 </svelte:head>
 
 <!-- skip link  -->
-<a class="sr-only" href="#main">Skip to main content</a>
-
-<div
+<main
+  id="main"
   class="page-x-padding article-columns pt-8 sm:pt-2 pb-6 grid grid-cols-1 place-content-start"
 >
   {#if data?.banner}
@@ -101,10 +100,10 @@ let storyLd = $derived.by(() => {
   <hr class="md:col-span-2 opacity-40" />
 
   <!-- col 1 -->
-  <main id="main" class="lg:max-w-article blog-article">
+  <div class="lg:max-w-article blog-article">
     <!-- CMS markdown body, parsed locally with sanitize enabled -->
     {@html data.html ?? ""}
-  </main>
+  </div>
 
   <!-- col 2 -->
   <aside class="flex justify-end">
@@ -186,7 +185,7 @@ let storyLd = $derived.by(() => {
       {/if}
     </div>
   </aside>
-</div>
+</main>
 
 <!-- prefooter  -->
 <nav class="block page-x-padding pt-4 mb-10">

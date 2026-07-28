@@ -7,7 +7,8 @@ import ProjectTile from "$components/ProjectTile.svelte";
 let { data } = $props();
 </script>
 
-<div
+<main
+  id="main"
   class="page-x-padding main-y-padding grid grid-cols-1 gap-12 min-h-screen place-content-start"
 >
   <header class="max-w-article">
@@ -25,7 +26,7 @@ let { data } = $props();
     </p>
   </header>
 
-  <main class="grid grid-cols-1 gap-10 max-w-article">
+  <div class="grid grid-cols-1 gap-10 max-w-article">
     {#each data.projects as project}
       <ProjectTile
         name={project.name}
@@ -43,5 +44,5 @@ let { data } = $props();
         </LinkButton>
       </ProjectTile>
     {/each}
-  </main>
-</div>
+  </div>
+</main>

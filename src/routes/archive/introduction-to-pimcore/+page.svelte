@@ -81,12 +81,13 @@ const notes = [
 ];
 </script>
 
-<div class="page-x-padding main-y-padding pb-6">
+<main id="main">
+<header class="page-x-padding main-y-padding pb-6">
   <h1 class="text-32px mb-2 text-maximumYellow font-700 font-display">
     An Introduction<br /> to Pimcore
   </h1>
   <p class="max-w-prose">This podcast episode was recorded in April 2018</p>
-</div>
+</header>
 
 <div class="page-x-padding pb-6">
   <aside
@@ -179,3 +180,4 @@ const notes = [
   {@render episodeSection("Episode Info", info)}
   {@render episodeSection("Episode Notes", notes)}
 </div>
+</main>

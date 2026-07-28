@@ -7,7 +7,8 @@ import ProjectTile from "$components/ProjectTile.svelte";
 let { data } = $props();
 </script>
 
-<div
+<main
+  id="main"
   class="page-x-padding main-y-padding grid grid-cols-1 gap-12 min-h-screen place-content-start"
 >
   <header class="max-w-article">
@@ -28,7 +29,7 @@ let { data } = $props();
     </p>
   </header>
 
-  <main class="grid grid-cols-1 gap-10 max-w-article">
+  <div class="grid grid-cols-1 gap-10 max-w-article">
     {#each data.packages as pkg}
       <ProjectTile name={pkg.name} status={pkg.status} summary={pkg.tagline}>
         <div class="flex flex-wrap gap-3">
@@ -52,5 +53,5 @@ let { data } = $props();
         </div>
       </ProjectTile>
     {/each}
-  </main>
-</div>
+  </div>
+</main>

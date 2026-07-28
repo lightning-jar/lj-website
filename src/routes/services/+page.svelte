@@ -9,7 +9,7 @@ let activePanel = $state(0);
 let panelsCount: number = $derived(data?.services?.length ?? 0);
 </script>
 
-<div class="page-x-padding min-h-screen">
+<main id="main" class="page-x-padding min-h-screen">
   <div class="main-y-padding pb-6">
     <h1 class="display">{data.banner.heading}</h1>
     <p class="max-w-prose"></p>
@@ -56,4 +56,4 @@ let panelsCount: number = $derived(data?.services?.length ?? 0);
       onadvance={() => (activePanel = (activePanel + 1) % panelsCount)}
     />
   </div>
-</div>
+</main>

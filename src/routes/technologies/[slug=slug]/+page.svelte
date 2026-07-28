@@ -5,10 +5,8 @@ let { data } = $props();
 let tech = $derived(data.technology);
 </script>
 
-<!-- skip link -->
-<a class="sr-only" href="#main">Skip to main content</a>
-
-<div
+<main
+  id="main"
   class="page-x-padding pt-8 pb-24 grid grid-cols-1 gap-8 lg:gap-12 lg:grid-cols-[minmax(0,_640px)_1fr]"
 >
   <div>
@@ -28,7 +26,7 @@ let tech = $derived(data.technology);
       </div>
     </header>
 
-    <main id="main">
+    <div>
       <!-- our-package callout -->
       {#if tech.packagePage}
         <div
@@ -108,7 +106,7 @@ let tech = $derived(data.technology);
           </p>
         </section>
       {/if}
-    </main>
+    </div>
   </div>
 
   <!-- sidebar -->
@@ -150,4 +148,4 @@ let tech = $derived(data.technology);
       {/if}
     </div>
   </aside>
-</div>
+</main>

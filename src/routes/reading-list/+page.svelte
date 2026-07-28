@@ -60,7 +60,8 @@ function clearFilters() {
   />
 </svelte:head>
 
-<div
+<main
+  id="main"
   class="page-x-padding main-y-padding pb-6 grid grid-cols-1 gap-8 min-h-screen place-content-start"
 >
   {#if data?.banner}
@@ -101,7 +102,7 @@ function clearFilters() {
     </p>
   {/if}
 
-  <main>
+  <div>
     <h2 class="sr-only">Select an Entry Below to Read More</h2>
     {#each filteredArticles as article, index (article.slug)}
       {#if index !== 0}
@@ -179,5 +180,5 @@ function clearFilters() {
         </button>
       </p>
     {/each}
-  </main>
-</div>
+  </div>
+</main>

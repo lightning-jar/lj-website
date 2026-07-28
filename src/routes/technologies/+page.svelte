@@ -2,12 +2,13 @@
 let { data } = $props();
 </script>
 
-<div class="page-x-padding main-y-padding !pb-8">
+<main id="main">
+<header class="page-x-padding main-y-padding !pb-8">
   <h1 class="display max-w-article">
     {data?.banner.heading}
   </h1>
   <p class="max-w-article">{data?.banner.subheading}</p>
-</div>
+</header>
 
 <div
   class="page-x-padding pb-24 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8"
@@ -52,7 +53,7 @@ let { data } = $props();
   <aside class="hidden lg:flex justify-end">
     <div class="max-w-400px w-full">
       <!-- jump links to sections -->
-      <nav class="flex gap-4 flex-wrap mb-8">
+      <nav aria-label="Technology categories" class="flex gap-4 flex-wrap mb-8">
         <h2
           class="text-22px font-serif text-maximumYellow font-700 sm:mb-0 mb-3 sr-only"
         >
@@ -69,7 +70,7 @@ let { data } = $props();
       </nav>
 
       <!-- list by name  -->
-      <nav class="border px-3 pt-4 pb-5 rounded border-slate-100/60 max-h-fit">
+      <nav aria-label="Technology categories sidebar" class="border px-3 pt-4 pb-5 rounded border-slate-100/60 max-h-fit">
         <h2
           class="text-22px font-serif text-maximumYellow font-700 sm:mb-0 mb-3 sr-only"
         >
@@ -92,3 +93,4 @@ let { data } = $props();
     </div>
   </aside>
 </div>
+</main>

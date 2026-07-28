@@ -6,7 +6,8 @@ import LinkButton from "$components/LinkButton.svelte";
 let { data } = $props();
 </script>
 
-<div
+<main
+  id="main"
   class="page-x-padding main-y-padding grid grid-cols-1 gap-12 min-h-screen place-content-start"
 >
   <header class="max-w-prose">
@@ -18,7 +19,7 @@ let { data } = $props();
     </p>
   </header>
 
-  <main class="grid grid-cols-1 gap-10">
+  <div class="grid grid-cols-1 gap-10">
     {#each data.sections ?? [] as section}
       <section class="max-w-article">
         <h2 class="heading-2">{section.heading}</h2>
@@ -68,5 +69,5 @@ let { data } = $props();
         {/if}
       </div>
     {/if}
-  </main>
-</div>
+  </div>
+</main>

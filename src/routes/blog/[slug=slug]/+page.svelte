@@ -65,10 +65,9 @@ function getAttributionFromSource(source: ArticleSource): string {
 </svelte:head>
 
 <!-- skip link  -->
-<a class="sr-only" href="#main">Skip to main content</a>
-
 <!-- body content area -->
-<div
+<main
+  id="main"
   class="page-x-padding min-h-screen pt-8 pb-8 grid grid-cols-1 gap-8 lg:gap-12 lg:grid-cols-[minmax(65ch,_640px)_1fr]"
 >
   <header class="lg:col-span-2">
@@ -81,7 +80,7 @@ function getAttributionFromSource(source: ArticleSource): string {
     <div class="mb-5 max-w-prose">{formattedDate}</div>
   </header>
 
-  <main id="main" class="blog-article max-w-prose contents">
+  <div class="blog-article max-w-prose contents">
     <div class="w-full">
       <!-- article image (wrapped so it is not an adjacent sibling of the
            first body paragraph, which would trigger the [&_img+p] caption rule) -->
@@ -123,7 +122,7 @@ function getAttributionFromSource(source: ArticleSource): string {
         </div>
       {/if}
     </div>
-  </main>
+  </div>
 
   <aside class="flex justify-end">
     <div class="max-w-480px grid grid-cols-1 gap-6 place-content-start">
@@ -219,7 +218,7 @@ function getAttributionFromSource(source: ArticleSource): string {
       {/if}
     </div>
   </aside>
-</div>
+</main>
 
 <!-- prefooter -->
 <nav class="page-x-padding py-6">

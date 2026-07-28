@@ -51,7 +51,8 @@ function clearFilters() {
   />
 </svelte:head>
 
-<div
+<main
+  id="main"
   class="page-x-padding min-h-screen pt-8 pb-8 grid gird-cols-1 min-h-screen place-content-start"
 >
   <div class="flex items-start justify-between gap-4 mb-8">
@@ -89,7 +90,7 @@ function clearFilters() {
     </p>
   {/if}
 
-  <main
+  <div
     class="grid max-w-420px sm-max-w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5"
   >
     {#each filteredArticles as article}
@@ -127,5 +128,5 @@ function clearFilters() {
         </button>
       </p>
     {/each}
-  </main>
-</div>
+  </div>
+</main>

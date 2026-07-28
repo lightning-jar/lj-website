@@ -11,9 +11,8 @@ let article = $derived(data.article);
 </script>
 
 <!-- skip link  -->
-<a class="sr-only" href="#main">Skip to main content</a>
-
-<div
+<main
+  id="main"
   class="page-x-padding main-y-padding pb-6 grid grid-cols-1 gap-8 min-h-screen place-content-start"
 >
   <header class="max-w-prose">
@@ -56,7 +55,7 @@ let article = $derived(data.article);
     </div>
   </header>
 
-  <main id="main" class="max-w-article">
+  <div class="max-w-article">
     {#if safeLinkUrl(article.image?.src)}
       <img
         src={safeLinkUrl(article.image?.src)}
@@ -98,7 +97,7 @@ let article = $derived(data.article);
         Read Full Source
       </a>
     {/if}
-  </main>
+  </div>
 
   <nav class="pt-4">
     <LinkText
@@ -110,4 +109,4 @@ let article = $derived(data.article);
       Back to the Reading List
     </LinkText>
   </nav>
-</div>
+</main>

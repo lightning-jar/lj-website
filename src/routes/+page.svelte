@@ -10,7 +10,7 @@ import HomeWhatWeDo from "$components/HomeWhatWeDo.svelte";
 let { data } = $props();
 </script>
 
-<div>
+<main id="main">
 	<!-- ticker hidden for now: pass ticker={data.ticker} to bring it back -->
 	<HomeBanner topics={data.topics} />
 	<HomeWhatWeDo />
@@ -18,4 +18,4 @@ let { data } = $props();
 	<HomeLatestStories stories={data.latestStories} />
 	<HomeLatestResearch studies={data.latestStudies} />
 	<HomeLatestReadingList entries={data.latestReading} />
-</div>
+</main>

@@ -111,7 +111,7 @@ function handleKeyDown(event: KeyboardEvent) {
   lg:py-8"
 >
   <!-- primary content area -->
-  <main
+  <div
     class="
 				grid
 				grid-cols-1
@@ -269,7 +269,7 @@ function handleKeyDown(event: KeyboardEvent) {
       }}
       useImage={false}
     />
-  </main>
+  </div>
 
   <!-- column 2 -->
   <div

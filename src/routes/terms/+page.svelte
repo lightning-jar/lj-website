@@ -2,12 +2,13 @@
 let { data } = $props();
 </script>
 
-<div class="page-x-padding main-y-padding !pb-6">
+<main id="main">
+<header class="page-x-padding main-y-padding !pb-6">
   <h1 class="display">
     {data?.heading}
   </h1>
   <p>{data?.subheading}</p>
-</div>
+</header>
 
 <div class="page-x-padding pb-24">
   <ol class="list-decimal grid grid-cols-1 gap-4 pl-3 opacity-90 max-w-article">
@@ -16,3 +17,4 @@ let { data } = $props();
     {/each}
   </ol>
 </div>
+</main>
