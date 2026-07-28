@@ -58,9 +58,10 @@ export async function load({ fetch, setHeaders }) {
 		}));
 
 	// latest reading-list entries for the homepage tiles (getter is
-	// repostDate-sorted newest first, capped at 6)
+	// repostDate-sorted newest first, capped at 6); tiles link our
+	// detail pages, which carry the summary and the outbound link
 	const latestReading = allReading.slice(0, 6).map((entry) => ({
-		url: entry.url ?? "",
+		slug: entry.slug,
 		title: entry.title,
 		publication: entry.source?.publicationName ?? "",
 	}));

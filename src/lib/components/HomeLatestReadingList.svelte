@@ -1,7 +1,7 @@
 <script lang="ts">
 // types
 interface ReadingCard {
-	url: string;
+	slug: string;
 	title: string;
 	publication: string;
 }
@@ -31,8 +31,7 @@ let { entries = [] }: Props = $props();
       {#each entries as entry, index}
         <a
           aria-labelledby="latest-reading-{index}"
-          href={entry.url}
-          rel="external"
+          href="/reading-list/{entry.slug}"
           title={entry.title}
           class="{index === 5
             ? 'lg:hidden xl:flex'
