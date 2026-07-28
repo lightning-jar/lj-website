@@ -6706,6 +6706,179 @@ export function initBenchCharts() {
 		);
 	})();
 
+	// --- Study AP: the off-catalog fork · foreign-topic empty rate by arm ---
+	(() => {
+		const GROUPS = [
+			{
+				model: "gemini-3.5-flash",
+				vals: [7, 12, 12],
+				tip: "7/12 → 12/12 under either sentence · unaided it stretched general canonical tags onto 5 foreign topics (zero invention)",
+			},
+			{
+				model: "sonnet-4.5",
+				vals: [7, 11, 12],
+				tip: "7/12 → 11/12 (fork text) and 12/12 (empty text) · the one fork miss stretched Design Systems and UX Design onto watercolor illustration",
+			},
+			{
+				model: "opus-4.8",
+				vals: [12, 12, 12],
+				tip: "12/12 in every arm · the frontier tier refuses unaided; guidance adds nothing here",
+			},
+		];
+		const CSHIPPED = "#8b93a3",
+			CFORK = "#3987e5",
+			CEMPTY = "#199e70";
+		byId("legend-31").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CSHIPPED +
+			'"></span>shipped stack (no off-catalog guidance)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CFORK +
+			'"></span>+ fork text (nearest-general or empty)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CEMPTY +
+			'"></span>+ empty text (leave empty when nothing fits)</span>' +
+			legendNote(
+				"empty tag lists out of 12 wholly-foreign topics · tag_create arm excluded (minting is allowed there; see table)",
+			);
+		const W = 880,
+			BAR = 14,
+			GAP = 4,
+			GH = 3 * BAR + 2 * GAP,
+			GPAD = 18,
+			T = 8,
+			B = 42,
+			L = 150,
+			// Wide right margin: full-scale bars carry their "12/12" label
+			// OUTSIDE the bar end, which must stay inside the viewBox.
+			R = 70;
+		const H = T + GROUPS.length * (GH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 12) * iw;
+		let g = "";
+		for (const tick of [0, 6, 12]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text class="chart-tick" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		let marks = "",
+			hits = "";
+		const COLORS = [CSHIPPED, CFORK, CEMPTY];
+		GROUPS.forEach((row, gi) => {
+			const top = T + gi * (GH + GPAD);
+			g +=
+				'<text class="chart-tick" x="' +
+				(L - 12) +
+				'" y="' +
+				(top + GH / 2 + 4) +
+				'" text-anchor="end">' +
+				row.model +
+				"</text>";
+			row.vals.forEach((v, ai) => {
+				const y = top + ai * (BAR + GAP);
+				const w = Math.max((v / 12) * iw, 2);
+				marks +=
+					'<rect x="' +
+					L +
+					'" y="' +
+					y +
+					'" width="' +
+					w +
+					'" height="' +
+					BAR +
+					'" fill="' +
+					COLORS[ai] +
+					'" rx="3"/>';
+				marks +=
+					'<text fill="#c3c9d4" font-size="11" x="' +
+					(L + w + 8) +
+					'" y="' +
+					(y + BAR - 3) +
+					'">' +
+					v +
+					"/12</text>";
+			});
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				top +
+				'" width="' +
+				iw +
+				'" height="' +
+				GH +
+				'" fill="transparent" data-tip="' +
+				esc(row.model + "\n" + row.tip) +
+				'"/>';
+		});
+		const el = byId("fig-offcatalog");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" role="img" aria-label="Grouped bar chart: empty tag lists on twelve wholly-foreign topics rise from seven of twelve on gemini and sonnet under the shipped stack to eleven or twelve of twelve under either guidance sentence; opus returns twelve of twelve empty in every arm, refusing unaided.">' +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"empty tag lists on the 12 wholly-foreign topics (sourdough, beekeeping, birdsong) by guidance arm; the frontier tier refuses unaided, one sentence of tool-description guidance closes the sub-frontier gap, and the minimal empty text is sufficient on all three tiers",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-offcatalog",
+			["cell", "gemini-3.5-flash", "sonnet-4.5", "opus-4.8"],
+			[
+				["foreign empty, shipped stack (control)", "7/12", "7/12", "12/12"],
+				["foreign empty, with fork text", "12/12", "11/12", "12/12"],
+				["foreign empty, with empty text", "12/12", "12/12", "12/12"],
+				[
+					"foreign under tag_create: minted / empty / stretched",
+					"12 / 0 / 0",
+					"3 / 6 / 3",
+					"1 / 11 / 0",
+				],
+				[
+					"adjacent conformant, registered sets (pooled arms)",
+					"43/48",
+					"36/48",
+					"31/48",
+				],
+				[
+					"adjacent, anchored exploratory reading",
+					"48/48",
+					"48/48",
+					"48/48",
+				],
+				["adjacent empty cells (any arm)", "0", "0", "0"],
+				["covered + trap discipline (min across arms)", "23/24", "24/24", "23/24"],
+				["mints accepted / attempted (guard never fired)", "26/26", "10/10", "4/4"],
+				["covered/trap cells with a mint attempt", "1", "0", "0"],
+				["invented tags, all 192 cells", "0", "0", "0"],
+			],
+		);
+	})();
+
 	// Every legend gets a "Legend" label as its first child — a styled
 	// paragraph, not a heading, so legends don't skip levels in the
 	// document outline. Runs after the builders above have set each

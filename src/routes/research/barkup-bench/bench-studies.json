@@ -1708,6 +1708,62 @@
 			],
 			"brief": "BRIEF-AO.md",
 			"quote": "Tag drift is structural, not sloppiness; the catalog read is the whole mechanism."
+		},
+		{
+			"slug": "ap",
+			"letters": "AP",
+			"track": "Agent-surface steering",
+			"title": "The off-catalog fork: one sentence settles the foreign branch; the registration loses the adjacent one",
+			"eyebrow": "Study AP · the off-catalog fork · 576 cells",
+			"indexLine": "The frontier tier refuses to tag off-catalog topics unaided (12/12 empty, replicating AO); one sentence of tool-description guidance closes the sub-frontier gap on every tier; a guarded tag_create tool stays fully disciplined; and the adjacent-class gate failed on solo-authored acceptable sets, not on model behavior.",
+			"sections": [
+				{
+					"id": "sec-offcatalog",
+					"eyebrow": "The off-catalog fork",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-31",
+					"figure": {
+						"id": "fig-offcatalog",
+						"title": "Foreign-Topic Empty Rate by Guidance Arm and Model"
+					},
+					"table": {
+						"id": "tbl-offcatalog",
+						"summary": "Foreign-branch closure by arm, adjacent readings, discipline checks, and the mint tier map"
+					},
+					"body": [
+						{
+							"heading": "The Fork AO Filed",
+							"html": "Study AO ended with a protocol lesson: its non-empty \"clean\" definition mis-scored opus declining to tag off-catalog topics. AP registered that fork explicitly, splitting the old uncovered class into <em>adjacent</em> (a general canonical tag genuinely fits) and <em>foreign</em> (nothing does), and measured two candidate guidance sentences plus a guarded <span class=\"font-mono\">tag_create</span> tool: 48 tasks, four arms, three models, 576 cells."
+						},
+						{
+							"heading": "The Foreign Branch Settles",
+							"html": "Unaided, the frontier tier already refuses: opus returned empty tag lists on 12/12 wholly-foreign topics, replicating AO exactly, while gemini and sonnet stretched general canonical tags onto 5 of 12. Either guidance sentence closes that gap. The minimal empty text (\"if no canonical tag genuinely fits, return an empty tags list\") hit 12/12 on all three models, and its feared side effect, suppressing legitimate tags on adjacent topics, never appeared: zero empty adjacent cells in any arm on any model."
+						},
+						{
+							"heading": "The Tool Is Discipline-Safe, With a Tier Map",
+							"html": "With a guarded <span class=\"font-mono\">tag_create</span> in hand, no model produced a single invented tag in 144 tool-arm cells, and the server-side guard never fired: all 40 mints were well-formed, Title Case, and free of near-duplicates. Willingness split sharply by tier: gemini minted on every foreign topic (26 mints), sonnet 10, opus 4; the frontier tier prefers empty over minting. A sub-frontier agent grows the catalog by a dozen well-formed, unwanted tags per batch, so if the tool ships it ships tier-gated or with human approval on new tags."
+						},
+						{
+							"heading": "The Gate Failed on the Registration",
+							"html": "The pre-registered gate failed by the letter: opus cleared 8/12 adjacent cells under the fork text against a ≥10 bar. The audit shows every failing cell was all-canonical; the misses are one or two extra, editorially arguable tags beyond the solo-authored acceptable sets (UX on a checkout-conversion piece, CSS on web components, Security on email deliverability). Under an anchored reading (all tags canonical, at least one from the registered set) adjacent scores 144/144 across every model and arm; that number is published as exploratory, not the registered definition. AO's lesson recurred one class over: acceptance criteria authored alone under-cover defensible editorial judgment."
+						},
+						{
+							"heading": "What Ships and What Waits",
+							"html": "Nothing ships from a failed gate. Filed: AP′, which re-registers the adjacent conformance definition and re-scores the same frozen raw results with no new API spend; the guidance-text decision waits for it. The foreign branch does not wait: on registered gates, either sentence stops sub-frontier stretching onto wholly-foreign topics, and the frontier tier never needed the help."
+						}
+					]
+				}
+			],
+			"published": "2026-07-28",
+			"related": [
+				{
+					"title": "Give the Model a Tool, Not a Rule",
+					"href": "/blog/give-the-model-a-tool-not-a-rule"
+				}
+			],
+			"brief": "BRIEF-AP.md",
+			"quote": "The models out-edited the registration: every adjacent miss was a defensible canonical tag the acceptable set forgot."
 		}
 	]
 }
