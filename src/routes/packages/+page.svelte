@@ -36,10 +36,10 @@ let { data } = $props();
             classes="button-accent"
             link={{
               href: `/packages/${pkg.id}`,
-              title: `${pkg.name}: full package page`,
+              title: `${pkg.name}: full package details`,
             }}
           >
-            Package page
+            Package Details
           </LinkButton>
           {#each pkg.links as link}
             <LinkButton
