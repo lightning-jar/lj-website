@@ -50,8 +50,9 @@ editor goes live without a redeploy:
 - **Reading list**: collection `reading-list`, Reading List blog entity
   (`getReadingList.ts`, `READING_LIST_API_KEY`). Entries are pure
   frontmatter (`Article` shape) with EMPTY markdown bodies — edited via
-  the replicator editor's frontmatter/JSON surfaces; no per-entry
-  routes on this site.
+  the replicator editor's frontmatter/JSON surfaces. Each entry has a
+  detail page at `/reading-list/[slug]` (summary + outbound link);
+  internal links should target those, not the source URL.
 - Markdown from the CMS is parsed locally by `parseMarkdown()` so
   rendering stays under this repo's control. Draft previews:
   `/blog/preview/[token]` (client-rendered, token-authed, works for
