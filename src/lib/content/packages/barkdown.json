@@ -1,0 +1,31 @@
+{
+	"id": "barkdown",
+	"name": "barkdown",
+	"npmName": "@kevinpeckham/barkdown",
+	"status": "Live",
+	"license": "MIT",
+	"category": "Markdown / DOM Codec",
+	"tagline": "A markdown to DOM round-trip codec, guaranteed to invert marked: canonical identity, fixed-point convergence, footnote fidelity, and no silent loss.",
+	"description": [
+		"Every markdown WYSIWYG is two translators wearing one trench coat. The famous half, markdown to HTML, is a solved problem. The other half, walking an edited DOM back into markdown, is usually a bespoke function tested against whatever documents existed the week it was written, and it is the half that owns your data. barkdown makes that pairing the product: a codec whose DOM-to-markdown direction is guaranteed to invert marked's parse.",
+		"The contract is a property you can test rather than a promise you have to trust. For canonical input, a round trip is byte-identical. For any input, one round trip canonicalizes and a second is a fixed point. Footnotes round-trip precisely, and unknown elements pass through as raw HTML instead of vanishing. The suite enforces this with a fixture corpus, adapter conformance runs, and property tests that throw roughly two thousand generated documents at the invariant per run.",
+		"barkdown was extracted from Replicator's production blog editor, where every keystroke on every article crosses this exact boundary. It is the serializer half of an editable-markdown pipeline; woof-editor is the editing surface built on top of it."
+	],
+	"install": "bun add @kevinpeckham/barkdown marked marked-footnote",
+	"links": [
+		{ "label": "npm", "href": "https://www.npmjs.com/package/@kevinpeckham/barkdown" },
+		{ "label": "GitHub", "href": "https://github.com/kevinpeckham/barkdown" }
+	],
+	"features": [
+		"Canonical identity: round trips of canonical markdown are byte-for-byte",
+		"Fixed-point convergence: serialize-then-parse is idempotent for any input",
+		"Footnote fidelity, including marked-footnote's exact DOM shape",
+		"No silent loss: unknown elements survive as raw HTML, every text node reaches output",
+		"Guarantees enforced by fixture corpus plus ~2,000 property-test documents per run"
+	],
+	"relatedArticles": [
+		{ "title": "The Untested Half of Your WYSIWYG", "href": "/blog/the-untested-half-of-your-wysiwyg" },
+		{ "title": "Content Is an Overlay: Separating Words from Structure in an AI Document Editor", "href": "/blog/content-overlay" }
+	],
+	"techId": "barkdown"
+}

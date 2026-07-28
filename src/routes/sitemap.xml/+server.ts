@@ -24,6 +24,7 @@ const productionUrl =
 import { getAllBlogArticleSlugs } from "$content/getters/getBlogArticles";
 import { getAllCustomerStorySlugs } from "$content/getters/getCustomerStories";
 import { getAllReadingListSlugs } from "$content/getters/getReadingList";
+import { allPackages } from "$content/getters/getPackagesContent";
 import { allTechnologies } from "$content/getters/getTechnologiesContent";
 
 // helper function to create sitemap pages
@@ -78,6 +79,10 @@ const staticPages = [
 	generateSiteMapXMLPage(`/customer-stories`, "monthly", 0.25), // customer stories landing page
 	generateSiteMapXMLPage(`/reading-list`, "monthly", 0.25), // reading list landing page
 	generateSiteMapXMLPage(`/services`, "monthly", 0.25), // services landing page
+	generateSiteMapXMLPage(`/packages`, "monthly", 0.25), // packages & tools landing page
+	...allPackages.map((pkg) =>
+		generateSiteMapXMLPage(`/packages/${pkg.id}`, "monthly", 0.25),
+	), // per-package detail pages
 	generateSiteMapXMLPage(`/technologies`, "monthly", 0.25), // technologies landing page
 	...allTechnologies.map((tech) =>
 		generateSiteMapXMLPage(`/technologies/${tech.id}`, "monthly", 0.25),

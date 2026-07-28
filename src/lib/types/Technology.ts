@@ -14,6 +14,8 @@ export interface Technology {
 		href: string;
 		title: string;
 	};
+	/** for Lightning Jar's own packages: path of the /packages page */
+	packagePage?: string;
 	supercategory?: string;
 	useCases?: string[];
 }

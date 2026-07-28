@@ -1,5 +1,6 @@
 {
 	"id": "barkdown",
+	"packagePage": "/packages/barkdown",
 	"name": "barkdown",
 	"shortDescription": "Our open-source Markdown to DOM round-trip codec: edit markdown as a live DOM and serialize it back with provably no silent loss.",
 	"description": [

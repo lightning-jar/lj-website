@@ -1,5 +1,6 @@
 {
 	"id": "barkup",
+	"packagePage": "/packages/barkup",
 	"name": "barkup",
 	"shortDescription": "Our open-source toolkit for letting LLMs author and edit typed trees as HTML, with every feature gated on a pre-registered benchmark before it ships.",
 	"description": [

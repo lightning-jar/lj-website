@@ -3,6 +3,7 @@ import { json } from "@sveltejs/kit";
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 import { getAllCustomerStories } from "$content/getters/getCustomerStories";
 import { getAllReadingListArticles } from "$content/getters/getReadingList";
+import { allPackages } from "$content/getters/getPackagesContent";
 import { allTechnologies } from "$content/getters/getTechnologiesContent";
 import type { SearchRecord } from "$utils/siteSearch";
 
@@ -69,6 +70,15 @@ export const GET: RequestHandler = async ({ fetch }) => {
 				blurb: blurb(tech.shortDescription),
 				tags: [tech.category, tech.supercategory ?? ""].filter(Boolean),
 				url: `/technologies/${tech.id}`,
+			}),
+		),
+		...allPackages.map(
+			(pkg): SearchRecord => ({
+				type: "package",
+				title: pkg.name,
+				blurb: blurb(pkg.tagline),
+				tags: [pkg.category, pkg.status].filter(Boolean),
+				url: `/packages/${pkg.id}`,
 			}),
 		),
 	];

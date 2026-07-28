@@ -1,0 +1,34 @@
+{
+	"id": "barkup",
+	"name": "barkup",
+	"npmName": "@kevinpeckham/barkup",
+	"status": "Live",
+	"license": "MIT",
+	"category": "LLM Data Format & Editing Toolkit",
+	"tagline": "Author typed trees as HTML: a config-driven grammar codec with stable ids, declared attribute coercion, and round-trip guarantees, designed for humans and LLM agents authoring the same markup.",
+	"description": [
+		"barkup lets an application define a typed tree grammar (pages, sections, components, whatever the domain calls for) and read and write it as an HTML dialect. The codec is config-driven: you declare the node types, their attributes, and their coercions, and barkup gives you parsing, serialization, byte-for-byte id preservation, and round-trip guarantees over that grammar.",
+		"The reason it exists is the editing era. When both humans and LLM agents author the same structured document, the format they meet in matters enormously. Our barkup-bench research series measured how models handle typed-tree editing across formats and strategies, and barkup is the library those findings shipped into: stable ids that survive rewrites, focused views so the model sees only the subtree it is editing, and validation of the whole document on every change.",
+		"It is the production format behind Replicator's design-tree editor, and the subject of one of the larger pre-registered LLM benchmark series we know of."
+	],
+	"install": "bun add @kevinpeckham/barkup",
+	"links": [
+		{ "label": "npm", "href": "https://www.npmjs.com/package/@kevinpeckham/barkup" },
+		{ "label": "GitHub", "href": "https://github.com/kevinpeckham/barkup" },
+		{ "label": "Benchmark dashboard", "href": "/research/barkup-bench" }
+	],
+	"features": [
+		"Config-driven grammar: declare node types, attributes, and coercions once",
+		"Byte-for-byte id preservation through parse and serialize cycles",
+		"Whole-tree rewrite and id-anchored patch editing strategies, both benchmarked",
+		"Focused views: hand the model one subtree without losing document identity",
+		"Round-trip guarantees enforced by test, in the barkdown family tradition"
+	],
+	"relatedArticles": [
+		{ "title": "AST as HTML: A Native Data Format for LLMs", "href": "/blog/ast-as-html" },
+		{ "title": "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees", "href": "/blog/stable-ids-are-all-you-need" },
+		{ "title": "barkup 0.2: We Shipped What the Benchmark Told Us", "href": "/blog/barkup-0-2-anchored-patches" },
+		{ "title": "barkup 0.3: Focused Views, or Why the Model Doesn't Need to See Your Tree", "href": "/blog/barkup-0-3-focused-views" }
+	],
+	"techId": "barkup"
+}

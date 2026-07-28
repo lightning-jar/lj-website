@@ -1,6 +1,7 @@
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 import { getAllCustomerStories } from "$content/getters/getCustomerStories";
 import { getAllReadingListArticles } from "$content/getters/getReadingList";
+import { allPackages } from "$content/getters/getPackagesContent";
 import { allTechnologies } from "$content/getters/getTechnologiesContent";
 
 import benchStudies from "../research/barkup-bench/bench-studies.json";
@@ -39,6 +40,7 @@ export const GET: RequestHandler = async ({ fetch }) => {
 		"",
 		`- [About](${BASE}/about): who we are, what we believe, twenty-five years of history`,
 		`- [Services](${BASE}/services): what we do for clients`,
+		`- [Packages & Tools](${BASE}/packages): open-source packages and tools we make`,
 		`- [Technologies](${BASE}/technologies): the stack we work in`,
 		`- [Customer Stories](${BASE}/customer-stories): case studies`,
 		`- [Testimonials](${BASE}/testimonials)`,
@@ -73,6 +75,11 @@ export const GET: RequestHandler = async ({ fetch }) => {
 	lines.push("", "## Reading List", "");
 	for (const e of readingList) {
 		lines.push(`- [${e.title}](${BASE}/reading-list/${e.slug}): ${e.excerpt}`);
+	}
+
+	lines.push("", "## Packages & Tools", "");
+	for (const p of allPackages) {
+		lines.push(`- [${p.name}](${BASE}/packages/${p.id}): ${p.tagline}`);
 	}
 
 	lines.push("", "## Technologies", "");

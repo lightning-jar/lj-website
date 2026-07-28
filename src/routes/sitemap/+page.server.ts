@@ -4,6 +4,7 @@ import { getCustomerStoriesSitemapSection } from "$content/getters/getCustomerSt
 import { homeSitemapSection } from "$content/getters/getHomeContent";
 import { getReadingListSitemapSection } from "$content/getters/getReadingList";
 import { servicesSitemapSection } from "$content/getters/getServicesContent";
+import { packagesSitemapSection } from "$content/getters/getPackagesContent";
 import { technologiesSitemapSection } from "$content/getters/getTechnologiesContent";
 import { termsSitemapSection } from "$content/getters/getTermsContent";
 import { testimonialsSitemapSection } from "$content/getters/getTestimonialsContent";
@@ -129,6 +130,7 @@ export const load = async ({ fetch, setHeaders }) => {
 		await getBlogArticlesSitemapSection(fetch),
 		builtWithSitemapSection,
 		await getCustomerStoriesSitemapSection(fetch),
+		packagesSitemapSection,
 		servicesSitemapSection,
 		technologiesSitemapSection,
 		testimonialsSitemapSection,

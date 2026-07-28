@@ -1,0 +1,30 @@
+{
+	"id": "woof-editor",
+	"name": "woof-editor",
+	"npmName": "@kevinpeckham/woof-editor",
+	"status": "Beta",
+	"license": "MIT",
+	"category": "Markdown Editor Component",
+	"tagline": "A contenteditable markdown editor for Svelte 5, backed by barkdown's round-trip codec: WYSIWYG editing where the markdown you save is exactly the markdown you meant.",
+	"description": [
+		"woof-editor is our open-source contenteditable markdown editor for Svelte 5. You seed it with markdown, your user edits a rendered WYSIWYG surface, and every mutation serializes back through barkdown to the canonical markdown form of what is on screen. Where traditional markdown WYSIWYGs round-trip lossily, accumulating whitespace changes and list-marker churn on every save, woof-editor inherits barkdown's property-tested guarantee that DOM-to-markdown inverts marked's parse.",
+		"The editor's job stays an editor's job: menus, a link popover, footnotes, keyboard undo and redo, paste sanitization through DOMPurify, and pluggable link previews. The round trip itself is the codec's problem. The whole consumer API is one component and one state class.",
+		"It grew up inside Replicator, where the same surface edits every article we publish, and it is currently in beta on npm. The live demo renders the serializer's output next to the editing surface, so you can watch the markdown stay exactly as tidy as it started."
+	],
+	"install": "bun add @kevinpeckham/woof-editor",
+	"links": [
+		{ "label": "Live demo", "href": "https://woof.bench.lj.dev/" },
+		{ "label": "npm", "href": "https://www.npmjs.com/package/@kevinpeckham/woof-editor" }
+	],
+	"features": [
+		"Round-trip WYSIWYG: every keystroke serializes to canonical markdown via barkdown",
+		"Menus, link popover, footnote support, keyboard undo and redo",
+		"Paste sanitization with a configurable DOMPurify schema",
+		"Scoped, themeable styling via stable class names and custom properties",
+		"One component, one state class: seed markdown in, read markdown out"
+	],
+	"relatedArticles": [
+		{ "title": "The Untested Half of Your WYSIWYG", "href": "/blog/the-untested-half-of-your-wysiwyg" }
+	],
+	"techId": "woof-editor"
+}

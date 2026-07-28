@@ -8,6 +8,7 @@ import { matchesEveryTerm, searchTermsOf } from "$utils/searchFilter";
 export type SearchRecordType =
 	| "blog"
 	| "customer-story"
+	| "package"
 	| "reading-list"
 	| "study"
 	| "technology";
@@ -24,6 +25,7 @@ export const SEARCH_TYPE_LABELS: Record<SearchRecordType, string> = {
 	blog: "Blog",
 	study: "Research",
 	"customer-story": "Customer Stories",
+	package: "Packages & Tools",
 	"reading-list": "Reading List",
 	technology: "Technologies",
 };

@@ -29,6 +29,23 @@ let tech = $derived(data.technology);
     </header>
 
     <main id="main">
+      <!-- our-package callout -->
+      {#if tech.packagePage}
+        <div
+          class="mb-6 max-w-prose border border-maximumYellow/40 rounded px-4 py-3 bg-maximumYellow/5"
+        >
+          <p class="opacity-90 text-15px leading-snug">
+            This is a Lightning Jar package.
+            <a
+              href={tech.packagePage}
+              class="underline decoration-maximumYellow/60 hover:decoration-maximumYellow underline-offset-4"
+            >
+              See the full package page →
+            </a>
+          </p>
+        </div>
+      {/if}
+
       <!-- description -->
       {#each tech.description ?? [] as paragraph}
         <p class="opacity-90 mb-4 max-w-prose">{paragraph}</p>

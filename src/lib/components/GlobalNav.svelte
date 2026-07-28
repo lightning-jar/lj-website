@@ -23,6 +23,7 @@ let navItems: NavItem[] = $state([
 	{ label: "Customer Stories", href: "/customer-stories" },
 	{ label: "Reading List", href: "/reading-list" },
 	{ label: "Technologies", href: "/technologies" },
+	{ label: "Packages & Tools", href: "/packages" },
 	{ label: "Fun", href: "/fun" },
 ]);
 
@@ -47,6 +48,7 @@ const desktopMenus = [
 		key: "more",
 		label: "More",
 		items: [
+			{ label: "Packages & Tools", href: "/packages" },
 			{ label: "Reading List", href: "/reading-list" },
 			{ label: "Fun", href: "/fun" },
 		],

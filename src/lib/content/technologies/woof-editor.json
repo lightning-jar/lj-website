@@ -1,5 +1,6 @@
 {
 	"id": "woof-editor",
+	"packagePage": "/packages/woof-editor",
 	"name": "woof-editor (beta)",
 	"shortDescription": "Our contenteditable markdown editor for Svelte 5, backed by barkdown's round-trip codec — WYSIWYG that never drifts on save.",
 	"description": [
