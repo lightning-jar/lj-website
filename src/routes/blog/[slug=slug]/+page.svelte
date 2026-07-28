@@ -86,10 +86,14 @@ function getAttributionFromSource(source: ArticleSource): string {
            first body paragraph, which would trigger the [&_img+p] caption rule) -->
       {#if image}
         <div class="mb-8">
+          <!-- width/height reserve the standard 3:2 hero box before the
+               image arrives, so the article body doesn't shift down -->
           <img
             src={image}
             alt={data.imageDescription || data.title}
             class="w-full h-auto"
+            width="1600"
+            height="1067"
             fetchpriority="high"
           />
         </div>
