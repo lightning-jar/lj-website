@@ -80,6 +80,7 @@ const config: VercelConfig = {
 		},
 	],
 	redirects: [
+		{ source: "/contact", destination: "/", statusCode: 301 },
 		{ source: "/privacy-policy", destination: "/terms", statusCode: 301 },
 		{
 			source: "/blog/the-rule-you-forgot-you-wrote",
