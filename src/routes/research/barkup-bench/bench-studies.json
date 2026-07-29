@@ -1824,6 +1824,66 @@
 			],
 			"brief": "BRIEF-OW.md",
 			"quote": "The cheapest model passed every gate; the two newest frontier models failed the same one, by obeying the cap instead of protecting the goal."
+		},
+		{
+			"slug": "aq",
+			"letters": "AQ",
+			"track": "Sessions & memory",
+			"title": "The powered fence: vindicated where it no longer matters, harmful where it does",
+			"eyebrow": "Study AQ · the powered client-prune fence · 400 cells",
+			"indexLine": "AL's fence sentence, powered 4× and aimed at the swap candidates: it closes sonnet's prune pathway completely (16/40 to 0/40, p=.00002), does nothing on gemini, is unnecessary on fable-5 (which spontaneously consolidates losslessly), and is actively harmful on kimi-k3 (prunes 5/40 to 18/40) — one sentence, four dispositions, and the fence line closes for the successor tiers.",
+			"sections": [
+				{
+					"id": "sec-fence",
+					"eyebrow": "The powered client-prune fence",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-33",
+					"figure": {
+						"id": "fig-fence",
+						"title": "Client-Prune Cells at the Cap Edge, Control vs Fence, by Model"
+					},
+					"table": {
+						"id": "tbl-fence",
+						"summary": "Prune and goal-loss counts, paired significance, pathway splits, and guards per model"
+					},
+					"body": [
+						{
+							"heading": "The Question, Powered",
+							"html": "Study AL had tested a one-sentence fence against the client-prune pathway (a model trimming its own memo to the 20-note cap before the app can run a goal-safe eviction) and returned \"unproven, not disproven\" on 10 cells per tier against a drifting baseline. The open-weight backfill made the question urgent: both plausible successor tiers failed the regression suite's cap-edge slice with exactly this anatomy. AQ powered the measurement 4× (40 paired cap-edge cells per model per arm, arms interleaved in one provider window) and aimed it where the decision lives: fable-5 and kimi-k3 gated, sonnet and gemini as continuity anchors, the fence sentence byte-identical to AL."
+						},
+						{
+							"heading": "Vindicated Where It No Longer Matters",
+							"html": "On sonnet the fence works at ceiling: prune cells fell from 16/40 to 0/40, all sixteen discordant pairs moving the fence's way, exact p = .00002. AL's hypothesis was right all along on the tier it was written for; ten cells and a halved baseline had hidden a near-total effect. The pathway is clean: sonnet never consolidates, and the fence flips it from pruning to over-sending, where the app's designed eviction protects every goal. If a sonnet-class disposition ever ships, the sentence is measured, shelf-ready protection."
+						},
+						{
+							"heading": "Unnecessary on One Successor",
+							"html": "fable-5's control baseline collapsed to 2/40 for the best possible reason: at the cap edge it spontaneously consolidates, sending a shorter, denser list with every needle preserved and every goal intact in 38 of 40 control cells. That is the lossless behavior Study AM measured as the ceiling when explicitly invited; fable-5 does it uninvited. The fence arm was perfect too (40/40 consolidated, zero prunes), but there was nothing left to fix. The instrument disagreement is reported honestly: the regression slice showed 3/10 prunes on a different corpus a day earlier — cap-edge exposure is real but corpus- and week-sensitive, so prune rates should be read as ranges."
+						},
+						{
+							"heading": "Harmful on the Other",
+							"html": "kimi-k3 is the study's unanticipated significant result, in a direction no interpretation row anticipated: prunes went from 5/40 under control to 18/40 under the fence, goal-loss from 5 to 19, sixteen of nineteen discordant pairs toward harm, one-sided p = .0022. The mechanism is legible in the pathway split. Unfenced, kimi consolidates losslessly (31/40). The fence's \"never drop or trim an existing note\" reads as a ban on that strategy: consolidations fell to 14, over-sending rose only to 7, and the remainder sent cap-sized lists missing an old goal. The sentence outlaws the benign disposition and installs the injurious one."
+						},
+						{
+							"heading": "What Ships and What Closes",
+							"html": "The fence line closes for the successor tiers: unnecessary on fable-5, harmful on kimi-k3, it ships in no tier-swap package, and the sentence stays permanently unshipped for these models. The tier-swap blocking item stands, with sharper shape: fable-5's real-world exposure looks smaller than the red gate implied; kimi-k3's is real and aggravated by the obvious prompt fix. The remaining lever is app-side and needs its own registration — the filed candidate advertises a lower cap than the app enforces, so cap-obedient trimming never bites. Guards were clean everywhere: no-op 20/20 on all four models, declarations landed in at least 39 of 40 cells per arm, and the run stayed inside its fence. One sentence, four dispositions, all four invisible before measuring: prompt rules are not portable, and this is the sharpest form the series' oldest moral has taken."
+						}
+					]
+				}
+			],
+			"published": "2026-07-29",
+			"related": [
+				{
+					"title": "Give the Model a Tool, Not a Rule",
+					"href": "/blog/give-the-model-a-tool-not-a-rule"
+				},
+				{
+					"title": "Backfill OW: the tier maps that motivated AQ",
+					"href": "/research/barkup-bench/ow"
+				}
+			],
+			"brief": "BRIEF-AQ.md",
+			"quote": "One sentence: ceiling-grade protection on one model, a no-op on a second, redundant on a third, and goal-destroying on a fourth."
 		}
 	]
 }

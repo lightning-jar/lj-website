@@ -7073,6 +7073,177 @@ export function initBenchCharts() {
 		);
 	})();
 
+	// --- Study AQ: the powered fence · prune cells control vs fence ---
+	(() => {
+		const GROUPS = [
+			{
+				model: "sonnet-4.5",
+				vals: [16, 0],
+				tip: "16/40 → 0/40 (p=.00002) · the fence flips sonnet from pruning to over-sending 40/40; AL vindicated with power",
+			},
+			{
+				model: "gemini-3.5-flash",
+				vals: [14, 12],
+				tip: "14/40 → 12/40 (n.s.) · no reliable effect, consistent with AL's weak directional read",
+			},
+			{
+				model: "fable-5",
+				vals: [2, 0],
+				tip: "2/40 → 0/40 · baseline collapsed for the best reason: fable-5 spontaneously consolidates losslessly in 38/40 control cells",
+			},
+			{
+				model: "kimi-k3",
+				vals: [5, 18],
+				tip: "5/40 → 18/40, goal-loss 5 → 19 (p=.0022 toward HARM) · the fence bans kimi's lossless-consolidation strategy and installs the injury it was written to prevent",
+			},
+		];
+		const CCONTROL = "#8b93a3",
+			CFENCE = "#3987e5";
+		byId("legend-33").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CCONTROL +
+			'"></span>control (shipped prompt rule)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CFENCE +
+			'"></span>+ fence sentence (AL text, byte-identical)</span>' +
+			legendNote(
+				"client-prune cells out of 40 paired cap-edge tasks (lower is better) · arms interleaved in one provider window · kimi-k3's fence bar is the study's unanticipated harm result",
+			);
+		const W = 880,
+			BAR = 16,
+			GAP = 4,
+			GH = 2 * BAR + GAP,
+			GPAD = 18,
+			T = 8,
+			B = 42,
+			L = 150,
+			R = 70;
+		const H = T + GROUPS.length * (GH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 40) * iw;
+		let g = "";
+		for (const tick of [0, 20, 40]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text class="chart-tick" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		let marks = "",
+			hits = "";
+		GROUPS.forEach((row, gi) => {
+			const top = T + gi * (GH + GPAD);
+			g +=
+				'<text class="chart-tick" x="' +
+				(L - 12) +
+				'" y="' +
+				(top + GH / 2 + 4) +
+				'" text-anchor="end">' +
+				row.model +
+				"</text>";
+			row.vals.forEach((v, ai) => {
+				const y = top + ai * (BAR + GAP);
+				const w = Math.max((v / 40) * iw, 2);
+				marks +=
+					'<rect x="' +
+					L +
+					'" y="' +
+					y +
+					'" width="' +
+					w +
+					'" height="' +
+					BAR +
+					'" fill="' +
+					(ai === 0 ? CCONTROL : CFENCE) +
+					'" rx="3"/>';
+				marks +=
+					'<text fill="#c3c9d4" font-size="11" x="' +
+					(L + w + 8) +
+					'" y="' +
+					(y + BAR - 4) +
+					'">' +
+					v +
+					"/40</text>";
+			});
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				top +
+				'" width="' +
+				iw +
+				'" height="' +
+				GH +
+				'" fill="transparent" data-tip="' +
+				esc(row.model + "\n" + row.tip) +
+				'"/>';
+		});
+		const el = byId("fig-fence");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" role="img" aria-label="Grouped bar chart of client-prune cells out of forty at the memo cap edge, control versus fence, per model: sonnet falls from sixteen to zero under the fence, gemini barely moves, fable-5 falls from two to zero, and kimi-k3 rises from five to eighteen — the fence harms it.">' +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the same registered sentence, four dispositions: ceiling-grade protection on sonnet, a no-op on gemini, redundant on fable-5 (which consolidates losslessly on its own), and goal-destroying on kimi-k3, where forbidding trims also forbade its benign consolidation strategy",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-fence",
+			["cell", "fable-5", "kimi-k3", "sonnet-4.5", "gemini-3.5-flash"],
+			[
+				["prune cells, control → fence", "2/40 → 0/40", "5/40 → 18/40", "16/40 → 0/40", "14/40 → 12/40"],
+				["goal-loss cells, control → fence", "2 → 0", "5 → 19", "16 → 0", "14 → 12"],
+				[
+					"discordant pairs (toward fence / toward harm)",
+					"2 / 0",
+					"3 / 16",
+					"16 / 0",
+					"9 / 7",
+				],
+				["one-sided exact p", ".25 n.s.", ".0022 toward HARM", ".00002", ".40 n.s."],
+				[
+					"control pathway: over-send / consolidate / prune",
+					"0 / 38 / 2",
+					"0 / 31 / 5",
+					"24 / 0 / 16",
+					"26 / 0 / 14",
+				],
+				[
+					"fence pathway: over-send / consolidate / prune",
+					"0 / 40 / 0",
+					"7 / 14 / 18",
+					"40 / 0 / 0",
+					"28 / 0 / 12",
+				],
+				["no-op guard (under-cap, fence arm)", "20/20", "20/20", "20/20", "20/20"],
+				["declaration landed (min across arms)", "40/40", "39/40", "40/40", "40/40"],
+			],
+		);
+	})();
+
 	// Every legend gets a "Legend" label as its first child — a styled
 	// paragraph, not a heading, so legends don't skip levels in the
 	// document outline. Runs after the builders above have set each
