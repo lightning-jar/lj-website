@@ -6885,6 +6885,194 @@ export function initBenchCharts() {
 		);
 	})();
 
+	// --- Backfill OW: goal-safe eviction at the cap edge, all measured models ---
+	(() => {
+		const ROWS = [
+			{
+				model: "gemini-3.5-flash",
+				v: 4,
+				tip: "4/10 (Study AK) · pruned a goal client-side in 6 of 10 cells before the app saw the list",
+			},
+			{
+				model: "sonnet-4.5",
+				v: 6,
+				tip: "6/10 (Study AK) · 4 client-side prunes, victims all goals",
+			},
+			{
+				model: "opus-4.8",
+				v: 10,
+				tip: "10/10 (Study AK, regression-validated) · over-sends the 21st note and lets the app run a designed eviction",
+			},
+			{
+				model: "kimi-k3",
+				v: 8,
+				tip: "8/10 (2026-07-29 regression run) · RED · one goal-victim client prune plus one lossy self-consolidation (sent 9 notes)",
+			},
+			{
+				model: "fable-5",
+				v: 7,
+				tip: "7/10 (2026-07-29 regression run) · RED · three client prunes, every victim a goal; in passing cells it over-sent or consolidated losslessly",
+			},
+			{
+				model: "gpt-oss-120b",
+				v: 10,
+				tip: "10/10 (2026-07-29 regression run) · the cheapest model measured passes the slice the two new frontiers fail",
+			},
+		];
+		const CPASS = "#199e70",
+			CBELOW = "#c98500";
+		byId("legend-32").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CPASS +
+			'"></span>meets the swap gate (9 of 10 or better)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CBELOW +
+			'"></span>below the gate</span>' +
+			legendNote(
+				"goal-safe cells of 10 at the K=20 memo cap edge, eviction pipeline present · original trio measured in Study AK; backfill models in the 2026-07-29 regression run · dashed line marks the registered gate",
+			);
+		const W = 880,
+			BAR = 16,
+			GPAD = 12,
+			T = 8,
+			B = 42,
+			L = 150,
+			R = 70;
+		const H = T + ROWS.length * (BAR + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 10) * iw;
+		let g = "";
+		for (const tick of [0, 5, 10]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text class="chart-tick" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		const gx = xOf(9);
+		g +=
+			'<line x1="' +
+			gx +
+			'" x2="' +
+			gx +
+			'" y1="' +
+			T +
+			'" y2="' +
+			(H - B) +
+			'" stroke="rgba(255,255,255,0.45)" stroke-width="1" stroke-dasharray="4 4"/>';
+		g +=
+			'<text class="chart-tick" x="' +
+			gx +
+			'" y="' +
+			(H - B + 34) +
+			'" text-anchor="middle">gate ≥9</text>';
+		let marks = "",
+			hits = "";
+		ROWS.forEach((row, i) => {
+			const y = T + i * (BAR + GPAD);
+			g +=
+				'<text class="chart-tick" x="' +
+				(L - 12) +
+				'" y="' +
+				(y + BAR - 3) +
+				'" text-anchor="end">' +
+				row.model +
+				"</text>";
+			const w = Math.max((row.v / 10) * iw, 2);
+			marks +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				y +
+				'" width="' +
+				w +
+				'" height="' +
+				BAR +
+				'" fill="' +
+				(row.v >= 9 ? CPASS : CBELOW) +
+				'" rx="3"/>';
+			marks +=
+				'<text fill="#c3c9d4" font-size="11" x="' +
+				(L + w + 8) +
+				'" y="' +
+				(y + BAR - 4) +
+				'">' +
+				row.v +
+				"/10</text>";
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				y +
+				'" width="' +
+				iw +
+				'" height="' +
+				BAR +
+				'" fill="transparent" data-tip="' +
+				esc(row.model + "\n" + row.tip) +
+				'"/>';
+		});
+		const el = byId("fig-backfill");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" role="img" aria-label="Bar chart of goal-safe eviction at the twenty-note memo cap edge across six models: opus and gpt-oss-120b score ten of ten, kimi-k3 eight, fable-5 seven, sonnet six, gemini four; a dashed line marks the swap gate at nine of ten.">' +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the one slice that separates the tiers: goal survival at the memo's 20-note cap edge with the eviction pipeline present; models that over-send let the app run a designed eviction, while cap-obedient models trim their own list and pick goals as victims",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-backfill",
+			["cell", "kimi-k3", "gpt-oss-120b", "fable-5"],
+			[
+				["regression gates passed (of 13)", "12", "13", "12"],
+				["goal-safe eviction at the cap edge", "8/10 RED", "10/10", "7/10 RED"],
+				[
+					"red-slice anatomy",
+					"1 goal prune + 1 lossy self-merge",
+					"none",
+					"3 goal prunes",
+				],
+				["AO bare-arm clean (drift anchor)", "0/36", "0/36", "0/36"],
+				["AO shipped covered + trap", "24/24", "24/24", "24/24"],
+				["AO warnings-only clean", "18/36", "1/36", "18/36"],
+				["AP adjacent, AP′ key (pooled arms)", "48/48", "26/48", "43/48"],
+				[
+					"foreign empty, unaided → with empty text",
+					"10/12 → 12/12",
+					"0/12 → 10/12",
+					"10/12 → 12/12",
+				],
+				["invented tags, all cells", "0", "0", "0"],
+				["accepted mints / attempts", "25/25", "18/18", "24/24"],
+				["suite + family spend", "$11.33", "$0.38", "$41.67"],
+			],
+		);
+	})();
+
 	// Every legend gets a "Legend" label as its first child — a styled
 	// paragraph, not a heading, so legends don't skip levels in the
 	// document outline. Runs after the builders above have set each

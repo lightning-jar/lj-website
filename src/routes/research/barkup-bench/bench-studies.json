@@ -1768,6 +1768,62 @@
 			],
 			"brief": "BRIEF-AP.md",
 			"quote": "The models out-edited the registration: every adjacent miss was a defensible canonical tag the acceptable set forgot."
+		},
+		{
+			"slug": "ow",
+			"letters": "OW",
+			"track": "Confirmations & machinery",
+			"title": "The open-weight backfill: the cheapest model passed everything; two frontiers failed the same gate",
+			"eyebrow": "Backfill OW · open-weight and frontier tier maps · 3,450 cells",
+			"indexLine": "gpt-oss-120b clears all 13 shipped-guardrail regression gates at 33 cents; kimi-k3 and fable-5 both go 12/13, red on the same memo-cap-edge slice via cap-obedient goal pruning; kimi-k3 posts the best adjacent-class tag numbers measured; the guardrail stack proves tier-robust down to the cheapest open-weight model.",
+			"sections": [
+				{
+					"id": "sec-backfill",
+					"eyebrow": "Open-weight and frontier tier maps",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-32",
+					"figure": {
+						"id": "fig-backfill",
+						"title": "Goal-Safe Eviction at the Memo Cap Edge, All Measured Models"
+					},
+					"table": {
+						"id": "tbl-backfill",
+						"summary": "Regression-gate outcomes, the red-slice anatomy, tag-family tier maps, and cost per model"
+					},
+					"body": [
+						{
+							"heading": "Why a Backfill",
+							"html": "The series had measured three closed-weight models throughout, while open-weight frontier models became genuinely competitive. This backfill maps <span class=\"font-mono\">moonshotai/kimi-k3</span> (open-weight frontier), <span class=\"font-mono\">openai/gpt-oss-120b</span> (open-weight non-frontier), and <span class=\"font-mono\">anthropic/claude-fable-5</span> (the closed frontier tier above the shipped one) against two standing instruments: the 13-gate regression suite and the tag-steering family. Registered as a tier-map extension: no new hypotheses, no new gates, prompts byte-identical, and all registered verdicts pinned to the original trio. One disclosure carried in the brief: the analyst model is among those measured, so every grader used is mechanical and predates the runs; the judge-graded Track 2 studies are excluded."
+						},
+						{
+							"heading": "The Cheapest Model Passed Everything",
+							"html": "gpt-oss-120b cleared all thirteen shipped-guardrail gates, anchored patches through memo mechanics, for 33 cents of API spend. The guardrail stack (context handed to the model, tools over rules, server-owned invariants) was designed not to depend on tier; the cheapest model in the series' history just delivered the strongest confirmation of that design yet."
+						},
+						{
+							"heading": "Two Frontiers, One Red Gate",
+							"html": "kimi-k3 (8/10) and fable-5 (7/10) both went red on a single slice, goal-safe eviction at the 20-note memo cap edge, with the exact client-prune anatomy Study AK registered as the app's honest boundary: each sends a list already trimmed to the cap, so the app's goal-preserving eviction never engages, and the victim is an old goal, the one thing only the memo carries. The failure is cap-obedience. The aging shipped tier passes this slice by over-sending and letting the app decide; the two newest frontier-class models politely self-edit and choose victims badly, while gpt-oss-120b passes it 10/10. Per the standing procedure, neither red-gated model ships onto the chat surfaces as-is, and the filed Study AL powered re-measurement (the client-prune prompt fence, verdict \"unproven, not disproven\") now has the motivation it lacked: the likely next tiers exhibit exactly the pathway it targets."
+						},
+						{
+							"heading": "The Tag Family Tier Map",
+							"html": "All the family's universals replicated: bare-arm drift 0/36 on every model, unprompted <span class=\"font-mono\">tags_list</span> reads in every shipped-arm cell, zero invented tags anywhere. kimi-k3 posted the best adjacent-class numbers measured to date, 12/12 in all four AP arms under the AP′ independent key. fable-5 profiles as the shipped tier's successor, with the same refusal to tag off-catalog topics and the same one-sentence fix, but it mints freely where opus abstains. gpt-oss-120b is the cautionary shape: perfect catalog obedience, yet it never returns an empty list unaided, the guidance sentences only partially rescue it, and its warnings-only arm collapsed to 1/36, the starkest the-tool-is-the-mechanism datapoint in the family."
+						},
+						{
+							"heading": "What It Cost and What It Licenses",
+							"html": "Total spend was $53.39 against a registered fence of $25 to $45; the overage came from underestimating fable-5's regression input volume and is disclosed in the report. Phase 2 (deeper family re-runs on the new models) stays unregistered and unspent. What this backfill licenses is a map, not a ship decision: the guardrails hold at every price point measured, the two newest frontier models share one specific, well-understood exposure at the memo cap edge, and any future tier swap starts from these gate summaries."
+						}
+					]
+				}
+			],
+			"published": "2026-07-29",
+			"related": [
+				{
+					"title": "Give the Model a Tool, Not a Rule",
+					"href": "/blog/give-the-model-a-tool-not-a-rule"
+				}
+			],
+			"brief": "BRIEF-OW.md",
+			"quote": "The cheapest model passed every gate; the two newest frontier models failed the same one, by obeying the cap instead of protecting the goal."
 		}
 	]
 }
