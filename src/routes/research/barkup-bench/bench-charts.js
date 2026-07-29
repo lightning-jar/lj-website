@@ -6865,6 +6865,12 @@ export function initBenchCharts() {
 					"31/48",
 				],
 				[
+					"adjacent conformant, AP′ independent key (pooled arms)",
+					"45/48",
+					"41/48",
+					"39/48",
+				],
+				[
 					"adjacent, anchored exploratory reading",
 					"48/48",
 					"48/48",
