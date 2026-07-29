@@ -1,8 +1,8 @@
 {
 	"_updateNote": "Single source of truth for barkup-bench headline numbers. Bump when a new study publishes. Consumed by the home research panel, /research, and /research/barkup-bench.",
-	"studiesSpelled": "forty-four",
-	"scoredRunsDisplay": "35,638",
+	"studiesSpelled": "forty-five",
+	"scoredRunsDisplay": "36,198",
 	"modelsSpelled": "eight",
-	"studiesDisplay": "44",
+	"studiesDisplay": "45",
 	"modelsDisplay": "8"
 }

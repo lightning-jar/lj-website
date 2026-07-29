@@ -7244,6 +7244,193 @@ export function initBenchCharts() {
 		);
 	})();
 
+	// --- Study AR: advertised headroom · three-arm prune cells ---
+	(() => {
+		const GROUPS = [
+			{
+				model: "sonnet-4.5",
+				vals: [18, 0, 37],
+				tip: "18/40 → 0/40 under headroom (p=3.8e-06, flips to 40/40 over-send) · truecap: 37/40 prunes with 37 goal losses — a binding number is poison",
+			},
+			{
+				model: "gemini-3.5-flash",
+				vals: [15, 0, 40],
+				tip: "15/40 → 0/40 under headroom (p=3.1e-05) — the first intervention ever to move gemini here · truecap: prunes 40/40 but loses ZERO goals, running its own fact-first eviction",
+			},
+			{
+				model: "fable-5",
+				vals: [3, 0, 5],
+				tip: "3/40 → 0/40 with 40/40 lossless consolidation under headroom · truecap collapses its consolidation (32 → 6 cells)",
+			},
+			{
+				model: "kimi-k3",
+				vals: [8, 7, 9],
+				tip: "inert across arms (8/7/9) · its losses are intrinsic lossy consolidation, not cap-obedience — unreachable by rule (AQ) or state (AR)",
+			},
+		];
+		const CCONTROL = "#8b93a3",
+			CHEADROOM = "#199e70",
+			CTRUECAP = "#e66767";
+		byId("legend-34").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CCONTROL +
+			'"></span>control (no capacity line)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CHEADROOM +
+			'"></span>headroom line (up to 24 notes)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CTRUECAP +
+			'"></span>truecap line (up to 20 notes)</span>' +
+			legendNote(
+				"client-prune cells out of 40 paired cap-edge tasks (lower is better) · arms interleaved in one provider window · registered templates rendered into the memo block header",
+			);
+		const W = 880,
+			BAR = 13,
+			GAP = 4,
+			GH = 3 * BAR + 2 * GAP,
+			GPAD = 16,
+			T = 8,
+			B = 42,
+			L = 150,
+			R = 70;
+		const H = T + GROUPS.length * (GH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 40) * iw;
+		let g = "";
+		for (const tick of [0, 20, 40]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text class="chart-tick" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick +
+				"</text>";
+		}
+		let marks = "",
+			hits = "";
+		const COLORS = [CCONTROL, CHEADROOM, CTRUECAP];
+		GROUPS.forEach((row, gi) => {
+			const top = T + gi * (GH + GPAD);
+			g +=
+				'<text class="chart-tick" x="' +
+				(L - 12) +
+				'" y="' +
+				(top + GH / 2 + 4) +
+				'" text-anchor="end">' +
+				row.model +
+				"</text>";
+			row.vals.forEach((v, ai) => {
+				const y = top + ai * (BAR + GAP);
+				const w = Math.max((v / 40) * iw, 2);
+				marks +=
+					'<rect x="' +
+					L +
+					'" y="' +
+					y +
+					'" width="' +
+					w +
+					'" height="' +
+					BAR +
+					'" fill="' +
+					COLORS[ai] +
+					'" rx="3"/>';
+				marks +=
+					'<text fill="#c3c9d4" font-size="11" x="' +
+					(L + w + 8) +
+					'" y="' +
+					(y + BAR - 2) +
+					'">' +
+					v +
+					"/40</text>";
+			});
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				top +
+				'" width="' +
+				iw +
+				'" height="' +
+				GH +
+				'" fill="transparent" data-tip="' +
+				esc(row.model + "\n" + row.tip) +
+				'"/>';
+		});
+		const el = byId("fig-headroom");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" role="img" aria-label="Grouped bar chart of client-prune cells out of forty at the memo cap edge under three arms per model: the headroom line takes sonnet from eighteen to zero, gemini from fifteen to zero, and fable-5 from three to zero, while kimi-k3 stays near eight in every arm; the truecap line explodes pruning to thirty-seven on sonnet and forty on gemini.">' +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"one line of state, two numbers, three fates: believed headroom (24) dissolves cap-obedient pruning wherever it exists, a believed binding limit (20) manufactures it, and kimi-k3 ignores both because its losses come from lossy consolidation, not obedience",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-headroom",
+			["cell", "fable-5", "kimi-k3", "sonnet-4.5", "gemini-3.5-flash"],
+			[
+				[
+					"prune cells: control / headroom / truecap",
+					"3 / 0 / 5",
+					"8 / 7 / 9",
+					"18 / 0 / 37",
+					"15 / 0 / 40",
+				],
+				[
+					"goal-loss: control / headroom / truecap",
+					"3 / 0 / 3",
+					"8 / 8 / 8",
+					"18 / 0 / 37",
+					"15 / 0 / 0",
+				],
+				[
+					"headroom pathway: over-send / consolidate / prune",
+					"0 / 40 / 0",
+					"0 / 32 / 7",
+					"40 / 0 / 0",
+					"37 / 3 / 0",
+				],
+				[
+					"headroom vs control, paired one-way discordants",
+					"3",
+					"mixed (inert)",
+					"18 (p=3.8e-06)",
+					"15 (p=3.1e-05)",
+				],
+				["no-op guard (under-cap, headroom arm)", "20/20", "19/20", "20/20", "20/20"],
+				["declaration landed (min across arms)", "40/40", "39/40", "40/40", "40/40"],
+				[
+					"AR′ comparative no-harm conjuncts",
+					"pass",
+					"pass",
+					"anchor",
+					"anchor",
+				],
+			],
+		);
+	})();
+
 	// Every legend gets a "Legend" label as its first child — a styled
 	// paragraph, not a heading, so legends don't skip levels in the
 	// document outline. Runs after the builders above have set each

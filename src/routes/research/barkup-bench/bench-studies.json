@@ -1884,6 +1884,66 @@
 			],
 			"brief": "BRIEF-AQ.md",
 			"quote": "One sentence: ceiling-grade protection on one model, a no-op on a second, redundant on a third, and goal-destroying on a fourth."
+		},
+		{
+			"slug": "ar",
+			"letters": "AR",
+			"track": "Sessions & memory",
+			"title": "Advertised headroom: one line of state outdoes the rule, and a binding number is poison",
+			"eyebrow": "Study AR · advertised headroom · 560 cells (+ the AR′ re-score)",
+			"indexLine": "A capacity state line ('an update may include up to 24 notes') harms nothing anywhere, erases cap-edge pruning completely on sonnet (18/40 to 0/40) and gemini (15/40 to 0/40, the first intervention ever to move it), perfects fable-5, and is inert on kimi-k3, whose losses turn out to be intrinsic lossy consolidation; the truecap arm shows a binding number is catastrophic.",
+			"sections": [
+				{
+					"id": "sec-headroom",
+					"eyebrow": "Advertised headroom",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-34",
+					"figure": {
+						"id": "fig-headroom",
+						"title": "Client-Prune Cells at the Cap Edge: Control, Headroom, and Truecap, by Model"
+					},
+					"table": {
+						"id": "tbl-headroom",
+						"summary": "Three-arm prune and goal-loss counts, pathway splits, guards, and the AR′ corrected conjuncts"
+					},
+					"body": [
+						{
+							"heading": "State, Not Instruction",
+							"html": "Study AQ closed the rule-shaped fix: the anti-trim sentence was unnecessary on fable-5 and actively harmful on kimi-k3. AR measured the filed app-side lever, one line of state rendered into the memo block header: <span class=\"font-mono\">Notes: 20 in use · an update may include up to 24 notes.</span> The wording is honest by construction, since the app's handler genuinely accepts over-length updates and evicts down to the 20-note storage cap. A truecap arm (<span class=\"font-mono\">up to 20 notes</span>) isolated the mechanism: same sentence shape, but the believed limit binds at the decision point. Per the AQ lesson, no-harm was gated first."
+						},
+						{
+							"heading": "A Total Fix Where the Disposition Exists",
+							"html": "On the tiers with genuine cap-obedient pruning, believed headroom dissolved it completely: sonnet went from 18/40 prune cells to 0/40 (all eighteen discordant pairs one way, p = 3.8e-06, flipping to clean over-sending in all 40 cells), and gemini from 15/40 to 0/40 (p = 3.1e-05), the first intervention in this family that has ever moved gemini; the AL fence did nothing for it across two studies. fable-5 went from an already-benign 3/40 to a perfect 0/40 with lossless consolidation in every cell. Nowhere did the line increase prunes, goal losses, or failures to record the new note."
+						},
+						{
+							"heading": "Inert on Kimi, and Diagnostic",
+							"html": "kimi-k3 barely moved (control 8/40, headroom 7/40, truecap 9/40), and that non-result is the study's diagnosis: its cap-edge losses were never cap-obedience. It consolidates in every arm and botches roughly a fifth of the consolidations, dropping a goal needle on the way. The rule could not reach this (AQ) and state cannot either: the exposure is intrinsic consolidation fidelity, quantified at about 20% of cap-edge updates this week, and any future mitigation targets that, not capacity beliefs. This is also why the pooled swap-candidate effect gate failed (p = .227): kimi's arm-independent losses flip pairs both ways."
+						},
+						{
+							"heading": "A Binding Number Is Poison",
+							"html": "The truecap arm confirmed the mechanism as emphatically as anything in the series. Shown a binding cap, sonnet pruned 37 of 40 cells with 37 goal losses; fable-5's spontaneous consolidation collapsed from 32 cells to 6; and gemini pruned all 40 while losing zero goals, the study's grace note: given a binding number, it runs its own deliberate fact-first eviction, a client-side copy of the app's policy. The fence is absolute: never render a binding cap number into model-visible context. The composer's memo-full indicator stays user-facing only."
+						},
+						{
+							"heading": "The Letter, the Lesson, and the AR′ Re-Score",
+							"html": "The pre-registered gate failed by the letter: the no-harm conjunct set an absolute goal-loss ceiling of 2/40 that kimi's CONTROL arm also violates (8/40), measuring the model's intrinsic lossiness rather than harm from the line. That is this family's third registration lesson (AO's non-empty rule, AP's solo-authored sets, AR's absolute ceiling), now adopted as protocol: no-harm conditions register comparatively unless the absolute bound is itself the claim. AR′ re-scored the frozen records under the corrected conjunct with the outcome disclosed in advance: no-harm PASSES on both successor tiers, the effect gate stands failed, and the headroom line stays unshipped for the tier-swap package while joining the measured shelf for sonnet and gemini class dispositions, where it is total and strictly dominant over the fence."
+						}
+					]
+				}
+			],
+			"published": "2026-07-29",
+			"related": [
+				{
+					"title": "Study AQ: the powered fence",
+					"href": "/research/barkup-bench/aq"
+				},
+				{
+					"title": "Backfill OW: the tier maps",
+					"href": "/research/barkup-bench/ow"
+				}
+			],
+			"brief": "BRIEF-AR.md",
+			"quote": "Believed headroom dissolved the pruning; a believed binding limit caused it. The models were obeying the number all along — we just got to pick the number."
 		}
 	]
 }
