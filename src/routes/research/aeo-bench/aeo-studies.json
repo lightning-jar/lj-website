@@ -46,6 +46,10 @@
 						{
 							"heading": "What This Licenses",
 							"html": "For a small, well-linked site: markdown negotiation with .md fallbacks and the hidden directive is worth shipping if your traffic includes chatty agents (large savings, zero measured downside); llms.txt and sitemap.xml did nothing here, not harmful, just unread; and no measured model needed navigation help. Vendor claims fared unevenly: the token-savings claim is confirmed at the wasteful-agent end and materially overstated for frugal agents, the adoption premise is model-dispositional rather than general, and the grep-loop hazard did not appear at this llms.txt size. Study 2 is filed: a large, weakly-linked fixture with orphaned pages, where discovery files have an actual mechanism to matter."
+						},
+						{
+							"heading": "The Haiku 4.5 Backfill",
+							"html": "Haiku 4.5 joined by registered backfill as the candidate model for a prospective Lightning Jar site chat agent, run byte-identically with the gates pinned. Its Study 1 profile is the strongest measured: 28 of 28 present-class in every arm, zero invented facts, and sonnet-class frugality (3.4 fetches, 8.2k input tokens per task) at roughly a third of the price. Its one repeated absent-class miss is an honest, evidence-grounded denial of the live-chat question, correct under the corrected grader. It never sent a markdown signal unprompted, like sonnet; for a first-party agent whose harness controls the Accept header, that costs nothing."
 						}
 					]
 				}
@@ -114,6 +118,10 @@
 						{
 							"heading": "What This Licenses",
 							"html": "For website owners: llms.txt and sitemap.xml do not help AI agents at the model layer today, even on sites built to need them. Keep them for the crawler and product layer if you like, at zero measured harm on compliant models, but the measured lever for agent-reachable content is linking it. For agent builders: the cheapest capability upgrade this series has measured is one sentence telling your fetch tool that /llms.txt exists; it converted 0 of 10 into 10 of 10 on the frontier tier. The current llms.txt conversation has the beneficiary wrong: the file format is fine; the readers are missing."
+						},
+						{
+							"heading": "The Haiku 4.5 Backfill",
+							"html": "Haiku 4.5's backfill matched the frontier pattern exactly where it matters and beat it where it counts for a site agent: zero discovery-file consultations unprompted and orphans 0 of 10 in the file arms (the universal result), but 10 of 10 under the one-sentence hint, a perfect 14 of 14 on linked classes (the only model of six to sweep them), zero skipped answer protocols, and zero invented facts. The registered decision read is on record in the repository: on the retrieval half of a site chat agent's job, this is the strongest profile the benchmark has measured."
 						}
 					]
 				}

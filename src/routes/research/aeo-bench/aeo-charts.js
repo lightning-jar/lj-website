@@ -84,6 +84,11 @@ export function initAeoCharts() {
 				vals: [1, null],
 				tip: "1/72: effectively never; no stable ratio",
 			},
+			{
+				model: "haiku-4.5",
+				vals: [0, null],
+				tip: "0/72 (registered backfill): never discovered the pathway, like sonnet; moot for a first-party agent whose harness sets the Accept header",
+			},
 		];
 		const CADOPT = "#3987e5",
 			CRATIO = "#c98500";
@@ -155,6 +160,7 @@ export function initAeoCharts() {
 				"opus-4.8",
 				"kimi-k3",
 				"gpt-oss-120b",
+				"haiku-4.5",
 			],
 			[
 				[
@@ -164,6 +170,7 @@ export function initAeoCharts() {
 					"140/140",
 					"140/140",
 					"118 → 122/140",
+					"140/140",
 				],
 				[
 					"absent-class correct, all arms (v1 → 1′ grader)",
@@ -172,16 +179,26 @@ export function initAeoCharts() {
 					"31 → 39/40",
 					"40/40",
 					"6/40 (52 empty-text cells)",
+					"35 → 40/40",
 				],
-				["llms.txt fetches (of 180 cells)", "0", "0", "0", "0", "0"],
-				["sitemap.xml fetches (of 180 cells)", "0", "0", "0", "0", "0"],
-				["unprompted markdown adoption (of 72)", "29", "0", "45", "2", "1"],
+				["llms.txt fetches (of 180 cells)", "0", "0", "0", "0", "0", "0"],
+				["sitemap.xml fetches (of 180 cells)", "0", "0", "0", "0", "0", "0"],
+				[
+					"unprompted markdown adoption (of 72)",
+					"29",
+					"0",
+					"45",
+					"2",
+					"1",
+					"0",
+				],
 				[
 					"input-cost ratio among adopters",
 					"26–27%",
 					"n/a",
 					"80–83%",
 					"49% (n=2)",
+					"n/a",
 					"n/a",
 				],
 				[
@@ -191,8 +208,9 @@ export function initAeoCharts() {
 					"2.7 / 6.9k",
 					"4.4 / 9.3k",
 					"2.2 / 3.8k",
+					"3.4 / 8.2k",
 				],
-				["invented facts (of 180 cells)", "0", "0", "0", "0", "0"],
+				["invented facts (of 180 cells)", "0", "0", "0", "0", "0", "0"],
 				[
 					"model spend across the study",
 					"$1.14",
@@ -200,6 +218,7 @@ export function initAeoCharts() {
 					"$6.90",
 					"$6.06",
 					"$0.10",
+					"$1.82",
 				],
 			],
 		);
@@ -232,6 +251,11 @@ export function initAeoCharts() {
 				model: "gpt-oss-120b",
 				vals: [0, 0],
 				tip: "protocol collapse: skipped submit_answer in 144/192 cells; its numbers measure compliance, not discovery",
+			},
+			{
+				model: "haiku-4.5",
+				vals: [0, 100],
+				tip: "registered backfill: file arms 0/40 (0/128 consultations, the frontier pattern) · hinted: 10/10, guesses 95 to 16, input cost down 12%",
 			},
 		];
 		const CFILES = "#8b93a3",
@@ -300,6 +324,7 @@ export function initAeoCharts() {
 				"opus-4.8",
 				"kimi-k3",
 				"gpt-oss-120b",
+				"haiku-4.5",
 			],
 			[
 				[
@@ -309,8 +334,17 @@ export function initAeoCharts() {
 					"0/10",
 					"0/10",
 					"0/10",
+					"0/10",
 				],
-				["orphans, hinted arm", "9/10", "8/10", "10/10", "10/10", "0/10"],
+				[
+					"orphans, hinted arm",
+					"9/10",
+					"8/10",
+					"10/10",
+					"10/10",
+					"0/10",
+					"10/10",
+				],
 				[
 					"unprompted discovery consultation (of 128)",
 					"7",
@@ -318,10 +352,11 @@ export function initAeoCharts() {
 					"0",
 					"11",
 					"0",
+					"0",
 				],
-				["hinted-arm consultation (of 32)", "19", "17", "15", "20", "9"],
-				["path-guess 404s, baseline arm", "104", "114", "12", "63", "7"],
-				["path-guess 404s, hinted arm", "15", "13", "7", "0", "21"],
+				["hinted-arm consultation (of 32)", "19", "17", "15", "20", "9", "13"],
+				["path-guess 404s, baseline arm", "104", "114", "12", "63", "7", "95"],
+				["path-guess 404s, hinted arm", "15", "13", "7", "0", "21", "16"],
 				[
 					"orphans declared not-on-site (non-hinted, of 50)",
 					"50",
@@ -329,6 +364,7 @@ export function initAeoCharts() {
 					"50",
 					"50",
 					"2 (48 no-submit)",
+					"49",
 				],
 				[
 					"linked-class correctness (deep + shallow, baseline)",
@@ -337,9 +373,18 @@ export function initAeoCharts() {
 					"13/14",
 					"13/14",
 					"7/14",
+					"14/14",
 				],
-				["no-submit cells (of 192)", "0", "3", "0", "0", "144"],
-				["model spend", "$3.77", "$30.83", "$20.79", "$19.66", "$0.27"],
+				["no-submit cells (of 192)", "0", "3", "0", "0", "144", "0"],
+				[
+					"model spend",
+					"$3.77",
+					"$30.83",
+					"$20.79",
+					"$19.66",
+					"$0.27",
+					"$9.69",
+				],
 			],
 		);
 	})();

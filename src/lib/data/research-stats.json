@@ -3,7 +3,7 @@
 	"totals": {
 		"studiesDisplay": "47",
 		"studiesSpelled": "forty-seven",
-		"scoredRunsDisplay": "38,058",
+		"scoredRunsDisplay": "38,430",
 		"modelsDisplay": "8",
 		"modelsSpelled": "eight"
 	},
@@ -17,8 +17,8 @@
 	"aeoBench": {
 		"studiesDisplay": "2",
 		"studiesSpelled": "two",
-		"scoredRunsDisplay": "1,860",
-		"modelsDisplay": "5",
-		"modelsSpelled": "five"
+		"scoredRunsDisplay": "2,232",
+		"modelsDisplay": "6",
+		"modelsSpelled": "six"
 	}
 }
