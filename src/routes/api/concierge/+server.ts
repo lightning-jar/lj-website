@@ -148,7 +148,16 @@ function redactMessages(messages: unknown[]): unknown[] {
 // chat-log review UI. Never throws into the stream; skipped when the
 // key isn't configured. No visitor identity is stored — messages only,
 // with PII scrubbed before they leave our infrastructure.
-function shipLog(id: string, messages: unknown[]) {
+function shipLog(
+	id: string,
+	messages: unknown[],
+	stepTimings?: {
+		n: number;
+		ms: number;
+		tools: string[];
+		finishReason?: string;
+	}[],
+) {
 	const key = ENV.REPLICATOR_CHAT_LOG_KEY;
 	if (!key) return;
 	const redacted = redactMessages(messages);
@@ -170,6 +179,7 @@ function shipLog(id: string, messages: unknown[]) {
 			contextLabel: label,
 			model: MODEL,
 			messages: redacted,
+			stepTimings,
 		}),
 	}).catch((err) => console.warn("concierge: log ship failed", err));
 }
@@ -265,6 +275,17 @@ export const POST: RequestHandler = async ({
 			"This conversation is too long — refresh to start fresh.",
 		);
 
+	// per-step wall-clock timings for the chat log (mirrors replicator's
+	// blog-chat): each step is one model turn; tools[] names what it
+	// called, ms is how long it took, finishReason ends it
+	const stepTimings: {
+		n: number;
+		ms: number;
+		tools: string[];
+		finishReason?: string;
+	}[] = [];
+	let lastStepAt = Date.now();
+
 	const result = streamText({
 		model: gateway(MODEL),
 		system: SYSTEM,
@@ -272,6 +293,16 @@ export const POST: RequestHandler = async ({
 		temperature: 0.3,
 		maxOutputTokens: 800,
 		stopWhen: stepCountIs(MAX_STEPS),
+		onStepFinish: (step) => {
+			const now = Date.now();
+			stepTimings.push({
+				n: stepTimings.length + 1,
+				ms: now - lastStepAt,
+				tools: (step.toolCalls ?? []).map((c) => c.toolName),
+				finishReason: step.finishReason,
+			});
+			lastStepAt = now;
+		},
 		tools: {
 			about_lightning_jar: tool({
 				description:
@@ -374,7 +405,7 @@ export const POST: RequestHandler = async ({
 		onError: () =>
 			"The lightning jar flickered. Please try that again in a moment.",
 		onFinish: ({ messages: finalMessages }) => {
-			if (chatId) shipLog(chatId, finalMessages);
+			if (chatId) shipLog(chatId, finalMessages, stepTimings);
 		},
 	});
 };
