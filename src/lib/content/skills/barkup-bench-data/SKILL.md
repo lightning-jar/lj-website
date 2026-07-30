@@ -19,8 +19,10 @@ handshake required), no authentication.
 
 Relevant tools:
 
-- `list_studies` — every study: letters (e.g. "AO"), slug, track,
-  title, and a one-line result.
+- `list_studies` — every study across both Lightning Jar research
+  projects: project, letters (e.g. "AO"), slug, track, title, and a
+  one-line result. Barkup Bench rows carry
+  `project === "barkup-bench"`; the sibling series is AEO Bench.
 - `read_study` — one study by slug: full section text, chart titles,
   and a link to its pre-registration brief.
 - `search_content` — keyword search across the whole site, including

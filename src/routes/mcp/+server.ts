@@ -14,6 +14,7 @@ import {
 import { getAllReadingListArticles } from "$content/getters/getReadingList";
 
 // research data (git-resident)
+import aeoStudies from "../research/aeo-bench/aeo-studies.json";
 import benchStudies from "../research/barkup-bench/bench-studies.json";
 
 import type { RequestHandler } from "./$types";
@@ -59,13 +60,14 @@ function handlerFor(fetch: Fetch) {
 						name: "Lightning Jar",
 						founded: 2001,
 						summary:
-							"Design, build, and brand technology studio. Websites, web applications, and custom software for business clients; open LLM research (Barkup Bench) and open-source libraries (barkup, barkdown); AI-era marketing technology including Replicator, an LLM-powered brand operating system.",
+							"Design, build, and brand technology studio. Websites, web applications, and custom software for business clients; open LLM research (Barkup Bench, AEO Bench) and open-source libraries (barkup, barkdown, woof-editor); AI-era marketing technology including Replicator, an LLM-powered brand operating system.",
 						contact: "hello@lightningjar.com",
 						surfaces: {
 							blog: `${BASE}/blog`,
 							customerStories: `${BASE}/customer-stories`,
 							readingList: `${BASE}/reading-list`,
 							research: `${BASE}/research/barkup-bench`,
+							aeoResearch: `${BASE}/research/aeo-bench`,
 							playbook: `${BASE}/research/barkup-bench/playbook`,
 							services: `${BASE}/services`,
 						},
@@ -73,6 +75,7 @@ function handlerFor(fetch: Fetch) {
 							"https://github.com/kevinpeckham/barkup",
 							"https://github.com/kevinpeckham/barkup-bench",
 							"https://github.com/kevinpeckham/barkdown",
+						"https://github.com/kevinpeckham/aeo-bench",
 						],
 					}),
 			);
@@ -243,51 +246,95 @@ function handlerFor(fetch: Fetch) {
 					),
 			);
 
+			// both research projects share the study tools; slugs are unique
+			// across projects (barkup studies use letters, aeo studies use
+			// numbers) so read_study needs no project argument
+			interface StudySection {
+				title: string;
+				figure?: { title?: string } | null;
+				body?: { heading?: string | null; html: string }[] | null;
+				takeaway?: string | null;
+			}
+			interface StudySource {
+				letters: string;
+				slug: string;
+				track: string;
+				title: string;
+				indexLine: string;
+				brief?: string | null;
+				sections: StudySection[];
+			}
+			const projects: {
+				project: string;
+				studies: StudySource[];
+				briefUrl: (brief: string) => string;
+			}[] = [
+				{
+					project: "barkup-bench",
+					studies: benchStudies.studies,
+					briefUrl: (brief) =>
+						`https://github.com/kevinpeckham/barkup-bench/blob/main/docs/${brief}`,
+				},
+				{
+					project: "aeo-bench",
+					studies: aeoStudies.studies,
+					briefUrl: (brief) =>
+						`https://github.com/kevinpeckham/aeo-bench/blob/main/${brief}`,
+				},
+			];
+
 			tool(
 				"list_studies",
-				"List every Barkup Bench study (pre-registered LLM tree-editing research): letters, slug, track, title, one-line result, url.",
+				"List every study across Lightning Jar's pre-registered research projects (Barkup Bench: LLM tree editing; AEO Bench: agent readiness and answer engine optimization): project, letters, slug, track, title, one-line result, url.",
 				{},
 				() =>
 					text(
-						benchStudies.studies.map((s) => ({
-							letters: s.letters,
-							slug: s.slug,
-							track: s.track,
-							title: s.title,
-							result: s.indexLine,
-							url: `${BASE}/research/barkup-bench/${s.slug}`,
-						})),
+						projects.flatMap(({ project, studies }) =>
+							studies.map((s) => ({
+								project,
+								letters: s.letters,
+								slug: s.slug,
+								track: s.track,
+								title: s.title,
+								result: s.indexLine,
+								url: `${BASE}/research/${project}/${s.slug}`,
+							})),
+						),
 					),
 			);
 
 			tool(
 				"read_study",
-				"Read one Barkup Bench study by slug: full section text (HTML stripped), chart titles, and source links.",
+				"Read one study by slug (from either research project; slugs are unique): full section text (HTML stripped), chart titles, and source links.",
 				{ slug: z.string().min(1) },
 				({ slug }: { slug: string }) => {
-					const study = benchStudies.studies.find((s) => s.slug === slug);
-					if (!study) return text({ error: `No study with slug "${slug}"` });
-					return text({
-						letters: study.letters,
-						track: study.track,
-						title: study.title,
-						url: `${BASE}/research/barkup-bench/${study.slug}`,
-						preRegistration: study.brief
-							? `https://github.com/kevinpeckham/barkup-bench/blob/main/docs/${study.brief}`
-							: null,
-						sections: study.sections.map((sec) => ({
-							title: stripHtml(sec.title),
-							chart:
-								sec.figure && "title" in sec.figure ? sec.figure.title : null,
-							text: sec.body
-								? sec.body
-										.map((c) =>
-											[c.heading, stripHtml(c.html)].filter(Boolean).join(": "),
-										)
-										.join("\n\n")
-								: stripHtml(sec.takeaway ?? ""),
-						})),
-					});
+					for (const { project, studies, briefUrl } of projects) {
+						const study = studies.find((s) => s.slug === slug);
+						if (!study) continue;
+						return text({
+							project,
+							letters: study.letters,
+							track: study.track,
+							title: study.title,
+							url: `${BASE}/research/${project}/${study.slug}`,
+							preRegistration: study.brief ? briefUrl(study.brief) : null,
+							sections: study.sections.map((sec) => ({
+								title: stripHtml(sec.title),
+								chart:
+									sec.figure && "title" in sec.figure
+										? (sec.figure.title ?? null)
+										: null,
+								text: sec.body
+									? sec.body
+											.map((c) =>
+												[c.heading, stripHtml(c.html)].filter(Boolean).join(": "),
+											)
+											.join("\n\n")
+									: stripHtml(sec.takeaway ?? ""),
+							})),
+						});
+					}
+					return text({ error: `No study with slug "${slug}"` });
 				},
 			);
 		},

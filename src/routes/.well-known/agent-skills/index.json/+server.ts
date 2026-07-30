@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 
+import aeoSkillMd from "$content/skills/aeo-bench-data/SKILL.md?raw";
 import skillMd from "$content/skills/barkup-bench-data/SKILL.md?raw";
 
 import type { RequestHandler } from "./$types";
@@ -12,7 +13,10 @@ export const prerender = false;
 
 const BASE = "https://www.lightningjar.com";
 
-const digest = `sha256:${createHash("sha256").update(skillMd, "utf8").digest("hex")}`;
+const digestOf = (md: string) =>
+	`sha256:${createHash("sha256").update(md, "utf8").digest("hex")}`;
+const digest = digestOf(skillMd);
+const aeoDigest = digestOf(aeoSkillMd);
 
 const index = {
 	$schema: "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
@@ -24,6 +28,14 @@ const index = {
 				"Query Barkup Bench, Lightning Jar's open, pre-registered benchmark series on how LLM agents read and edit structured document trees — list studies, read full findings, and pull supporting resources via the public keyless MCP server or plain HTTP.",
 			url: `${BASE}/.well-known/agent-skills/barkup-bench-data/SKILL.md`,
 			digest,
+		},
+		{
+			name: "aeo-bench-data",
+			type: "skill-md",
+			description:
+				"Query AEO Bench, Lightning Jar's open, pre-registered benchmark series measuring whether agent-readiness and answer-engine-optimization techniques actually help AI agents use websites — list studies, read full findings, and pull supporting resources via the public keyless MCP server or plain HTTP.",
+			url: `${BASE}/.well-known/agent-skills/aeo-bench-data/SKILL.md`,
+			digest: aeoDigest,
 		},
 	],
 };
