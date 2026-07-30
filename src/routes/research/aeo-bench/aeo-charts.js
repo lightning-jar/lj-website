@@ -26,7 +26,7 @@ export function initAeoCharts() {
 	function table(el, headers, rows) {
 		byId(el).innerHTML =
 			"<table><thead><tr>" +
-			headers.map((h) => "<th>" + h + "</th>").join("") +
+			headers.map((h) => '<th scope="col">' + h + "</th>").join("") +
 			"</tr></thead><tbody>" +
 			rows
 				.map(
@@ -36,16 +36,24 @@ export function initAeoCharts() {
 			"</tbody></table>";
 	}
 
-	// --- tooltip ---
-	const tip = byId("tooltip");
-	function showTip(e, text) {
-		tip.textContent = text;
-		tip.style.display = "block";
-		tip.style.left = `${e.pageX + 14}px`;
-		tip.style.top = `${e.pageY + 14}px`;
+	// --- shared tooltip (canonical bench-charts behavior: opacity +
+	// client coordinates + viewport-edge flipping; the page's #tooltip div
+	// is a fixed, opacity-0 element styled for exactly this) ---
+	const tooltip = byId("tooltip");
+	function showTip(evt, text) {
+		tooltip.textContent = text;
+		tooltip.style.opacity = "1";
+		const pad = 14;
+		let x = evt.clientX + pad;
+		let y = evt.clientY + pad;
+		const r = tooltip.getBoundingClientRect();
+		if (x + r.width > window.innerWidth - 8) x = evt.clientX - r.width - pad;
+		if (y + r.height > window.innerHeight - 8) y = evt.clientY - r.height - pad;
+		tooltip.style.left = x + "px";
+		tooltip.style.top = y + "px";
 	}
 	function hideTip() {
-		tip.style.display = "none";
+		tooltip.style.opacity = "0";
 	}
 
 	// --- Study 1: unprompted markdown adoption + input-cost ratio ---
