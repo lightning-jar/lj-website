@@ -20,8 +20,8 @@
 				},
 				"secondary": {
 					"label": "Our LLM Research",
-					"href": "/research/barkup-bench",
-					"title": "Barkup Bench: our open LLM structured-editing benchmark"
+					"href": "/research",
+					"title": "Research at Lightning Jar: our open LLM benchmark programs"
 				}
 			}
 		},
@@ -29,7 +29,8 @@
 			"heading": "We Believe in Research",
 			"text": [
 				"Good engineering decisions come from evidence, not vibes. That's why we run and publish open-source research for developers of LLM applications: a growing series of pre-registered studies, more than {{researchRuns}} scored model runs and counting, corrections included.",
-				"The flagship is Barkup Bench, our open benchmark measuring how language models read and edit structured documents. Every study is pre-registered before a single model is called: {{researchStudies}} studies so far, across {{researchModels}} models, trees from 5 to 1,000 nodes, and editing sessions up to 36 edits long. Everything the benchmark validates ships in our open-source barkup library, and everything it refutes gets published anyway."
+				"The flagship is Barkup Bench, our open benchmark measuring how language models read and edit structured documents. Every study is pre-registered before a single model is called: {{researchStudies}} studies so far, across {{researchModels}} models, trees from 5 to 1,000 nodes, and editing sessions up to 36 edits long. Everything the benchmark validates ships in our open-source barkup library, and everything it refutes gets published anyway.",
+				"The newest program is AEO Bench, which points the same discipline at a question our clients are starting to ask: do agent-readiness techniques like llms.txt and markdown negotiation actually help AI agents use a website? Study 1 measured 900 agent runs against a controlled site and found the industry's favorite advice largely unread, while the one technique that works pays off most for the agents that need it most. The fixture, the graders, and every result are open for anyone to check."
 			],
 			"ctas": {
 				"primary": {
