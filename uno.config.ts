@@ -10,10 +10,11 @@ import {
 export default defineConfig({
 	content: {
 		pipeline: {
-			// bench-charts.js emits utility classes in generated chart markup
+			// the chart builders emit utility classes in generated markup
 			include: [
 				/\.(svelte|md|json|html)($|\?)/,
 				/barkup-bench\/bench-charts\.js$/,
+				/aeo-bench\/aeo-charts\.js$/,
 			],
 		},
 		filesystem: ["./src/app.html"],

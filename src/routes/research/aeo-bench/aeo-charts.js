@@ -62,12 +62,12 @@ export function initAeoCharts() {
 			{
 				model: "opus-4.8",
 				vals: [64, 82],
-				tip: "adoption 45/72 markdown-arm cells (mostly Accept negotiation) · but savings only ~18% — opus was already frugal (2.7 fetches, 6.9k tokens per task)",
+				tip: "adoption 45/72 markdown-arm cells (mostly Accept negotiation) · but savings only ~18%; opus was already frugal (2.7 fetches, 6.9k tokens per task)",
 			},
 			{
 				model: "gemini-3.5-flash",
 				vals: [40, 27],
-				tip: "adoption 29/72 via the hidden directive · input cost fell to 26–27% of baseline — a 73–74% saving, inside Cloudflare's claim",
+				tip: "adoption 29/72 via the hidden directive · input cost fell to 26–27% of baseline, a 73–74% saving, inside Cloudflare's claim",
 			},
 			{
 				model: "kimi-k3",
@@ -77,12 +77,12 @@ export function initAeoCharts() {
 			{
 				model: "sonnet-4.5",
 				vals: [0, null],
-				tip: "0/72 — never discovered the pathway; no ratio exists",
+				tip: "0/72: never discovered the pathway; no ratio exists",
 			},
 			{
 				model: "gpt-oss-120b",
 				vals: [1, null],
-				tip: "1/72 — effectively never; no stable ratio",
+				tip: "1/72: effectively never; no stable ratio",
 			},
 		];
 		const CADOPT = "#3987e5",
@@ -95,7 +95,7 @@ export function initAeoCharts() {
 			CRATIO +
 			'"></span>input-cost ratio vs own baseline among adopters (lower is better)</span>' +
 			legendNote(
-				"the fetch tool never mentioned markdown — adoption means the model found the hidden directive and acted on it · ratio bars absent where a model produced too few adopter cells to measure",
+				"the fetch tool never mentioned markdown: adoption means the model found the hidden directive and acted on it · ratio bars absent where a model produced too few adopter cells to measure",
 			);
 		const W = 880,
 			BAR = 14,
@@ -134,13 +134,13 @@ export function initAeoCharts() {
 		});
 		const el = byId("fig-adoption");
 		el.innerHTML =
-			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grouped bar chart per model: unprompted markdown adoption is sixty-four percent for opus, forty percent for gemini, and near zero for sonnet, kimi, and gpt-oss; among adopters the input-cost ratio versus baseline is eighty-two percent for opus and twenty-seven percent for gemini — the savings are largest for the least frugal agent.">` +
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grouped bar chart per model: unprompted markdown adoption is sixty-four percent for opus, forty percent for gemini, and near zero for sonnet, kimi, and gpt-oss; among adopters the input-cost ratio versus baseline is eighty-two percent for opus and twenty-seven percent for gemini; the savings are largest for the least frugal agent.">` +
 			g +
 			marks +
 			hits +
 			"</svg>" +
 			figCap(
-				"the two markdown findings in one frame: adoption is a model disposition (some models read the hidden directive and act, some never do), and the cost saving among adopters is proportional to how wasteful the agent's baseline was — the frugal frontier model saves least",
+				"the two markdown findings in one frame: adoption is a model disposition (some models read the hidden directive and act, some never do), and the cost saving among adopters is proportional to how wasteful the agent's baseline was; the frugal frontier model saves least",
 			);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
