@@ -1,34 +1,67 @@
 <script lang="ts">
-import { Chat } from "@ai-sdk/svelte";
-import { DefaultChatTransport } from "ai";
+// Lazy hydration: the AI SDK (@ai-sdk/svelte + ai) is NOT imported
+// statically, so it stays out of the page's initial bundle. It loads,
+// and the Chat instance is constructed, only on the first human
+// gesture — focus, pointer, or touch on the card (all three so
+// keyboard, mouse, touch, and assistive tech each trigger it). The
+// input element is rendered immediately and never unmounts, so typed
+// text and focus survive hydration with no swap. Cheap on page load;
+// wakes on intent.
+import type { Chat } from "@ai-sdk/svelte";
+import type { UIMessage } from "ai";
 
 let input = $state("");
 let lastError = $state("");
+let activated = $state(false);
+let chat = $state<Chat<UIMessage> | null>(null);
+let inputEl: HTMLInputElement | null = $state(null);
 
-const chat = new Chat({
-	transport: new DefaultChatTransport({ api: "/api/concierge" }),
-	onError(err) {
-		// the route's refusals are JSON {"error": "..."} — surface the
-		// message itself when we can parse it
-		try {
-			lastError = JSON.parse(err.message).error ?? err.message;
-		} catch {
-			lastError = err?.message ?? String(err);
-		}
-	},
-});
+async function activate() {
+	if (activated) return;
+	activated = true;
+	try {
+		const [{ Chat: ChatCtor }, { DefaultChatTransport }] = await Promise.all([
+			import("@ai-sdk/svelte"),
+			import("ai"),
+		]);
+		chat = new ChatCtor<UIMessage>({
+			transport: new DefaultChatTransport({ api: "/api/concierge" }),
+			onError(err) {
+				// the route's refusals are JSON {"error": "..."} — surface the
+				// message itself when we can parse it
+				try {
+					lastError = JSON.parse(err.message).error ?? err.message;
+				} catch {
+					lastError = err?.message ?? String(err);
+				}
+			},
+		});
+	} catch {
+		activated = false; // let a later gesture retry
+		lastError = "The concierge couldn't load. Refresh and try again.";
+	}
+}
 
+const messages = $derived(chat?.messages ?? []);
 const busy = $derived(
-	chat.status === "streaming" || chat.status === "submitted",
+	chat?.status === "streaming" || chat?.status === "submitted",
 );
 
-function send(event: SubmitEvent) {
+async function send(event: SubmitEvent) {
 	event.preventDefault();
 	const text = input.trim();
 	if (!text || busy) return;
 	lastError = "";
+	if (!chat) await activate();
+	if (!chat) return; // activate() failed; lastError already set
 	chat.sendMessage({ text });
 	input = "";
+}
+
+function useSuggestion(suggestion: string) {
+	input = suggestion;
+	void activate();
+	inputEl?.focus();
 }
 
 // Minimal, safe rendering of the agent's markdown: escape everything,
@@ -55,7 +88,7 @@ function renderMarkdownLite(text: string): string {
 		.join("");
 }
 
-function textOf(message: (typeof chat.messages)[number]): string {
+function textOf(message: UIMessage): string {
 	// a message can carry several text parts (before and after tool
 	// calls) — join as paragraphs so they don't run together
 	return (message.parts ?? [])
@@ -65,7 +98,7 @@ function textOf(message: (typeof chat.messages)[number]): string {
 		.join("\n\n");
 }
 
-function isSearching(message: (typeof chat.messages)[number]): boolean {
+function isSearching(message: UIMessage): boolean {
 	return (message.parts ?? []).some(
 		(p) => p.type.startsWith("tool-") || p.type === "dynamic-tool",
 	);
@@ -78,14 +111,24 @@ const SUGGESTIONS = [
 ];
 </script>
 
-<div class="grid grid-cols-1 gap-4 max-w-article w-full">
+<!-- gesture triggers on the card: focusin (keyboard + AT + click into a
+     control), pointerenter (mouse), touchstart (touch) — any wakes the
+     SDK. Non-interactive handlers on a container are an intentional
+     activation heuristic, not a control. -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div
+  class="grid grid-cols-1 gap-4 max-w-article w-full"
+  onfocusin={activate}
+  onpointerenter={activate}
+  ontouchstart={activate}
+>
   <!-- transcript -->
   <div
     class="grid grid-cols-1 gap-3 min-h-[16rem]"
     aria-live="polite"
     aria-label="Conversation"
   >
-    {#if chat.messages.length === 0}
+    {#if messages.length === 0}
       <p class="opacity-70 text-15px">
         Ask about the studio's work, research, packages, or writing. A few
         starters:
@@ -94,10 +137,8 @@ const SUGGESTIONS = [
         {#each SUGGESTIONS as suggestion}
           <button
             type="button"
-            class="text-14px border border-maximumYellow/40 text-maximumYellow rounded-full px-3 py-1.5 hover:bg-maximumYellow/10"
-            onclick={() => {
-              input = suggestion;
-            }}
+            class="text-14px block border border-maximumYellow/40 text-maximumYellow rounded-full px-3 py-0 leading-none hover:bg-maximumYellow/10"
+            onclick={() => useSuggestion(suggestion)}
           >
             {suggestion}
           </button>
@@ -105,7 +146,7 @@ const SUGGESTIONS = [
       </div>
     {/if}
 
-    {#each chat.messages as message (message.id)}
+    {#each messages as message (message.id)}
       {#if message.role === "user"}
         <div
           class="justify-self-end max-w-[85%] border border-white/15 bg-white/5 rounded-lg px-4 py-2.5 text-15px"
@@ -129,7 +170,7 @@ const SUGGESTIONS = [
       {/if}
     {/each}
 
-    {#if busy && chat.messages.at(-1)?.role === "user"}
+    {#if busy && messages.at(-1)?.role === "user"}
       <span class="opacity-60 font-mono text-13px">⚡ thinking…</span>
     {/if}
 
@@ -147,8 +188,10 @@ const SUGGESTIONS = [
     <label class="grow">
       <span class="sr-only">Message the concierge</span>
       <input
+        bind:this={inputEl}
         type="text"
         bind:value={input}
+        onfocus={activate}
         maxlength="2000"
         placeholder="Ask the concierge…"
         autocomplete="off"
