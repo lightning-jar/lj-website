@@ -20,9 +20,10 @@
  * @module parseMarkdown
  */
 
+import { parse } from "yaml";
+
 import { Marked, type Tokens } from "marked";
 import markedFootnote from "marked-footnote";
-import { parse } from "yaml";
 
 /**
  * Type guard to check if a value is a valid frontmatter object
@@ -60,10 +61,14 @@ function escapeHtml(s: string): string {
 }
 
 /**
- * Safe HTML tags allowed through sanitization (self-closing or empty inline tags).
- * Pattern matches: <br>, <br/>, <br />, <hr>, <hr/>, etc.
+ * Safe HTML tags allowed through sanitization: self-closing/empty inline
+ * tags, plus BARE (attribute-free) inline formatting tags that CMS authors
+ * commonly type instead of markdown (`<strong>`, `<em>`, `<b>`, `<i>`,
+ * `<u>`). Only the exact tag with no attributes matches — `<strong>` and
+ * `</strong>` pass, `<strong onclick=…>` is escaped, so no event handler
+ * or scheme can ride through. Matches: <br>, <br/>, <strong>, </em>, etc.
  */
-const SAFE_HTML_TAGS = /^<(br|hr|wbr)(\s*\/?)>$/i;
+const SAFE_HTML_TAGS = /^<\/?(br|hr|wbr|strong|em|b|i|u)(\s*\/?)>$/i;
 
 /**
  * Escape `<` except for allowlisted safe HTML tags

@@ -659,13 +659,15 @@ describe("parseMarkdownTextToHtml - code spans inside links and images", () => {
 		expect(html).not.toContain("MD_CODE");
 	});
 
-	it("still neutralizes HTML in link text around code spans", () => {
-		const md = "[a <b> `c`](https://example.com)";
+	it("still neutralizes unsafe HTML in link text around code spans", () => {
+		// bare formatting tags are allowlisted, so probe with a tag that
+		// must always be escaped (attributes → event handlers)
+		const md = "[a <img src=x onerror=alert(1)> `c`](https://example.com)";
 		const html = parseMarkdownTextToHtml({
 			markdown: md,
 			options: { sanitize: true },
 		});
-		expect(html).not.toContain("<b>");
+		expect(html).not.toContain("<img");
 		expect(html).toContain("<code>c</code>");
 		expect(html).not.toContain("MD_CODE");
 	});
@@ -677,5 +679,19 @@ describe("parseMarkdownTextToHtml - code spans inside links and images", () => {
 			options: { sanitize: true },
 		});
 		expect(html).not.toContain("MD_CODE");
+	});
+
+	it("passes bare inline formatting tags through, escapes attributed ones", () => {
+		// CMS authors sometimes type raw <strong>/<em> instead of markdown;
+		// the bare tags render, but any attribute-carrying variant is escaped
+		const html = parseMarkdownTextToHtml({
+			markdown:
+				"<strong>Bold.</strong> <em>Italic.</em> <strong onclick=alert(1)>x</strong>",
+			options: { sanitize: true },
+		});
+		expect(html).toContain("<strong>Bold.</strong>");
+		expect(html).toContain("<em>Italic.</em>");
+		expect(html).toContain("&lt;strong onclick=alert(1)>");
+		expect(html).not.toContain("<strong onclick");
 	});
 });
