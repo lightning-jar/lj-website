@@ -36,6 +36,9 @@ interface ApiArticleDetail extends ApiArticleListItem {
 
 export interface BlogArticleListEntry {
 	frontMatter: FrontMatter;
+	/** full-resolution publish timestamp from the CMS; breaks same-day
+	 * ties in the sort (frontMatter.date is only day-resolution). */
+	publishedAt: string | null;
 }
 
 export interface BlogArticleDetail {
@@ -77,7 +80,10 @@ export async function getAllBlogArticles(
 	fetch: Fetch,
 ): Promise<BlogArticleListEntry[]> {
 	const list = await fetchArticleList(fetch);
-	const articles = list.map((item) => ({ frontMatter: item.frontMatter }));
+	const articles = list.map((item) => ({
+		frontMatter: item.frontMatter,
+		publishedAt: item.publishedAt,
+	}));
 	return articles.sort((a, b) => {
 		const dateA = new Date(
 			a.frontMatter?.date && typeof a.frontMatter.date === "string"
@@ -91,6 +97,11 @@ export async function getAllBlogArticles(
 		);
 		const byDate = dateB.getTime() - dateA.getTime();
 		if (byDate !== 0) return byDate;
+		// same editorial date (frontMatter.date is day-only from the CMS)
+		// → newest published first, using the full publish timestamp
+		const pubA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+		const pubB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+		if (pubB !== pubA) return pubB - pubA;
 		const slugA =
 			typeof a.frontMatter?.slug === "string" ? a.frontMatter.slug : "";
 		const slugB =

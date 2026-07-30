@@ -12,19 +12,16 @@ export async function load({ fetch, setHeaders }) {
 		"cache-control": "public, s-maxage=300, stale-while-revalidate=3600",
 	});
 
-	// get all blog articles from the CMS at request time
+	// get all blog articles from the CMS at request time. The getter
+	// already returns them newest-first (by editorial date, then by
+	// full publish timestamp for same-day ties), so we keep that order
+	// rather than re-sorting on the day-only date here.
 	const rawArticles = await getAllBlogArticles(fetch);
 
-	// reduce articles to front-matter only
-	const articles: FrontMatter[] = rawArticles.map((article) => {
-		return article.frontMatter || {};
-	});
-
-	const sortedArticles = articles.sort((a, b) => {
-		const dateA = new Date(a.date || "");
-		const dateB = new Date(b.date || "");
-		return dateB.getTime() - dateA.getTime();
-	});
+	// reduce articles to front-matter only, preserving the getter's order
+	const articles: FrontMatter[] = rawArticles.map(
+		(article) => article.frontMatter || {},
+	);
 
 	const meta = {
 		title: "Blog",
@@ -32,7 +29,7 @@ export async function load({ fetch, setHeaders }) {
 	};
 
 	return {
-		articles: sortedArticles,
+		articles,
 		meta,
 	};
 }
