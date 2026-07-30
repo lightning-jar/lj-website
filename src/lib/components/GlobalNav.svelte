@@ -25,6 +25,7 @@ let navItems: NavItem[] = $state([
 	{ label: "Technologies", href: "/technologies" },
 	{ label: "Packages & Tools", href: "/packages" },
 	{ label: "Fun", href: "/fun" },
+	{ label: "Concierge", href: "/concierge" },
 ]);
 
 // desktop top-nav (lg+): links + dropdown menus
@@ -51,6 +52,7 @@ const desktopMenus = [
 			{ label: "Packages & Tools", href: "/packages" },
 			{ label: "Reading List", href: "/reading-list" },
 			{ label: "Fun", href: "/fun" },
+			{ label: "Concierge", href: "/concierge" },
 		],
 	},
 ];
