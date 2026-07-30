@@ -1,8 +1,12 @@
 <script lang="ts">
+// shared headline numbers: src/lib/data/research-stats.json
+
 import { onMount } from "svelte";
 
 // components
 import LinkButton from "$components/LinkButton.svelte";
+
+import researchStats from "$data/research-stats.json";
 
 // dashboard content and chart data
 import aeo from "./aeo-content.json";
@@ -176,9 +180,9 @@ const proseCls = "text-[#c3c9d4]";
       <!-- headline stats -->
       <div class="grid grid-cols-2 gap-3">
         {#each [
-          { num: "1", cap: "pre-registered study, plus a registered re-score" },
-          { num: "900", cap: "scored agent runs at temperature 0" },
-          { num: "5", cap: "models measured across tiers" },
+          { num: researchStats.aeoBench.studiesDisplay, cap: "pre-registered study, plus a registered re-score" },
+          { num: researchStats.aeoBench.scoredRunsDisplay, cap: "scored agent runs at temperature 0" },
+          { num: researchStats.aeoBench.modelsDisplay, cap: "models measured across tiers" },
         ] as tile (tile.cap)}
           <div
             class="bg-[hsl(217,44%,19%)] border border-white/14 rounded-md px-4.5 pt-4 pb-3.5"

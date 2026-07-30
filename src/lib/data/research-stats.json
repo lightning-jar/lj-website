@@ -1,8 +1,24 @@
 {
-	"_updateNote": "Single source of truth for barkup-bench headline numbers. Bump when a new study publishes. Consumed by the home research panel, /research, and /research/barkup-bench.",
-	"studiesSpelled": "forty-five",
-	"scoredRunsDisplay": "36,198",
-	"modelsSpelled": "eight",
-	"studiesDisplay": "45",
-	"modelsDisplay": "8"
+	"_updateNote": "Single source of truth for research headline numbers, per project plus program totals. Bump the project block when a new study publishes and keep totals in sync. Consumers: home research panel (totals for runs, barkupBench for the flagship paragraph), /research project tiles, /research/barkup-bench hub + playbook, /research/aeo-bench hub.",
+	"totals": {
+		"studiesDisplay": "46",
+		"studiesSpelled": "forty-six",
+		"scoredRunsDisplay": "37,098",
+		"modelsDisplay": "8",
+		"modelsSpelled": "eight"
+	},
+	"barkupBench": {
+		"studiesDisplay": "45",
+		"studiesSpelled": "forty-five",
+		"scoredRunsDisplay": "36,198",
+		"modelsDisplay": "8",
+		"modelsSpelled": "eight"
+	},
+	"aeoBench": {
+		"studiesDisplay": "1",
+		"studiesSpelled": "one",
+		"scoredRunsDisplay": "900",
+		"modelsDisplay": "5",
+		"modelsSpelled": "five"
+	}
 }

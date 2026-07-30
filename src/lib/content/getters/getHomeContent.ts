@@ -4,9 +4,9 @@ import researchStats from "$data/research-stats.json";
 // Interpolate shared research stats so the home panel can never drift from
 // the research pages. Single source: src/lib/data/research-stats.json
 const substitutions: Record<string, string> = {
-	"{{researchStudies}}": researchStats.studiesSpelled,
-	"{{researchRuns}}": researchStats.scoredRunsDisplay,
-	"{{researchModels}}": researchStats.modelsSpelled,
+	"{{researchStudies}}": researchStats.barkupBench.studiesSpelled,
+	"{{researchRuns}}": researchStats.totals.scoredRunsDisplay,
+	"{{researchModels}}": researchStats.barkupBench.modelsSpelled,
 };
 
 function interpolate(text: string): string {

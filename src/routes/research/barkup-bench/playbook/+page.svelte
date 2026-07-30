@@ -225,8 +225,8 @@ it>" instead of a patch.`,
       <h1 class="display">The Builder's Playbook</h1>
       <p class="text-16px {proseCls} mb-4 mt-4">
         Ten guidelines for building document-editing apps with LLM agents,
-        distilled from {researchStats.studiesSpelled} pre-registered studies
-        and more than {researchStats.scoredRunsDisplay} scored model runs.
+        distilled from {researchStats.barkupBench.studiesSpelled} pre-registered studies
+        and more than {researchStats.barkupBench.scoredRunsDisplay} scored model runs.
         Each one is an action you can take this week, with the measurement
         that earned it a place on the list and a link to its chart on the
         <a class={linkCls} href={dash}>research dashboard</a>.

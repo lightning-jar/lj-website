@@ -271,9 +271,9 @@ const proseCls = "text-[#c3c9d4]";
       <!-- headline stats: single source of truth is research-stats.json -->
       <div class="grid grid-cols-2 gap-3">
         {#each [
-          { num: researchStats.studiesDisplay, cap: "pre-registered studies, published as found" },
-          { num: researchStats.scoredRunsDisplay, cap: "scored model runs at temperature 0" },
-          { num: researchStats.modelsDisplay, cap: "models measured across tiers" },
+          { num: researchStats.barkupBench.studiesDisplay, cap: "pre-registered studies, published as found" },
+          { num: researchStats.barkupBench.scoredRunsDisplay, cap: "scored model runs at temperature 0" },
+          { num: researchStats.barkupBench.modelsDisplay, cap: "models measured across tiers" },
           { num: "1,000", cap: "nodes in the largest trees; sessions to 36 edits" },
         ] as tile (tile.cap)}
           <div
