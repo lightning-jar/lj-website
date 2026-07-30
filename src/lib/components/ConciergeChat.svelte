@@ -111,8 +111,17 @@ function renderMarkdownLite(text: string): string {
 		.replace(/'/g, "&#39;")
 		.replace(/[\uE000\uE001]/g, "");
 
-	// stash inline code and links as placeholders so bold/italic passes
-	// can't mangle their contents (URLs, code with * or _)
+	// bold + italic, applied both to a link's label (a label can itself
+	// be **bold**) and to the running text outside links
+	const emphasize = (str: string) =>
+		str
+			.replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>")
+			.replace(/(?<![*\w])\*([^*\n]+)\*(?!\*)/g, "<em>$1</em>")
+			.replace(/(?<![_\w])_([^_\n]+)_(?![_\w])/g, "<em>$1</em>");
+
+	// stash inline code and links as placeholders so the emphasis pass
+	// can't mangle their contents (URLs, code with * or _); the label of
+	// a link is emphasized here, before it's stashed
 	const stash: string[] = [];
 	const mask = (html: string) => `\uE000${stash.push(html) - 1}\uE001`;
 	let s = escaped
@@ -121,12 +130,10 @@ function renderMarkdownLite(text: string): string {
 			/\[([^\]]+)\]\((\/(?![/\\])[^)\s"'\\]*|https:\/\/[^)\s"'\\]+)\)/g,
 			(_m, label, href) =>
 				mask(
-					`<a class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4" rel="nofollow" href="${href}">${label}</a>`,
+					`<a class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4" rel="nofollow" href="${href}">${emphasize(label)}</a>`,
 				),
-		)
-		.replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>")
-		.replace(/(?<![*\w])\*([^*\n]+)\*(?!\*)/g, "<em>$1</em>")
-		.replace(/(?<![_\w])_([^_\n]+)_(?![_\w])/g, "<em>$1</em>");
+		);
+	s = emphasize(s);
 
 	// block structure: group consecutive list items into <ul>/<ol>, split
 	// the rest into paragraphs on blank lines (single newline → <br>)
@@ -166,10 +173,13 @@ function renderMarkdownLite(text: string): string {
 	flushPara();
 	flushList();
 
-	// restore stashed code/link html
-	return blocks
-		.join("")
-		.replace(/\uE000(\d+)\uE001/g, (_m, i) => stash[Number(i)] ?? "");
+	// restore stashed code/link html; loop so a mask nested inside another
+	// (e.g. inline code inside a link label) is fully resolved
+	let out = blocks.join("");
+	for (let i = 0; i < 3 && /\uE000\d+\uE001/.test(out); i++) {
+		out = out.replace(/\uE000(\d+)\uE001/g, (_m, n) => stash[Number(n)] ?? "");
+	}
+	return out;
 }
 
 function textOf(message: UIMessage): string {
@@ -223,7 +233,7 @@ const SUGGESTIONS = [
 
   <!-- transcript -->
   <div
-    class="grid grid-cols-1 gap-3 min-h-[16rem] place-content-start bg-white/5 rounded-md px-4 pt-5"
+    class="grid grid-cols-1 gap-3 min-h-[16rem] place-content-start bg-white/5 rounded-md px-4 pt-5 pb-6"
     aria-live="polite"
     aria-label="Conversation"
   >
