@@ -50,7 +50,10 @@ export async function load({ fetch, setHeaders }) {
 	}));
 
 	// latest studies for the homepage tiles: both research projects,
-	// tagged with their project, newest first by published date, cap 6.
+	// tagged with their project, newest first, cap 6. `published` is
+	// day-resolution, so same-day studies tie on date; the study JSON is
+	// chronological (oldest first), so a higher file position is the
+	// newer study — `order` (descending) breaks those ties correctly.
 	const latestStudies = [
 		...benchStudies.studies.map((study) => ({
 			slug: study.slug,
@@ -69,10 +72,12 @@ export async function load({ fetch, setHeaders }) {
 			projectSlug: "aeo-bench",
 		})),
 	]
-		.sort(
-			(a, b) =>
-				new Date(b.published).getTime() - new Date(a.published).getTime(),
-		)
+		.map((study, order) => ({ ...study, order }))
+		.sort((a, b) => {
+			const byDate =
+				new Date(b.published).getTime() - new Date(a.published).getTime();
+			return byDate !== 0 ? byDate : b.order - a.order;
+		})
 		.slice(0, 6);
 
 	// latest reading-list entries for the homepage tiles (getter is
