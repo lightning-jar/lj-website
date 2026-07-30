@@ -6,30 +6,6 @@ import HamburgerButton from "$components/HamburgerButton.svelte";
 import NavLogoBlock from "$components/NavLogoBlock.svelte";
 import NavSearch from "$components/NavSearch.svelte";
 
-// content
-type NavItem = {
-	label: string;
-	href: string;
-	el?: HTMLAnchorElement;
-};
-
-let navItems: NavItem[] = $state([
-	{ label: "Home", href: "/" },
-	{ label: "Blog", href: "/blog" },
-	{ label: "About", href: "/about" },
-	{ label: "Services", href: "/services" },
-	{ label: "Research", href: "/research" },
-	{ label: "Barkup Bench", href: "/research/barkup-bench" },
-	{ label: "AEO Bench", href: "/research/aeo-bench" },
-	{ label: "Testimonials", href: "/testimonials" },
-	{ label: "Customer Stories", href: "/customer-stories" },
-	{ label: "Reading List", href: "/reading-list" },
-	{ label: "Technologies", href: "/technologies" },
-	{ label: "Packages & Tools", href: "/packages" },
-	{ label: "Fun", href: "/fun" },
-	{ label: "Concierge", href: "/concierge" },
-]);
-
 // desktop top-nav (lg+): links + dropdown menus
 const desktopLinks = [{ label: "Blog", href: "/blog" }];
 const desktopMenus = [
@@ -66,12 +42,34 @@ const desktopMenus = [
 ];
 let openDesktopMenu: string | null = $state(null);
 
+// mobile nav (below lg): a flat "Home"/"Blog" plus the same grouped
+// menus as desktop, rendered as tap-to-expand accordions — the
+// touch-friendly form of the desktop flyouts, so every link is reachable
+type MobileEntry =
+	| { type: "link"; label: string; href: string }
+	| { type: "menu"; key: string; label: string; items: NavLink[] };
+type NavLink = { label: string; href: string };
+const mobileNav: MobileEntry[] = [
+	{ type: "link", label: "Home", href: "/" },
+	{ type: "link", label: "Blog", href: "/blog" },
+	...desktopMenus.map(
+		(m): MobileEntry => ({
+			type: "menu",
+			key: m.key,
+			label: m.label,
+			items: m.items,
+		}),
+	),
+];
+let openMobileMenu: string | null = $state(null);
+function toggleMobileMenu(key: string) {
+	openMobileMenu = openMobileMenu === key ? null : key;
+}
+
 // state
 let popover: HTMLDivElement | null = $state(null);
 let nav: HTMLElement | null = $state(null);
 let openMenuButton: HTMLButtonElement | null = $state(null);
-let closeMenuButton: HTMLButtonElement | null = $state(null);
-let lastNavItem = $derived(navItems[navItems.length - 1].el);
 
 let popoverState: "closed" | "open" = $state("closed");
 
@@ -82,6 +80,7 @@ $effect(() => {
 		preventBodyScroll();
 	} else {
 		allowBodyScroll();
+		openMobileMenu = null; // collapse accordions when the menu closes
 	}
 });
 
@@ -162,17 +161,6 @@ function handleWindowClick(e: MouseEvent) {
 
 function handleWindowKeydown(e: KeyboardEvent) {
 	if (e.key === "Escape") openDesktopMenu = null;
-}
-
-function handleKeydown(e: KeyboardEvent) {
-	console.log(e.key);
-	if (e.key === "Tab" && popoverState === "open") {
-		// natural DOM order flows close button → search → nav items;
-		// loop back to the top from the last nav item
-		if (document.activeElement === lastNavItem) {
-			focusOnNavHamburger();
-		}
-	}
 }
 </script>
 
@@ -275,7 +263,6 @@ function handleKeydown(e: KeyboardEvent) {
     <!-- menu modal popover -->
     <div
       bind:this={popover}
-      onkeydown={handleKeydown}
       popover="auto"
       role="dialog"
       aria-modal="true"
@@ -305,17 +292,53 @@ function handleKeydown(e: KeyboardEvent) {
       <nav
         aria-label="Primary"
         bind:this={nav}
-        class="grid grid-cols-1 gap-5 place-content-center place-items-center font-serif font-700 text-22px sm:text-30px lg:text-48px sm:gap-6 text-accent pt-5"
+        class="grid grid-cols-1 max-w-md mx-auto w-full font-sans text-19px pt-6"
       >
-        {#each navItems as item, index}
-          {@const idSlug = item.href.replaceAll("/", "")}
-          <a
-            id="nav-item-{idSlug || 'home'}"
-            bind:this={navItems[index].el}
-            href={item.href}
-            class="opacity-90 underline-offset-4 decoration-accent/30 hover:opacity-100 hover:underline hover:decoration-accent underline-offset-8 font-display"
-            onclick={handleNavItemClick}>{item.label}</a
-          >
+        {#each mobileNav as entry (entry.label)}
+          {#if entry.type === "link"}
+            <a
+              href={entry.href}
+              class="block py-3 border-b border-white/10 text-accent opacity-90 hover:opacity-100"
+              onclick={handleNavItemClick}>{entry.label}</a
+            >
+          {:else}
+            <div class="border-b border-white/10">
+              <button
+                type="button"
+                aria-expanded={openMobileMenu === entry.key}
+                class="w-full flex items-center justify-between py-3 text-left text-accent opacity-90 hover:opacity-100"
+                onclick={() => toggleMobileMenu(entry.key)}
+              >
+                {entry.label}
+                <svg
+                  class="w-4 h-4 transition-transform {openMobileMenu ===
+                  entry.key
+                    ? 'rotate-180'
+                    : ''}"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  aria-hidden="true"
+                >
+                  <path d="M2.5 4.5 L6 8 L9.5 4.5" />
+                </svg>
+              </button>
+              {#if openMobileMenu === entry.key}
+                <div
+                  class="grid grid-cols-1 pl-4 ml-1 mb-2 border-l border-accent/30"
+                >
+                  {#each entry.items as item (item.href)}
+                    <a
+                      href={item.href}
+                      class="block py-2 text-16px text-white/85 hover:text-accent"
+                      onclick={handleNavItemClick}>{item.label}</a
+                    >
+                  {/each}
+                </div>
+              {/if}
+            </div>
+          {/if}
         {/each}
       </nav>
     </div>
