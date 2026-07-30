@@ -1,6 +1,7 @@
-// Concierge chat prototype: unlinked and noindexed while we decide
-// whether it earns a place on the homepage. robotsFollow: false makes
-// the layout emit the noindex robots meta.
+// Concierge chat prototype. Now deliberately surfaced (footer link +
+// both sitemaps) as a pre-homepage soft launch, partly to see how the
+// abuse defenses hold up under real bot/crawler traffic — so it's
+// indexable (robotsFollow: true) to keep the sitemap signal coherent.
 export const prerender = false;
 
 export function load() {
@@ -9,7 +10,7 @@ export function load() {
 			title: "Concierge (experiment)",
 			description:
 				"An experimental chat guide to Lightning Jar's work, research, and writing.",
-			robotsFollow: false,
+			robotsFollow: true,
 			analyticsOn: true,
 		},
 	};

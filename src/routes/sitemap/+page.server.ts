@@ -37,6 +37,19 @@ const funSection = {
 	],
 };
 
+const conciergeSection = {
+	name: "Concierge",
+	pages: [
+		{
+			href: "/concierge",
+			title: "Concierge (experiment)",
+			description:
+				"An experimental chat guide to the studio's work, research, packages, and writing, grounded in this site's own content.",
+			date: "",
+		},
+	],
+};
+
 import aeoStudies from "../research/aeo-bench/aeo-studies.json";
 
 const researchSection = {
@@ -139,6 +152,7 @@ export const load = async ({ fetch, setHeaders }) => {
 	});
 	const sitemap = [
 		homeSitemapSection,
+		conciergeSection,
 		aboutSection,
 		funSection,
 		researchSection,

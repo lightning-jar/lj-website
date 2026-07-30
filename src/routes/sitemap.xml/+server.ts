@@ -80,6 +80,7 @@ const staticPages = [
 	generateSiteMapXMLPage(`/blog`, "monthly", 0.25), // blog landing page
 	generateSiteMapXMLPage(`/feeds`, "monthly", 0.25), // feed index page
 	generateSiteMapXMLPage(`/fun`, "monthly", 0.25), // fun side projects page
+	generateSiteMapXMLPage(`/concierge`, "monthly", 0.25), // concierge chat experiment
 	generateSiteMapXMLPage(`/built-with`, "monthly", 0.25), // built with
 	generateSiteMapXMLPage(`/customer-stories`, "monthly", 0.25), // customer stories landing page
 	generateSiteMapXMLPage(`/reading-list`, "monthly", 0.25), // reading list landing page

@@ -65,6 +65,10 @@
 		{
 			"href": "/feeds",
 			"data-text": "Feeds"
+		},
+		{
+			"href": "/concierge",
+			"data-text": "Concierge"
 		}
 	]
 }
