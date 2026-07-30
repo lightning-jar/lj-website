@@ -96,7 +96,7 @@ let {
   </div>
 
   <!-- legal links -->
-  <div class="mb-4 flex gap-4">
+  <div class="mb-4 flex flex-wrap gap-x-4 gap-y-2">
     {#each legalLinks ?? [] as link}
       {#if link.href && link["data-text"]}
         <a
