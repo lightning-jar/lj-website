@@ -389,6 +389,115 @@ export function initAeoCharts() {
 		);
 	})();
 
+	// --- Study 3: input tokens per solved task on the candidate, by design ---
+	(() => {
+		const ROWS = [
+			{
+				arm: "no affordance",
+				v: 68910,
+				color: "#8b93a3",
+				tip: "control (frozen Study 2 records) · orphans 0/10 · 12.2 fetches/task · opus 29.9k, gemini 85.9k per solved",
+			},
+			{
+				arm: "hint sentence",
+				v: 41341,
+				color: "#3987e5",
+				tip: "Study 2's one-sentence affordance · orphans 10/10 · 8.4 fetches · opus 19.7k, gemini 60.2k per solved",
+			},
+			{
+				arm: "prefetch (giant)",
+				v: 26980,
+				color: "#e66767",
+				tip: "the ~300-entry everything-index in context · orphans 10/10 but 2.68x the curated slice's input for zero added accuracy",
+			},
+			{
+				arm: "index tool",
+				v: 13529,
+				color: "#c98500",
+				tip: "read_site_index tool · orphans 10/10 · strong second; loses to prefetch because a tool round-trip cannot ride the cached system prompt",
+			},
+			{
+				arm: "prefetch (curated)",
+				v: 9379,
+				color: "#199e70",
+				tip: "the winner and registered ship design · orphans 10/10, linked 14/14, 3.1 fetches · 7.3x cheaper than unaided, 4.4x cheaper than the hint",
+			},
+		];
+		byId("legend-3").innerHTML =
+			'<span class="key"><span class="chip" style="background:#199e70"></span>the shipping design (curated-index prefetch)</span>' +
+			'<span class="key"><span class="chip" style="background:#8b93a3"></span>other measured designs</span>' +
+			legendNote(
+				"input tokens per SOLVED task on Haiku 4.5, the site-chat-agent candidate (lower is better) · all fresh designs solve the orphan class 10/10; the differences are economics · anchors opus and gemini in the table",
+			);
+		const W = 880,
+			BAR = 16,
+			GPAD = 12,
+			T = 8,
+			B = 42,
+			L = 210,
+			R = 84;
+		const H = T + ROWS.length * (BAR + GPAD) + B;
+		const iw = W - L - R;
+		const max = 70000;
+		const xOf = (v) => L + (v / max) * iw;
+		let g = "";
+		for (const tick of [0, 35000, 70000]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick / 1000}k</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		ROWS.forEach((row, i) => {
+			const y = T + i * (BAR + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${y + BAR - 3}" text-anchor="end">${row.arm}</text>`;
+			const w = Math.max((row.v / max) * iw, 2);
+			marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${row.color}" rx="3"/>`;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 4}">${(row.v / 1000).toFixed(1)}k</text>`;
+			hits += `<rect x="${L}" y="${y}" width="${iw}" height="${BAR}" fill="transparent" data-tip="${esc(row.arm + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-affordance");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart of input tokens per solved task on Haiku 4.5 across five affordance designs: 68.9 thousand with no affordance, 41.3 thousand with the hint sentence, 27 thousand prefetching the giant index, 13.5 thousand with an index tool, and 9.4 thousand prefetching the curated index, the winning design.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the harness design menu priced on the candidate model: every deliberate affordance solves the orphan class completely, so the decision is pure economics, and putting a curated index in the context wins by 4.4x over the hint and 7.3x over hoping",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-affordance",
+			["cell", "haiku-4.5", "opus-4.8", "gemini-3.5-flash"],
+			[
+				[
+					"orphans: control → hint → prefetch → giant → tool",
+					"0 → 10 → 10 → 10 → 10 /10",
+					"0 → 10 → 10 → 10 → 10 /10",
+					"0 → 9 → 10 → 10 → 10 /10",
+				],
+				["in-tok per solved: control", "68.9k", "29.9k", "85.9k"],
+				["in-tok per solved: hint", "41.3k", "19.7k", "60.2k"],
+				["in-tok per solved: prefetch (curated)", "9.4k", "9.1k", "23.3k"],
+				["in-tok per solved: prefetch (giant)", "27.0k", "32.4k", "53.1k"],
+				["in-tok per solved: index tool", "13.5k", "10.6k", "21.9k"],
+				[
+					"mean fetches: control → prefetch",
+					"12.2 → 3.1",
+					"7.8 → 2.3",
+					"15.3 → 6.1",
+				],
+				["no-submit cells (all arms)", "0", "0", "0"],
+				["S3 gates", "H1 PASS (ceiling)", "anchor", "anchor"],
+				["model spend (fresh arms)", "$1.69", "$8.60", "$1.04"],
+			],
+		);
+	})();
+
 	// Legend title post-pass (idempotent), mirroring bench-charts.js.
 	document.querySelectorAll(".chart-legend").forEach((el) => {
 		if (!el.firstElementChild?.classList?.contains("legend-title")) {

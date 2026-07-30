@@ -135,10 +135,70 @@
 				{
 					"title": "AEO Bench Study 1",
 					"href": "/research/aeo-bench/1"
+				},
+				{
+					"title": "Study 3: the affordance study",
+					"href": "/research/aeo-bench/3"
 				}
 			],
 			"brief": "docs/BRIEF-STUDY2.md",
 			"quote": "The file was fine. The readers were missing: zero consultations in 128 chances on the frontier tier, and one sentence of affordance was worth more than every file on the site."
+		},
+		{
+			"slug": "3",
+			"letters": "3",
+			"track": "Agent harness design",
+			"title": "The affordance study: the index goes in the context",
+			"eyebrow": "Study 3 · the affordance study · 288 fresh cells on the frozen fixture",
+			"indexLine": "The series' first gate PASS: prefetching a curated site index into the agent's context matches or beats every other design at a fraction of the cost (Haiku: 9.4k input tokens per solved task vs 68.9k unaided and 41.3k under the hint), every deliberate affordance dissolves Study 2's orphan catastrophe completely, and the giant everything-index costs 2.68 times the curated slice for zero added accuracy.",
+			"sections": [
+				{
+					"id": "sec-study3",
+					"eyebrow": "The affordance study",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-3",
+					"figure": {
+						"id": "fig-affordance",
+						"title": "Input Tokens per Solved Task on the Candidate Model, by Affordance Design"
+					},
+					"table": {
+						"id": "tbl-affordance",
+						"summary": "Per-arm accuracy and economics across three models, with the registered gates"
+					},
+					"body": [
+						{
+							"heading": "From Finding to Wiring",
+							"html": "Study 2 ended with the discovery layer's value proven and its consumption missing: one sentence of affordance rescued the orphan class completely. But that sentence was one point in an unmapped design space, and a real harness decision rides on the map: Lightning Jar's prospective site chat agent, candidate model Haiku 4.5. Study 3 measured the menu on the frozen Study 2 fixture: the hint (reused from frozen records), prefetching the curated index into the system context, prefetching the giant everything-index, and a dedicated read_site_index tool. The registered prediction, stated before running: the carrier beats the hint, because handing a model what it needs beats hoping it goes and gets it."
+						},
+						{
+							"heading": "Every Deliberate Design Works; the Carrier Wins on Cost",
+							"html": "All three fresh affordances solved the orphan class 10 of 10 on every model: the entire Study 2 catastrophe dissolves under any deliberate harness design. The differences are economics. On Haiku, input tokens per solved task fell from 68.9k unaided to 41.3k under the hint, 13.5k with the index tool, and 9.4k with the curated index prefetched into context: 7.3 times cheaper than baseline, 4.4 times cheaper than the hint, at equal or better accuracy. The prefetch also rides the cacheable system prompt, where a tool call cannot. The carrier prediction passed its registered gate with a strict pooled win."
+						},
+						{
+							"heading": "The Size Read, Finally Powered",
+							"html": "Twice this series registered a read on Cloudflare's oversized-index concern and twice it went vacuous because nothing consulted the files. With prefetch, consultation is total by construction, and the verdict is clean: the giant everything-index bought nothing (zero orphan delta, one linked task pooled) and cost 2.68 times the curated index's input. The grep-loop pathology never materialized; models read a prefetched index once rather than grepping it. The concern is real but it is a token tax, not a behavior failure. Guidance for sites with large indexes, including this site's own 150-entry llms.txt: keep the full file public, and serve the agent a curated slice."
+						},
+						{
+							"heading": "The Candidate Is Ready",
+							"html": "The registered readiness gate asked whether Haiku 4.5 holds its quality under the design it would actually ship. It passed at ceiling: orphans 10 of 10, linked classes 14 of 14, the same honest denial on the one absent-class edge, zero protocol misses, and the best economics in the study. Combined with the Haiku backfill's zero-fabrication record and the earlier studies, the lj-website agent's retrieval architecture is now settled by measurement: Haiku 4.5, curated-index prefetch in context, the hint sentence as degraded-mode fallback."
+						}
+					]
+				}
+			],
+			"published": "2026-07-30",
+			"related": [
+				{
+					"title": "One Sentence Beats Every File",
+					"href": "/blog/one-sentence-beats-every-file"
+				},
+				{
+					"title": "Study 2: the discovery-file mechanism",
+					"href": "/research/aeo-bench/2"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY3.md",
+			"quote": "Every deliberate affordance dissolved the catastrophe; the winner was the one that stopped hoping the model would look and simply handed it the map."
 		}
 	]
 }

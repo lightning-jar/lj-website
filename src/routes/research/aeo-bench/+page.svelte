@@ -96,9 +96,10 @@ const proseCls = "text-[#c3c9d4]";
       Study 1 measured the retrieval-class techniques from Cloudflare's
       agent-readiness proposal (llms.txt, sitemap.xml, and markdown content
       negotiation) on a well-linked site; Study 2 rebuilt the site so
-      discovery files were the only path to the answers. Together: 2,232
-      scored agent runs across six models (Haiku 4.5 joined by
-      registered backfill as a site-chat-agent candidate). Hypotheses, corpora, and graders
+      discovery files were the only path to the answers; Study 3 measured
+      how an agent harness should consume a site index, settling the
+      candidate agent's retrieval design. Together: 2,520 scored agent runs
+      across six models. Hypotheses, corpora, and graders
       are committed before any scored run; results are published as found,
       corrections included.
     </p>

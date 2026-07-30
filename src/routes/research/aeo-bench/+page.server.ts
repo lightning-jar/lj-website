@@ -10,6 +10,7 @@ const seriesSlugs = [
 	"introducing-aeo-bench",
 	"nobody-reads-llms-txt",
 	"one-sentence-beats-every-file",
+	"the-index-goes-in-the-context",
 ];
 
 function buildSeriesArticles(allBlogArticles: { frontMatter: FrontMatter }[]) {
