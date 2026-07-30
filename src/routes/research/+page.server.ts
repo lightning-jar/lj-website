@@ -7,6 +7,13 @@ const studiesSentenceCase =
 
 const projects = [
 	{
+		name: "AEO Bench",
+		slug: "aeo-bench",
+		status: "Active",
+		summary:
+			"An open, pre-registered benchmark measuring whether agent-readiness and answer-engine-optimization techniques (llms.txt, sitemap.xml, markdown content negotiation) measurably help AI agents use websites. Study 1: 900 scored agent runs across five models against a controlled 40-page fixture, with token cost as a first-class outcome. Results published as found, corrections included.",
+	},
+	{
 		name: "Barkup Bench",
 		slug: "barkup-bench",
 		status: "Active",

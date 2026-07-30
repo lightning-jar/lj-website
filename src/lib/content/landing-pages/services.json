@@ -53,6 +53,26 @@
 			]
 		},
 		{
+			"heading": "AEO & Agent Readiness",
+			"text": "AI agents are becoming the web's newest audience, and most websites are not ready for them. We help organizations get ahead of that shift: auditing sites for agent legibility, implementing the techniques that measurably work (markdown content negotiation, clean semantic content, structured discovery), and skipping the ones that do not. The guidance comes from our own open research program, AEO Bench, where we test agent-readiness techniques against controlled sites and real models before we recommend them, so our clients invest in what actually moves the needle in this quickly evolving space.",
+			"icon": {
+				"src": "https://lj-01.nyc3.cdn.digitaloceanspaces.com/icons/icon-web-design.svg",
+				"alt": "stylized block drawing of a web page",
+				"width": "24",
+				"height": "24"
+			},
+			"links": [
+				{
+					"text": "AEO Bench: our open agent-readiness research",
+					"href": "/research/aeo-bench"
+				},
+				{
+					"text": "Give the Model a Tool, Not a Rule",
+					"href": "/blog/give-the-model-a-tool-not-a-rule"
+				}
+			]
+		},
+		{
 			"heading": "Custom Software & Apps",
 			"text": "Non-software companies with great ideas on how to digitize their services or solutions, or solve a business challenge through custom software, often need help turning their vision into reality. That’s where we come in.",
 			"icon": {

@@ -1,0 +1,59 @@
+{
+	"studies": [
+		{
+			"slug": "1",
+			"letters": "1",
+			"track": "Retrieval-class techniques",
+			"title": "Nobody reads llms.txt: the aids don't change what agents find; one changes what it costs",
+			"eyebrow": "Study 1 · retrieval-class agent readiness · 900 cells",
+			"indexLine": "Across 900 agent runs on a fictional 40-page site, no model consulted llms.txt or sitemap.xml even once; correctness saturated in every arm including bare HTML; markdown negotiation was discovered unprompted by some models and not others (opus 64%, sonnet 0%), and its token savings scale with how wasteful the agent was to begin with (gemini saves 74%, opus 20%).",
+			"sections": [
+				{
+					"id": "sec-study1",
+					"eyebrow": "Retrieval-class agent readiness",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-1",
+					"figure": {
+						"id": "fig-adoption",
+						"title": "Unprompted Markdown Adoption and Input-Cost Ratio, by Model"
+					},
+					"table": {
+						"id": "tbl-adoption",
+						"summary": "Per-model correctness under both graders, discovery-file consultation, markdown economics, and sentinel discipline"
+					},
+					"body": [
+						{
+							"heading": "The Question",
+							"html": "Cloudflare's agent-readiness post proposes a menu of techniques for making websites legible to AI agents, with three quantitative claims attached: markdown content negotiation saves up to 80% of tokens, agents grep-loop on oversized llms.txt files, and only three agent products send the markdown Accept header by default. None of it had been measured at the model level with controlled content. Study 1 measured the retrieval-class techniques the way the sibling series measures everything: a deterministic fictional fixture (Petrel &amp; Pine Supply Co., 40 pages of realistic retail noise), five site variants, 36 seeded questions in four classes (shallow, deep, cross-page, and absent, where the correct answer is that the site does not say), five models, mechanical grading, and a fetch tool whose description never mentions any technique, so every discovery is the model's own."
+						},
+						{
+							"heading": "Nobody Reads the Discovery Files",
+							"html": "The headline is an absence. With llms.txt present and well-formed, and sitemap.xml present and advertised in robots.txt, no model fetched either file even once in 900 cells: not the frontier tiers, not the open-weight tiers, not in any of the 540 cells where at least one existed. Agents enter at the root and navigate by following visible links, the way people do. The honest scope limit is registered: this fixture is small and well-linked, and discovery files may earn their keep on huge or weakly-linked sites; that is Study 2's question. But for a site like this one, llms.txt is content nobody reads."
+						},
+						{
+							"heading": "Finding Facts Was Never the Bottleneck",
+							"html": "Correctness saturated. Every model except gpt-oss-120b scored a perfect 28 of 28 on present-class tasks in every arm, including bare baseline HTML with no aids at all; the pooled paired tests found nothing (all p at or above .31). On a navigable 40-page site, no measured tier needs help finding facts, so no retrieval aid can improve a ceiling. The registered reading applies: retrieval-class agent readiness is a token-economics play, not a correctness play, at this site scale."
+						},
+						{
+							"heading": "Markdown Adoption Is a Disposition, and Savings Track Waste",
+							"html": "The one aid with measurable effects was the markdown pathway, and both of its effects came with a twist. Adoption first: with only a hidden HTML comment advertising the .md variants, opus-4.8 discovered and used the pathway in 64% of markdown-arm cells, gemini-3.5-flash in 40%, and sonnet-4.5, kimi-k3, and gpt-oss-120b essentially never. Cloudflare's observation that only three agent products send the header has a model-level analog: unprompted negotiation is a disposition some models simply lack. Economics second: gemini's input cost fell to 26&#8211;27% of its own baseline, squarely inside the claimed savings; opus's fell only to 80&#8211;83%, because opus was already frugal (2.7 fetches and 6.9k tokens per task against gemini's 4.9 and 18.1k). The saving is proportional to how wasteful the agent was to begin with, which is why the registered per-model bar failed by the letter on opus."
+						},
+						{
+							"heading": "Zero Invented Facts, and the Fourth Registration Lesson",
+							"html": "No model invented a fact in 900 cells. Every apparent fabrication decomposed under audit: gpt-oss-120b returned empty final text in 52 cells (a harness output interaction, filed for Study 2's structured answer channel), and opus-4.8 wrote honest, correct denials (\"the site does not state anything about a student discount\") that missed the registered literal sentinel. Two genuine grader defects also surfaced (spaced times, a Unicode hyphen). Study 1′ re-registered the grader with mechanical corrections and re-scored the frozen records: opus's absent-class scores rose to 7&#8211;8 of 8, gpt-oss recovered its normalization victims, and every gate verdict stood. The lesson the sibling series keeps teaching arrived here on schedule: registered format requirements keep mis-scoring honest behavior, so grade the meaning mechanically, not the phrasing."
+						},
+						{
+							"heading": "What This Licenses",
+							"html": "For a small, well-linked site: markdown negotiation with .md fallbacks and the hidden directive is worth shipping if your traffic includes chatty agents (large savings, zero measured downside); llms.txt and sitemap.xml did nothing here, not harmful, just unread; and no measured model needed navigation help. Vendor claims fared unevenly: the token-savings claim is confirmed at the wasteful-agent end and materially overstated for frugal agents, the adoption premise is model-dispositional rather than general, and the grep-loop hazard did not appear at this llms.txt size. Study 2 is filed: a large, weakly-linked fixture with orphaned pages, where discovery files have an actual mechanism to matter."
+						}
+					]
+				}
+			],
+			"published": "2026-07-30",
+			"related": [],
+			"brief": "BRIEF.md",
+			"quote": "The web is optimizing for readers that never arrive: in 900 agent runs, llms.txt was fetched exactly zero times."
+		}
+	]
+}
