@@ -19,6 +19,8 @@ let navItems: NavItem[] = $state([
 	{ label: "About", href: "/about" },
 	{ label: "Services", href: "/services" },
 	{ label: "Research", href: "/research" },
+	{ label: "Barkup Bench", href: "/research/barkup-bench" },
+	{ label: "AEO Bench", href: "/research/aeo-bench" },
 	{ label: "Testimonials", href: "/testimonials" },
 	{ label: "Customer Stories", href: "/customer-stories" },
 	{ label: "Reading List", href: "/reading-list" },
@@ -29,11 +31,17 @@ let navItems: NavItem[] = $state([
 ]);
 
 // desktop top-nav (lg+): links + dropdown menus
-const desktopLinks = [
-	{ label: "Blog", href: "/blog" },
-	{ label: "Research", href: "/research" },
-];
+const desktopLinks = [{ label: "Blog", href: "/blog" }];
 const desktopMenus = [
+	{
+		key: "research",
+		label: "Research",
+		items: [
+			{ label: "Overview", href: "/research" },
+			{ label: "Barkup Bench", href: "/research/barkup-bench" },
+			{ label: "AEO Bench", href: "/research/aeo-bench" },
+		],
+	},
 	{
 		key: "about",
 		label: "About Us",
