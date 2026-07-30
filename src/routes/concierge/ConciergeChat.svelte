@@ -117,14 +117,14 @@ const SUGGESTIONS = [
      activation heuristic, not a control. -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-  class="grid grid-cols-1 gap-4 max-w-article w-full"
+  class="grid grid-cols-1 gap-4 max-w-article place-content-start w-full"
   onfocusin={activate}
   onpointerenter={activate}
   ontouchstart={activate}
 >
   <!-- transcript -->
   <div
-    class="grid grid-cols-1 gap-3 min-h-[16rem]"
+    class="grid grid-cols-1 gap-3 min-h-[16rem] place-content-start bg-white/5 rounded-md px-4 pt-5"
     aria-live="polite"
     aria-label="Conversation"
   >
@@ -133,11 +133,11 @@ const SUGGESTIONS = [
         Ask about the studio's work, research, packages, or writing. A few
         starters:
       </p>
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-x-2 gap-y-3 place-content-start">
         {#each SUGGESTIONS as suggestion}
           <button
             type="button"
-            class="text-14px block border border-maximumYellow/40 text-maximumYellow rounded-full px-3 py-0 leading-none hover:bg-maximumYellow/10"
+            class="text-14px block border border-maximumYellow/40 text-maximumYellow rounded-full px-3 py-2 leading-snug hover:bg-maximumYellow/3 hover:border-maximumYellow max-h-fit"
             onclick={() => useSuggestion(suggestion)}
           >
             {suggestion}
@@ -184,7 +184,7 @@ const SUGGESTIONS = [
   </div>
 
   <!-- input -->
-  <form onsubmit={send} class="flex gap-2 items-end">
+  <form onsubmit={send} class="flex gap-3 items-center">
     <label class="grow">
       <span class="sr-only">Message the concierge</span>
       <input
@@ -195,13 +195,13 @@ const SUGGESTIONS = [
         maxlength="2000"
         placeholder="Ask the concierge…"
         autocomplete="off"
-        class="w-full rounded-lg border border-current bg-oxfordDark/40 px-4 py-2.5 text-15px placeholder:text-current/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+        class="w-full rounded-md border border-current bg-oxfordDark/40 px-4 py-2 text-15px placeholder:text-current/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
       />
     </label>
     <button
       type="submit"
       disabled={busy || !input.trim()}
-      class="button-accent rounded-lg px-4 py-2.5 text-15px disabled:opacity-50 disabled:cursor-not-allowed"
+      class="button-accent !px-3 !rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
     >
       {busy ? "…" : "Send"}
     </button>
@@ -209,7 +209,7 @@ const SUGGESTIONS = [
 
   <p class="text-13px opacity-60">
     An experiment. Answers come from this site's own content and link their
-    sources; for anything that matters, email
+    sources. <br />For anything that matters, email
     <a
       class="underline underline-offset-4"
       href="mailto:hello@lightningjar.com">hello@lightningjar.com</a
