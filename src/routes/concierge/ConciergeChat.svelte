@@ -87,32 +87,89 @@ function useSuggestion(suggestion: string) {
 	inputEl?.focus();
 }
 
-// Minimal, safe rendering of the agent's markdown: escape everything,
-// then allow exactly two constructs back — [text](url) links and
-// paragraph breaks. No raw HTML from the model ever reaches the DOM.
+// Safe, whitelist-only markdown rendering of the agent's replies. The
+// model emits a small, predictable vocabulary — paragraphs, bullet and
+// numbered lists, bold, italic, inline code, and links — so we handle
+// exactly those rather than pulling in a full parser + sanitizer.
 //
-// Destinations are restricted to a single-slash root path (NOT `//`,
-// which is a protocol-relative off-site link) or an explicit https://
-// URL. Quotes and backslashes are excluded from the match: quotes so a
-// crafted destination can't break out of the href attribute, backslashes
-// so `/\/evil.com` (which browsers may read as `//evil.com`) can't sneak
-// an off-site link past the single-slash rule.
+// The guarantee: escape ALL html first, so nothing the model writes can
+// become markup; the only tags in the output are ones this function
+// introduces from its own templates, over escaped (or already-safe,
+// stashed) content. Link destinations are restricted to a single-slash
+// root path (NOT `//`, a protocol-relative off-site link) or an explicit
+// https:// URL, with quotes and backslashes excluded so a crafted
+// destination can't break out of the href attribute or smuggle
+// `/\/evil.com` (which browsers may read as `//evil.com`) past the rule.
 function renderMarkdownLite(text: string): string {
+	// escape everything, then drop the private-use sentinels we use for
+	// stashing so model text can't collide with a placeholder
 	const escaped = text
 		.replace(/&/g, "&amp;")
 		.replace(/</g, "&lt;")
 		.replace(/>/g, "&gt;")
 		.replace(/"/g, "&quot;")
-		.replace(/'/g, "&#39;");
-	const linked = escaped.replace(
-		/\[([^\]]+)\]\((\/(?![/\\])[^)\s"'\\]*|https:\/\/[^)\s"'\\]+)\)/g,
-		(_m, label, href) =>
-			`<a class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4" rel="nofollow" href="${href}">${label}</a>`,
-	);
-	return linked
-		.split(/\n{2,}/)
-		.map((p) => `<p>${p.replace(/\n/g, "<br />")}</p>`)
-		.join("");
+		.replace(/'/g, "&#39;")
+		.replace(/[\uE000\uE001]/g, "");
+
+	// stash inline code and links as placeholders so bold/italic passes
+	// can't mangle their contents (URLs, code with * or _)
+	const stash: string[] = [];
+	const mask = (html: string) => `\uE000${stash.push(html) - 1}\uE001`;
+	let s = escaped
+		.replace(/`([^`\n]+)`/g, (_m, code) => mask(`<code>${code}</code>`))
+		.replace(
+			/\[([^\]]+)\]\((\/(?![/\\])[^)\s"'\\]*|https:\/\/[^)\s"'\\]+)\)/g,
+			(_m, label, href) =>
+				mask(
+					`<a class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4" rel="nofollow" href="${href}">${label}</a>`,
+				),
+		)
+		.replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>")
+		.replace(/(?<![*\w])\*([^*\n]+)\*(?!\*)/g, "<em>$1</em>")
+		.replace(/(?<![_\w])_([^_\n]+)_(?![_\w])/g, "<em>$1</em>");
+
+	// block structure: group consecutive list items into <ul>/<ol>, split
+	// the rest into paragraphs on blank lines (single newline → <br>)
+	const blocks: string[] = [];
+	let list: { tag: "ul" | "ol"; items: string[] } | null = null;
+	let para: string[] = [];
+	const flushPara = () => {
+		if (para.length) blocks.push(`<p>${para.join("<br />")}</p>`);
+		para = [];
+	};
+	const flushList = () => {
+		if (list)
+			blocks.push(
+				`<${list.tag}>${list.items.map((i) => `<li>${i}</li>`).join("")}</${list.tag}>`,
+			);
+		list = null;
+	};
+	for (const line of s.split("\n")) {
+		const ul = line.match(/^\s*[-*]\s+(.*)$/);
+		const ol = line.match(/^\s*\d+\.\s+(.*)$/);
+		if (ul || ol) {
+			flushPara();
+			const tag = ul ? "ul" : "ol";
+			if (!list || list.tag !== tag) {
+				flushList();
+				list = { tag, items: [] };
+			}
+			list.items.push((ul ?? ol)?.[1] ?? "");
+		} else if (line.trim() === "") {
+			flushPara();
+			flushList();
+		} else {
+			flushList();
+			para.push(line);
+		}
+	}
+	flushPara();
+	flushList();
+
+	// restore stashed code/link html
+	return blocks
+		.join("")
+		.replace(/\uE000(\d+)\uE001/g, (_m, i) => stash[Number(i)] ?? "");
 }
 
 function textOf(message: UIMessage): string {
@@ -198,7 +255,9 @@ const SUGGESTIONS = [
       {:else}
         <div class="max-w-[92%] text-15px leading-relaxed">
           {#if textOf(message)}
-            <div class="grid grid-cols-1 gap-2 [&_p]:opacity-90">
+            <div
+              class="grid grid-cols-1 gap-2 [&_p]:opacity-90 [&_strong]:font-600 [&_em]:italic [&_code]:(font-mono text-13px bg-white/10 rounded px-1 py-0.5) [&_ul]:(list-disc pl-5 grid gap-1) [&_ol]:(list-decimal pl-5 grid gap-1) [&_li]:opacity-90"
+            >
               <!-- eslint-disable-next-line svelte/no-at-html-tags — output
                    of renderMarkdownLite, which escapes all HTML first -->
               {@html renderMarkdownLite(textOf(message))}
