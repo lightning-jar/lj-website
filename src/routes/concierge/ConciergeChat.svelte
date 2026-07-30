@@ -109,9 +109,11 @@ function isSearching(message: UIMessage): boolean {
 }
 
 const SUGGESTIONS = [
-	"What did the research find about llms.txt?",
+	"What kind of research is Lightning Jar doing?",
+	"What are the key findings of LJ's AEO research to date?",
 	"Have you built transit websites?",
 	"What is woof-editor?",
+	"What is Replicator?"
 ];
 </script>
 
