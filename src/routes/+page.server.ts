@@ -1,8 +1,11 @@
 // data
-import { homeContent } from "$content/getters/getHomeContent";
+
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 import { getAllCustomerStories } from "$content/getters/getCustomerStories";
+import { homeContent } from "$content/getters/getHomeContent";
 import { getAllReadingListArticles } from "$content/getters/getReadingList";
+
+import aeoStudies from "./research/aeo-bench/aeo-studies.json";
 import benchStudies from "./research/barkup-bench/bench-studies.json";
 
 // Request-time (not prerendered): the Latest tiles stay current with
@@ -46,16 +49,31 @@ export async function load({ fetch, setHeaders }) {
 				: "",
 	}));
 
-	// latest studies for the homepage tiles (file is chronological; newest
-	// last, so reverse and cap at 6)
-	const latestStudies = benchStudies.studies
-		.slice(-6)
-		.reverse()
-		.map((study) => ({
+	// latest studies for the homepage tiles: both research projects,
+	// tagged with their project, newest first by published date, cap 6.
+	const latestStudies = [
+		...benchStudies.studies.map((study) => ({
 			slug: study.slug,
 			letters: study.letters,
 			title: study.title,
-		}));
+			published: study.published,
+			project: "Barkup",
+			projectSlug: "barkup-bench",
+		})),
+		...aeoStudies.studies.map((study) => ({
+			slug: study.slug,
+			letters: study.letters,
+			title: study.title,
+			published: study.published,
+			project: "AEO",
+			projectSlug: "aeo-bench",
+		})),
+	]
+		.sort(
+			(a, b) =>
+				new Date(b.published).getTime() - new Date(a.published).getTime(),
+		)
+		.slice(0, 6);
 
 	// latest reading-list entries for the homepage tiles (getter is
 	// repostDate-sorted newest first, capped at 6); tiles link our
