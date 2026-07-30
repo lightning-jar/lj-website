@@ -65,9 +65,15 @@ function useSuggestion(suggestion: string) {
 }
 
 // Minimal, safe rendering of the agent's markdown: escape everything,
-// then allow exactly two constructs back — [text](url) links (root-
-// relative or https only) and paragraph breaks. No raw HTML from the
-// model ever reaches the DOM.
+// then allow exactly two constructs back — [text](url) links and
+// paragraph breaks. No raw HTML from the model ever reaches the DOM.
+//
+// Destinations are restricted to a single-slash root path (NOT `//`,
+// which is a protocol-relative off-site link) or an explicit https://
+// URL. Quotes and backslashes are excluded from the match: quotes so a
+// crafted destination can't break out of the href attribute, backslashes
+// so `/\/evil.com` (which browsers may read as `//evil.com`) can't sneak
+// an off-site link past the single-slash rule.
 function renderMarkdownLite(text: string): string {
 	const escaped = text
 		.replace(/&/g, "&amp;")
@@ -75,12 +81,10 @@ function renderMarkdownLite(text: string): string {
 		.replace(/>/g, "&gt;")
 		.replace(/"/g, "&quot;")
 		.replace(/'/g, "&#39;");
-	// quotes are additionally excluded from the URL match so a crafted
-	// destination can never break out of the href attribute
 	const linked = escaped.replace(
-		/\[([^\]]+)\]\(((?:\/|https:\/\/)[^)\s"']+)\)/g,
+		/\[([^\]]+)\]\((\/(?![/\\])[^)\s"'\\]*|https:\/\/[^)\s"'\\]+)\)/g,
 		(_m, label, href) =>
-			`<a class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4" href="${href}">${label}</a>`,
+			`<a class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4" rel="nofollow" href="${href}">${label}</a>`,
 	);
 	return linked
 		.split(/\n{2,}/)
@@ -137,7 +141,7 @@ const SUGGESTIONS = [
         {#each SUGGESTIONS as suggestion}
           <button
             type="button"
-            class="text-14px block border border-maximumYellow/40 text-maximumYellow rounded-full px-3 py-2 leading-snug hover:bg-maximumYellow/3 hover:border-maximumYellow max-h-fit"
+            class="text-14px block border border-maximumYellow/40 text-maximumYellow rounded-full px-3 py-2 leading-snug hover-bg-maximumYellow/3 hover-border-maximumYellow max-h-fit"
             onclick={() => useSuggestion(suggestion)}
           >
             {suggestion}

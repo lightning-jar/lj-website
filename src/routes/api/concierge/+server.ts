@@ -44,7 +44,9 @@ export const prerender = false;
 const MODEL = "anthropic/claude-haiku-4.5";
 const MAX_STEPS = 6;
 const MAX_TURNS = 12; // user messages per conversation
-const MAX_MESSAGE_CHARS = 2_000;
+const MAX_MESSAGE_CHARS = 2_000; // per single text part
+const MAX_TOTAL_MESSAGES = 40; // whole client-supplied history
+const MAX_TOTAL_CHARS = 24_000; // sum across all text parts
 const RATE_WINDOW_MS = 5 * 60 * 1000;
 const RATE_MAX_REQUESTS = 10; // per IP per window
 const DAILY_MAX_REQUESTS = 400; // per instance per UTC day
@@ -201,12 +203,30 @@ export const POST: RequestHandler = async ({
 			413,
 			"This conversation has gone long — refresh to start a fresh one. (The concierge keeps chats short on purpose.)",
 		);
-	const oversize = messages.some((m) =>
-		(m.parts ?? []).some(
-			(p) => p.type === "text" && p.text.length > MAX_MESSAGE_CHARS,
-		),
-	);
-	if (oversize) return refuse(413, "That message is a bit long for a chat.");
+	// bound the whole payload, not just per-part: a client could otherwise
+	// send many parts (or many forged assistant turns) each under the
+	// per-part cap and still drive a large token bill in one request
+	if (messages.length > MAX_TOTAL_MESSAGES)
+		return refuse(
+			413,
+			"This conversation is too long — refresh to start fresh.",
+		);
+	let totalChars = 0;
+	let oversizePart = false;
+	for (const m of messages) {
+		for (const p of m.parts ?? []) {
+			if (p.type !== "text") continue;
+			if (p.text.length > MAX_MESSAGE_CHARS) oversizePart = true;
+			totalChars += p.text.length;
+		}
+	}
+	if (oversizePart)
+		return refuse(413, "That message is a bit long for a chat.");
+	if (totalChars > MAX_TOTAL_CHARS)
+		return refuse(
+			413,
+			"This conversation is too long — refresh to start fresh.",
+		);
 
 	const result = streamText({
 		model: gateway(MODEL),
@@ -297,6 +317,10 @@ export const POST: RequestHandler = async ({
 		// `messages` here is the full conversation including the assistant
 		// turn just generated (with tool calls/results)
 		originalMessages: messages,
+		// never surface a gateway/model error verbatim to the client (it
+		// can carry provider internals); return a fixed in-voice string
+		onError: () =>
+			"The lightning jar flickered. Please try that again in a moment.",
 		onFinish: ({ messages: finalMessages }) => {
 			if (chatId) shipLog(chatId, finalMessages);
 		},
