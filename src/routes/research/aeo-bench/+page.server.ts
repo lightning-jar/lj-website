@@ -6,7 +6,11 @@ import type { FrontMatter } from "$types/FrontMatter";
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 
 // The benchmark series, in narrative (chronological) order.
-const seriesSlugs = ["introducing-aeo-bench", "nobody-reads-llms-txt"];
+const seriesSlugs = [
+	"introducing-aeo-bench",
+	"nobody-reads-llms-txt",
+	"one-sentence-beats-every-file",
+];
 
 function buildSeriesArticles(allBlogArticles: { frontMatter: FrontMatter }[]) {
 	return seriesSlugs

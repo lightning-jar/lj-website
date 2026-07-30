@@ -63,6 +63,70 @@
 			],
 			"brief": "BRIEF.md",
 			"quote": "The web is optimizing for readers that never arrive: in 900 agent runs, llms.txt was fetched exactly zero times."
+		},
+		{
+			"slug": "2",
+			"letters": "2",
+			"track": "Retrieval-class techniques",
+			"title": "The discovery-file mechanism: nothing reads llms.txt even when it is the only way, and one sentence fixes everything",
+			"eyebrow": "Study 2 · the discovery-file mechanism · 960 cells",
+			"indexLine": "On a 300-page weakly-linked site with orphan pages reachable only through discovery files, every model scored 0/10 on orphan tasks in every file-bearing arm because nothing reads the files (opus consulted them 0 times in 128 chances); one sentence of tool-description affordance took orphans to 8 to 10 of 10 everywhere protocol-compliant, and unreachable facts were confidently declared not-on-site 148 of 150 times.",
+			"sections": [
+				{
+					"id": "sec-study2",
+					"eyebrow": "The discovery-file mechanism",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-2",
+					"figure": {
+						"id": "fig-orphans",
+						"title": "Orphan-Page Success: Every File-Bearing Arm vs the One-Sentence Hint, by Model"
+					},
+					"table": {
+						"id": "tbl-orphans",
+						"summary": "Per-model orphan results, discovery-file consultation, not-on-site declarations, hint effects, and spend"
+					},
+					"body": [
+						{
+							"heading": "The Site Where the Files Could Matter",
+							"html": "Study 1's scope limit was explicit: on a small, well-linked site, discovery files had no mechanism to matter. Study 2 built the site where they do. A deterministic ~300-page catalog era of Petrel &amp; Pine: 12 categories of paginated products, chained documentation, thin headers, and 12 registered <em>orphan pages</em> (recalls, safety bulletins, rebate terms) that exist in sitemap.xml and every llms.txt variant but are linked from no page at all. Six arms: baseline, sitemap, curated llms.txt, a giant everything-list llms.txt, hierarchical llms.txt, and the mechanism isolator: one registered sentence in the fetch tool description saying machine-readable indexes may exist. A structured submit_answer channel replaced free-text answers, closing Study 1's grading lessons mechanically."
+						},
+						{
+							"heading": "Zero for Two Hundred",
+							"html": "Every model scored 0 of 10 on orphan tasks in every file-bearing, non-hinted arm. Sitemap, curated, giant, hierarchical: all identical to baseline, on a site engineered so the files were the only path to the answers. The reason is behavioral and unanimous: unprompted consultation of a present discovery file, out of 128 chances per model, was 0 for opus-4.8, 0 for gpt-oss-120b, 1 for sonnet-4.5, 7 for gemini-3.5-flash, and 11 for kimi-k3. Models burned up to a hundred guessed-path 404s per arm hunting URL patterns, and the guesses almost never included the two standardized index paths the industry is currently shipping."
+						},
+						{
+							"heading": "One Sentence Beats Every File",
+							"html": "The hinted arm served the identical site and added a single sentence to the fetch tool's description. Orphan success went from 0 of 10 to 10 of 10 on opus-4.8 and kimi-k3, 9 of 10 on gemini, 8 of 10 on sonnet. Consultation rose to 15 to 20 of 32 cells, path-guessing collapsed (kimi went from 43 guesses to zero), and input cost fell on the models that used the index best (kimi saved 28 percent). The value of llms.txt is real. The discovery of llms.txt is the missing link, and it lives in agent products and harnesses, not in websites."
+						},
+						{
+							"heading": "Unreachable Means Confidently Denied",
+							"html": "The sharpest practical finding: in non-hinted arms, orphan cells ended with an explicit not-on-site declaration 148 times out of 150 on the four protocol-compliant models. The orphan pages carry recalls and safety bulletins. Content your navigation cannot reach is not just unfound; agents authoritatively declare it nonexistent, in a structured answer channel, after exhausting their search budget. If your site has unlinked content that matters, this is the failure mode to fear."
+						},
+						{
+							"heading": "The Letters, Honestly",
+							"html": "The pre-registered gate FAILS, on the registered zero-consultation row in its strongest form: no discovery arm moved the orphan class because nothing read the files. Comparative no-harm also fails by the letter via gpt-oss-120b, whose hierarchical-arm drop traces to protocol collapse rather than file harm: it skipped submit_answer in 144 of its 192 cells, and richer sites gave it more input to drown in; both readings are published. The grep-loop claim goes unmeasured for the best possible reason: three consulting cells across five models in the giant arm mean the hazard's premise fails before the hazard can occur. Total spend $79.10 against the registered fences."
+						},
+						{
+							"heading": "What This Licenses",
+							"html": "For website owners: llms.txt and sitemap.xml do not help AI agents at the model layer today, even on sites built to need them. Keep them for the crawler and product layer if you like, at zero measured harm on compliant models, but the measured lever for agent-reachable content is linking it. For agent builders: the cheapest capability upgrade this series has measured is one sentence telling your fetch tool that /llms.txt exists; it converted 0 of 10 into 10 of 10 on the frontier tier. The current llms.txt conversation has the beneficiary wrong: the file format is fine; the readers are missing."
+						}
+					]
+				}
+			],
+			"published": "2026-07-30",
+			"related": [
+				{
+					"title": "Nobody Reads llms.txt (Yet)",
+					"href": "/blog/nobody-reads-llms-txt"
+				},
+				{
+					"title": "AEO Bench Study 1",
+					"href": "/research/aeo-bench/1"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY2.md",
+			"quote": "The file was fine. The readers were missing: zero consultations in 128 chances on the frontier tier, and one sentence of affordance was worth more than every file on the site."
 		}
 	]
 }

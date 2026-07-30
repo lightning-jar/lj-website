@@ -1,9 +1,9 @@
 {
 	"_updateNote": "Single source of truth for research headline numbers, per project plus program totals. Bump the project block when a new study publishes and keep totals in sync. Consumers: home research panel (totals for runs, barkupBench for the flagship paragraph), /research project tiles, /research/barkup-bench hub + playbook, /research/aeo-bench hub.",
 	"totals": {
-		"studiesDisplay": "46",
-		"studiesSpelled": "forty-six",
-		"scoredRunsDisplay": "37,098",
+		"studiesDisplay": "47",
+		"studiesSpelled": "forty-seven",
+		"scoredRunsDisplay": "38,058",
 		"modelsDisplay": "8",
 		"modelsSpelled": "eight"
 	},
@@ -15,9 +15,9 @@
 		"modelsSpelled": "eight"
 	},
 	"aeoBench": {
-		"studiesDisplay": "1",
-		"studiesSpelled": "one",
-		"scoredRunsDisplay": "900",
+		"studiesDisplay": "2",
+		"studiesSpelled": "two",
+		"scoredRunsDisplay": "1,860",
 		"modelsDisplay": "5",
 		"modelsSpelled": "five"
 	}

@@ -205,6 +205,145 @@ export function initAeoCharts() {
 		);
 	})();
 
+	// --- Study 2: orphan success, file-bearing arms vs the hint ---
+	(() => {
+		const GROUPS = [
+			{
+				model: "opus-4.8",
+				vals: [0, 100],
+				tip: "file arms 0/40 pooled (consulted a discovery file 0 times in 128 chances) · hinted: 10/10, consultation 15/32",
+			},
+			{
+				model: "kimi-k3",
+				vals: [0, 100],
+				tip: "file arms 0/40 (11/128 consultations, none decisive) · hinted: 10/10, path guesses fell to zero, input cost down 28%",
+			},
+			{
+				model: "gemini-3.5-flash",
+				vals: [0, 90],
+				tip: "file arms 0/40 (7/128 consultations) · hinted: 9/10, consultation 19/32",
+			},
+			{
+				model: "sonnet-4.5",
+				vals: [0, 80],
+				tip: "file arms 0/40 (1/128 consultations; 100+ path guesses per arm) · hinted: 8/10",
+			},
+			{
+				model: "gpt-oss-120b",
+				vals: [0, 0],
+				tip: "protocol collapse: skipped submit_answer in 144/192 cells; its numbers measure compliance, not discovery",
+			},
+		];
+		const CFILES = "#8b93a3",
+			CHINT = "#199e70";
+		byId("legend-2").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CFILES +
+			'"></span>best of the four file-bearing arms (sitemap, curated, giant, hierarchical llms.txt)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CHINT +
+			'"></span>hinted arm: same site, one sentence in the fetch tool description</span>' +
+			legendNote(
+				"orphan-task success (percent of 10 tasks whose facts live on pages linked from nowhere) · file arms shown as their best single arm, which was 0/10 for every model",
+			);
+		const W = 880,
+			BAR = 14,
+			GAP = 4,
+			GH = 2 * BAR + GAP,
+			GPAD = 18,
+			T = 8,
+			B = 42,
+			L = 150,
+			R = 70;
+		const H = T + GROUPS.length * (GH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 50, 100]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		GROUPS.forEach((row, gi) => {
+			const top = T + gi * (GH + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${top + GH / 2 + 4}" text-anchor="end">${row.model}</text>`;
+			row.vals.forEach((v, ai) => {
+				const y = top + ai * (BAR + GAP);
+				const w = Math.max((v / 100) * iw, 2);
+				marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${ai === 0 ? CFILES : CHINT}" rx="3"/>`;
+				marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 3}">${v}%</text>`;
+			});
+			hits += `<rect x="${L}" y="${top}" width="${iw}" height="${GH}" fill="transparent" data-tip="${esc(row.model + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-orphans");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grouped bar chart per model: orphan-page success is zero percent in every file-bearing arm for all five models, and rises to one hundred percent on opus and kimi, ninety on gemini, and eighty on sonnet when one sentence in the fetch tool description mentions machine-readable indexes; gpt-oss stays at zero due to protocol collapse.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the mechanism study's verdict in one frame: on a site where discovery files are the only path to the answers, the files alone move nothing at any tier because nothing reads them; the identical site plus one sentence of agent-side affordance solves the class outright",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-orphans",
+			[
+				"cell",
+				"gemini-3.5-flash",
+				"sonnet-4.5",
+				"opus-4.8",
+				"kimi-k3",
+				"gpt-oss-120b",
+			],
+			[
+				[
+					"orphans, best file-bearing arm",
+					"0/10",
+					"0/10",
+					"0/10",
+					"0/10",
+					"0/10",
+				],
+				["orphans, hinted arm", "9/10", "8/10", "10/10", "10/10", "0/10"],
+				[
+					"unprompted discovery consultation (of 128)",
+					"7",
+					"1",
+					"0",
+					"11",
+					"0",
+				],
+				["hinted-arm consultation (of 32)", "19", "17", "15", "20", "9"],
+				["path-guess 404s, baseline arm", "104", "114", "12", "63", "7"],
+				["path-guess 404s, hinted arm", "15", "13", "7", "0", "21"],
+				[
+					"orphans declared not-on-site (non-hinted, of 50)",
+					"50",
+					"48",
+					"50",
+					"50",
+					"2 (48 no-submit)",
+				],
+				[
+					"linked-class correctness (deep + shallow, baseline)",
+					"13/14",
+					"13/14",
+					"13/14",
+					"13/14",
+					"7/14",
+				],
+				["no-submit cells (of 192)", "0", "3", "0", "0", "144"],
+				["model spend", "$3.77", "$30.83", "$20.79", "$19.66", "$0.27"],
+			],
+		);
+	})();
+
 	// Legend title post-pass (idempotent), mirroring bench-charts.js.
 	document.querySelectorAll(".chart-legend").forEach((el) => {
 		if (!el.firstElementChild?.classList?.contains("legend-title")) {

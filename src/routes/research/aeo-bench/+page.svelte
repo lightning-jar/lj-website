@@ -95,9 +95,11 @@ const proseCls = "text-[#c3c9d4]";
     <p class="opacity-90 mb-4">
       Study 1 measured the retrieval-class techniques from Cloudflare's
       agent-readiness proposal (llms.txt, sitemap.xml, and markdown content
-      negotiation) across 900 agent runs and five models. Hypotheses, corpora,
-      and graders are committed before any scored run; results are published
-      as found, corrections included.
+      negotiation) on a well-linked site; Study 2 rebuilt the site so
+      discovery files were the only path to the answers. Together: 1,860
+      scored agent runs across five models. Hypotheses, corpora, and graders
+      are committed before any scored run; results are published as found,
+      corrections included.
     </p>
   </header>
 
@@ -191,7 +193,7 @@ const proseCls = "text-[#c3c9d4]";
       <!-- headline stats -->
       <div class="grid grid-cols-2 gap-3">
         {#each [
-          { num: researchStats.aeoBench.studiesDisplay, cap: "pre-registered study, plus a registered re-score" },
+          { num: researchStats.aeoBench.studiesDisplay, cap: "pre-registered studies, plus a registered re-score" },
           { num: researchStats.aeoBench.scoredRunsDisplay, cap: "scored agent runs at temperature 0" },
           { num: researchStats.aeoBench.modelsDisplay, cap: "models measured across tiers" },
         ] as tile (tile.cap)}
