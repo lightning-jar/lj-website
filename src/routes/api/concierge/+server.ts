@@ -33,6 +33,7 @@ import {
 	listStudies,
 	readBlogArticle,
 	readCustomerStory,
+	readPage,
 	readStudy,
 	searchContent,
 } from "$lib/server/agentTools";
@@ -160,7 +161,7 @@ Style:
 - A light touch of lightning-flavored whimsy is welcome (sparingly — one flourish per conversation, not per message).
 - If a visitor seems to be evaluating the studio for a project, mention hello@lightningjar.com once, without being pushy.
 
-You have tools for: the studio overview, keyword search across blog/stories/reading list/technologies/packages, full blog articles, customer stories, the reading list, the open-source package list, and both research series (Barkup Bench and AEO Bench study data). Prefer search_content first when unsure where something lives; use list_packages for open-source questions and read_study when a research question needs findings, not just titles.`;
+You have tools for: the studio overview, keyword search across blog/stories/reading list/technologies/packages, full blog articles, customer stories, the reading list, the open-source package list, the overview pages (about/services/testimonials/terms/fun/built-with via read_page), and both research series (Barkup Bench and AEO Bench study data). Prefer search_content first when unsure where something lives; use read_page for questions about the studio's services, history, terms, or side projects; use list_packages for open-source questions and read_study when a research question needs findings, not just titles.`;
 
 // ---- route -----------------------------------------------------------
 export const POST: RequestHandler = async ({
@@ -266,7 +267,7 @@ export const POST: RequestHandler = async ({
 				execute: async () => listBlogArticles(fetch),
 			}),
 			read_blog_article: tool({
-				description: "Read one blog article by slug (full body).",
+				description: "Read one blog article by slug (full markdown body).",
 				inputSchema: z.object({ slug: z.string().min(1) }),
 				execute: async ({ slug }) => readBlogArticle(fetch, slug),
 			}),
@@ -284,6 +285,21 @@ export const POST: RequestHandler = async ({
 				description: "List the curated reading list with our summaries.",
 				inputSchema: z.object({}),
 				execute: async () => listReadingList(fetch),
+			}),
+			read_page: tool({
+				description:
+					"Read the full text of a studio overview page: about, services, testimonials, terms, fun, or built-with. Use this for questions about what the studio offers, its history, its terms, its side projects, or the site's own tech.",
+				inputSchema: z.object({
+					page: z.enum([
+						"about",
+						"services",
+						"testimonials",
+						"terms",
+						"fun",
+						"built-with",
+					]),
+				}),
+				execute: async ({ page }) => readPage(fetch, page),
 			}),
 			list_packages: tool({
 				description:

@@ -8,11 +8,11 @@
 
 import {
 	getAllBlogArticles,
-	getBlogArticleBySlug,
+	getBlogArticleMarkdownBySlug,
 } from "$content/getters/getBlogArticles";
 import {
 	getAllCustomerStories,
-	getCustomerStoryBySlug,
+	getCustomerStoryMarkdownBySlug,
 } from "$content/getters/getCustomerStories";
 import { allPackages } from "$content/getters/getPackagesContent";
 import { getAllReadingListArticles } from "$content/getters/getReadingList";
@@ -148,7 +148,10 @@ export async function listBlogArticles(fetch: Fetch) {
 }
 
 export async function readBlogArticle(fetch: Fetch, slug: string) {
-	const detail = await getBlogArticleBySlug(fetch, slug);
+	// return the raw markdown body, not rendered HTML: AEO Bench Study 1
+	// measured markdown saving 20-74% of the tokens HTML costs an agent,
+	// and we publish barkdown — no reason to feed our own agent HTML.
+	const detail = await getBlogArticleMarkdownBySlug(fetch, slug);
 	if (!detail) return { error: `No article with slug "${slug}"` };
 	const fm = detail.frontMatter;
 	return {
@@ -159,7 +162,7 @@ export async function readBlogArticle(fetch: Fetch, slug: string) {
 		description: fm.description,
 		tags: fm.tags,
 		url: `${SITE_BASE}/blog/${fm.slug}`,
-		html: detail.html,
+		markdown: detail.markdown,
 	};
 }
 
@@ -175,17 +178,19 @@ export async function listCustomerStories(fetch: Fetch) {
 }
 
 export async function readCustomerStory(fetch: Fetch, slug: string) {
-	const story = await getCustomerStoryBySlug(fetch, slug);
-	if (!story) return { error: `No story with slug "${slug}"` };
+	// markdown body + the structured frontmatter fields (customer,
+	// testimonials) — lean tokens per the AEO Bench markdown finding
+	const detail = await getCustomerStoryMarkdownBySlug(fetch, slug);
+	if (!detail) return { error: `No story with slug "${slug}"` };
+	const fm = detail.frontMatter;
 	return {
-		slug: story.slug,
-		title: story.title,
-		customer: story.customer,
-		excerpt: story.excerpt,
-		testimonials: story.testimonials,
-		technologies: story.technologies?.map((t) => t.name),
-		url: `${SITE_BASE}/customer-stories/${story.slug}`,
-		html: story.html,
+		slug: fm.slug,
+		title: fm.title,
+		customer: fm.customer,
+		excerpt: fm.excerpt,
+		testimonials: fm.testimonials,
+		url: `${SITE_BASE}/customer-stories/${fm.slug}`,
+		markdown: detail.markdown,
 	};
 }
 
@@ -199,6 +204,50 @@ export async function listReadingList(fetch: Fetch) {
 		ourPage: `${SITE_BASE}/reading-list/${e.slug}`,
 		sourceUrl: e.url,
 	}));
+}
+
+// The overview/marketing pages no other tool exposes. Without this the
+// concierge is blind to its own studio's services/about/etc content and
+// — per AEO Bench Study 2 — would confidently declare it nonexistent.
+// Enum-constrained (no arbitrary fetch); content is read from the
+// rendered page and stripped to text.
+export const SITE_PAGES = {
+	about: "/about",
+	services: "/services",
+	testimonials: "/testimonials",
+	terms: "/terms",
+	fun: "/fun",
+	"built-with": "/built-with",
+} as const;
+
+export type SitePageKey = keyof typeof SITE_PAGES;
+
+export async function readPage(fetch: Fetch, page: SitePageKey) {
+	const path = SITE_PAGES[page];
+	if (!path) return { error: `Unknown page "${page}"` };
+	let html: string;
+	try {
+		const res = await fetch(`${SITE_BASE}${path}`);
+		if (!res.ok) return { error: `Page "${page}" returned ${res.status}` };
+		html = await res.text();
+	} catch {
+		return { error: `Could not load page "${page}"` };
+	}
+	// main content only, tags stripped, whitespace collapsed, capped
+	const main = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? html;
+	const text = main
+		.replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/gi, " ")
+		.replace(/<[^>]+>/g, " ")
+		.replace(/&nbsp;/g, " ")
+		.replace(/&amp;/g, "&")
+		.replace(/&lt;/g, "<")
+		.replace(/&gt;/g, ">")
+		.replace(/&#39;/g, "'")
+		.replace(/&quot;/g, '"')
+		.replace(/\s+/g, " ")
+		.trim()
+		.slice(0, 6_000);
+	return { page, url: `${SITE_BASE}${path}`, text };
 }
 
 export function listPackages() {

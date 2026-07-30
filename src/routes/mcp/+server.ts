@@ -14,6 +14,7 @@ import {
 	listStudies,
 	readBlogArticle,
 	readCustomerStory,
+	readPage,
 	readStudy,
 	searchContent,
 } from "$lib/server/agentTools";
@@ -88,6 +89,23 @@ function handlerFor(fetch: Fetch) {
 				{ slug: z.string().min(1) },
 				async ({ slug }: { slug: string }) =>
 					text(await readBlogArticle(fetch, slug)),
+			);
+
+			tool(
+				"read_page",
+				"Read the full text of a studio overview page: about, services, testimonials, terms, fun, or built-with.",
+				{
+					page: z.enum([
+						"about",
+						"services",
+						"testimonials",
+						"terms",
+						"fun",
+						"built-with",
+					]),
+				},
+				async ({ page }: { page: Parameters<typeof readPage>[1] }) =>
+					text(await readPage(fetch, page)),
 			);
 
 			tool(
