@@ -110,13 +110,49 @@ function scrubMessages(raw: UIMessage[]): UIMessage[] {
 		}));
 }
 
+// Local PII redaction, applied ONLY to the outgoing log (never to what
+// the model sees or the visitor reads), so it can be aggressive on
+// contact-detail patterns without touching the chat itself. Emails,
+// SSNs, card-like digit runs, and US phone numbers — the things a
+// visitor might type that we don't want sitting in the log store.
+// Longer digit patterns run before shorter so a card number isn't
+// mistaken for a phone; boundaries keep matches out of larger runs.
+const PII_PATTERNS: [RegExp, string][] = [
+	[/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g, "[email]"],
+	[/\b\d{3}-\d{2}-\d{4}\b/g, "[ssn]"],
+	[/(?<!\d)\d(?:[ -]?\d){12,18}(?!\d)/g, "[number]"],
+	[
+		/(?<!\d)(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}(?!\d)/g,
+		"[phone]",
+	],
+];
+
+function redactPii(s: string): string {
+	let out = s;
+	for (const [re, tag] of PII_PATTERNS) out = out.replace(re, tag);
+	return out;
+}
+
+// deep-redact the text parts (user + assistant); tool parts are our own
+// public content and left as-is so the log stays useful
+function redactMessages(messages: unknown[]): unknown[] {
+	return (messages as UIMessage[]).map((m) => ({
+		...m,
+		parts: (m.parts ?? []).map((p) =>
+			p.type === "text" && "text" in p ? { ...p, text: redactPii(p.text) } : p,
+		),
+	}));
+}
+
 // Fire-and-forget: persist the finished conversation to replicator's
 // chat-log review UI. Never throws into the stream; skipped when the
-// key isn't configured. No visitor identity is stored — messages only.
+// key isn't configured. No visitor identity is stored — messages only,
+// with PII scrubbed before they leave our infrastructure.
 function shipLog(id: string, messages: unknown[]) {
 	const key = ENV.REPLICATOR_CHAT_LOG_KEY;
 	if (!key) return;
-	const firstUser = (messages as UIMessage[]).find((m) => m.role === "user");
+	const redacted = redactMessages(messages);
+	const firstUser = (redacted as UIMessage[]).find((m) => m.role === "user");
 	const label = (firstUser?.parts ?? [])
 		.filter((p) => p.type === "text")
 		.map((p) => ("text" in p ? p.text : ""))
@@ -133,7 +169,7 @@ function shipLog(id: string, messages: unknown[]) {
 			surface: "lj-concierge",
 			contextLabel: label,
 			model: MODEL,
-			messages,
+			messages: redacted,
 		}),
 	}).catch((err) => console.warn("concierge: log ship failed", err));
 }
