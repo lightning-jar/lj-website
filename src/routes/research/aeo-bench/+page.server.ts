@@ -11,6 +11,7 @@ const seriesSlugs = [
 	"nobody-reads-llms-txt",
 	"one-sentence-beats-every-file",
 	"the-index-goes-in-the-context",
+	"three-files-nobody-reads",
 ];
 
 function buildSeriesArticles(allBlogArticles: { frontMatter: FrontMatter }[]) {

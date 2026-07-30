@@ -195,10 +195,74 @@
 				{
 					"title": "Study 2: the discovery-file mechanism",
 					"href": "/research/aeo-bench/2"
+				},
+				{
+					"title": "Study 4: the capability layer",
+					"href": "/research/aeo-bench/4"
 				}
 			],
 			"brief": "docs/BRIEF-STUDY3.md",
 			"quote": "Every deliberate affordance dissolved the catastrophe; the winner was the one that stopped hoping the model would look and simply handed it the map."
+		},
+		{
+			"slug": "4",
+			"letters": "4",
+			"track": "The capability layer",
+			"title": "The capability layer: three files nobody reads, one sentence that replaces them, and the tools that pay for themselves",
+			"eyebrow": "Study 4 · the capability layer · 288 cells",
+			"indexLine": "MCP server cards join llms.txt and sitemap.xml as the third well-known file class with a universal zero: no model consulted one unprompted. But one affordance sentence buys the whole card-to-API chain at every tier, mounted tools flip API habits and cut costs up to 5.4 times, and zero invented order statuses appeared in 288 cells.",
+			"sections": [
+				{
+					"id": "sec-study4",
+					"eyebrow": "The capability layer",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-4",
+					"figure": {
+						"id": "fig-capability",
+						"title": "Capability-Task Success by Arm and Model"
+					},
+					"table": {
+						"id": "tbl-capability",
+						"summary": "Per-arm accuracy, API-path preference, card consultation, economics, and the honesty record"
+					},
+					"body": [
+						{
+							"heading": "The Fourth Question",
+							"html": "Cloudflare's agent-readiness framing ends with capabilities: can an agent do anything on your site beyond reading it? The proposal is machine-usable endpoints advertised through well-known files like MCP server cards. Studies 1 through 3 measured the reading half; Study 4 measured the doing half, with a product anchor: this site ships a real MCP endpoint and a tool-mounted concierge whose design the study's fourth arm replicates. The frozen fixture gained an order-status API whose data lives on no page (the capability analog of the orphan class), a structured product endpoint duplicating page facts, and a server card at the well-known path. Two predictions were registered before running: discovery fails a third time, and mounted tools win."
+						},
+						{
+							"heading": "Three Files, One Law",
+							"html": "The server card was consulted zero times unprompted, by every model. That makes three well-known file classes with the same universal zero: llms.txt, sitemap.xml, and now MCP server cards. At the model layer in mid-2026, this reads less like a finding and more like a law: nothing discovers well-known files, at any tier, under any pressure this series has constructed. Capability tasks in the card-only arm scored exactly what the control arm scored: zero."
+						},
+						{
+							"heading": "One Sentence Buys the Chain; the Tool Changes the Habit",
+							"html": "Told only that a card MAY exist, every model read it and chained through to the API: capability tasks went from 0 of 8 to 8 of 8 on gemini and haiku and 7 of 8 on opus, a two-hop discovery that works at every tier. But the study's novel finding is about preference: in the affordance arm, with full knowledge of both endpoints, every model still answered every product question from pages, 0 of 24 via the API, reserving structured calls for orders it could get no other way. Only mounting the endpoints as harness tools changed the habit (gemini and opus routed 8 of 8 product lookups through the tool; haiku split 4 of 8). Knowing an endpoint exists changes nothing; holding it changes everything, the purest form yet of the tool-availability lesson from the sibling series."
+						},
+						{
+							"heading": "The Tools Pay for Themselves",
+							"html": "Mounted was the cheapest arm for every model: haiku fell from 51.4k mean input tokens per cell to 9.5k (5.4 times), opus from 13.6k to 6.6k, gemini from 50.9k to 29.1k. Structured capabilities do not just enable transactional answers; they replace page crawls with single calls and make the whole surface cheaper. And the honesty class that matters most on transactional surfaces held perfectly: 288 cells, four fake order numbers per arm, zero invented shipping statuses; every nonexistent order was reported not found."
+						},
+						{
+							"heading": "The Scorecard, Complete",
+							"html": "All four of the agent-readiness questions now have measurements. Can agents find you? Not by files: three classes, universal zero. Can they read you? Yes, and markdown negotiation pays whoever asks for it. Are they allowed? Untested here (a policy question, not a capability one). Can they do anything? Yes, dramatically, the moment the consuming side holds the capability, and not one moment before. Every measurement in this series located the missing half of agent readiness in the same place: the agent's harness, not the website. Sites should publish the files and endpoints; builders should mount them; and the one-sentence affordance remains the cheapest bridge while the ecosystem's consuming side catches up."
+						}
+					]
+				}
+			],
+			"published": "2026-07-31",
+			"related": [
+				{
+					"title": "Study 3: the affordance study",
+					"href": "/research/aeo-bench/3"
+				},
+				{
+					"title": "One Sentence Beats Every File",
+					"href": "/blog/one-sentence-beats-every-file"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY4.md",
+			"quote": "Three well-known file classes, one law: nothing reads them unprompted. The capability layer works the moment the consuming side holds it, and not one moment before."
 		}
 	]
 }

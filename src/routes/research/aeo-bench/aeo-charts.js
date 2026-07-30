@@ -498,6 +498,115 @@ export function initAeoCharts() {
 		);
 	})();
 
+	// --- Study 4: capability-task success by arm and model ---
+	(() => {
+		const GROUPS = [
+			{
+				model: "gemini-3.5-flash",
+				vals: [0, 0, 100, 100],
+				tip: "control 0/8, card 0/8 (card never consulted), affordance 8/8 (12 card reads, chained to the API), mounted 8/8 · mean in-tok 50.9k to 29.1k",
+			},
+			{
+				model: "haiku-4.5",
+				vals: [0, 0, 100, 100],
+				tip: "control 0/8, card 0/8, affordance 8/8 (14 card reads), mounted 8/8 · in-tok 51.4k to 9.5k, a 5.4x reduction — the study's best economics",
+			},
+			{
+				model: "opus-4.8",
+				vals: [0, 0, 88, 100],
+				tip: "control 0/8, card 0/8, affordance 7/8 (one two-hop fumble), mounted 8/8 · in-tok 13.6k to 6.6k",
+			},
+		];
+		const COLORS = ["#8b93a3", "#e66767", "#3987e5", "#199e70"];
+		byId("legend-4").innerHTML =
+			'<span class="key"><span class="chip" style="background:#8b93a3"></span>control (no capability surface)</span>' +
+			'<span class="key"><span class="chip" style="background:#e66767"></span>server card served, nothing else (the discovery probe)</span>' +
+			'<span class="key"><span class="chip" style="background:#3987e5"></span>+ one affordance sentence naming the well-known path</span>' +
+			'<span class="key"><span class="chip" style="background:#199e70"></span>endpoints mounted as harness tools (the concierge design)</span>' +
+			legendNote(
+				"capability-task success (percent of 8 order-status questions answerable only through the API) · the card-only arm equals control at every tier because no model ever read the card unprompted",
+			);
+		const W = 880,
+			BAR = 11,
+			GAP = 3,
+			GH = 4 * BAR + 3 * GAP,
+			GPAD = 16,
+			T = 8,
+			B = 42,
+			L = 168,
+			R = 70;
+		const H = T + GROUPS.length * (GH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 50, 100]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		GROUPS.forEach((row, gi) => {
+			const top = T + gi * (GH + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${top + GH / 2 + 4}" text-anchor="end">${row.model}</text>`;
+			row.vals.forEach((v, ai) => {
+				const y = top + ai * (BAR + GAP);
+				const w = Math.max((v / 100) * iw, 2);
+				marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${COLORS[ai]}" rx="2"/>`;
+				marks += `<text fill="#c3c9d4" font-size="10" x="${L + w + 6}" y="${y + BAR - 2}">${v}%</text>`;
+			});
+			hits += `<rect x="${L}" y="${top}" width="${iw}" height="${GH}" fill="transparent" data-tip="${esc(row.model + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-capability");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grouped bar chart per model of capability-task success across four arms: zero percent under control and card-only for every model, eighty-eight to one hundred percent under the affordance sentence, and one hundred percent with mounted tools everywhere.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the fourth agent-readiness question answered: a server card alone equals nothing at every tier because nothing reads it; one sentence of harness affordance buys the card-to-API chain; mounting the endpoints buys perfect routing and the largest cost reduction in the series",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-capability",
+			["cell", "gemini-3.5-flash", "haiku-4.5", "opus-4.8"],
+			[
+				[
+					"capability: control / card / affordance / mounted",
+					"0 / 0 / 8 / 8 (of 8)",
+					"0 / 0 / 8 / 8",
+					"0 / 0 / 7 / 8",
+				],
+				["server-card reads, card-only arm", "0", "0", "0"],
+				["server-card reads, affordance arm", "12", "14", "15"],
+				[
+					"both-ways via API: affordance / mounted",
+					"0/8 / 8/8",
+					"0/8 / 4/8",
+					"0/8 / 8/8",
+				],
+				[
+					"mean in-tok: control → mounted",
+					"50.9k → 29.1k",
+					"51.4k → 9.5k",
+					"13.6k → 6.6k",
+				],
+				["invented order statuses (96 cells each)", "0", "0", "0"],
+				[
+					"absent-class notes",
+					"2 no-submit after tool 404 (pilot only)",
+					"live-chat honest denial ×4",
+					"1 miss/arm",
+				],
+				["model spend", "$1.56", "$1.87", "$10.16"],
+			],
+		);
+	})();
+
 	// Legend title post-pass (idempotent), mirroring bench-charts.js.
 	document.querySelectorAll(".chart-legend").forEach((el) => {
 		if (!el.firstElementChild?.classList?.contains("legend-title")) {

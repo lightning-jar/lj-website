@@ -97,9 +97,9 @@ const proseCls = "text-[#c3c9d4]";
       agent-readiness proposal (llms.txt, sitemap.xml, and markdown content
       negotiation) on a well-linked site; Study 2 rebuilt the site so
       discovery files were the only path to the answers; Study 3 measured
-      how an agent harness should consume a site index, settling the
-      candidate agent's retrieval design. Together: 2,520 scored agent runs
-      across six models. Hypotheses, corpora, and graders
+      how an agent harness should consume a site index; Study 4 measured
+      the capability layer (MCP server cards and structured endpoints).
+      Together: 2,808 scored agent runs across six models. Hypotheses, corpora, and graders
       are committed before any scored run; results are published as found,
       corrections included.
     </p>
