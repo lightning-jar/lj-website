@@ -55,14 +55,15 @@ interface StudyFeedSource {
 	published: string;
 }
 
-// one entry per barkup-bench study; shared by the research feed and the
-// combined /atom.xml feed
+// one entry per study in a research project (barkup-bench, aeo-bench);
+// shared by the per-project research feeds and the combined /atom.xml
 export function buildStudyEntries(
 	baseUrl: string,
 	studies: StudyFeedSource[],
+	projectSlug = "barkup-bench",
 ): FeedEntry[] {
 	return studies.map((s) => {
-		const url = `${baseUrl}/research/barkup-bench/${s.slug}`;
+		const url = `${baseUrl}/research/${projectSlug}/${s.slug}`;
 		return {
 			id: url,
 			title: `Study ${s.letters}: ${s.title}`,

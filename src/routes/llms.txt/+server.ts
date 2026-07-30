@@ -4,6 +4,7 @@ import { getAllReadingListArticles } from "$content/getters/getReadingList";
 import { allPackages } from "$content/getters/getPackagesContent";
 import { allTechnologies } from "$content/getters/getTechnologiesContent";
 
+import aeoStudies from "../research/aeo-bench/aeo-studies.json";
 import benchStudies from "../research/barkup-bench/bench-studies.json";
 
 import type { RequestHandler } from "./$types";
@@ -54,6 +55,15 @@ export const GET: RequestHandler = async ({ fetch }) => {
 	for (const s of benchStudies.studies) {
 		lines.push(
 			`- [Study ${s.letters}: ${s.title}](${BASE}/research/barkup-bench/${s.slug}): ${s.indexLine}`,
+		);
+	}
+
+	lines.push(
+		`- [AEO Bench](${BASE}/research/aeo-bench): open, pre-registered benchmark series measuring whether agent-readiness and answer-engine-optimization techniques measurably help AI agents use websites`,
+	);
+	for (const s of aeoStudies.studies) {
+		lines.push(
+			`- [AEO Study ${s.letters}: ${s.title}](${BASE}/research/aeo-bench/${s.slug}): ${s.indexLine}`,
 		);
 	}
 

@@ -30,6 +30,12 @@ export function load() {
 					"One entry per published study in our open, pre-registered LLM research series.",
 			},
 			{
+				href: "/research/aeo-bench/atom.xml",
+				title: "AEO Bench Research",
+				description:
+					"One entry per published study in our open benchmark series on agent readiness and answer engine optimization.",
+			},
+			{
 				href: "/reading-list/atom.xml",
 				title: "Reading List",
 				description:

@@ -7,6 +7,7 @@ import { allPackages } from "$content/getters/getPackagesContent";
 import { allTechnologies } from "$content/getters/getTechnologiesContent";
 import type { SearchRecord } from "$utils/siteSearch";
 
+import aeoStudies from "../research/aeo-bench/aeo-studies.json";
 import benchStudies from "../research/barkup-bench/bench-studies.json";
 
 import type { RequestHandler } from "./$types";
@@ -43,6 +44,15 @@ export const GET: RequestHandler = async ({ fetch }) => {
 				blurb: blurb(study.indexLine),
 				tags: [study.track],
 				url: `/research/barkup-bench/${study.slug}`,
+			}),
+		),
+		...aeoStudies.studies.map(
+			(study): SearchRecord => ({
+				type: "study",
+				title: `AEO Study ${study.letters}: ${study.title}`,
+				blurb: blurb(study.indexLine),
+				tags: [study.track, "AEO Bench"],
+				url: `/research/aeo-bench/${study.slug}`,
 			}),
 		),
 		...stories.map(

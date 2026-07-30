@@ -4,6 +4,7 @@
 import { onMount } from "svelte";
 
 // components
+import FeedBadge from "$components/FeedBadge.svelte";
 import LinkButton from "$components/LinkButton.svelte";
 
 import researchStats from "$data/research-stats.json";
@@ -61,6 +62,15 @@ const eyebrowCls =
 const proseCls = "text-[#c3c9d4]";
 </script>
 
+<svelte:head>
+	<link
+		rel="alternate"
+		type="application/atom+xml"
+		title="AEO Bench research feed"
+		href="/research/aeo-bench/atom.xml"
+	/>
+</svelte:head>
+
 <main
   id="main"
   class="page-x-padding main-y-padding grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-x-12 gap-y-16 min-h-screen place-content-start"
@@ -73,6 +83,7 @@ const proseCls = "text-[#c3c9d4]";
   <header>
     <div class="flex items-start justify-between gap-4">
       <h1 class="display">AEO Bench</h1>
+      <FeedBadge href="/research/aeo-bench/atom.xml" />
     </div>
     <p class="opacity-90 mb-4">
       Can your website be read by an AI agent, and do the techniques that

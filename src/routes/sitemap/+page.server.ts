@@ -37,6 +37,8 @@ const funSection = {
 	],
 };
 
+import aeoStudies from "../research/aeo-bench/aeo-studies.json";
+
 const researchSection = {
 	name: "Research",
 	pages: [
@@ -67,6 +69,19 @@ const researchSection = {
 				"The practical distillation of the benchmark series: ten measured guidelines for building document-editing apps with LLM agents, each with a scenario, a code example, and a link to its chart.",
 			date: "",
 		},
+		{
+			href: "/research/aeo-bench",
+			title: "AEO Bench",
+			description:
+				"Our open, pre-registered benchmark series measuring whether agent-readiness and answer-engine-optimization techniques measurably help AI agents use websites.",
+			date: "",
+		},
+		...aeoStudies.studies.map((s) => ({
+			href: `/research/aeo-bench/${s.slug}`,
+			title: `Study ${s.letters}: ${s.title}`,
+			description: s.indexLine,
+			date: s.published,
+		})),
 	],
 };
 

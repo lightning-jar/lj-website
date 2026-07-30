@@ -23,6 +23,7 @@ import {
 	buildStudyEntries,
 } from "$utils/feedEntries";
 
+import aeoStudies from "../research/aeo-bench/aeo-studies.json";
 import benchStudies from "../research/barkup-bench/bench-studies.json";
 
 const baseUrl = `https://${
@@ -41,6 +42,7 @@ export const GET: RequestHandler = async ({ fetch }) => {
 			...buildCustomerStoryEntries(baseUrl, stories),
 			...buildReadingListEntries(baseUrl, readingList),
 			...buildStudyEntries(baseUrl, benchStudies.studies),
+			...buildStudyEntries(baseUrl, aeoStudies.studies, "aeo-bench"),
 		],
 		{
 			baseUrl,

@@ -15,6 +15,7 @@ import type { SitemapXMLFrequency, SitemapXMLPage } from "$types/Sitemap";
 
 import { ENV } from "varlock/env";
 // env variables
+import aeoStudies from "./../research/aeo-bench/aeo-studies.json";
 import benchStudies from "./../research/barkup-bench/bench-studies.json";
 
 const productionUrl =
@@ -72,6 +73,10 @@ const staticPages = [
 	...benchStudies.studies.map((s) =>
 		generateSiteMapXMLPage(`/research/barkup-bench/${s.slug}`, "monthly", 0.25),
 	), // per-study result pages
+	generateSiteMapXMLPage(`/research/aeo-bench`, "weekly", 0.25), // aeo-bench research dashboard
+	...aeoStudies.studies.map((s) =>
+		generateSiteMapXMLPage(`/research/aeo-bench/${s.slug}`, "monthly", 0.25),
+	), // per-study result pages
 	generateSiteMapXMLPage(`/blog`, "monthly", 0.25), // blog landing page
 	generateSiteMapXMLPage(`/feeds`, "monthly", 0.25), // feed index page
 	generateSiteMapXMLPage(`/fun`, "monthly", 0.25), // fun side projects page
@@ -95,6 +100,7 @@ const staticPages = [
 	generateSiteMapXMLPage(`/customer-stories/atom.xml`, "weekly", 0.25),
 	generateSiteMapXMLPage(`/reading-list/atom.xml`, "weekly", 0.25),
 	generateSiteMapXMLPage(`/research/barkup-bench/atom.xml`, "weekly", 0.25),
+	generateSiteMapXMLPage(`/research/aeo-bench/atom.xml`, "weekly", 0.25),
 ] as SitemapXMLPage[];
 
 // Server endpoint to serve the sitemap
