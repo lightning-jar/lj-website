@@ -34,6 +34,15 @@ describe("buildSiteIndex (AEO Bench Study 3 curated index)", () => {
 		expect(idx.length).toBeLessThan(9_000);
 	});
 
+	test("study header states the exact total (so the model doesn't estimate)", () => {
+		const idx = buildSiteIndex(INPUT);
+		// count only per-study lines (project/slug), not the sections line
+		// that names the two dashboards
+		const studyLines = (idx.match(/\n- \/research\/[\w-]+\/\S/g) ?? []).length;
+		expect(studyLines).toBeGreaterThan(0);
+		expect(idx).toMatch(new RegExp(`Research studies \\(${studyLines} total;`));
+	});
+
 	test("carries the curated pieces: studies, packages, section paths", () => {
 		const idx = buildSiteIndex(INPUT);
 		expect(idx).toContain("/research/aeo-bench/1");

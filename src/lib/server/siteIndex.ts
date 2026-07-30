@@ -56,7 +56,10 @@ export function buildSiteIndex(input: SiteIndexInput): string {
 	for (const p of input.packages) lines.push(`- ${p.name} — /packages/${p.id}`);
 	lines.push("");
 
-	lines.push("Research studies (read_study by slug for full findings):");
+	const studyCount = STUDY_PROJECTS.reduce((n, p) => n + p.studies.length, 0);
+	lines.push(
+		`Research studies (${studyCount} total; read_study by slug for full findings):`,
+	);
 	for (const { project, studies } of STUDY_PROJECTS) {
 		for (const s of studies) {
 			lines.push(`- /research/${project}/${s.slug} — ${s.letters}: ${s.title}`);
