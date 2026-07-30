@@ -13,16 +13,7 @@
 // Every answer must come from tool results; the system prompt forbids
 // freeform claims about the studio. Cheap fast model, low temperature.
 
-import { gateway } from "@ai-sdk/gateway";
-import {
-	convertToModelMessages,
-	stepCountIs,
-	streamText,
-	tool,
-	type UIMessage,
-} from "ai";
-import { ENV } from "varlock/env";
-import { z } from "zod";
+import type { RequestHandler } from "./$types";
 
 import {
 	aboutLightningJar,
@@ -36,9 +27,19 @@ import {
 	readPage,
 	readStudy,
 	searchContent,
+	siteIndex,
 } from "$lib/server/agentTools";
-
-import type { RequestHandler } from "./$types";
+import { gateway } from "@ai-sdk/gateway";
+import {
+	convertToModelMessages,
+	type SystemModelMessage,
+	stepCountIs,
+	streamText,
+	tool,
+	type UIMessage,
+} from "ai";
+import { ENV } from "varlock/env";
+import { z } from "zod";
 
 export const prerender = false;
 
@@ -87,6 +88,10 @@ const ALLOWED_ORIGINS = new Set([
 	"http://localhost:5193",
 ]);
 
+// control characters except newline/tab — stripped from incoming text
+// biome-ignore lint/suspicious/noControlCharactersInRegex: stripping them is the point
+const CONTROL_CHARS = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g;
+
 // Keep only what a legitimate chat client sends: user/assistant roles
 // and plain text parts. A hostile client could otherwise inject file
 // parts, fabricated tool results, or oversized structures.
@@ -100,12 +105,7 @@ function scrubMessages(raw: UIMessage[]): UIMessage[] {
 				.filter((p) => p.type === "text")
 				.map((p) => ({
 					type: "text" as const,
-					// strip control characters except newline/tab
-					// biome-ignore lint/suspicious/noControlCharactersInRegex: that's the point
-					text: ("text" in p ? p.text : "").replace(
-						/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g,
-						"",
-					),
+					text: ("text" in p ? p.text : "").replace(CONTROL_CHARS, ""),
 				})),
 		}));
 }
@@ -286,9 +286,25 @@ export const POST: RequestHandler = async ({
 	}[] = [];
 	let lastStepAt = Date.now();
 
+	// Prefetch the curated site index (AEO Bench Study 3) into a single
+	// static system block, cache-controlled per the barkup-bench/replicator
+	// two-block pattern: the concierge has no per-request system content, so
+	// the whole block is static and Anthropic reads it back at ~10% cost on
+	// every turn after the first. Nothing per-request may enter this string.
+	// (memoized in siteIndex(); resolves empty on CMS failure so the chat
+	// still works — an error path, not the cached steady state.)
+	const index = await siteIndex(fetch).catch(() => "");
+	const system: SystemModelMessage[] = [
+		{
+			role: "system",
+			content: index ? `${SYSTEM}\n\nSite index:\n${index}` : SYSTEM,
+			providerOptions: { anthropic: { cacheControl: { type: "ephemeral" } } },
+		},
+	];
+
 	const result = streamText({
 		model: gateway(MODEL),
-		system: SYSTEM,
+		system,
 		messages: await convertToModelMessages(messages),
 		temperature: 0.3,
 		maxOutputTokens: 800,

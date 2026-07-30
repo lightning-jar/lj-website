@@ -20,8 +20,13 @@ import { allTechnologies } from "$content/getters/getTechnologiesContent";
 
 import aeoStudies from "../../routes/research/aeo-bench/aeo-studies.json";
 import benchStudies from "../../routes/research/barkup-bench/bench-studies.json";
+import { buildSiteIndex } from "./siteIndex";
 
 export const SITE_BASE = "https://www.lightningjar.com";
+
+// re-exported so the concierge's curated-index tests can reach it without
+// importing this module (which pulls in import.meta.glob getters)
+export { buildSiteIndex } from "./siteIndex";
 
 type Fetch = typeof globalThis.fetch;
 
@@ -225,15 +230,24 @@ export type SitePageKey = keyof typeof SITE_PAGES;
 export async function readPage(fetch: Fetch, page: SitePageKey) {
 	const path = SITE_PAGES[page];
 	if (!path) return { error: `Unknown page "${page}"` };
-	let html: string;
+	const url = `${SITE_BASE}${path}`;
+	let res: Response;
 	try {
-		const res = await fetch(`${SITE_BASE}${path}`);
+		// ask for markdown first: AEO Bench Study 1 measured markdown saving
+		// 20-74% of the tokens HTML costs an agent, and this site negotiates
+		// it (hooks.server.ts). Pages that don't negotiate just return HTML,
+		// which we strip below as before.
+		res = await fetch(url, { headers: { accept: "text/markdown" } });
 		if (!res.ok) return { error: `Page "${page}" returned ${res.status}` };
-		html = await res.text();
 	} catch {
 		return { error: `Could not load page "${page}"` };
 	}
-	// main content only, tags stripped, whitespace collapsed, capped
+	if ((res.headers.get("content-type") ?? "").includes("text/markdown")) {
+		const markdown = (await res.text()).slice(0, 6_000);
+		return { page, url, markdown };
+	}
+	// fallback: main content only, tags stripped, whitespace collapsed, capped
+	const html = await res.text();
 	const main = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? html;
 	const text = main
 		.replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/gi, " ")
@@ -247,7 +261,7 @@ export async function readPage(fetch: Fetch, page: SitePageKey) {
 		.replace(/\s+/g, " ")
 		.trim()
 		.slice(0, 6_000);
-	return { page, url: `${SITE_BASE}${path}`, text };
+	return { page, url, text };
 }
 
 export function listPackages() {
@@ -342,4 +356,31 @@ export function readStudy(slug: string) {
 		};
 	}
 	return { error: `No study with slug "${slug}"` };
+}
+
+// The curated site index (AEO Bench Study 3), built ONCE per server
+// process and cached: the blog/reading counts are fetched from the CMS on
+// the first call and the rendered string is reused thereafter, so it is
+// byte-stable within a process — required for the prompt-cache breakpoint
+// in the concierge route. A failed first build resets the cache so a
+// later request retries rather than serving a permanently empty index.
+let _siteIndex: Promise<string> | null = null;
+export function siteIndex(fetch: Fetch): Promise<string> {
+	if (!_siteIndex) {
+		_siteIndex = (async () => {
+			const [blog, reading] = await Promise.all([
+				getAllBlogArticles(fetch),
+				getAllReadingListArticles(fetch),
+			]);
+			return buildSiteIndex({
+				blogArticles: blog.length,
+				readingListEntries: reading.length,
+				packages: allPackages.map((p) => ({ name: p.name, id: p.id })),
+			});
+		})();
+		_siteIndex.catch(() => {
+			_siteIndex = null;
+		});
+	}
+	return _siteIndex;
 }
