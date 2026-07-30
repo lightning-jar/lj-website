@@ -39,9 +39,13 @@ function renderMarkdownLite(text: string): string {
 	const escaped = text
 		.replace(/&/g, "&amp;")
 		.replace(/</g, "&lt;")
-		.replace(/>/g, "&gt;");
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#39;");
+	// quotes are additionally excluded from the URL match so a crafted
+	// destination can never break out of the href attribute
 	const linked = escaped.replace(
-		/\[([^\]]+)\]\(((?:\/|https:\/\/)[^)\s]+)\)/g,
+		/\[([^\]]+)\]\(((?:\/|https:\/\/)[^)\s"']+)\)/g,
 		(_m, label, href) =>
 			`<a class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4" href="${href}">${label}</a>`,
 	);
