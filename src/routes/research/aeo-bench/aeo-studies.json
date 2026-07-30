@@ -59,6 +59,10 @@
 				{
 					"title": "Introducing AEO Bench",
 					"href": "/blog/introducing-aeo-bench"
+				},
+				{
+					"title": "Study 2: the discovery-file mechanism",
+					"href": "/research/aeo-bench/2"
 				}
 			],
 			"brief": "BRIEF.md",
