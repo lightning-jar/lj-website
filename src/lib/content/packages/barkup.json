@@ -13,7 +13,10 @@
 	],
 	"install": "bun add @kevinpeckham/barkup",
 	"links": [
-		{ "label": "npm", "href": "https://www.npmjs.com/package/@kevinpeckham/barkup" },
+		{
+			"label": "npm",
+			"href": "https://www.npmjs.com/package/@kevinpeckham/barkup"
+		},
 		{ "label": "GitHub", "href": "https://github.com/kevinpeckham/barkup" },
 		{ "label": "Benchmark dashboard", "href": "/research/barkup-bench" }
 	],
@@ -25,10 +28,22 @@
 		"Round-trip guarantees enforced by test, in the barkdown family tradition"
 	],
 	"relatedArticles": [
-		{ "title": "AST as HTML: A Native Data Format for LLMs", "href": "/blog/ast-as-html" },
-		{ "title": "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees", "href": "/blog/stable-ids-are-all-you-need" },
-		{ "title": "barkup 0.2: We Shipped What the Benchmark Told Us", "href": "/blog/barkup-0-2-anchored-patches" },
-		{ "title": "barkup 0.3: Focused Views, or Why the Model Doesn't Need to See Your Tree", "href": "/blog/barkup-0-3-focused-views" }
+		{
+			"title": "AST as HTML: A Native Data Format for LLMs",
+			"href": "/blog/ast-as-html"
+		},
+		{
+			"title": "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees",
+			"href": "/blog/stable-ids-are-all-you-need"
+		},
+		{
+			"title": "barkup 0.2: We Shipped What the Benchmark Told Us",
+			"href": "/blog/barkup-0-2-anchored-patches"
+		},
+		{
+			"title": "barkup 0.3: Focused Views, or Why the Model Doesn't Need to See Your Tree",
+			"href": "/blog/barkup-0-3-focused-views"
+		}
 	],
 	"techId": "barkup"
 }

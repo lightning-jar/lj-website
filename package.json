@@ -33,9 +33,12 @@
 		"vite": "^8.0.8"
 	},
 	"dependencies": {
+		"@ai-sdk/gateway": "^4.0.32",
+		"@ai-sdk/svelte": "^5.0.42",
 		"@modelcontextprotocol/sdk": "^1.29.0",
 		"@sentry/sveltekit": "^10.49.0",
 		"@varlock/1password-plugin": "2.0.0",
+		"ai": "^7.0.42",
 		"marked": "^18.0.0",
 		"marked-footnote": "^1.4.0",
 		"mcp-handler": "1.1.0",

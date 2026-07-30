@@ -13,7 +13,10 @@
 	],
 	"install": "bun add @kevinpeckham/barkdown marked marked-footnote",
 	"links": [
-		{ "label": "npm", "href": "https://www.npmjs.com/package/@kevinpeckham/barkdown" },
+		{
+			"label": "npm",
+			"href": "https://www.npmjs.com/package/@kevinpeckham/barkdown"
+		},
 		{ "label": "GitHub", "href": "https://github.com/kevinpeckham/barkdown" }
 	],
 	"features": [
@@ -24,8 +27,14 @@
 		"Guarantees enforced by fixture corpus plus ~2,000 property-test documents per run"
 	],
 	"relatedArticles": [
-		{ "title": "The Untested Half of Your WYSIWYG", "href": "/blog/the-untested-half-of-your-wysiwyg" },
-		{ "title": "Content Is an Overlay: Separating Words from Structure in an AI Document Editor", "href": "/blog/content-overlay" }
+		{
+			"title": "The Untested Half of Your WYSIWYG",
+			"href": "/blog/the-untested-half-of-your-wysiwyg"
+		},
+		{
+			"title": "Content Is an Overlay: Separating Words from Structure in an AI Document Editor",
+			"href": "/blog/content-overlay"
+		}
 	],
 	"techId": "barkdown"
 }

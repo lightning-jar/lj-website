@@ -14,7 +14,10 @@
 	"install": "bun add @kevinpeckham/woof-editor",
 	"links": [
 		{ "label": "Live demo", "href": "https://woof.bench.lj.dev/" },
-		{ "label": "npm", "href": "https://www.npmjs.com/package/@kevinpeckham/woof-editor" }
+		{
+			"label": "npm",
+			"href": "https://www.npmjs.com/package/@kevinpeckham/woof-editor"
+		}
 	],
 	"features": [
 		"Round-trip WYSIWYG: every keystroke serializes to canonical markdown via barkdown",
@@ -24,7 +27,10 @@
 		"One component, one state class: seed markdown in, read markdown out"
 	],
 	"relatedArticles": [
-		{ "title": "The Untested Half of Your WYSIWYG", "href": "/blog/the-untested-half-of-your-wysiwyg" }
+		{
+			"title": "The Untested Half of Your WYSIWYG",
+			"href": "/blog/the-untested-half-of-your-wysiwyg"
+		}
 	],
 	"techId": "woof-editor"
 }
