@@ -51,7 +51,16 @@
 				}
 			],
 			"published": "2026-07-30",
-			"related": [],
+			"related": [
+				{
+					"title": "Nobody Reads llms.txt (Yet)",
+					"href": "/blog/nobody-reads-llms-txt"
+				},
+				{
+					"title": "Introducing AEO Bench",
+					"href": "/blog/introducing-aeo-bench"
+				}
+			],
 			"brief": "BRIEF.md",
 			"quote": "The web is optimizing for readers that never arrive: in 900 agent runs, llms.txt was fetched exactly zero times."
 		}
