@@ -16,30 +16,53 @@ let activated = $state(false);
 let chat = $state<Chat<UIMessage> | null>(null);
 let inputEl: HTMLInputElement | null = $state(null);
 
+// the route's refusals are JSON {"error": "..."} — surface the message
+// itself when we can parse it
+function handleChatError(err: Error) {
+	try {
+		lastError = JSON.parse(err.message).error ?? err.message;
+	} catch {
+		lastError = err?.message ?? String(err);
+	}
+}
+
+// build a fresh Chat with a new conversation id. The dynamic imports are
+// ES-module-cached after the first call, so this is instant on reset.
+async function newChat(): Promise<Chat<UIMessage>> {
+	const [{ Chat: ChatCtor }, { DefaultChatTransport }] = await Promise.all([
+		import("@ai-sdk/svelte"),
+		import("ai"),
+	]);
+	return new ChatCtor<UIMessage>({
+		transport: new DefaultChatTransport({ api: "/api/concierge" }),
+		onError: handleChatError,
+	});
+}
+
 async function activate() {
 	if (activated) return;
 	activated = true;
 	try {
-		const [{ Chat: ChatCtor }, { DefaultChatTransport }] = await Promise.all([
-			import("@ai-sdk/svelte"),
-			import("ai"),
-		]);
-		chat = new ChatCtor<UIMessage>({
-			transport: new DefaultChatTransport({ api: "/api/concierge" }),
-			onError(err) {
-				// the route's refusals are JSON {"error": "..."} — surface the
-				// message itself when we can parse it
-				try {
-					lastError = JSON.parse(err.message).error ?? err.message;
-				} catch {
-					lastError = err?.message ?? String(err);
-				}
-			},
-		});
+		chat = await newChat();
 	} catch {
 		activated = false; // let a later gesture retry
 		lastError = "The concierge couldn't load. Refresh and try again.";
 	}
+}
+
+// clear the conversation: stop any in-flight stream, then start a fresh
+// Chat (new id, so the cleared conversation logs separately rather than
+// overwriting), and reset the input back to the empty state.
+async function reset() {
+	if (busy) await chat?.stop().catch(() => {});
+	try {
+		chat = await newChat();
+	} catch {
+		// keep the existing chat if a rebuild somehow fails
+	}
+	input = "";
+	lastError = "";
+	inputEl?.focus();
 }
 
 const messages = $derived(chat?.messages ?? []);
@@ -113,7 +136,7 @@ const SUGGESTIONS = [
 	"What are the key findings of LJ's AEO research to date?",
 	"Have you built transit websites?",
 	"What is woof-editor?",
-	"What is Replicator?"
+	"What is Replicator?",
 ];
 </script>
 
@@ -128,6 +151,19 @@ const SUGGESTIONS = [
   onpointerenter={activate}
   ontouchstart={activate}
 >
+  <!-- clear conversation (only once there's something to clear) -->
+  {#if messages.length > 0}
+    <div class="flex justify-end -mb-1">
+      <button
+        type="button"
+        onclick={reset}
+        class="text-13px opacity-70 hover:opacity-100 hover:text-maximumYellow underline underline-offset-4 decoration-maximumYellow/30"
+      >
+        Clear conversation
+      </button>
+    </div>
+  {/if}
+
   <!-- transcript -->
   <div
     class="grid grid-cols-1 gap-3 min-h-[16rem] place-content-start bg-white/5 rounded-md px-4 pt-5"
