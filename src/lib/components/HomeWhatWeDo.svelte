@@ -18,6 +18,11 @@ const services = [
 		href: "/research/barkup-bench",
 	},
 	{
+		heading: "Agent Readiness & AEO",
+		text: "Making your site legible to AI agents, audited and implemented against our own AEO Bench research so you invest only in what measurably works.",
+		href: "/research/aeo-bench",
+	},
+	{
 		heading: "Brand Strategy & Design Systems",
 		text: "Brand voice, design systems, and UX optimization — the experience layer that makes the technology feel like you.",
 		href: "/services",

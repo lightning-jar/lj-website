@@ -29,27 +29,27 @@ let { articles = [] }: Props = $props();
       class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-5"
     >
       {#each articles as article, index}
-        <a
-          aria-labelledby="latest-title-{article.slug}"
-          href="/blog/{article.slug}"
-          class="{index === 5
-            ? 'lg:hidden xl:block'
-            : ''} aspect-[4/3] w-full border border-current rounded-lg overflow-hidden relative"
-        >
-          <img
-            aria-hidden="true"
-            src={article.image}
-            alt=""
-            class="w-full !h-full object-cover"
-            loading="lazy"
-          />
-          <h3
-            id="latest-title-{article.slug}"
-            class="px-3 absolute bottom-0 flex backdrop-blur bg-oxfordDark/80 w-full py-2 font-sans font-400 leading-snug text-17px"
+        <article class={index === 5 ? "lg:hidden xl:block" : ""}>
+          <a
+            aria-labelledby="latest-title-{article.slug}"
+            href="/blog/{article.slug}"
+            class="block aspect-[4/3] w-full border border-current rounded-lg overflow-hidden relative"
           >
-            {article.title}
-          </h3>
-        </a>
+            <img
+              aria-hidden="true"
+              src={article.image}
+              alt=""
+              class="w-full !h-full object-cover"
+              loading="lazy"
+            />
+            <h3
+              id="latest-title-{article.slug}"
+              class="px-3 absolute bottom-0 flex backdrop-blur bg-oxfordDark/80 w-full py-2 font-sans font-400 leading-snug text-17px"
+            >
+              {article.title}
+            </h3>
+          </a>
+        </article>
       {/each}
     </div>
   </section>

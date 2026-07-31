@@ -1,7 +1,7 @@
 <script lang="ts">
-import { addIntegration } from "@sentry/sveltekit";
-
 import { page } from "$app/state";
+
+import { addIntegration } from "@sentry/sveltekit";
 
 import { jsonLdScript, LJ_PUBLISHER } from "$utils/jsonLd";
 import { safeLinkUrl } from "$utils/safeLinkUrl";
@@ -23,6 +23,7 @@ let articleLd = $derived.by(() => {
 		headline: data.title,
 		description: data.meta?.description || undefined,
 		datePublished: data.meta?.date || undefined,
+		dateModified: data.meta?.date || undefined,
 		image: image || undefined,
 		author: data.authorProfile
 			? {
@@ -77,7 +78,11 @@ function getAttributionFromSource(source: ArticleSource): string {
       title="browse all blog stories">Back to Blog</a
     >
     <h1 class="display text-balance max-w-1000px">{data.title}</h1>
-    <div class="mb-5 max-w-prose">{formattedDate}</div>
+    {#if formattedDate}
+      <time class="mb-5 max-w-prose block" datetime={data.meta?.date}
+        >{formattedDate}</time
+      >
+    {/if}
   </header>
 
   <div class="blog-article max-w-prose contents">
