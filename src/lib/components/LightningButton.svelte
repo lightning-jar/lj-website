@@ -147,10 +147,10 @@ async function playClick() {
       <!-- optional character -->
       <div
         class={character
-          ? "leading-none inline-flex justify-center items-baseline group-hover:hidden "
-          : "hidden bg-red"}
+          ? "leading-none inline-flex justify-center items-center group-hover:hidden font-sans font-800 text-16px"
+          : "hidden"}
       >
-        {character}
+        {@html `${character === "arrow" ? '<span class="i-ph-arrow-right-bold"></span>' : character}`}
       </div>
     </button>
 

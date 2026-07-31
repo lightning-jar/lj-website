@@ -61,7 +61,7 @@ function handleToggle(event: ToggleEvent) {
     class="flex items-center justify-between gap-3 px-4 py-3 border-b border-white/10"
   >
     <h2 class="font-serif font-700 text-16px text-maximumYellow">
-      Ask Eljay (Our Agent)
+      Ask Eljay <span class="hidden lg-inline">(Our Agent)</span>
     </h2>
     <div class="flex items-center gap-3">
       <button

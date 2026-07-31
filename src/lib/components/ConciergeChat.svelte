@@ -314,7 +314,7 @@ function stickToBottom(
 	        {#each randomSuggestions as suggestion}
 	          <button
 	            type="button"
-	            class="text-14px block border border-maximumYellow/40 text-maximumYellow rounded-full px-2 py-2 leading-snug hover-bg-maximumYellow/3 hover-border-maximumYellow max-h-fit"
+	            class="text-14px block border border-maximumYellow/40 text-maximumYellow rounded-full px-3 py-2 leading-snug text-left hover-bg-maximumYellow/3 hover-border-maximumYellow max-h-fit"
 	            onclick={() => useSuggestion(suggestion)}
 	          >
 	            {suggestion}

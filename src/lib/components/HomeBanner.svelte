@@ -253,7 +253,7 @@ function handleKeyDown(event: KeyboardEvent) {
 
     <LightningButton
       ariaLabel="go to next topic"
-      character="→"
+      character="arrow"
       containerClasses="w-8 h-8 items-center !absolute top-32 sm:top-18 right-0 lg:right-4"
       classes="
             border
@@ -263,7 +263,7 @@ function handleKeyDown(event: KeyboardEvent) {
             text-oxford
             hover:bg-transparent
             hover:text-maximumYellow"
-      enableClickMe={true}
+      enableClickMe={false}
       onclick={() => {
         incrementCounter("topic", topics.length);
       }}

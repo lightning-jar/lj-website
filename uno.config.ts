@@ -2,6 +2,7 @@ import extractorSvelte from "@unocss/extractor-svelte";
 import presetWind4 from "@unocss/preset-wind4";
 import {
 	defineConfig,
+	presetIcons,
 	presetWebFonts,
 	transformerDirectives,
 	transformerVariantGroup,
@@ -20,22 +21,6 @@ export default defineConfig({
 		filesystem: ["./src/app.html"],
 	},
 	extractors: [extractorSvelte()],
-	layers: {
-		reset: 1,
-		preflights: 2,
-		variables: 3,
-		components: 4,
-		base: 5,
-		default: 7,
-		utilities: 8,
-		shortcuts: 9,
-	},
-	outputToCssLayers: {
-		cssLayerName: (layer) => {
-			// The default layer will be output to the "utilities" CSS layer.
-			if (layer === "default") return "utilities";
-		},
-	},
 	preflights: [
 		// svelte announcer bug fix
 		// https://github.com/sveltejs/kit/issues/11993
@@ -96,6 +81,9 @@ export default defineConfig({
 	],
 	presets: [
 		presetWind4({ preflights: { reset: true } }),
+		presetIcons({
+			warn: true,
+		}),
 		presetWebFonts({
 			provider: "bunny",
 			fonts: {
@@ -196,6 +184,31 @@ export default defineConfig({
 			"chart",
 			"overflow-x-auto font-mono tabular-nums mt-5 mb-5 bg-white/5 rounded-sm px-4 pt-2 pb-5 [&>svg]:(block w-full h-auto min-w-[640px]) [&_.chart-caption]:(mt-2 max-w-[56rem]) [&_td.heat]:(border-2 border-oxford px-3.5 py-2 text-right) [&_td.heat:first-child]:(text-left font-sans)",
 		],
+		["chat-response", `
+			grid
+			grid-cols-1
+			gap-2
+			underline-offset-4
+			w-full
+			[&_strong]:font-600
+			[&_em]:italic
+			[&_code]-font-mono
+			[&_code]-bg-slate-200/10
+			[&_code]-rounded
+			[&_code]-px-1
+			[&_code]-py-0.5
+			[&_ul]-list-disc
+			[&_ul]-pl-5
+			[&_ul]-grid
+			[&_ul]-gap-1
+			[&_ol]-list-decimal
+			[&_ol]-pl-5
+			[&_ol]-grid
+			[&_ol]-gap-1
+			[&_a]-underline
+			[&_a]-decoration-current/40
+			hover-[&_a]-decoration-current
+			`],
 		// The clickable summary of a collapsed data-table <details> on the
 		// dashboard — its own identity (was borrowing chart-caption), with
 		// its interaction affordances built in.
@@ -237,9 +250,7 @@ export default defineConfig({
       opacity-90
       text-[0.9em]
       hover:text-accent
-      hover:opacity-100
-      hover:shadow
-      hover:shadow-current`,
+      hover:opacity-100`,
 		],
 		["button-accent", "button text-accent hover:text-oxford hover:bg-accent"],
 		// Compact button (e.g. package links in sidebars). Self-contained
@@ -247,7 +258,39 @@ export default defineConfig({
 		// conflicts arise.
 		[
 			"button-small",
-			"inline-flex max-w-fit justify-center items-center gap-2 border border-current opacity-90 text-0.85em px-3 py-1 rounded-sm hover:text-accent hover:opacity-100 hover:shadow hover:shadow-current",
+			`inline-flex
+			max-w-fit
+			justify-center
+			items-center
+			gap-2
+			border
+			border-current
+			leading-none
+			opacity-90
+			text-0.85em
+			px-3
+			py-1
+			rounded-sm
+			hover-text-accent
+			hover-opacity-100`,
+		],
+		[
+			"button-xsmall",
+			`inline-flex
+			max-w-fit
+			justify-center
+			items-center
+			gap-2
+			border
+			border-current
+			leading-none
+			opacity-90
+			text-0.80em
+			px-2
+			py-1
+			rounded-sm
+			hover-text-accent
+			hover-opacity-100`,
 		],
 
 		["page-x-padding", "px-4 sm:px-6 md:px-7 lg:px-8 xl:px-16 2xl:px-24"],
