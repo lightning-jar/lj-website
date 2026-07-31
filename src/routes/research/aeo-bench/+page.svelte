@@ -118,6 +118,26 @@ const proseCls = "text-[#c3c9d4]";
       </p>
     </header>
 
+    <!-- headline findings (mirrors the barkup-bench dashboard tiles) -->
+    <div
+      class="grid grid-cols-[repeat(auto-fit,minmax(210px,1fr))] gap-3 mt-7.5 mb-3.5"
+    >
+      {#each aeo.tiles as tile (tile.cap)}
+        <div
+          class="bg-[hsl(217,44%,19%)] border border-white/14 rounded-md px-4.5 pt-4 pb-3.5"
+        >
+          <div
+            class="font-mono tabular-nums text-[1.85rem] font-700 leading-[1.1] tracking-[-0.01em]"
+          >
+            {@html tile.num}
+          </div>
+          <div class="text-[#c3c9d4] text-15px mt-1.5">
+            {@html tile.cap}
+          </div>
+        </div>
+      {/each}
+    </div>
+
     <section class="mt-14" id="studies">
       <p class={eyebrowCls}>The study series · study 1 + registered re-score</p>
       <h2 class="text-[1.22rem] font-600 tracking-[-0.01em] mb-1">

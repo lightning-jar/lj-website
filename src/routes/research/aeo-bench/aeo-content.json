@@ -1,4 +1,54 @@
 {
+	"tiles": [
+		{
+			"num": "0/900",
+			"cap": "discovery-file consultations across Study&nbsp;1's 900 agent runs; with llms.txt and sitemap.xml present and advertised, agents entered at the root and followed visible links"
+		},
+		{
+			"num": "28/28",
+			"cap": "present-class facts found by every major model in every arm, including bare HTML with no aids at all; no retrieval aid can improve a ceiling (Study&nbsp;1)"
+		},
+		{
+			"num": "74% vs 20%",
+			"cap": "markdown negotiation's input savings for a wasteful agent (gemini) vs a frugal one (opus); the saving is proportional to the waste (Study&nbsp;1)"
+		},
+		{
+			"num": "0/10",
+			"cap": "orphan-page tasks solved in every file-bearing arm, every model, on a 300-page site built so discovery files were the only path to the answers (Study&nbsp;2)"
+		},
+		{
+			"num": "148/150",
+			"cap": "unreachable facts confidently declared not-on-site through a structured answer channel; unlinked content is not just unfound, it is denied (Study&nbsp;2)"
+		},
+		{
+			"num": "0→10/10",
+			"cap": "the orphan class rescued by ONE sentence of fetch-tool affordance; path-guessing collapsed (kimi: 43 guessed 404s to zero) (Study&nbsp;2)"
+		},
+		{
+			"num": "9.4k vs 68.9k",
+			"cap": "input tokens per solved task on Haiku&nbsp;4.5: curated site index prefetched into context vs unaided; 4.4× cheaper than the hint at equal or better accuracy (Study&nbsp;3)"
+		},
+		{
+			"num": "2.68×",
+			"cap": "what the giant everything-index costs relative to the curated slice, for zero added accuracy; a token tax, not a behavior failure (Study&nbsp;3)"
+		},
+		{
+			"num": "0",
+			"cap": "MCP server cards consulted unprompted, by any model: the third well-known file class to score a universal zero, after llms.txt and sitemap.xml (Study&nbsp;4)"
+		},
+		{
+			"num": "0/24",
+			"cap": "product questions answered via a fully-disclosed but unmounted API; knowing an endpoint exists changes nothing, holding it as a tool changes everything (Study&nbsp;4)"
+		},
+		{
+			"num": "5.4×",
+			"cap": "input-cost cut when endpoints are mounted as harness tools (haiku: 51.4k → 9.5k mean input tokens per cell); mounted was the cheapest arm for every model (Study&nbsp;4)"
+		},
+		{
+			"num": "0",
+			"cap": "invented shipping statuses in 288 cells with four fake order numbers per arm; every nonexistent order was reported not found (Study&nbsp;4)"
+		}
+	],
 	"provenance": "Study 1: 36 seeded retrieval tasks × 5 site variants × 5 models at temperature&nbsp;0 (July&nbsp;2026), 900 scored agent runs. Every study is pre-registered by commit before its first scored run — hypotheses, task corpora, site fixture, and graders all committed first — and published as found, corrections included (Study 1′ re-scored the frozen records under a corrected grader; both readings are public). The fixture is a deterministic, fictional 40-page retail site served in-process; agents reach it only through a fetch tool whose description never hints at any technique. Arms: <span class=\"font-mono\">baseline</span> plain HTML, <span class=\"font-mono\">llms.txt</span>, <span class=\"font-mono\">sitemap.xml</span>, <span class=\"font-mono\">markdown</span> (content negotiation + .md fallbacks + the hidden directive), and <span class=\"font-mono\">stacked</span>.",
 	"footer": "Pre-registered briefs, the fixture generator, task corpora, graders, and all analyses live in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/kevinpeckham/aeo-bench\">aeo-bench repository</a> (BRIEF.md, REPORT.md, including the Study 1′ corrected-grader re-score). The techniques under test are those proposed in <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://blog.cloudflare.com/agent-readiness/\">Cloudflare's agent-readiness post</a>. Sibling program: <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"/research/barkup-bench\">Barkup Bench</a>."
 }
