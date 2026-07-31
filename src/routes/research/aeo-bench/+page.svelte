@@ -212,6 +212,30 @@ const proseCls = "text-[#c3c9d4]";
         {/each}
       </div>
 
+      <!-- the Agent-Readiness & AEO Playbook tout -->
+      <div
+        class="border border-maximumYellow/30 bg-maximumYellow/5 rounded-md px-4.5 pt-4 pb-5"
+      >
+        <h3 class="font-serif font-700 text-17px text-maximumYellow mb-2">
+          The Agent-Readiness &amp; AEO Playbook
+        </h3>
+        <p class="opacity-90 text-14px mb-4">
+          Want the findings as advice you can act on? Eight guidelines, split
+          for site owners and agent builders, each with the study that earned
+          it.
+        </p>
+        <LinkButton
+          base="button-small"
+          classes="button-accent"
+          link={{
+            href: "/research/aeo-bench/playbook",
+            title: "The Agent-Readiness & AEO Playbook",
+          }}
+        >
+          Read the Playbook
+        </LinkButton>
+      </div>
+
       <!-- the packages -->
       <div
         class="w-full border border-slate-100/10 bg-slate-100/5 rounded px-3 pt-4 pb-5"

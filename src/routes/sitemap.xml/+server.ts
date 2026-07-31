@@ -24,8 +24,8 @@ const productionUrl =
 // get data for blog + customer stories + reading list
 import { getAllBlogArticleSlugs } from "$content/getters/getBlogArticles";
 import { getAllCustomerStorySlugs } from "$content/getters/getCustomerStories";
-import { getAllReadingListSlugs } from "$content/getters/getReadingList";
 import { allPackages } from "$content/getters/getPackagesContent";
+import { getAllReadingListSlugs } from "$content/getters/getReadingList";
 import { allTechnologies } from "$content/getters/getTechnologiesContent";
 
 // helper function to create sitemap pages
@@ -74,6 +74,7 @@ const staticPages = [
 		generateSiteMapXMLPage(`/research/barkup-bench/${s.slug}`, "monthly", 0.25),
 	), // per-study result pages
 	generateSiteMapXMLPage(`/research/aeo-bench`, "weekly", 0.25), // aeo-bench research dashboard
+	generateSiteMapXMLPage(`/research/aeo-bench/playbook`, "weekly", 0.25), // the agent-readiness & aeo playbook
 	...aeoStudies.studies.map((s) =>
 		generateSiteMapXMLPage(`/research/aeo-bench/${s.slug}`, "monthly", 0.25),
 	), // per-study result pages

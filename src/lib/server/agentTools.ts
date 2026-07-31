@@ -46,6 +46,7 @@ export function aboutLightningJar() {
 			research: `${SITE_BASE}/research/barkup-bench`,
 			aeoResearch: `${SITE_BASE}/research/aeo-bench`,
 			playbook: `${SITE_BASE}/research/barkup-bench/playbook`,
+			aeoPlaybook: `${SITE_BASE}/research/aeo-bench/playbook`,
 			services: `${SITE_BASE}/services`,
 		},
 		packages: [

@@ -37,7 +37,7 @@ export function buildSiteIndex(input: SiteIndexInput): string {
 	lines.push("- /technologies — the stack we build on");
 	lines.push("- /packages — our open-source packages");
 	lines.push(
-		"- /research/barkup-bench, /research/aeo-bench — research dashboards; /research/barkup-bench/playbook — the builder's playbook",
+		"- /research/barkup-bench, /research/aeo-bench — research dashboards; /research/barkup-bench/playbook — the builder's playbook; /research/aeo-bench/playbook — the agent-readiness & AEO playbook",
 	);
 	lines.push("");
 

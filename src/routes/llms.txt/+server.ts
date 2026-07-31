@@ -1,13 +1,13 @@
+import type { RequestHandler } from "./$types";
+
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 import { getAllCustomerStories } from "$content/getters/getCustomerStories";
-import { getAllReadingListArticles } from "$content/getters/getReadingList";
 import { allPackages } from "$content/getters/getPackagesContent";
+import { getAllReadingListArticles } from "$content/getters/getReadingList";
 import { allTechnologies } from "$content/getters/getTechnologiesContent";
 
 import aeoStudies from "../research/aeo-bench/aeo-studies.json";
 import benchStudies from "../research/barkup-bench/bench-studies.json";
-
-import type { RequestHandler } from "./$types";
 
 // llms.txt (llmstxt.org): a markdown index of the site for LLM agents.
 // Served at request time so it always reflects the published CMS
@@ -60,6 +60,9 @@ export const GET: RequestHandler = async ({ fetch }) => {
 
 	lines.push(
 		`- [AEO Bench](${BASE}/research/aeo-bench): open, pre-registered benchmark series measuring whether agent-readiness and answer-engine-optimization techniques measurably help AI agents use websites`,
+	);
+	lines.push(
+		`- [The Agent-Readiness & AEO Playbook](${BASE}/research/aeo-bench/playbook): eight evidence-checked guidelines, split for site owners and agent builders, pairing Cloudflare's agent-readiness proposal with what our studies confirmed, corrected, or overturned`,
 	);
 	for (const s of aeoStudies.studies) {
 		lines.push(

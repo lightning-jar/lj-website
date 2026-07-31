@@ -2,9 +2,9 @@ import { getBlogArticlesSitemapSection } from "$content/getters/getBlogArticles"
 import { builtWithSitemapSection } from "$content/getters/getBuiltWithContent";
 import { getCustomerStoriesSitemapSection } from "$content/getters/getCustomerStories";
 import { homeSitemapSection } from "$content/getters/getHomeContent";
+import { packagesSitemapSection } from "$content/getters/getPackagesContent";
 import { getReadingListSitemapSection } from "$content/getters/getReadingList";
 import { servicesSitemapSection } from "$content/getters/getServicesContent";
-import { packagesSitemapSection } from "$content/getters/getPackagesContent";
 import { technologiesSitemapSection } from "$content/getters/getTechnologiesContent";
 import { termsSitemapSection } from "$content/getters/getTermsContent";
 import { testimonialsSitemapSection } from "$content/getters/getTestimonialsContent";
@@ -95,6 +95,13 @@ const researchSection = {
 			description: s.indexLine,
 			date: s.published,
 		})),
+		{
+			href: "/research/aeo-bench/playbook",
+			title: "The Agent-Readiness & AEO Playbook",
+			description:
+				"The practical distillation of AEO Bench: eight evidence-checked guidelines split for site owners and agent builders, each pairing the prevailing agent-readiness advice with what our studies confirmed, corrected, or overturned.",
+			date: "",
+		},
 	],
 };
 
