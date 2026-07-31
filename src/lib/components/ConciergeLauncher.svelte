@@ -1,78 +1,69 @@
 <script lang="ts">
-// Floating concierge launcher (homepage): a fixed bottom-right button
-// that opens a panel wrapping ConciergeChat. The panel mounts on first
-// open and then hides via class rather than unmounting, so the
-// conversation, typed input, and the lazily-loaded AI SDK all survive
-// close/reopen. It never opens itself: a click is the only way in
-// (human-origin gesture — the CCRTA-measured cost/abuse fence), and
-// ConciergeChat's own gesture-gated hydration is preserved inside.
+// Floating concierge launcher (homepage), built on the native popover
+// API: the panel lives in the top layer (no z-index management), the
+// launcher toggles it declaratively via popovertarget, and popover=auto
+// gives Escape-to-close and light dismiss for free. The panel is always
+// in the DOM (closed popovers are display:none), so the conversation,
+// typed input, and the lazily-loaded AI SDK survive close/reopen —
+// and ConciergeChat's gesture-gated hydration still defers the SDK
+// until a human actually interacts with the chat.
+//
+// Positioning: CSS anchor positioning pins the panel to the launcher
+// where supported; the fixed bottom/right utilities remain as the
+// fallback for browsers without anchor support.
 import ConciergeChat from "$components/ConciergeChat.svelte";
 import LightningBolt from "$components/LightningBolt.svelte";
 
 let open = $state(false);
-let everOpened = $state(false);
 let panelEl: HTMLElement | null = $state(null);
-let buttonEl: HTMLButtonElement | null = $state(null);
 // component instance: exposes ConciergeChat's exported reset()
 let chatApi: ReturnType<typeof ConciergeChat> | null = $state(null);
 
-function toggle() {
-	open = !open;
+// track the popover's real state for the icon/label swap; on open, move
+// focus to the chat input (the browser returns focus to the launcher
+// when the popover closes)
+function handleToggle(event: ToggleEvent) {
+	open = event.newState === "open";
 	if (open) {
-		everOpened = true;
-		// after the panel renders, move focus to the chat input
-		requestAnimationFrame(() => {
-			panelEl?.querySelector<HTMLInputElement>("input[type='text']")?.focus();
-		});
+		panelEl?.querySelector<HTMLInputElement>("input[type='text']")?.focus();
 	}
-}
-
-function close() {
-	if (!open) return;
-	open = false;
-	buttonEl?.focus();
-}
-
-function handleKeydown(event: KeyboardEvent) {
-	if (event.key === "Escape") close();
 }
 </script>
 
-<svelte:window onkeydown={open ? handleKeydown : undefined} />
-
-{#if everOpened}
-  <!-- svelte-ignore a11y_no_noninteractive_element_interactions — Escape
-       handling lives on the window listener; this container only scopes
-       the dialog region -->
-  <section
-    bind:this={panelEl}
-    id="concierge-panel"
-    aria-label="Concierge chat"
-    class="{open ? 'grid' : 'hidden'}
-    	bg-oxford
-      border
-      border-white/14
-      bottom-21
-      fixed
-      gap-0
-      grid-rows-[auto_minmax(0,1fr)]
-      h-[min(640px,calc(100dvh-7.5rem))]
-      motion-safe:animate-[fade-in_120ms_ease-out]
-      overflow-hidden
-      right-5
-      rounded-lg
-      shadow-2xl
-      shadow-black/50
-      w-[min(420px,calc(100vw-2.5rem))]
-      z-50"
+<section
+  bind:this={panelEl}
+  id="concierge-panel"
+  popover="auto"
+  ontoggle={handleToggle}
+  aria-label="Concierge chat"
+  class="
+    bg-oxford
+    text-cultured
+    border
+    border-white/14
+    bottom-21
+    inset-auto
+    fixed
+    gap-0
+    grid
+    grid-rows-[auto_minmax(0,1fr)]
+    h-[min(640px,calc(100dvh-7.5rem))]
+    m-0
+    motion-safe:animate-[fade-in_120ms_ease-out]
+    overflow-hidden
+    right-5
+    rounded-lg
+    shadow-2xl
+    shadow-black/50
+    w-[min(420px,calc(100vw-2.5rem))]"
+>
+  <header
+    class="flex items-center justify-between gap-3 px-4 py-3 border-b border-white/10"
   >
-    <header
-      class="flex items-center justify-between gap-3 px-4 py-3 border-b border-white/10"
-    >
-      <h2 class="font-serif font-700 text-16px text-maximumYellow">
+    <h2 class="font-serif font-700 text-16px text-maximumYellow">
       Ask Eljay (Our Agent)
-      </h2>
-      <div class="flex items-center gap-3">
+    </h2>
+    <div class="flex items-center gap-3">
       <button
         type="button"
         onclick={() => chatApi?.reset()}
@@ -81,36 +72,29 @@ function handleKeydown(event: KeyboardEvent) {
       >
         <span aria-hidden="true" class="i-ph-arrow-clockwise-bold"></span>
       </button>
-        <a
-          href="/concierge"
-          class="button-xsmall"
-          >↗</a
-        >
-        <button
-          type="button"
-          onclick={close}
-          aria-label="Close the concierge panel"
-          class="button-xsmall"
-        >
-          <span aria-hidden="true">✕</span>
-        </button>
-      </div>
-    </header>
-
-    <div class="bg-blue/5 h-full px-4 pt-4 pb-6">
-      <ConciergeChat bind:this={chatApi} hideClearButton />
+      <a href="/concierge" class="button-xsmall" aria-label="Open the concierge full page">↗</a>
+      <button
+        type="button"
+        popovertarget="concierge-panel"
+        popovertargetaction="hide"
+        aria-label="Close the concierge panel"
+        class="button-xsmall"
+      >
+        <span aria-hidden="true">✕</span>
+      </button>
     </div>
-  </section>
-{/if}
+  </header>
+
+  <div class="bg-blue/5 h-full px-4 pt-4 pb-6">
+    <ConciergeChat bind:this={chatApi} hideClearButton />
+  </div>
+</section>
 
 <button
-  bind:this={buttonEl}
   type="button"
-  onclick={toggle}
-  aria-expanded={open}
-  aria-controls="concierge-panel"
+  popovertarget="concierge-panel"
   aria-label={open ? "Close the concierge chat" : "Ask the concierge"}
-  class="fixed bottom-5 right-5 z-50 w-13 h-13 flex items-center justify-center rounded-full border border-maximumYellow bg-maximumYellow text-oxford shadow-lg hover:bg-oxford hover:text-maximumYellow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-oxford"
+  class="concierge-launcher fixed bottom-5 right-5 z-50 w-13 h-13 flex items-center justify-center rounded-full border border-maximumYellow bg-maximumYellow text-oxford shadow-lg hover:bg-oxford hover:text-maximumYellow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-oxford"
 >
   {#if open}
     <span aria-hidden="true" class="text-18px leading-none">✕</span>
@@ -120,3 +104,22 @@ function handleKeydown(event: KeyboardEvent) {
     </span>
   {/if}
 </button>
+
+<style>
+	/* Anchor positioning (progressive enhancement): pin the panel to the
+	   launcher button so the pair can never drift apart. Browsers without
+	   anchor support keep the fixed bottom/right utility fallback above. */
+	.concierge-launcher {
+		anchor-name: --concierge-launcher;
+	}
+
+	@supports (anchor-name: --a) {
+		#concierge-panel {
+			position-anchor: --concierge-launcher;
+			top: auto;
+			left: auto;
+			bottom: calc(anchor(top) + 0.75rem);
+			right: anchor(right);
+		}
+	}
+</style>
