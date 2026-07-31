@@ -139,7 +139,7 @@ const proseCls = "text-[#c3c9d4]";
     </div>
 
     <section class="mt-14" id="studies">
-      <p class={eyebrowCls}>The study series · study 1 + registered re-score</p>
+      <p class={eyebrowCls}>The study series · four studies + a registered re-score</p>
       <h2 class="text-[1.22rem] font-600 tracking-[-0.01em] mb-1">
         Every Study, One Page Each
       </h2>
