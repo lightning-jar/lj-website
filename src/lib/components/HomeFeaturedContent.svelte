@@ -36,6 +36,11 @@ const featured: FeaturedItem[] = [
 		title: "14 Languages in Days, Not Quarters: CCRTA Sitewide Translation",
 		href: "/customer-stories/ccrta-multilingual-translation",
 	},
+	{
+		kind: "Blog",
+		title: "Building a Modern Transit Website: Live Bus Tracking on Open Data",
+		href: "/blog/modern-transit-website",
+	},
 ];
 </script>
 
@@ -52,7 +57,9 @@ const featured: FeaturedItem[] = [
         aria-labelledby="featured-title-{index}"
         href={item.href}
         title={item.title}
-        class="aspect-[4/3] w-full border border-current rounded-lg overflow-hidden relative flex flex-col justify-between gap-2 p-3 hover:bg-white/5"
+        class="{index === 5
+          ? 'lg:hidden xl:flex'
+          : ''} aspect-[4/3] w-full border border-current rounded-lg overflow-hidden relative flex flex-col justify-between gap-2 p-3 hover:bg-white/5"
       >
         <div class="text-maximumYellow text-13px uppercase tracking-wide">
           {item.kind}
