@@ -27,6 +27,11 @@ let panelsCount: number = $derived(data?.services?.length ?? 0);
           >
             "{service.text}"
           </p>
+          {#if service.body}
+            <p class="text-16px md:text-17px leading-relaxed text-slate-200 mb-6 max-w-540px">
+              {service.body}
+            </p>
+          {/if}
           {#if service.links?.length}
             <div class="mt-2 max-w-540px">
               <h3
