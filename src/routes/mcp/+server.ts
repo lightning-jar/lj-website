@@ -1,6 +1,6 @@
 import { json } from "@sveltejs/kit";
-import { createMcpHandler } from "mcp-handler";
-import { z } from "zod";
+
+import type { RequestHandler } from "./$types";
 
 // One shared tool layer serves both this public MCP endpoint and the
 // concierge chat (/api/concierge) — the data functions live in
@@ -18,8 +18,10 @@ import {
 	readStudy,
 	searchContent,
 } from "$lib/server/agentTools";
-
-import type { RequestHandler } from "./$types";
+import { createRateLimiter } from "$lib/server/rateLimit";
+import { createMcpHandler } from "mcp-handler";
+import { ENV } from "varlock/env";
+import { z } from "zod";
 
 // Public, keyless, read-only MCP endpoint (streamable HTTP, stateless):
 // everything it serves is already public on the site, so agent reach is
@@ -163,7 +165,52 @@ const CORS = {
 		"content-type, mcp-session-id, mcp-protocol-version",
 };
 
-export const POST: RequestHandler = async ({ request, fetch }) => {
+// Anti-runaway fence, not anti-usage: a legitimate agent session makes
+// 5-15 tool calls (AEO Bench Study 1 measured 2.7-4.9 fetches per
+// task), and cloud-hosted agents share egress IPs, so the caps are
+// generous. Upstash-backed when configured, in-memory per-instance
+// otherwise ($lib/server/rateLimit).
+const limiter = createRateLimiter({
+	prefix: "rl:mcp",
+	rules: [
+		{ name: "ip", max: 60, windowSec: 300, scope: "ip" },
+		{ name: "daily", max: 2_000, windowSec: 86_400, scope: "global" },
+	],
+	redisUrl: ENV.KV_REST_API_URL || undefined,
+	redisToken: ENV.KV_REST_API_TOKEN || undefined,
+});
+
+export const POST: RequestHandler = async ({
+	request,
+	fetch,
+	getClientAddress,
+}) => {
+	let ip = "unknown";
+	try {
+		ip = getClientAddress();
+	} catch {
+		// prerender/analysis contexts — keep the fallback key
+	}
+	const verdict = await limiter.check(ip);
+	if (!verdict.ok) {
+		// well-behaved MCP clients speak HTTP: 429 + Retry-After lets them
+		// back off; the JSON-RPC error body keeps protocol clients readable
+		return json(
+			{
+				jsonrpc: "2.0",
+				id: null,
+				error: {
+					code: -32000,
+					message: `Rate limited. Retry after ${verdict.retryAfterSec} seconds.`,
+				},
+			},
+			{
+				status: 429,
+				headers: { ...CORS, "retry-after": String(verdict.retryAfterSec) },
+			},
+		);
+	}
+
 	const res = await handlerFor(fetch)(request);
 	for (const [k, v] of Object.entries(CORS)) res.headers.set(k, v);
 	return res;

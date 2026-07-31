@@ -21,14 +21,47 @@ import { allTechnologies } from "$content/getters/getTechnologiesContent";
 import aeoStudies from "../../routes/research/aeo-bench/aeo-studies.json";
 import benchStudies from "../../routes/research/barkup-bench/bench-studies.json";
 import { buildSiteIndex } from "./siteIndex";
+import { createTtlCache } from "./ttlCache";
 
 export const SITE_BASE = "https://www.lightningjar.com";
+
+// In-instance TTL memos over the CMS fetches — the burst-cost lever: a
+// run of tool calls (one agent session can make 5-15) hits the CMS once
+// per collection per TTL, not once per call. 120s keeps the agent
+// surfaces fresh while bounding what any burst, legitimate or abusive,
+// can cost upstream. Negative results (missing slugs) cache too, which
+// bounds repeated probing; thrown failures are never cached (ttlCache
+// evicts rejections so transient CMS errors retry immediately).
+const TTL_MS = 120_000;
 
 // re-exported so the concierge's curated-index tests can reach it without
 // importing this module (which pulls in import.meta.glob getters)
 export { buildSiteIndex } from "./siteIndex";
 
 type Fetch = typeof globalThis.fetch;
+
+const cBlogList = createTtlCache<
+	Awaited<ReturnType<typeof getAllBlogArticles>>
+>({ ttlMs: TTL_MS, maxEntries: 1 });
+const cStoryList = createTtlCache<
+	Awaited<ReturnType<typeof getAllCustomerStories>>
+>({ ttlMs: TTL_MS, maxEntries: 1 });
+const cReadingList = createTtlCache<
+	Awaited<ReturnType<typeof getAllReadingListArticles>>
+>({ ttlMs: TTL_MS, maxEntries: 1 });
+const cBlogRead = createTtlCache<
+	Awaited<ReturnType<typeof getBlogArticleMarkdownBySlug>>
+>({ ttlMs: TTL_MS, maxEntries: 300 });
+const cStoryRead = createTtlCache<
+	Awaited<ReturnType<typeof getCustomerStoryMarkdownBySlug>>
+>({ ttlMs: TTL_MS, maxEntries: 100 });
+
+const blogArticles = (fetch: Fetch) =>
+	cBlogList.get("all", () => getAllBlogArticles(fetch));
+const customerStories = (fetch: Fetch) =>
+	cStoryList.get("all", () => getAllCustomerStories(fetch));
+const readingList = (fetch: Fetch) =>
+	cReadingList.get("all", () => getAllReadingListArticles(fetch));
 
 const stripHtml = (s: string) => s.replace(/<[^>]+>/g, "");
 
@@ -68,7 +101,7 @@ export async function searchContent(
 		terms.every((t) => haystack.toLowerCase().includes(t));
 	const out: unknown[] = [];
 	if (!collection || collection === "blog") {
-		for (const a of await getAllBlogArticles(fetch)) {
+		for (const a of await blogArticles(fetch)) {
 			const fm = a.frontMatter;
 			const hay = [fm.title, fm.description, ...(fm.tags ?? [])].join(" ");
 			if (matches(hay))
@@ -82,7 +115,7 @@ export async function searchContent(
 		}
 	}
 	if (!collection || collection === "customer-story") {
-		for (const s of await getAllCustomerStories(fetch)) {
+		for (const s of await customerStories(fetch)) {
 			const hay = [s.title, s.excerpt, ...(s.tags ?? [])].join(" ");
 			if (matches(hay))
 				out.push({
@@ -95,7 +128,7 @@ export async function searchContent(
 		}
 	}
 	if (!collection || collection === "reading-list") {
-		for (const e of await getAllReadingListArticles(fetch)) {
+		for (const e of await readingList(fetch)) {
 			const hay = [e.title, e.summary, e.excerpt, ...(e.tags ?? [])].join(" ");
 			if (matches(hay))
 				out.push({
@@ -143,7 +176,7 @@ export async function searchContent(
 }
 
 export async function listBlogArticles(fetch: Fetch) {
-	return (await getAllBlogArticles(fetch)).map((a) => ({
+	return (await blogArticles(fetch)).map((a) => ({
 		slug: a.frontMatter.slug,
 		title: a.frontMatter.title,
 		date: a.frontMatter.date,
@@ -157,7 +190,9 @@ export async function readBlogArticle(fetch: Fetch, slug: string) {
 	// return the raw markdown body, not rendered HTML: AEO Bench Study 1
 	// measured markdown saving 20-74% of the tokens HTML costs an agent,
 	// and we publish barkdown — no reason to feed our own agent HTML.
-	const detail = await getBlogArticleMarkdownBySlug(fetch, slug);
+	const detail = await cBlogRead.get(slug, () =>
+		getBlogArticleMarkdownBySlug(fetch, slug),
+	);
 	if (!detail) return { error: `No article with slug "${slug}"` };
 	const fm = detail.frontMatter;
 	return {
@@ -173,7 +208,7 @@ export async function readBlogArticle(fetch: Fetch, slug: string) {
 }
 
 export async function listCustomerStories(fetch: Fetch) {
-	return (await getAllCustomerStories(fetch)).map((s) => ({
+	return (await customerStories(fetch)).map((s) => ({
 		slug: s.slug,
 		title: s.title,
 		customer: s.customer?.name,
@@ -186,7 +221,9 @@ export async function listCustomerStories(fetch: Fetch) {
 export async function readCustomerStory(fetch: Fetch, slug: string) {
 	// markdown body + the structured frontmatter fields (customer,
 	// testimonials) — lean tokens per the AEO Bench markdown finding
-	const detail = await getCustomerStoryMarkdownBySlug(fetch, slug);
+	const detail = await cStoryRead.get(slug, () =>
+		getCustomerStoryMarkdownBySlug(fetch, slug),
+	);
 	if (!detail) return { error: `No story with slug "${slug}"` };
 	const fm = detail.frontMatter;
 	return {
@@ -201,7 +238,7 @@ export async function readCustomerStory(fetch: Fetch, slug: string) {
 }
 
 export async function listReadingList(fetch: Fetch) {
-	return (await getAllReadingListArticles(fetch)).map((e) => ({
+	return (await readingList(fetch)).map((e) => ({
 		slug: e.slug,
 		title: e.title,
 		author: e.author?.name,
@@ -228,9 +265,18 @@ export const SITE_PAGES = {
 
 export type SitePageKey = keyof typeof SITE_PAGES;
 
+const cPage = createTtlCache<Awaited<ReturnType<typeof fetchPage>>>({
+	ttlMs: TTL_MS,
+	maxEntries: 12,
+});
+
 export async function readPage(fetch: Fetch, page: SitePageKey) {
+	if (!SITE_PAGES[page]) return { error: `Unknown page "${page}"` };
+	return cPage.get(page, () => fetchPage(fetch, page));
+}
+
+async function fetchPage(fetch: Fetch, page: SitePageKey) {
 	const path = SITE_PAGES[page];
-	if (!path) return { error: `Unknown page "${page}"` };
 	const url = `${SITE_BASE}${path}`;
 	let res: Response;
 	try {
@@ -370,8 +416,8 @@ export function siteIndex(fetch: Fetch): Promise<string> {
 	if (!_siteIndex) {
 		_siteIndex = (async () => {
 			const [blog, reading] = await Promise.all([
-				getAllBlogArticles(fetch),
-				getAllReadingListArticles(fetch),
+				blogArticles(fetch),
+				readingList(fetch),
 			]);
 			return buildSiteIndex({
 				blogArticles: blog.length,

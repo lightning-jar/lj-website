@@ -3,11 +3,12 @@
 // agentTools). Prototype scope, fail-closed by design:
 //
 // - No AI_GATEWAY_API_KEY → 503. The site never depends on this route.
-// - In-memory per-IP rate limit + global daily request budget. These
-//   are per-instance (serverless memory is not shared), so they are a
-//   first fence, not the wall — the AI Gateway credit cap is the hard
-//   backstop. Promotion to the homepage should move both counters to
-//   Redis (the CCRTA mapBudget pattern) and add a BotID verdict.
+// - Per-IP rate limit + global daily request budget via the shared
+//   limiter ($lib/server/rateLimit): Upstash-backed when KV_REST_API_*
+//   is configured (counters shared across instances), in-memory
+//   per-instance otherwise. Either way a fence, not the wall — the AI
+//   Gateway credit cap is the hard backstop. BotID remains a
+//   homepage-promotion item.
 // - Conversation and message size caps bound the worst-case request.
 //
 // Every answer must come from tool results; the system prompt forbids
@@ -27,6 +28,7 @@ import {
 	searchContent,
 	siteIndex,
 } from "$lib/server/agentTools";
+import { createRateLimiter } from "$lib/server/rateLimit";
 import { gateway } from "@ai-sdk/gateway";
 import {
 	convertToModelMessages,
@@ -47,31 +49,24 @@ const MAX_TURNS = 12; // user messages per conversation
 const MAX_MESSAGE_CHARS = 2_000; // per single text part
 const MAX_TOTAL_MESSAGES = 40; // whole client-supplied history
 const MAX_TOTAL_CHARS = 24_000; // sum across all text parts
-const RATE_WINDOW_MS = 5 * 60 * 1000;
-const RATE_MAX_REQUESTS = 10; // per IP per window
-const DAILY_MAX_REQUESTS = 400; // per instance per UTC day
+const RATE_MAX_REQUESTS = 10; // per IP per 5-minute window
+const DAILY_MAX_REQUESTS = 400; // shared per UTC day (per instance without Redis)
 
-// ---- fences (in-memory; see header) ----------------------------------
-const ipHits = new Map<string, number[]>();
-let dailyCount = 0;
-let dailyStamp = "";
-
-function overLimits(ip: string): string | null {
-	const today = new Date().toISOString().slice(0, 10);
-	if (today !== dailyStamp) {
-		dailyStamp = today;
-		dailyCount = 0;
-	}
-	if (dailyCount >= DAILY_MAX_REQUESTS) return "daily";
-	const now = Date.now();
-	const hits = (ipHits.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
-	if (hits.length >= RATE_MAX_REQUESTS) return "rate";
-	hits.push(now);
-	ipHits.set(ip, hits);
-	if (ipHits.size > 5_000) ipHits.clear(); // crude memory bound
-	dailyCount += 1;
-	return null;
-}
+// ---- fences (shared limiter; see header) ------------------------------
+const limiter = createRateLimiter({
+	prefix: "rl:concierge",
+	rules: [
+		{ name: "ip", max: RATE_MAX_REQUESTS, windowSec: 300, scope: "ip" },
+		{
+			name: "daily",
+			max: DAILY_MAX_REQUESTS,
+			windowSec: 86_400,
+			scope: "global",
+		},
+	],
+	redisUrl: ENV.KV_REST_API_URL || undefined,
+	redisToken: ENV.KV_REST_API_TOKEN || undefined,
+});
 
 const RECHARGING =
 	"The lightning jar is recharging. Please try again in a little while, or email hello@lightningjar.com — a person answers that.";
@@ -182,10 +177,14 @@ function shipLog(
 	}).catch((err) => console.warn("concierge: log ship failed", err));
 }
 
-function refuse(status: number, message: string) {
+function refuse(
+	status: number,
+	message: string,
+	extraHeaders?: Record<string, string>,
+) {
 	return new Response(JSON.stringify({ error: message }), {
 		status,
-		headers: { "content-type": "application/json" },
+		headers: { "content-type": "application/json", ...extraHeaders },
 	});
 }
 
@@ -225,8 +224,11 @@ export const POST: RequestHandler = async ({
 	} catch {
 		// prerender/analysis contexts — keep the fallback key
 	}
-	const limited = overLimits(ip);
-	if (limited) return refuse(429, RECHARGING);
+	const verdict = await limiter.check(ip);
+	if (!verdict.ok)
+		return refuse(429, RECHARGING, {
+			"retry-after": String(verdict.retryAfterSec),
+		});
 
 	let messages: UIMessage[];
 	let chatId = "";
@@ -390,10 +392,9 @@ export const POST: RequestHandler = async ({
 			}),
 		},
 		onFinish: ({ usage }) => {
-			// visibility while this is a prototype; promotion to the
-			// homepage should ship these to a real counter
+			// visibility while this is a prototype
 			console.info(
-				`concierge: in=${usage.inputTokens ?? "?"} out=${usage.outputTokens ?? "?"} daily=${dailyCount}`,
+				`concierge: in=${usage.inputTokens ?? "?"} out=${usage.outputTokens ?? "?"}`,
 			);
 		},
 	});

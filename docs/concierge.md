@@ -218,10 +218,15 @@ backstop.
   the browser and unforgeable from page JavaScript, so this blocks
   cross-site calls and naive scripts/scrapers (a determined script can
   spoof it — hence "fence, not wall").
-- **Rate limits.** Per-IP sliding window (10 / 5 min) and per-instance
-  daily cap (400 / UTC day). In-memory and per-instance (serverless
-  memory is not shared) — a first fence; the homepage-promotion plan
-  moves these to Redis (the CCRTA `mapBudget` pattern).
+- **Rate limits.** Per-IP fixed window (10 / 5 min) and daily cap
+  (400 / UTC day) via the shared limiter (`$lib/server/rateLimit`, also
+  used by `/mcp` at 60 / 5 min + 2,000 / day). Upstash-backed when
+  `KV_REST_API_URL`/`KV_REST_API_TOKEN` are configured, so counters are
+  shared across serverless instances; without them (local dev, tests,
+  or an Upstash outage) it falls back to in-memory per-instance
+  counters — a fence either way. Blocked requests return 429 with a
+  `Retry-After` header; `/mcp` additionally answers with a JSON-RPC
+  error body so protocol clients back off cleanly.
 - **Size caps.** ≤12 user turns, ≤2k chars per text part, ≤40 total
   messages, ≤24k total chars, ≤800 output tokens, ≤6 tool steps. Bounds
   the cost of any single request, including forged assistant history.
@@ -246,12 +251,13 @@ backstop.
   no-secrets read-only agent, plus an external dependency and
   data-sharing.)
 
-**Deferred to homepage promotion:** Redis-backed rate/budget counters,
-and **BotID** (Vercel proof-of-work) — the proper defense against a
-spoofing bot, which the CCRTA maps work proved handles this adversary
-class. A client-side gesture gate was considered and rejected as a
-security control (forgeable outside a browser); the lazy hydration below
-is the UX-and-cost version of that idea.
+**Deferred to homepage promotion:** **BotID** (Vercel proof-of-work) —
+the proper defense against a spoofing bot, which the CCRTA maps work
+proved handles this adversary class. (Redis-backed counters, once on
+this list, shipped early: see Rate limits above.) A client-side gesture
+gate was considered and rejected as a security control (forgeable
+outside a browser); the lazy hydration below is the UX-and-cost version
+of that idea.
 
 ---
 
@@ -355,8 +361,10 @@ Both optional; the route degrades gracefully without either.
 
 If the concierge graduates from experiment to a homepage feature:
 
-1. **Redis-backed rate/budget counters** (CCRTA `mapBudget` pattern) —
-   the in-memory fences are per-instance.
+1. ~~Redis-backed rate/budget counters~~ — shipped ahead of promotion:
+   the shared limiter (`$lib/server/rateLimit`) backs both this route
+   and `/mcp` with Upstash fixed-window counters, falling back to
+   in-memory per-instance when unconfigured.
 2. **BotID** — the real defense against spoofing bots.
 3. An a11y + performance pass on the widget in its homepage placement.
 4. Revisit `MAX_STEPS` only after auditing `finishReason` in the chat
