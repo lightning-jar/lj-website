@@ -7,14 +7,26 @@
 // input element is rendered immediately and never unmounts, so typed
 // text and focus survive hydration with no swap. Cheap on page load;
 // wakes on intent.
+
+import { onMount } from "svelte";
+
+import { pickRandom } from "$utils/pickRandom";
+
 import type { Chat } from "@ai-sdk/svelte";
 import type { UIMessage } from "ai";
+import type { Attachment } from "svelte/attachments";
+
+// hideClearButton: set by hosts that provide their own reset affordance
+// (the homepage launcher's header button calls the exported reset()
+// via bind:this); the standalone /concierge page keeps the inline one
+let { hideClearButton = false } = $props();
 
 let input = $state("");
 let lastError = $state("");
 let activated = $state(false);
 let chat = $state<Chat<UIMessage> | null>(null);
 let inputEl: HTMLInputElement | null = $state(null);
+let scroller: HTMLDivElement | null = $state(null);
 
 // the route's refusals are JSON {"error": "..."} — surface the message
 // itself when we can parse it
@@ -52,8 +64,9 @@ async function activate() {
 
 // clear the conversation: stop any in-flight stream, then start a fresh
 // Chat (new id, so the cleared conversation logs separately rather than
-// overwriting), and reset the input back to the empty state.
-async function reset() {
+// overwriting), and reset the input back to the empty state. Exported
+// (a component instance export) so hosts can call it via bind:this.
+export async function reset() {
 	if (busy) await chat?.stop().catch(() => {});
 	try {
 		chat = await newChat();
@@ -200,12 +213,60 @@ function isSearching(message: UIMessage): boolean {
 
 const SUGGESTIONS = [
 	"What kind of research is Lightning Jar doing?",
-	"What are the key findings of LJ's AEO research to date?",
+	"What are the key findings of LJ's AEO research?",
 	"What is the AEO Playbook?",
 	"Have you built transit websites?",
 	"What is woof-editor?",
 	"What is Replicator?",
 ];
+
+// SSR and hydration must agree, so the server renders a deterministic
+// first-three; the client reshuffles once after mount (Math.random in
+// component init would make server and client HTML disagree)
+let randomSuggestions = $state(SUGGESTIONS.slice(0, 3));
+onMount(() => {
+	randomSuggestions = pickRandom(SUGGESTIONS);
+});
+
+function stickToBottom(
+	// Getter for the "re-pin" signal — read lazily so the attachment
+	// body itself never touches reactive state (which would tear the
+	// whole thing down on every change)
+	repinOn: () => unknown,
+	threshold = 100,
+): Attachment<HTMLElement> {
+	return (el) => {
+		let pinned = true;
+
+		const onScroll = () => {
+			pinned = el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
+		};
+		const scrollDown = () => {
+			if (pinned) el.scrollTo({ top: el.scrollHeight });
+		};
+
+		// Child effect: re-runs whenever the signal changes (a message is
+		// added), forcing a re-pin even if the user had scrolled away.
+		// Effects run after the DOM updates, so scrollHeight is current.
+		$effect(() => {
+			repinOn(); // register dependency
+			pinned = true;
+			scrollDown();
+		});
+
+		// Streaming tokens: keep pinned as text mutates
+		const mo = new MutationObserver(scrollDown);
+		mo.observe(el, { childList: true, subtree: true, characterData: true });
+
+		el.addEventListener("scroll", onScroll);
+		scrollDown();
+
+		return () => {
+			mo.disconnect();
+			el.removeEventListener("scroll", onScroll);
+		};
+	};
+}
 </script>
 
 <!-- gesture triggers on the card: focusin (keyboard + AT + click into a
@@ -214,14 +275,17 @@ const SUGGESTIONS = [
      activation heuristic, not a control. -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-  class="grid grid-cols-1 gap-4 max-w-article place-content-start w-full"
+  class="gap-4 grid grid-cols-1 {messages.length > 0 && !hideClearButton
+    ? 'grid-rows-[auto_minmax(0,1fr)_auto_auto]'
+    : 'grid-rows-[minmax(0,1fr)_auto_auto]'} h-full max-h-full place-content-stretch overflow-hidden w-full"
   onfocusin={activate}
   onpointerenter={activate}
   ontouchstart={activate}
 >
-  <!-- clear conversation (only once there's something to clear) -->
-  {#if messages.length > 0}
-    <div class="flex justify-end -mb-1">
+  <!-- clear conversation (only once there's something to clear; hidden
+       when the host supplies its own reset control) -->
+  {#if messages.length > 0 && !hideClearButton}
+    <div class="flex justify-end">
       <button
         type="button"
         onclick={reset}
@@ -234,65 +298,69 @@ const SUGGESTIONS = [
 
   <!-- transcript -->
   <div
-    class="grid grid-cols-1 gap-3 min-h-[16rem] place-content-start bg-white/5 rounded-md px-4 pt-5 pb-6"
+    bind:this={scroller}
+		{@attach stickToBottom(() => messages.length)}
+    class="grid grid-cols-1 grid-rows-[1fr] gap-4 h-full max-h-full overflow-y-scroll place-content-start text-0.9em"
     aria-live="polite"
     aria-label="Conversation"
   >
-    {#if messages.length === 0}
-      <p class="opacity-70 text-15px">
-        Ask about the studio's work, research, packages, or writing. A few
-        starters:
-      </p>
-      <div class="flex flex-wrap gap-x-2 gap-y-3 place-content-start">
-        {#each SUGGESTIONS as suggestion}
-          <button
-            type="button"
-            class="text-14px block border border-maximumYellow/40 text-maximumYellow rounded-full px-3 py-2 leading-snug hover-bg-maximumYellow/3 hover-border-maximumYellow max-h-fit"
-            onclick={() => useSuggestion(suggestion)}
-          >
-            {suggestion}
-          </button>
-        {/each}
-      </div>
-    {/if}
+  	<div class="grid grid-cols-1 h-auto place-content-start min-h-full">
+	    {#if messages.length === 0}
+	      <p class="opacity-90 mb-3">
+	        Ask about the studio's work, research, packages, or writing. A few
+	        starters:
+	      </p>
+	      <div class="flex flex-wrap gap-x-2 gap-y-3 place-content-start">
+	        {#each randomSuggestions as suggestion}
+	          <button
+	            type="button"
+	            class="text-14px block border border-maximumYellow/40 text-maximumYellow rounded-full px-2 py-2 leading-snug hover-bg-maximumYellow/3 hover-border-maximumYellow max-h-fit"
+	            onclick={() => useSuggestion(suggestion)}
+	          >
+	            {suggestion}
+	          </button>
+	        {/each}
+	      </div>
+	    {/if}
 
-    {#each messages as message (message.id)}
-      {#if message.role === "user"}
-        <div
-          class="justify-self-end max-w-[85%] border border-white/15 bg-white/5 rounded-lg px-4 py-2.5 text-15px"
-        >
-          {textOf(message)}
-        </div>
-      {:else}
-        <div class="max-w-[92%] text-15px leading-relaxed">
-          {#if textOf(message)}
-            <div
-              class="grid grid-cols-1 gap-2 [&_p]:opacity-90 [&_strong]:font-600 [&_em]:italic [&_code]:(font-mono text-13px bg-white/10 rounded px-1 py-0.5) [&_ul]:(list-disc pl-5 grid gap-1) [&_ol]:(list-decimal pl-5 grid gap-1) [&_li]:opacity-90"
-            >
-              <!-- eslint-disable-next-line svelte/no-at-html-tags — output
-                   of renderMarkdownLite, which escapes all HTML first -->
-              {@html renderMarkdownLite(textOf(message))}
-            </div>
-          {:else if isSearching(message)}
-            <span class="opacity-60 font-mono text-13px"
-              >⚡ checking the site…</span
-            >
-          {/if}
-        </div>
-      {/if}
-    {/each}
+	    {#each messages as message (message.id)}
+	      {#if message.role === "user"}
+	        <div
+	          class="justify-self-end max-w-[85%] border border-white/15 bg-white/5 rounded-lg px-4 py-2.5 mb-4"
+	        >
+	          {textOf(message)}
+	        </div>
+	      {:else}
+	        <div class="leading-relaxed">
+	          {#if textOf(message)}
+	            <div
+	              class="chat-response"
+	            >
+	              <!-- eslint-disable-next-line svelte/no-at-html-tags — output
+	                   of renderMarkdownLite, which escapes all HTML first -->
+	              {@html renderMarkdownLite(textOf(message))}
+	            </div>
+	          {:else if isSearching(message)}
+	            <span class="opacity-60 font-mono text-13px"
+	              >⚡ checking the site…</span
+	            >
+	          {/if}
+	        </div>
+	      {/if}
+	    {/each}
 
-    {#if busy && messages.at(-1)?.role === "user"}
-      <span class="opacity-60 font-mono text-13px">⚡ thinking…</span>
-    {/if}
+	    {#if busy && messages.at(-1)?.role === "user"}
+	      <span class="opacity-60 font-mono text-13px">⚡ thinking…</span>
+	    {/if}
 
-    {#if lastError}
-      <p
-        class="text-15px border border-maximumYellow/40 rounded px-4 py-2.5 opacity-90"
-      >
-        {lastError}
-      </p>
-    {/if}
+	    {#if lastError}
+	      <p
+	        class="text-15px border border-maximumYellow/40 rounded px-4 py-2.5 opacity-90"
+	      >
+	        {lastError}
+	      </p>
+	    {/if}
+     </div>
   </div>
 
   <!-- input -->
@@ -305,7 +373,7 @@ const SUGGESTIONS = [
         bind:value={input}
         onfocus={activate}
         maxlength="2000"
-        placeholder="Ask the concierge…"
+        placeholder="Ask Eljay…"
         autocomplete="off"
         class="w-full rounded-md border border-current bg-oxfordDark/40 px-4 py-2 text-15px placeholder:text-current/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
       />
@@ -320,8 +388,8 @@ const SUGGESTIONS = [
   </form>
 
   <p class="text-13px opacity-60">
-    An experiment. Answers come from this site's own content and link their
-    sources. <br />For anything that matters, email
+    Answers come from this site's own content and link their
+    sources. For anything that matters, email
     <a
       class="underline underline-offset-4"
       href="mailto:hello@lightningjar.com">hello@lightningjar.com</a

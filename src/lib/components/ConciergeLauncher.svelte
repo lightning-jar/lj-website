@@ -13,6 +13,8 @@ let open = $state(false);
 let everOpened = $state(false);
 let panelEl: HTMLElement | null = $state(null);
 let buttonEl: HTMLButtonElement | null = $state(null);
+// component instance: exposes ConciergeChat's exported reset()
+let chatApi: ReturnType<typeof ConciergeChat> | null = $state(null);
 
 function toggle() {
 	open = !open;
@@ -47,48 +49,56 @@ function handleKeydown(event: KeyboardEvent) {
     id="concierge-panel"
     aria-label="Concierge chat"
     class="{open ? 'grid' : 'hidden'}
-      fixed
-      bottom-21
-      right-5
-      z-50
-      w-[min(420px,calc(100vw-2.5rem))]
-      h-[min(640px,calc(100dvh-7.5rem))]
-      grid-rows-[auto_minmax(0,1fr)]
-      gap-0
-      bg-oxford
+    	bg-oxford
       border
       border-white/14
+      bottom-21
+      fixed
+      gap-0
+      grid-rows-[auto_minmax(0,1fr)]
+      h-[min(640px,calc(100dvh-7.5rem))]
+      motion-safe:animate-[fade-in_120ms_ease-out]
+      overflow-hidden
+      right-5
       rounded-lg
       shadow-2xl
       shadow-black/50
-      overflow-hidden
-      motion-safe:animate-[fade-in_120ms_ease-out]"
+      w-[min(420px,calc(100vw-2.5rem))]
+      z-50"
   >
     <header
       class="flex items-center justify-between gap-3 px-4 py-3 border-b border-white/10"
     >
       <h2 class="font-serif font-700 text-16px text-maximumYellow">
-        Concierge
+      Ask Eljay (Our Agent)
       </h2>
       <div class="flex items-center gap-3">
+      <button
+        type="button"
+        onclick={() => chatApi?.reset()}
+        aria-label="Clear the current conversation"
+        class="button-xsmall"
+      >
+        <span aria-hidden="true" class="i-ph-arrow-clockwise-bold"></span>
+      </button>
         <a
           href="/concierge"
-          class="text-13px opacity-70 hover:opacity-100 hover:text-maximumYellow underline underline-offset-4 decoration-maximumYellow/30"
-          >Full page</a
+          class="button-xsmall"
+          >↗</a
         >
         <button
           type="button"
           onclick={close}
           aria-label="Close the concierge panel"
-          class="w-6 h-6 flex items-center justify-center rounded opacity-70 hover:opacity-100 hover:text-maximumYellow focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+          class="button-xsmall"
         >
           <span aria-hidden="true">✕</span>
         </button>
       </div>
     </header>
 
-    <div class="overflow-y-auto px-4 pt-4 pb-5">
-      <ConciergeChat />
+    <div class="bg-blue/5 h-full px-4 pt-4 pb-6">
+      <ConciergeChat bind:this={chatApi} hideClearButton />
     </div>
   </section>
 {/if}
