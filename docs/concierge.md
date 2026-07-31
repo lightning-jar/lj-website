@@ -251,13 +251,19 @@ backstop.
   no-secrets read-only agent, plus an external dependency and
   data-sharing.)
 
-**Deferred to homepage promotion:** **BotID** (Vercel proof-of-work) —
-the proper defense against a spoofing bot, which the CCRTA maps work
-proved handles this adversary class. (Redis-backed counters, once on
-this list, shipped early: see Rate limits above.) A client-side gesture
-gate was considered and rejected as a security control (forgeable
-outside a browser); the lazy hydration below is the UX-and-cost version
-of that idea.
+**On BotID — demoted, per the CCRTA evidence (July 2026 maps sprint):**
+this list once carried BotID as the proper bot defense; the CCRTA
+findings say otherwise. There, ~85% of the Maps bill was an automated
+client that a human-origin activation gate eliminated without
+classifying anyone — it loaded pages, never emitted a human gesture,
+and stopped. BotID Deep Analysis was enabled and reverted the same
+morning (Kasada's client challenge took mobile time-to-map from ~0.5s
+to ~20s, and its fetch wrapper defeats `AbortSignal` timeouts), and a
+page-load `checkBotId()` breaks cold navigations outright. The
+concierge already ships the measure that worked: gesture-gated lazy
+hydration — the SDK, and any model spend, require a human-origin event.
+(Redis-backed counters, also once on this list, shipped early: see Rate
+limits above.)
 
 ---
 
@@ -365,7 +371,15 @@ If the concierge graduates from experiment to a homepage feature:
    the shared limiter (`$lib/server/rateLimit`) backs both this route
    and `/mcp` with Upstash fixed-window counters, falling back to
    in-memory per-instance when unconfigured.
-2. **BotID** — the real defense against spoofing bots.
+2. ~~BotID~~ — demoted on CCRTA evidence (see the security section):
+   Deep Analysis cost ~20s of mobile latency there and was reverted;
+   the automated client died to human-origin gating, which this widget
+   already has (gesture-gated hydration). If abuse materializes, the
+   evidence-backed escalation path is operational, not code: Vercel
+   Firewall rules on `/api/concierge` (CCRTA runs Bot Protection at
+   Challenge), with the Redis counters as the measurement channel that
+   answers "did that work?" in one query. Any such rule must never
+   cover `/mcp` — inviting agents is that endpoint's purpose.
 3. An a11y + performance pass on the widget in its homepage placement.
 4. Revisit `MAX_STEPS` only after auditing `finishReason` in the chat
    logs.
