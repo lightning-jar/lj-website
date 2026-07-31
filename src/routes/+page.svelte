@@ -1,4 +1,5 @@
 <script lang="ts">
+import ConciergeLauncher from "$components/ConciergeLauncher.svelte";
 import HomeBanner from "$components/HomeBanner.svelte";
 import HomeFeaturedContent from "$components/HomeFeaturedContent.svelte";
 import HomeLatestArticles from "$components/HomeLatestArticles.svelte";
@@ -20,4 +21,5 @@ let { data } = $props();
 	<HomeLatestStories stories={data.latestStories} />
 	<HomeLatestResearch studies={data.latestStudies} />
 	<HomeLatestReadingList entries={data.latestReading} />
+	<ConciergeLauncher />
 </main>

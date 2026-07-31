@@ -1,24 +1,23 @@
 <script lang="ts">
-import { createAttachmentKey } from "svelte/attachments";
-
 import { goto } from "$app/navigation";
-
 // import child page data
 import { page } from "$app/state";
+
+import { createAttachmentKey } from "svelte/attachments";
 
 // import css file
 import "uno.css";
 
+import BackToTop from "$components/BackToTop.svelte";
 // import components
 import GlobalFooter from "$components/GlobalFooter.svelte";
 import GlobalNav from "$components/GlobalNav.svelte";
 import SvelteAnnounceFix from "$components/SvelteAnnounceFix.svelte";
-import BackToTop from "$components/BackToTop.svelte";
+
+import { initWebMcp } from "$utils/webMcp";
 
 // types
 import type { PageMeta } from "$types/PageMeta";
-
-import { initWebMcp } from "$utils/webMcp";
 
 // props
 let { children, data } = $props();
@@ -129,4 +128,7 @@ let ogType = $derived(
   <GlobalFooter {...data.footer} />
 {/if}
 
-<BackToTop />
+<!-- on the homepage the concierge launcher takes this corner -->
+{#if page.url.pathname !== "/"}
+  <BackToTop />
+{/if}

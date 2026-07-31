@@ -127,7 +127,7 @@ function renderMarkdownLite(text: string): string {
 	let s = escaped
 		.replace(/`([^`\n]+)`/g, (_m, code) => mask(`<code>${code}</code>`))
 		.replace(
-			/\[([^\]]+)\]\((\/(?![/\\])[^)\s"'\\]*|https:\/\/[^)\s"'\\]+)\)/g,
+			/\[([^\]]+)\]\((\/(?![/\\])[^)\s"'\\]*|https:\/\/[^)\s"'\\]+|mailto:[^)\s"'\\]+)\)/g,
 			(_m, label, href) =>
 				mask(
 					`<a class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4" rel="nofollow" href="${href}">${emphasize(label)}</a>`,
