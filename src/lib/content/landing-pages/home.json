@@ -39,9 +39,9 @@
 					"title": "Research at Lightning Jar"
 				},
 				"secondary": {
-					"label": "The Builder's Playbook",
-					"href": "/research/barkup-bench/playbook",
-					"title": "The Builder's Playbook: practical applications of the Barkup Bench findings"
+					"label": "The AEO Playbook",
+					"href": "/research/aeo-bench/playbook",
+					"title": "The Agent-Readiness & AEO Playbook: what actually helps agents use your site"
 				}
 			}
 		},

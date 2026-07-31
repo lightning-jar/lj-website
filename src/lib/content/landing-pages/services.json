@@ -67,6 +67,10 @@
 					"href": "/research/aeo-bench"
 				},
 				{
+					"text": "The Agent-Readiness & AEO Playbook: what actually helps",
+					"href": "/research/aeo-bench/playbook"
+				},
+				{
 					"text": "Give the Model a Tool, Not a Rule",
 					"href": "/blog/give-the-model-a-tool-not-a-rule"
 				}

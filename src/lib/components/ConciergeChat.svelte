@@ -201,6 +201,7 @@ function isSearching(message: UIMessage): boolean {
 const SUGGESTIONS = [
 	"What kind of research is Lightning Jar doing?",
 	"What are the key findings of LJ's AEO research to date?",
+	"What is the AEO Playbook?",
 	"Have you built transit websites?",
 	"What is woof-editor?",
 	"What is Replicator?",
