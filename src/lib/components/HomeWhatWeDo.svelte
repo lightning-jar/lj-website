@@ -4,27 +4,27 @@
 const services = [
 	{
 		heading: "Web Application Design & Development",
-		text: "Websites and web applications, designed and built end to end — SvelteKit, TypeScript, and a static-first bias for speed.",
+		text: "Websites and web applications built end to end: SvelteKit, TypeScript, and a static-first bias for speed.",
 		href: "/services",
 	},
 	{
 		heading: "Custom Software Development",
-		text: "Custom software, portals, and internal tools shaped to how your business actually works — not the other way around.",
+		text: "Software, portals, and internal tools shaped to how your business actually works, not the other way around.",
 		href: "/services",
 	},
 	{
 		heading: "AI & LLM Application Development",
-		text: "Custom AI applications and LLM-powered products, grounded in our own published research on how these models behave.",
+		text: "AI applications and LLM products, grounded in our own published research on how these models behave.",
 		href: "/research/barkup-bench",
 	},
 	{
 		heading: "Agent Readiness & AEO",
-		text: "Making your site legible to AI agents, audited and implemented against our own AEO Bench research so you invest only in what measurably works.",
+		text: "Making your site legible to AI agents, backed by our AEO Bench research so you invest only in what measurably works.",
 		href: "/research/aeo-bench",
 	},
 	{
 		heading: "Brand Strategy & Design Systems",
-		text: "Brand voice, design systems, and UX optimization — the experience layer that makes the technology feel like you.",
+		text: "Brand voice, design systems, and UX optimization: the experience layer that makes the technology feel like you.",
 		href: "/services",
 	},
 ];
