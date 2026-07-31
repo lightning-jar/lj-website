@@ -40,7 +40,7 @@ const services = [
     >
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-5">
     {#each services as service}
       <a
         href={service.href}
