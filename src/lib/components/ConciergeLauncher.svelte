@@ -45,7 +45,6 @@ function handleToggle(event: ToggleEvent) {
     inset-auto
     fixed
     gap-0
-    grid
     grid-rows-[auto_minmax(0,1fr)]
     h-[min(640px,calc(100dvh-7.5rem))]
     m-0
@@ -111,6 +110,14 @@ function handleToggle(event: ToggleEvent) {
 	   anchor support keep the fixed bottom/right utility fallback above. */
 	.concierge-launcher {
 		anchor-name: --concierge-launcher;
+	}
+
+	/* The popover UA stylesheet hides closed popovers with a NON-important
+	   display:none, so any always-on display utility overrides it and the
+	   "closed" panel renders in static flow at the bottom of the page.
+	   Display therefore keys off the open state here, never a class. */
+	#concierge-panel:popover-open {
+		display: grid;
 	}
 
 	@supports (anchor-name: --a) {

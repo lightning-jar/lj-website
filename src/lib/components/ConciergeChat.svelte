@@ -227,8 +227,10 @@ function isSearching(message: UIMessage): boolean {
 }
 
 // shared with the API route, where the same strings form the
-// response-cache allowlist — a chip click is served from cache
-const SUGGESTIONS = [...CONCIERGE_SUGGESTIONS];
+// response-cache allowlist — a chip click is served from cache.
+// Filtered defensively: a stray empty entry in the list once dealt
+// blank chips (~18% of draws) before it was caught.
+const SUGGESTIONS = CONCIERGE_SUGGESTIONS.filter((s) => s.trim());
 
 // SSR and hydration must agree, so the server renders a deterministic
 // first-three; the client reshuffles once after mount (Math.random in

@@ -11,7 +11,7 @@ document describes the implementation as it ships.
 | Surface | Where | What |
 |---|---|---|
 | Full page | `/ask-eljay` (`src/routes/ask-eljay/`) | The standalone chat experience. `/concierge` 301s here (`vercel.ts`). |
-| Homepage launcher | `ConciergeLauncher.svelte`, rendered from `/` | Floating bottom-right button opening a panel that wraps the same chat component. |
+| Site-wide launcher | `ConciergeLauncher.svelte`, rendered from the root layout | Floating bottom-right button on every page except `/ask-eljay` (which keeps Back-to-top instead), opening a panel that wraps the same chat component. |
 | Chat API | `POST /api/concierge` | The backend both surfaces stream from (path kept through the rebrand — it is an internal API). |
 | Public MCP | `POST /mcp` | The same tool layer, served keyless and read-only to visiting agents. |
 
@@ -78,7 +78,7 @@ Haiku's quality wanting.
 
 The suggestion chips are fixed strings in
 `src/lib/data/conciergeSuggestions.ts` (single source of truth for the
-UI chips and the server allowlist — currently twelve prompts). A
+UI chips and the server allowlist). A
 first-turn message that exactly matches an allowlisted prompt is served
 from `responseCache.ts`: Upstash `GET`/`SET EX` when `KV_REST_API_*`
 is configured (shared across instances), in-memory fallback otherwise.
@@ -146,8 +146,10 @@ Gateway credit cap is the hard backstop):
   launcher suppress the inline clear button (its header has its own)
   while the full page keeps it.
 - **Suggestions.** Three chips are picked at random from the shared
-  twelve client-side in `onMount` (SSR renders a deterministic first
-  three so hydration agrees).
+  list client-side in `onMount` (SSR renders a deterministic first
+  three so hydration agrees), and reset deals a fresh hand. The list is
+  filtered for empty entries defensively — a stray `""` in the data
+  once dealt blank chips on ~18% of draws.
 
 `ConciergeLauncher.svelte` (homepage only, rendered from `/`):
 
@@ -155,6 +157,11 @@ Gateway credit cap is the hard backstop):
   the top layer, toggled declaratively via `popovertarget`; Escape,
   light dismiss, and focus-return are platform behavior. The panel
   stays in the DOM when closed, so the conversation survives reopen.
+- **Display keys off `:popover-open`, never a class.** The popover UA
+  stylesheet hides closed popovers with a NON-important `display:none`,
+  so any always-on display utility overrides it — an always-on `grid`
+  class once left the "closed" panel rendered in static flow at the
+  bottom of the page. The component's style block owns display now.
 - **CSS anchor positioning** pins the panel to the launcher
   (`anchor-name`/`position-anchor`, 12px gap) as progressive
   enhancement; fixed bottom/right utilities are the fallback.
@@ -179,6 +186,13 @@ dictation button carry `metadata: { voice: true }` (the scrubber
 allowlists exactly that literal and drops all other client metadata),
 so voice-input usage is identifiable in the logs. Cache hits do not
 ship logs.
+
+## Discoverability
+
+`/ask-eljay` is listed in both sitemaps, the footer, the More menu, the
+nav search index (`search-index.json`, type `page`), and the concierge's
+own curated site index; `/concierge` 301s to it. The launcher makes the
+experience reachable from every page without hunting for any of those.
 
 ## Environment
 

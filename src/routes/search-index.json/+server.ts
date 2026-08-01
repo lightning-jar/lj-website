@@ -1,16 +1,16 @@
 import { json } from "@sveltejs/kit";
 
+import type { SearchRecord } from "$utils/siteSearch";
+import type { RequestHandler } from "./$types";
+
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 import { getAllCustomerStories } from "$content/getters/getCustomerStories";
-import { getAllReadingListArticles } from "$content/getters/getReadingList";
 import { allPackages } from "$content/getters/getPackagesContent";
+import { getAllReadingListArticles } from "$content/getters/getReadingList";
 import { allTechnologies } from "$content/getters/getTechnologiesContent";
-import type { SearchRecord } from "$utils/siteSearch";
 
 import aeoStudies from "../research/aeo-bench/aeo-studies.json";
 import benchStudies from "../research/barkup-bench/bench-studies.json";
-
-import type { RequestHandler } from "./$types";
 
 // Lightweight index for the nav search box: one small JSON fetch, then
 // all filtering happens client-side (siteSearch.ts). Request-time so it
@@ -27,6 +27,15 @@ export const GET: RequestHandler = async ({ fetch }) => {
 	]);
 
 	const records: SearchRecord[] = [
+		// standalone pages worth surfacing in search (no getter feeds these)
+		{
+			type: "page",
+			title: "Ask Eljay",
+			blurb:
+				"Our AI assistant: a chat guide to the studio's work, research, packages, and writing, grounded in this site's own content.",
+			tags: ["AI", "Chat", "Assistant", "Agent", "Eljay"],
+			url: "/ask-eljay",
+		},
 		...articles.map((article): SearchRecord => {
 			const fm = article.frontMatter;
 			return {

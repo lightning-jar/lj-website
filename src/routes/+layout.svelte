@@ -7,6 +7,7 @@ import { page } from "$app/state";
 import "uno.css";
 
 import BackToTop from "$components/BackToTop.svelte";
+import ConciergeLauncher from "$components/ConciergeLauncher.svelte";
 // import components
 import GlobalFooter from "$components/GlobalFooter.svelte";
 import GlobalNav from "$components/GlobalNav.svelte";
@@ -126,7 +127,10 @@ let ogType = $derived(
   <GlobalFooter {...data.footer} />
 {/if}
 
-<!-- on the homepage the concierge launcher takes this corner -->
-{#if page.url.pathname !== "/"}
+<!-- Ask Eljay floats on every page; its full page keeps Back-to-top
+     instead (the launcher would duplicate the experience there) -->
+{#if page.url.pathname === "/ask-eljay"}
   <BackToTop />
+{:else}
+  <ConciergeLauncher />
 {/if}
