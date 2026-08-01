@@ -37,14 +37,14 @@ const funSection = {
 	],
 };
 
-const conciergeSection = {
-	name: "Concierge",
+const askEljaySection = {
+	name: "Ask Eljay",
 	pages: [
 		{
-			href: "/concierge",
-			title: "Concierge (experiment)",
+			href: "/ask-eljay",
+			title: "Ask Eljay",
 			description:
-				"An experimental chat guide to the studio's work, research, packages, and writing, grounded in this site's own content.",
+				"Our AI assistant: a chat guide to the studio's work, research, packages, and writing, grounded in this site's own content.",
 			date: "",
 		},
 	],
@@ -159,7 +159,7 @@ export const load = async ({ fetch, setHeaders }) => {
 	});
 	const sitemap = [
 		homeSitemapSection,
-		conciergeSection,
+		askEljaySection,
 		aboutSection,
 		funSection,
 		researchSection,

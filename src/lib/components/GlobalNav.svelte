@@ -36,7 +36,7 @@ const desktopMenus = [
 			{ label: "Packages & Tools", href: "/packages" },
 			{ label: "Reading List", href: "/reading-list" },
 			{ label: "Fun", href: "/fun" },
-			{ label: "Concierge", href: "/concierge" },
+			{ label: "Ask Eljay", href: "/ask-eljay" },
 		],
 	},
 ];

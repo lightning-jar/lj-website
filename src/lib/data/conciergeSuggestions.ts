@@ -5,11 +5,14 @@
 export const CONCIERGE_SUGGESTIONS = [
 	"What is Lightning Jar?",
 	"What kind of research is Lightning Jar doing?",
+	"Who founded Lightning Jar?",
 	"What are the key findings of LJ's AEO research?",
 	"What is the AEO Playbook?",
+	"What is the Builder's Playbook?",
 	"Have you built transit websites?",
 	"What is woof-editor?",
 	"What is Replicator?",
 	"What is Barkup?",
 	"What is Barkdown?",
+	"What is Lightning Jar's advice on Pimcore in 2026?"
 ] as const;

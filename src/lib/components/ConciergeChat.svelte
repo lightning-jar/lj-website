@@ -145,7 +145,7 @@ function renderMarkdownLite(text: string): string {
 			/\[([^\]]+)\]\((\/(?![/\\])[^)\s"'\\]*|https:\/\/[^)\s"'\\]+|mailto:[^)\s"'\\]+)\)/g,
 			(_m, label, href) =>
 				mask(
-					`<a class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4" rel="nofollow" href="${href}">${emphasize(label)}</a>`,
+					`<a class="" rel="nofollow" href="${href}">${emphasize(label)}</a>`,
 				),
 		);
 	s = emphasize(s);
@@ -328,7 +328,7 @@ function stickToBottom(
 	          {textOf(message)}
 	        </div>
 	      {:else}
-	        <div class="leading-relaxed">
+	        <div class="leading-relaxed mb-4">
 	          {#if textOf(message)}
 	            <div
 	              class="chat-response"
@@ -338,7 +338,7 @@ function stickToBottom(
 	              {@html renderMarkdownLite(textOf(message))}
 	            </div>
 	          {:else if isSearching(message)}
-	            <span class="opacity-60 font-mono text-13px"
+	            <span class="opacity-60 font-mono text-13px mb-4"
 	              >⚡ checking the site…</span
 	            >
 	          {/if}

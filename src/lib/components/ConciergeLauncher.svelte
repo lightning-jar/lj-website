@@ -35,7 +35,7 @@ function handleToggle(event: ToggleEvent) {
   id="concierge-panel"
   popover="auto"
   ontoggle={handleToggle}
-  aria-label="Concierge chat"
+  aria-label="Ask Eljay chat"
   class="
     bg-oxford
     text-cultured
@@ -72,12 +72,12 @@ function handleToggle(event: ToggleEvent) {
       >
         <span aria-hidden="true" class="i-ph-arrow-clockwise-bold"></span>
       </button>
-      <a href="/concierge" class="button-xsmall" aria-label="Open the concierge full page">↗</a>
+      <a href="/ask-eljay" class="button-xsmall" aria-label="Open Ask Eljay as a full page">↗</a>
       <button
         type="button"
         popovertarget="concierge-panel"
         popovertargetaction="hide"
-        aria-label="Close the concierge panel"
+        aria-label="Close the Ask Eljay panel"
         class="button-xsmall"
       >
         <span aria-hidden="true">✕</span>
@@ -93,7 +93,7 @@ function handleToggle(event: ToggleEvent) {
 <button
   type="button"
   popovertarget="concierge-panel"
-  aria-label={open ? "Close the concierge chat" : "Ask the concierge"}
+  aria-label={open ? "Close the Ask Eljay chat" : "Ask Eljay, our AI assistant"}
   class="concierge-launcher fixed bottom-5 right-5 z-50 w-13 h-13 flex items-center justify-center rounded-full border border-maximumYellow bg-maximumYellow text-oxford shadow-lg hover:bg-oxford hover:text-maximumYellow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-oxford"
 >
   {#if open}

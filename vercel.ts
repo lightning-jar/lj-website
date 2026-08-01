@@ -81,6 +81,7 @@ const config: VercelConfig = {
 	],
 	redirects: [
 		{ source: "/contact", destination: "/", statusCode: 301 },
+		{ source: "/concierge", destination: "/ask-eljay", statusCode: 301 },
 		{
 			source: "/case-studies/tremor-video",
 			destination: "/customer-stories",

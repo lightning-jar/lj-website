@@ -22,8 +22,9 @@ import aeoStudies from "../../routes/research/aeo-bench/aeo-studies.json";
 import benchStudies from "../../routes/research/barkup-bench/bench-studies.json";
 import { buildSiteIndex } from "./siteIndex";
 import { createTtlCache } from "./ttlCache";
+import { SITE_BASE } from "$data/siteBase";
+import { ABOUT_LIGHTNING_JAR } from "$data/aboutLightningJar";
 
-export const SITE_BASE = "https://www.lightningjar.com";
 
 // In-instance TTL memos over the CMS fetches — the burst-cost lever: a
 // run of tool calls (one agent session can make 5-15) hits the CMS once
@@ -66,32 +67,7 @@ const readingList = (fetch: Fetch) =>
 const stripHtml = (s: string) => s.replace(/<[^>]+>/g, "");
 
 export function aboutLightningJar() {
-	return {
-		name: "Lightning Jar",
-		founded: 2001,
-		founder: "Alan Ruthazer (stepped away from the business)",
-		leadership:
-			"Kevin Peckham, Principal & Chief Technologist (with the studio since 2011); Alex Cantu, Director of Technology",
-		summary:
-			"Design, build, and brand technology studio. Websites, web applications, and custom software for business clients; open LLM research (Barkup Bench, AEO Bench) and open-source libraries (barkup, barkdown, woof-editor); AI-era marketing technology including Replicator, an LLM-powered brand operating system.",
-		contact: "hello@lightningjar.com",
-		surfaces: {
-			blog: `${SITE_BASE}/blog`,
-			customerStories: `${SITE_BASE}/customer-stories`,
-			readingList: `${SITE_BASE}/reading-list`,
-			research: `${SITE_BASE}/research/barkup-bench`,
-			aeoResearch: `${SITE_BASE}/research/aeo-bench`,
-			playbook: `${SITE_BASE}/research/barkup-bench/playbook`,
-			aeoPlaybook: `${SITE_BASE}/research/aeo-bench/playbook`,
-			services: `${SITE_BASE}/services`,
-		},
-		packages: [
-			"https://github.com/kevinpeckham/barkup",
-			"https://github.com/kevinpeckham/barkup-bench",
-			"https://github.com/kevinpeckham/barkdown",
-			"https://github.com/kevinpeckham/aeo-bench",
-		],
-	};
+	return ABOUT_LIGHTNING_JAR;
 }
 
 export async function searchContent(

@@ -18,7 +18,7 @@ function clickLightningButton() {
   class="lg:absolute top-100px left-110% lg:right-4 group flex justify-left w-9 h-9"
 >
   <LightningButton
-    character="→"
+    character="arrow"
     classes="
           border
           border-maximumYellow
