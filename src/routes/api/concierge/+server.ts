@@ -30,6 +30,7 @@ import {
 	searchContent,
 	siteIndex,
 } from "$lib/server/agentTools";
+import { ALLOWED_ORIGINS } from "$lib/server/allowedOrigins";
 import { createRateLimiter } from "$lib/server/rateLimit";
 import { createResponseCache } from "$lib/server/responseCache";
 import { gateway } from "@ai-sdk/gateway";
@@ -118,16 +119,6 @@ function cachedStreamResponse(text: string): Response {
 
 const RECHARGING =
 	"The lightning jar is recharging. Please try again in a little while, or email hello@lightningjar.com — a person answers that.";
-
-// Browsers always send Origin on fetch POSTs; requiring a known one
-// blocks drive-by scripts and naive scrapers (a determined client can
-// spoof it — this is a fence, not the wall).
-const ALLOWED_ORIGINS = new Set([
-	"https://www.lightningjar.com",
-	"https://lightningjar.com",
-	"https://ljweb.bench.lj.dev",
-	"http://localhost:5193",
-]);
 
 // control characters except newline/tab — stripped from incoming text
 // biome-ignore lint/suspicious/noControlCharactersInRegex: stripping them is the point

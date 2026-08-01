@@ -10,6 +10,8 @@
 
 import { onMount } from "svelte";
 
+import VoiceInputButton from "$components/VoiceInputButton.svelte";
+
 import { pickRandom } from "$utils/pickRandom";
 
 import type { Chat } from "@ai-sdk/svelte";
@@ -377,6 +379,14 @@ function stickToBottom(
         class="w-full rounded-md border border-current bg-oxfordDark/40 px-4 py-2 text-15px placeholder:text-current/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
       />
     </label>
+    <VoiceInputButton
+      disabled={busy}
+      onTranscript={(text) => {
+        input = input.trim() ? `${input.trim()} ${text}` : text;
+        void activate();
+        inputEl?.focus();
+      }}
+    />
     <button
       type="submit"
       disabled={busy || !input.trim()}
