@@ -31,6 +31,9 @@ let activated = $state(false);
 let chat = $state<Chat<UIMessage> | null>(null);
 let inputEl: HTMLInputElement | null = $state(null);
 let scroller: HTMLDivElement | null = $state(null);
+// true when the pending input includes dictated text (logged as a
+// voice-input marker on the sent message, then cleared)
+let dictated = $state(false);
 
 // the route's refusals are JSON {"error": "..."} — surface the message
 // itself when we can parse it
@@ -79,6 +82,7 @@ export async function reset() {
 	}
 	input = "";
 	lastError = "";
+	dictated = false;
 	// a fresh conversation gets a fresh set of starter chips
 	randomSuggestions = pickRandom(SUGGESTIONS);
 	inputEl?.focus();
@@ -96,7 +100,12 @@ async function send(event: SubmitEvent) {
 	lastError = "";
 	if (!chat) await activate();
 	if (!chat) return; // activate() failed; lastError already set
-	chat.sendMessage({ text });
+	if (dictated) {
+		chat.sendMessage({ text, metadata: { voice: true } });
+	} else {
+		chat.sendMessage({ text });
+	}
+	dictated = false;
 	input = "";
 }
 
@@ -382,6 +391,7 @@ function stickToBottom(
     <VoiceInputButton
       disabled={busy}
       onTranscript={(text) => {
+        dictated = true;
         input = input.trim() ? `${input.trim()} ${text}` : text;
         void activate();
         inputEl?.focus();

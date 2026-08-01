@@ -174,7 +174,11 @@ parts are PII-redacted (emails, SSNs, card-like digit runs, US phones);
 tool parts ship unredacted (they carry only our public content). Each
 log carries `stepTimings` — per-step wall-clock, tool names, and
 finishReason — which is what surfaced the read_study slug-guessing
-loop within a day of activation. Cache hits do not ship logs.
+loop within a day of activation. User messages composed with the
+dictation button carry `metadata: { voice: true }` (the scrubber
+allowlists exactly that literal and drops all other client metadata),
+so voice-input usage is identifiable in the logs. Cache hits do not
+ship logs.
 
 ## Environment
 

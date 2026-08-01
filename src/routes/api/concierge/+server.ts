@@ -126,13 +126,23 @@ const CONTROL_CHARS = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g;
 
 // Keep only what a legitimate chat client sends: user/assistant roles
 // and plain text parts. A hostile client could otherwise inject file
-// parts, fabricated tool results, or oversized structures.
+// parts, fabricated tool results, or oversized structures. Metadata is
+// dropped except one allowlisted marker: `{ voice: true }` on user
+// messages, set by the dictation button so voice input is identifiable
+// in the shipped chat logs — the exact literal only, nothing rides
+// along with it.
 function scrubMessages(raw: UIMessage[]): UIMessage[] {
 	return raw
 		.filter((m) => m.role === "user" || m.role === "assistant")
 		.map((m) => ({
 			id: typeof m.id === "string" ? m.id.slice(0, 64) : "m",
 			role: m.role,
+			...(m.role === "user" &&
+			m.metadata != null &&
+			typeof m.metadata === "object" &&
+			(m.metadata as Record<string, unknown>).voice === true
+				? { metadata: { voice: true } }
+				: {}),
 			parts: (m.parts ?? [])
 				.filter((p) => p.type === "text")
 				.map((p) => ({
