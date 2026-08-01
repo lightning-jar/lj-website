@@ -69,6 +69,9 @@ export function aboutLightningJar() {
 	return {
 		name: "Lightning Jar",
 		founded: 2001,
+		founder: "Alan Ruthazer (stepped away from the business)",
+		leadership:
+			"Kevin Peckham, Principal & Chief Technologist (with the studio since 2011); Alex Cantu, Director of Technology",
 		summary:
 			"Design, build, and brand technology studio. Websites, web applications, and custom software for business clients; open LLM research (Barkup Bench, AEO Bench) and open-source libraries (barkup, barkdown, woof-editor); AI-era marketing technology including Replicator, an LLM-powered brand operating system.",
 		contact: "hello@lightningjar.com",
