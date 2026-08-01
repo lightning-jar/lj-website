@@ -36,6 +36,69 @@ export const GET: RequestHandler = async ({ fetch }) => {
 			tags: ["AI", "Chat", "Assistant", "Agent", "Eljay"],
 			url: "/ask-eljay",
 		},
+		{
+			type: "page",
+			title: "About Lightning Jar",
+			blurb:
+				"Who we are, what we believe, and twenty-five years of history: a design, build, and brand technology studio, independent since 2001.",
+			tags: ["Studio", "History", "Team"],
+			url: "/about",
+		},
+		{
+			type: "page",
+			title: "Services",
+			blurb:
+				"Web application design and development, custom software, AI and LLM solutions, AEO and agent readiness, ecommerce, and brand strategy.",
+			tags: ["Services", "Web Development", "AI", "AEO", "Brand"],
+			url: "/services",
+		},
+		{
+			type: "page",
+			title: "Testimonials",
+			blurb: "What clients say about working with Lightning Jar.",
+			tags: ["Clients", "Reviews", "Testimonials"],
+			url: "/testimonials",
+		},
+		{
+			type: "page",
+			title: "Fun",
+			blurb:
+				"Side projects from the studio: open-source experiments, instruments, and toys we built because the itch was there.",
+			tags: ["Side Projects", "Experiments", "Play"],
+			url: "/fun",
+		},
+		{
+			type: "page",
+			title: "Built With",
+			blurb:
+				"The full technology inventory of this site: every framework, library, service, and standard lightningjar.com is built on.",
+			tags: ["Technology", "Stack", "Transparency"],
+			url: "/built-with",
+		},
+		{
+			type: "page",
+			title: "Research at Lightning Jar",
+			blurb:
+				"The open research program: pre-registered studies delivering practical guidance for developers of LLM applications.",
+			tags: ["Research", "Benchmarks", "LLMs"],
+			url: "/research",
+		},
+		{
+			type: "page",
+			title: "The Builder's Playbook",
+			blurb:
+				"Ten measured guidelines for building document-editing apps with LLM agents, distilled from the Barkup Bench series.",
+			tags: ["Research", "Playbook", "Barkup Bench", "LLMs"],
+			url: "/research/barkup-bench/playbook",
+		},
+		{
+			type: "page",
+			title: "The Agent-Readiness & AEO Playbook",
+			blurb:
+				"Eight evidence-checked guidelines for site owners and agent builders, pairing prevailing agent-readiness advice with what our studies measured.",
+			tags: ["Research", "Playbook", "AEO Bench", "Agent Readiness"],
+			url: "/research/aeo-bench/playbook",
+		},
 		...articles.map((article): SearchRecord => {
 			const fm = article.frontMatter;
 			return {
