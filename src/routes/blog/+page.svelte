@@ -57,7 +57,7 @@ function clearFilters() {
 >
   <div class="flex items-start justify-between gap-4 mb-8">
     <header class="max-w-prose">
-      <h1 class="display">{data?.meta?.title || "Blog"}</h1>
+      <h1 class="heading-1">{data?.meta?.title || "Blog"}</h1>
       <p>
         {data?.meta?.description || ""}
       </p>

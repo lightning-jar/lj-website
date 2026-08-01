@@ -180,7 +180,7 @@ const agentGuidelines = guidelines.filter((g) => g.part === "agent");
         <a class="hover:underline underline-offset-3" href={dash}>aeo-bench</a> ·
         practical applications
       </p>
-      <h1 class="display">The Agent-Readiness &amp; AEO Playbook</h1>
+      <h1 class="heading-1">The Agent-Readiness &amp; AEO Playbook</h1>
       <p class="text-16px {proseCls} mb-4 mt-4">
         <a class={linkCls} href={cloudflare}>Cloudflare's agent-readiness
         proposal</a> is the most concrete menu anyone has published for making a

@@ -82,7 +82,7 @@ const proseCls = "text-[#c3c9d4]";
   >
   <header>
     <div class="flex items-start justify-between gap-4">
-      <h1 class="display">AEO Bench</h1>
+      <h1 class="heading-1">AEO Bench</h1>
       <FeedBadge href="/research/aeo-bench/atom.xml" />
     </div>
     <p class="opacity-90 mb-4">

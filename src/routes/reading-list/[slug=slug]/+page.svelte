@@ -25,7 +25,7 @@ let article = $derived(data.article);
     >
       Reading List
     </LinkText>
-    <h1 class="display text-balance">{article.title}</h1>
+    <h1 class="heading-1 text-balance">{article.title}</h1>
 
     <!-- meta -->
     <div class="flex mt-3 gap-2 text-slate-100/80">

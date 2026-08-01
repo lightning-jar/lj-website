@@ -12,7 +12,7 @@ let { data } = $props();
   class="page-x-padding main-y-padding grid grid-cols-1 gap-12 min-h-screen place-content-start"
 >
   <header class="max-w-article">
-    <h1 class="display">Research</h1>
+    <h1 class="heading-1">Research</h1>
     <p class="opacity-90 mb-4">
       We believe good engineering decisions come from evidence, not vibes. So
       we run our own research: pre-registered studies whose hypotheses,

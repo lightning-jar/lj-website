@@ -12,7 +12,7 @@ let { data } = $props();
   class="page-x-padding main-y-padding grid grid-cols-1 gap-12 min-h-screen place-content-start"
 >
   <header class="max-w-article">
-    <h1 class="display">Fun</h1>
+    <h1 class="heading-1">Fun</h1>
     <p class="opacity-90 mb-4">
       Not everything we build is for a client. Some things we build because
       the itch was there: a tool we wished existed, a concept we wanted to

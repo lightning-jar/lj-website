@@ -4,7 +4,7 @@ let { data } = $props();
 
 <main id="main">
 <header class="page-x-padding main-y-padding !pb-6">
-  <h1 class="display">
+  <h1 class="heading-1">
     {data?.heading}
   </h1>
   <p>{data?.subheading}</p>

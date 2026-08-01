@@ -22,8 +22,8 @@ let { studies = [] }: Props = $props();
       <a
         href="/research"
         aria-label="View all research studies"
-        class="text-maximumYellow hover:underline text-15px whitespace-nowrap"
-        >View all →</a
+        class="view-all-link"
+        >View All<span>→</span></a
       >
     </div>
 
@@ -40,13 +40,13 @@ let { studies = [] }: Props = $props();
             : ''} aspect-[4/3] w-full border border-current rounded-lg overflow-hidden relative flex flex-col justify-between gap-2 p-3 hover:bg-white/5"
         >
           <div
-            class="text-maximumYellow text-13px uppercase tracking-wide"
+            class="tile-meta"
           >
             {study.project} · Study {study.letters}
           </div>
           <h3
             id="latest-study-{study.slug}"
-            class="font-sans font-400 leading-snug text-15px sm:text-16px line-clamp-4"
+            class="tile-text line-clamp-4"
           >
             {study.title}
           </h3>

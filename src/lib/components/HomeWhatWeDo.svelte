@@ -31,12 +31,14 @@ const services = [
 </script>
 
 <section class="page-x-padding py-12 border-t border-white/10 w-full">
-  <div class="flex items-end justify-between gap-4 mb-6">
+  <div class="flex items-baseline justify-between gap-4 mb-6">
     <h2 class="heading-2">What We Do</h2>
     <a
       href="/services"
-      class="text-maximumYellow hover:underline text-15px whitespace-nowrap"
-      >All services →</a
+      class="view-all-link"
+      >All Services
+      <span>→</span>
+      </a
     >
   </div>
 
@@ -44,12 +46,12 @@ const services = [
     {#each services as service}
       <a
         href={service.href}
-        class="border border-current rounded-lg p-4 flex flex-col gap-2 hover:bg-white/5"
+        class="border border-current rounded-lg p-4 flex flex-col justify-between gap-2 hover:bg-white/5"
       >
-        <h3 class="text-maximumYellow font-serif font-700 leading-snug">
+        <h3 class="tile-meta">
           {service.heading}
         </h3>
-        <p class="text-15px leading-snug opacity-90">{service.text}</p>
+        <p class="tile-text line-clamp-4">{service.text}</p>
       </a>
     {/each}
   </div>

@@ -53,7 +53,7 @@ let pagesCount = $derived.by(() => {
 
 <main id="main" class="page-x-padding main-y-padding font-mono text-15px">
   <header class="mb-10">
-    <h1 class="display font-sans mb-4">Sitemap</h1>
+    <h1 class="heading-1 mb-4">Sitemap</h1>
   </header>
 
   <div class="mb-10">

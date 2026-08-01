@@ -129,7 +129,7 @@ function getAttributionFromSource(source: ArticleSource): string {
   </div>
 {:else if viewState === "not-found"}
   <div class="page-x-padding min-h-screen pt-16">
-    <h1 class="display">Preview not found</h1>
+    <h1 class="heading-1">Preview not found</h1>
     <p class="max-w-prose mt-4 opacity-90">
       This preview link is invalid or its article has been removed. Ask for a
       fresh link from the article's editor.
@@ -137,7 +137,7 @@ function getAttributionFromSource(source: ArticleSource): string {
   </div>
 {:else if viewState === "error"}
   <div class="page-x-padding min-h-screen pt-16">
-    <h1 class="display">Preview unavailable</h1>
+    <h1 class="heading-1">Preview unavailable</h1>
     <p class="max-w-prose mt-4 opacity-90">
       The draft could not be loaded. Refresh to try again.
     </p>
@@ -256,7 +256,7 @@ function getAttributionFromSource(source: ArticleSource): string {
     class="page-x-padding min-h-screen pt-8 pb-8 grid grid-cols-1 gap-8 lg:gap-12 lg:grid-cols-[minmax(65ch,_640px)_1fr]"
   >
     <header class="lg:col-span-2">
-      <h1 class="display text-balance max-w-1000px">{title}</h1>
+      <h1 class="heading-1 text-balance max-w-1000px">{title}</h1>
       <div class="mb-5 max-w-prose">{formattedDate}</div>
     </header>
 

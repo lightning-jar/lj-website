@@ -20,7 +20,7 @@ let pkg = $derived(data.pkg);
       >
         Packages &amp; Tools
       </LinkText>
-      <h1 class="display">{pkg.name}</h1>
+      <h1 class="heading-1">{pkg.name}</h1>
       <div class="opacity-90 italic mb-6">
         {pkg.category} · {pkg.status}{pkg.license ? ` · ${pkg.license}` : ""}
       </div>

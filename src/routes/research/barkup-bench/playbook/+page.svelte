@@ -222,7 +222,7 @@ it>" instead of a patch.`,
           >barkup-bench</a
         > · practical applications
       </p>
-      <h1 class="display">The Builder's Playbook</h1>
+      <h1 class="heading-1">The Builder's Playbook</h1>
       <p class="text-16px {proseCls} mb-4 mt-4">
         Ten guidelines for building document-editing apps with LLM agents,
         distilled from {researchStats.barkupBench.studiesSpelled} pre-registered studies

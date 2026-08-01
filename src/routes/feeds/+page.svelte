@@ -6,7 +6,7 @@ let { data } = $props();
 
 <main id="main">
 <header class="page-x-padding main-y-padding !pb-8">
-  <h1 class="display max-w-article">Feeds</h1>
+  <h1 class="heading-1 max-w-article">Feeds</h1>
   <p class="max-w-article">
     Everything Lightning Jar publishes is available by Atom feed — follow
     in any feed reader, no algorithm in between. Subscribe to a single

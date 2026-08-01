@@ -11,7 +11,7 @@ let { data } = $props();
   class="page-x-padding main-y-padding grid grid-cols-1 gap-12 min-h-screen place-content-start"
 >
   <header class="max-w-prose">
-    <h1 class="display">
+    <h1 class="heading-1">
       {data.banner?.heading}
     </h1>
     <p class="max-w-prose empty:hidden">

@@ -124,33 +124,23 @@ function handleKeyDown(event: KeyboardEvent) {
 				pt-12"
   >
     {#each topics as topic, index}
-      <!-- only the first (default-visible) headline is a real heading;
-           the rotating alternates are styled text, keeping the document
-           outline clean for crawlers and screen readers -->
-      {@const headingTag = index === 0 ? "h1" : "p"}
+      <!-- the first (default-visible) headline is the page's h1; the
+           rotating alternates are h2s so each panel keeps heading
+           semantics (they are display:none until selected, so assistive
+           tech only encounters the active one) -->
+      {@const headingTag = index === 0 ? "h1" : "h2"}
       {#if index > -1}
         <!-- heading -->
 
         <svelte:element
           this={headingTag}
           class="{counters.topic === index ? 'flex' : 'hidden'}
-          font-display
-          text-34px
-          font-400
-          leading-tight
+          heading-1
           mb-7
-          text-maximumYellow
-          text-balance
-          text-pretty
           border-y
           border-transparent
           [border-image:linear-gradient(90deg,_hsla(64,94%,58%,0.6),_hsla(64,94%,58%,0.6),_hsla(64,94%,58%,0.6))_1]
-          p-[20px_0px_24px_0px]
-          //border-none
-          uppercase
-          text-shadow
-          text-shadow-oxfordDark
-          sm:text-48px"
+          p-[20px_0px_24px_0px]"
         >
           <span class="block w-[calc(100%-64px)]">{topic.heading}</span>
         </svelte:element>
@@ -159,13 +149,7 @@ function handleKeyDown(event: KeyboardEvent) {
         {#each topic.text as text}
           <div
             class="{counters.topic === index ? 'block' : 'hidden'}
-					font-sans
-          text-17px
-					leading-[1.65]
-					text-yellow-50
-					mb-6
-					pl-0
-					opacity-95
+            body-1
 					"
           >
             {@html text}

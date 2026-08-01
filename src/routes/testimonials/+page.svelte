@@ -11,7 +11,7 @@ let panelsCount: number = $derived(data.testimonials?.length ?? 0);
 
 <main id="main" class="page-x-padding min-h-screen">
 	<div class="main-y-padding pb-6">
-		<h1 class="display">{data.banner.heading}</h1>
+		<h1 class="heading-1">{data.banner.heading}</h1>
 		<p class="max-w-prose empty:hidden">{data.banner.subheading}</p>
 	</div>
 

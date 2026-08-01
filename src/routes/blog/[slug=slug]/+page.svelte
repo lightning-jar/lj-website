@@ -77,7 +77,7 @@ function getAttributionFromSource(source: ArticleSource): string {
       href="/blog"
       title="browse all blog stories">Back to Blog</a
     >
-    <h1 class="display text-balance max-w-1000px">{data.title}</h1>
+    <h1 class="heading-1 text-balance max-w-1000px">{data.title}</h1>
     {#if formattedDate}
       <time class="mb-5 max-w-prose block" datetime={data.meta?.date}
         >{formattedDate}</time

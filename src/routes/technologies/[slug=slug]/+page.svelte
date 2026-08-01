@@ -20,7 +20,7 @@ let tech = $derived(data.technology);
       >
         Technologies
       </LinkText>
-      <h1 class="display">{tech.name}</h1>
+      <h1 class="heading-1">{tech.name}</h1>
       <div class="opacity-90 italic mb-6">
         {tech.category}{tech.license ? ` · ${tech.license}` : ""}
       </div>

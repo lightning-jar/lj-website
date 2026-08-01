@@ -19,7 +19,7 @@ let message = $derived.by(() => {
 
 <main id="main" class="page-x-padding min-h-screen pt-8">
   <div class="max-w-prose">
-    <h1 class="font-display text-10vw text-maximumYellow">{page.status}</h1>
+    <h1 class="heading-1 text-10vw">{page.status}</h1>
     <div>{message}</div>
   </div>
 </main>

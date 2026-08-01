@@ -20,8 +20,8 @@ let { entries = [] }: Props = $props();
       <a
         href="/reading-list"
         aria-label="View all reading list entries"
-        class="text-maximumYellow hover:underline text-15px whitespace-nowrap"
-        >View all →</a
+        class="view-all-link"
+        >View All<span>→</span></a
       >
     </div>
 
@@ -38,13 +38,13 @@ let { entries = [] }: Props = $props();
             : ''} aspect-[4/3] w-full border border-current rounded-lg overflow-hidden relative flex flex-col justify-between gap-2 p-3 hover:bg-white/5"
         >
           <div
-            class="text-maximumYellow text-13px uppercase tracking-wide truncate"
+            class="tile-meta"
           >
             {entry.publication}
           </div>
           <h3
             id="latest-reading-{index}"
-            class="font-sans font-400 leading-snug text-15px sm:text-16px line-clamp-4"
+            class="tile-text line-clamp-4"
           >
             {entry.title}
           </h3>

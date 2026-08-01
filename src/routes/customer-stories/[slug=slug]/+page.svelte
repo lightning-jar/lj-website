@@ -52,7 +52,7 @@ let storyLd = $derived.by(() => {
       >
         Customer Stories
       </LinkText>
-      <h1 class="display">
+      <h1 class="heading-1">
         {data.banner?.heading}
         {#if data.banner?.subtitle}
           <span

@@ -67,7 +67,7 @@ function clearFilters() {
   {#if data?.banner}
     <div class="flex items-start justify-between gap-4">
       <header class="max-w-prose">
-        <h1 class="display">
+        <h1 class="heading-1">
           {data.banner?.heading}
         </h1>
         <p class="max-w-prose mb-5 empty:hidden">

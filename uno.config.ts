@@ -184,7 +184,9 @@ export default defineConfig({
 			"chart",
 			"overflow-x-auto font-mono tabular-nums mt-5 mb-5 bg-white/5 rounded-sm px-4 pt-2 pb-5 [&>svg]:(block w-full h-auto min-w-[640px]) [&_.chart-caption]:(mt-2 max-w-[56rem]) [&_td.heat]:(border-2 border-oxford px-3.5 py-2 text-right) [&_td.heat:first-child]:(text-left font-sans)",
 		],
-		["chat-response", `
+		[
+			"chat-response",
+			`
 			grid
 			grid-cols-1
 			gap-2
@@ -208,7 +210,8 @@ export default defineConfig({
 			[&_a]-underline
 			[&_a]-decoration-current/40
 			hover-[&_a]-decoration-current
-			`],
+			`,
+		],
 		// The clickable summary of a collapsed data-table <details> on the
 		// dashboard — its own identity (was borrowing chart-caption), with
 		// its interaction affordances built in.
@@ -235,6 +238,17 @@ export default defineConfig({
 		[
 			"main-y-padding",
 			"pt-10 pb-14 lg:(pt-12 pb-16) xl:(pt-14 pb-20) 2xl:(pt-16 pb-22)",
+		],
+		[
+			"body-1",
+			`font-sans
+			leading-[1.5]
+			mb-6
+			opacity-95
+			pl-0
+			text-18px
+			text-yellow-50
+			lg-text-17px`,
 		],
 		[
 			"button",
@@ -295,17 +309,44 @@ export default defineConfig({
 
 		["page-x-padding", "px-4 sm:px-6 md:px-7 lg:px-8 xl:px-16 2xl:px-24"],
 		[
-			"display",
-			"text-balance font-700 font-display text-maximumYellow mb-3 text-32px lg:text-42px leading-snug",
-		],
-		[
-			// Same treatment as "display" under the semantic heading scale.
+			// The semantic heading scale (replaced the retired "display" shortcut).
 			"heading-1",
-			"text-balance font-700 font-display text-maximumYellow mb-3 text-32px lg:text-42px leading-snug",
+			`
+			font-sans
+			font-700
+			leading-tight
+			mb-3
+			text-32px
+			text-balance
+			text-maximumYellow
+			text-pretty
+			uppercase
+			sm-font-display
+			sm-font-700
+			sm-leading-snug
+			sm-text-34px
+			lg-text-40px
+			xl-text-44px
+			`,
 		],
 		[
 			"heading-2",
-			"font-700 text-maximumYellow mb-3 text-20px lg:text-24px font-serif",
+			`font-700
+			font-sans
+			text-20px
+			text-maximumYellow
+			sm-font-serif
+			lg-text-24px`,
+		],
+		[
+			"heading-3",
+			`font-700
+			font-sans
+			leading-snug
+			text-18px
+			text-maximumYellow
+			sm-font-serif
+			lg-text-18px`,
 		],
 		[
 			"body-article",
@@ -360,7 +401,45 @@ export default defineConfig({
 			grid-cols-1
 			place-content-start
 			md:grid-cols-[minmax(36ch,_640px)_minmax(30ch,_420px)]
-			lg:grid-cols-[minmax(58ch,_640px)_minmax(30ch,_1fr)]
+			`,
+		],
+		[
+			"tile-meta",
+			`font-sans
+			font-400
+			uppercase
+			text-15px
+			text-maximumYellow
+			lg-text-14px
+			`,
+		],
+		[
+			"tile-text",
+			`font-sans
+			font-400
+			leading-snug
+			opacity-90
+			text-17px
+			lg-text-16px
+			`,
+		],
+		[
+			"view-all-link",
+			`font-sans
+			font-400
+			flex
+			items-center
+			gap-1
+			opacity-90
+			text-maximumYellow
+			underline-offset-4
+			text-17px
+			hover-underline
+			hover-opacity-100
+			[&_span]:i-ph-arrow-right-bold
+			[&_span]:flex
+			lg-text-16px
+
 			`,
 		],
 	],

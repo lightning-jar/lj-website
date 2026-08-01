@@ -56,7 +56,7 @@ function toggleTag(tag: string) {
 
 <main id="main">
 <header class="page-x-padding main-y-padding !pb-8">
-  <h1 class="display max-w-article">
+  <h1 class="heading-1 max-w-article">
     {data?.banner.heading}
   </h1>
   <p class="max-w-article">{data?.banner.subheading}</p>

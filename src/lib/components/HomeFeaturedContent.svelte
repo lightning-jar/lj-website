@@ -37,16 +37,17 @@ const featured: FeaturedItem[] = [
 		href: "/customer-stories/ccrta-multilingual-translation",
 	},
 	{
-		kind: "Blog",
-		title: "Building a Modern Transit Website: Live Bus Tracking on Open Data",
-		href: "/blog/modern-transit-website",
+		kind: "Ask Eljay",
+		title: "Want to learn more about LJ? Ask our LLM agent.",
+		href: "/ask-eljay",
 	},
 ];
 </script>
 
 <section class="page-x-padding py-12 border-t border-white/10 w-full">
-  <div class="flex items-end justify-between gap-4 mb-6">
+  <div class="flex items-baseline justify-between gap-4 mb-6">
     <h2 class="heading-2">Featured</h2>
+    <a href="/ask-eljay" class="view-all-link">Ask Eljay<span>→</span></a>
   </div>
 
   <div
@@ -58,15 +59,15 @@ const featured: FeaturedItem[] = [
         href={item.href}
         title={item.title}
         class="{index === 5
-          ? 'lg:hidden xl:flex'
-          : ''} aspect-[4/3] w-full border border-current rounded-lg overflow-hidden relative flex flex-col justify-between gap-2 p-3 hover:bg-white/5"
+          ? 'lg-hidden xl-flex'
+          : ''} aspect-[4/3] w-full border border-current rounded-lg overflow-hidden relative flex flex-col justify-between gap-2 p-3 hover-bg-white/5"
       >
-        <div class="text-maximumYellow text-13px uppercase tracking-wide">
+        <div class="tile-meta">
           {item.kind}
         </div>
         <h3
           id="featured-title-{index}"
-          class="font-sans font-400 leading-snug text-15px sm:text-16px line-clamp-4"
+          class="tile-text line-clamp-4"
         >
           {item.title}
         </h3>

@@ -20,8 +20,8 @@ let { stories = [] }: Props = $props();
       <a
         href="/customer-stories"
         aria-label="View all customer stories"
-        class="text-maximumYellow hover:underline text-15px whitespace-nowrap"
-        >View all →</a
+        class="view-all-link"
+        >View all<span>→</span></a
       >
     </div>
 
@@ -32,22 +32,22 @@ let { stories = [] }: Props = $props();
         <a
           aria-labelledby="latest-story-{story.slug}"
           href="/customer-stories/{story.slug}"
-          class="{index === 5
-            ? 'lg:hidden xl:block'
-            : ''} aspect-[4/3] w-full border border-current rounded-lg overflow-hidden relative"
+          class="w-full"
         >
-          <img
-            aria-hidden="true"
-            src={story.image}
-            alt=""
-            class="w-full !h-full object-cover"
-            loading="lazy"
-          />
+        <div class="flex aspect-4/3 w-full rounded-t-lg overflow-hidden relative">
+	            <img
+	              aria-hidden="true"
+	              src={story.image}
+	              alt=""
+	              class="w-full !h-full object-cover"
+	              loading="lazy"
+	            >
+        </div>
           <h3
             id="latest-story-{story.slug}"
-            class="px-3 absolute bottom-0 flex backdrop-blur bg-oxfordDark/80 w-full py-2 font-sans font-400 leading-snug text-17px"
+            class="px-3 pt-2 pb-4 bg-white/5 rounded-b-lg min-h-68px"
           >
-            {story.title}
+          <div class="tile-text line-clamp-2">{story.title}</div>
           </h3>
         </a>
       {/each}
