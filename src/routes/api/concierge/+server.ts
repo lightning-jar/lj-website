@@ -443,7 +443,7 @@ export const POST: RequestHandler = async ({
 			}),
 			read_study: tool({
 				description:
-					"Read one study's full findings by slug (slugs unique across projects).",
+					'Read one study\'s full findings by its short slug — the last path segment alone, e.g. "1" for /research/aeo-bench/1 or "ag" for /research/barkup-bench/ag. Slugs are unique across projects.',
 				inputSchema: z.object({ slug: z.string().min(1) }),
 				execute: async ({ slug }) => readStudy(slug),
 			}),

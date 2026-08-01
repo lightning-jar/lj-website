@@ -148,7 +148,7 @@ function handlerFor(fetch: Fetch) {
 
 			tool(
 				"read_study",
-				"Read one study by slug (from either research project; slugs are unique): full section text (HTML stripped), chart titles, and source links.",
+				'Read one study by its short slug — the last path segment alone, e.g. "1" for /research/aeo-bench/1 or "ag" for /research/barkup-bench/ag (slugs are unique across projects): full section text (HTML stripped), chart titles, and source links.',
 				{ slug: z.string().min(1) },
 				({ slug }: { slug: string }) => text(readStudy(slug)),
 			);

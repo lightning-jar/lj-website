@@ -58,7 +58,7 @@ export function buildSiteIndex(input: SiteIndexInput): string {
 
 	const studyCount = STUDY_PROJECTS.reduce((n, p) => n + p.studies.length, 0);
 	lines.push(
-		`Research studies (${studyCount} total; read_study by slug for full findings):`,
+		`Research studies (${studyCount} total; read_study with the short slug — the last path segment, e.g. read_study("1") — for full findings):`,
 	);
 	for (const { project, studies } of STUDY_PROJECTS) {
 		for (const s of studies) {

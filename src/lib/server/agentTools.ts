@@ -379,8 +379,15 @@ export function listStudies() {
 }
 
 export function readStudy(slug: string) {
+	// Agents guess path-shaped slugs ("aeo-bench/1", "/research/barkup-bench/ag",
+	// or the full URL) because the site index lists studies as paths — observed
+	// in production chat logs burning 4 of 6 tool steps on retries. Normalize
+	// to the last path segment; slugs are unique across projects, so the
+	// segment alone is unambiguous.
+	const normalized =
+		slug.trim().toLowerCase().split("/").filter(Boolean).pop() ?? "";
 	for (const { project, studies, briefUrl } of projects) {
-		const study = studies.find((s) => s.slug === slug);
+		const study = studies.find((s) => s.slug === normalized);
 		if (!study) continue;
 		return {
 			project,
@@ -405,7 +412,9 @@ export function readStudy(slug: string) {
 			})),
 		};
 	}
-	return { error: `No study with slug "${slug}"` };
+	return {
+		error: `No study with slug "${slug}". Use the short study identifier alone — the last segment of /research/<project>/<slug> — e.g. "1" for AEO Bench Study 1 or "ag" for Barkup Bench Study AG.`,
+	};
 }
 
 // The curated site index (AEO Bench Study 3), built ONCE per server
