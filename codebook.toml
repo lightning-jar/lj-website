@@ -5,6 +5,8 @@ dictionaries = [
 words = [
   "affordance",
     "automatable",
+    "barkdown",
+    "barkup",
     "bindable",
     "changefreq",
     "codebook",
