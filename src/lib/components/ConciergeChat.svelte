@@ -77,6 +77,8 @@ export async function reset() {
 	}
 	input = "";
 	lastError = "";
+	// a fresh conversation gets a fresh set of starter chips
+	randomSuggestions = pickRandom(SUGGESTIONS);
 	inputEl?.focus();
 }
 

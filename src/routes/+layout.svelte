@@ -3,8 +3,6 @@ import { goto } from "$app/navigation";
 // import child page data
 import { page } from "$app/state";
 
-import { createAttachmentKey } from "svelte/attachments";
-
 // import css file
 import "uno.css";
 
