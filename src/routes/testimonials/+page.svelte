@@ -45,6 +45,7 @@ let panelsCount: number = $derived(data.testimonials?.length ?? 0);
 		{/each}
 
 		<PanelAdvanceArrow
+			ariaLabel="Go to the next testimonial"
 			onadvance={() => (activePanel = (activePanel + 1) % panelsCount)}
 		/>
 	</div>

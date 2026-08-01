@@ -89,11 +89,22 @@ function handleKeyDown(event: KeyboardEvent) {
 		decrementCounter("topic", topics.length);
 	}
 }
+
+// announced politely so arrow/dot users hear where rotation landed
+const activeAnnouncement = $derived(
+	topics.length
+		? `Message ${counters.topic + 1} of ${topics.length}: ${topics[counters.topic]?.heading ?? ""}`
+		: "",
+);
 </script>
 
-<svelte:body onkeydown={handleKeyDown} />
-
+<!-- arrow keys advance the carousel only while focus is inside the
+     banner (a body-wide handler used to preventDefault ArrowDown and
+     broke keyboard scrolling on the whole page) -->
+<!-- svelte-ignore a11y_no_static_element_interactions — the container
+     scopes key handling for the focusable controls within it -->
 <div
+  onkeydown={handleKeyDown}
   class="
   border-b
   border-white/10
@@ -125,16 +136,18 @@ function handleKeyDown(event: KeyboardEvent) {
   >
     {#each topics as topic, index}
       <!-- the first (default-visible) headline is the page's h1; the
-           rotating alternates are h2s so each panel keeps heading
-           semantics (they are display:none until selected, so assistive
-           tech only encounters the active one) -->
+           rotating alternates are h2s. Inactive panels' text content is
+           sr-only rather than display:none, so every message is present
+           in the accessibility tree and screen readers can read the
+           whole set linearly; only the CTA rows stay display:none
+           (visually-hidden links would be focusable but invisible) -->
       {@const headingTag = index === 0 ? "h1" : "h2"}
       {#if index > -1}
         <!-- heading -->
 
         <svelte:element
           this={headingTag}
-          class="{counters.topic === index ? 'flex' : 'hidden'}
+          class="{counters.topic === index ? 'flex' : 'sr-only'}
           heading-1
           mb-7
           border-y
@@ -148,7 +161,7 @@ function handleKeyDown(event: KeyboardEvent) {
         <!-- text -->
         {#each topic.text as text}
           <div
-            class="{counters.topic === index ? 'block' : 'hidden'}
+            class="{counters.topic === index ? 'block' : 'sr-only'}
             body-1
 					"
           >
@@ -159,7 +172,7 @@ function handleKeyDown(event: KeyboardEvent) {
         <!-- bullets -->
         {#if topic?.bullets?.[0]}
           <ul
-            class="{counters.topic === index ? 'grid' : 'hidden'}
+            class="{counters.topic === index ? 'grid' : 'sr-only'}
             gap-3
   					text-17px
   					text-accent
@@ -209,6 +222,9 @@ function handleKeyDown(event: KeyboardEvent) {
         {/if}
       {/if}
     {/each}
+
+    <!-- polite announcement of rotation for assistive tech -->
+    <div class="sr-only" aria-live="polite">{activeAnnouncement}</div>
 
     <!-- panel position dots -->
     {#if topics.length > 1}

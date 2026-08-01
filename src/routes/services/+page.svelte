@@ -17,8 +17,11 @@ let panelsCount: number = $derived(data?.services?.length ?? 0);
 
   <div class="grid grid-cols-1 gap-12 relative max-w-560px">
     {#each data.services as service, index}
-      {#if index === activePanel}
-        <article class="pb-0">
+      <!-- every service is always in the DOM: the inactive ones are
+           sr-only (crawlable, readable by screen readers in one linear
+           pass) except their link lists, which stay display:none so no
+           invisible focusable links exist -->
+      <article class={index === activePanel ? "pb-0" : "sr-only"}>
           <h2 class="uppercase text-slate-100 mb-3 font-700 tracking-wider">
             {service.heading}
           </h2>
@@ -33,7 +36,7 @@ let panelsCount: number = $derived(data?.services?.length ?? 0);
             </p>
           {/if}
           {#if service.links?.length}
-            <div class="mt-2 max-w-540px">
+            <div class="{index === activePanel ? '' : 'hidden'} mt-2 max-w-540px">
               <h3
                 class="text-12px uppercase tracking-wider text-slate-400 mb-2"
               >
@@ -54,10 +57,17 @@ let panelsCount: number = $derived(data?.services?.length ?? 0);
             </div>
           {/if}
         </article>
-      {/if}
     {/each}
 
+    <!-- polite announcement of rotation for assistive tech -->
+    <div class="sr-only" aria-live="polite">
+      {data.services?.[activePanel]
+        ? `Service ${activePanel + 1} of ${panelsCount}: ${data.services[activePanel].heading}`
+        : ""}
+    </div>
+
     <PanelAdvanceArrow
+      ariaLabel="Go to the next service"
       onadvance={() => (activePanel = (activePanel + 1) % panelsCount)}
     />
   </div>
