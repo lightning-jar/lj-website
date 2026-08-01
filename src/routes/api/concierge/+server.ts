@@ -16,6 +16,8 @@
 
 import type { RequestHandler } from "./$types";
 
+import { CONCIERGE_SUGGESTIONS } from "$data/conciergeSuggestions";
+
 import {
 	aboutLightningJar,
 	listBlogArticles,
@@ -29,6 +31,7 @@ import {
 	siteIndex,
 } from "$lib/server/agentTools";
 import { createRateLimiter } from "$lib/server/rateLimit";
+import { createResponseCache } from "$lib/server/responseCache";
 import { gateway } from "@ai-sdk/gateway";
 import {
 	convertToModelMessages,
@@ -67,6 +70,51 @@ const limiter = createRateLimiter({
 	redisUrl: ENV.KV_REST_API_URL || undefined,
 	redisToken: ENV.KV_REST_API_TOKEN || undefined,
 });
+
+// ---- suggested-prompt response cache ---------------------------------
+// The suggestion chips are fixed strings, so a first-turn chip request
+// is identical across visitors: serve the stored answer instantly
+// (the model's 3-6s stream becomes ~0) and refresh it every 6 hours so
+// cited content stays current. Exact-match only, first turn only.
+const promptCache = createResponseCache({
+	prefix: "cc:v1",
+	ttlSec: 6 * 60 * 60,
+	redisUrl: ENV.KV_REST_API_URL || undefined,
+	redisToken: ENV.KV_REST_API_TOKEN || undefined,
+});
+const CACHEABLE_PROMPTS = new Set<string>(CONCIERGE_SUGGESTIONS);
+
+// a conversation is cacheable only when it is exactly one user message
+// with exactly one text part that exact-matches an allowlisted prompt
+function cacheKeyFor(messages: UIMessage[]): string | null {
+	if (messages.length !== 1 || messages[0].role !== "user") return null;
+	const parts = messages[0].parts ?? [];
+	if (parts.length !== 1 || parts[0].type !== "text") return null;
+	const text = parts[0].text.trim();
+	return CACHEABLE_PROMPTS.has(text) ? `${MODEL}:${text}` : null;
+}
+
+// replay a stored answer in the UI-message-stream wire format the
+// client's transport expects (start → text → finish, then [DONE])
+function cachedStreamResponse(text: string): Response {
+	const chunks = [
+		{ type: "start" },
+		{ type: "start-step" },
+		{ type: "text-start", id: "0" },
+		{ type: "text-delta", id: "0", delta: text },
+		{ type: "text-end", id: "0" },
+		{ type: "finish-step" },
+		{ type: "finish" },
+	];
+	const body = `${chunks.map((c) => `data: ${JSON.stringify(c)}`).join("\n\n")}\n\ndata: [DONE]\n\n`;
+	return new Response(body, {
+		headers: {
+			"content-type": "text/event-stream",
+			"cache-control": "no-cache",
+			"x-concierge-cache": "hit",
+		},
+	});
+}
 
 const RECHARGING =
 	"The lightning jar is recharging. Please try again in a little while, or email hello@lightningjar.com — a person answers that.";
@@ -275,6 +323,15 @@ export const POST: RequestHandler = async ({
 			"This conversation is too long — refresh to start fresh.",
 		);
 
+	// suggested-prompt cache: an exact first-turn chip match replays the
+	// stored answer instantly (no model call, no log ship — the cached
+	// conversation already shipped when it was first generated)
+	const cacheKey = cacheKeyFor(messages);
+	if (cacheKey) {
+		const cached = await promptCache.get(cacheKey);
+		if (cached) return cachedStreamResponse(cached);
+	}
+
 	// per-step wall-clock timings for the chat log (mirrors replicator's
 	// blog-chat): each step is one model turn; tools[] names what it
 	// called, ms is how long it took, finishReason ends it
@@ -409,6 +466,19 @@ export const POST: RequestHandler = async ({
 			"The lightning jar flickered. Please try that again in a moment.",
 		onFinish: ({ messages: finalMessages }) => {
 			if (chatId) shipLog(chatId, finalMessages, stepTimings);
+			// store a clean chip answer for replay (normal stop finishes only,
+			// so refusals and truncated streams never get cached)
+			if (cacheKey && stepTimings.at(-1)?.finishReason === "stop") {
+				const last = finalMessages.at(-1);
+				if (last?.role === "assistant") {
+					const answer = (last.parts ?? [])
+						.filter((p) => p.type === "text")
+						.map((p) => ("text" in p ? p.text : ""))
+						.filter(Boolean)
+						.join("\n\n");
+					if (answer) promptCache.set(cacheKey, answer);
+				}
+			}
 		},
 	});
 };

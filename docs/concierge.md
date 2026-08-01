@@ -218,6 +218,16 @@ backstop.
   the browser and unforgeable from page JavaScript, so this blocks
   cross-site calls and naive scripts/scrapers (a determined script can
   spoof it — hence "fence, not wall").
+- **Suggested-prompt response cache.** The suggestion chips are fixed
+  strings (`$data/conciergeSuggestions`, shared by the UI and the API
+  route), so a first-turn chip request is identical across visitors. An
+  exact match against the allowlist is served from cache
+  (`$lib/server/responseCache`: Upstash when configured, in-memory
+  fallback) as an instant replayed stream — measured ~70ms vs 4-6s of
+  model streaming — with a 6h TTL so cited content stays fresh. Only
+  clean `finishReason: "stop"` answers are stored; cache hits skip the
+  chat-log ship (the original conversation already logged) and carry an
+  `x-concierge-cache: hit` header.
 - **Rate limits.** Per-IP fixed window (10 / 5 min) and daily cap
   (400 / UTC day) via the shared limiter (`$lib/server/rateLimit`, also
   used by `/mcp` at 60 / 5 min + 2,000 / day). Upstash-backed when

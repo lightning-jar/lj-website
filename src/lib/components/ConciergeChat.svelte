@@ -16,6 +16,8 @@ import type { Chat } from "@ai-sdk/svelte";
 import type { UIMessage } from "ai";
 import type { Attachment } from "svelte/attachments";
 
+import { CONCIERGE_SUGGESTIONS } from "$data/conciergeSuggestions";
+
 // hideClearButton: set by hosts that provide their own reset affordance
 // (the homepage launcher's header button calls the exported reset()
 // via bind:this); the standalone /concierge page keeps the inline one
@@ -211,14 +213,9 @@ function isSearching(message: UIMessage): boolean {
 	);
 }
 
-const SUGGESTIONS = [
-	"What kind of research is Lightning Jar doing?",
-	"What are the key findings of LJ's AEO research?",
-	"What is the AEO Playbook?",
-	"Have you built transit websites?",
-	"What is woof-editor?",
-	"What is Replicator?",
-];
+// shared with the API route, where the same strings form the
+// response-cache allowlist — a chip click is served from cache
+const SUGGESTIONS = [...CONCIERGE_SUGGESTIONS];
 
 // SSR and hydration must agree, so the server renders a deterministic
 // first-three; the client reshuffles once after mount (Math.random in
