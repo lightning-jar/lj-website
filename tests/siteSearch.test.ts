@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
-
 import {
 	filterSearchIndex,
+	focusLeftContainer,
 	groupSearchResults,
 	type SearchRecord,
 } from "../src/lib/utils/siteSearch";
@@ -80,5 +80,31 @@ describe("groupSearchResults", () => {
 		expect(solo).toHaveLength(1);
 		expect(solo[0]?.label).toBe("Blog");
 		expect(solo[0]?.items).toHaveLength(1);
+	});
+});
+
+// Regression: iPadOS/Safari taps on a search result fire focusout with
+// relatedTarget null while the tap is in flight; closing on null used
+// to unmount the tapped <a> before its click dispatched, eating the
+// navigation. (bun test cannot mount .svelte components, so the
+// component's focusout decision lives in this pure predicate and the
+// handler stays one line — the repo's convention for testable logic.)
+describe("focusLeftContainer (NavSearch focusout decision)", () => {
+	const node = (inside: boolean) => ({ isInside: inside }) as unknown as Node;
+	const container = {
+		contains: (n: Node) =>
+			(n as unknown as { isInside?: boolean }).isInside === true,
+	};
+
+	test("stays open when focusout has no relatedTarget (Safari tap)", () => {
+		expect(focusLeftContainer(container, null)).toBe(false);
+	});
+
+	test("closes when focus lands outside the container", () => {
+		expect(focusLeftContainer(container, node(false))).toBe(true);
+	});
+
+	test("stays open when focus moves within the container", () => {
+		expect(focusLeftContainer(container, node(true))).toBe(false);
 	});
 });

@@ -3,6 +3,7 @@ import { goto } from "$app/navigation";
 
 import {
 	filterSearchIndex,
+	focusLeftContainer,
 	groupSearchResults,
 	loadSearchIndex,
 	type SearchRecord,
@@ -64,8 +65,13 @@ function handleInputKeydown(e: KeyboardEvent) {
 }
 
 function handleFocusOut(e: FocusEvent) {
-	const container = e.currentTarget as HTMLElement;
-	if (!container.contains(e.relatedTarget as Node)) close();
+	// focusLeftContainer treats a null relatedTarget as "still inside":
+	// Safari/iPadOS taps fire focusout with relatedTarget null while the
+	// tap is in flight, and closing then unmounts the tapped result link
+	// before its click dispatches (the tap navigated nowhere). Outside
+	// clicks still close via handleWindowClick; Escape always closes.
+	if (focusLeftContainer(e.currentTarget as HTMLElement, e.relatedTarget))
+		close();
 }
 
 function handleWindowClick(e: MouseEvent) {

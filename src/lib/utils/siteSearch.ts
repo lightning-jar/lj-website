@@ -70,6 +70,21 @@ export function loadSearchIndex(): Promise<SearchRecord[]> {
 	return indexPromise;
 }
 
+// Whether a focusout event means focus truly LEFT the search container.
+// Safari (and iPadOS) does not focus a link on tap, so mid-tap the
+// input's focusout arrives with relatedTarget null; treating null as
+// "outside" closes the panel and unmounts the tapped <a> before its
+// click can dispatch, silently eating the navigation. Null therefore
+// never closes — outside taps still close via the window click handler,
+// and Escape always closes.
+export function focusLeftContainer(
+	container: { contains(node: Node): boolean },
+	relatedTarget: EventTarget | null,
+): boolean {
+	if (!relatedTarget) return false;
+	return !container.contains(relatedTarget as Node);
+}
+
 // group filtered results for display, in SEARCH_TYPE_LABELS order
 export function groupSearchResults(
 	results: SearchRecord[],
