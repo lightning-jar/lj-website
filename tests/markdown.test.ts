@@ -3,6 +3,7 @@ import {
 	getFrontMatter,
 	parseMarkdown,
 	parseMarkdownTextToHtml,
+	stripLeadingH1,
 } from "../src/lib/utils/parseMarkdown";
 
 // Utility to normalize HTML output for comparisons (marked emits newlines
@@ -693,5 +694,30 @@ describe("parseMarkdownTextToHtml - code spans inside links and images", () => {
 		expect(html).toContain("<em>Italic.</em>");
 		expect(html).toContain("&lt;strong onclick=alert(1)>");
 		expect(html).not.toContain("<strong onclick");
+	});
+});
+
+describe("stripLeadingH1", () => {
+	it("removes a single leading level-1 heading", () => {
+		expect(stripLeadingH1("# Title\n\nBody text.")).toBe("\nBody text.");
+	});
+
+	it("tolerates leading blank lines before the heading", () => {
+		expect(stripLeadingH1("\n\n# Title\nBody.")).toBe("Body.");
+	});
+
+	it("leaves bodies without a leading h1 untouched", () => {
+		const md = "Plain opening paragraph.\n\n# Later heading\n";
+		expect(stripLeadingH1(md)).toBe(md);
+	});
+
+	it("does not strip deeper headings", () => {
+		const md = "## Section\nBody.";
+		expect(stripLeadingH1(md)).toBe(md);
+	});
+
+	it("strips only the first h1, never mid-document ones", () => {
+		const md = "# Title\nIntro.\n\n# Another h1 in body\n";
+		expect(stripLeadingH1(md)).toBe("Intro.\n\n# Another h1 in body\n");
 	});
 });

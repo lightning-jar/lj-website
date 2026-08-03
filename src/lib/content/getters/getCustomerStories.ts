@@ -8,18 +8,18 @@
 // reproduce its sequence). Technology enrichment stays local: `technologies`
 // content remains in git.
 
-// env
-import { ENV } from "varlock/env";
-
 // utils
-import { parseMarkdownTextToHtml } from "$utils/parseMarkdown";
-
-// data
-import { allTechnologies } from "$content/getters/getTechnologiesContent";
+import { parseMarkdownTextToHtml, stripLeadingH1 } from "$utils/parseMarkdown";
 
 // types
 import type { CustomerStory } from "$types/CustomerStory";
 import type { SitemapPage, SitemapSection } from "$types/Sitemap";
+
+// data
+import { allTechnologies } from "$content/getters/getTechnologiesContent";
+
+// env
+import { ENV } from "varlock/env";
 
 type Fetch = typeof globalThis.fetch;
 
@@ -144,7 +144,8 @@ export async function getCustomerStoryBySlug(
 	return {
 		...enrichTechnologies(normalizeMeta(data.article.frontMatter)),
 		html: parseMarkdownTextToHtml({
-			markdown: data.article.markdown,
+			// the template renders its own <h1> from frontmatter
+			markdown: stripLeadingH1(data.article.markdown),
 			options: { sanitize: true, lazyImages: true },
 		}),
 	};

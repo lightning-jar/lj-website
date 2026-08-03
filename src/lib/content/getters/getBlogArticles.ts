@@ -7,7 +7,7 @@
 
 // utils
 import { matchAuthorProfile } from "$utils/authorMatch";
-import { parseMarkdownTextToHtml } from "$utils/parseMarkdown";
+import { parseMarkdownTextToHtml, stripLeadingH1 } from "$utils/parseMarkdown";
 
 // types
 import type { FrontMatter } from "$types/FrontMatter";
@@ -160,7 +160,8 @@ export async function getBlogArticleBySlug(
 	return {
 		frontMatter: data.article.frontMatter,
 		html: parseMarkdownTextToHtml({
-			markdown: data.article.markdown,
+			// the template renders its own <h1> from frontmatter
+			markdown: stripLeadingH1(data.article.markdown),
 			options: { sanitize: true, lazyImages: true },
 		}),
 		nextArticleSlug: slugs[index + 1],

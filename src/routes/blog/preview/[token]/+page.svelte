@@ -2,7 +2,7 @@
 import { page } from "$app/state";
 
 // utils
-import { parseMarkdownTextToHtml } from "$utils/parseMarkdown";
+import { parseMarkdownTextToHtml, stripLeadingH1 } from "$utils/parseMarkdown";
 import { safeLinkUrl } from "$utils/safeLinkUrl";
 
 // types
@@ -57,7 +57,8 @@ $effect(() => {
 			if (stale) return;
 			article = body.article;
 			html = parseMarkdownTextToHtml({
-				markdown: body.article.markdown,
+				// the template renders its own <h1> from frontmatter
+				markdown: stripLeadingH1(body.article.markdown),
 				options: { sanitize: true, lazyImages: true },
 			});
 			viewState = "ready";

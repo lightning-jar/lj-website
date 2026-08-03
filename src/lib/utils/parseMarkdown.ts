@@ -231,6 +231,19 @@ function stripFrontMatter(markdown: string): string {
 }
 
 /**
+ * Remove a single leading level-1 heading from a markdown body.
+ *
+ * CMS article bodies begin with `# Title` by convention, but the site
+ * templates render their own <h1> from frontmatter — parsing the body
+ * as-is produced duplicate h1s on every article page. Only the first
+ * non-blank line is considered, and only an `# ` heading (deeper
+ * headings and mid-document h1s are untouched).
+ */
+export function stripLeadingH1(markdown: string): string {
+	return markdown.replace(/^\s*#[ \t][^\n]*\n?/, "");
+}
+
+/**
  * Convert markdown text to HTML
  *
  * Front matter is automatically stripped before parsing.
