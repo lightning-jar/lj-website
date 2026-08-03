@@ -17,5 +17,7 @@ export const CONCIERGE_SUGGESTIONS = [
 	"What is Lightning Jar's advice on Pimcore in 2026?",
 	"What are some things customers say about Lightning Jar?",
 	"Who are some of Lightning Jar's customers?",
-	"What industries does Lightning Jar serve?"
+	"What industries does Lightning Jar serve?",
+	"What technologies is this site built with?",
+	"What technologies does Lightning Jar specialize in?",
 ] as const;

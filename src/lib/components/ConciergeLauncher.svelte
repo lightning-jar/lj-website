@@ -71,7 +71,7 @@ function handleToggle(event: ToggleEvent) {
       >
         <span aria-hidden="true" class="i-ph-arrow-clockwise-bold"></span>
       </button>
-      <a href="/ask-eljay" class="button-xsmall" aria-label="Open Ask Eljay as a full page">↗</a>
+      <a href="/ask-eljay" class="button-xsmall" aria-label="Open Ask Eljay as a full page"><span aria-hidden="true" class="i-ph-arrow-up-right-bold"></span></a>
       <button
         type="button"
         popovertarget="concierge-panel"
@@ -79,7 +79,7 @@ function handleToggle(event: ToggleEvent) {
         aria-label="Close the Ask Eljay panel"
         class="button-xsmall"
       >
-        <span aria-hidden="true">✕</span>
+      <span aria-hidden="true" class="i-ph-x-bold"></span>
       </button>
     </div>
   </header>
@@ -93,13 +93,14 @@ function handleToggle(event: ToggleEvent) {
   type="button"
   popovertarget="concierge-panel"
   aria-label={open ? "Close the Ask Eljay chat" : "Ask Eljay, our AI assistant"}
-  class="concierge-launcher fixed bottom-5 right-5 z-50 w-13 h-13 flex items-center justify-center rounded-full border border-maximumYellow bg-maximumYellow text-oxford shadow-lg hover:bg-oxford hover:text-maximumYellow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-oxford"
+  class="concierge-launcher group fixed bottom-5 right-5 z-50 w-13 h-13 flex items-center justify-center rounded-full border border-maximumYellow bg-maximumYellow text-oxford shadow-lg hover:bg-oxford hover:text-maximumYellow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-oxford"
 >
   {#if open}
     <span aria-hidden="true" class="text-18px leading-none">✕</span>
   {:else}
-    <span aria-hidden="true" class="w-4.5 block">
+    <span aria-hidden="true" class="w-4.5 block relative">
       <LightningBolt />
+      <div class="hidden group-hover-block absolute bottom-10 right-10 text-nowrap">Ask Eljay</div>
     </span>
   {/if}
 </button>
