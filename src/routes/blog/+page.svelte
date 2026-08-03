@@ -1,6 +1,9 @@
 <script lang="ts">
+import { page } from "$app/state";
+
 import FeedBadge from "$components/FeedBadge.svelte";
 import SearchTagFilter from "$components/SearchTagFilter.svelte";
+
 import {
 	matchesEveryTerm,
 	searchTermsOf,
@@ -10,7 +13,8 @@ import {
 
 let { data } = $props();
 
-let search = $state("");
+// seeded from ?q= so article-page tag pills can deep-link a filter
+let search = $state(page.url.searchParams.get("q") ?? "");
 
 // unique tags across all articles, alphabetized
 const allTags = $derived(

@@ -79,9 +79,24 @@ function getAttributionFromSource(source: ArticleSource): string {
     >
     <h1 class="heading-1 text-balance max-w-1000px">{data.title}</h1>
     {#if formattedDate}
-      <time class="mb-5 max-w-prose block" datetime={data.meta?.date}
+      <time class="mb-2 max-w-prose block" datetime={data.meta?.date}
         >{formattedDate}</time
       >
+    {/if}
+    {#if data.meta?.tags?.length}
+      <ul class="flex flex-wrap gap-2 mb-5 list-none" aria-label="Article tags">
+        {#each data.meta.tags as tag (tag)}
+          <li>
+            <a
+              href="/blog?q={encodeURIComponent(tag)}"
+              title="More articles tagged {tag}"
+              class="text-13px border border-maximumYellow/40 text-maximumYellow rounded-full px-2.5 py-1 leading-snug hover-border-maximumYellow hover-bg-maximumYellow/3"
+            >
+              {tag}
+            </a>
+          </li>
+        {/each}
+      </ul>
     {/if}
   </header>
 
