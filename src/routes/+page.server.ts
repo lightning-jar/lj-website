@@ -16,14 +16,26 @@ export const prerender = false;
 
 export async function load({ fetch, setHeaders }) {
 	setHeaders({
-		"cache-control": "public, s-maxage=300, stale-while-revalidate=3600",
+		"cache-control":
+			"public, s-maxage=300, stale-while-revalidate=3600, stale-if-error=86400",
 	});
 
-	const [allStories, allArticles, allReading] = await Promise.all([
-		getAllCustomerStories(fetch),
-		getAllBlogArticles(fetch),
-		getAllReadingListArticles(fetch),
-	]);
+	// The Latest rows are decoration on an otherwise static page: each
+	// source degrades to an empty row on failure (the sections are
+	// length-guarded), so the homepage cannot 500 for CMS reasons.
+	// (2026-08-10 outage: a CMS lockout turned this page into an error.)
+	const [storiesResult, articlesResult, readingResult] =
+		await Promise.allSettled([
+			getAllCustomerStories(fetch),
+			getAllBlogArticles(fetch),
+			getAllReadingListArticles(fetch),
+		]);
+	const allStories =
+		storiesResult.status === "fulfilled" ? storiesResult.value : [];
+	const allArticles =
+		articlesResult.status === "fulfilled" ? articlesResult.value : [];
+	const allReading =
+		readingResult.status === "fulfilled" ? readingResult.value : [];
 
 	// latest customer stories for the homepage grid (curated order, capped
 	// at 6; the getter is already order-sorted)

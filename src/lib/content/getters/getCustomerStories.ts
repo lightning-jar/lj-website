@@ -20,6 +20,7 @@ import { allTechnologies } from "$content/getters/getTechnologiesContent";
 
 // env
 import { ENV } from "varlock/env";
+import { cmsJson } from "./cmsJson";
 
 type Fetch = typeof globalThis.fetch;
 
@@ -91,12 +92,11 @@ function enrichTechnologies(story: CustomerStory): CustomerStory {
 export async function getAllCustomerStories(
 	fetch: Fetch,
 ): Promise<CustomerStory[]> {
-	const res = await fetch(
+	const data = await cmsJson<{ articles: ApiArticleListItem[] }>(
+		fetch,
 		`${apiBase()}/api/public/blog/articles?collection=customer-story&limit=200`,
-		{ headers: authHeaders(), cache: "force-cache" },
+		authHeaders(),
 	);
-	if (!res.ok) throw new Error(`Customer stories fetch failed: ${res.status}`);
-	const data = (await res.json()) as { articles: ApiArticleListItem[] };
 	return data.articles
 		.map((item) => enrichTechnologies(normalizeMeta(item.frontMatter)))
 		.sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
@@ -116,13 +116,13 @@ export async function getCustomerStoryMarkdownBySlug(
 	slug: string,
 ): Promise<{ frontMatter: CustomerStory; markdown: string } | undefined> {
 	if (!slug) return undefined;
-	const res = await fetch(
+	const data = await cmsJson<{ article: ApiArticleDetail } | null>(
+		fetch,
 		`${apiBase()}/api/public/blog/articles/${encodeURIComponent(slug)}?collection=customer-story`,
-		{ headers: authHeaders(), cache: "force-cache" },
+		authHeaders(),
+		null,
 	);
-	if (res.status === 404) return undefined;
-	if (!res.ok) throw new Error(`Customer story fetch failed: ${res.status}`);
-	const data = (await res.json()) as { article: ApiArticleDetail };
+	if (!data) return undefined;
 	return {
 		frontMatter: normalizeMeta(data.article.frontMatter),
 		markdown: data.article.markdown,
@@ -134,13 +134,13 @@ export async function getCustomerStoryBySlug(
 	slug: string,
 ): Promise<CustomerStory | undefined> {
 	if (!slug) return undefined;
-	const res = await fetch(
+	const data = await cmsJson<{ article: ApiArticleDetail } | null>(
+		fetch,
 		`${apiBase()}/api/public/blog/articles/${encodeURIComponent(slug)}?collection=customer-story`,
-		{ headers: authHeaders(), cache: "force-cache" },
+		authHeaders(),
+		null,
 	);
-	if (res.status === 404) return undefined;
-	if (!res.ok) throw new Error(`Customer story fetch failed: ${res.status}`);
-	const data = (await res.json()) as { article: ApiArticleDetail };
+	if (!data) return undefined;
 	return {
 		...enrichTechnologies(normalizeMeta(data.article.frontMatter)),
 		html: parseMarkdownTextToHtml({

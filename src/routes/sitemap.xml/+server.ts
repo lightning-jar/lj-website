@@ -130,11 +130,19 @@ export const GET: RequestHandler = async ({ fetch }) => {
 		return new Response(generateSiteMapXML(sorted), {
 			headers: {
 				"content-type": "application/xml; charset=utf-8",
-				"cache-control": "public, s-maxage=900, stale-while-revalidate=3600",
+				"cache-control":
+					"public, s-maxage=900, stale-while-revalidate=86400, stale-if-error=86400",
 			},
 		});
 	} catch (error) {
+		// only reachable when the CMS is down AND no last-known-good copy
+		// exists; 503 tells crawlers to come back rather than treating the
+		// sitemap as gone (a partial sitemap would be worse — URLs would
+		// appear to have vanished)
 		console.error("Error generating sitemap:", error);
-		return new Response("Error generating sitemap", { status: 500 });
+		return new Response("Sitemap temporarily unavailable", {
+			status: 503,
+			headers: { "retry-after": "300" },
+		});
 	}
 };

@@ -17,11 +17,17 @@ export const prerender = false;
 const BASE = "https://www.lightningjar.com";
 
 export const GET: RequestHandler = async ({ fetch }) => {
-	const [articles, stories, readingList] = await Promise.all([
+	// CMS collections degrade to empty sections on failure so the
+	// majority-static index (research, packages, technologies, agents)
+	// still serves during a CMS outage
+	const [articlesR, storiesR, readingR] = await Promise.allSettled([
 		getAllBlogArticles(fetch),
 		getAllCustomerStories(fetch),
 		getAllReadingListArticles(fetch),
 	]);
+	const articles = articlesR.status === "fulfilled" ? articlesR.value : [];
+	const stories = storiesR.status === "fulfilled" ? storiesR.value : [];
+	const readingList = readingR.status === "fulfilled" ? readingR.value : [];
 
 	const lines: string[] = [
 		"# Lightning Jar",
@@ -118,7 +124,8 @@ export const GET: RequestHandler = async ({ fetch }) => {
 	return new Response(lines.join("\n"), {
 		headers: {
 			"content-type": "text/plain; charset=utf-8",
-			"cache-control": "public, s-maxage=900, stale-while-revalidate=3600",
+			"cache-control":
+				"public, s-maxage=900, stale-while-revalidate=86400, stale-if-error=86400",
 		},
 	});
 };

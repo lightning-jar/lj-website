@@ -15,6 +15,7 @@ import type { SitemapPage, SitemapSection } from "$types/Sitemap";
 
 // env
 import { ENV } from "varlock/env";
+import { cmsJson } from "./cmsJson";
 
 type Fetch = typeof globalThis.fetch;
 
@@ -64,12 +65,11 @@ function authHeaders(): HeadersInit {
 // and origin propagation work; `cache: "force-cache"` lets Vercel's
 // edge layer participate per the CMS contract.
 async function fetchArticleList(fetch: Fetch): Promise<ApiArticleListItem[]> {
-	const res = await fetch(`${apiBase()}/api/public/blog/articles?limit=200`, {
-		headers: authHeaders(),
-		cache: "force-cache",
-	});
-	if (!res.ok) throw new Error(`Blog list fetch failed: ${res.status}`);
-	const data = (await res.json()) as { articles: ApiArticleListItem[] };
+	const data = await cmsJson<{ articles: ApiArticleListItem[] }>(
+		fetch,
+		`${apiBase()}/api/public/blog/articles?limit=200`,
+		authHeaders(),
+	);
 	return data.articles;
 }
 
@@ -125,13 +125,13 @@ export async function getBlogArticleMarkdownBySlug(
 	slug: string,
 ): Promise<{ frontMatter: FrontMatter; markdown: string } | undefined> {
 	if (!slug) return undefined;
-	const res = await fetch(
+	const data = await cmsJson<{ article: ApiArticleDetail } | null>(
+		fetch,
 		`${apiBase()}/api/public/blog/articles/${encodeURIComponent(slug)}`,
-		{ headers: authHeaders(), cache: "force-cache" },
+		authHeaders(),
+		null,
 	);
-	if (res.status === 404) return undefined;
-	if (!res.ok) throw new Error(`Blog article fetch failed: ${res.status}`);
-	const data = (await res.json()) as { article: ApiArticleDetail };
+	if (!data) return undefined;
 	return {
 		frontMatter: data.article.frontMatter,
 		markdown: data.article.markdown,
@@ -150,13 +150,13 @@ export async function getBlogArticleBySlug(
 	const slugs = await getAllBlogArticleSlugs(fetch);
 	const index = slugs.indexOf(slug);
 	if (index === -1) return undefined;
-	const res = await fetch(
+	const data = await cmsJson<{ article: ApiArticleDetail } | null>(
+		fetch,
 		`${apiBase()}/api/public/blog/articles/${encodeURIComponent(slug)}`,
-		{ headers: authHeaders(), cache: "force-cache" },
+		authHeaders(),
+		null,
 	);
-	if (res.status === 404) return undefined;
-	if (!res.ok) throw new Error(`Blog article fetch failed: ${res.status}`);
-	const data = (await res.json()) as { article: ApiArticleDetail };
+	if (!data) return undefined;
 	return {
 		frontMatter: data.article.frontMatter,
 		html: parseMarkdownTextToHtml({
@@ -225,12 +225,11 @@ export interface BlogAuthorProfile {
 export async function getBlogAuthorCatalog(
 	fetch: Fetch,
 ): Promise<BlogAuthorProfile[]> {
-	const res = await fetch(`${apiBase()}/api/public/blog/authors`, {
-		headers: authHeaders(),
-		cache: "force-cache",
-	});
-	if (!res.ok) throw new Error(`Blog authors fetch failed: ${res.status}`);
-	const data = (await res.json()) as { authors: BlogAuthorProfile[] };
+	const data = await cmsJson<{ authors: BlogAuthorProfile[] }>(
+		fetch,
+		`${apiBase()}/api/public/blog/authors`,
+		authHeaders(),
+	);
 	return data.authors;
 }
 

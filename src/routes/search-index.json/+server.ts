@@ -20,11 +20,16 @@ export const prerender = false;
 const blurb = (text: string | undefined | null) => (text ?? "").slice(0, 200);
 
 export const GET: RequestHandler = async ({ fetch }) => {
-	const [articles, stories, readingList] = await Promise.all([
+	// CMS sources degrade to empty on failure — a search index without
+	// the blog is better than no search at all
+	const [articlesR, storiesR, readingR] = await Promise.allSettled([
 		getAllBlogArticles(fetch),
 		getAllCustomerStories(fetch),
 		getAllReadingListArticles(fetch),
 	]);
+	const articles = articlesR.status === "fulfilled" ? articlesR.value : [];
+	const stories = storiesR.status === "fulfilled" ? storiesR.value : [];
+	const readingList = readingR.status === "fulfilled" ? readingR.value : [];
 
 	const records: SearchRecord[] = [
 		// standalone pages worth surfacing in search (no getter feeds these)
@@ -169,7 +174,8 @@ export const GET: RequestHandler = async ({ fetch }) => {
 		{ records },
 		{
 			headers: {
-				"cache-control": "public, s-maxage=300, stale-while-revalidate=3600",
+				"cache-control":
+					"public, s-maxage=300, stale-while-revalidate=3600, stale-if-error=86400",
 			},
 		},
 	);

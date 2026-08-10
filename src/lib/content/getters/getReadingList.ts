@@ -5,12 +5,13 @@
 // empty, so there is no parseMarkdown step — both the list and detail
 // fetches return complete entries.
 
-// env
-import { ENV } from "varlock/env";
-
 // types
 import type { Article } from "$types/Article";
 import type { SitemapSection } from "$types/Sitemap";
+
+// env
+import { ENV } from "varlock/env";
+import { cmsJson } from "./cmsJson";
 
 type Fetch = typeof globalThis.fetch;
 
@@ -37,12 +38,11 @@ function authHeaders(): HeadersInit {
 export async function getAllReadingListArticles(
 	fetch: Fetch,
 ): Promise<Article[]> {
-	const res = await fetch(
+	const data = await cmsJson<{ articles: ApiArticleListItem[] }>(
+		fetch,
 		`${apiBase()}/api/public/blog/articles?collection=reading-list&limit=200`,
-		{ headers: authHeaders(), cache: "force-cache" },
+		authHeaders(),
 	);
-	if (!res.ok) throw new Error(`Reading list fetch failed: ${res.status}`);
-	const data = (await res.json()) as { articles: ApiArticleListItem[] };
 	return data.articles
 		.map((item) => item.frontMatter)
 		.sort((a, b) => {
@@ -56,15 +56,13 @@ export async function getReadingListArticleBySlug(
 	slug: string,
 ): Promise<Article | undefined> {
 	if (!slug) return undefined;
-	const res = await fetch(
+	const data = await cmsJson<{ article: ApiArticleListItem } | null>(
+		fetch,
 		`${apiBase()}/api/public/blog/articles/${encodeURIComponent(slug)}?collection=reading-list`,
-		{ headers: authHeaders(), cache: "force-cache" },
+		authHeaders(),
+		null,
 	);
-	if (res.status === 404) return undefined;
-	if (!res.ok)
-		throw new Error(`Reading list entry fetch failed: ${res.status}`);
-	const data = (await res.json()) as { article: ApiArticleListItem };
-	return data.article.frontMatter;
+	return data ? data.article.frontMatter : undefined;
 }
 
 export async function getAllReadingListSlugs(fetch: Fetch): Promise<string[]> {

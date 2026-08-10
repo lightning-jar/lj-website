@@ -157,22 +157,39 @@ export const load = async ({ fetch, setHeaders }) => {
 	setHeaders({
 		"cache-control": "public, s-maxage=900, stale-while-revalidate=3600",
 	});
+	// CMS-backed sections degrade to empty on failure; the rest of the
+	// sitemap (static + git content) always serves
+	const empty = (name: string) => ({ name, pages: [] });
+	const [blogR, storiesR, readingR] = await Promise.allSettled([
+		getBlogArticlesSitemapSection(fetch),
+		getCustomerStoriesSitemapSection(fetch),
+		getReadingListSitemapSection(fetch),
+	]);
+	const blogSection =
+		blogR.status === "fulfilled" ? blogR.value : empty("Blog");
+	const storiesSection =
+		storiesR.status === "fulfilled"
+			? storiesR.value
+			: empty("Customer Stories");
+	const readingSection =
+		readingR.status === "fulfilled" ? readingR.value : empty("Reading List");
+
 	const sitemap = [
 		homeSitemapSection,
 		askEljaySection,
 		aboutSection,
 		funSection,
 		researchSection,
-		await getBlogArticlesSitemapSection(fetch),
+		blogSection,
 		builtWithSitemapSection,
-		await getCustomerStoriesSitemapSection(fetch),
+		storiesSection,
 		packagesSitemapSection,
 		servicesSitemapSection,
 		technologiesSitemapSection,
 		testimonialsSitemapSection,
 		termsSitemapSection,
 		archiveSection,
-		await getReadingListSitemapSection(fetch),
+		readingSection,
 		sitemapSection,
 	];
 
