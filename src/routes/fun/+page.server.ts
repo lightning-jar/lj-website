@@ -1,5 +1,15 @@
 const projects = [
 	{
+		name: "Stem Shovel",
+		status: "Live / BETA",
+		summary:
+			"Stem Shovel is a web app for managing songwriting, arranging, and recording projects with an emphasis on creativity and collaboration. Built by musicians for musicians, this web-app is intended to be an easy-to-use and affordable location for storing and sharing demos, stems, lyrics, chord charts and other songwriting assets.",
+		links: [
+			{ label: "Stem Shovel", href: "https://www.stemshovel.com" },
+			{ label: "GitHub", href: "https://github.com/kevinpeckham/stem-shovel" },
+		],
+	},
+	{
 		name: "Fifths",
 		status: "Live",
 		summary:
