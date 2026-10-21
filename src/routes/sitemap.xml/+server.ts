@@ -17,6 +17,7 @@ import { ENV } from "varlock/env";
 // env variables
 import aeoStudies from "./../research/aeo-bench/aeo-studies.json";
 import benchStudies from "./../research/barkup-bench/bench-studies.json";
+import stemStudies from "./../research/stem-bench/stem-studies.json";
 
 const productionUrl =
 	ENV.VERCEL_PROJECT_PRODUCTION_URL || "www.lightningjar.com";
@@ -77,6 +78,10 @@ const staticPages = [
 	generateSiteMapXMLPage(`/research/aeo-bench/playbook`, "weekly", 0.25), // the agent-readiness & aeo playbook
 	...aeoStudies.studies.map((s) =>
 		generateSiteMapXMLPage(`/research/aeo-bench/${s.slug}`, "monthly", 0.25),
+	), // per-study result pages
+	generateSiteMapXMLPage(`/research/stem-bench`, "weekly", 0.25), // stem-bench research dashboard
+	...stemStudies.studies.map((s) =>
+		generateSiteMapXMLPage(`/research/stem-bench/${s.slug}`, "monthly", 0.25),
 	), // per-study result pages
 	generateSiteMapXMLPage(`/blog`, "monthly", 0.25), // blog landing page
 	generateSiteMapXMLPage(`/feeds`, "monthly", 0.25), // feed index page

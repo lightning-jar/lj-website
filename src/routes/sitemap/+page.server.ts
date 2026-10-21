@@ -10,6 +10,7 @@ import { termsSitemapSection } from "$content/getters/getTermsContent";
 import { testimonialsSitemapSection } from "$content/getters/getTestimonialsContent";
 
 import benchStudies from "./../research/barkup-bench/bench-studies.json";
+import stemStudies from "./../research/stem-bench/stem-studies.json";
 
 const aboutSection = {
 	name: "About",
@@ -102,6 +103,19 @@ const researchSection = {
 				"The practical distillation of AEO Bench: eight evidence-checked guidelines split for site owners and agent builders, each pairing the prevailing agent-readiness advice with what our studies confirmed, corrected, or overturned.",
 			date: "",
 		},
+		{
+			href: "/research/stem-bench",
+			title: "Stem Bench",
+			description:
+				"Our open benchmark program testing a production LLM feature against ground truth built by construction: Stem Shovel's chart-draft pipeline, pre-registered and published as found, gate letters included.",
+			date: "",
+		},
+		...stemStudies.studies.map((s) => ({
+			href: `/research/stem-bench/${s.slug}`,
+			title: `Study ${s.letters}: ${s.title}`,
+			description: s.indexLine,
+			date: s.published,
+		})),
 	],
 };
 
