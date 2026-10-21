@@ -16,6 +16,7 @@ const desktopMenus = [
 			{ label: "Overview", href: "/research" },
 			{ label: "Barkup Bench", href: "/research/barkup-bench" },
 			{ label: "AEO Bench", href: "/research/aeo-bench" },
+			{ label: "Stem Bench", href: "/research/stem-bench" },
 		],
 	},
 	{
