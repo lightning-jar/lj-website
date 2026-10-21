@@ -1944,6 +1944,74 @@
 			],
 			"brief": "BRIEF-AR.md",
 			"quote": "Believed headroom dissolved the pruning; a believed binding limit caused it. The models were obeying the number all along — we just got to pick the number."
+		},
+		{
+			"slug": "as",
+			"letters": "AS",
+			"track": "Whole-system baselines",
+			"title": "The PDF to template pipeline, measured: the machinery passes, and fidelity stops at the re-branding boundary",
+			"eyebrow": "Study AS · the PDF to template pipeline · 12 items, 16 scored pages",
+			"indexLine": "The series' first whole-system study ran replicator's shipped six-stage PDF reconstruction pipeline against 12 frozen foreign-design PDFs: the machinery gates passed emphatically (12/12 completions, 0 fallback widgets in 85 builds) while both quality gates failed as measured (median fidelity 0.634 against a 0.700 bar, verify-loop uplift +0.007 against +0.050), and the decomposition is the finding: a dark cover page scored 0.002 because brand-compliance lint deliberately re-brands foreign palettes, and the verify loop spent 43% of wall-clock patching layout when the residual error is style.",
+			"sections": [
+				{
+					"id": "sec-pipeline",
+					"eyebrow": "Whole-system baselines",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-35",
+					"figure": {
+						"id": "fig-pipeline",
+						"title": "Median Page Fidelity by Tier, Initial and Final, Against the Registered Bar"
+					},
+					"table": {
+						"id": "tbl-pipeline",
+						"summary": "Gate verdicts, per-tier fidelity, verify economics, reuse rates, and stage wall-clock"
+					},
+					"body": [
+						{
+							"heading": "The First Whole-System Study",
+							"html": "Every study in this series so far isolated a protocol variable. AS measures a shipped product: replicator's six-stage PDF to template reconstruction pipeline (v3.269.1, all five LLM stages on <span class=\"font-mono\">claude-fable-5.1</span>), which takes a PDF designed elsewhere and rebuilds it as a native template through decompose, match, build, assemble, and a render-score-critique-correct verify loop. Until now its only numbers came from two development runs on one real-world PDF (final pages 0.75/0.75). The registered baseline replaced that anecdote: a frozen 12-item corpus of agent-designed foreign PDFs across three difficulty tiers, 16 scored pages, four registered gates, about 46 minutes of pipeline wall-clock, every created artifact deleted between items so the reuse catalog cannot grow mid-study."
+						},
+						{
+							"heading": "The Machinery Holds",
+							"html": "Both machinery gates passed emphatically. G1: 12 of 12 items completed every stage with zero pipeline errors and zero transport retries in scored cells. G4: zero fallback widgets in 85 builds; every generated widget validated through the lint and correction loop. The keep-best invariant held on all 16 pages, and the cleanup contract left zero rows and zero blobs across 14 invocations, including a clean recovery after an external process kill mid-run (the interrupted item re-ran from scratch; nothing from the killed attempt was kept)."
+						},
+						{
+							"heading": "Fidelity Fails at the Re-Branding Boundary",
+							"html": "G2 asked for a median final fidelity of 0.70 and got 0.634 (tier medians, initial to final: T1 0.689 to 0.693, T2 0.486 to 0.530, T3 0.591 to 0.634). The development anecdote did not replicate on foreign designs, and the single most diagnostic cell says why: a full-bleed dark-green cover page scored 0.002. The pipeline's brand-compliance lint deliberately re-brands foreign palettes into the org's theme, and the block-similarity metric reads that obedience as total mismatch. The gate number therefore conflates two different gaps: genuine layout and density deficits (real, visible in T2's 0.486 initial medians, where multi-region compositions flatten) and an intentional design-policy penalty. The metric measures pixel-faithful reproduction; the product promises recreate-in-our-brand. Those were the same thing for the development PDF, which was already in the org's brand, and are different things for every foreign design."
+						},
+						{
+							"heading": "The Verify Loop Pays 43% for +0.007",
+							"html": "G3 asked the correction loop for a median uplift of +0.05 on pages entering correction and measured +0.007; on 15 of 16 pages the final correction was reverted by keep-best. The loop applied 66 critic findings across 27 iterations and consumed 43% of total pipeline wall-clock (19.9 of 46.1 minutes) to produce nearly nothing. The contrast with the development PDF is the diagnosis: there, initial scores of 0.34 and 0.53 meant gross layout errors, and layout-scoped corrections earned +0.22 and +0.41. On this corpus initials are higher (median 0.60) and the residual error is style: palettes, backgrounds, typography, density, which anchored layout patches cannot touch, so keep-best correctly rejects round after round. The loop is doing its job; it is aimed at the wrong error class for this corpus."
+						},
+						{
+							"heading": "Descriptive Reads",
+							"html": "Reuse ran low in every tier (T1 0.07, T2 0.21, T3 0.19): a foreign-design corpus against a realistic org catalog mostly builds new widgets, as registered. Two-page items showed no page-2 degradation; the second page scored above the first in all four T3 items. Stage wall-clock split: build 17.3 minutes, verify 19.9, decompose 6.0, match 2.7. One disclosed limitation: per-cell token cost is not instrumented in the shipped pipeline, so the study reports wall-clock and a corpus-level spend estimate instead."
+						},
+						{
+							"heading": "What This Feeds",
+							"html": "The gates were registered as a baseline for the roadmap, not a shipping decision, and each failure names its fix: the highest-leverage improvement is palette and background fidelity, either theme-from-source (derive the document theme from the PDF instead of forcing the org default) or an explicit re-branding disclosure in the product; the verify stage should gain a style-correction channel or skip correction when findings are style-class, since two reverted iterations per page is the pipeline's largest cost for its smallest return; and the metric itself needs a palette-blind, layout-only successor so the next registration separates the two gaps this study had to disentangle narratively. That re-registration is the natural Study AT. One corpus disclosure stands: the 12 designs were authored by an LLM agent to a registered spec and accepted on visual review before any scored run."
+						}
+					]
+				}
+			],
+			"published": "2026-10-21",
+			"related": [
+				{
+					"title": "Replicator, the product under test",
+					"href": "https://replicator.lj.dev"
+				},
+				{
+					"title": "Study AR: advertised headroom",
+					"href": "/research/barkup-bench/ar"
+				},
+				{
+					"title": "Stem Bench Study 1, a sibling production-feature study",
+					"href": "/research/stem-bench/1"
+				}
+			],
+			"brief": "BRIEF-AS.md",
+			"quote": "The dark cover page scored 0.002 not because the pipeline failed but because it obeyed: the lint re-brands foreign palettes, and the metric calls that obedience a total mismatch."
 		}
 	]
 }

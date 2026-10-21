@@ -7478,6 +7478,187 @@ export function initBenchCharts() {
 		);
 	})();
 
+	// --- Study AS: PDF→template pipeline · per-tier fidelity vs the bar ---
+	(() => {
+		const GROUPS = [
+			{
+				tier: "T1 simple",
+				vals: [0.689, 0.693],
+				tip: "single-flow layouts · registered tier bar 0.800, missed · the median moved +0.004 through the verify loop",
+			},
+			{
+				tier: "T2 medium",
+				vals: [0.486, 0.53],
+				tip: "multi-region compositions flatten: the lowest initials in the study are genuine layout deficits, not re-branding",
+			},
+			{
+				tier: "T3 hard",
+				vals: [0.591, 0.634],
+				tip: "dense 2-page documents · no page-2 degradation (p1 > p0 in all 4 items) · includes the 0.002 dark cover page, the re-branding penalty in one number",
+			},
+			{
+				tier: "all 16 pages",
+				vals: [0.6, 0.634],
+				tip: "median final 0.634 vs the registered 0.700 bar: G2 FAIL as measured · verify uplift +0.007 vs the +0.050 bar: G3 FAIL · machinery gates G1 and G4 PASS",
+			},
+		];
+		const CINITIAL = "#8b93a3",
+			CFINAL = "#3987e5",
+			CBAR = "#e66767";
+		byId("legend-35").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CINITIAL +
+			'"></span>median initial score (before the verify loop)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CFINAL +
+			'"></span>median final score (after correction, keep-best)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CBAR +
+			'"></span>registered G2 bar (0.700 overall median)</span>' +
+			legendNote(
+				"16px block-similarity between the rendered reconstruction and the source page, 0 to 1 · the metric scores pixel-faithful reproduction while brand-compliance lint deliberately re-brands foreign palettes, so part of every deficit is design policy, not failure",
+			);
+		const W = 880,
+			BAR = 13,
+			GAP = 4,
+			GH = 2 * BAR + GAP,
+			GPAD = 16,
+			T = 8,
+			B = 42,
+			L = 190,
+			R = 70;
+		const H = T + GROUPS.length * (GH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + v * iw;
+		let g = "";
+		for (const tick of [0, 0.5, 1]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text class="chart-tick" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">' +
+				tick.toFixed(1) +
+				"</text>";
+		}
+		// the registered G2 bar, dashed
+		const bx = xOf(0.7);
+		g +=
+			'<line x1="' +
+			bx +
+			'" x2="' +
+			bx +
+			'" y1="' +
+			T +
+			'" y2="' +
+			(H - B) +
+			'" stroke="' +
+			CBAR +
+			'" stroke-width="1.5" stroke-dasharray="5 4"/>';
+		g +=
+			'<text fill="' +
+			CBAR +
+			'" font-size="11" x="' +
+			bx +
+			'" y="' +
+			(H - B + 34) +
+			'" text-anchor="middle">0.700 bar</text>';
+		let marks = "",
+			hits = "";
+		const COLORS = [CINITIAL, CFINAL];
+		GROUPS.forEach((row, gi) => {
+			const top = T + gi * (GH + GPAD);
+			g +=
+				'<text class="chart-tick" x="' +
+				(L - 12) +
+				'" y="' +
+				(top + GH / 2 + 4) +
+				'" text-anchor="end">' +
+				row.tier +
+				"</text>";
+			row.vals.forEach((v, ai) => {
+				const y = top + ai * (BAR + GAP);
+				const w = Math.max(v * iw, 2);
+				marks +=
+					'<rect x="' +
+					L +
+					'" y="' +
+					y +
+					'" width="' +
+					w +
+					'" height="' +
+					BAR +
+					'" fill="' +
+					COLORS[ai] +
+					'" rx="3"/>';
+				marks +=
+					'<text fill="#c3c9d4" font-size="11" x="' +
+					(L + w + 8) +
+					'" y="' +
+					(y + BAR - 2) +
+					'">' +
+					v.toFixed(3) +
+					"</text>";
+			});
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				top +
+				'" width="' +
+				iw +
+				'" height="' +
+				GH +
+				'" fill="transparent" data-tip="' +
+				esc(row.tier + "\n" + row.tip) +
+				'"/>';
+		});
+		const el = byId("fig-pipeline");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" role="img" aria-label="Grouped bar chart of median page fidelity by tier, initial and final scores against the registered 0.700 bar: tier one 0.689 to 0.693, tier two 0.486 to 0.530, tier three 0.591 to 0.634, and all sixteen pages 0.600 to 0.634; every tier lands under the bar and the verify loop moves each median only slightly.">' +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the whole-system baseline in one frame: every tier lands under the registered bar, the gap is largest where multi-region layouts flatten (T2) and where re-branding penalizes foreign palettes (T3's dark cover page scored 0.002), and the thin initial-to-final gap is the verify loop spending 43% of wall-clock for +0.007",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-pipeline",
+			["cell", "T1 simple", "T2 medium", "T3 hard", "corpus"],
+			[
+				["median fidelity, initial → final", "0.689 → 0.693", "0.486 → 0.530", "0.591 → 0.634", "0.600 → 0.634"],
+				["registered G2 bar", "0.800 (tier bar) · FAIL", "n/a", "n/a", "0.700 · FAIL"],
+				["items / scored pages", "4 / 4", "4 / 4", "4 / 8", "12 / 16"],
+				["reuse rate (vs build)", "0.07", "0.21", "0.19", "low everywhere, as registered"],
+				["initial-to-final median movement", "+0.004", "+0.044", "+0.043", "+0.034"],
+				["registered G3 uplift (median per corrected page)", "n/a", "n/a", "n/a", "+0.007 vs +0.050 bar · FAIL"],
+				["last correction reverted by keep-best", "n/a", "n/a", "n/a", "15/16 pages"],
+				["pipeline errors (G1) / fallback widgets (G4)", "0 / 0", "0 / 0", "0 / 0", "12/12 complete · 0 in 85 builds · PASS both"],
+				["stage wall-clock, corpus total", "n/a", "n/a", "n/a", "build 17.3 · verify 19.9 (43%) · decompose 6.0 · match 2.7 min"],
+			],
+		);
+	})();
+
 	// Every legend gets a "Legend" label as its first child — a styled
 	// paragraph, not a heading, so legends don't skip levels in the
 	// document outline. Runs after the builders above have set each
