@@ -50,6 +50,10 @@
 						{
 							"heading": "What This Licenses",
 							"html": "For Stem Shovel: keep the hint line and keep the frontier draft model; the hint is free accuracy for fable and poison only in the hands of models the product does not use. Two specific fixes went back to the app's FINDINGS file: the matcher's bare-fifth penalty mis-names power-chord bars the draft model then has to rescue, and a one-retry-on-empty guard would close the deterministic empty-completion edge. For everyone else: hint-following under pressure is a measurable, strongly tiered property, and a scaffold that is safe decoration for a frontier model can quietly become the answer sheet for a cheap one."
+						},
+						{
+							"heading": "Production Response, and Amendment 2",
+							"html": "A benchmark about a product is most useful when the product can answer, and Stem Shovel answered the same day. Version 0.142.0 shipped both fixes the study sent back, citing it: the matcher's flat bare-fifth penalty became a missing-tone penalty (a bar with no third no longer reads as a major chord), and the chart draft gained one retry on an empty completion. The bench re-ported the new matcher, registered Amendment 2, and re-ran the shipped-configuration arm with the hints it now produces: 80 cells, zero errors. The hint itself rose from 90.5% to 96.4% of bars, and every model that leans on it rose with it: kimi 75.5% to 94.8%, near its correct-hint ceiling; haiku 87.5% to 92.5%; gpt-oss 85.9% to 92.0%; gemini 94.3% to 98.2%. fable moved within noise (99.8% to 99.3%, and zero wrong hints propagated under either matcher). The flip rate is a wrong-hint-arm measurement and is unchanged by construction. The numbers elsewhere on this page stand as run, against v0.141. The sharpened conclusion is less flattering for the cheap tier, not more: with the better matcher, haiku, kimi, and gpt-oss all score below the bare matcher's own 96.4% in the shipped configuration, so the hint is doing their work for them; only fable and gemini add value over the hint they are given. Full tables are in the repository's REPORT.md under \"Production response and Amendment 2\"."
 						}
 					]
 				}
