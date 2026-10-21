@@ -1,7 +1,9 @@
+import { type FeedEntry, str, toIso } from "$utils/atomFeed";
+
 import type { BlogArticleListEntry } from "$content/getters/getBlogArticles";
 import type { Article } from "$types/Article";
 import type { CustomerStory } from "$types/CustomerStory";
-import { type FeedEntry, str, toIso } from "$utils/atomFeed";
+import type { Finding } from "$types/Finding";
 
 export function buildCustomerStoryEntries(
 	baseUrl: string,
@@ -73,6 +75,26 @@ export function buildStudyEntries(
 			authorName: "Lightning Jar",
 			category: "Research",
 		};
+	});
+}
+
+export function buildFindingsEntries(
+	baseUrl: string,
+	allFindings: Finding[],
+): FeedEntry[] {
+	return allFindings.flatMap((f) => {
+		if (!f?.slug) return [];
+		return [
+			{
+				id: `tag:lightningjar.com,2026:findings:${f.slug}`,
+				link: `${baseUrl}/findings/${f.slug}`,
+				title: f.number ? `No. ${f.number}: ${f.title || ""}` : f.title || "",
+				updated: toIso(f.verified),
+				summary: f.description || "",
+				authorName: "Lightning Jar",
+				category: "Findings",
+			},
+		];
 	});
 }
 

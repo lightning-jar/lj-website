@@ -2,6 +2,7 @@ import type { RequestHandler } from "./$types";
 
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 import { getAllCustomerStories } from "$content/getters/getCustomerStories";
+import { getAllFindings } from "$content/getters/getFindings";
 import { allPackages } from "$content/getters/getPackagesContent";
 import { getAllReadingListArticles } from "$content/getters/getReadingList";
 import { allTechnologies } from "$content/getters/getTechnologiesContent";
@@ -20,14 +21,16 @@ export const GET: RequestHandler = async ({ fetch }) => {
 	// CMS collections degrade to empty sections on failure so the
 	// majority-static index (research, packages, technologies, agents)
 	// still serves during a CMS outage
-	const [articlesR, storiesR, readingR] = await Promise.allSettled([
+	const [articlesR, storiesR, readingR, findingsR] = await Promise.allSettled([
 		getAllBlogArticles(fetch),
 		getAllCustomerStories(fetch),
 		getAllReadingListArticles(fetch),
+		getAllFindings(fetch),
 	]);
 	const articles = articlesR.status === "fulfilled" ? articlesR.value : [];
 	const stories = storiesR.status === "fulfilled" ? storiesR.value : [];
 	const readingList = readingR.status === "fulfilled" ? readingR.value : [];
+	const findings = findingsR.status === "fulfilled" ? findingsR.value : [];
 
 	const lines: string[] = [
 		"# Lightning Jar",
@@ -94,6 +97,16 @@ export const GET: RequestHandler = async ({ fetch }) => {
 	lines.push("", "## Reading List", "");
 	for (const e of readingList) {
 		lines.push(`- [${e.title}](${BASE}/reading-list/${e.slug}): ${e.excerpt}`);
+	}
+
+	if (findings.length) {
+		lines.push("", "## Findings", "");
+		for (const f of findings) {
+			const label = f.number ? `No. ${f.number}: ${f.title}` : (f.title ?? "");
+			lines.push(
+				`- [${label}](${BASE}/findings/${f.slug}): ${f.description ?? ""}`,
+			);
+		}
 	}
 
 	lines.push("", "## Packages & Tools", "");

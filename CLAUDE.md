@@ -53,6 +53,13 @@ editor goes live without a redeploy:
   the replicator editor's frontmatter/JSON surfaces. Each entry has a
   detail page at `/reading-list/[slug]` (summary + outbound link);
   internal links should target those, not the source URL.
+- **Findings**: collection `findings`, Findings blog entity
+  (`getFindings.ts`, `FINDINGS_API_KEY`). Short numbered field notes
+  (`Finding` shape: number/area/project/verified/environment in
+  frontmatter, prose in the markdown body) at `/findings` and
+  `/findings/[slug]`. Until the entity + key exist, every getter
+  degrades to empty (keys not starting with `blogk_` are ignored), so
+  the surface is safe to deploy pre-mint.
 - Markdown from the CMS is parsed locally by `parseMarkdown()` so
   rendering stays under this repo's control. Draft previews:
   `/blog/preview/[token]` (client-rendered, token-authed, works for

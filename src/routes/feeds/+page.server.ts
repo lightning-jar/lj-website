@@ -41,6 +41,12 @@ export function load() {
 				description:
 					"Curated articles from around the web, with our summaries.",
 			},
+			{
+				href: "/findings/atom.xml",
+				title: "Findings",
+				description:
+					"Short, numbered field notes from production work: one verified platform lesson per entry, with the receipt.",
+			},
 		],
 		meta: {
 			title: "Feeds",

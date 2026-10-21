@@ -25,6 +25,7 @@ const productionUrl =
 // get data for blog + customer stories + reading list
 import { getAllBlogArticleSlugs } from "$content/getters/getBlogArticles";
 import { getAllCustomerStorySlugs } from "$content/getters/getCustomerStories";
+import { getAllFindingsSlugs } from "$content/getters/getFindings";
 import { allPackages } from "$content/getters/getPackagesContent";
 import { getAllReadingListSlugs } from "$content/getters/getReadingList";
 import { allTechnologies } from "$content/getters/getTechnologiesContent";
@@ -90,6 +91,7 @@ const staticPages = [
 	generateSiteMapXMLPage(`/built-with`, "monthly", 0.25), // built with
 	generateSiteMapXMLPage(`/customer-stories`, "monthly", 0.25), // customer stories landing page
 	generateSiteMapXMLPage(`/reading-list`, "monthly", 0.25), // reading list landing page
+	generateSiteMapXMLPage(`/findings`, "weekly", 0.25), // findings series landing page
 	generateSiteMapXMLPage(`/services`, "monthly", 0.25), // services landing page
 	generateSiteMapXMLPage(`/packages`, "monthly", 0.25), // packages & tools landing page
 	...allPackages.map((pkg) =>
@@ -106,6 +108,7 @@ const staticPages = [
 	generateSiteMapXMLPage(`/blog/atom.xml`, "weekly", 0.25),
 	generateSiteMapXMLPage(`/customer-stories/atom.xml`, "weekly", 0.25),
 	generateSiteMapXMLPage(`/reading-list/atom.xml`, "weekly", 0.25),
+	generateSiteMapXMLPage(`/findings/atom.xml`, "weekly", 0.25),
 	generateSiteMapXMLPage(`/research/barkup-bench/atom.xml`, "weekly", 0.25),
 	generateSiteMapXMLPage(`/research/aeo-bench/atom.xml`, "weekly", 0.25),
 ] as SitemapXMLPage[];
@@ -125,11 +128,15 @@ export const GET: RequestHandler = async ({ fetch }) => {
 		const readingListPages = (await getAllReadingListSlugs(fetch)).map((slug) =>
 			generateSiteMapXMLPage(`/reading-list/${slug}`, "monthly", 0.25),
 		);
+		const findingsPages = (await getAllFindingsSlugs(fetch)).map((slug) =>
+			generateSiteMapXMLPage(`/findings/${slug}`, "monthly", 0.25),
+		);
 		const pages = [
 			...staticPages,
 			...blogArticlePages,
 			...customerStoryPages,
 			...readingListPages,
+			...findingsPages,
 		] as SitemapXMLPage[];
 		const sorted = pages.sort((a, b) => a.path.localeCompare(b.path));
 		return new Response(generateSiteMapXML(sorted), {

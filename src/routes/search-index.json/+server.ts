@@ -5,6 +5,7 @@ import type { RequestHandler } from "./$types";
 
 import { getAllBlogArticles } from "$content/getters/getBlogArticles";
 import { getAllCustomerStories } from "$content/getters/getCustomerStories";
+import { getAllFindings } from "$content/getters/getFindings";
 import { allPackages } from "$content/getters/getPackagesContent";
 import { getAllReadingListArticles } from "$content/getters/getReadingList";
 import { allTechnologies } from "$content/getters/getTechnologiesContent";
@@ -22,14 +23,16 @@ const blurb = (text: string | undefined | null) => (text ?? "").slice(0, 200);
 export const GET: RequestHandler = async ({ fetch }) => {
 	// CMS sources degrade to empty on failure — a search index without
 	// the blog is better than no search at all
-	const [articlesR, storiesR, readingR] = await Promise.allSettled([
+	const [articlesR, storiesR, readingR, findingsR] = await Promise.allSettled([
 		getAllBlogArticles(fetch),
 		getAllCustomerStories(fetch),
 		getAllReadingListArticles(fetch),
+		getAllFindings(fetch),
 	]);
 	const articles = articlesR.status === "fulfilled" ? articlesR.value : [];
 	const stories = storiesR.status === "fulfilled" ? storiesR.value : [];
 	const readingList = readingR.status === "fulfilled" ? readingR.value : [];
+	const findings = findingsR.status === "fulfilled" ? findingsR.value : [];
 
 	const records: SearchRecord[] = [
 		// standalone pages worth surfacing in search (no getter feeds these)
@@ -148,6 +151,21 @@ export const GET: RequestHandler = async ({ fetch }) => {
 				blurb: blurb(entry.summary ?? entry.excerpt),
 				tags: entry.tags ?? [],
 				url: `/reading-list/${entry.slug}`,
+			}),
+		),
+		...findings.map(
+			(finding): SearchRecord => ({
+				type: "finding",
+				title: finding.number
+					? `No. ${finding.number}: ${finding.title ?? ""}`
+					: (finding.title ?? ""),
+				blurb: blurb(finding.description),
+				tags: [
+					finding.area ?? "",
+					finding.project ?? "",
+					...(finding.tags ?? []),
+				].filter(Boolean),
+				url: `/findings/${finding.slug}`,
 			}),
 		),
 		...allTechnologies.map(

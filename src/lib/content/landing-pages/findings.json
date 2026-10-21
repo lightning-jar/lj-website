@@ -1,0 +1,12 @@
+{
+	"banner": {
+		"heading": "Findings",
+		"subheading": "Short, numbered field notes from our production work: one verified platform lesson per entry, stated as a claim and backed by a receipt."
+	},
+	"meta": {
+		"title": "Findings",
+		"description": "The Lightning Jar Findings series: short, numbered field notes from production work. Each entry is one verified platform lesson with the symptom, the cause, the fix, and the receipt.",
+		"robotsFollow": true,
+		"analyticsOn": true
+	}
+}

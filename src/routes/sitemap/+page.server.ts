@@ -1,6 +1,7 @@
 import { getBlogArticlesSitemapSection } from "$content/getters/getBlogArticles";
 import { builtWithSitemapSection } from "$content/getters/getBuiltWithContent";
 import { getCustomerStoriesSitemapSection } from "$content/getters/getCustomerStories";
+import { getFindingsSitemapSection } from "$content/getters/getFindings";
 import { homeSitemapSection } from "$content/getters/getHomeContent";
 import { packagesSitemapSection } from "$content/getters/getPackagesContent";
 import { getReadingListSitemapSection } from "$content/getters/getReadingList";
@@ -157,7 +158,7 @@ const sitemapSection = {
 			href: "/feeds",
 			title: "Feeds",
 			description:
-				"All five Atom feeds, described: everything combined, blog, customer stories, research, and reading list.",
+				"All of the site's Atom feeds, described: everything combined, blog, customer stories, research, reading list, and findings.",
 			date: "",
 		},
 	],
@@ -174,10 +175,11 @@ export const load = async ({ fetch, setHeaders }) => {
 	// CMS-backed sections degrade to empty on failure; the rest of the
 	// sitemap (static + git content) always serves
 	const empty = (name: string) => ({ name, pages: [] });
-	const [blogR, storiesR, readingR] = await Promise.allSettled([
+	const [blogR, storiesR, readingR, findingsR] = await Promise.allSettled([
 		getBlogArticlesSitemapSection(fetch),
 		getCustomerStoriesSitemapSection(fetch),
 		getReadingListSitemapSection(fetch),
+		getFindingsSitemapSection(fetch),
 	]);
 	const blogSection =
 		blogR.status === "fulfilled" ? blogR.value : empty("Blog");
@@ -187,6 +189,8 @@ export const load = async ({ fetch, setHeaders }) => {
 			: empty("Customer Stories");
 	const readingSection =
 		readingR.status === "fulfilled" ? readingR.value : empty("Reading List");
+	const findingsSection =
+		findingsR.status === "fulfilled" ? findingsR.value : empty("Findings");
 
 	const sitemap = [
 		homeSitemapSection,
@@ -194,6 +198,7 @@ export const load = async ({ fetch, setHeaders }) => {
 		aboutSection,
 		funSection,
 		researchSection,
+		findingsSection,
 		blogSection,
 		builtWithSitemapSection,
 		storiesSection,
