@@ -3,7 +3,7 @@
 	"totals": {
 		"studiesDisplay": "50",
 		"studiesSpelled": "fifty",
-		"scoredRunsDisplay": "39,326",
+		"scoredRunsDisplay": "39,406",
 		"modelsDisplay": "10",
 		"modelsSpelled": "ten"
 	},
@@ -24,7 +24,7 @@
 	"stemBench": {
 		"studiesDisplay": "1",
 		"studiesSpelled": "one",
-		"scoredRunsDisplay": "320",
+		"scoredRunsDisplay": "400",
 		"modelsDisplay": "5",
 		"modelsSpelled": "five"
 	}
