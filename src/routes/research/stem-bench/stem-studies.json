@@ -1,0 +1,76 @@
+{
+	"studies": [
+		{
+			"slug": "1",
+			"letters": "1",
+			"track": "The chart-draft pipeline",
+			"title": "The hint-following study: models that can read the notes don't copy the hint",
+			"eyebrow": "Study 1 · the chart-draft pipeline · 320 cells",
+			"indexLine": "Stem Shovel's chart draft shows a model each bar's transcribed notes plus a free template matcher's chord guess. Across 320 cells on 440 seeded bars, the frontier models copied a systematically wrong hint zero times between them, while kimi-k2.6 surrendered 69% of the bars it could read correctly on its own; the shipped configuration (fable-5-1 plus the hint) scored 99.8%, 9.3 points over the free matcher alone, at about $0.10 a draft.",
+			"sections": [
+				{
+					"id": "sec-stem-study1",
+					"eyebrow": "The chart-draft pipeline",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s1",
+					"figure": {
+						"id": "fig-flip",
+						"title": "Wrong-Hint Flip Rate by Model"
+					},
+					"table": {
+						"id": "tbl-matrix",
+						"summary": "Bar accuracy per arm, hint-copy and flip rates, disclosure, and spend"
+					},
+					"body": [
+						{
+							"heading": "The Question",
+							"html": "<a href=\"https://www.stemshovel.com\">Stem Shovel</a>, Lightning Jar's music collaboration app, drafts a chord chart for a band by showing a model what Spotify's Basic Pitch transcriber heard in each bar of their recording, plus a free template matcher's per-bar chord guess in brackets. The prompt calls the guess \"a hint, not an answer,\" but nobody knew whether the model reads the noisy notes or copies the hint. If it mostly copies, the frontier call is laundering a free heuristic's output; if it mostly reads, wrong hints should barely hurt. Study 1 made the question answerable by construction: 16 hand-authored songs (440 bars, known chords), synthesized to audio, transcribed by the production pipeline with its exact model files and thresholds, and drafted under four arms that vary only the hint: none, the production matcher's, the truth, and a systematically wrong transform (root up a perfect fourth, quality kept)."
+						},
+						{
+							"heading": "Ground Truth by Construction",
+							"html": "Every prompt text is the production app's verbatim, pinned by test; grading is mechanical (same root pitch class, same canonical quality, enharmonics equal) and committed before any scored run. The free template matcher's own baseline, known at registration, is 90.5% (398 of 440 bars), with a weakness it earns honestly: on the study's power-chord song its bare-fifth penalty names root-plus-fifth bars as major or sus chords and scores 3 of 28. Five models ran the full 64-cell grid: the production draft model claude-fable-5-1, the pilot gemini-3.5-flash, gpt-oss-120b, haiku-4.5, and kimi-k2.6."
+						},
+						{
+							"heading": "The Gradient",
+							"html": "The registered headline number is the flip rate: of the bars a model answered correctly with no hint at all, how many did it surrender to a wrong hint? The answer is a capability gradient, not a universal. The two strongest models never flipped a single bar: zero copied roots in 438 chances each, roughly 850 combined. gpt-oss-120b flipped 22.6%, and bimodally: in two songs it surrendered to the wrong hints wholesale (0 of 32 and 0 of 28) while reading the rest clean. haiku-4.5 flipped 49.5% and kimi-k2.6 flipped 69.1%. The registered prediction got the shape right and the universality wrong: it expected wrong hints to hurt every model, and they did not hurt the strong ones at all."
+						},
+						{
+							"heading": "Hints Carry Notation, Not Pitch",
+							"html": "The pilot model showed why wrong hints can even help a strong reader. On the power-chord song with no hint, gemini wrote the right roots in the wrong spelling (plain majors instead of fifth chords) and scored 4 of 28 under strict grading. Shown wrong-rooted hints that carried the \"5\" suffix convention, it wrote the right roots in the right spelling: 28 of 28. The hint acted as a style guide, never as a source of pitches. fable-5-1 went one better on honesty: shown wrong hints, it flagged the disagreement with the matcher in its notes field in 11 of 16 songs. kimi flagged zero."
+						},
+						{
+							"heading": "The Production Design Holds, and Nothing Cheaper Does",
+							"html": "The shipped configuration (notes plus the matcher's hint) was the best arm for every model, and for the production model it hit 99.8% bar accuracy, 9.3 points over the free matcher alone, at about $0.10 a draft. The same configuration rescued the cheap models without saving them: haiku rose 38 points to 87.5% and kimi 47 points to 75.5%, both still below the bare matcher's own 90.5%. Reading noisy transcription with no help at all, only the frontier tier beat the free heuristic (gemini 94.1%, fable 98.5% on answered cells). The model choice behind Stem Shovel's chart draft now rests on a measured number instead of a vibe."
+						},
+						{
+							"heading": "The Letters, Honestly",
+							"html": "The registered gate asked for a significant correct-hint lift in the pilot model and in the pooled matrix. The pooled matrix passed decisively (37.7 points, p &lt; 0.00005); the pilot clause failed by letter at p = 1.0, because the pilot model was at ceiling everywhere but one song and a paired test with one informative pair cannot reach significance at any effect size. The gate fails as written and both readings are published. One protocol amendment was committed before any affected scored cell: haiku rejects the production thinking settings outright, and kimi with default reasoning spent its entire output budget thinking in 62 of 64 cells, burning $8.70 to produce no JSON, which independently reproduces the reasoning-off lesson already hard-coded in Stem Shovel's own text-to-beat path. The archived failure is published as evidence. One more artifact is on record: a single prompt that deterministically returns an empty completion from fable (zero output tokens, reproduced), scored 0 of 28 under the registered no-retry rule."
+						},
+						{
+							"heading": "What This Licenses",
+							"html": "For Stem Shovel: keep the hint line and keep the frontier draft model; the hint is free accuracy for fable and poison only in the hands of models the product does not use. Two specific fixes went back to the app's FINDINGS file: the matcher's bare-fifth penalty mis-names power-chord bars the draft model then has to rescue, and a one-retry-on-empty guard would close the deterministic empty-completion edge. For everyone else: hint-following under pressure is a measurable, strongly tiered property, and a scaffold that is safe decoration for a frontier model can quietly become the answer sheet for a cheap one."
+						}
+					]
+				}
+			],
+			"published": "2026-10-21",
+			"related": [
+				{
+					"title": "Stem Shovel, the product under test",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "AEO Bench, the sibling program",
+					"href": "/research/aeo-bench"
+				},
+				{
+					"title": "Barkup Bench, the sibling program",
+					"href": "/research/barkup-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY1.md",
+			"quote": "Zero copied roots in roughly 850 chances on the frontier tier; the cheapest model surrendered 69% of the bars it could read on its own."
+		}
+	]
+}

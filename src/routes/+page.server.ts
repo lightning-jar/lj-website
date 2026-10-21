@@ -7,6 +7,7 @@ import { getAllReadingListArticles } from "$content/getters/getReadingList";
 
 import aeoStudies from "./research/aeo-bench/aeo-studies.json";
 import benchStudies from "./research/barkup-bench/bench-studies.json";
+import stemStudies from "./research/stem-bench/stem-studies.json";
 
 // Request-time (not prerendered): the Latest tiles stay current with
 // the CMS between deploys, and hooks.server.ts can answer
@@ -82,6 +83,14 @@ export async function load({ fetch, setHeaders }) {
 			published: study.published,
 			project: "AEO",
 			projectSlug: "aeo-bench",
+		})),
+		...stemStudies.studies.map((study) => ({
+			slug: study.slug,
+			letters: study.letters,
+			title: study.title,
+			published: study.published,
+			project: "Stem",
+			projectSlug: "stem-bench",
 		})),
 	]
 		.map((study, order) => ({ ...study, order }))

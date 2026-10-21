@@ -19,6 +19,13 @@ const projects = [
 		status: "Active",
 		summary: `An open, pre-registered benchmark series measuring how large language models read and edit structured document trees. ${studiesSentenceCase} studies, more than ${researchStats.barkupBench.scoredRunsDisplay} scored model runs, ${researchStats.barkupBench.modelsSpelled} models, trees from 5 to 1,000 nodes, sessions up to 36 edits. Results published as found, corrections included; every finding shipped into the open-source barkup library.`,
 	},
+	{
+		name: "Stem Bench",
+		slug: "stem-bench",
+		status: "Active",
+		summary:
+			"An open, pre-registered benchmark series measuring the AI features of Stem Shovel, Lightning Jar's music collaboration app. Study 1: 320 scored cells across five models asking whether a chart-drafting model reads the transcribed notes or copies a heuristic hint, with ground truth by construction. Results published as found, failed gate letters included.",
+	},
 ];
 
 export function load() {

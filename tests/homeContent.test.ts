@@ -11,6 +11,7 @@ describe("home content interpolation", () => {
 			researchStats.totals,
 			researchStats.barkupBench,
 			researchStats.aeoBench,
+			researchStats.stemBench,
 		]) {
 			expect(block.studiesSpelled).toMatch(/^[a-z-]+$/);
 			expect(block.scoredRunsDisplay).toMatch(/^[\d,]+$/);

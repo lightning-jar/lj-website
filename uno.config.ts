@@ -16,6 +16,7 @@ export default defineConfig({
 				/\.(svelte|md|json|html)($|\?)/,
 				/barkup-bench\/bench-charts\.js$/,
 				/aeo-bench\/aeo-charts\.js$/,
+				/stem-bench\/stem-charts\.js$/,
 			],
 		},
 		filesystem: ["./src/app.html"],
