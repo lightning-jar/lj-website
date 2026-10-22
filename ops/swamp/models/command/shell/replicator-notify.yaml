@@ -1,0 +1,43 @@
+# Email alerts via replicator's notify-ops-failure.ts (Resend) — lj-website
+# has no server email of its own, so ops alerts borrow the sibling repo's
+# wired, tested path. Runs through replicator's varlock env so the Resend
+# key resolves there, never here.
+type: command/shell
+typeVersion: 2026.02.09.1
+id: 02118956-a5f0-410e-8e71-b7c6e14bfd66
+name: replicator-notify
+version: 1
+tags:
+  repo: lj-website
+  layer: ops
+
+globalArguments:
+  replicatorDir: /home/exedev/projects/replicator
+
+methods:
+  execute:
+    arguments:
+      # subject/body are interpolated inside double quotes — spaces,
+      # parens, and colons in the inputs must not reach sh unquoted
+      # (live-fire caught exactly that: `sh: Syntax error: "(" unexpected`).
+      # Keep double quotes OUT of the input strings themselves.
+      run: >-
+        APP_ENV=development bunx varlock run -- bun
+        scripts/notify-ops-failure.ts --subject="${{ inputs.subject }}"
+        --body="${{ inputs.body }}"
+      workingDir: "${{ self.globalArguments.replicatorDir }}"
+      timeout: 120000
+      ignoreExitCode: false
+
+inputs:
+  type: object
+  properties:
+    subject:
+      type: string
+      description: Email subject line
+    body:
+      type: string
+      description: Email body (plain sentence or two)
+  required:
+    - subject
+    - body

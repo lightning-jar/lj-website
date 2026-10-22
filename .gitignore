@@ -27,3 +27,4 @@ vite.config.ts.timestamp-*
 # Sentry Config File
 .env.sentry-build-plugin
 .env*.local
+ops/sweep-state.json

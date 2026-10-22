@@ -1,0 +1,40 @@
+# Runs an lj-website repo script under bun from the repo root. The
+# findings-sweep probe is the first consumer; exit semantics are the
+# script's own (sweep: 0 = nothing new / baseline, 3 = new claims,
+# 1 = probe error) and land in the result data either way.
+type: command/shell
+typeVersion: 2026.02.09.1
+id: f21e5946-0cd5-41ae-a4af-e41dd271810e
+name: lj-ops-script
+version: 1
+tags:
+  repo: lj-website
+  layer: ops
+
+globalArguments:
+  repoDir: /home/exedev/projects/lj-website
+
+methods:
+  execute:
+    arguments:
+      run: "bun run ${{ inputs.script }} ${{ inputs.args }}"
+      workingDir: "${{ self.globalArguments.repoDir }}"
+      timeout: 300000
+      ignoreExitCode: "${{ inputs.ignoreExitCode }}"
+
+inputs:
+  type: object
+  properties:
+    script:
+      type: string
+      description: Repo-relative script path (e.g. scripts/findings-sweep.ts)
+    args:
+      type: string
+      description: Extra CLI flags for the script
+      default: ""
+    ignoreExitCode:
+      type: boolean
+      description: Treat nonzero exit as success (exit code still lands in result data)
+      default: true
+  required:
+    - script

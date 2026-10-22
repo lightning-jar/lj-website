@@ -1,0 +1,88 @@
+# Findings-series source sweep — weekly detect-and-report. Runs the
+# repo's findings-sweep probe (extracts finding-shaped claims from the
+# source corpora, diffs against the last snapshot) and emails a digest
+# pointer when new unharvested claims appear. Publishing stays human:
+# this workflow never writes to the CMS. A probe that fails silently
+# would be theater, so a broken probe emails too.
+id: 6f2096bd-1f14-47de-94d4-2d4f8556beb1
+name: findings-sweep
+description: Weekly sweep of finding-shaped source corpora — email digest on new claims
+version: 1
+tags:
+  team: lj-website
+  pattern: monitoring
+trigger:
+  schedule: "30 6 * * 1"
+
+inputs:
+  type: object
+  properties:
+    sweepScript:
+      type: string
+      default: scripts/findings-sweep.ts
+  required: []
+
+jobs:
+  - name: sweep
+    steps:
+      - name: run-sweep
+        task:
+          type: behavior
+          behavior: lj-ops-script
+          methodName: execute
+          inputs:
+            script: "${{ inputs.sweepScript }}"
+            args: ""
+            ignoreExitCode: true
+        dataOutputOverrides:
+          - specName: result
+            lifetime: 90d
+            tags:
+              audit: findings-sweep
+
+      - name: assert-nothing-new
+        dependsOn:
+          - step: run-sweep
+            condition:
+              type: succeeded
+        task:
+          type: assert
+          expr: data.latest("lj-ops-script", "result").content.exitCode == 0
+          message: "New finding-shaped claims detected in the source corpora — see the run-sweep log for the digest; an email was dispatched."
+          severity: low
+
+      - name: notify-new-candidates
+        dependsOn:
+          - step: assert-nothing-new
+            condition:
+              type: failed
+        allowFailure: true
+        task:
+          type: behavior
+          behavior: replicator-notify
+          methodName: execute
+          inputs:
+            subject: "Findings sweep: new source claims to review"
+            body: >-
+              The weekly findings sweep found new finding-shaped claims in
+              the source corpora (stem-shovel FINDINGS.md / woof-editor
+              CHANGELOG). Digest: swamp workflow history findings-sweep
+              (from ~/projects/lj-website/ops/swamp under varlock), or ask
+              the lj-website agent to draft the new entries.
+
+      - name: notify-probe-broken
+        dependsOn:
+          - step: run-sweep
+            condition:
+              type: failed
+        allowFailure: true
+        task:
+          type: behavior
+          behavior: replicator-notify
+          methodName: execute
+          inputs:
+            subject: "Findings sweep PROBE ERROR"
+            body: >-
+              The findings-sweep probe itself failed to run (missing source
+              file or setup error, not a content verdict). Inspect: swamp
+              workflow history findings-sweep on lj-bench.
