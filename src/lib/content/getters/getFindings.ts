@@ -53,9 +53,12 @@ function apiKeyOrNull(): string | null {
 export async function getAllFindings(fetch: Fetch): Promise<Finding[]> {
 	const key = apiKeyOrNull();
 	if (!key) return [];
+	// No collection param: replicator's collection registry doesn't know
+	// "findings" (yet) and the per-blog key already scopes requests to
+	// the Findings blog entity.
 	const data = await cmsJson<{ articles: ApiFindingListItem[] }>(
 		fetch,
-		`${apiBase()}/api/public/blog/articles?collection=findings&limit=500`,
+		`${apiBase()}/api/public/blog/articles?limit=500`,
 		{ "x-api-key": key },
 	);
 	return data.articles
@@ -77,7 +80,7 @@ export async function getFindingBySlug(
 	if (!key || !slug) return undefined;
 	const data = await cmsJson<{ article: ApiFindingDetail } | null>(
 		fetch,
-		`${apiBase()}/api/public/blog/articles/${encodeURIComponent(slug)}?collection=findings`,
+		`${apiBase()}/api/public/blog/articles/${encodeURIComponent(slug)}`,
 		{ "x-api-key": key },
 		null,
 	);
