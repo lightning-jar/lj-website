@@ -7659,6 +7659,205 @@ export function initBenchCharts() {
 		);
 	})();
 
+	// --- Study AT: verify-loop uplift on its own judging metric ---
+	(() => {
+		const ROWS = [
+			{
+				arm: "AS loop",
+				v: 0.007,
+				color: "#8b93a3",
+				tip: "the Study AS baseline: median +0.007 on the metric that judged it, corrections kept on 1/16 pages, 43% of wall-clock",
+			},
+			{
+				arm: "AT-brand",
+				v: 0.017,
+				color: "#3987e5",
+				tip: "median structure uplift +0.017, corrections kept on 11/16 pages, max kept gain +0.112 · the dark cover's structure climbed 0.626 to 0.738 while appearance sat at 0.007: the decoupling proven",
+			},
+			{
+				arm: "AT-match",
+				v: 0.026,
+				color: "#199e70",
+				tip: "median structure uplift +0.026, corrections kept on 12/16 pages, max kept gain +0.098 · verify wall-clock share 39% vs AS's 43%",
+			},
+		];
+		const CBAR = "#e66767";
+		byId("legend-36").innerHTML =
+			'<span class="key"><span class="chip" style="background:#8b93a3"></span>AS baseline loop</span>' +
+			'<span class="key"><span class="chip" style="background:#3987e5"></span>AT-brand (default org theme)</span>' +
+			'<span class="key"><span class="chip" style="background:#199e70"></span>AT-match (source colors)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CBAR +
+			'"></span>registered AT-G3 bar (+0.03)</span>' +
+			legendNote(
+				"median uplift per corrected page on the metric that judges each loop (AS: appearance; AT: the new palette-blind structure score) · both AT arms miss the +0.03 bar narrowly, a bar guessed with no prior structure-uplift data, while beating AS's loop 2.4 to 3.7 times",
+			);
+		const W = 880,
+			BAR = 16,
+			GPAD = 12,
+			T = 8,
+			B = 42,
+			L = 150,
+			R = 84;
+		const H = T + ROWS.length * (BAR + GPAD) + B;
+		const iw = W - L - R;
+		const max = 0.04;
+		const xOf = (v) => L + (v / max) * iw;
+		let g = "";
+		for (const tick of [0, 0.02, 0.04]) {
+			const x = xOf(tick);
+			g +=
+				'<line x1="' +
+				x +
+				'" x2="' +
+				x +
+				'" y1="' +
+				T +
+				'" y2="' +
+				(H - B) +
+				'" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>';
+			g +=
+				'<text class="chart-tick" x="' +
+				x +
+				'" y="' +
+				(H - B + 20) +
+				'" text-anchor="middle">+' +
+				tick.toFixed(2) +
+				"</text>";
+		}
+		const bx = xOf(0.03);
+		g +=
+			'<line x1="' +
+			bx +
+			'" x2="' +
+			bx +
+			'" y1="' +
+			T +
+			'" y2="' +
+			(H - B) +
+			'" stroke="' +
+			CBAR +
+			'" stroke-width="1.5" stroke-dasharray="5 4"/>';
+		g +=
+			'<text fill="' +
+			CBAR +
+			'" font-size="11" x="' +
+			bx +
+			'" y="' +
+			(H - B + 34) +
+			'" text-anchor="middle">+0.03 bar</text>';
+		let marks = "",
+			hits = "";
+		ROWS.forEach((row, i) => {
+			const y = T + i * (BAR + GPAD);
+			g +=
+				'<text class="chart-tick" x="' +
+				(L - 12) +
+				'" y="' +
+				(y + BAR - 3) +
+				'" text-anchor="end">' +
+				row.arm +
+				"</text>";
+			const w = Math.max((row.v / max) * iw, 2);
+			marks +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				y +
+				'" width="' +
+				w +
+				'" height="' +
+				BAR +
+				'" fill="' +
+				row.color +
+				'" rx="3"/>';
+			marks +=
+				'<text fill="#c3c9d4" font-size="11" x="' +
+				(L + w + 8) +
+				'" y="' +
+				(y + BAR - 4) +
+				'">+' +
+				row.v.toFixed(3) +
+				"</text>";
+			hits +=
+				'<rect x="' +
+				L +
+				'" y="' +
+				y +
+				'" width="' +
+				iw +
+				'" height="' +
+				BAR +
+				'" fill="transparent" data-tip="' +
+				esc(row.arm + "\n" + row.tip) +
+				'"/>';
+		});
+		const el = byId("fig-at");
+		el.innerHTML =
+			'<svg viewBox="0 0 ' +
+			W +
+			" " +
+			H +
+			'" role="img" aria-label="Bar chart of median verify-loop uplift per corrected page on each loop\'s own judging metric: plus 0.007 for the Study AS appearance-judged loop, plus 0.017 for AT-brand, and plus 0.026 for AT-match, both structure-judged, against a registered bar of plus 0.03 that both AT arms narrowly miss.">' +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the rebuilt loop moves the metric that judges it 2.4 to 3.7 times further than AS's loop moved its own, keeps corrections on 11 to 12 of 16 pages against AS's 1, and still fails its registered bar narrowly: an honest miss against a threshold guessed before any structure-uplift data existed",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-at",
+			["cell", "AS (frozen baseline)", "AT-brand", "AT-match"],
+			[
+				["completions", "12/12", "12/12 · AT-G1 PASS", "12/12 · AT-G1 PASS"],
+				[
+					"fallback widgets (AT-G4)",
+					"0 in 85 builds",
+					"0 in 168 builds across both arms · PASS",
+					"counted with brand",
+				],
+				[
+					"median appearance fidelity (16 pages)",
+					"0.634",
+					"0.618 · AT-G5 PASS (within the registered 0.03 no-harm bound)",
+					"0.634",
+				],
+				[
+					"median uplift on the loop's own judging metric",
+					"+0.007 (appearance)",
+					"+0.017 (structure)",
+					"+0.026 (structure)",
+				],
+				[
+					"registered uplift bar",
+					"+0.050 · FAIL (AS-G3)",
+					"+0.030 · FAIL, narrowly",
+					"+0.030 · FAIL, narrowly",
+				],
+				["pages where corrections survived", "1/16", "11/16", "12/16"],
+				["max kept gain", "n/a", "+0.112", "+0.098"],
+				[
+					"AT-G2 recovery hypothesis (registered: ≥ 12/16 vs frozen AS)",
+					"baseline",
+					"n/a",
+					"4/16 · FAIL (10/16 vs the contemporaneous brand arm)",
+				],
+				[
+					"the dark cover page",
+					"appearance 0.002",
+					"appearance 0.007 · structure 0.626 → 0.738",
+					"appearance 0.002: palette extraction flawless, nothing paints the page surface",
+				],
+				["verify wall-clock share", "43%", "41%", "39%"],
+			],
+		);
+	})();
+
 	// Every legend gets a "Legend" label as its first child — a styled
 	// paragraph, not a heading, so legends don't skip levels in the
 	// document outline. Runs after the builders above have set each

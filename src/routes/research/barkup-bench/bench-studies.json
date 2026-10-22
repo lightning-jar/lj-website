@@ -2012,6 +2012,74 @@
 			],
 			"brief": "BRIEF-AS.md",
 			"quote": "The dark cover page scored 0.002 not because the pipeline failed but because it obeyed: the lint re-brands foreign palettes, and the metric calls that obedience a total mismatch."
+		},
+		{
+			"slug": "at",
+			"letters": "AT",
+			"track": "Whole-system baselines",
+			"title": "The AS interventions, measured: the re-branding penalty was concentrated, not pervasive, and the study corrects its own story",
+			"eyebrow": "Study AT · the AS interventions · 2 arms, 32 scored pages, paired against the frozen AS records",
+			"indexLine": "Replicator shipped all three Study AS interventions the same evening (structure-judged verify, theme-from-source, brand-mode steering), and AT measured them on the frozen AS corpus: the recovery gate failed 4/16 and thereby corrected AS's own published reading (the re-branding penalty lives on dark surfaces; light pages move only hundredths; the dark cover stayed 0.002 because nothing paints the page surface), while the rebuilt verify loop kept corrections on 11 to 12 of 16 pages against AS's 1 and moved its own metric 2.4 to 3.7 times further, just under a bar that was guessed with no prior data.",
+			"sections": [
+				{
+					"id": "sec-at",
+					"eyebrow": "Whole-system baselines",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-36",
+					"figure": {
+						"id": "fig-at",
+						"title": "Verify-Loop Median Uplift on Its Own Judging Metric, Against the Registered Bar"
+					},
+					"table": {
+						"id": "tbl-at",
+						"summary": "Paired gate verdicts, fidelity medians, loop economics, and the dark-cover diagnosis across AS and both AT arms"
+					},
+					"body": [
+						{
+							"heading": "The Same-Evening Sequel",
+							"html": "Study AS named three fixes and replicator shipped all three before the night was out (v3.270.0 to v3.272.0): a palette-blind structure score that now gates and judges the verify loop, with a diminishing-returns stop and a re-branding disclosure in the product; an opt-in Match source colors import that derives a versioned theme from the PDF's deterministically extracted palette; and a brand-mode-aware critic and corrector. AT measured all three on the frozen AS corpus, paired page by page against the frozen AS records, with every quality gate registered comparatively per the Study AR lesson. Two full corpus passes (AT-brand, the default org-theme policy on the upgraded pipeline, and AT-match with source colors on): 24 items, 32 scored pages, 24 of 24 completions, zero fallback widgets in 168 builds, zero invariant violations, cleanup spotless including the twelve imported themes."
+						},
+						{
+							"heading": "The Failure That Corrects the Last Study",
+							"html": "AS read its fidelity gap as genuine layout deficits conflated with a pervasive re-branding penalty, and AT registered the recovery hypothesis that reading implies: match-colors should beat the frozen baseline on at least 12 of 16 paired pages. Reality returned 4 of 16. The penalty is real but concentrated: on the fifteen light-background pages, org-theme and source-palette renderings differ by appearance deltas of 0.01 to 0.07, and only the dark full-bleed cover was catastrophic. That cover stayed at 0.002 in the match arm, and the diagnosis is the study's sharpest sentence: palette extraction was flawless (the theme carries exactly the right dark green and gold), but nothing paints the page surface with them; the widgets sit on a white page, because page-background painting is an assembly-level decision that does not exist yet. The corrected story: the dominant residual gap is layout and density, not color policy, and until the paint step ships, Match source colors changes accents and tints, not page surfaces."
+						},
+						{
+							"heading": "The Loop Now Moves Its Own Metric, Just Under the Bar",
+							"html": "AS's verify loop managed +0.007 median uplift on the metric that judged it and kept corrections on one page in sixteen. The rebuilt loop, judged by structure, kept corrections on 11 of 16 pages (brand) and 12 of 16 (match), with median structure uplift +0.017 and +0.026 and maximum kept gains of +0.112 and +0.098, zero keep-best violations in either arm. The registered bar was +0.03, so AT-G3 fails narrowly on both arms, an honest miss against a bar guessed with no prior structure-uplift data. The decoupling the design wanted is proven in one cell: the dark cover's structure climbed 0.626 to 0.738 while its appearance sat at 0.007. Verify wall-clock share eased only slightly (41 and 39 percent against AS's 43), because first-iteration gains were mostly either kept and large or reverted."
+						},
+						{
+							"heading": "No Harm, and the Numbers That Did Not Move",
+							"html": "AT-G5 closed the main risk of swapping the judging metric: under unchanged color policy, the brand arm's median appearance fidelity is 0.618 against AS's 0.634, inside the registered 0.03 no-harm bound, so judging by structure did not buy structure by visibly spending appearance. Overall fidelity medians are otherwise flat (0.634 AS, 0.618 brand, 0.634 match), and flat is the expected reading: these waves fixed measurement, loop economics, and policy options, not layout generation. The machinery gates held their AS form, 12 of 12 completions in each arm and zero fallbacks."
+						},
+						{
+							"heading": "The Register-Comparative Lesson, Again",
+							"html": "Two methodological notes earned their place in the series' running curriculum. Cross-run pairing is noisy: against the contemporaneous brand arm, match-colors wins 10 of 16 pages, against the frozen AS records only 4 of 16, because run-to-run build stochasticity swamps small per-page deltas; the cleaner contemporaneous pairing is the one AR's lesson prescribes. And AT-G2's threshold was set under the narrative assumption Study AS published, which this study then refuted. A gate that can lose to the data is the system working."
+						},
+						{
+							"heading": "What This Feeds",
+							"html": "The roadmap order after AT is explicit. First, the deterministic page-background paint at assemble: when a source page's extracted background is non-white, set the page root's background from the theme token, unambiguously under match-colors and as a product-policy choice under org-theme. It is a code change, not a study, and it closes the one catastrophic cell. Second, decompose and build stage layout fidelity, where the real headroom lives: compositional T2 pages start at structure scores of 0.48 to 0.55. Third, re-register the G3 bar once those give the loop pages whose errors it can actually fix. One disclosure stands from the brief: a single Wave 3 smoke page was seen before registration, and the gate thresholds were chosen with that one-page knowledge, disclosed rather than pretended away."
+						}
+					]
+				}
+			],
+			"published": "2026-10-21",
+			"related": [
+				{
+					"title": "Study AS: the whole-system baseline this study corrects",
+					"href": "/research/barkup-bench/as"
+				},
+				{
+					"title": "Replicator, the product under test",
+					"href": "https://replicator.lj.dev"
+				},
+				{
+					"title": "barkup-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/barkup-bench"
+				}
+			],
+			"brief": "BRIEF-AT.md",
+			"quote": "The recovery gate was set under the story the last study told, and the data refused it: the penalty lives on dark surfaces, the palette extraction was flawless, and nothing paints the page. A gate that can lose to the data is the system working."
 		}
 	]
 }
