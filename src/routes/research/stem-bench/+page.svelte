@@ -88,10 +88,13 @@ const proseCls = "text-[#c3c9d4]";
     <p class="opacity-90 mb-4">
       Study 1 measured the chart-draft pipeline: when the model reads a noisy
       music transcription with a free template matcher's chord guess riding
-      along as a hint, does it read the notes or copy the hint? 320 scored
-      cells across five models. Hypotheses, corpora, and graders are committed
-      before any scored run; results are published as found, failed gate
-      letters included.
+      along as a hint, does it read the notes or copy the hint? Study 2
+      measured the reasoning-off claim hard-coded in the Text-to-Beat
+      feature, and found the claim holds for the shipped model while the
+      call shape itself is not portable across models. 650 scored cells
+      across five models so far. Hypotheses, corpora, and graders are
+      committed before any scored run; results are published as found,
+      gate letters included.
     </p>
   </header>
 
@@ -203,7 +206,7 @@ const proseCls = "text-[#c3c9d4]";
       <!-- headline stats -->
       <div class="grid grid-cols-2 gap-3">
         {#each [
-          { num: researchStats.stemBench.studiesDisplay, cap: "pre-registered study, published as found" },
+          { num: researchStats.stemBench.studiesDisplay, cap: "pre-registered studies, published as found" },
           { num: researchStats.stemBench.scoredRunsDisplay, cap: "scored cells at temperature 0" },
           { num: researchStats.stemBench.modelsDisplay, cap: "models measured across tiers" },
         ] as tile (tile.cap)}

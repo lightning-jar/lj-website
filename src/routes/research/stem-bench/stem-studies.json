@@ -75,6 +75,74 @@
 			],
 			"brief": "docs/BRIEF-STUDY1.md",
 			"quote": "Zero copied roots in roughly 850 chances on the frontier tier; the cheapest model surrendered 69% of the bars it could read on its own."
+		},
+		{
+			"slug": "2",
+			"letters": "2",
+			"track": "Call shapes and reasoning",
+			"title": "Reasoning off, measured: the claim holds 51 points beyond its wording, and the call shape is not portable",
+			"eyebrow": "Study 2 · call shapes and reasoning · 250 cells",
+			"indexLine": "Stem Shovel's Text-to-Beat hard-codes reasoning off for its model on an unmeasured comment in the code. Study 2 ported the production call verbatim and measured both halves: for the production model the claim is upheld 51 points beyond its own wording (95.0% vs 44.0%, the program's first by-letter gate pass), while the finding that outranks the gate is that reasoning off is not a portable call shape: gemini accepts the field, disobeys it, and returns zero valid beats in 25 tries under production's token cap, so the documented env-var model swap would silently kill the feature.",
+			"sections": [
+				{
+					"id": "sec-stem-study2",
+					"eyebrow": "Call shapes and reasoning",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s2",
+					"figure": {
+						"id": "fig-reasoning",
+						"title": "Combined Score by Model, Reasoning Off vs Provider Default"
+					},
+					"table": {
+						"id": "tbl-reasoning",
+						"summary": "Combined scores, validity, latency and token multiples, gate and reads, and the failure anatomy per model"
+					},
+					"body": [
+						{
+							"heading": "The Claim in the Code",
+							"html": "Stem Shovel's Text-to-Beat feature turns a described beat into a drum-machine pattern, and it runs its model with reasoning off on an empirical claim that lives as a comment in production: a thinking model spends minutes on a drum pattern and gets it no better. The claim had never been measured. Study 2 ported the production call verbatim and pinned it by test (the system prompt, the validator with production's exact error messages, the retry-with-reason, the same REST endpoint), then ran 25 hand-authored beat prompts under two arms: R-off, production exactly as shipped (reasoning effort none, 1,500-token cap), and R-default, the reasoning field omitted with an 8,000-token cap, the one registered asymmetry, since a thinking model needs room to finish. Grading is production's own validator plus 49 mechanical checks tied only to what each prompt explicitly asks; style conventions the prompt leaves implicit are never checked, the Study AP lesson applied in advance. A task scores 0 without a valid beat, else checks passed over total."
+						},
+						{
+							"heading": "The First By-Letter Gate Pass",
+							"html": "For the production model, kimi-k2.6, the hard-coded claim is upheld beyond its own wording: reasoning is not merely no better, it is 51 points worse (combined score 95.0% with reasoning off, 44.0% with it on, p = .0015). The anatomy: kimi's default reasoning exhausted even the raised 8,000-token budget on 14 of 25 tasks and returned no content at all, and production's retry cannot rescue an empty reply, because a conversation with an empty assistant turn is a gateway 400. On the 11 tasks where its thinking finished, every check passed: completed reasoning helps slightly and completes less than half the time. After four studies across two programs whose gates failed by letter, this is the first to pass by letter, and it converts the comment in textToBeat.ts from an anecdote into a citation."
+						},
+						{
+							"heading": "The Finding That Outranks the Gate",
+							"html": "Reasoning off is not a portable call shape. gemini-3.5-flash accepts effort none and disobeys it, thinking roughly 3,000 tokens regardless, so under production's 1,500-token cap it burned to the limit twice per request and produced zero valid beats in 25 tasks; given room to think it scores 99% at 25 of 25. Stem Shovel's TEXT_TO_BEAT_MODEL is swappable by env var precisely so models can be compared without a deploy, and this measurement shows the swap would silently kill the feature for a model that ignores the reasoning field. The registration had anticipated a model that rejects the field with an API error (the Amendment 1 rule, registered this time instead of discovered); a model that accepts and disobeys is a failure class the registration did not anticipate, published as measured."
+						},
+						{
+							"heading": "The Gradient",
+							"html": "The matrix splits into three dispositions. The anthropic models are indifferent to the field: fable-5-1 scores 100% in both arms at 1.4 times the tokens with its adaptive thinking, and haiku-4.5 is identical in both (92.0%, multiples of 1.0). The open-weight reasoner pays catastrophically: kimi's default arm costs 20.3 times the latency and 29.7 times the output tokens of production's call. And gpt-oss-120b is the one model reasoning helps: +15 points (77.0% to 92.0%, p = .14, not significant) at 2.8 times the cost, mostly by rescuing its weak first-try formatting, 13 of 25 valid on the first try with the retry saving 8 more."
+						},
+						{
+							"heading": "Honest Accounting",
+							"html": "The registered prediction scorecard went 1 right, 2 wrong, 1 half-wrong: the claim held for kimi with economics past the predicted 5 times, but kimi's reasoning-arm first-try validity was 40% against a predicted 85%, the no-model-gains-3-points prediction was refuted by letter through gemini's +99 (call-shape breakage, not reasoning quality), and gemini's reasoning-off arm turned out slower than its reasoning arm (26 versus 16 second medians) because cap exhaustion runs the clock twice. Two corrections were made before any result was read and are dated in the brief: the analyzer's scoring was brought to the registered rule, and the brief's prose was corrected to the committed corpus counts (25 tasks, 49 checks). Total spend about $4.85 of the $28 in fences."
+						},
+						{
+							"heading": "What This Licenses",
+							"html": "For Stem Shovel: the hard-coded choice is now a measured one for the shipped model, and the comment gets a citation. The env-var swap path needs a guard: a per-model output budget or a one-request smoke test on model change, and reasoning-capable swaps of the gpt-oss class want the retry's rejected-reply path checked against empty completions. For everyone else: a provider accepting a reasoning parameter tells you nothing about honoring it, and the cheapest place to discover that is a benchmark rather than a silently dead feature behind an env-var change."
+						}
+					]
+				}
+			],
+			"published": "2026-10-22",
+			"related": [
+				{
+					"title": "Study 1: the hint-following study",
+					"href": "/research/stem-bench/1"
+				},
+				{
+					"title": "Stem Shovel, the product under test",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY2.md",
+			"quote": "The model that obeys reasoning off got better, and the model that ignores it got nothing: gemini burned to the token cap twice per request and returned zero valid beats in 25 tries, on the exact call shape a documented env-var swap would ship."
 		}
 	]
 }

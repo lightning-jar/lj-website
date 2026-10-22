@@ -218,6 +218,148 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 2: combined score, reasoning off vs provider default ---
+	(() => {
+		const GROUPS = [
+			{
+				model: "kimi-k2.6 (prod.)",
+				vals: [95, 44],
+				tip: "the gate: claim upheld 51 points beyond its wording (p = .0015) · default reasoning exhausted the 8k budget on 14/25 tasks and returned nothing; the retry cannot replay an empty reply · 20.3x latency, 29.7x tokens",
+			},
+			{
+				model: "fable-5-1",
+				vals: [100, 100],
+				tip: "indifferent to the field: perfect in both arms, 1.2x latency and 1.4x tokens under adaptive thinking",
+			},
+			{
+				model: "haiku-4.5",
+				vals: [92, 92],
+				tip: "identical arms: 23/25 valid both ways, multiples of 1.0",
+			},
+			{
+				model: "gpt-oss-120b",
+				vals: [77, 92],
+				tip: "the one model reasoning helps: +15 points (p = .14, not significant) at 2.8x cost, mostly rescuing weak first-try formatting (13/25 first-try, 8 retry rescues)",
+			},
+			{
+				model: "gemini-3.5-flash",
+				vals: [0, 99],
+				tip: "accepts effort none and disobeys it: thinks ~3,000 tokens regardless, burned production's 1,500-token cap twice per request, 0/25 valid · and the off arm is SLOWER (26 s vs 16 s medians)",
+			},
+		];
+		const COFF = "#3987e5",
+			CDEF = "#c98500";
+		byId("legend-s2").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			COFF +
+			'"></span>R-off: production verbatim (reasoning effort none, 1,500-token cap)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CDEF +
+			'"></span>R-default: reasoning field omitted (8,000-token cap, the registered asymmetry)</span>' +
+			legendNote(
+				"combined score over 25 beat prompts: 0 without a valid beat (production's own validator, ported and pinned), else mechanical checks passed over total, tied only to explicit prompt text · total spend about $4.85 of the $28 fences",
+			);
+		const W = 880,
+			BAR = 14,
+			GAP = 4,
+			GH = 2 * BAR + GAP,
+			GPAD = 18,
+			T = 8,
+			B = 42,
+			L = 215,
+			R = 84;
+		const H = T + GROUPS.length * (GH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 50, 100]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		GROUPS.forEach((row, gi) => {
+			const top = T + gi * (GH + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${top + GH / 2 + 4}" text-anchor="end">${row.model}</text>`;
+			row.vals.forEach((v, ai) => {
+				const y = top + ai * (BAR + GAP);
+				const w = Math.max((v / 100) * iw, 2);
+				marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${ai === 0 ? COFF : CDEF}" rx="3"/>`;
+				marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 3}">${v}%</text>`;
+			});
+			hits += `<rect x="${L}" y="${top}" width="${iw}" height="${GH}" fill="transparent" data-tip="${esc(row.model + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-reasoning");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grouped bar chart of combined beat score per model with reasoning off versus the provider default: the production model kimi scores 95 percent off and 44 percent on; fable one hundred both; haiku 92 both; gpt-oss 77 off and 92 on; and gemini zero percent off and 99 percent on, the two reversals in one picture.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the two reversals in one picture: the production model loses 51 points the moment its reasoning is allowed to run, and gemini loses everything the moment it is not, because it ignores the field and thinks into the cap; the same call shape is optimal for one model and fatal for another",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-reasoning",
+			[
+				"cell",
+				"kimi-k2.6 (production)",
+				"fable-5-1",
+				"haiku-4.5",
+				"gpt-oss-120b",
+				"gemini-3.5-flash",
+			],
+			[
+				[
+					"combined score: R-off / R-default",
+					"95.0% / 44.0%",
+					"100% / 100%",
+					"92.0% / 92.0%",
+					"77.0% / 92.0%",
+					"0.0% / 99.0%",
+				],
+				[
+					"valid beats, off → default",
+					"24/25 → 11/25",
+					"25/25 → 25/25",
+					"23/25 → 23/25",
+					"21/25 → 24/25",
+					"0/25 → 25/25",
+				],
+				[
+					"latency multiple, default over off",
+					"20.3x",
+					"1.2x",
+					"1.0x",
+					"2.7x",
+					"0.7x (the off arm is slower: 26 s vs 16 s medians)",
+				],
+				["output-token multiple", "29.7x", "1.4x", "1.0x", "2.8x", "1.0x"],
+				[
+					"gate / registered read",
+					"S2-H1 PASS: claim upheld, 51 pts (p = .0015)",
+					"indifferent (adaptive thinking)",
+					"indifferent",
+					"+15 pts from reasoning (p = .14, n.s.)",
+					"call-shape breakage, not reasoning quality",
+				],
+				[
+					"failure anatomy",
+					"default reasoning exhausted the 8k budget on 14/25 tasks; the retry cannot replay an empty reply (gateway 400)",
+					"n/a",
+					"n/a",
+					"weak first-try formatting: 13/25, retry rescued 8",
+					"ignores effort none, thinks ~3,000 tokens into a 1,500-token cap, twice per request",
+				],
+			],
+		);
+	})();
+
 	// Legend title post-pass (idempotent), mirroring bench-charts.js.
 	document.querySelectorAll(".chart-legend").forEach((el) => {
 		if (!el.firstElementChild?.classList?.contains("legend-title")) {

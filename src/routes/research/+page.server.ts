@@ -24,7 +24,7 @@ const projects = [
 		slug: "stem-bench",
 		status: "Active",
 		summary:
-			"An open, pre-registered benchmark series measuring the AI features of Stem Shovel, Lightning Jar's music collaboration app. Study 1: 320 scored cells across five models asking whether a chart-drafting model reads the transcribed notes or copies a heuristic hint, with ground truth by construction. Results published as found, failed gate letters included.",
+			"An open, pre-registered benchmark series measuring the AI features of Stem Shovel, Lightning Jar's music collaboration app. Two studies, 650 scored cells across five models: whether a chart-drafting model reads the transcribed notes or copies a heuristic hint, and whether the reasoning-off claim hard-coded in the beat generator survives measurement. Results published as found, gate letters included.",
 	},
 ];
 
