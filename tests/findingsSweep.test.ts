@@ -57,3 +57,52 @@ describe("findings sweep", () => {
 		expect(claims.some((c) => c.includes("downmixes to mono"))).toBe(true);
 	});
 });
+
+import {
+	areaFor,
+	descriptionFrom,
+	extractEntries,
+	slugFromClaim,
+} from "../scripts/findings-draft-stubs";
+
+describe("findings draft stubs", () => {
+	const md = [
+		"# Findings",
+		"",
+		"## Web Audio",
+		"",
+		"- **An `AnalyserNode` downmixes to mono.** For anything that needs",
+		"  the channels apart, split first (`#readLoudness`, D3).",
+		"",
+		"## Database and tooling",
+		"",
+		"- **The dev server serves code live; the build needs a restart.** A",
+		"  Svelte edit is in the next page load.",
+	].join("\n");
+
+	test("extracts full entry blocks with their nearest heading", () => {
+		const entries = extractEntries(md);
+		expect(entries.length).toBe(2);
+		expect(entries[0].claim).toBe("An `AnalyserNode` downmixes to mono.");
+		expect(entries[0].heading).toBe("Web Audio");
+		expect(entries[0].block).toContain("split first");
+		expect(entries[1].heading).toBe("Database and tooling");
+	});
+
+	test("maps headings to series areas with per-source fallback", () => {
+		const entries = extractEntries(md);
+		expect(areaFor("stem-shovel", entries[0])).toBe("Web Audio");
+		expect(areaFor("stem-shovel", entries[1])).toBe("Tooling");
+		expect(areaFor("woof-editor", { ...entries[0], heading: "0.2.0" })).toBe(
+			"Web Platform",
+		);
+	});
+
+	test("derives short slugs and first-sentence descriptions", () => {
+		const entries = extractEntries(md);
+		expect(slugFromClaim(entries[0].claim)).toBe("analysernode-downmixes-mono");
+		expect(descriptionFrom(entries[0])).toBe(
+			"For anything that needs the channels apart, split first (`#readLoudness`, D3).",
+		);
+	});
+});

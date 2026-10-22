@@ -133,6 +133,11 @@ async function main() {
 		),
 		published,
 	};
+	// Persisted for the draft-stubs stage (same workflow, next step).
+	writeFileSync(
+		join(dirname(statePath), "last-sweep-report.json"),
+		JSON.stringify(report, null, "\t"),
+	);
 	console.log(JSON.stringify(report, null, 2));
 	process.exit(previous !== null && newCount > 0 ? 3 : 0);
 }

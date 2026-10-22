@@ -1,9 +1,10 @@
-# Findings-series source sweep — weekly detect-and-report. Runs the
+# Findings-series source sweep — weekly detect, draft, notify. Runs the
 # repo's findings-sweep probe (extracts finding-shaped claims from the
-# source corpora, diffs against the last snapshot) and emails a digest
-# pointer when new unharvested claims appear. Publishing stays human:
-# this workflow never writes to the CMS. A probe that fails silently
-# would be theater, so a broken probe emails too.
+# source corpora, diffs against the last snapshot); when new claims
+# appear, a second stage creates CMS DRAFT STUBS in the Findings blog
+# (verbatim source block + review banner, never published) and the
+# email says drafts are ready for review. Publishing stays human. A
+# probe that fails silently would be theater, so broken stages email too.
 id: 6f2096bd-1f14-47de-94d4-2d4f8556beb1
 name: findings-sweep
 description: Weekly sweep of finding-shaped source corpora — email digest on new claims
@@ -51,9 +52,48 @@ jobs:
           message: "New finding-shaped claims detected in the source corpora — see the run-sweep log for the digest; an email was dispatched."
           severity: low
 
-      - name: notify-new-candidates
+      - name: draft-stubs
         dependsOn:
           - step: assert-nothing-new
+            condition:
+              type: failed
+        task:
+          type: behavior
+          behavior: lj-ops-script
+          methodName: execute
+          inputs:
+            script: scripts/findings-draft-stubs.ts
+            args: ""
+            ignoreExitCode: false
+        dataOutputOverrides:
+          - specName: result
+            lifetime: 90d
+            tags:
+              audit: findings-sweep
+
+      - name: notify-drafts-ready
+        dependsOn:
+          - step: draft-stubs
+            condition:
+              type: succeeded
+        allowFailure: true
+        task:
+          type: behavior
+          behavior: replicator-notify
+          methodName: execute
+          inputs:
+            subject: "Findings sweep: new draft stubs ready for review"
+            body: >-
+              The weekly findings sweep found new finding-shaped claims and
+              created draft stubs in the Findings blog. Review them in the
+              Replicator editor and publish, or ask the lj-website agent to
+              rewrite them into house style first. Stub list: swamp workflow
+              history findings-sweep (from ~/projects/lj-website/ops/swamp
+              under varlock), draft-stubs step log.
+
+      - name: notify-drafting-failed
+        dependsOn:
+          - step: draft-stubs
             condition:
               type: failed
         allowFailure: true
@@ -62,13 +102,13 @@ jobs:
           behavior: replicator-notify
           methodName: execute
           inputs:
-            subject: "Findings sweep: new source claims to review"
+            subject: "Findings sweep: new claims found but DRAFTING FAILED"
             body: >-
-              The weekly findings sweep found new finding-shaped claims in
-              the source corpora (stem-shovel FINDINGS.md / woof-editor
-              CHANGELOG). Digest: swamp workflow history findings-sweep
-              (from ~/projects/lj-website/ops/swamp under varlock), or ask
-              the lj-website agent to draft the new entries.
+              The weekly findings sweep found new finding-shaped claims but
+              the draft-stub stage failed (missing REPLICATOR_AGENT_KEY or
+              MCP error), so no CMS drafts were created. The claims are in
+              the sweep report; inspect swamp workflow history
+              findings-sweep on lj-bench and re-run after fixing.
 
       - name: notify-probe-broken
         dependsOn:

@@ -17,7 +17,9 @@ globalArguments:
 methods:
   execute:
     arguments:
-      run: "bun run ${{ inputs.script }} ${{ inputs.args }}"
+      # Through varlock so 1Password-resolved env (REPLICATOR_AGENT_KEY,
+      # BLOG_CMS_BASE_URL) reaches scripts as process.env.
+      run: "bunx varlock run -- bun run ${{ inputs.script }} ${{ inputs.args }}"
       workingDir: "${{ self.globalArguments.repoDir }}"
       timeout: 300000
       ignoreExitCode: "${{ inputs.ignoreExitCode }}"
