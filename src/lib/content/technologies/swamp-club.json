@@ -1,0 +1,20 @@
+{
+	"id": "swamp-club",
+	"name": "Swamp Club",
+	"shortDescription": "Behavior-based automation for AI-era operations: repeatable workflows, vaulted secrets, and scheduled sweeps instead of token-hungry agent sessions.",
+	"description": [
+		"Swamp (swamp-club.com) approaches automation from the opposite direction of open-ended AI agents: composable, typed behaviors wired together into declarative YAML workflows, with secrets held in vaults and every run auditable and schedulable. The pitch is repeatability; an automation you can read, version, and re-run beats a transcript you can only hope repeats.",
+		"We adopted it in Replicator's operations layer, where its definitions are committed to the repository: a standing production-data audit, an orphan-blob audit, and scheduled sweeps that run as swamp workflows on cron triggers."
+	],
+	"useCases": [
+		"Standing data audits and scheduled operational sweeps",
+		"Repeatable multi-step automations with vaulted credentials",
+		"Keeping ops work deterministic and auditable where an agent session would be overkill"
+	],
+	"license": "Proprietary",
+	"category": "AI Ops Automation",
+	"link": {
+		"href": "https://swamp-club.com"
+	},
+	"supercategory": "ai-llm"
+}
