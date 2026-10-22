@@ -147,7 +147,7 @@ function clearFilters() {
 
           <!-- facets: toggle into the search filter -->
           <span class="flex flex-wrap gap-2 text-0.9em text-accent">
-            {#each [finding.area, finding.project, ...(finding.tags ?? [])].filter((t) => typeof t === "string" && t.length > 0) as tag (tag)}
+            {#each [...new Set([finding.area, finding.project, ...(finding.tags ?? [])].filter((t) => typeof t === "string" && t.length > 0))] as tag (tag)}
               <button
                 type="button"
                 onclick={() => toggleTag(tag as string)}
