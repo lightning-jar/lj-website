@@ -149,6 +149,22 @@ async function mcpCall(
 	tool: string,
 	args: Record<string, unknown>,
 ): Promise<unknown> {
+	// One retry on transient failure (5xx/network): the live-fire hit a
+	// one-off Internal Error that succeeded on replay — cheap insurance,
+	// same lesson as Findings No. 12.
+	try {
+		return await mcpCallOnce(tool, args);
+	} catch (e) {
+		if (!String(e).includes("HTTP 5") && !String(e).includes("fetch")) throw e;
+		await new Promise((r) => setTimeout(r, 3000));
+		return await mcpCallOnce(tool, args);
+	}
+}
+
+async function mcpCallOnce(
+	tool: string,
+	args: Record<string, unknown>,
+): Promise<unknown> {
 	const base = (process.env.BLOG_CMS_BASE_URL ?? "").replace(/\/$/, "");
 	const key = process.env.REPLICATOR_AGENT_KEY;
 	if (!base || !key) {
