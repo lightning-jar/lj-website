@@ -244,6 +244,7 @@ async function main() {
 		: { next: 29 };
 
 	const created: { number: number; title: string; previewUrl?: string }[] = [];
+	const stubRecords: Record<string, unknown>[] = [];
 	for (const [sourceName, claims] of Object.entries(report.newBySource)) {
 		if (claims.length === 0) continue;
 		const meta = SOURCE_META[sourceName];
@@ -296,6 +297,18 @@ async function main() {
 					slug: frontmatter.slug,
 				});
 				created.push({ number, title, previewUrl: res.draftPreviewUrl });
+				// handoff for the rewrite stage (findings-rewrite.ts)
+				stubRecords.push({
+					articleId: res.articleId,
+					claim: entry.claim,
+					block: entry.block,
+					source: sourceName,
+					number,
+					area,
+					project: meta.project,
+					verified: frontmatter.verified,
+					slug: frontmatter.slug,
+				});
 			}
 			numbering.next = number + 1;
 		}
@@ -303,6 +316,10 @@ async function main() {
 
 	if (!dryRun) {
 		writeFileSync(numberingPath, JSON.stringify(numbering, null, "\t"));
+		writeFileSync(
+			join(OPS, "last-stubs.json"),
+			JSON.stringify(stubRecords, null, "\t"),
+		);
 	}
 	console.log(
 		JSON.stringify({ created: created.length, stubs: created }, null, 2),

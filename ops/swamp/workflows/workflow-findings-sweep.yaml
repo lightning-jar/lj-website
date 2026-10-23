@@ -35,6 +35,7 @@ jobs:
             script: "${{ inputs.sweepScript }}"
             args: ""
             ignoreExitCode: true
+            timeoutMs: 300000
         dataOutputOverrides:
           - specName: result
             lifetime: 90d
@@ -65,6 +66,27 @@ jobs:
             script: scripts/findings-draft-stubs.ts
             args: ""
             ignoreExitCode: false
+            timeoutMs: 300000
+        dataOutputOverrides:
+          - specName: result
+            lifetime: 90d
+            tags:
+              audit: findings-sweep
+
+      - name: rewrite-drafts
+        dependsOn:
+          - step: draft-stubs
+            condition:
+              type: succeeded
+        task:
+          type: behavior
+          behavior: lj-ops-script
+          methodName: execute
+          inputs:
+            script: scripts/findings-rewrite.ts
+            args: ""
+            ignoreExitCode: false
+            timeoutMs: 1800000
         dataOutputOverrides:
           - specName: result
             lifetime: 90d
@@ -73,7 +95,7 @@ jobs:
 
       - name: notify-drafts-ready
         dependsOn:
-          - step: draft-stubs
+          - step: rewrite-drafts
             condition:
               type: succeeded
         allowFailure: true
@@ -82,14 +104,35 @@ jobs:
           behavior: replicator-notify
           methodName: execute
           inputs:
-            subject: "Findings sweep: new draft stubs ready for review"
+            subject: "Findings sweep: new drafts ready for review"
             body: >-
-              The weekly findings sweep found new finding-shaped claims and
-              created draft stubs in the Findings blog. Review them in the
-              Replicator editor and publish, or ask the lj-website agent to
-              rewrite them into house style first. Stub list: swamp workflow
-              history findings-sweep (from ~/projects/lj-website/ops/swamp
-              under varlock), draft-stubs step log.
+              The weekly findings sweep found new finding-shaped claims,
+              created drafts in the Findings blog, and rewrote them into
+              house style (gated: no dashes, no ai-writing-tells hits,
+              receipt line required, canonical tags only). Review in the
+              Replicator editor and publish. Any entry the writer could not
+              gate-pass is left as a raw stub with a review banner; the
+              rewrite-drafts step log lists both groups.
+
+      - name: notify-rewrite-failed
+        dependsOn:
+          - step: rewrite-drafts
+            condition:
+              type: failed
+        allowFailure: true
+        task:
+          type: behavior
+          behavior: replicator-notify
+          methodName: execute
+          inputs:
+            subject: "Findings sweep: raw stubs created, rewrite stage FAILED"
+            body: >-
+              New claims were drafted as raw stubs but the house-style
+              rewrite stage failed, so the drafts still carry their review
+              banners and verbatim source text. Do not publish them as-is;
+              review in the Replicator editor or ask the lj-website agent
+              to rewrite. Inspect: swamp workflow history findings-sweep on
+              lj-bench, rewrite-drafts step log.
 
       - name: notify-drafting-failed
         dependsOn:

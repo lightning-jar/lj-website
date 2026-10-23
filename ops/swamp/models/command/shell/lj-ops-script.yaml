@@ -21,7 +21,7 @@ methods:
       # BLOG_CMS_BASE_URL) reaches scripts as process.env.
       run: "bunx varlock run -- bun run ${{ inputs.script }} ${{ inputs.args }}"
       workingDir: "${{ self.globalArguments.repoDir }}"
-      timeout: 300000
+      timeout: "${{ inputs.timeoutMs }}"
       ignoreExitCode: "${{ inputs.ignoreExitCode }}"
 
 inputs:
@@ -38,5 +38,9 @@ inputs:
       type: boolean
       description: Treat nonzero exit as success (exit code still lands in result data)
       default: true
+    timeoutMs:
+      type: number
+      description: Kill the script after this many milliseconds
+      default: 300000
   required:
     - script
