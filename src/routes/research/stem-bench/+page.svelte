@@ -93,7 +93,9 @@ const proseCls = "text-[#c3c9d4]";
       feature, and found the claim holds for the shipped model while the
       call shape itself is not portable across models. Study 3 asked whether
       a model can read sheet music at all, as a Verovio round trip with
-      every fact known by construction. 730 scored cells across six models
+      every fact known by construction. Study 4 asked whether the
+      listening-layer song check hears what it claims to hear, and found a
+      text channel wearing headphones. 838 scored cells across seven models
       so far. Hypotheses, corpora, and graders are committed before any
       scored run; results are published as found, gate letters included.
     </p>
