@@ -360,6 +360,130 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 3: chord recall, page image vs PDF of the identical page ---
+	(() => {
+		const GROUPS = [
+			{
+				model: "fable-5-1 (prod.)",
+				vals: [98.8, 76],
+				tip: "the production model: 98.8% exact at 100% precision, zero measure drift, ~$0.06 a score · the identical page as PDF drops to 76.0, repeat dots collapse hardest · probe: honest in both arms",
+			},
+			{
+				model: "gemini-3.5-flash",
+				vals: [97.1, 70.4],
+				tip: "97.1% as image, 70.4% as PDF · but the probe: one fabricated line under image input (m1 key C major 4/4, invented title); honest as PDF · the S3-H2 by-letter failure",
+			},
+			{
+				model: "opus-4.8",
+				vals: [62.2, 82.5],
+				tip: "the odd one out: better on PDF (82.5) than image (62.2), so the modality effect lives in each provider's PDF pipeline, not in PDFs as such · probe: honest, one decline without the registered Note form (a format miss)",
+			},
+			{
+				model: "haiku-4.5",
+				vals: [1.2, 0],
+				tip: "cannot do this job: reads the signatures and writes a ~120-token stub, mean measure drift 14.9 · the sharpest tier cliff the program has measured · probe: honest in both arms",
+			},
+		];
+		const CIMG = "#3987e5",
+			CPDF = "#c98500";
+		byId("legend-s3").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CIMG +
+			'"></span>D-image: the page as a PNG</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CPDF +
+			'"></span>D-pdf: the identical page as a PDF</span>' +
+			legendNote(
+				"exact chord recall on readable scores, graded against production's own summary of the source MusicXML (ported verbatim and pinned) · 268 measures across 10 readable scores · total spend about $2.10 of the $34 fences",
+			);
+		const W = 880,
+			BAR = 14,
+			GAP = 4,
+			GH = 2 * BAR + GAP,
+			GPAD = 18,
+			T = 8,
+			B = 42,
+			L = 215,
+			R = 84;
+		const H = T + GROUPS.length * (GH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 50, 100]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		GROUPS.forEach((row, gi) => {
+			const top = T + gi * (GH + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${top + GH / 2 + 4}" text-anchor="end">${row.model}</text>`;
+			row.vals.forEach((v, ai) => {
+				const y = top + ai * (BAR + GAP);
+				const w = Math.max((v / 100) * iw, 2);
+				marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${ai === 0 ? CIMG : CPDF}" rx="3"/>`;
+				marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 3}">${v}%</text>`;
+			});
+			hits += `<rect x="${L}" y="${top}" width="${iw}" height="${GH}" fill="transparent" data-tip="${esc(row.model + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-notation");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grouped bar chart of exact chord recall per model reading the same engraved score page as an image versus as a PDF: fable 98.8 percent image and 76 percent PDF, gemini 97.1 and 70.4, opus 62.2 image but 82.5 PDF, and haiku 1.2 and zero.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"frontier models genuinely read sheet music from a clean page image, and the operational finding is the modality gap: three of four models lose 20 or more points when the identical page arrives as a PDF, opus runs the other way because the effect lives in provider ingestion pipelines, and haiku's cliff is the sharpest tier difference the program has measured",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-notation",
+			[
+				"cell",
+				"fable-5-1 (production)",
+				"gemini-3.5-flash",
+				"opus-4.8",
+				"haiku-4.5",
+			],
+			[
+				[
+					"exact chord recall: image / PDF",
+					"98.8% / 76.0%",
+					"97.1% / 70.4%",
+					"62.2% / 82.5%",
+					"1.2% / 0.0%",
+				],
+				[
+					"keys within ±1 measure, pooled (the S3-H1 read)",
+					"91.7% · PASS vs the registered 90% bar",
+					"91.7%",
+					"70.8%",
+					"70.8%",
+				],
+				["mean measure-count drift", "0.0", "0.1", "1.6", "14.9"],
+				[
+					"the 80 px honesty probe",
+					"honest in both arms",
+					"fabricated one line as image; honest as PDF (the S3-H2 by-letter failure)",
+					"honest; one decline without the registered Note form (a format miss)",
+					"honest in both arms",
+				],
+				[
+					"anatomy note",
+					"~$0.06 a score; repeat dots are the class lost in PDFs",
+					"the archived 150 px probe run holds its full fabrication signature",
+					"better on PDF than image: the modality effect is per provider pipeline",
+					"writes a ~120-token stub per score",
+				],
+			],
+		);
+	})();
+
 	// Legend title post-pass (idempotent), mirroring bench-charts.js.
 	document.querySelectorAll(".chart-legend").forEach((el) => {
 		if (!el.firstElementChild?.classList?.contains("legend-title")) {

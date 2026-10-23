@@ -143,6 +143,82 @@
 			],
 			"brief": "docs/BRIEF-STUDY2.md",
 			"quote": "The model that obeys reasoning off got better, and the model that ignores it got nothing: gemini burned to the token cap twice per request and returned zero valid beats in 25 tries, on the exact call shape a documented env-var swap would ship."
+		},
+		{
+			"slug": "3",
+			"letters": "3",
+			"track": "Reading the page",
+			"title": "Can a model read sheet music? The frontier tier can, the PDF path is the bottleneck, and the probe had to be calibrated twice",
+			"eyebrow": "Study 3 · reading the page · 160 cells across two arms",
+			"indexLine": "Stem Shovel's chart-read feature has a model read an engraved score into a per-measure summary, on the strength of one informal test. Study 3 measured it as a registered round trip over 11 Verovio-engraved scores with every fact known by construction: the production model reads a clean page image at 98.8% exact chord recall with zero measure drift at about $0.06 a score, three of four models lose 20 or more points when the identical page arrives as a PDF, haiku is the sharpest tier cliff the program has measured, and the honesty gate fails by letter through one fabricated line from the pilot model. As far as we know, the first registered LLM notation-reading benchmark anywhere.",
+			"sections": [
+				{
+					"id": "sec-stem-study3",
+					"eyebrow": "Reading the page",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s3",
+					"figure": {
+						"id": "fig-notation",
+						"title": "Exact Chord Recall by Model, Page Image vs PDF of the Identical Page"
+					},
+					"table": {
+						"id": "tbl-notation",
+						"summary": "Per-arm chord recall, the keys gate read, measure drift, and the honesty probe per model"
+					},
+					"body": [
+						{
+							"heading": "The Question and the Round Trip",
+							"html": "Stem Shovel's chart-read has a model read a PDF or image of an engraved score into the per-measure text summary that feeds the song check and the chart draft, and its model choice rested on one informal test. Study 3 measured the feature as a round trip with ground truth by construction: scores authored as MusicXML with every fact known, engraved by Verovio exactly as a user's upload would be, read under production's prompt byte for byte, and graded against the deterministic summary production itself makes of the source XML, ported verbatim and pinned. The fixture is 11 scores: 268 readable measures covering keys from four sharps to three flats with mid-piece changes, meter and tempo changes, rehearsal marks, repeats with first and second endings, segno, coda and fine, slash-bass and exotic chord qualities, one N.C. measure, two 2-page items, and an unreadable honesty probe, registered up front rather than discovered later, the Study 2 lesson applied in advance. As far as we know, no public LLM notation-reading benchmark existed before this one."
+						},
+						{
+							"heading": "Two Amendments and a Calibration Lesson",
+							"html": "Both amendments preceded every matrix cell and both are committed with their anatomy. First, the fixture's PNGs were transparent, and a transparent page composites to black on black at the model, so the entire first pilot measured the void (the pilot model's own words: the provided image is completely black); the run was discarded in full and archived. Second, the probe had to be recalibrated twice: its vector PDF stayed crisp at any zoom, and the 150 px raster that looked destroyed to a human was still readable in fact, the pilot model pulling 7 of 8 chords off the smear. The probe now renders at 80 px, where chord letters are about four pixels. The calibration lesson is the quotable one: vision models read far below the resolution a human finds legible, so an unreadability probe must be set by model behavior, not eyesight."
+						},
+						{
+							"heading": "The Gate Accounting",
+							"html": "S3-H1, the production claim, passes to the decimal: fable-5-1 reads key signatures at exactly 91.7% recall within one measure against the registered 90% bar, upholding the anecdote the feature was built on. S3-H2, the honesty gate, fails by letter through its every-model clause: shown the 80 px smear as an image, the pilot model wrote one fabricated line (m1 key C major 4/4, under an invented title) instead of the registered Note declaration, while its PDF arm declined honestly, and the archived 150 px run holds its full fabrication signature, a confident progression that was simply wrong. The program's recurring registration lesson arrives in a third costume: a gate quantified over every model makes the weakest model the gate. Published as failed."
+						},
+						{
+							"heading": "Frontier Models Read Sheet Music, and the PDF Path Is the Bottleneck",
+							"html": "The production model reads engraved notation from a clean page image at 98.8% exact chord recall with perfect precision and zero measure-count drift, at roughly $0.06 a score; the pilot model is close behind at 97.1%. The modality finding is the operational one: three of four models lose 20 or more points of chord recall when the identical page arrives as a PDF instead of an image (fable 98.8 to 76.0), with repeat dots collapsing hardest. Opus is the odd one out, better on PDF than image, which places the effect in each provider's internal PDF pipeline rather than in PDFs as such. The ship guidance writes itself: chart-read should rasterize PDFs app-side and send images, not trust each provider's ingestion."
+						},
+						{
+							"heading": "The Tier Cliff and the Honesty Map",
+							"html": "haiku-4.5 cannot do this job: 1.2% chord recall as image, 0.0% as PDF, a mean measure drift of 14.9, and a summary of about 120 output tokens per score; it reads the signatures and writes a stub. That is the sharpest tier cliff the program has measured, sharper than anything in Studies 1 or 2. The honesty map splits on provider lines: the anthropic models decline the unreadable page in both arms (opus once declined without the registered Note form, a format miss rather than a fabrication under the registered distinction), while gemini fabricates under image input. Study 2's accept-and-disobey lesson generalizes to vision exactly as the brief predicted it might."
+						},
+						{
+							"heading": "Honest Accounting",
+							"html": "The registered scorecard: prediction 1 right to the decimal of the bar; 2 half-right, with image-arm chord recall above the predicted band; 3 wrong in the most instructive way, since endings scored 100% wherever answered, meaning the volta brackets read fine and it is the repeat dots that get lost, and only in PDFs; 4 right in substance, one model fabricated and it was not an anthropic one; 5 right for gemini and fable, refuted by opus. Total spend about $2.10 of the $34 in fences, and the two discarded runs are archived with their anatomy rather than deleted."
+						},
+						{
+							"heading": "What This Licenses",
+							"html": "For Stem Shovel: chart-read's model choice is validated against two tiers and a competitor, and the one change worth shipping is rasterizing PDFs app-side before the model sees them. haiku is a measured anti-recommendation on this surface, and any future model swap should include the probe as a one-page honesty smoke test. For anyone building vision benchmarks: the probe's two recalibrations are the reusable method, since what a human calls unreadable and what a model can read are different quantities, and only the model's behavior can draw the line."
+						}
+					]
+				}
+			],
+			"published": "2026-10-23",
+			"related": [
+				{
+					"title": "Study 2: reasoning off, measured",
+					"href": "/research/stem-bench/2"
+				},
+				{
+					"title": "Study 1: the hint-following study",
+					"href": "/research/stem-bench/1"
+				},
+				{
+					"title": "Stem Shovel, the product under test",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY3.md",
+			"quote": "The pilot model pulled seven of eight chords off a smear no human could read. Two recalibrations later the probe sits at 80 pixels, and the lesson stands: unreadable must be calibrated by model behavior, not eyesight."
 		}
 	]
 }

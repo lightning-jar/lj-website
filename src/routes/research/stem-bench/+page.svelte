@@ -91,10 +91,11 @@ const proseCls = "text-[#c3c9d4]";
       along as a hint, does it read the notes or copy the hint? Study 2
       measured the reasoning-off claim hard-coded in the Text-to-Beat
       feature, and found the claim holds for the shipped model while the
-      call shape itself is not portable across models. 650 scored cells
-      across five models so far. Hypotheses, corpora, and graders are
-      committed before any scored run; results are published as found,
-      gate letters included.
+      call shape itself is not portable across models. Study 3 asked whether
+      a model can read sheet music at all, as a Verovio round trip with
+      every fact known by construction. 730 scored cells across six models
+      so far. Hypotheses, corpora, and graders are committed before any
+      scored run; results are published as found, gate letters included.
     </p>
   </header>
 
