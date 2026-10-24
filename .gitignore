@@ -32,3 +32,6 @@ ops/*.json
 
 # vitest coverage output
 coverage
+
+# Playwright MCP run artifacts (traces, console logs, screenshots)
+.playwright-mcp
