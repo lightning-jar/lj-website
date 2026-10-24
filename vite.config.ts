@@ -1,4 +1,4 @@
-import { sentrySvelteKit } from "@sentry/sveltekit";
+import { sentrySvelteKit } from "@sentry/sveltekit/vite";
 import { default as vercel } from "@sveltejs/adapter-vercel";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
@@ -39,15 +39,20 @@ export default defineConfig({
 		// loader at request time (it has no .env.schema there and crashed at
 		// module init, 500ing every non-prerendered request).
 		varlockVitePlugin({ ssrInjectMode: "resolved-env" }),
+		// Sentry 11 moved this plugin to the /vite subpath and flattened
+		// sourceMapsUploadOptions to the top level.
 		sentrySvelteKit({
-			sourceMapsUploadOptions: {
-				org: "lightning-jar",
-				project: "lj-website",
-			},
+			org: "lightning-jar",
+			project: "lj-website",
 		}),
 		UnoCSS(),
 		sveltekit({
-			adapter: vercel(),
+			// Pin the serverless runtime here. Without this the adapter
+			// derives it from whatever Node version ran the build, so a
+			// build on Node 22 would quietly ship nodejs22.x functions. (The
+			// `config` export in hooks.server.ts never did this: adapters
+			// only read `config` from route files, not from hooks.)
+			adapter: vercel({ runtime: "nodejs24.x" }),
 
 			alias: aliasList,
 

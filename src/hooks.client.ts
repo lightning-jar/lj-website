@@ -6,12 +6,12 @@ Sentry.init({
 
 	tracesSampleRate: 1.0,
 
-	// Enable logs to be sent to Sentry
-	enableLogs: true,
+	// (enableLogs is gone in Sentry 11; logs are on by default.)
 
-	// Enable sending user PII (Personally Identifiable Information)
-	// https://docs.sentry.io/platforms/javascript/guides/sveltekit/configuration/options/#sendDefaultPii
-	sendDefaultPii: true,
+	// Sentry 11 replaced sendDefaultPii with the dataCollection option, and
+	// its defaults are the documented equivalent of the sendDefaultPii: true
+	// this client previously set, so the option is simply dropped rather
+	// than translated. Tighten via dataCollection if that should change.
 });
 
 // If you have a custom error handler, pass it to `handleErrorWithSentry`

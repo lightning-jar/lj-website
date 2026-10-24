@@ -1,7 +1,6 @@
 import { handleErrorWithSentry, sentryHandle } from "@sentry/sveltekit";
 import { sequence } from "@sveltejs/kit/hooks";
 import type { Handle } from "@sveltejs/kit/hooks";
-import type { Config } from "@sveltejs/adapter-vercel";
 
 import { getBlogArticleMarkdownBySlug } from "$content/getters/getBlogArticles";
 import { getCustomerStoryMarkdownBySlug } from "$content/getters/getCustomerStories";
@@ -14,11 +13,9 @@ import {
 	storyMarkdownDoc,
 } from "$utils/agentMarkdown";
 
-// adapter-vercel route config, read by the framework
-// fallow-ignore-next-line unused-export
-export const config: Config = {
-	runtime: "nodejs24.x",
-};
+// The serverless runtime is pinned on the adapter in vite.config.ts. A
+// `config` export here was never read: adapters only pick up `config`
+// from route files (+server, +page.server, +layout.server), not hooks.
 
 const BASE = "https://www.lightningjar.com";
 
