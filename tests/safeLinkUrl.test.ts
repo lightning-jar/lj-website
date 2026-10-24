@@ -1,6 +1,6 @@
 import { safeLinkUrl } from "#lib/utils/safeLinkUrl.js";
 
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 
 describe("safeLinkUrl", () => {
 	test("allows https URLs", () => {

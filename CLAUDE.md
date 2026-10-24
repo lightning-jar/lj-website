@@ -12,8 +12,9 @@ Lightning Jar website - a static-first, content-driven marketing site built with
 bun dev              # Start dev server (localhost:5193, pinned/strict)
 bun build            # Production build → .vercel/output
 bun preview          # Preview production build locally
-bun test             # Run tests (Bun test runner)
-bun test --watch     # Watch mode for tests
+bun run test         # Run tests (Vitest) — NOT `bun test`, see Testing
+bun run test:watch   # Watch mode for tests
+bun run test:coverage  # Tests with v8 coverage
 bun run check        # TypeScript + Svelte type checking
 bun run check:watch  # Watch mode for type checking
 bun run format       # Format with Biome
@@ -92,8 +93,12 @@ natively (same convention as slx-web):
   "#lib/*": "./src/lib/*"
   ```
   The first exists because Bun does not apply TypeScript's `.js` -> `.ts`
-  rewrite inside subpath imports; without the fallback array every
-  `#lib/**.js` import fails under `bun test` (Vite resolves it either way).
+  rewrite inside subpath imports, while Vite does. Now that tests run on
+  Vitest (i.e. through Vite) it is no longer load-bearing, but it is kept:
+  it costs nothing and keeps `#lib/*` importable from plain `bun` or `node`
+  (ad-hoc scripts, one-off probes) instead of depending on resolver
+  leniency. slx-web omits it and works only because everything there goes
+  through Vite.
 
 ### Data Flow
 ```
@@ -141,7 +146,7 @@ Blog copy follows house rules: no em/en dashes in prose, plain phrasing over cle
   `bunx biome check --write`.
 - **Dependency pins**: core framework and toolchain packages (kit, svelte,
   vite, vite-plugin-svelte, adapter-vercel, svelte-check, unocss, biome,
-  sentry, varlock trio, @vercel/config, yaml, mcp-handler) are pinned
+  sentry, varlock trio, @vercel/config, yaml, mcp-handler, vitest) are pinned
   exactly so upgrades are deliberate commits; leaf libraries keep carets.
   Same policy as slx-web.
 - **Types**: Strict TypeScript; type definitions in `src/lib/types/`
@@ -149,11 +154,35 @@ Blog copy follows house rules: no em/en dashes in prose, plain phrasing over cle
 
 ## Testing
 
-Tests use Bun's built-in test runner with Happy DOM for DOM simulation:
+**Vitest** (config: `vitest.config.ts`), 196 tests in `tests/*.test.ts`.
+
 ```bash
-bun test                    # Run all tests
-bun test tests/slugify.test.ts  # Run single test file
+bun run test                         # Run all tests
+bun run test tests/slugify.test.ts   # Run a single file
+bun run test:coverage                # v8 coverage
 ```
+
+**Important: use `bun run test`, not `bun test`.** Bare `bun test` invokes
+Bun's built-in runner instead of Vitest. It silently half-works: it ignores
+`vitest.config.ts` and the `// @vitest-environment` docblock, so the DOM
+suite loses its globals (measured: 184 pass / 12 fail). Same gotcha as
+slx-web.
+
+- `vitest.config.ts` is standalone and does NOT load the `sveltekit()`
+  plugin: there are no `.svelte` component tests here, so pulling Kit,
+  varlock, Sentry and the adapter into every run would cost startup and buy
+  nothing. Tests still resolve modules through Vite, which is the point of
+  being on Vitest: `#lib/*` resolves exactly as it does in dev and build.
+- Default environment is `node`. The only DOM-dependent suite
+  (`visibilityTimer.test.ts`) opts in with a `// @vitest-environment
+  happy-dom` docblock on line 1.
+- Tests import explicitly from `"vitest"` (no `globals: true`).
+- Bun-only test APIs are gone and must not come back: no `bun:test`
+  imports, no `Bun.*` (use `node:crypto` etc.), no `import.meta.dir` (use
+  `import.meta.dirname`), and no Bun matchers like `toStartWith`.
+- `scripts/` still run under Bun via swamp and legitimately use `Bun.spawn`
+  and `import.meta.main`; that is why `@types/bun` and the `bun` tsconfig
+  type stay.
 
 ## Environment Variables
 

@@ -1,6 +1,6 @@
-import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { describe, expect, test } from "vitest";
 
 // Supply-chain tripwires, added after the 2026-08 keyv/cacheable npm
 // compromise (see /reading-list/keyv-cacheable-compromise). Two
@@ -17,7 +17,7 @@ import { join } from "node:path";
 //    against install-hook malware. Pinning the allowlist here makes
 //    growing it a conscious, reviewed decision instead of a drive-by.
 
-const repoRoot = join(import.meta.dir, "..");
+const repoRoot = join(import.meta.dirname, "..");
 
 // package-name prefixes as they appear in bun.lock keys ("name@version")
 const WATCHLIST: { pattern: string; incident: string }[] = [

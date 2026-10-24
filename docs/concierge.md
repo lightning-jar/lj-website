@@ -215,10 +215,15 @@ All via varlock (`.env.schema`), values in the 1Password environment:
   `tests/ttlCache.test.ts` — both Redis (mocked pipeline) and
   in-memory modes.
 - `tests/pickRandom.test.ts` — chip selection helpers.
-- The tool layer (`agentTools.ts`) imports `import.meta.glob` getters
-  and cannot run under bun test; its behavior is verified live against
-  the dev server (MCP `tools/call` + chat probes) — see the commit
-  messages for the verification transcripts of each change.
+- The tool layer (`agentTools.ts`) is not unit-tested here. Its
+  `import.meta.glob` getters are fine under Vitest (it runs through
+  Vite), but importing it pulls in `cmsJson.ts`, which reads
+  `ENV.KV_REST_API_*` at module scope and throws "varlock ENV not
+  initialized" outside the app. Testing it would mean mocking
+  `varlock/env` (the pattern slx-web uses for its sitemap test). Until
+  then its behavior is verified live against the dev server (MCP
+  `tools/call` + chat probes) — see the commit messages for the
+  verification transcripts of each change.
 - Browser verification via Playwright: gesture-gated zero-request
   guarantee, axe scans (WCAG 2A/AA/2.1AA) with the panel open and
   closed, popover keyboard behavior, cache-hit rendering.

@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import {
 	agentMarkdownRouteFor,
 	blogMarkdownDoc,
@@ -43,7 +43,7 @@ describe("markdown docs", () => {
 			url: "https://www.lightningjar.com/blog/leaving-wordpress",
 			markdown: "Body text.",
 		});
-		expect(doc).toStartWith("---\n");
+		expect(doc.startsWith("---\n")).toBe(true);
 		expect(doc).toContain("title: Leaving WordPress");
 		expect(doc).toContain('tags: ["CMS"]');
 		expect(doc).toContain(

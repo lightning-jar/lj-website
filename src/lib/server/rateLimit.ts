@@ -11,7 +11,7 @@
 // - Fail-open to memory, never closed: if Redis is unreachable the
 //   in-memory counters still fence this instance; an outage must not
 //   take the endpoints down. These are fences, not walls.
-// - Config is injected (no env reads here) so bun tests can exercise
+// - Config is injected (no env reads here) so tests can exercise
 //   both modes without varlock.
 
 export interface LimitRule {

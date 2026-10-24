@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import { createResponseCache } from "../src/lib/server/responseCache";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

@@ -1,6 +1,7 @@
-import { describe, expect, it } from "bun:test";
+import { createHash } from "node:crypto";
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { describe, expect, it } from "vitest";
 import { parseMarkdown } from "../src/lib/utils/parseMarkdown";
 
 // Characterization test for parseMarkdown against a FROZEN snapshot of
@@ -11,11 +12,14 @@ import { parseMarkdown } from "../src/lib/utils/parseMarkdown";
 // not. Do not add new posts here.
 //
 // To regenerate after an INTENDED parser change:
-//   UPDATE_GOLDEN=1 bun test tests/blogCorpus.test.ts
+//   UPDATE_GOLDEN=1 bun run test tests/blogCorpus.test.ts
 // then review the fixture diff before committing.
 
-const blogDir = join(import.meta.dir, "fixtures/blog-corpus");
-const fixturePath = join(import.meta.dir, "fixtures/blog-corpus-hashes.json");
+const blogDir = join(import.meta.dirname, "fixtures/blog-corpus");
+const fixturePath = join(
+	import.meta.dirname,
+	"fixtures/blog-corpus-hashes.json",
+);
 
 function renderAll(): Record<string, string> {
 	const hashes: Record<string, string> = {};
@@ -24,7 +28,7 @@ function renderAll(): Record<string, string> {
 		.sort();
 	for (const file of files) {
 		const { html } = parseMarkdown(readFileSync(join(blogDir, file), "utf8"));
-		hashes[file] = new Bun.CryptoHasher("sha256").update(html).digest("hex");
+		hashes[file] = createHash("sha256").update(html).digest("hex");
 	}
 	return hashes;
 }

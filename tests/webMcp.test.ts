@@ -1,6 +1,6 @@
 import type { SearchRecord } from "../src/lib/utils/siteSearch";
 
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import { buildWebMcpTools } from "../src/lib/utils/webMcp";
 
 const records: SearchRecord[] = [

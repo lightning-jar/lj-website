@@ -7,7 +7,7 @@
 // Upstash-backed when configured, so an instance that never saw the
 // data can still recover a copy written by another; an in-memory map
 // serves as fallback and fast path either way. Config is injected (no
-// env reads) so bun tests can exercise both modes.
+// env reads) so tests can exercise both modes.
 
 export interface LastKnownGoodConfig {
 	/** key prefix, e.g. "lkg:v1" */

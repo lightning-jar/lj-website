@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import {
 	filterSearchIndex,
 	focusLeftContainer,
@@ -86,9 +86,10 @@ describe("groupSearchResults", () => {
 // Regression: iPadOS/Safari taps on a search result fire focusout with
 // relatedTarget null while the tap is in flight; closing on null used
 // to unmount the tapped <a> before its click dispatched, eating the
-// navigation. (bun test cannot mount .svelte components, so the
-// component's focusout decision lives in this pure predicate and the
-// handler stays one line — the repo's convention for testable logic.)
+// navigation. (This Vitest config omits the svelte plugin, so .svelte
+// components cannot be mounted here; the component's focusout decision
+// therefore lives in this pure predicate and the handler stays one line,
+// which is the repo's convention for testable logic.)
 describe("focusLeftContainer (NavSearch focusout decision)", () => {
 	const node = (inside: boolean) => ({ isInside: inside }) as unknown as Node;
 	const container = {

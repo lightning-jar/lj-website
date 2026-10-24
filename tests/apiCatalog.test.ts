@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import {
 	API_CATALOG,
 	API_CATALOG_CONTENT_TYPE,
@@ -27,7 +27,9 @@ const EXPECTED_ITEM_HREFS = [
 
 describe("api-catalog (RFC 9727)", () => {
 	test("media type carries the RFC 9727 profile parameter (§4.2)", () => {
-		expect(API_CATALOG_CONTENT_TYPE).toStartWith("application/linkset+json");
+		expect(
+			API_CATALOG_CONTENT_TYPE.startsWith("application/linkset+json"),
+		).toBe(true);
 		expect(API_CATALOG_CONTENT_TYPE).toContain(
 			'profile="https://www.rfc-editor.org/info/rfc9727"',
 		);
@@ -45,7 +47,7 @@ describe("api-catalog (RFC 9727)", () => {
 		// exact count so a silently shrinking catalog fails loudly
 		expect(items).toHaveLength(12);
 		for (const item of items ?? []) {
-			expect(item.href).toStartWith("https://www.lightningjar.com/");
+			expect(item.href.startsWith("https://www.lightningjar.com/")).toBe(true);
 			expect(item.type).toBeTruthy();
 		}
 	});

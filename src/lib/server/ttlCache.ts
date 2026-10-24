@@ -1,6 +1,6 @@
 // Tiny async TTL memo for in-instance caching of CMS fetches (the
 // agent surfaces' quiet cost lever: a burst of tool calls should hit
-// the CMS once, not once per call). Pure and env-free so bun tests can
+// the CMS once, not once per call). Pure and env-free so tests can
 // import it directly.
 //
 // Semantics:

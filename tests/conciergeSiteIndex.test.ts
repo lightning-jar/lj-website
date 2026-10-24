@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 // import from the glob-free module directly: agentTools pulls in
 // import.meta.glob getters that bun's runtime can't evaluate
 import { buildSiteIndex } from "../src/lib/server/siteIndex";

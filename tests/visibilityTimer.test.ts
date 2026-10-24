@@ -1,6 +1,6 @@
-import "./setup.dom";
+// @vitest-environment happy-dom
 
-import { beforeEach, describe, expect, it, mock } from "bun:test";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { startVisibilityTimer } from "../src/lib/utils/visibilityTimer"; // adjust path
 
 // ---- Test environment/mocks ----
@@ -11,7 +11,7 @@ let rafQueue: Array<FrameRequestCallback> = [];
 let rafIdCounter = 1;
 const rafIds = new Map<number, FrameRequestCallback>();
 
-const _onExit = mock(() => {});
+const _onExit = vi.fn(() => {});
 
 function _flushRAFFrames(times = 1) {
 	for (let i = 0; i < times; i++) {
@@ -216,9 +216,9 @@ describe("startVisibilityTimer - lifecycle", () => {
 	it("calls onEnter on first visible, onExit on hide, and onFinish after visible duration", () => {
 		const target = makeTarget();
 
-		const onEnter = mock(() => {});
-		const onExit = mock(() => {});
-		const onFinish = mock(() => {});
+		const onEnter = vi.fn(() => {});
+		const onExit = vi.fn(() => {});
+		const onFinish = vi.fn(() => {});
 
 		const api = startVisibilityTimer({
 			target,
@@ -270,7 +270,7 @@ describe("startVisibilityTimer - lifecycle", () => {
 
 	it("does not double-fire onExit if already hidden", () => {
 		const target = makeTarget();
-		const onExit = mock(() => {});
+		const onExit = vi.fn(() => {});
 		const _api = startVisibilityTimer({
 			target,
 			durationMs: 300,
@@ -294,8 +294,8 @@ describe("startVisibilityTimer - lifecycle", () => {
 
 	it("finish while visible does not disconnect; future re-entries start fresh cycles", () => {
 		const target = makeTarget();
-		const onEnter = mock(() => {});
-		const onFinish = mock(() => {});
+		const onEnter = vi.fn(() => {});
+		const onFinish = vi.fn(() => {});
 		startVisibilityTimer({
 			target,
 			durationMs: 200,
@@ -320,8 +320,8 @@ describe("startVisibilityTimer - lifecycle", () => {
 describe("startVisibilityTimer - manual controls and destroy", () => {
 	it("forceEnter/forceExit toggle visibility and callbacks", () => {
 		const target = makeTarget();
-		const onEnter = mock(() => {});
-		const onExit = mock(() => {});
+		const onEnter = vi.fn(() => {});
+		const onExit = vi.fn(() => {});
 		const api = startVisibilityTimer({
 			target,
 			durationMs: 500,
@@ -342,7 +342,7 @@ describe("startVisibilityTimer - manual controls and destroy", () => {
 
 	it("destroy stops RAF and IO, optionally fires exit if visible", () => {
 		const target = makeTarget();
-		const onExit = mock(() => {});
+		const onExit = vi.fn(() => {});
 		const api = startVisibilityTimer({
 			target,
 			durationMs: 500,
@@ -377,8 +377,8 @@ describe("startVisibilityTimer - manual controls and destroy", () => {
 
 	it("resetNow restarts remaining immediately when visible", () => {
 		const target = makeTarget();
-		const onEnter = mock(() => {});
-		const onFinish = mock(() => {});
+		const onEnter = vi.fn(() => {});
+		const onFinish = vi.fn(() => {});
 		const _api = startVisibilityTimer({
 			target,
 			durationMs: 1000,
@@ -424,7 +424,7 @@ describe("startVisibilityTimer - options", () => {
 
 	it("io visible only when isIntersecting and ratio > 0", () => {
 		const target = makeTarget();
-		const onEnter = mock(() => {});
+		const onEnter = vi.fn(() => {});
 		const _api = startVisibilityTimer({
 			target,
 			durationMs: 200,

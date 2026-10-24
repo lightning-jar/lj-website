@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import { createLastKnownGood } from "../src/lib/server/lastKnownGood";
 
 describe("last-known-good — in-memory mode", () => {

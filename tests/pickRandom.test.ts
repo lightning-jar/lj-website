@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import { pickRandom, randomInt } from "../src/lib/utils/pickRandom";
 
 describe("randomInt", () => {

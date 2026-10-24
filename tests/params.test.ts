@@ -1,4 +1,4 @@
-import { describe, expect, it } from "bun:test";
+import { describe, expect, it } from "vitest";
 import { params } from "../src/params";
 
 // SvelteKit 3 matchers are Standard Schemas built by defineParams(), and a

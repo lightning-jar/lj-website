@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import { createTtlCache } from "../src/lib/server/ttlCache";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
