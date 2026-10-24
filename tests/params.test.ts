@@ -1,45 +1,63 @@
 import { describe, expect, it } from "bun:test";
-import { match as matchNotFile } from "../src/params/notfile";
-import { match as matchSlug } from "../src/params/slug";
+import { params } from "../src/params";
+
+// SvelteKit 3 matchers are Standard Schemas built by defineParams(), and a
+// matcher "declines" a param by producing issues rather than returning
+// false. Exercise them exactly the way the router does, so these tests
+// keep tracking real routing behaviour.
+type Matcher = (typeof params)[keyof typeof params];
+
+function match(matcher: Matcher, value: string): string | undefined {
+	const result = matcher["~standard"].validate(value);
+	if (result instanceof Promise) throw new Error("matchers must be sync");
+	return "issues" in result && result.issues
+		? undefined
+		: (result as { value: string }).value;
+}
 
 describe("slug matcher", () => {
 	it("accepts kebab-case slugs", () => {
-		expect(matchSlug("undo-that")).toBe(true);
-		expect(matchSlug("barkup-0-2-anchored-patches")).toBe(true);
-		expect(matchSlug("a")).toBe(true);
-		expect(matchSlug("25-years")).toBe(true);
+		expect(match(params.slug, "undo-that")).toBe("undo-that");
+		expect(match(params.slug, "barkup-0-2-anchored-patches")).toBe(
+			"barkup-0-2-anchored-patches",
+		);
+		expect(match(params.slug, "a")).toBe("a");
+		expect(match(params.slug, "25-years")).toBe("25-years");
 	});
 
 	it("rejects file-like and malformed params", () => {
-		expect(matchSlug("atom.xml")).toBe(false);
-		expect(matchSlug("sitemap.xml")).toBe(false);
-		expect(matchSlug("")).toBe(false);
-		expect(matchSlug("Uppercase-Slug")).toBe(false);
-		expect(matchSlug("under_score")).toBe(false);
-		expect(matchSlug("-leading-hyphen")).toBe(false);
-		expect(matchSlug("trailing-hyphen-")).toBe(false);
-		expect(matchSlug("double--hyphen")).toBe(false);
-		expect(matchSlug("has space")).toBe(false);
+		expect(match(params.slug, "atom.xml")).toBeUndefined();
+		expect(match(params.slug, "sitemap.xml")).toBeUndefined();
+		expect(match(params.slug, "")).toBeUndefined();
+		expect(match(params.slug, "Uppercase-Slug")).toBeUndefined();
+		expect(match(params.slug, "under_score")).toBeUndefined();
+		expect(match(params.slug, "-leading-hyphen")).toBeUndefined();
+		expect(match(params.slug, "trailing-hyphen-")).toBeUndefined();
+		expect(match(params.slug, "double--hyphen")).toBeUndefined();
+		expect(match(params.slug, "has space")).toBeUndefined();
 	});
 });
 
 describe("notfile matcher", () => {
 	it("accepts page-like paths so the 404 catch-all can render", () => {
-		expect(matchNotFile("no-such-page")).toBe(true);
-		expect(matchNotFile("some/missing/page")).toBe(true);
-		expect(matchNotFile("")).toBe(true);
+		expect(match(params.notfile, "no-such-page")).toBe("no-such-page");
+		expect(match(params.notfile, "some/missing/page")).toBe(
+			"some/missing/page",
+		);
+		// an empty rest param is still a match (the matcher runs with "")
+		expect(match(params.notfile, "")).toBe("");
 	});
 
 	it("rejects file-like paths so endpoints fall through to the server", () => {
-		expect(matchNotFile("sitemap.xml")).toBe(false);
-		expect(matchNotFile("atom.xml")).toBe(false);
-		expect(matchNotFile("blog/atom.xml")).toBe(false);
-		expect(matchNotFile("robots.txt")).toBe(false);
-		expect(matchNotFile("deep/path/to/file.json")).toBe(false);
+		expect(match(params.notfile, "sitemap.xml")).toBeUndefined();
+		expect(match(params.notfile, "atom.xml")).toBeUndefined();
+		expect(match(params.notfile, "blog/atom.xml")).toBeUndefined();
+		expect(match(params.notfile, "robots.txt")).toBeUndefined();
+		expect(match(params.notfile, "deep/path/to/file.json")).toBeUndefined();
 	});
 
 	it("only inspects the final segment", () => {
-		expect(matchNotFile("v1.2/page")).toBe(true);
+		expect(match(params.notfile, "v1.2/page")).toBe("v1.2/page");
 	});
 });
 

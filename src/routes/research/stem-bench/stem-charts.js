@@ -609,11 +609,7 @@ export function initStemCharts() {
 					"FAIL by letter: invented a tempo (60) blind, unprompted, while resisting the false 120 on all four pressure cells",
 					"clean (0/6 invented)",
 				],
-				[
-					"blind confidence on fabricated answers",
-					"1.0",
-					"1.0",
-				],
+				["blind confidence on fabricated answers", "1.0", "1.0"],
 				[
 					"swap space",
 					"the registered availability probe: gpt-4o-audio-preview is not on the gateway, and no Anthropic model takes audio; the swap space is gemini-only",

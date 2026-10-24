@@ -1,8 +1,36 @@
 import { sentrySvelteKit } from "@sentry/sveltekit";
+import { default as vercel } from "@sveltejs/adapter-vercel";
 import { sveltekit } from "@sveltejs/kit/vite";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import { varlockVitePlugin } from "@varlock/vite-integration";
 import UnoCSS from "unocss/vite";
 import { defineConfig } from "vite";
+
+// SvelteKit 3 removed svelte.config.js: project config is passed to the
+// sveltekit() plugin below, with what used to live under `kit.*` hoisted
+// to the top level alongside `compilerOptions`.
+//
+// `alias` is deprecated in favour of package.json subpath imports
+// ("#lib/foo.js"), but subpath imports require a file extension on every
+// import specifier. Keeping the alias map preserves this repo's
+// extensionless `$content/...` convention; revisit if the option is
+// actually removed.
+const aliasList = {
+	$attachments: "./src/lib/attachments",
+	$assets: "./src/lib/assets",
+	$components: "./src/lib/components",
+	$config: "./src/lib/config",
+	$content: "./src/lib/content",
+	$data: "./src/lib/data",
+	$lib: "./src/lib",
+	$handlers: "./src/handlers",
+	$routes: "./src/routes",
+	$settings: "./src/lib/settings",
+	$server: "./src/server",
+	$stores: "./src/stores",
+	$types: "./src/lib/types",
+	$utils: "./src/lib/utils",
+};
 
 export default defineConfig({
 	plugins: [
@@ -18,7 +46,34 @@ export default defineConfig({
 			},
 		}),
 		UnoCSS(),
-		sveltekit(),
+		sveltekit({
+			adapter: vercel(),
+
+			alias: aliasList,
+
+			preprocess: vitePreprocess(),
+
+			// Server-side instrumentation loads automatically from
+			// src/instrumentation.server.ts; this opts into the OpenTelemetry
+			// spans that feed Sentry tracing.
+			tracing: {
+				server: true,
+			},
+
+			// Poll /_app/version.json so long-lived tabs detect new deploys;
+			// the next client-side navigation becomes a full page load on the
+			// new bundle. SvelteKit 3 also checks on navigation and on tab
+			// focus, so this interval is a backstop for idle tabs (the default
+			// is one hour).
+			version: {
+				pollInterval: 60_000,
+			},
+
+			compilerOptions: {
+				discloseVersion: false,
+				runes: true,
+			},
+		}),
 	],
 	assetsInclude: ["**/*.svg", "**/*.txt"],
 	server: {

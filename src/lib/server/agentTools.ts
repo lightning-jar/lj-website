@@ -25,7 +25,6 @@ import { createTtlCache } from "./ttlCache";
 import { SITE_BASE } from "$data/siteBase";
 import { ABOUT_LIGHTNING_JAR } from "$data/aboutLightningJar";
 
-
 // In-instance TTL memos over the CMS fetches — the burst-cost lever: a
 // run of tool calls (one agent session can make 5-15) hits the CMS once
 // per collection per TTL, not once per call. 120s keeps the agent

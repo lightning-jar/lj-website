@@ -114,7 +114,12 @@ Blog copy follows house rules: no em/en dashes in prose, plain phrasing over cle
 
 ## Code Style
 
-- **Formatting**: Biome with tabs, double quotes, trailing commas
+- **Formatting**: Biome with tabs, double quotes, trailing commas. Markdown,
+  SVG and `ops/swamp/vaults` are excluded in `biome.json`: prose follows the
+  house editorial rules (not a formatter), `tests/fixtures/blog-corpus` is a
+  frozen corpus whose bytes must not drift, the SVGs are committed assets,
+  and the vault files are generated. Do not re-enable these without a
+  deliberate, separate reformat commit.
 - **Imports**: Organized by Biome with specific grouping (SvelteKit first, then external libs, then internal aliases)
 - **Types**: Strict TypeScript; type definitions in `src/lib/types/`
 - **Svelte**: Runes mode only (`$state`, `$derived`, `$effect` instead of stores)

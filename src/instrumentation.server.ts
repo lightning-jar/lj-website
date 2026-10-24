@@ -1,4 +1,6 @@
-// Loaded by SvelteKit via kit.experimental.instrumentation.server in svelte.config.js.
+// Loaded automatically by SvelteKit because this file exists (SvelteKit 3
+// dropped the experimental.instrumentation.server opt-in); the matching
+// tracing.server flag lives in vite.config.ts.
 // fallow-ignore-file unused-file
 import * as Sentry from "@sentry/sveltekit";
 

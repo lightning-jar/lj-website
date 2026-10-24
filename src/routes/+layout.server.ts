@@ -2,7 +2,7 @@
 export const prerender = true;
 
 // import version
-import { version } from "$app/environment";
+import { version } from "$app/env";
 // env variables
 import { ENV } from "varlock/env";
 
