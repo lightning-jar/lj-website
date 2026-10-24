@@ -1,9 +1,9 @@
-import { createHash } from "node:crypto";
-
-import aeoSkillMd from "$content/skills/aeo-bench-data/SKILL.md?raw";
-import skillMd from "$content/skills/barkup-bench-data/SKILL.md?raw";
-
 import type { RequestHandler } from "./$types";
+
+import aeoSkillMd from "#lib/content/skills/aeo-bench-data/SKILL.md?raw";
+import skillMd from "#lib/content/skills/barkup-bench-data/SKILL.md?raw";
+
+import { createHash } from "node:crypto";
 
 // Agent Skills Discovery index (RFC v0.2.0,
 // https://github.com/cloudflare/agent-skills-discovery-rfc). The digest

@@ -1,9 +1,9 @@
 // data
 
 // types
-import type { FrontMatter } from "$types/FrontMatter";
+import type { FrontMatter } from "#lib/types/FrontMatter.js";
 
-import { getAllBlogArticles } from "$content/getters/getBlogArticles";
+import { getAllBlogArticles } from "#lib/content/getters/getBlogArticles.js";
 
 // The benchmark series, in narrative (chronological) order. Empty until
 // the first stem-bench article publishes; the section is length-guarded.

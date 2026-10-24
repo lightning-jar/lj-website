@@ -1,11 +1,11 @@
 import type { RequestHandler } from "./$types";
 
-import { getAllBlogArticles } from "$content/getters/getBlogArticles";
-import { getAllCustomerStories } from "$content/getters/getCustomerStories";
-import { getAllFindings } from "$content/getters/getFindings";
-import { allPackages } from "$content/getters/getPackagesContent";
-import { getAllReadingListArticles } from "$content/getters/getReadingList";
-import { allTechnologies } from "$content/getters/getTechnologiesContent";
+import { getAllBlogArticles } from "#lib/content/getters/getBlogArticles.js";
+import { getAllCustomerStories } from "#lib/content/getters/getCustomerStories.js";
+import { getAllFindings } from "#lib/content/getters/getFindings.js";
+import { allPackages } from "#lib/content/getters/getPackagesContent.js";
+import { getAllReadingListArticles } from "#lib/content/getters/getReadingList.js";
+import { allTechnologies } from "#lib/content/getters/getTechnologiesContent.js";
 
 import aeoStudies from "../research/aeo-bench/aeo-studies.json";
 import benchStudies from "../research/barkup-bench/bench-studies.json";

@@ -10,15 +10,15 @@
 
 import { onMount } from "svelte";
 
-import VoiceInputButton from "$components/VoiceInputButton.svelte";
+import VoiceInputButton from "#lib/components/VoiceInputButton.svelte";
 
-import { pickRandom } from "$utils/pickRandom";
+import { pickRandom } from "#lib/utils/pickRandom.js";
 
 import type { Chat } from "@ai-sdk/svelte";
 import type { UIMessage } from "ai";
 import type { Attachment } from "svelte/attachments";
 
-import { CONCIERGE_SUGGESTIONS } from "$data/conciergeSuggestions";
+import { CONCIERGE_SUGGESTIONS } from "#lib/data/conciergeSuggestions.js";
 
 // hideClearButton: set by hosts that provide their own reset affordance
 // (the homepage launcher's header button calls the exported reset()

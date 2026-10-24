@@ -1,9 +1,10 @@
 // import landing page content
-import page from "$content/landing-pages/technologies.json";
 
 // types
-import type { Technology } from "$types/Technology";
-import type { TechnologySupercategory } from "$types/TechnologySupercategory";
+import type { Technology } from "#lib/types/Technology.js";
+import type { TechnologySupercategory } from "#lib/types/TechnologySupercategory.js";
+
+import page from "#lib/content/landing-pages/technologies.json";
 
 // function to load all technology
 async function loadAllTechnologiesJson() {

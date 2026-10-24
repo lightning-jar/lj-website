@@ -1,7 +1,7 @@
 <script lang="ts">
 import { onMount } from "svelte";
 
-import { jsonLdScript, LJ_PUBLISHER } from "$utils/jsonLd";
+import { jsonLdScript, LJ_PUBLISHER } from "#lib/utils/jsonLd.js";
 
 let { data } = $props();
 

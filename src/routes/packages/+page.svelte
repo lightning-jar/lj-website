@@ -1,7 +1,7 @@
 <script lang="ts">
 // components
-import LinkButton from "$components/LinkButton.svelte";
-import ProjectTile from "$components/ProjectTile.svelte";
+import LinkButton from "#lib/components/LinkButton.svelte";
+import ProjectTile from "#lib/components/ProjectTile.svelte";
 
 // props
 let { data } = $props();

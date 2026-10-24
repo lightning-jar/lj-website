@@ -1,6 +1,6 @@
 <script lang="ts">
 // components
-import PanelAdvanceArrow from "$components/PanelAdvanceArrow.svelte";
+import PanelAdvanceArrow from "#lib/components/PanelAdvanceArrow.svelte";
 
 // props
 let { data } = $props();

@@ -4,7 +4,7 @@ import {
 	allPackages,
 	getPackageById,
 	getRelatedPackages,
-} from "$content/getters/getPackagesContent";
+} from "#lib/content/getters/getPackagesContent.js";
 
 // git-resident content: prerender every package page
 export const prerender = true;

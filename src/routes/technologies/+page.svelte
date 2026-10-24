@@ -1,11 +1,12 @@
 <script lang="ts">
 // components
-import SearchTagFilter from "$components/SearchTagFilter.svelte";
+import SearchTagFilter from "#lib/components/SearchTagFilter.svelte";
+
 import {
 	matchesEveryTerm,
 	searchTermsOf,
 	toggleSearchTerm,
-} from "$utils/searchFilter";
+} from "#lib/utils/searchFilter.js";
 
 let { data } = $props();
 

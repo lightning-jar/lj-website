@@ -8,12 +8,14 @@
 // fallow-ignore-next-line unused-export
 export const prerender = false;
 
-import { ENV } from "varlock/env";
+import { buildAtomFeed } from "#lib/utils/atomFeed.js";
+import { buildReadingListEntries } from "#lib/utils/feedEntries.js";
+
 import type { RequestHandler } from "@sveltejs/kit";
 
-import { getAllReadingListArticles } from "$content/getters/getReadingList";
-import { buildAtomFeed } from "$utils/atomFeed";
-import { buildReadingListEntries } from "$utils/feedEntries";
+import { getAllReadingListArticles } from "#lib/content/getters/getReadingList.js";
+
+import { ENV } from "varlock/env";
 
 const baseUrl = `https://${
 	ENV.VERCEL_PROJECT_PRODUCTION_URL || "www.lightningjar.com"

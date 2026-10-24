@@ -1,5 +1,13 @@
 {
-	"extends": "./.svelte-kit/tsconfig.json",
+	// Generated into node_modules by `svelte-kit sync` (SvelteKit 3 replaced
+	// ./.svelte-kit/tsconfig.json with this). The bare specifier resolves in
+	// TypeScript only, which used to break Bun's inheritance of `paths`; that
+	// no longer matters now that every internal import goes through
+	// package.json's `#lib/*` subpath, which Bun resolves natively.
+	"extends": "$app/tsconfig",
+	// $app/tsconfig supplies isolatedModules and verbatimModuleSyntax but no
+	// include/exclude, so they are declared here.
+	"include": ["src", "tests", "scripts", "*"],
 	"compilerOptions": {
 		"allowJs": true,
 		"checkJs": true,
@@ -10,11 +18,6 @@
 		"sourceMap": true,
 		"strict": true,
 		"moduleResolution": "bundler",
-		"types": ["node", "bun"]
+		"types": ["$app/types", "node", "bun"]
 	}
-	// Path aliases are handled by https://svelte.dev/docs/kit/configuration#alias
-	// except $lib which is handled by https://svelte.dev/docs/kit/configuration#files
-	//
-	// If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
-	// from the referenced tsconfig.json - TypeScript does not merge them in
 }

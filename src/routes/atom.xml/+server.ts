@@ -9,20 +9,21 @@
 // fallow-ignore-next-line unused-export
 export const prerender = false;
 
-import { ENV } from "varlock/env";
-import type { RequestHandler } from "@sveltejs/kit";
-
-import { getAllBlogArticles } from "$content/getters/getBlogArticles";
-import { getAllCustomerStories } from "$content/getters/getCustomerStories";
-import { getAllReadingListArticles } from "$content/getters/getReadingList";
-import { buildAtomFeed } from "$utils/atomFeed";
+import { buildAtomFeed } from "#lib/utils/atomFeed.js";
 import {
 	buildBlogEntries,
 	buildCustomerStoryEntries,
 	buildReadingListEntries,
 	buildStudyEntries,
-} from "$utils/feedEntries";
+} from "#lib/utils/feedEntries.js";
 
+import type { RequestHandler } from "@sveltejs/kit";
+
+import { getAllBlogArticles } from "#lib/content/getters/getBlogArticles.js";
+import { getAllCustomerStories } from "#lib/content/getters/getCustomerStories.js";
+import { getAllReadingListArticles } from "#lib/content/getters/getReadingList.js";
+
+import { ENV } from "varlock/env";
 import aeoStudies from "../research/aeo-bench/aeo-studies.json";
 import benchStudies from "../research/barkup-bench/bench-studies.json";
 

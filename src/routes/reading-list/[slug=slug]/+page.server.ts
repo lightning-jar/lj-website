@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit";
 
-import { getReadingListArticleBySlug } from "$content/getters/getReadingList";
+import { getReadingListArticleBySlug } from "#lib/content/getters/getReadingList.js";
 
 // Rendered at request time so CMS saves go live without a redeploy —
 // including brand-new slugs; Vercel's edge caches responses on the same

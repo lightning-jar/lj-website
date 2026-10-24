@@ -7,12 +7,12 @@
 // fallow-ignore-next-line unused-export
 export const prerender = false;
 
-import { buildAtomFeed } from "$utils/atomFeed";
-import { buildFindingsEntries } from "$utils/feedEntries";
+import { buildAtomFeed } from "#lib/utils/atomFeed.js";
+import { buildFindingsEntries } from "#lib/utils/feedEntries.js";
 
 import type { RequestHandler } from "@sveltejs/kit";
 
-import { getAllFindings } from "$content/getters/getFindings";
+import { getAllFindings } from "#lib/content/getters/getFindings.js";
 
 import { ENV } from "varlock/env";
 

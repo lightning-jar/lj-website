@@ -1,4 +1,4 @@
-import page from "$content/landing-pages/built-with.json";
+import page from "#lib/content/landing-pages/built-with.json";
 
 export const builtWithContent = page;
 

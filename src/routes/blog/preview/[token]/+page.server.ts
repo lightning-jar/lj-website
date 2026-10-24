@@ -1,6 +1,6 @@
 // env
 
-import { getBlogAuthorCatalog } from "$content/getters/getBlogArticles";
+import { getBlogAuthorCatalog } from "#lib/content/getters/getBlogArticles.js";
 
 import { ENV } from "varlock/env";
 

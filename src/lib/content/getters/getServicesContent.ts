@@ -1,4 +1,4 @@
-import page from "$content/landing-pages/services.json";
+import page from "#lib/content/landing-pages/services.json";
 
 export const servicesContent = page;
 

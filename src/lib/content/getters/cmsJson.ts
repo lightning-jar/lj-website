@@ -12,7 +12,7 @@
 
 import { error } from "@sveltejs/kit";
 
-import { createLastKnownGood } from "$lib/server/lastKnownGood";
+import { createLastKnownGood } from "#lib/server/lastKnownGood.js";
 import { ENV } from "varlock/env";
 
 type Fetch = typeof globalThis.fetch;

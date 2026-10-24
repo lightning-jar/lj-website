@@ -1,7 +1,7 @@
 <script lang="ts">
 // Yellow arrow that fires the lightning-bolt animation and advances the
 // active panel. Shared by /services and /testimonials.
-import LightningButton from "$components/LightningButton.svelte";
+import LightningButton from "#lib/components/LightningButton.svelte";
 
 // props
 let {

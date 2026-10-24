@@ -1,7 +1,7 @@
 // types
-import type { FrontMatter } from "$types/FrontMatter";
+import type { FrontMatter } from "#lib/types/FrontMatter.js";
 
-import { getAllBlogArticles } from "$content/getters/getBlogArticles";
+import { getAllBlogArticles } from "#lib/content/getters/getBlogArticles.js";
 
 // Rendered at request time so CMS saves go live without a redeploy;
 // Vercel's edge caches responses on the same TTLs as the CMS API.

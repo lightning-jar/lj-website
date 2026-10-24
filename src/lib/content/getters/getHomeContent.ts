@@ -1,5 +1,5 @@
-import home from "$content/landing-pages/home.json";
-import researchStats from "$data/research-stats.json";
+import home from "#lib/content/landing-pages/home.json";
+import researchStats from "#lib/data/research-stats.json";
 
 // Interpolate shared research stats so the home panel can never drift from
 // the research pages. Single source: src/lib/data/research-stats.json

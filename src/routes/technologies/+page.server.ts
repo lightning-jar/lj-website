@@ -3,7 +3,7 @@ import {
 	allTechnologies,
 	allTechnologySupercategories,
 	technologiesLandingPageContent,
-} from "$content/getters/getTechnologiesContent";
+} from "#lib/content/getters/getTechnologiesContent.js";
 
 export function load() {
 	return {

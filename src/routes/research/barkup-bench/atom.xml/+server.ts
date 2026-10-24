@@ -7,8 +7,8 @@
 // fallow-ignore-next-line unused-export
 export const prerender = true;
 
-import { buildAtomFeed } from "$utils/atomFeed";
-import { buildStudyEntries } from "$utils/feedEntries";
+import { buildAtomFeed } from "#lib/utils/atomFeed.js";
+import { buildStudyEntries } from "#lib/utils/feedEntries.js";
 
 import type { RequestHandler } from "@sveltejs/kit";
 

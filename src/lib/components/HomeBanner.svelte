@@ -1,8 +1,8 @@
 <script lang="ts">
 // components
-import LightningBolt from "$components/LightningBolt.svelte";
-import LightningButton from "$components/LightningButton.svelte";
-import LinkButton from "$components/LinkButton.svelte";
+import LightningBolt from "#lib/components/LightningBolt.svelte";
+import LightningButton from "#lib/components/LightningButton.svelte";
+import LinkButton from "#lib/components/LinkButton.svelte";
 
 // types
 interface TopicCta {

@@ -1,5 +1,5 @@
 // shared headline numbers: src/lib/data/research-stats.json
-import researchStats from "$data/research-stats.json";
+import researchStats from "#lib/data/research-stats.json";
 
 const studiesSentenceCase =
 	researchStats.barkupBench.studiesSpelled.charAt(0).toUpperCase() +

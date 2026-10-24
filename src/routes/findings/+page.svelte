@@ -1,7 +1,7 @@
 <script lang="ts">
 // components
-import FeedBadge from "$components/FeedBadge.svelte";
-import SearchTagFilter from "$components/SearchTagFilter.svelte";
+import FeedBadge from "#lib/components/FeedBadge.svelte";
+import SearchTagFilter from "#lib/components/SearchTagFilter.svelte";
 
 // utils
 import {
@@ -10,7 +10,7 @@ import {
 	tagIsActive,
 	toggleSearchTerm,
 	uniqueSortedTags,
-} from "$utils/searchFilter";
+} from "#lib/utils/searchFilter.js";
 
 let { data } = $props();
 

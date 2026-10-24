@@ -11,8 +11,8 @@ import { json } from "@sveltejs/kit";
 
 import type { RequestHandler } from "./$types";
 
-import { ALLOWED_ORIGINS } from "$lib/server/allowedOrigins";
-import { createRateLimiter } from "$lib/server/rateLimit";
+import { ALLOWED_ORIGINS } from "#lib/server/allowedOrigins.js";
+import { createRateLimiter } from "#lib/server/rateLimit.js";
 import { ENV } from "varlock/env";
 
 export const prerender = false;

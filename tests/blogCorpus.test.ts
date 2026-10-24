@@ -1,6 +1,6 @@
-import { readFileSync, readdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
 import { describe, expect, it } from "bun:test";
+import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import { parseMarkdown } from "../src/lib/utils/parseMarkdown";
 
 // Characterization test for parseMarkdown against a FROZEN snapshot of

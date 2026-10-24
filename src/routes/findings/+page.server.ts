@@ -1,12 +1,12 @@
 // types
 
-import type { Banner } from "$types/Banner";
-import type { Finding } from "$types/Finding";
-import type { PageMeta } from "$types/PageMeta";
+import type { Banner } from "#lib/types/Banner.js";
+import type { Finding } from "#lib/types/Finding.js";
+import type { PageMeta } from "#lib/types/PageMeta.js";
 
 // data
-import { getAllFindings } from "$content/getters/getFindings";
-import { default as landing } from "$content/landing-pages/findings.json";
+import { getAllFindings } from "#lib/content/getters/getFindings.js";
+import { default as landing } from "#lib/content/landing-pages/findings.json";
 
 const banner: Banner = landing.banner;
 const meta: PageMeta = landing.meta;

@@ -1,14 +1,14 @@
-import { getBlogArticlesSitemapSection } from "$content/getters/getBlogArticles";
-import { builtWithSitemapSection } from "$content/getters/getBuiltWithContent";
-import { getCustomerStoriesSitemapSection } from "$content/getters/getCustomerStories";
-import { getFindingsSitemapSection } from "$content/getters/getFindings";
-import { homeSitemapSection } from "$content/getters/getHomeContent";
-import { packagesSitemapSection } from "$content/getters/getPackagesContent";
-import { getReadingListSitemapSection } from "$content/getters/getReadingList";
-import { servicesSitemapSection } from "$content/getters/getServicesContent";
-import { technologiesSitemapSection } from "$content/getters/getTechnologiesContent";
-import { termsSitemapSection } from "$content/getters/getTermsContent";
-import { testimonialsSitemapSection } from "$content/getters/getTestimonialsContent";
+import { getBlogArticlesSitemapSection } from "#lib/content/getters/getBlogArticles.js";
+import { builtWithSitemapSection } from "#lib/content/getters/getBuiltWithContent.js";
+import { getCustomerStoriesSitemapSection } from "#lib/content/getters/getCustomerStories.js";
+import { getFindingsSitemapSection } from "#lib/content/getters/getFindings.js";
+import { homeSitemapSection } from "#lib/content/getters/getHomeContent.js";
+import { packagesSitemapSection } from "#lib/content/getters/getPackagesContent.js";
+import { getReadingListSitemapSection } from "#lib/content/getters/getReadingList.js";
+import { servicesSitemapSection } from "#lib/content/getters/getServicesContent.js";
+import { technologiesSitemapSection } from "#lib/content/getters/getTechnologiesContent.js";
+import { termsSitemapSection } from "#lib/content/getters/getTermsContent.js";
+import { testimonialsSitemapSection } from "#lib/content/getters/getTestimonialsContent.js";
 
 import benchStudies from "./../research/barkup-bench/bench-studies.json";
 import stemStudies from "./../research/stem-bench/stem-studies.json";

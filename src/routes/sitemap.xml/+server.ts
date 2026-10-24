@@ -11,7 +11,10 @@ export const prerender = false;
 
 // types
 import type { RequestHandler } from "@sveltejs/kit";
-import type { SitemapXMLFrequency, SitemapXMLPage } from "$types/Sitemap";
+import type {
+	SitemapXMLFrequency,
+	SitemapXMLPage,
+} from "#lib/types/Sitemap.js";
 
 import { ENV } from "varlock/env";
 // env variables
@@ -23,12 +26,12 @@ const productionUrl =
 	ENV.VERCEL_PROJECT_PRODUCTION_URL || "www.lightningjar.com";
 
 // get data for blog + customer stories + reading list
-import { getAllBlogArticleSlugs } from "$content/getters/getBlogArticles";
-import { getAllCustomerStorySlugs } from "$content/getters/getCustomerStories";
-import { getAllFindingsSlugs } from "$content/getters/getFindings";
-import { allPackages } from "$content/getters/getPackagesContent";
-import { getAllReadingListSlugs } from "$content/getters/getReadingList";
-import { allTechnologies } from "$content/getters/getTechnologiesContent";
+import { getAllBlogArticleSlugs } from "#lib/content/getters/getBlogArticles.js";
+import { getAllCustomerStorySlugs } from "#lib/content/getters/getCustomerStories.js";
+import { getAllFindingsSlugs } from "#lib/content/getters/getFindings.js";
+import { allPackages } from "#lib/content/getters/getPackagesContent.js";
+import { getAllReadingListSlugs } from "#lib/content/getters/getReadingList.js";
+import { allTechnologies } from "#lib/content/getters/getTechnologiesContent.js";
 
 // helper function to create sitemap pages
 function generateSiteMapXMLPage(

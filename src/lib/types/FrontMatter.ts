@@ -1,4 +1,4 @@
-import type { ArticleSource } from "$types/ArticleSource";
+import type { ArticleSource } from "#lib/types/ArticleSource.js";
 
 export interface FrontMatter {
 	[key: string]: unknown;

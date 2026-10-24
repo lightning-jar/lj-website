@@ -3,8 +3,8 @@ import { page } from "$app/state";
 
 import { addIntegration } from "@sentry/sveltekit";
 
-import { jsonLdScript, LJ_PUBLISHER } from "$utils/jsonLd";
-import { safeLinkUrl } from "$utils/safeLinkUrl";
+import { jsonLdScript, LJ_PUBLISHER } from "#lib/utils/jsonLd.js";
+import { safeLinkUrl } from "#lib/utils/safeLinkUrl.js";
 
 let { data } = $props();
 
@@ -42,7 +42,7 @@ let articleLd = $derived.by(() => {
 	});
 });
 
-import type { ArticleSource } from "$types/ArticleSource";
+import type { ArticleSource } from "#lib/types/ArticleSource.js";
 
 function getAttributionFromSource(source: ArticleSource): string {
 	const array: string[] = [];

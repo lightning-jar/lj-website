@@ -4,10 +4,10 @@
 import { onMount } from "svelte";
 
 // components
-import FeedBadge from "$components/FeedBadge.svelte";
-import LinkButton from "$components/LinkButton.svelte";
+import FeedBadge from "#lib/components/FeedBadge.svelte";
+import LinkButton from "#lib/components/LinkButton.svelte";
 
-import researchStats from "$data/research-stats.json";
+import researchStats from "#lib/data/research-stats.json";
 
 // dashboard content and chart data
 import aeo from "./aeo-content.json";

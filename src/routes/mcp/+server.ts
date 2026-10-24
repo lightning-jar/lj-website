@@ -4,7 +4,7 @@ import type { RequestHandler } from "./$types";
 
 // One shared tool layer serves both this public MCP endpoint and the
 // concierge chat (/api/concierge) — the data functions live in
-// $lib/server/agentTools so the two surfaces can never drift.
+// #lib/server/agentTools so the two surfaces can never drift.
 import {
 	aboutLightningJar,
 	listBlogArticles,
@@ -17,8 +17,8 @@ import {
 	readPage,
 	readStudy,
 	searchContent,
-} from "$lib/server/agentTools";
-import { createRateLimiter } from "$lib/server/rateLimit";
+} from "#lib/server/agentTools.js";
+import { createRateLimiter } from "#lib/server/rateLimit.js";
 import { createMcpHandler } from "mcp-handler";
 import { ENV } from "varlock/env";
 import { z } from "zod";
@@ -34,129 +34,160 @@ type Fetch = typeof globalThis.fetch;
 function handlerFor(fetch: Fetch) {
 	return createMcpHandler(
 		(server) => {
-			// The SDK's .tool() overload types resolve against zod v3 shapes;
-			// the runtime supports zod v4 (peer ^3.25 || ^4.0). One cast
-			// bridges the typings — args are validated by the SDK at runtime.
-			const tool = server.tool.bind(server) as (
-				name: string,
-				description: string,
-				schema: Record<string, unknown>,
-				// biome-ignore lint/suspicious/noExplicitAny: SDK-validated args
-				cb: (args: any) => Promise<unknown> | unknown,
-			) => void;
-
 			const text = (value: unknown) => ({
 				content: [
 					{ type: "text" as const, text: JSON.stringify(value, null, 2) },
 				],
 			});
 
-			tool(
+			server.registerTool(
 				"about_lightning_jar",
-				"Who Lightning Jar is, what the studio does, and the site's key surfaces (research, playbook, packages, contact).",
-				{},
+				{
+					description:
+						"Who Lightning Jar is, what the studio does, and the site's key surfaces (research, playbook, packages, contact).",
+					inputSchema: z.object({}),
+				},
 				() => text(aboutLightningJar()),
 			);
 
-			tool(
+			server.registerTool(
 				"search_content",
-				"Search Lightning Jar's blog articles, customer stories, reading-list entries, technologies, and open-source packages by keyword. Every term must match somewhere in the title, description, summary, or tags.",
 				{
-					query: z.string().min(1).describe("Search terms, space-separated"),
-					collection: z
-						.enum([
-							"blog",
-							"customer-story",
-							"reading-list",
-							"technology",
-							"package",
-						])
-						.optional()
-						.describe("Restrict to one collection"),
+					description:
+						"Search Lightning Jar's blog articles, customer stories, reading-list entries, technologies, and open-source packages by keyword. Every term must match somewhere in the title, description, summary, or tags.",
+					inputSchema: z.object({
+						query: z.string().min(1).describe("Search terms, space-separated"),
+						collection: z
+							.enum([
+								"blog",
+								"customer-story",
+								"reading-list",
+								"technology",
+								"package",
+							])
+							.optional()
+							.describe("Restrict to one collection"),
+					}),
 				},
 				async ({ query, collection }: { query: string; collection?: string }) =>
 					text(await searchContent(fetch, query, collection)),
 			);
 
-			tool(
+			server.registerTool(
 				"list_blog_articles",
-				"List Lightning Jar blog articles, newest first: slug, title, date, description, url.",
-				{},
+				{
+					description:
+						"List Lightning Jar blog articles, newest first: slug, title, date, description, url.",
+					inputSchema: z.object({}),
+				},
 				async () => text(await listBlogArticles(fetch)),
 			);
 
-			tool(
+			server.registerTool(
 				"read_blog_article",
-				"Read one blog article by slug: full markdown body plus frontmatter essentials.",
-				{ slug: z.string().min(1) },
+				{
+					description:
+						"Read one blog article by slug: full markdown body plus frontmatter essentials.",
+					inputSchema: z.object({ slug: z.string().min(1) }),
+				},
 				async ({ slug }: { slug: string }) =>
 					text(await readBlogArticle(fetch, slug)),
 			);
 
-			tool(
+			server.registerTool(
 				"read_page",
-				"Read the full text of a studio overview page: about, services, testimonials, terms, fun, or built-with.",
 				{
-					page: z.enum([
-						"about",
-						"services",
-						"testimonials",
-						"terms",
-						"fun",
-						"built-with",
-					]),
+					description:
+						"Read the full text of a studio overview page: about, services, testimonials, terms, fun, or built-with.",
+					inputSchema: z.object({
+						page: z.enum([
+							"about",
+							"services",
+							"testimonials",
+							"terms",
+							"fun",
+							"built-with",
+						]),
+					}),
 				},
 				async ({ page }: { page: Parameters<typeof readPage>[1] }) =>
 					text(await readPage(fetch, page)),
 			);
 
-			tool(
+			server.registerTool(
 				"list_customer_stories",
-				"List Lightning Jar customer stories in curated order: slug, title, customer, excerpt, url.",
-				{},
+				{
+					description:
+						"List Lightning Jar customer stories in curated order: slug, title, customer, excerpt, url.",
+					inputSchema: z.object({}),
+				},
 				async () => text(await listCustomerStories(fetch)),
 			);
 
-			tool(
+			server.registerTool(
 				"read_customer_story",
-				"Read one customer story by slug: rendered body plus customer, testimonials, and technologies.",
-				{ slug: z.string().min(1) },
+				{
+					description:
+						"Read one customer story by slug: rendered body plus customer, testimonials, and technologies.",
+					inputSchema: z.object({ slug: z.string().min(1) }),
+				},
 				async ({ slug }: { slug: string }) =>
 					text(await readCustomerStory(fetch, slug)),
 			);
 
-			tool(
+			server.registerTool(
 				"list_reading_list",
-				"List the Lightning Jar reading list, newest repost first: curated external articles with our summaries.",
-				{},
+				{
+					description:
+						"List the Lightning Jar reading list, newest repost first: curated external articles with our summaries.",
+					inputSchema: z.object({}),
+				},
 				async () => text(await listReadingList(fetch)),
 			);
 
-			tool(
+			server.registerTool(
 				"list_packages",
-				"List Lightning Jar's open-source packages and tools (barkup, barkdown, woof-editor, …): name, npm package, status, tagline, links, url.",
-				{},
+				{
+					description:
+						"List Lightning Jar's open-source packages and tools (barkup, barkdown, woof-editor, …): name, npm package, status, tagline, links, url.",
+					inputSchema: z.object({}),
+				},
 				() => text(listPackages()),
 			);
 
-			tool(
+			server.registerTool(
 				"list_studies",
-				"List every study across Lightning Jar's pre-registered research projects (Barkup Bench: LLM tree editing; AEO Bench: agent readiness and answer engine optimization): project, letters, slug, track, title, one-line result, url.",
-				{},
+				{
+					description:
+						"List every study across Lightning Jar's pre-registered research projects (Barkup Bench: LLM tree editing; AEO Bench: agent readiness and answer engine optimization): project, letters, slug, track, title, one-line result, url.",
+					inputSchema: z.object({}),
+				},
 				() => text(listStudies()),
 			);
 
-			tool(
+			server.registerTool(
 				"read_study",
-				'Read one study by its short slug — the last path segment alone, e.g. "1" for /research/aeo-bench/1 or "ag" for /research/barkup-bench/ag (slugs are unique across projects): full section text (HTML stripped), chart titles, and source links.',
-				{ slug: z.string().min(1) },
+				{
+					description:
+						'Read one study by its short slug — the last path segment alone, e.g. "1" for /research/aeo-bench/1 or "ag" for /research/barkup-bench/ag (slugs are unique across projects): full section text (HTML stripped), chart titles, and source links.',
+					inputSchema: z.object({ slug: z.string().min(1) }),
+				},
 				({ slug }: { slug: string }) => text(readStudy(slug)),
 			);
 		},
-		{ serverInfo: { name: "lightning-jar", version: "1.0.0" } },
-		{ basePath: "", disableSse: true, maxDuration: 60 },
+		{
+			serverInfo: { name: "lightning-jar", version: "1.0.0" },
+			// Stateless: reject subscriptions rather than opening an SSE
+			// stream (mcp-handler 1's `disableSse` became this in 2.x).
+			maxSubscriptions: 0,
+		},
 	);
 }
+
+// mcp-handler 2 dropped the handler-level `maxDuration`; on Vercel it is
+// route config, which adapter-vercel reads from +server.ts. Runtime is
+// inherited from the adapter default pinned in vite.config.ts.
+export const config = { maxDuration: 60 };
 
 const CORS = {
 	"Access-Control-Allow-Origin": "*",
@@ -169,7 +200,7 @@ const CORS = {
 // 5-15 tool calls (AEO Bench Study 1 measured 2.7-4.9 fetches per
 // task), and cloud-hosted agents share egress IPs, so the caps are
 // generous. Upstash-backed when configured, in-memory per-instance
-// otherwise ($lib/server/rateLimit).
+// otherwise (#lib/server/rateLimit).
 const limiter = createRateLimiter({
 	prefix: "rl:mcp",
 	rules: [

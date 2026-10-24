@@ -2,13 +2,16 @@
 import { page } from "$app/state";
 
 // utils
-import { parseMarkdownTextToHtml, stripLeadingH1 } from "$utils/parseMarkdown";
-import { safeLinkUrl } from "$utils/safeLinkUrl";
+import {
+	parseMarkdownTextToHtml,
+	stripLeadingH1,
+} from "#lib/utils/parseMarkdown.js";
+import { safeLinkUrl } from "#lib/utils/safeLinkUrl.js";
 
 // types
-import type { Article } from "$types/Article";
-import type { ArticleSource } from "$types/ArticleSource";
-import type { FrontMatter } from "$types/FrontMatter";
+import type { Article } from "#lib/types/Article.js";
+import type { ArticleSource } from "#lib/types/ArticleSource.js";
+import type { FrontMatter } from "#lib/types/FrontMatter.js";
 
 interface PreviewArticle {
 	slug: string;
@@ -23,7 +26,7 @@ interface PreviewArticle {
 	markdown: string;
 }
 
-import { matchAuthorProfile } from "$utils/authorMatch";
+import { matchAuthorProfile } from "#lib/utils/authorMatch.js";
 
 let { data } = $props();
 

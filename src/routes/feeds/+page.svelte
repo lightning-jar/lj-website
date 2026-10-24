@@ -1,5 +1,5 @@
 <script lang="ts">
-import FeedBadge from "$components/FeedBadge.svelte";
+import FeedBadge from "#lib/components/FeedBadge.svelte";
 
 let { data } = $props();
 </script>

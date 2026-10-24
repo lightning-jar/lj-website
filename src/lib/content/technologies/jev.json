@@ -1,0 +1,25 @@
+{
+	"id": "jev",
+	"name": "Jev",
+	"shortDescription": "A typed-decision model for boxed choices: pick one option from a set, answer a calibrated yes or no, or score against ordered criteria, with a probability attached to every answer.",
+	"description": [
+		"Jev is TypeSafe AI's first public model, which they describe as a \"System One\" model for automation: reached as typesafe-ai/jev through the Vercel AI Gateway's decisions endpoint, it does one narrow thing, answering typed questions about an application-state string. A question is a choice from an enumerated set, a predicate (a calibrated yes or no), or a score against ordered criteria, and every answer comes back with a probability and the full distribution rather than prose we would have to parse. Input runs about four cents per million tokens with output free, so a decision is effectively free compared to a frontier call.",
+		"We use it in Replicator at decision points that are genuinely boxed and always have a fallback path: assessing what an inbound attachment is for, picking which organization a document belongs to, and judging reuse-versus-build in the PDF widget pipeline. The rule we deploy under is deliberately narrow. Jev is for enumerable choices behind a fallback, never destructive operations, and never a replacement for a guardrail we established with a measurement.",
+		"That last clause came from running the experiment. Barkup Bench Study AU put Jev against fable-5.1 on 102 frozen PDF regions, both engines fresh on byte-identical inputs. Action agreement came in at 0.676 against a pre-registered 0.85 gate, so the swap was declined and fable stayed. The useful part was the texture: 31 of 33 disagreements ran one direction, Jev reusing at 45.1% where fable sat at 16.7%, with its extra reuses carrying median probability 0.71. That is a systematically looser policy rather than noise, and it was 49 times faster and roughly 500 times cheaper while being the wrong judge for that stage."
+	],
+	"useCases": [
+		"Enumerable decision points where a probability matters more than an explanation",
+		"Calibrated yes or no predicates over application state, behind a fallback path",
+		"Cheap, fast classification and routing that would be wasteful as a frontier model call"
+	],
+	"license": "Proprietary",
+	"category": "Typed Decision Model",
+	"link": {
+		"href": "https://www.typesafe.ai"
+	},
+	"relatedArticle": {
+		"href": "/research/barkup-bench/au",
+		"title": "Study AU: The match-stage engine A/B, where Jev proved to be a looser policy rather than a drop-in judge"
+	},
+	"supercategory": "ai-llm"
+}

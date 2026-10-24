@@ -1,5 +1,5 @@
 // data
-import { testimonialsContent } from "$content/getters/getTestimonialsContent";
+import { testimonialsContent } from "#lib/content/getters/getTestimonialsContent.js";
 
 export function load() {
 	return {

@@ -1,9 +1,9 @@
 <script lang="ts">
 // components
-import LinkButton from "$components/LinkButton.svelte";
+import LinkButton from "#lib/components/LinkButton.svelte";
 
 // shared headline numbers: src/lib/data/research-stats.json
-import researchStats from "$data/research-stats.json";
+import researchStats from "#lib/data/research-stats.json";
 
 // shared dashboard styles (mirrors /research/aeo-bench and the sibling
 // Builder's Playbook so the two guidance pages read as one series)

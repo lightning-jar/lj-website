@@ -6,17 +6,17 @@ import { page } from "$app/state";
 // import css file
 import "uno.css";
 
-import BackToTop from "$components/BackToTop.svelte";
-import ConciergeLauncher from "$components/ConciergeLauncher.svelte";
+import BackToTop from "#lib/components/BackToTop.svelte";
+import ConciergeLauncher from "#lib/components/ConciergeLauncher.svelte";
 // import components
-import GlobalFooter from "$components/GlobalFooter.svelte";
-import GlobalNav from "$components/GlobalNav.svelte";
-import SvelteAnnounceFix from "$components/SvelteAnnounceFix.svelte";
+import GlobalFooter from "#lib/components/GlobalFooter.svelte";
+import GlobalNav from "#lib/components/GlobalNav.svelte";
+import SvelteAnnounceFix from "#lib/components/SvelteAnnounceFix.svelte";
 
-import { initWebMcp } from "$utils/webMcp";
+import { initWebMcp } from "#lib/utils/webMcp.js";
 
 // types
-import type { PageMeta } from "$types/PageMeta";
+import type { PageMeta } from "#lib/types/PageMeta.js";
 
 // props
 let { children, data } = $props();

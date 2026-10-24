@@ -1,4 +1,4 @@
-import type { Link } from "$types/Link";
+import type { Link } from "#lib/types/Link.js";
 
 /** An open-source package or tool made by Lightning Jar, featured on
  * the /packages ("Packages & Tools") section. Distinct from Technology:

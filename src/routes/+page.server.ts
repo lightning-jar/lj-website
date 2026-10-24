@@ -1,9 +1,9 @@
 // data
 
-import { getAllBlogArticles } from "$content/getters/getBlogArticles";
-import { getAllCustomerStories } from "$content/getters/getCustomerStories";
-import { homeContent } from "$content/getters/getHomeContent";
-import { getAllReadingListArticles } from "$content/getters/getReadingList";
+import { getAllBlogArticles } from "#lib/content/getters/getBlogArticles.js";
+import { getAllCustomerStories } from "#lib/content/getters/getCustomerStories.js";
+import { homeContent } from "#lib/content/getters/getHomeContent.js";
+import { getAllReadingListArticles } from "#lib/content/getters/getReadingList.js";
 
 import aeoStudies from "./research/aeo-bench/aeo-studies.json";
 import benchStudies from "./research/barkup-bench/bench-studies.json";

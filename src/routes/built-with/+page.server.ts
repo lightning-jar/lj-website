@@ -1,5 +1,5 @@
 // data
-import { builtWithContent } from "$content/getters/getBuiltWithContent";
+import { builtWithContent } from "#lib/content/getters/getBuiltWithContent.js";
 
 export function load() {
 	return {
