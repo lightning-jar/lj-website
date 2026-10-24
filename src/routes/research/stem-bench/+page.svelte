@@ -95,9 +95,12 @@ const proseCls = "text-[#c3c9d4]";
       a model can read sheet music at all, as a Verovio round trip with
       every fact known by construction. Study 4 asked whether the
       listening-layer song check hears what it claims to hear, and found a
-      text channel wearing headphones. 838 scored cells across seven models
-      so far. Hypotheses, corpora, and graders are committed before any
-      scored run; results are published as found, gate letters included.
+      text channel wearing headphones. Study 5 composed the reader with the
+      listener, caught a fixture confound that forced a dated correction to
+      Study 3, and measured a chain that adds nothing of its own. 886
+      scored cells across seven models so far. Hypotheses, corpora, and
+      graders are committed before any scored run; results are published as
+      found, gate letters and corrections included.
     </p>
   </header>
 

@@ -148,9 +148,9 @@
 			"slug": "3",
 			"letters": "3",
 			"track": "Reading the page",
-			"title": "Can a model read sheet music? The frontier tier can, the PDF path is the bottleneck, and the probe had to be calibrated twice",
+			"title": "Can a model read sheet music? The frontier tier can, the probe had to be calibrated twice, and the PDF arm was corrected after first publication",
 			"eyebrow": "Study 3 · reading the page · 160 cells across two arms",
-			"indexLine": "Stem Shovel's chart-read feature has a model read an engraved score into a per-measure summary, on the strength of one informal test. Study 3 measured it as a registered round trip over 11 Verovio-engraved scores with every fact known by construction: the production model reads a clean page image at 98.8% exact chord recall with zero measure drift at about $0.06 a score, three of four models lose 20 or more points when the identical page arrives as a PDF, haiku is the sharpest tier cliff the program has measured, and the honesty gate fails by letter through one fabricated line from the pilot model. As far as we know, the first registered LLM notation-reading benchmark anywhere.",
+			"indexLine": "Stem Shovel's chart-read feature measured as a registered round trip over 11 Verovio-engraved scores with every fact known by construction: the production model reads a clean page at 98.8% exact chord recall as an image and, after a dated correction, 99.3% as a PDF. As first published this page reported a 20-point PDF ingestion gap; Study 5's anatomy then caught the bench's own PDF generation silently dropping every chord accidental, the affected cells were re-run on honest pages, and the finding is replaced: the hazard is PDF text generation at authoring time, detectable but not recoverable. Gates unchanged; haiku remains the sharpest tier cliff measured; the honesty gate still fails by letter through one fabricated pilot-model line.",
 			"sections": [
 				{
 					"id": "sec-stem-study3",
@@ -168,6 +168,10 @@
 					},
 					"body": [
 						{
+							"heading": "Correction (2026-10-24, found by Study 5)",
+							"html": "Study 5 composed this study's reader with Study 4's listener, and its first run's anatomy caught a confound in this study's own fixture: pdfkit's WinAnsi fonts cannot encode the music accidental glyphs Verovio writes into chord text, so every flat and sharp in every committed PDF silently rendered as its natural (Eb as E, F#7 as F7). The PDF arm therefore measured models correctly reading corrupted pages, and the decisive split was sitting in the data: fable's PDF chord recall was about 94% on sharp-and-natural-key items and about 55% on flat-key items. The PDFs were re-rendered with chart-ASCII accidentals and every readable PDF cell was discarded, archived, and re-run. Corrected PDF chord recall: fable 76.0% to 99.3%, gemini 70.4% to 99.3%, opus 82.5% to 74.2% (its better-on-PDF oddity shrinks into re-run noise), haiku unchanged at zero; fable's keys, repeats and specials rose to 100%, dissolving the repeat-dots finding as well. Finding 2 as first published is withdrawn in mechanism and magnitude, and the sections below carry the corrected story with the original numbers labeled where they appear. Gates are unchanged: S3-H1 was pooled keys and still passes at 91.7%, and the honesty gate's by-letter failure stands."
+						},
+						{
 							"heading": "The Question and the Round Trip",
 							"html": "Stem Shovel's chart-read has a model read a PDF or image of an engraved score into the per-measure text summary that feeds the song check and the chart draft, and its model choice rested on one informal test. Study 3 measured the feature as a round trip with ground truth by construction: scores authored as MusicXML with every fact known, engraved by Verovio exactly as a user's upload would be, read under production's prompt byte for byte, and graded against the deterministic summary production itself makes of the source XML, ported verbatim and pinned. The fixture is 11 scores: 268 readable measures covering keys from four sharps to three flats with mid-piece changes, meter and tempo changes, rehearsal marks, repeats with first and second endings, segno, coda and fine, slash-bass and exotic chord qualities, one N.C. measure, two 2-page items, and an unreadable honesty probe, registered up front rather than discovered later, the Study 2 lesson applied in advance. As far as we know, no public LLM notation-reading benchmark existed before this one."
 						},
@@ -180,8 +184,8 @@
 							"html": "S3-H1, the production claim, passes to the decimal: fable-5-1 reads key signatures at exactly 91.7% recall within one measure against the registered 90% bar, upholding the anecdote the feature was built on. S3-H2, the honesty gate, fails by letter through its every-model clause: shown the 80 px smear as an image, the pilot model wrote one fabricated line (m1 key C major 4/4, under an invented title) instead of the registered Note declaration, while its PDF arm declined honestly, and the archived 150 px run holds its full fabrication signature, a confident progression that was simply wrong. The program's recurring registration lesson arrives in a third costume: a gate quantified over every model makes the weakest model the gate. Published as failed."
 						},
 						{
-							"heading": "Frontier Models Read Sheet Music, and the PDF Path Is the Bottleneck",
-							"html": "The production model reads engraved notation from a clean page image at 98.8% exact chord recall with perfect precision and zero measure-count drift, at roughly $0.06 a score; the pilot model is close behind at 97.1%. The modality finding is the operational one: three of four models lose 20 or more points of chord recall when the identical page arrives as a PDF instead of an image (fable 98.8 to 76.0), with repeat dots collapsing hardest. Opus is the odd one out, better on PDF than image, which places the effect in each provider's internal PDF pipeline rather than in PDFs as such. The ship guidance writes itself: chart-read should rasterize PDFs app-side and send images, not trust each provider's ingestion."
+							"heading": "Frontier Models Read Sheet Music (Corrected)",
+							"html": "The production model reads engraved notation from a clean page at 98.8% exact chord recall as an image and 99.3% as a PDF, with perfect precision and zero measure-count drift, at roughly $0.06 a score; the pilot model matches it (97.1% and 99.3%). As first published, this section reported the opposite for PDFs: a 20-point ingestion gap (fable 76.0%, gemini 70.4%) with opus oddly better on PDF at 82.5%, and ship guidance to rasterize PDFs app-side. All of that measured the confounded pages, and all of it is withdrawn. What replaces it: PDF text GENERATION is the hazard. Font encodings of the WinAnsi class silently drop music accidentals at authoring time, the corruption survives any ingestion path including rasterization, and it is detectable but not recoverable: the key signature disagrees with the chord spellings, and fable flagged exactly that inconsistency unprompted in its notes. The replacement ship guidance is a key-vs-chords consistency check on chart-read output."
 						},
 						{
 							"heading": "The Tier Cliff and the Honesty Map",
@@ -189,17 +193,21 @@
 						},
 						{
 							"heading": "Honest Accounting",
-							"html": "The registered scorecard: prediction 1 right to the decimal of the bar; 2 half-right, with image-arm chord recall above the predicted band; 3 wrong in the most instructive way, since endings scored 100% wherever answered, meaning the volta brackets read fine and it is the repeat dots that get lost, and only in PDFs; 4 right in substance, one model fabricated and it was not an anthropic one; 5 right for gemini and fable, refuted by opus. Total spend about $2.10 of the $34 in fences, and the two discarded runs are archived with their anatomy rather than deleted."
+							"html": "The registered scorecard: prediction 1 right to the decimal of the bar; 2 half-right, with image-arm chord recall above the predicted band; 3 wrong in the most instructive way as first published (repeat dots apparently lost, and only in PDFs), then dissolved entirely by the Correction, since on honest pages fable reads repeats at 100% in both formats; 4 right in substance, one model fabricated and it was not an anthropic one; 5 right for gemini and fable, refuted by opus. Total spend about $2.10 of the $34 in fences, and the two discarded runs are archived with their anatomy rather than deleted."
 						},
 						{
 							"heading": "What This Licenses",
-							"html": "For Stem Shovel: chart-read's model choice is validated against two tiers and a competitor, and the one change worth shipping is rasterizing PDFs app-side before the model sees them. haiku is a measured anti-recommendation on this surface, and any future model swap should include the probe as a one-page honesty smoke test. For anyone building vision benchmarks: the probe's two recalibrations are the reusable method, since what a human calls unreadable and what a model can read are different quantities, and only the model's behavior can draw the line."
+							"html": "For Stem Shovel: chart-read's model choice is validated against two tiers and a competitor. The rasterize-PDFs-app-side guidance published here originally is withdrawn by the Correction; the durable guidance is a key-vs-chords consistency check on chart-read output, since generation-time accidental loss is detectable (the production model already flags the inconsistency unprompted) but not recoverable. haiku is a measured anti-recommendation on this surface, and any future model swap should include the probe as a one-page honesty smoke test. For anyone building vision benchmarks: the probe's two recalibrations and the Correction's confound are the same reusable method, since what a human calls unreadable, and what a human assumes a renderer drew, both need mechanical verification."
 						}
 					]
 				}
 			],
 			"published": "2026-10-23",
 			"related": [
+				{
+					"title": "Study 5: the composed pipeline, which caught this correction",
+					"href": "/research/stem-bench/5"
+				},
 				{
 					"title": "Study 2: reasoning off, measured",
 					"href": "/research/stem-bench/2"
@@ -295,6 +303,78 @@
 			],
 			"brief": "docs/BRIEF-STUDY4.md",
 			"quote": "Correct candidates in, correct answers out; wrong candidates in, wrong answers out; the chart in, perfection out. The second opinion is a text channel wearing headphones."
+		},
+		{
+			"slug": "5",
+			"letters": "5",
+			"track": "Composition",
+			"title": "The composed pipeline: the chain adds nothing of its own, and its first run audited its own predecessors",
+			"eyebrow": "Study 5 · composition · 48 fresh cells against a frozen ceiling",
+			"indexLine": "Production composes chart-read and the song-check: the chart beside the mix is the reader's imperfect output, not truth. Study 5 measured the composed chain against Study 4's frozen ceiling with a committed propagation classifier, and its first run's anatomy caught a cross-study confound in the bench's own PDF generation, forcing the Study 3 correction. On honest pages both gates pass at zero listener-added errors, the propagation table is 37 pass and 1 rescued per arm, and the one fact the reader omitted was rescued by the listener reading the chart's chord content, placing the modulation at 20.2 seconds against a 20.21-second truth.",
+			"sections": [
+				{
+					"id": "sec-stem-study5",
+					"eyebrow": "Composition",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s5",
+					"figure": {
+						"id": "fig-chain",
+						"title": "Propagation Classes per Fact: the Corrected Run, with the Confounded First Run for Contrast"
+					},
+					"table": {
+						"id": "tbl-chain",
+						"summary": "Gate verdicts, the propagation table, the rescue anatomy, the ceiling, and the archived first run per arm"
+					},
+					"body": [
+						{
+							"heading": "The Question",
+							"html": "Studies 3 and 4 measured chart-read and the song-check separately, and separately they are solved problems: a frontier reader at 98.8% and a listener that is perfect when the chart is in view. But production composes them, and the chart beside the mix is chart-read's imperfect output, not the truth Study 4 supplied. Study 5 measured the composed chain: Study 4's 12 metered mixes, their matching lead sheets engraved by Study 3's committed pipeline, read by production's chart-read in both input formats, and the reader's output fed to production's song-check in place of truth, with Study 4's frozen chart-arm cells as the registered ceiling and a committed propagation classifier sorting every fact into pass, listener-added, propagated, rescued or mutated."
+						},
+						{
+							"heading": "The Study That Audited Its Own Predecessors",
+							"html": "The first run's biggest result was upstream of the study: the PDF-arm reader kept reporting chords with no flats, and the mechanism check proved the bench's own PDF generation was the culprit, pdfkit's WinAnsi fonts silently dropping the music accidental glyphs Verovio writes into chord text, in every committed PDF of this study and Study 3 alike. The composed chain, built to detect error propagation, caught a fixture confound its predecessor had published numbers on. Amendment 1 committed the finding, the affected cells were discarded and archived, the PDFs re-rendered with ASCII accidentals, and Study 3's Correction was issued the same day. One classifier disclosure rode along: a reader's positional error converts downstream into a confidently wrong second-placement that the value-level extraction attributes to the listener, so the analysis reports position propagation explicitly."
+						},
+						{
+							"heading": "The Corrected Verdict",
+							"html": "On honest pages, both gates pass with zero listener-added errors. Across 38 facts per arm the reader made exactly one error, omitting one score's relative-major modulation line from its summary, and the listener rescued it in both arms: reading the chart's chord content (the progression turns to C material), it reported the modulation anyway and placed it at 20.2 seconds against a 20.21-second truth. That rescue is the composed chain's one addition over its parts, and it runs in the right direction. Nothing propagated, nothing mutated: 37 pass and 1 rescued, per arm, against a frozen ceiling the chain equals."
+						},
+						{
+							"heading": "What the Confounded Run Showed",
+							"html": "The discarded first run earns its own record, because it demonstrated the failure mode the corrected run no longer could: the chain faithfully transmitting upstream damage. Shown a B-minor sheet whose F#7 printed as F7, the reader reasonably named D major and the listener propagated it one to one; the reader's positional misreadings converted into confidently wrong second-placements downstream. The chain did not amplify or dampen any of it. The corrected run shows none of these, for the simple reason that the pages stopped lying."
+						},
+						{
+							"heading": "The Composition Law",
+							"html": "Both runs together give the honest composition story: the chain adds nothing of its own. With a competent reader on honest pages it equals its ceiling; fed corrupted pages it transmits the corruption at full confidence. The quality of the composed feature is exactly the quality of the page its reader is shown, which makes the reader's input, not the chain's plumbing, the thing worth engineering."
+						},
+						{
+							"heading": "What This Licenses",
+							"html": "For Stem Shovel: the song-check inherits chart-read's accuracy one to one, so surfacing the chart summary for user correction protects everything downstream of it, and the production model's unprompted key-vs-chords inconsistency notes deserve treatment as a first-class signal rather than prose, since they are the one detectable trace of unrecoverable upstream corruption. Total spend about $3.40 of the $6 fence, both runs included, with the confounded cells archived rather than deleted."
+						}
+					]
+				}
+			],
+			"published": "2026-10-24",
+			"related": [
+				{
+					"title": "Study 3: can a model read sheet music? (corrected by this study)",
+					"href": "/research/stem-bench/3"
+				},
+				{
+					"title": "Study 4: the listening layer",
+					"href": "/research/stem-bench/4"
+				},
+				{
+					"title": "Stem Shovel, the product under test",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY5.md",
+			"quote": "The chain adds nothing of its own: it is exactly as good as the page its reader is shown. Its first run's best result was catching the page lying."
 		}
 	]
 }

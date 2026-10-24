@@ -365,18 +365,18 @@ export function initStemCharts() {
 		const GROUPS = [
 			{
 				model: "fable-5-1 (prod.)",
-				vals: [98.8, 76],
-				tip: "the production model: 98.8% exact at 100% precision, zero measure drift, ~$0.06 a score · the identical page as PDF drops to 76.0, repeat dots collapse hardest · probe: honest in both arms",
+				vals: [98.8, 99.3],
+				tip: "the production model: 98.8% exact at 100% precision, zero measure drift, ~$0.06 a score · PDF 99.3 corrected (76.0 as first published, on the confounded pages) · probe: honest in both arms",
 			},
 			{
 				model: "gemini-3.5-flash",
-				vals: [97.1, 70.4],
-				tip: "97.1% as image, 70.4% as PDF · but the probe: one fabricated line under image input (m1 key C major 4/4, invented title); honest as PDF · the S3-H2 by-letter failure",
+				vals: [97.1, 99.3],
+				tip: "97.1% as image, 99.3% as PDF corrected (70.4 as first published) · but the probe: one fabricated line under image input (m1 key C major 4/4, invented title); honest as PDF · the S3-H2 by-letter failure",
 			},
 			{
 				model: "opus-4.8",
-				vals: [62.2, 82.5],
-				tip: "the odd one out: better on PDF (82.5) than image (62.2), so the modality effect lives in each provider's PDF pipeline, not in PDFs as such · probe: honest, one decline without the registered Note form (a format miss)",
+				vals: [62.2, 74.2],
+				tip: "62.2% as image, 74.2% as PDF corrected (82.5 as first published; the better-on-PDF oddity shrank into re-run noise with the Correction) · probe: honest, one decline without the registered Note form (a format miss)",
 			},
 			{
 				model: "haiku-4.5",
@@ -394,7 +394,7 @@ export function initStemCharts() {
 			CPDF +
 			'"></span>D-pdf: the identical page as a PDF</span>' +
 			legendNote(
-				"exact chord recall on readable scores, graded against production's own summary of the source MusicXML (ported verbatim and pinned) · 268 measures across 10 readable scores · total spend about $2.10 of the $34 fences",
+				"exact chord recall on readable scores, graded against production's own summary of the source MusicXML (ported verbatim and pinned) · 268 measures across 10 readable scores · PDF-arm numbers are the corrected re-run of 2026-10-24 (the as-first-published figures, measured on pages whose accidentals the fixture's own renderer had dropped, are in the table, archived)",
 			);
 		const W = 880,
 			BAR = 14,
@@ -429,13 +429,13 @@ export function initStemCharts() {
 		});
 		const el = byId("fig-notation");
 		el.innerHTML =
-			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grouped bar chart of exact chord recall per model reading the same engraved score page as an image versus as a PDF: fable 98.8 percent image and 76 percent PDF, gemini 97.1 and 70.4, opus 62.2 image but 82.5 PDF, and haiku 1.2 and zero.">` +
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grouped bar chart of exact chord recall per model reading the same engraved score page as an image versus as a corrected PDF: fable 98.8 percent image and 99.3 PDF, gemini 97.1 and 99.3, opus 62.2 and 74.2, and haiku 1.2 and zero.">` +
 			g +
 			marks +
 			hits +
 			"</svg>" +
 			figCap(
-				"frontier models genuinely read sheet music from a clean page image, and the operational finding is the modality gap: three of four models lose 20 or more points when the identical page arrives as a PDF, opus runs the other way because the effect lives in provider ingestion pipelines, and haiku's cliff is the sharpest tier difference the program has measured",
+				"frontier models genuinely read sheet music in either format: on honest pages the production model reads 98.8% as an image and 99.3% as a PDF. As first published this chart showed a 20-point PDF gap; the Correction traced it to the fixture's own PDF renderer silently dropping accidentals, and the hazard it leaves behind is generation-time, not ingestion-time. haiku's cliff is the sharpest tier difference the program has measured",
 			);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
@@ -452,11 +452,18 @@ export function initStemCharts() {
 			],
 			[
 				[
-					"exact chord recall: image / PDF",
-					"98.8% / 76.0%",
-					"97.1% / 70.4%",
-					"62.2% / 82.5%",
+					"exact chord recall: image / PDF (corrected 2026-10-24)",
+					"98.8% / 99.3%",
+					"97.1% / 99.3%",
+					"62.2% / 74.2%",
 					"1.2% / 0.0%",
+				],
+				[
+					"PDF arm as first published (confounded pages, archived)",
+					"76.0%",
+					"70.4%",
+					"82.5%",
+					"0.0%",
 				],
 				[
 					"keys within ±1 measure, pooled (the S3-H1 read)",
@@ -475,9 +482,9 @@ export function initStemCharts() {
 				],
 				[
 					"anatomy note",
-					"~$0.06 a score; repeat dots are the class lost in PDFs",
+					"~$0.06 a score; on corrected pages keys, repeats and specials read 100% in both formats",
 					"the archived 150 px probe run holds its full fabrication signature",
-					"better on PDF than image: the modality effect is per provider pipeline",
+					"the better-on-PDF oddity was the confound; corrected, within re-run noise",
 					"writes a ~120-token stub per score",
 				],
 			],
@@ -618,6 +625,129 @@ export function initStemCharts() {
 					"swap space",
 					"the registered availability probe: gpt-4o-audio-preview is not on the gateway, and no Anthropic model takes audio; the swap space is gemini-only",
 					"pushes back on tempo/meter, still swallows the wrong key",
+				],
+			],
+		);
+	})();
+
+	// --- Study 5: propagation classes, corrected run vs the confounded first run ---
+	(() => {
+		const CPASS = "#199e70",
+			CRESCUED = "#3987e5",
+			CPOS = "#c98500",
+			CPROP = "#e66767";
+		const ROWS = [
+			{
+				label: "corrected (per arm)",
+				total: 38,
+				segs: [
+					{ n: 37, color: CPASS, name: "pass" },
+					{ n: 1, color: CRESCUED, name: "rescued" },
+				],
+				tip: "38 facts per arm on honest pages: 37 pass, 1 rescued (the reader omitted one modulation line; the listener reported it anyway from the chart's chord content and placed it at 20.2 s vs a 20.21 s truth) · zero listener-added, zero propagated, zero mutated · both gates PASS",
+			},
+			{
+				label: "confounded (PDF arm)",
+				total: 39,
+				segs: [
+					{ n: 34, color: CPASS, name: "pass" },
+					{ n: 3, color: CPOS, name: "positional, reattributed" },
+					{ n: 1, color: CPROP, name: "propagated" },
+					{ n: 1, color: CRESCUED, name: "rescued" },
+				],
+				tip: "the archived run on pages whose accidentals the renderer had dropped: the chain faithfully transmitted the damage (D major propagated 1:1 from a B-minor sheet whose F#7 printed as F7), and reader positional errors converted into confidently wrong second-placements first attributed to the listener",
+			},
+		];
+		byId("legend-s5").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CPASS +
+			'"></span>pass</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CRESCUED +
+			'"></span>rescued by the listener</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CPOS +
+			'"></span>positional, reattributed to the reader</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CPROP +
+			'"></span>propagated upstream damage</span>' +
+			legendNote(
+				"every fact the composed chain carried, classified by the committed propagation classifier against Study 4's frozen ceiling · the confounded first run is archived, not scored: it is shown because it demonstrates the failure mode the corrected run no longer can · total spend about $3.40 of the $6 fence",
+			);
+		const W = 880,
+			BAR = 22,
+			GPAD = 18,
+			T = 8,
+			B = 42,
+			L = 255,
+			R = 84;
+		const H = T + ROWS.length * (BAR + GPAD) + B;
+		const iw = W - L - R;
+		let g = "";
+		for (const tick of [0, 0.5, 1]) {
+			const x = L + tick * iw;
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${Math.round(tick * 100)}%</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		ROWS.forEach((row, i) => {
+			const y = T + i * (BAR + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${y + BAR / 2 + 4}" text-anchor="end">${row.label}</text>`;
+			let x = L;
+			for (const seg of row.segs) {
+				const w = Math.max((seg.n / row.total) * iw, 2);
+				marks += `<rect x="${x}" y="${y}" width="${w}" height="${BAR}" fill="${seg.color}"/>`;
+				if (w > 26) {
+					marks += `<text fill="#0b1626" font-size="11" font-weight="700" x="${x + w / 2}" y="${y + BAR - 7}" text-anchor="middle">${seg.n}</text>`;
+				}
+				x += w;
+			}
+			hits += `<rect x="${L}" y="${y}" width="${iw}" height="${BAR}" fill="transparent" data-tip="${esc(row.label + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-chain");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Two stacked bars of propagation classes: the corrected run carries 37 passing facts and 1 rescued per arm with nothing added, propagated or mutated; the archived confounded first run carries 34 passes, 3 positional reattributions, 1 propagated error and 1 rescue.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the composition story in two bars: on honest pages the chain equals its ceiling (37 pass, 1 rescued, nothing of its own added), and on the corrupted pages of the archived first run it transmitted the damage faithfully at full confidence; the chain is exactly as good as the page its reader is shown",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-chain",
+			["cell", "C5-png arm", "C5-pdf arm (corrected)"],
+			[
+				["gate S5-G1: zero listener-added errors", "PASS", "PASS"],
+				[
+					"propagation: pass / rescued / propagated / mutated / listener-added",
+					"37 / 1 / 0 / 0 / 0",
+					"37 / 1 / 0 / 0 / 0",
+				],
+				[
+					"the one reader error",
+					"omitted one score's relative-major modulation line",
+					"the same omission",
+				],
+				[
+					"the rescue",
+					"the listener reported the modulation from the chart's chord content and placed it at 20.2 s vs a 20.21 s truth; Study 4's blind arm found 0/6 changes",
+					"the same rescue, both arms",
+				],
+				[
+					"the ceiling",
+					"Study 4's frozen L-chart cells; the corrected chain equals it",
+					"same ceiling, equalled",
+				],
+				[
+					"the archived first run",
+					"PNG cells stood (their inputs were honest)",
+					"34 pass, 3 positional reattributions, 1 propagated, 1 rescued: faithful transmission of pages whose accidentals the renderer had dropped, the anatomy that forced Study 3's Correction",
 				],
 			],
 		);
