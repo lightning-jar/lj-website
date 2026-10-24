@@ -2,9 +2,9 @@
 import { goto } from "$app/navigation";
 
 // components
-import HamburgerButton from "$components/HamburgerButton.svelte";
-import NavLogoBlock from "$components/NavLogoBlock.svelte";
-import NavSearch from "$components/NavSearch.svelte";
+import HamburgerButton from "#lib/components/HamburgerButton.svelte";
+import NavLogoBlock from "#lib/components/NavLogoBlock.svelte";
+import NavSearch from "#lib/components/NavSearch.svelte";
 
 // desktop top-nav (lg+): links + dropdown menus
 const desktopLinks = [{ label: "Blog", href: "/blog" }];

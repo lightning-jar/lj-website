@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Lightning Jar website - a static-first, content-driven marketing site built with SvelteKit 2.x and Svelte 5 (runes mode).
+Lightning Jar website - a static-first, content-driven marketing site built with SvelteKit 3.x and Svelte 5 (runes mode).
 
 ## Commands
 
@@ -23,13 +23,20 @@ bun run lint         # Lint and fix with Biome
 ## Architecture
 
 ### Tech Stack
-- **Framework**: SvelteKit 2.x with Svelte 5 runes (`$state`, `$derived`, `$effect`)
+- **Framework**: SvelteKit 3.x with Svelte 5 runes (`$state`, `$derived`, `$effect`)
 - **Styling**: UnoCSS with Tailwind v4 preset
 - **Build**: Vite 8.x, TypeScript 6.x
 - **Runtime**: Bun 1.x / Node 24.x
 - **Deployment**: Vercel (adapter-vercel), config in `vercel.ts`
 - **Env vars**: varlock (`.env.schema` + `varlock/env` import)
-- **Monitoring**: Sentry (errors), Plausible (analytics)
+- **Monitoring**: Sentry 11 (errors), Plausible (analytics). Sentry 11
+  replaced `sendDefaultPii` with `dataCollection` and turned user info,
+  cookies, headers, request/response bodies and GenAI inputs/outputs ON by
+  default. `src/instrumentation.server.ts` pins the pre-upgrade baseline
+  (all of that off) so the prompts and completions flowing through
+  `/api/concierge` and `/api/transcribe` are not shipped to Sentry. This is
+  a deliberate divergence from slx-web, which inherits the new defaults.
+  Source maps upload only from Vercel builds (`VERCEL=1`).
 
 ### Content System
 Two content sources:
@@ -70,16 +77,23 @@ editor goes live without a redeploy:
 - **Landing pages**: JSON files in `src/lib/content/landing-pages/`
 - **Technologies**: JSON in `src/lib/content/technologies/`, grouped by `supercategory` (defined in `src/lib/content/technologySuperCategories/`)
 
-### Path Aliases
-```
-$components → src/lib/components
-$content    → src/lib/content
-$types      → src/lib/types
-$utils      → src/lib/utils
-$assets     → src/lib/assets
-$data       → src/lib/data
-$settings   → src/lib/settings
-```
+### Imports (`#lib`)
+No custom path aliases (SvelteKit 3 deprecated `config.alias`). Everything
+under `src/lib` is reached through the Node subpath import declared in
+`package.json` `imports`, which Vite, TypeScript and Bun all resolve
+natively (same convention as slx-web):
+
+- Use explicit extensions: `#lib/utils/slugify.js` for `.ts` modules,
+  `#lib/components/Foo.svelte`, `#lib/data/footer.json`.
+- Asset queries pass through: `#lib/assets/icon.svg?raw`.
+- The mapping is two entries, and the order matters:
+  ```json
+  "#lib/*.js": ["./src/lib/*.ts", "./src/lib/*.js"],
+  "#lib/*": "./src/lib/*"
+  ```
+  The first exists because Bun does not apply TypeScript's `.js` -> `.ts`
+  rewrite inside subpath imports; without the fallback array every
+  `#lib/**.js` import fails under `bun test` (Vite resolves it either way).
 
 ### Data Flow
 ```
@@ -114,13 +128,22 @@ Blog copy follows house rules: no em/en dashes in prose, plain phrasing over cle
 
 ## Code Style
 
-- **Formatting**: Biome with tabs, double quotes, trailing commas. Markdown,
-  SVG and `ops/swamp/vaults` are excluded in `biome.json`: prose follows the
-  house editorial rules (not a formatter), `tests/fixtures/blog-corpus` is a
-  frozen corpus whose bytes must not drift, the SVGs are committed assets,
-  and the vault files are generated. Do not re-enable these without a
-  deliberate, separate reformat commit.
-- **Imports**: Organized by Biome with specific grouping (SvelteKit first, then external libs, then internal aliases)
+- **Formatting**: Biome with tabs, double quotes, trailing commas. Biome 2.6
+  added markdown, YAML and SVG formatters; the markdown formatter is turned
+  off (`markdown.formatter.enabled: false`, as in slx-web) because prose
+  follows the house editorial rules and `tests/fixtures/blog-corpus` is a
+  frozen corpus whose bytes must not drift. SVGs (committed assets) and
+  `ops/swamp/vaults` (generated) are excluded in `files.includes`. Do not
+  re-enable these without a deliberate, separate reformat commit.
+- **Imports**: Organized by Biome with specific grouping (SvelteKit first,
+  then external libs, then `#lib/...` groups). `bun run format` does NOT
+  apply import grouping: it is an assist, so it needs
+  `bunx biome check --write`.
+- **Dependency pins**: core framework and toolchain packages (kit, svelte,
+  vite, vite-plugin-svelte, adapter-vercel, svelte-check, unocss, biome,
+  sentry, varlock trio, @vercel/config, yaml, mcp-handler) are pinned
+  exactly so upgrades are deliberate commits; leaf libraries keep carets.
+  Same policy as slx-web.
 - **Types**: Strict TypeScript; type definitions in `src/lib/types/`
 - **Svelte**: Runes mode only (`$state`, `$derived`, `$effect` instead of stores)
 

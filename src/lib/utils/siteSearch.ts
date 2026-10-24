@@ -3,7 +3,7 @@
 // Barkup Bench studies) and are filtered client-side with the same
 // every-term-must-match semantics as the listing pages (searchFilter.ts).
 
-import { matchesEveryTerm, searchTermsOf } from "$utils/searchFilter";
+import { matchesEveryTerm, searchTermsOf } from "#lib/utils/searchFilter.js";
 
 export type SearchRecordType =
 	| "blog"

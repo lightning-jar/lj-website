@@ -1,9 +1,9 @@
 <script lang="ts">
 // components
-import LinkText from "$components/LinkText.svelte";
+import LinkText from "#lib/components/LinkText.svelte";
 
 // utils
-import { safeLinkUrl } from "$utils/safeLinkUrl";
+import { safeLinkUrl } from "#lib/utils/safeLinkUrl.js";
 
 let { data } = $props();
 

@@ -1,7 +1,7 @@
 import {
 	allPackages,
 	packagesLandingMeta,
-} from "$content/getters/getPackagesContent";
+} from "#lib/content/getters/getPackagesContent.js";
 
 // git-resident content: prerender
 export const prerender = true;

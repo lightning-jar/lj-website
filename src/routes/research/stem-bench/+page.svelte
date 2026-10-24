@@ -4,9 +4,9 @@
 import { onMount } from "svelte";
 
 // components
-import LinkButton from "$components/LinkButton.svelte";
+import LinkButton from "#lib/components/LinkButton.svelte";
 
-import researchStats from "$data/research-stats.json";
+import researchStats from "#lib/data/research-stats.json";
 
 // dashboard content and chart data
 import stem from "./stem-content.json";

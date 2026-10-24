@@ -1,5 +1,5 @@
 // types
-import type { LjPackage } from "$types/Package";
+import type { LjPackage } from "#lib/types/Package.js";
 
 // function to load all package JSONs
 async function loadAllPackagesJson() {

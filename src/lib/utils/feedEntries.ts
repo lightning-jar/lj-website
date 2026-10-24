@@ -1,9 +1,9 @@
-import { type FeedEntry, str, toIso } from "$utils/atomFeed";
+import { type FeedEntry, str, toIso } from "#lib/utils/atomFeed.js";
 
-import type { BlogArticleListEntry } from "$content/getters/getBlogArticles";
-import type { Article } from "$types/Article";
-import type { CustomerStory } from "$types/CustomerStory";
-import type { Finding } from "$types/Finding";
+import type { BlogArticleListEntry } from "#lib/content/getters/getBlogArticles.js";
+import type { Article } from "#lib/types/Article.js";
+import type { CustomerStory } from "#lib/types/CustomerStory.js";
+import type { Finding } from "#lib/types/Finding.js";
 
 export function buildCustomerStoryEntries(
 	baseUrl: string,

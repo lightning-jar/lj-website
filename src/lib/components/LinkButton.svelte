@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Snippet } from "svelte";
-import type { Link } from "$types/Link";
+import type { Link } from "#lib/types/Link.js";
 
-import * as sfx from "$lib/sfx";
+import * as sfx from "#lib/sfx.js";
 
 interface Props {
 	/** Base button shortcut; swap for e.g. "button-small". */

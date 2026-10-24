@@ -1,16 +1,16 @@
 <script lang="ts">
-import * as sfx from "$lib/sfx";
-
-// components
-import LightningBolt from "$components/LightningBolt.svelte";
-
 import { createAttachmentKey } from "svelte/attachments";
 
+// components
+import LightningBolt from "#lib/components/LightningBolt.svelte";
+
 // utils
-import { startVisibilityTimer } from "$utils/visibilityTimer";
+import { startVisibilityTimer } from "#lib/utils/visibilityTimer.js";
 
 // types
 import type { Attachment } from "svelte/attachments";
+
+import * as sfx from "#lib/sfx.js";
 
 // props
 let {

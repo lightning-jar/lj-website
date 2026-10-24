@@ -1,11 +1,12 @@
 <script lang="ts">
 // components
-import LinkButton from "$components/LinkButton.svelte";
-import LinkText from "$components/LinkText.svelte";
 
 import { page } from "$app/state";
 
-import { jsonLdScript, LJ_PUBLISHER } from "$utils/jsonLd";
+import LinkButton from "#lib/components/LinkButton.svelte";
+import LinkText from "#lib/components/LinkText.svelte";
+
+import { jsonLdScript, LJ_PUBLISHER } from "#lib/utils/jsonLd.js";
 
 // props
 let { data } = $props();

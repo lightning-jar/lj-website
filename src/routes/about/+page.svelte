@@ -1,6 +1,6 @@
 <script lang="ts">
 // components
-import LinkButton from "$components/LinkButton.svelte";
+import LinkButton from "#lib/components/LinkButton.svelte";
 
 // props
 let { data } = $props();

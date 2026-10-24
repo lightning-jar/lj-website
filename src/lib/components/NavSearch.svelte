@@ -7,7 +7,7 @@ import {
 	groupSearchResults,
 	loadSearchIndex,
 	type SearchRecord,
-} from "$utils/siteSearch";
+} from "#lib/utils/siteSearch.js";
 
 interface Props {
 	// desktop: icon button opening a dropdown panel; mobile: inline

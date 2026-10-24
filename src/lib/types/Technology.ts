@@ -1,5 +1,5 @@
-import type { Image } from "$types/Image";
-import type { Link } from "$types/Link";
+import type { Image } from "#lib/types/Image.js";
+import type { Link } from "#lib/types/Link.js";
 
 export interface Technology {
 	name: string;

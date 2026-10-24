@@ -1,4 +1,4 @@
-import type { Link } from "$types/Link";
+import type { Link } from "#lib/types/Link.js";
 
 export interface Banner {
 	heading: string;

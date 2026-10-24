@@ -4,8 +4,9 @@ Sitemap page
 -->
 <script lang="ts">
 // components
-import SearchTagFilter from "$components/SearchTagFilter.svelte";
-import { matchesEveryTerm, searchTermsOf } from "$utils/searchFilter";
+import SearchTagFilter from "#lib/components/SearchTagFilter.svelte";
+
+import { matchesEveryTerm, searchTermsOf } from "#lib/utils/searchFilter.js";
 
 // data
 let { data } = $props();

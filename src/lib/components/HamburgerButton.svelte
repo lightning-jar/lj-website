@@ -1,7 +1,6 @@
 <script lang="ts">
-import * as sfx from "$lib/sfx";
-
-import { default as hamburgerIcon } from "$assets/hamburger.svg?raw";
+import { default as hamburgerIcon } from "#lib/assets/hamburger.svg?raw";
+import * as sfx from "#lib/sfx.js";
 
 let {
 	ariaLabel = "toggle menu",

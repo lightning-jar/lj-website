@@ -1,4 +1,4 @@
-import type { Attribution } from "$types/Attribution";
+import type { Attribution } from "#lib/types/Attribution.js";
 
 export interface Testimonial {
 	quote: string[];

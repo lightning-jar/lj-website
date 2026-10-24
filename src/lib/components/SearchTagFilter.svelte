@@ -1,8 +1,8 @@
 <script lang="ts">
 // Search input + collapsible tag-chip shortcuts for listing pages.
 // The parent owns the search string (bind:search) and the filtering;
-// term/toggle helpers live in $utils/searchFilter.
-import { tagIsActive } from "$utils/searchFilter";
+// term/toggle helpers live in #lib/utils/searchFilter.
+import { tagIsActive } from "#lib/utils/searchFilter.js";
 
 interface Props {
 	search: string;

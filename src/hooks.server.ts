@@ -1,17 +1,20 @@
-import { handleErrorWithSentry, sentryHandle } from "@sentry/sveltekit";
 import { sequence } from "@sveltejs/kit/hooks";
-import type { Handle } from "@sveltejs/kit/hooks";
 
-import { getBlogArticleMarkdownBySlug } from "$content/getters/getBlogArticles";
-import { getCustomerStoryMarkdownBySlug } from "$content/getters/getCustomerStories";
-import { getReadingListArticleBySlug } from "$content/getters/getReadingList";
+import { handleErrorWithSentry, sentryHandle } from "@sentry/sveltekit";
+
 import {
 	agentMarkdownRouteFor,
 	blogMarkdownDoc,
 	markdownResponse,
 	readingListMarkdownDoc,
 	storyMarkdownDoc,
-} from "$utils/agentMarkdown";
+} from "#lib/utils/agentMarkdown.js";
+
+import type { Handle } from "@sveltejs/kit/hooks";
+
+import { getBlogArticleMarkdownBySlug } from "#lib/content/getters/getBlogArticles.js";
+import { getCustomerStoryMarkdownBySlug } from "#lib/content/getters/getCustomerStories.js";
+import { getReadingListArticleBySlug } from "#lib/content/getters/getReadingList.js";
 
 // The serverless runtime is pinned on the adapter in vite.config.ts. A
 // `config` export here was never read: adapters only pick up `config`

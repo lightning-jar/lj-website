@@ -1,14 +1,15 @@
 <script lang="ts">
 // components
-import FeedBadge from "$components/FeedBadge.svelte";
-import LinkButton from "$components/LinkButton.svelte";
-import SearchTagFilter from "$components/SearchTagFilter.svelte";
+import FeedBadge from "#lib/components/FeedBadge.svelte";
+import LinkButton from "#lib/components/LinkButton.svelte";
+import SearchTagFilter from "#lib/components/SearchTagFilter.svelte";
+
 import {
 	matchesEveryTerm,
 	searchTermsOf,
 	toggleSearchTerm,
 	uniqueSortedTags,
-} from "$utils/searchFilter";
+} from "#lib/utils/searchFilter.js";
 
 let { data } = $props();
 

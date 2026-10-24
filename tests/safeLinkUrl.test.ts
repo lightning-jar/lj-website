@@ -1,6 +1,6 @@
-import { describe, expect, test } from "bun:test";
+import { safeLinkUrl } from "#lib/utils/safeLinkUrl.js";
 
-import { safeLinkUrl } from "$utils/safeLinkUrl";
+import { describe, expect, test } from "bun:test";
 
 describe("safeLinkUrl", () => {
 	test("allows https URLs", () => {

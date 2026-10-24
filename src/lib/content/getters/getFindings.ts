@@ -11,11 +11,14 @@
 // @required in .env.schema once the key exists everywhere.
 
 // utils
-import { parseMarkdownTextToHtml, stripLeadingH1 } from "$utils/parseMarkdown";
+import {
+	parseMarkdownTextToHtml,
+	stripLeadingH1,
+} from "#lib/utils/parseMarkdown.js";
 
 // types
-import type { Finding, FindingDetail } from "$types/Finding";
-import type { SitemapSection } from "$types/Sitemap";
+import type { Finding, FindingDetail } from "#lib/types/Finding.js";
+import type { SitemapSection } from "#lib/types/Sitemap.js";
 
 // env
 import { ENV } from "varlock/env";

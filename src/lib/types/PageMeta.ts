@@ -1,5 +1,5 @@
-import type { Image } from "$types/Image";
-import type { SitemapXMLFrequency } from "$types/Sitemap";
+import type { Image } from "#lib/types/Image.js";
+import type { SitemapXMLFrequency } from "#lib/types/Sitemap.js";
 
 export interface PageMeta {
 	[key: string]: unknown;

@@ -1,14 +1,10 @@
 {
-	// SvelteKit 3 replaced ./.svelte-kit/tsconfig.json with a config written
-	// to node_modules/$app/tsconfig.json by `svelte-kit sync`. The docs spell
-	// this as "extends": "$app/tsconfig", but that bare specifier resolves
-	// only in TypeScript (the directory has no package.json), and Bun then
-	// silently drops the inherited `paths`, which breaks every $-aliased
-	// import under `bun test`. Pointing at the same generated file by
-	// relative path keeps both toolchains working with no duplicated config;
-	// the cost is a cosmetic `tsconfig_extends_missing` warning from
-	// svelte-kit sync, which string-matches the documented spelling.
-	"extends": "./node_modules/$app/tsconfig.json",
+	// Generated into node_modules by `svelte-kit sync` (SvelteKit 3 replaced
+	// ./.svelte-kit/tsconfig.json with this). The bare specifier resolves in
+	// TypeScript only, which used to break Bun's inheritance of `paths`; that
+	// no longer matters now that every internal import goes through
+	// package.json's `#lib/*` subpath, which Bun resolves natively.
+	"extends": "$app/tsconfig",
 	// $app/tsconfig supplies isolatedModules and verbatimModuleSyntax but no
 	// include/exclude, so they are declared here.
 	"include": ["src", "tests", "scripts", "*"],
@@ -24,5 +20,4 @@
 		"moduleResolution": "bundler",
 		"types": ["$app/types", "node", "bun"]
 	}
-	// Path aliases come from the `alias` option in vite.config.ts.
 }

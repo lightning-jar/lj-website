@@ -1,11 +1,11 @@
 // types
-import type { Banner } from "$types/Banner";
-import type { CustomerStorySummary } from "$types/CustomerStorySummary";
-import type { PageMeta } from "$types/PageMeta";
+import type { Banner } from "#lib/types/Banner.js";
+import type { CustomerStorySummary } from "#lib/types/CustomerStorySummary.js";
+import type { PageMeta } from "#lib/types/PageMeta.js";
 
 // data
-import { getAllCustomerStories } from "$content/getters/getCustomerStories";
-import { default as landing } from "$content/landing-pages/customer-stories.json";
+import { getAllCustomerStories } from "#lib/content/getters/getCustomerStories.js";
+import { default as landing } from "#lib/content/landing-pages/customer-stories.json";
 
 const banner: Banner = landing.banner;
 const meta: PageMeta = landing.meta;

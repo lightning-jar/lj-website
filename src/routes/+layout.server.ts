@@ -3,11 +3,12 @@ export const prerender = true;
 
 // import version
 import { version } from "$app/env";
-// env variables
-import { ENV } from "varlock/env";
 
 // footer content
-import { default as footer } from "$data/footer.json";
+import { default as footer } from "#lib/data/footer.json";
+
+// env variables
+import { ENV } from "varlock/env";
 
 const isProduction = ENV.VERCEL_ENV === "production";
 const productionUrl = ENV.VERCEL_PROJECT_PRODUCTION_URL;

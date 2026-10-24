@@ -9,21 +9,21 @@
 import {
 	getAllBlogArticles,
 	getBlogArticleMarkdownBySlug,
-} from "$content/getters/getBlogArticles";
+} from "#lib/content/getters/getBlogArticles.js";
 import {
 	getAllCustomerStories,
 	getCustomerStoryMarkdownBySlug,
-} from "$content/getters/getCustomerStories";
-import { allPackages } from "$content/getters/getPackagesContent";
-import { getAllReadingListArticles } from "$content/getters/getReadingList";
-import { allTechnologies } from "$content/getters/getTechnologiesContent";
+} from "#lib/content/getters/getCustomerStories.js";
+import { allPackages } from "#lib/content/getters/getPackagesContent.js";
+import { getAllReadingListArticles } from "#lib/content/getters/getReadingList.js";
+import { allTechnologies } from "#lib/content/getters/getTechnologiesContent.js";
+import { ABOUT_LIGHTNING_JAR } from "#lib/data/aboutLightningJar.js";
+import { SITE_BASE } from "#lib/data/siteBase.js";
 
 import aeoStudies from "../../routes/research/aeo-bench/aeo-studies.json";
 import benchStudies from "../../routes/research/barkup-bench/bench-studies.json";
 import { buildSiteIndex } from "./siteIndex";
 import { createTtlCache } from "./ttlCache";
-import { SITE_BASE } from "$data/siteBase";
-import { ABOUT_LIGHTNING_JAR } from "$data/aboutLightningJar";
 
 // In-instance TTL memos over the CMS fetches — the burst-cost lever: a
 // run of tool calls (one agent session can make 5-15) hits the CMS once

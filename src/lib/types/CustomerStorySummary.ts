@@ -1,6 +1,6 @@
-import type { Banner } from "$types/Banner";
-import type { Customer } from "$types/Customer";
-import type { Image } from "$types/Image";
+import type { Banner } from "#lib/types/Banner.js";
+import type { Customer } from "#lib/types/Customer.js";
+import type { Image } from "#lib/types/Image.js";
 
 export interface CustomerStorySummary {
 	banner: Banner;

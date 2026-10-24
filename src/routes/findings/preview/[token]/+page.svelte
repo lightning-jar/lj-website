@@ -2,10 +2,13 @@
 import { page } from "$app/state";
 
 // utils
-import { parseMarkdownTextToHtml, stripLeadingH1 } from "$utils/parseMarkdown";
+import {
+	parseMarkdownTextToHtml,
+	stripLeadingH1,
+} from "#lib/utils/parseMarkdown.js";
 
 // types
-import type { Finding } from "$types/Finding";
+import type { Finding } from "#lib/types/Finding.js";
 
 interface PreviewFinding {
 	slug: string;

@@ -1,5 +1,5 @@
 // data
-import { termsContent } from "$content/getters/getTermsContent";
+import { termsContent } from "#lib/content/getters/getTermsContent.js";
 
 export function load() {
 	return {

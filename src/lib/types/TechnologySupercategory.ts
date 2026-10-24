@@ -1,4 +1,4 @@
-import type { Image } from "$types/Image";
+import type { Image } from "#lib/types/Image.js";
 
 export interface TechnologySupercategory {
 	id: string;

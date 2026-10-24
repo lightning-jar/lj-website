@@ -9,7 +9,7 @@ import {
 	filterSearchIndex,
 	loadSearchIndex,
 	type SearchRecord,
-} from "$utils/siteSearch";
+} from "#lib/utils/siteSearch.js";
 
 interface WebMcpToolResult {
 	content: { type: "text"; text: string }[];

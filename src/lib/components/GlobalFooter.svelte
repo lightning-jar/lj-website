@@ -1,6 +1,6 @@
 <script lang="ts">
 // components
-import NavLogoBlock from "$components/NavLogoBlock.svelte";
+import NavLogoBlock from "#lib/components/NavLogoBlock.svelte";
 
 // imported types
 import type { HTMLLinkAttributes } from "svelte/elements";

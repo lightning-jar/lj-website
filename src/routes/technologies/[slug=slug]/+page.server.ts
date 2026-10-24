@@ -5,7 +5,7 @@ import {
 	getRelatedTechnologies,
 	getTechnologyById,
 	getTechnologySupercategory,
-} from "$content/getters/getTechnologiesContent";
+} from "#lib/content/getters/getTechnologiesContent.js";
 
 // git-resident content: prerender every technology page
 export const prerender = true;

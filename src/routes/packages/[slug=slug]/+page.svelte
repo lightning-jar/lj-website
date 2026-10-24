@@ -1,5 +1,5 @@
 <script lang="ts">
-import LinkText from "$components/LinkText.svelte";
+import LinkText from "#lib/components/LinkText.svelte";
 
 let { data } = $props();
 let pkg = $derived(data.pkg);

@@ -1,6 +1,6 @@
 <script lang="ts">
 // import components
-import LightningButton from "$components/LightningButton.svelte";
+import LightningButton from "#lib/components/LightningButton.svelte";
 
 // props
 let { id, classes }: { id?: string; classes?: string } = $props();

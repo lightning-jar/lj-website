@@ -6,8 +6,8 @@
 // fetches return complete entries.
 
 // types
-import type { Article } from "$types/Article";
-import type { SitemapSection } from "$types/Sitemap";
+import type { Article } from "#lib/types/Article.js";
+import type { SitemapSection } from "#lib/types/Sitemap.js";
 
 // env
 import { ENV } from "varlock/env";

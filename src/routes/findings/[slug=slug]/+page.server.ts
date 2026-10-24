@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit";
 
-import { getFindingBySlug } from "$content/getters/getFindings";
+import { getFindingBySlug } from "#lib/content/getters/getFindings.js";
 
 // Rendered at request time so CMS saves go live without a redeploy —
 // including brand-new slugs; Vercel's edge caches responses on the same

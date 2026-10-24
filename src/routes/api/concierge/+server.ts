@@ -1,10 +1,10 @@
 // The concierge chat backend: a tool-grounded agent over the same
-// shared tool layer the public MCP server exposes ($lib/server/
+// shared tool layer the public MCP server exposes (#lib/server/
 // agentTools). Prototype scope, fail-closed by design:
 //
 // - No AI_GATEWAY_API_KEY → 503. The site never depends on this route.
 // - Per-IP rate limit + global daily request budget via the shared
-//   limiter ($lib/server/rateLimit): Upstash-backed when KV_REST_API_*
+//   limiter (#lib/server/rateLimit): Upstash-backed when KV_REST_API_*
 //   is configured (counters shared across instances), in-memory
 //   per-instance otherwise. Either way a fence, not the wall — the AI
 //   Gateway credit cap is the hard backstop. BotID remains a
@@ -16,7 +16,7 @@
 
 import type { RequestHandler } from "./$types";
 
-import { CONCIERGE_SUGGESTIONS } from "$data/conciergeSuggestions";
+import { CONCIERGE_SUGGESTIONS } from "#lib/data/conciergeSuggestions.js";
 
 import {
 	aboutLightningJar,
@@ -29,10 +29,10 @@ import {
 	readStudy,
 	searchContent,
 	siteIndex,
-} from "$lib/server/agentTools";
-import { ALLOWED_ORIGINS } from "$lib/server/allowedOrigins";
-import { createRateLimiter } from "$lib/server/rateLimit";
-import { createResponseCache } from "$lib/server/responseCache";
+} from "#lib/server/agentTools.js";
+import { ALLOWED_ORIGINS } from "#lib/server/allowedOrigins.js";
+import { createRateLimiter } from "#lib/server/rateLimit.js";
+import { createResponseCache } from "#lib/server/responseCache.js";
 import { gateway } from "@ai-sdk/gateway";
 import {
 	convertToModelMessages,

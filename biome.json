@@ -37,10 +37,14 @@
 			"!**/.env.*.local",
 			"!**/data/",
 			"!**/output",
-			"!**/*.md",
 			"!**/*.svg",
 			"!ops/swamp/vaults"
 		]
+	},
+	"markdown": {
+		"formatter": {
+			"enabled": false
+		}
 	},
 	"formatter": {
 		"enabled": true,
@@ -80,31 +84,18 @@
 							":BLANK_LINE:",
 							{ "type": false, "source": ["@sentry/**"] },
 							":BLANK_LINE:",
-							{
-								"type": false,
-								"source": ["$components/**", "$lib/components/**"]
-							},
+							{ "type": false, "source": ["#lib/components/**"] },
 							":BLANK_LINE:",
-							{
-								"type": false,
-								"source": ["$utils", "$utils/**", "$lib/utils/**"]
-							},
+							{ "type": false, "source": ["#lib/utils/**"] },
 							":BLANK_LINE:",
 							{ "type": true, "source": ["**"] },
 							":BLANK_LINE:",
 							{
 								"type": false,
-								"source": [
-									"$content",
-									"$content/**",
-									"$lib/content/**",
-									"$data/**"
-								]
+								"source": ["#lib/content/**", "#lib/data/**"]
 							},
 							":BLANK_LINE:",
-							{ "type": false, "source": ["$stores/**", "$lib/stores/**"] },
-							":BLANK_LINE:",
-							{ "type": false, "source": ["$assets/**", "$lib/assets/**"] },
+							{ "type": false, "source": ["#lib/assets/**"] },
 							[":ALIAS:"]
 						]
 					}

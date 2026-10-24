@@ -1,8 +1,8 @@
 import { describe, expect, it } from "bun:test";
 import {
 	matchesEveryTerm,
-	tagIsActive,
 	searchTermsOf,
+	tagIsActive,
 	toggleSearchTerm,
 	uniqueSortedTags,
 } from "../src/lib/utils/searchFilter";

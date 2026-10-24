@@ -1,5 +1,5 @@
 <script lang="ts">
-import ConciergeChat from "$components/ConciergeChat.svelte";
+import ConciergeChat from "#lib/components/ConciergeChat.svelte";
 </script>
 
 <main

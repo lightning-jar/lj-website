@@ -11,8 +11,8 @@
 // Positioning: CSS anchor positioning pins the panel to the launcher
 // where supported; the fixed bottom/right utilities remain as the
 // fallback for browsers without anchor support.
-import ConciergeChat from "$components/ConciergeChat.svelte";
-import LightningBolt from "$components/LightningBolt.svelte";
+import ConciergeChat from "#lib/components/ConciergeChat.svelte";
+import LightningBolt from "#lib/components/LightningBolt.svelte";
 
 let open = $state(false);
 let panelEl: HTMLElement | null = $state(null);

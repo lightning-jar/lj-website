@@ -1,7 +1,7 @@
 // Customer stories live in the replicator CMS (Lightning Jar org,
 // collection "customer-story", Customer Stories blog entity) and are
 // fetched at request time via the org-scoped public API. The markdown
-// body is parsed locally by $utils/parseMarkdown; structured fields
+// body is parsed locally by #lib/utils/parseMarkdown; structured fields
 // (banner, testimonials, perspectives, images, …) ride in frontmatter.
 // Stories sort by frontmatter `date`, newest first (since 2026-07-21;
 // the former curated `order` field is retired — dates were assigned to
@@ -9,14 +9,17 @@
 // content remains in git.
 
 // utils
-import { parseMarkdownTextToHtml, stripLeadingH1 } from "$utils/parseMarkdown";
+import {
+	parseMarkdownTextToHtml,
+	stripLeadingH1,
+} from "#lib/utils/parseMarkdown.js";
 
 // types
-import type { CustomerStory } from "$types/CustomerStory";
-import type { SitemapPage, SitemapSection } from "$types/Sitemap";
+import type { CustomerStory } from "#lib/types/CustomerStory.js";
+import type { SitemapPage, SitemapSection } from "#lib/types/Sitemap.js";
 
 // data
-import { allTechnologies } from "$content/getters/getTechnologiesContent";
+import { allTechnologies } from "#lib/content/getters/getTechnologiesContent.js";
 
 // env
 import { ENV } from "varlock/env";

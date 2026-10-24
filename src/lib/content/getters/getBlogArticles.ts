@@ -2,16 +2,19 @@
 // fetched at request time via the org-scoped public API — blog routes,
 // feeds, and sitemaps are server-rendered with edge caching so CMS
 // saves go live without a redeploy (matching slx-web). Markdown is
-// still parsed locally by $utils/parseMarkdown so published HTML stays
+// still parsed locally by #lib/utils/parseMarkdown so published HTML stays
 // bit-identical to the git-content era.
 
 // utils
-import { matchAuthorProfile } from "$utils/authorMatch";
-import { parseMarkdownTextToHtml, stripLeadingH1 } from "$utils/parseMarkdown";
+import { matchAuthorProfile } from "#lib/utils/authorMatch.js";
+import {
+	parseMarkdownTextToHtml,
+	stripLeadingH1,
+} from "#lib/utils/parseMarkdown.js";
 
 // types
-import type { FrontMatter } from "$types/FrontMatter";
-import type { SitemapPage, SitemapSection } from "$types/Sitemap";
+import type { FrontMatter } from "#lib/types/FrontMatter.js";
+import type { SitemapPage, SitemapSection } from "#lib/types/Sitemap.js";
 
 // env
 import { ENV } from "varlock/env";

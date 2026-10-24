@@ -1,5 +1,5 @@
 // src/lib/sfx.ts
-import { playOneShot } from "$lib/audio";
+import { playOneShot } from "#lib/audio.js";
 
 type SfxDef = {
 	url: string;

@@ -1,6 +1,6 @@
-import skillMd from "$content/skills/aeo-bench-data/SKILL.md?raw";
-
 import type { RequestHandler } from "./$types";
+
+import skillMd from "#lib/content/skills/aeo-bench-data/SKILL.md?raw";
 
 // The skill artifact itself; served from source so the sha256 digest in
 // ../index.json is always computed from these exact bytes.

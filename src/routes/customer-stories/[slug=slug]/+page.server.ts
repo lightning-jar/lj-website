@@ -2,12 +2,12 @@
 
 import { error } from "@sveltejs/kit";
 
-import type { CustomerStory } from "$types/CustomerStory";
+import type { CustomerStory } from "#lib/types/CustomerStory.js";
 
 import {
 	getCustomerStoryBySlug,
 	getNextCustomerStorySlug,
-} from "$content/getters/getCustomerStories";
+} from "#lib/content/getters/getCustomerStories.js";
 
 // Rendered at request time so CMS saves go live without a redeploy —
 // including brand-new slugs; Vercel's edge caches responses on the same
