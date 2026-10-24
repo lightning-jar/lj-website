@@ -7858,6 +7858,122 @@ export function initBenchCharts() {
 		);
 	})();
 
+	// --- Study AU: the match-stage A/B disagreement anatomy ---
+	(() => {
+		const ROWS = [
+			{
+				label: "both engines agree",
+				v: 69,
+				color: "#8b93a3",
+				tip: "69/102 regions: same action from both engines on byte-identical inputs · and when that action is reuse, the identical widget 15/15 (exact-widget agreement 1.00)",
+			},
+			{
+				label: "Jev reuses, fable builds",
+				v: 31,
+				color: "#c98500",
+				tip: "31/102: the one-directional disagreement · median Jev probability 0.71 (a policy, not noise) · 15 of the 31 are heading-class regions matched to a generic heading widget, where fable's judge-by-purpose rule declines",
+			},
+			{
+				label: "fable reuses, Jev builds",
+				v: 2,
+				color: "#e66767",
+				tip: "2/102: the only reverse cases, both in Jev's low-confidence zone (p 0.45 to 0.53)",
+			},
+		];
+		byId("legend-37").innerHTML =
+			'<span class="key"><span class="chip" style="background:#8b93a3"></span>agreement</span>' +
+			'<span class="key"><span class="chip" style="background:#c98500"></span>Jev-reuse / fable-build (the looser policy)</span>' +
+			'<span class="key"><span class="chip" style="background:#e66767"></span>fable-reuse / Jev-build</span>' +
+			legendNote(
+				"102 regions from the frozen AT-brand decompose outputs, judged fresh by both engines on byte-identical text-only inputs under identical guards · action agreement 0.676 vs the registered 0.85 gate: FAIL, Phase 2 unrun · overall reuse rates: fable 16.7%, Jev 45.1%",
+			);
+		const W = 880,
+			BAR = 16,
+			GPAD = 12,
+			T = 8,
+			B = 42,
+			L = 255,
+			R = 84;
+		const H = T + ROWS.length * (BAR + GPAD) + B;
+		const iw = W - L - R;
+		const max = 102;
+		const xOf = (v) => L + (v / max) * iw;
+		let g = "";
+		for (const tick of [0, 51, 102]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		ROWS.forEach((row, i) => {
+			const y = T + i * (BAR + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${y + BAR - 3}" text-anchor="end">${row.label}</text>`;
+			const w = Math.max((row.v / max) * iw, 2);
+			marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${row.color}" rx="3"/>`;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 4}">${row.v}/102</text>`;
+			hits += `<rect x="${L}" y="${y}" width="${iw}" height="${BAR}" fill="transparent" data-tip="${esc(row.label + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-au");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart of the 102 regions judged by both match engines: 69 agreements, 31 regions where Jev reuses and fable builds, and 2 where fable reuses and Jev builds; the disagreement is almost entirely one-directional.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the anatomy that turned a failed gate into a finding: the engines disagree almost entirely in one direction, agree on the exact widget whenever they both reuse, and Jev's extra reuses carry high confidence; not an accurate judge and a noisy one, but a strict policy and a permissive one",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-au",
+			["cell", "fable-5.1 (shipped)", "Jev (typesafe-ai/jev-1.14.0)"],
+			[
+				[
+					"AU-G1 action agreement (gate to Phase 2)",
+					"0.676 vs the registered ≥ 0.85 · FAIL: Phase 2 unrun, fable stays the default",
+					"same measurement, same verdict",
+				],
+				["region reuse rate (102 regions)", "16.7%", "45.1%"],
+				[
+					"exact-widget agreement when both reuse",
+					"15/15 (1.00)",
+					"the identical 15 widgets",
+				],
+				[
+					"disagreement direction",
+					"builds where Jev reuses (31 of 33)",
+					"reuses where fable builds; 2 reverse cases, both in its p 0.45 to 0.53 low-confidence zone",
+				],
+				[
+					"median probability on its extra reuses",
+					"n/a",
+					"0.71: a consistent policy, not noise",
+				],
+				[
+					"heading-class share of the extra reuses",
+					"declines under the judge-by-purpose rule",
+					"15/31 matched to a generic heading widget",
+				],
+				["mean page latency", "9,580 ms", "196 ms (49x faster)"],
+				["model cost, 16-page sweep", "~$1.50", "~$0.003"],
+				[
+					"replay validation vs the AT-recorded decisions",
+					"99.0% self-consistent across two days of catalog drift",
+					"n/a",
+				],
+				[
+					"outcome",
+					"stays the default",
+					"the engine switch ships dormant as the re-test apparatus; the policy-vs-policy question is named for its own registration",
+				],
+			],
+		);
+	})();
+
 	// Every legend gets a "Legend" label as its first child — a styled
 	// paragraph, not a heading, so legends don't skip levels in the
 	// document outline. Runs after the builders above have set each

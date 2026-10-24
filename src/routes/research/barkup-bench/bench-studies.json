@@ -2080,6 +2080,78 @@
 			],
 			"brief": "BRIEF-AT.md",
 			"quote": "The recovery gate was set under the story the last study told, and the data refused it: the penalty lives on dark surfaces, the palette extraction was flawless, and nothing paints the page. A gate that can lose to the data is the system working."
+		},
+		{
+			"slug": "au",
+			"letters": "AU",
+			"track": "Whole-system baselines",
+			"title": "The match-stage engine A/B: Jev is not a drop-in judge, it is a looser policy, and the gate declined to fund finding out more",
+			"eyebrow": "Study AU · the match-stage engine A/B · 102 regions judged twice, Phase 2 unrun by rule",
+			"indexLine": "Can a typed-decision model at a thousandth of the cost replace fable-5.1 as the PDF pipeline's reuse-vs-build judge? Phase 1 judged 102 frozen regions with both engines fresh on byte-identical inputs: action agreement 0.676 against the registered 0.85 gate, so Phase 2 never ran and fable stays. The texture is the finding: 31 of 33 disagreements run one direction (Jev reuses at 45.1% where fable sits at 16.7%), both engines pick the identical widget 15 of 15 when they agree to reuse, and Jev's extra reuses carry median probability 0.71, a systematically looser policy rather than noise, 49 times faster and roughly 500 times cheaper.",
+			"sections": [
+				{
+					"id": "sec-au",
+					"eyebrow": "Whole-system baselines",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-37",
+					"figure": {
+						"id": "fig-au",
+						"title": "The 102 Regions, Judged by Both Engines: Agreement and the One-Directional Disagreement"
+					},
+					"table": {
+						"id": "tbl-au",
+						"summary": "The gate, reuse rates, the disagreement anatomy, the replay validation, latency and cost per engine"
+					},
+					"body": [
+						{
+							"heading": "The Question and the Gated Design",
+							"html": "Replicator's PDF-pipeline match stage decides reuse-versus-build for every decomposed region: one fable-5.1 call per page over a text-only prompt, wrapped in deterministic guards. Jev (typesafe-ai jev-1.14.0, a typed-decision model at about $0.042 per million input tokens) answers exactly that shape, one choice per region over the candidate list plus a build sentinel, and if quality held, the stage's model cost would fall about a thousandfold and its latency from seconds to sub-second. The registration bought the answer in two gated phases: Phase 1 (about $2) replayed the frozen Study AT brand-arm decompose outputs, 12 items, 16 pages, 102 regions, judging every page with both engines fresh on byte-identical inputs under identical guards; Phase 2, the full-pipeline arm at about $20, would run only past a registered agreement gate of 0.85 on actions and 0.90 on exact widgets."
+						},
+						{
+							"heading": "The Gate, Published as Measured",
+							"html": "AU-G1 failed: action agreement 0.676 against the registered 0.85. Per the registered decision rule, Phase 2 did not run, fable-5.1 remains the match default, and the roughly $20 full-pipeline arm was never spent. That is the quiet discipline angle worth naming: the gate's job was to decline to fund a deeper experiment on a failed interchangeability check, and it did exactly that."
+						},
+						{
+							"heading": "One Direction, Same Widget",
+							"html": "The texture of the failure is the finding. Of 33 disagreements, 31 run the same direction: Jev reuses where fable builds, with overall reuse rates of 45.1% against 16.7%. When both engines say reuse, they chose the identical widget 15 of 15. And Jev is not noisy: its extra reuses carry a median probability of 0.71. It simply holds a looser matching policy. Nearly half of its extra reuses (15 of 31) are heading-class regions matched to a generic heading widget, exactly where fable's judge-by-purpose rule, present in both engines' inputs, makes fable decline. The two reverse cases sit in Jev's own low-confidence zone (p 0.45 to 0.53). The engines are not an accurate one and an inaccurate one; they are two policies, one strict and one permissive, applied consistently."
+						},
+						{
+							"heading": "The Replay Validates Itself",
+							"html": "A protocol check rode along: judged fresh today on the same frozen inputs, fable agreed with its own AT-recorded decisions on 99.0% of regions despite two days of organic catalog drift. The offline replay method is sound, and the shipped judge is highly self-consistent, which is itself a useful property to have measured for a stage that decides what gets built."
+						},
+						{
+							"heading": "The Economics for the Record",
+							"html": "Why the question was worth asking: Jev judged pages in 196 milliseconds mean against fable's 9,580, a 49-times speedup, and the entire 16-page sweep cost about $0.003 of Jev input against about $1.50 of fable. If the policies had agreed, the switch would have been free money. They did not, and the price of knowing was about $2."
+						},
+						{
+							"heading": "What This Does Not Settle",
+							"html": "The study names its own open question rather than quietly answering it: whether Jev's permissive policy produces BETTER pipelines. Fable built 85 widgets across Study AS, and if generic-heading reuse is actually fine, the strict policy over-builds at real cost on every run. Answering that requires a full-pipeline arm scored on downstream structure and appearance, which is exactly the Phase 2 this study's gate declined to fund on interchangeability grounds; a future registration could re-ask it as which policy is right rather than whether the engines are interchangeable. Until then, the replicator-side engine switch and the Jev judge ship dormant, default fable, guards identical, as the ready-made re-test apparatus."
+						}
+					]
+				}
+			],
+			"published": "2026-10-24",
+			"related": [
+				{
+					"title": "Study AT: the AS interventions, measured",
+					"href": "/research/barkup-bench/at"
+				},
+				{
+					"title": "Study AS: the whole-system baseline",
+					"href": "/research/barkup-bench/as"
+				},
+				{
+					"title": "Replicator, the product under test",
+					"href": "https://replicator.lj.dev"
+				},
+				{
+					"title": "barkup-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/barkup-bench"
+				}
+			],
+			"brief": "BRIEF-AU.md",
+			"quote": "Jev is not a noisy version of fable's judge; it is a different policy, applied consistently, at a five-hundredth of the price. Which policy is right is a different study, and the gate declined to fund it on a failed interchangeability check."
 		}
 	]
 }
