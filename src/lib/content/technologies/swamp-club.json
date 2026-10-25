@@ -4,7 +4,7 @@
 	"shortDescription": "Behavior-based automation for AI-era operations: repeatable workflows, vaulted secrets, and scheduled sweeps instead of token-hungry agent sessions.",
 	"description": [
 		"Swamp (swamp-club.com) approaches automation from the opposite direction of open-ended AI agents: composable, typed behaviors wired together into declarative YAML workflows, with secrets held in vaults and every run auditable and schedulable. The pitch is repeatability; an automation you can read, version, and re-run beats a transcript you can only hope repeats.",
-		"We adopted it in Replicator's operations layer, where its definitions are committed to the repository: a standing production-data audit, an orphan-blob audit, and scheduled sweeps that run as swamp workflows on cron triggers."
+		"We adopted it first in Replicator's operations layer, where its definitions are committed to the repository: a standing production-data audit, an orphan-blob audit, and scheduled sweeps that run as swamp workflows on cron triggers. This site uses it too, for a weekly sweep that drafts Findings entries for human review and a production smoke check every 30 minutes that emails us when something breaks."
 	],
 	"useCases": [
 		"Standing data audits and scheduled operational sweeps",

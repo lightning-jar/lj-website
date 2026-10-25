@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 - `prod-smoke` swamp workflow (every 30 min at :10/:40): `scripts/smoke-prod.ts` probes www.lightningjar.com (home SSR shell, the four CMS-backed listings, MCP `initialize`, concierge route load, and live deploy sha vs `origin/production`) and emails on failure. Ported from replicator; runs on its own `lj-smoke-script` behavior so its results never land between findings-sweep's probe and assert.
 - `src/lib/utils/deployFreshness.ts` and `src/lib/utils/shellArgs.ts` (ported from replicator, with tests).
-- Built With: Swamp entry.
+- Built With: Swamp entry; the Swamp Club technology page now notes lj-website adoption alongside Replicator.
 
 ### Fixed
 - Shell injection in the swamp behaviors: `lj-ops-script` and `replicator-notify` interpolated inputs into a shell line. Both now run a fixed command and pass inputs as env vars to `scripts/ops-run.ts` (path allowlist + argv split, no shell), matching replicator and slx-customer-portal.
