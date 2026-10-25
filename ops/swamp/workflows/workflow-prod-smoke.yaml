@@ -1,0 +1,102 @@
+# Prod health probe — external smoke of www.lightningjar.com every 30
+# minutes, offset from replicator (:00/:30) and the portal (:15/:45). The
+# classes it targets never reach Sentry: init-time bundle crashes (the
+# mcp-handler ERR_REQUIRE_ESM class) and quiet CMS loss, which the
+# last-known-good cache and the findings key fallback render as empty or
+# frozen pages instead of errors. It also asserts the live deploy matches
+# origin/production, since a failing Vercel build leaves every health check
+# green on the old code. Clean runs complete silently; a failing check (or
+# a broken probe) emails Kevin via replicator's Resend — a scheduled probe
+# that fails silently would be theater.
+#
+# Encoding follows replicator's prod-smoke: the probe runs with
+# ignoreExitCode so its exit code lands in result data and the data
+# commits; the assert reads it; the two notify steps hang off the
+# assert/probe FAILURE edges and are allowFailure so an email outage can't
+# mask the real verdict.
+id: da6b81f4-be3c-4761-92bb-6fb285828356
+name: prod-smoke
+description: External www.lightningjar.com health checks every 30 min, email on failure
+version: 1
+tags:
+  team: lj-website
+  pattern: monitoring
+trigger:
+  schedule: "10,40 * * * *"
+
+inputs:
+  type: object
+  properties:
+    smokeScript:
+      type: string
+      default: scripts/smoke-prod.ts
+    smokeArgs:
+      type: string
+      description: Extra flags for the probe (e.g. --base=… to aim at a preview)
+      default: ""
+  required: []
+
+jobs:
+  - name: smoke
+    steps:
+      - name: run-smoke
+        task:
+          type: behavior
+          behavior: lj-smoke-script
+          methodName: execute
+          inputs:
+            script: "${{ inputs.smokeScript }}"
+            args: "${{ inputs.smokeArgs }}"
+            ignoreExitCode: true
+        dataOutputOverrides:
+          - specName: result
+            lifetime: 14d
+            tags:
+              audit: prod-smoke
+
+      - name: assert-healthy
+        dependsOn:
+          - step: run-smoke
+            condition:
+              type: succeeded
+        task:
+          type: assert
+          expr: data.latest("lj-smoke-script", "result").content.exitCode == 0
+          message: "Prod smoke found failing checks on www.lightningjar.com — see the run-smoke log; an email alert was dispatched."
+          severity: high
+
+      - name: notify-unhealthy
+        dependsOn:
+          - step: assert-healthy
+            condition:
+              type: failed
+        allowFailure: true
+        task:
+          type: behavior
+          behavior: replicator-notify
+          methodName: execute
+          inputs:
+            subject: "lj-website prod smoke FAILED"
+            body: >-
+              One or more health checks failed on www.lightningjar.com
+              (home, CMS-backed listings, MCP, concierge or deploy
+              freshness). Inspect: swamp workflow history prod-smoke (from
+              ~/projects/lj-website/ops/swamp under varlock); the run-smoke
+              log lists the failing checks.
+
+      - name: notify-probe-broken
+        dependsOn:
+          - step: run-smoke
+            condition:
+              type: failed
+        allowFailure: true
+        task:
+          type: behavior
+          behavior: replicator-notify
+          methodName: execute
+          inputs:
+            subject: "lj-website prod smoke PROBE ERROR"
+            body: >-
+              The smoke probe itself failed to run (infra/setup error, not
+              a health verdict). Inspect: swamp workflow history prod-smoke
+              on lj-bench.

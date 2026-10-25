@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.20.0] - 2026-10-25
+
+### Added
+- `prod-smoke` swamp workflow (every 30 min at :10/:40): `scripts/smoke-prod.ts` probes www.lightningjar.com (home SSR shell, the four CMS-backed listings, MCP `initialize`, concierge route load, and live deploy sha vs `origin/production`) and emails on failure. Ported from replicator; runs on its own `lj-smoke-script` behavior so its results never land between findings-sweep's probe and assert.
+- `src/lib/utils/deployFreshness.ts` and `src/lib/utils/shellArgs.ts` (ported from replicator, with tests).
+- Built With: Swamp entry.
+
+### Fixed
+- Shell injection in the swamp behaviors: `lj-ops-script` and `replicator-notify` interpolated inputs into a shell line. Both now run a fixed command and pass inputs as env vars to `scripts/ops-run.ts` (path allowlist + argv split, no shell), matching replicator and slx-customer-portal.
+- `replicator-notify` alerts failed at init: lj-website's `OP_TOKEN`/`OP_ENV_ID` leaked from the outer varlock into replicator's, which then tried to load lj-website's 1Password environment. The behavior now strips them (`env -u`) before calling replicator's varlock.
+
 ## [0.19.0] - 2026-07-24
 
 ### Changed

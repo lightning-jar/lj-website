@@ -377,6 +377,17 @@
 			}
 		},
 		{
+			"name": "Swamp",
+			"category": "Ops Automation",
+			"description": [
+				"Swamp runs the operational chores around this site as declarative YAML workflows that live in the repository, run on a schedule, and keep a versioned record of every run. A weekly sweep looks for new finding-shaped claims in our project notes and drafts them as Findings entries in our CMS for human review. Every 30 minutes a production smoke check confirms that the home page, the CMS-backed listings, the MCP endpoint, and the concierge all respond the way they should, and that the live deployment matches the latest commit. When a check fails, it sends us an email. The workflows never publish anything on their own; a person reviews and publishes every entry."
+			],
+			"license": "Proprietary",
+			"link": {
+				"href": "https://swamp-club.com"
+			}
+		},
+		{
 			"name": "TypeScript",
 			"category": "Programming Language",
 			"description": [

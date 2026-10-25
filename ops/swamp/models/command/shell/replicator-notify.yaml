@@ -2,11 +2,19 @@
 # has no server email of its own, so ops alerts borrow the sibling repo's
 # wired, tested path. Runs through replicator's varlock env so the Resend
 # key resolves there, never here.
+#
+# SECURITY (2026-10-25): subject/body are NOT interpolated into the shell
+# line (they used to be, inside double quotes — live-fire already broke it
+# once with `sh: Syntax error: "(" unexpected`, and a `"` or `$(` in an
+# input was a shell injection). `run` is fixed; the flags travel in OPS_ARGS
+# to replicator's scripts/ops-run.ts, which splits them into argv without a
+# shell. A double quote inside subject/body now only mis-splits the argv
+# (garbled email), it cannot execute anything — still keep them out.
 type: command/shell
 typeVersion: 2026.02.09.1
 id: 02118956-a5f0-410e-8e71-b7c6e14bfd66
 name: replicator-notify
-version: 1
+version: 2
 tags:
   repo: lj-website
   layer: ops
@@ -17,15 +25,19 @@ globalArguments:
 methods:
   execute:
     arguments:
-      # subject/body are interpolated inside double quotes — spaces,
-      # parens, and colons in the inputs must not reach sh unquoted
-      # (live-fire caught exactly that: `sh: Syntax error: "(" unexpected`).
-      # Keep double quotes OUT of the input strings themselves.
+      # `env -u`: this behavior runs inside lj-website's varlock (daemon and
+      # ad-hoc runs alike), whose OP_TOKEN / OP_ENV_ID and __VARLOCK_* state
+      # would otherwise override replicator's .env.local, so replicator's
+      # varlock tried to load lj-website's 1Password environment and every
+      # alert died at init (found 2026-10-25 by the prod-smoke red-path run).
       run: >-
-        APP_ENV=development bunx varlock run -- bun
-        scripts/notify-ops-failure.ts --subject="${{ inputs.subject }}"
-        --body="${{ inputs.body }}"
+        env -u OP_TOKEN -u OP_ENV_ID -u __VARLOCK_RUN -u __VARLOCK_ENV
+        -u __VARLOCK_REDACTED_STREAMS APP_ENV=development
+        bunx varlock run -- bun scripts/ops-run.ts
       workingDir: "${{ self.globalArguments.replicatorDir }}"
+      env:
+        OPS_SCRIPT: scripts/notify-ops-failure.ts
+        OPS_ARGS: '--subject="${{ inputs.subject }}" --body="${{ inputs.body }}"'
       timeout: 120000
       ignoreExitCode: false
 

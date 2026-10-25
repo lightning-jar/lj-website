@@ -2,11 +2,19 @@
 # findings-sweep probe is the first consumer; exit semantics are the
 # script's own (sweep: 0 = nothing new / baseline, 3 = new claims,
 # 1 = probe error) and land in the result data either way.
+#
+# SECURITY (2026-10-25, ported from replicator/slx-customer-portal): inputs
+# are NOT interpolated into the shell line. `run` is a fixed command;
+# `script` and `args` travel as environment variables to scripts/ops-run.ts,
+# which validates the path (scripts/<name>.ts only) and splits the flags into
+# argv for Bun.spawn without a shell. swamp does not enforce JSON-schema
+# `pattern` on inputs, so a schema fence alone is decoration — do not go
+# back to `bun run ${{ inputs.script }} ${{ inputs.args }}`.
 type: command/shell
 typeVersion: 2026.02.09.1
 id: f21e5946-0cd5-41ae-a4af-e41dd271810e
 name: lj-ops-script
-version: 1
+version: 2
 tags:
   repo: lj-website
   layer: ops
@@ -19,8 +27,11 @@ methods:
     arguments:
       # Through varlock so 1Password-resolved env (REPLICATOR_AGENT_KEY,
       # BLOG_CMS_BASE_URL) reaches scripts as process.env.
-      run: "bunx varlock run -- bun run ${{ inputs.script }} ${{ inputs.args }}"
+      run: bunx varlock run -- bun scripts/ops-run.ts
       workingDir: "${{ self.globalArguments.repoDir }}"
+      env:
+        OPS_SCRIPT: "${{ inputs.script }}"
+        OPS_ARGS: "${{ inputs.args }}"
       timeout: "${{ inputs.timeoutMs }}"
       ignoreExitCode: "${{ inputs.ignoreExitCode }}"
 
@@ -29,10 +40,10 @@ inputs:
   properties:
     script:
       type: string
-      description: Repo-relative script path (e.g. scripts/findings-sweep.ts)
+      description: Repo-relative script path, scripts/<name>.ts only (enforced by scripts/ops-run.ts)
     args:
       type: string
-      description: Extra CLI flags for the script
+      description: Flags passed to the script, split into argv by scripts/ops-run.ts — never interpreted by a shell
       default: ""
     ignoreExitCode:
       type: boolean

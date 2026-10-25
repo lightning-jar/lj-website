@@ -1,0 +1,49 @@
+# Run an lj-website SMOKE script under varlock. Same shape as lj-ops-script,
+# but a separate behavior on purpose: workflow asserts read
+# `data.latest(<behavior>, "result")`, and prod-smoke writes a result every
+# 30 minutes — sharing lj-ops-script would let a smoke result land between
+# findings-sweep's run-sweep and its assert. Own behavior = own stream (the
+# lesson slx-customer-portal's portal-release-script encodes).
+#
+# SECURITY: same structure as lj-ops-script — fixed `run`, inputs via
+# environment variables to scripts/ops-run.ts (path validation + argv split,
+# no shell). See that file's header for why a schema `pattern` is not enough.
+type: command/shell
+typeVersion: 2026.02.09.1
+id: 4a918632-4f9e-40ec-8458-8344ac2b142a
+name: lj-smoke-script
+version: 1
+tags:
+  repo: lj-website
+  layer: ops
+
+globalArguments:
+  repoDir: /home/exedev/projects/lj-website
+
+methods:
+  execute:
+    arguments:
+      run: bunx varlock run -- bun scripts/ops-run.ts
+      workingDir: "${{ self.globalArguments.repoDir }}"
+      env:
+        OPS_SCRIPT: "${{ inputs.script }}"
+        OPS_ARGS: "${{ inputs.args }}"
+      timeout: 180000
+      ignoreExitCode: "${{ inputs.ignoreExitCode }}"
+
+inputs:
+  type: object
+  properties:
+    script:
+      type: string
+      description: Repo-relative script path, scripts/<name>.ts only (enforced by scripts/ops-run.ts)
+    args:
+      type: string
+      description: Flags passed to the script, split into argv by scripts/ops-run.ts — never interpreted by a shell
+      default: ""
+    ignoreExitCode:
+      type: boolean
+      description: Treat nonzero exit as success (exit code still lands in result data)
+      default: false
+  required:
+    - script
