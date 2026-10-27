@@ -2152,6 +2152,82 @@
 			],
 			"brief": "BRIEF-AU.md",
 			"quote": "Jev is not a noisy version of fable's judge; it is a different policy, applied consistently, at a five-hundredth of the price. Which policy is right is a different study, and the gate declined to fund it on a failed interchangeability check."
+		},
+		{
+			"slug": "av",
+			"letters": "AV",
+			"track": "Whole-system baselines",
+			"title": "Which matching policy is right? All gates pass, the default flips to the thousandfold-cheaper judge",
+			"eyebrow": "Study AV · strict vs permissive matching, scored downstream · 2 full-pipeline arms, 32 scored pages",
+			"indexLine": "Study AU measured that the two match-stage judges disagree; AV ran the sequel AU's gate refused to fund and measured what the disagreement costs downstream. On a pinned instance with both arms at one commit, every gate passed: 12/12 completions per arm, zero fallbacks in 140 builds, and a median paired structure delta of -0.014 against the -0.03 no-harm bound, so the recommendation flips the match default to Jev: 40.9% fewer widgets built, the match stage 13 times faster, the pipeline 24% faster end to end, the stage's model cost about a thousandfold lower. The honest texture runs against the registered prediction: compositions absorbed the permissive policy best and simple pages paid the most.",
+			"sections": [
+				{
+					"id": "sec-av",
+					"eyebrow": "Whole-system baselines",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-38",
+					"figure": {
+						"id": "fig-av",
+						"title": "Median Paired Structure Delta (Jev Minus Fable) by Tier, Against the No-Harm Bound"
+					},
+					"table": {
+						"id": "tbl-av",
+						"summary": "Gates, reuse rates, widgets built, wall-clock, cost, and the named divergences per arm"
+					},
+					"body": [
+						{
+							"heading": "The Question AU Could Not Answer",
+							"html": "Study AU established that Jev is not the same judge as fable at the PDF pipeline's match stage: a one-directional disagreement, reuse rates of 45.1% against 16.7%, and a gate that declined to fund the deeper experiment on a failed interchangeability check. Agreement cannot say which policy is RIGHT. Study AV, the fourth whole-system study, registered and run by the stem-bench analyst from the hand-off proposal, scores both policies where it matters: two full AS-corpus pipeline passes differing only in the match engine, graded on downstream structure. If generic-heading reuse is actually fine, fable's strictness over-builds at the pipeline's most expensive stage on every run; if it is not, the fidelity bill should show it. Fence $70, spend about $37."
+						},
+						{
+							"heading": "A Pinned Instance and Two Stop Rules",
+							"html": "Unlike AS through AU, which ran on the shared dev service, AV pinned a dedicated worktree instance at v3.293.3 so both arms share one commit and the engine is set per process rather than by mutating a shared service; there is no version split of the AU kind anywhere in the pairing. Two registered stop rules ran before anything scored. The harness smoke revalidated the endpoint across replicator's SvelteKit 3 migration. The engine-plumbing check, which demands the two arms actually decide differently on the same items, was settled decisively by the match stage's latency fingerprint: fable deliberates for 4.2 to 16.8 seconds per page, Jev answers in 231 to 670 milliseconds. The fable baseline was bought fresh for about $20 rather than reusing frozen records, applying the record-reuse lesson stem-bench Study 5 taught the week before. One operational note is disclosed: external kills interrupted the jev arm twice mid-item; no scored record was affected, the items re-ran from scratch, and the stray staging folders were swept at teardown."
+						},
+						{
+							"heading": "All Gates Pass, and the Default Flips",
+							"html": "AV-G1: 12 of 12 items complete in each arm. AV-G2: zero fallback widgets in 140 builds. AV-G3, the gate: median paired structure delta (jev minus fable) of -0.014 over 16 pages, inside the registered -0.03 no-harm bound. Per the registered decision rule the recommendation is to switch the match stage's default engine to Jev, shipped as a normal versioned change with the env switch retained as rollback, exactly the apparatus AU left dormant. The hand-off to the replicator agent is committed alongside the results with the care items the texture suggests."
+						},
+						{
+							"heading": "The Price of Permissiveness, Measured",
+							"html": "AU's offline policies reproduced end to end: fable reused 17.0% of 106 regions and built 88 widgets; Jev reused 50.9% and built 52, which is 40.9% fewer trips through the pipeline's most expensive stage. Match wall-clock fell from 161 seconds to 12 corpus-wide, total pipeline time from 42.7 to 32.3 minutes, and the stage's model cost from about $1.50 to about $0.003 per pass. The downstream price of all that permissiveness is the gate number itself: a median 0.014 of structure, measured, inside the bound."
+						},
+						{
+							"heading": "The Texture, and a Wrong Prediction",
+							"html": "The registered prediction said divergence would concentrate in T2, the composition tier whose heading-class regions drove AU's disagreement anatomy. It did not, and the inversion is the study's most instructive line: T2 absorbed stretched matches best (median delta +0.008, and t2-agenda is the corpus's one positive divergence, +0.068 with 9 of 10 regions reused), while the simple T1 pages paid most (tier median -0.042, with t1-memo at -0.111 the one page clearly past the bound on its own, and t3-case-study at -0.078 behind it). A loose match hurts exactly where a page has few regions to hide it. The scorecard: prediction 1 right, 2 half-right (the build reduction in band, but the match speedup is 13 times end to end, not the 45 extrapolated from AU's offline timing), 3 wrong as described, 4 right (the dark page paired normally at the shared commit)."
+						},
+						{
+							"heading": "What Stays Unfunded, and a Program Milestone",
+							"html": "The conditional routed arm stays unfunded per its own registration: with the gate green, routing is moot, though t1-memo's -0.111 is the exact cell a future region-count or confidence threshold would target, and the hand-off records that as a care item rather than a requirement. One housekeeping line for the program ledger: with AV's 32 scored pages, the research program's scored-run count crosses forty thousand."
+						}
+					]
+				}
+			],
+			"published": "2026-10-27",
+			"related": [
+				{
+					"title": "Study AU: the engine A/B this study answers",
+					"href": "/research/barkup-bench/au"
+				},
+				{
+					"title": "Study AT: the AS interventions, measured",
+					"href": "/research/barkup-bench/at"
+				},
+				{
+					"title": "Study AS: the whole-system baseline",
+					"href": "/research/barkup-bench/as"
+				},
+				{
+					"title": "Replicator, the product under test",
+					"href": "https://replicator.lj.dev"
+				},
+				{
+					"title": "barkup-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/barkup-bench"
+				}
+			],
+			"brief": "BRIEF-AV.md",
+			"quote": "AU measured that the judges disagree; AV measured what the disagreement costs: a median 0.014 of structure, for a thousandfold cheaper stage that builds 41 percent fewer widgets. The default flips."
 		}
 	]
 }

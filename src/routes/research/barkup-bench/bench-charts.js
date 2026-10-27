@@ -8022,6 +8022,131 @@ export function initBenchCharts() {
 		);
 	})();
 
+	// --- Study AV: paired structure delta by tier vs the no-harm bound ---
+	(() => {
+		const ROWS = [
+			{
+				label: "T1 simple (4 pages)",
+				v: -0.042,
+				color: "#e66767",
+				tip: "the tier that paid most: median Δ −0.042 (fable 0.647, jev 0.605) · t1-memo −0.111 is the one page clearly past the bound on its own, and t1-event-flyer −0.050 sits behind it · a loose match hurts where a page has few regions to hide it",
+			},
+			{
+				label: "T2 medium (4 pages)",
+				v: 0.008,
+				color: "#199e70",
+				tip: "the tier AU's anatomy worried about absorbed stretched matches best: median Δ +0.008 · t2-agenda is the corpus's one positive divergence, +0.068 at 9/10 regions reused",
+			},
+			{
+				label: "T3 hard (8 pages)",
+				v: -0.014,
+				color: "#3987e5",
+				tip: "median Δ −0.014 (fable 0.587, jev 0.577) · t3-case-study −0.078 and t3-annual-report p1 −0.052 are its named divergences · the dark page paired normally at the shared commit",
+			},
+			{
+				label: "all 16 pages (the gate)",
+				v: -0.014,
+				color: "#3987e5",
+				tip: "AV-G3: median paired Δstructure −0.014 vs the registered −0.03 bound · PASS, and per the decision rule the match default flips to Jev",
+			},
+		];
+		const CBOUND = "#e66767";
+		byId("legend-38").innerHTML =
+			'<span class="key"><span class="chip" style="background:#3987e5"></span>median paired Δ structure, jev minus fable (0 = the engines tie)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CBOUND +
+			'"></span>registered no-harm bound (−0.03)</span>' +
+			legendNote(
+				"two full pipeline passes over the frozen AS corpus at one pinned commit, differing only in the match engine · negative means the permissive judge cost structure on that tier · reuse 17.0% strict vs 50.9% permissive, 52 widgets built vs 88, the match stage 13 times faster · spend about $37 of the $70 fence",
+			);
+		const W = 880,
+			BAR = 16,
+			GPAD = 12,
+			T = 8,
+			B = 42,
+			L = 255,
+			R = 84;
+		const H = T + ROWS.length * (BAR + GPAD) + B;
+		const iw = W - L - R;
+		const MIN = -0.06,
+			MAX = 0.03;
+		const xOf = (v) => L + ((v - MIN) / (MAX - MIN)) * iw;
+		let g = "";
+		for (const tick of [-0.06, -0.03, 0, 0.03]) {
+			const x = xOf(tick);
+			const strong = tick === 0;
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,${strong ? "0.25" : "0.09"})" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick > 0 ? "+" : ""}${tick.toFixed(2)}</text>`;
+		}
+		const bx = xOf(-0.03);
+		g += `<line x1="${bx}" x2="${bx}" y1="${T}" y2="${H - B}" stroke="${CBOUND}" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+		g += `<text fill="${CBOUND}" font-size="11" x="${bx}" y="${H - B + 34}" text-anchor="middle">−0.03 bound</text>`;
+		let marks = "";
+		let hits = "";
+		const zero = xOf(0);
+		ROWS.forEach((row, i) => {
+			const y = T + i * (BAR + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${y + BAR - 3}" text-anchor="end">${row.label}</text>`;
+			const xv = xOf(row.v);
+			const x = Math.min(zero, xv);
+			const w = Math.max(Math.abs(xv - zero), 2);
+			marks += `<rect x="${x}" y="${y}" width="${w}" height="${BAR}" fill="${row.color}" rx="3"/>`;
+			const lx = row.v >= 0 ? xv + 8 : xv - 8;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${lx}" y="${y + BAR - 4}" text-anchor="${row.v >= 0 ? "start" : "end"}">${row.v > 0 ? "+" : ""}${row.v.toFixed(3)}</text>`;
+			hits += `<rect x="${L}" y="${y}" width="${iw}" height="${BAR}" fill="transparent" data-tip="${esc(row.label + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-av");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart of median paired structure deltas, jev minus fable, by tier: minus 0.042 on simple tier one, which crosses the minus 0.03 bound on its own, plus 0.008 on medium tier two, and minus 0.014 on hard tier three and on all sixteen pages pooled, where the registered gate is measured and passes.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the sequel AU's gate refused to fund, answered: the permissive judge costs a median 0.014 of structure corpus-wide, inside the registered bound, and the texture inverts the prediction, with compositions absorbing stretched matches best and simple pages paying most; the default flips to the engine that is a thousandfold cheaper",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-av",
+			["cell", "AV-fable (strict, the baseline)", "AV-jev (permissive)"],
+			[
+				["completion (AV-G1)", "12/12", "12/12 · PASS"],
+				[
+					"fallback widgets (AV-G2)",
+					"0",
+					"0 in 140 builds across both arms · PASS",
+				],
+				[
+					"median structure, 16 pages",
+					"0.574",
+					"0.571 · paired Δ −0.014 vs the −0.03 bound · AV-G3 PASS",
+				],
+				["reuse rate (106 regions)", "17.0%", "50.9%"],
+				["widgets built", "88", "52 (40.9% fewer)"],
+				[
+					"match-stage wall-clock, corpus",
+					"161 s (4.2 to 16.8 s per page)",
+					"12 s (231 to 670 ms per page: the plumbing fingerprint)",
+				],
+				["total pipeline wall-clock", "42.7 min", "32.3 min (24% faster)"],
+				["stage model cost per corpus pass", "~$1.50", "~$0.003"],
+				[
+					"named divergences",
+					"the reference",
+					"t1-memo −0.111 (the one clear casualty) · t3-case-study −0.078 · t1-event-flyer −0.050 · t2-agenda +0.068 at 9/10 reuse, the one positive",
+				],
+				[
+					"outcome",
+					"baseline bought fresh (~$20) per stem-bench Study 5's record-reuse lesson",
+					"recommended as the new default (HANDOFF-AV-SWITCH), env switch kept as rollback; the routed arm stays unfunded, with t1-memo the cell a future threshold would target",
+				],
+			],
+		);
+	})();
+
 	// Every legend gets a "Legend" label as its first child — a styled
 	// paragraph, not a heading, so legends don't skip levels in the
 	// document outline. Runs after the builders above have set each
