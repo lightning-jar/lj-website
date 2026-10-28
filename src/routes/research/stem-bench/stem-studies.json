@@ -470,7 +470,7 @@
 						},
 						{
 							"heading": "The Instruction Loses to the Text, Fourth Appearance",
-							"html": "S7-G2 fails at 24 of 24, and the values convict the mechanism beyond argument. On chord-only charts, where no tempo mark exists anywhere and the registered correct answer is null, the model never answered null, and it did not estimate by ear either: every single invented tempo equals the settings value verbatim. 120 in, 120 out; a lying 60 in, 60 out; both models, 47 of 47 cells, and meter behaves identically. The instruction says use the settings to follow the bars; the model reads that as this is the tempo; and when instruction and text contradict, the text wins. That is the program's recurring law in its fourth costume, after the hint-following of Study 1, the call shapes of Study 2, and the candidates of Study 4."
+							"html": "S7-G2 fails at 24 of 24, and the values convict the mechanism beyond argument. On chord-only charts, where no tempo mark exists anywhere and the registered correct answer is null, the model never answered null, and it did not estimate by ear either: every single invented tempo equals the settings value verbatim. 120 in, 120 out; a lying 60 in, 60 out; both models, 47 of 47 cells, and meter behaves identically. The instruction says use the settings to follow the bars; the model reads that as this is the tempo; and when instruction and text contradict, the text wins. That is the program's recurring law in its fourth costume, after the hint-following of Study 1, the call shapes of Study 2, and the candidates of Study 4. <a href=\"/research/stem-bench/8\">Study 8</a> adds the corollary from the section detector: the chart's text beats wrong settings, and the chart's silence does not beat the model's priors."
 						},
 						{
 							"heading": "Harm Containment, and the Guard's Design Limit",
@@ -494,6 +494,10 @@
 					"href": "/research/stem-bench/4"
 				},
 				{
+					"title": "Study 8: section detection, the loophole test",
+					"href": "/research/stem-bench/8"
+				},
+				{
 					"title": "Study 6: the warning heuristic, validated",
 					"href": "/research/stem-bench/6"
 				},
@@ -512,6 +516,78 @@
 			],
 			"brief": "docs/BRIEF-STUDY7.md",
 			"quote": "Told to follow the bars, the model heard a tempo; told the truth by the chart, it ignored the lie. The instruction lost to the text both times, and the gate caught everything that mattered."
+		},
+		{
+			"slug": "8",
+			"letters": "8",
+			"track": "Listening",
+			"title": "Section detection: they hear texture, not form, and the gate is lost by half a false boundary",
+			"eyebrow": "Study 8 · listening, the loophole test · 90 cells across three arms",
+			"indexLine": "Section detection was the last unmeasured AI feature, and the loophole test: Studies 4 and 7 showed the listening layer reads rather than hears, but what it did register blind were gross structural events, and section boundaries are gross structural events. The loophole is real: blind texture-contrast boundaries landed 7/8 and 8/8 across two models, the program's first genuine listening result. But the hearing is texture, not form: harmonic boundaries landed 3/6, uniform loops gained three to six invented sections each, and the gate failed by half a false boundary (noise 0.53 per item against a 0.50 bound) even though chart-anchored detection was perfect, because the chart's silence does not beat the model's form prior.",
+			"sections": [
+				{
+					"id": "sec-stem-study8",
+					"eyebrow": "Listening, the loophole test",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s8",
+					"figure": {
+						"id": "fig-sections",
+						"title": "Boundary Detection by Class, Blind and Chart-Anchored (Production Model)"
+					},
+					"table": {
+						"id": "tbl-sections",
+						"summary": "The gate stated plainly, detection and noise per class and model, names, and the amendment"
+					},
+					"body": [
+						{
+							"heading": "The Loophole Test",
+							"html": "Every listening verdict so far said the models read rather than hear, but Studies 4 and 7 both left one loophole on the record: what the listener did register blind were gross structural events, a tempo double noticed in prose, a texture shift remarked on. Section boundaries ARE gross structural events, and section detection was the last AI feature in the app without a measurement. Study 8 ported the v0.192.0 detectSectionsWithAi call verbatim and extended Study 4's fixture with three sparse-and-dense contrast mixes, boundaries a human hears instantly, names and seconds true by construction, then ran three arms: blind, with the account's section vocabulary, and with the marked chart. Two gemini generations, 90 cells, about $0.60 of the fence."
+						},
+						{
+							"heading": "Amendment 1: Our Own Study 2 Shape",
+							"html": "Before publication, the bench caught itself in the exact shape Study 2 caught in kimi: the harness's 2000-token output cap truncated the rambling production model mid-JSON in 16 cells, conflating budget exhaustion with failure. The cap was raised to 4000 and the failed cells re-run, disclosed and committed before any result was read. Two production-model cells never produced JSON at any budget; they are counted as misses, disclosed rather than excluded."
+						},
+						{
+							"heading": "The Loophole Is Real",
+							"html": "On the contrast mixes, blind, the production model found 7 of 8 section boundaries and 3.5-flash found 8 of 8. After four consecutive studies whose listening verdicts were text-reading verdicts, this is the program's first genuine hearing result: a sparse-to-dense arrangement change is something the audio stack actually registers, without a word of text to transcribe."
+						},
+						{
+							"heading": "Texture, Not Form",
+							"html": "The hearing stops at texture. Harmonic and tempo-change boundaries, the kind that define musical form without an arrangement change, landed 3 of 6 blind. And uniform single-section loops, the sharpest probe, were subdivided into invented verse-and-chorus structure at three to six false boundaries per item. The generational split runs opposite to Study 4's equality: 3.5-flash is much cleaner blind (1.0 false boundaries per item against the production model's 3.3), so structural hearing is improving across generations even while neither model can be called a form listener."
+						},
+						{
+							"heading": "The Gate, Lost by Half a Boundary, and the Chart-Silence Corollary",
+							"html": "S8-G1 fails by the narrowest margin in the program: chart-anchored detection was perfect, 14 of 14 boundaries with every placement within 4 seconds, but mean false boundaries landed at 0.53 per item against the registered 0.50 bound, eight false boundaries across fifteen items where the bound allowed seven and a half. 3.5-flash passes at 0.47. The noise source is the finding's sharpest nuance: even chart-anchored, uniform loops gain about 1.2 invented boundaries per item while contrast and change items sit at zero, because the chart's single rehearsal mark does not stop the form prior from inventing a chorus. Study 7 established that explicit chart text beats wrong settings; Study 8's corollary is that the chart's silence does not beat the model's priors. Names complete the pattern: 8 of 8 from the chart, 3 of 8 or worse without, because names come from text, as everything always has."
+						},
+						{
+							"heading": "Ship Guidance, and the Scorecard",
+							"html": "Briefed back to Stem Shovel: ship section detection chart-gated like the song-check; a surviving blind mode is honest only for arrangement-contrast boundaries and should say so in its copy; and the parse-dont-ask rule extends here, taking the section count and names mechanically from the chart's rehearsal marks and asking the model only for what measured perfect and text cannot supply, the boundaries' placement in seconds, which zeros the loop subdivision by construction and passes the gate without re-registering it. The scorecard: prediction 1 wrong by letter (100% detection, gate lost on noise), 2 substantially right, 3 mixed (vocabulary moved little), 4 wrong in the instructive direction."
+						}
+					]
+				}
+			],
+			"published": "2026-10-28",
+			"related": [
+				{
+					"title": "Study 4: the listening layer",
+					"href": "/research/stem-bench/4"
+				},
+				{
+					"title": "Study 7: the redesigned song-check",
+					"href": "/research/stem-bench/7"
+				},
+				{
+					"title": "Stem Shovel, the product under test",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY8.md",
+			"quote": "The first thing the program ever caught them hearing was texture, and the same cells caught them inventing a chorus into a loop the chart said was one section. The chart's text beats wrong settings; the chart's silence does not beat the prior."
 		}
 	]
 }

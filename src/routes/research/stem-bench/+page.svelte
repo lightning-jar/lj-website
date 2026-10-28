@@ -101,7 +101,9 @@ const proseCls = "text-[#c3c9d4]";
       validated the production warning heuristic that correction produced,
       at zero model spend. Study 7 re-measured the song check Stem Shovel
       rebuilt in response to Study 4, and the deference failure is closed.
-      982 scored cells across seven models so far.
+      Study 8 ran the loophole test on the last unmeasured feature and
+      recorded the program's first genuine listening result: they hear
+      texture, not form. 1,072 scored cells across seven models so far.
       Hypotheses, corpora, and graders are committed before any scored
       run; results are published as found, gate letters and corrections
       included.

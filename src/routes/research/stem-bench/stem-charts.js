@@ -749,6 +749,122 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 8: boundary detection by class, blind vs chart-anchored ---
+	(() => {
+		const GROUPS = [
+			{
+				label: "texture contrast (8)",
+				vals: [7, 8],
+				total: 8,
+				tip: "the loophole, confirmed: sparse-to-dense arrangement changes heard blind, 7/8 production and 8/8 on 3.5-flash · the program's first genuine listening result",
+			},
+			{
+				label: "harmonic/tempo change (6)",
+				vals: [3, 6],
+				total: 6,
+				tip: "the form half of hearing: boundaries with no arrangement change landed 3/6 blind · chart-anchored, all found and placed within 4 s",
+			},
+		];
+		const CBLIND = "#c98500",
+			CCHART = "#199e70";
+		byId("legend-s8").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CBLIND +
+			'"></span>blind (audio alone)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CCHART +
+			'"></span>chart-anchored (the marked chart beside the mix)</span>' +
+			legendNote(
+				"true section boundaries found by the production model, by boundary class · detection is only half the story: blind runs also INVENTED 3.3 false boundaries per item (3 to 6 per uniform loop), and even chart-anchored, uniform loops gained ~1.2 invented boundaries per item while contrast and change items sat at zero · the gate and both models' noise are in the table",
+			);
+		const W = 880,
+			BAR = 14,
+			GAP = 4,
+			GH = 2 * BAR + GAP,
+			GPAD = 18,
+			T = 8,
+			B = 42,
+			L = 255,
+			R = 84;
+		const H = T + GROUPS.length * (GH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (f) => L + f * iw;
+		let g = "";
+		for (const tick of [0, 0.5, 1]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${Math.round(tick * 100)}%</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		GROUPS.forEach((row, gi) => {
+			const top = T + gi * (GH + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${top + GH / 2 + 4}" text-anchor="end">${row.label}</text>`;
+			row.vals.forEach((v, ai) => {
+				const y = top + ai * (BAR + GAP);
+				const w = Math.max((v / row.total) * iw, 2);
+				marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${ai === 0 ? CBLIND : CCHART}" rx="3"/>`;
+				marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 3}">${v}/${row.total}</text>`;
+			});
+			hits += `<rect x="${L}" y="${top}" width="${iw}" height="${GH}" fill="transparent" data-tip="${esc(row.label + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-sections");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grouped bar chart of section boundaries found by the production model: texture-contrast boundaries seven of eight blind and eight of eight chart-anchored; harmonic and tempo-change boundaries three of six blind and six of six chart-anchored.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the texture-versus-form split: arrangement contrast is genuinely heard blind, musical form is not, and the chart arm finds everything while the false-boundary noise on uniform loops, about 1.2 invented sections per item even with the chart in view, is what cost the gate by half a boundary",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-sections",
+			["cell", "gemini-3-flash (production)", "gemini-3.5-flash"],
+			[
+				[
+					"S8-G1: chart-arm detection and noise",
+					"14/14 found, every placement within 4 s · noise 0.53/item vs the registered 0.50 bound: FAIL, eight false boundaries where it allowed seven and a half",
+					"14/14 · 0.47/item · passes",
+				],
+				[
+					"blind: texture-contrast boundaries",
+					"7/8",
+					"8/8",
+				],
+				[
+					"blind: harmonic/tempo-change boundaries",
+					"3/6",
+					"3/6",
+				],
+				[
+					"blind false boundaries per item",
+					"3.3 (3 to 6 invented sections per uniform loop)",
+					"1.0: Study 4's generational equality does not extend to structural hearing",
+				],
+				[
+					"chart-anchored false boundaries, uniform loops",
+					"~1.2/item (0.0 on contrast and change items): the chart's silence does not beat the form prior",
+					"cleaner, and passes the bound",
+				],
+				[
+					"section names",
+					"8/8 from the chart · 3/8 or worse without",
+					"the same pattern: names come from text",
+				],
+				[
+					"Amendment 1",
+					"the bench's own 2000-token cap truncated 16 cells mid-JSON (the Study 2 shape, caught in our own harness); cap to 4000, failed cells re-run · two cells never produced JSON at any budget, counted as misses",
+					"unaffected",
+				],
+			],
+		);
+	})();
+
 	// --- Study 7: wrong values echoed and applied, before and after the redesign ---
 	(() => {
 		const ROWS = [
