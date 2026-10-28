@@ -749,6 +749,28 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 6: the warning-heuristic validation table (no figure) ---
+	table(
+		"tbl-warnings",
+		[
+			"instrument (production reader)",
+			"detectable corrupted reads caught",
+			"undetectable reads fired",
+			"clean false positives",
+		],
+		[
+			["H-shipped (as in production)", "10/10", "2/12", "4/42"],
+			["H-letters (registered refinement)", "10/10", "0/12", "2/42"],
+			[
+				"H-scoped, key-in-force (exploratory, post-hoc)",
+				"10/10",
+				"0/12",
+				"1/42, and the one flag caught a read whose modulation sat three bars late",
+			],
+		],
+		"148 existing reader texts (52 corrupted, 96 clean) from Studies 3 and 5; expected labels mechanical from the committed specs; zero model calls. Undetectable reads are stub texts that never reach the rule's eight-chord floor.",
+	);
+
 	// Legend title post-pass (idempotent), mirroring bench-charts.js.
 	document.querySelectorAll(".chart-legend").forEach((el) => {
 		if (!el.firstElementChild?.classList?.contains("legend-title")) {

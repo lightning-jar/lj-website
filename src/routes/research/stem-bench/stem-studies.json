@@ -169,7 +169,7 @@
 					"body": [
 						{
 							"heading": "Correction (2026-10-24, found by Study 5)",
-							"html": "Study 5 composed this study's reader with Study 4's listener, and its first run's anatomy caught a confound in this study's own fixture: pdfkit's WinAnsi fonts cannot encode the music accidental glyphs Verovio writes into chord text, so every flat and sharp in every committed PDF silently rendered as its natural (Eb as E, F#7 as F7). The PDF arm therefore measured models correctly reading corrupted pages, and the decisive split was sitting in the data: fable's PDF chord recall was about 94% on sharp-and-natural-key items and about 55% on flat-key items. The PDFs were re-rendered with chart-ASCII accidentals and every readable PDF cell was discarded, archived, and re-run. Corrected PDF chord recall: fable 76.0% to 99.3%, gemini 70.4% to 99.3%, opus 82.5% to 74.2% (its better-on-PDF oddity shrinks into re-run noise), haiku unchanged at zero; fable's keys, repeats and specials rose to 100%, dissolving the repeat-dots finding as well. Finding 2 as first published is withdrawn in mechanism and magnitude, and the sections below carry the corrected story with the original numbers labeled where they appear. Gates are unchanged: S3-H1 was pooled keys and still passes at 91.7%, and the honesty gate's by-letter failure stands."
+							"html": "Study 5 composed this study's reader with Study 4's listener, and its first run's anatomy caught a confound in this study's own fixture: pdfkit's WinAnsi fonts cannot encode the music accidental glyphs Verovio writes into chord text, so every flat and sharp in every committed PDF silently rendered as its natural (Eb as E, F#7 as F7). The PDF arm therefore measured models correctly reading corrupted pages, and the decisive split was sitting in the data: fable's PDF chord recall was about 94% on sharp-and-natural-key items and about 55% on flat-key items. The PDFs were re-rendered with chart-ASCII accidentals and every readable PDF cell was discarded, archived, and re-run. Corrected PDF chord recall: fable 76.0% to 99.3%, gemini 70.4% to 99.3%, opus 82.5% to 74.2% (its better-on-PDF oddity shrinks into re-run noise), haiku unchanged at zero; fable's keys, repeats and specials rose to 100%, dissolving the repeat-dots finding as well. Finding 2 as first published is withdrawn in mechanism and magnitude, and the sections below carry the corrected story with the original numbers labeled where they appear. Gates are unchanged: S3-H1 was pooled keys and still passes at 91.7%, and the honesty gate's by-letter failure stands. The warning heuristic this correction produced was itself validated in <a href=\"/research/stem-bench/6\">Study 6</a>: 10 of 10 detectable corrupted reads caught, at zero model spend."
 						},
 						{
 							"heading": "The Question and the Round Trip",
@@ -349,7 +349,7 @@
 						},
 						{
 							"heading": "What This Licenses",
-							"html": "For Stem Shovel: the song-check inherits chart-read's accuracy one to one, so surfacing the chart summary for user correction protects everything downstream of it, and the production model's unprompted key-vs-chords inconsistency notes deserve treatment as a first-class signal rather than prose, since they are the one detectable trace of unrecoverable upstream corruption. Total spend about $3.40 of the $6 fence, both runs included, with the confounded cells archived rather than deleted."
+							"html": "For Stem Shovel: the song-check inherits chart-read's accuracy one to one, so surfacing the chart summary for user correction protects everything downstream of it, and the production model's unprompted key-vs-chords inconsistency notes deserve treatment as a first-class signal rather than prose, since they are the one detectable trace of unrecoverable upstream corruption. Total spend about $3.40 of the $6 fence, both runs included, with the confounded cells archived rather than deleted. The warning heuristic that grew from this study's confound was validated in <a href=\"/research/stem-bench/6\">Study 6</a>, closing the loop a second time."
 						}
 					]
 				}
@@ -375,6 +375,63 @@
 			],
 			"brief": "docs/BRIEF-STUDY5.md",
 			"quote": "The chain adds nothing of its own: it is exactly as good as the page its reader is shown. Its first run's best result was catching the page lying."
+		},
+		{
+			"slug": "6",
+			"letters": "6",
+			"track": "Validation",
+			"title": "The warning heuristic, validated: the loop closes twice, at zero model spend",
+			"eyebrow": "Study 6 · validation micro-study · 148 existing reader texts, zero model calls",
+			"indexLine": "Stem Shovel shipped a chart-read warning heuristic straight from Study 3's correction brief, unmeasured. The bench already held model reads of the same engraved pages in corrupted and clean form, so Study 6 validated the shipped rule at zero model spend: 10/10 detectable corrupted reads caught, the false-positive class its own source comment worried about measured at 4/42, and an exploratory key-in-force refinement whose single surviving flag caught a real defect, a read that placed its modulation three bars late.",
+			"sections": [
+				{
+					"id": "sec-stem-study6",
+					"eyebrow": "Validation",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-warnings",
+						"summary": "The three instruments over 148 existing reader texts: hits, undetectable fires, and clean false positives"
+					},
+					"body": [
+						{
+							"heading": "The Loop, Closing Twice",
+							"html": "Study 5 caught the bench's own PDF renderer dropping accidentals; the correction brief suggested a production guard; Stem Shovel shipped it as chartReadWarnings (flag a read whose key signature calls for two or more accidentals while none of eight or more chord symbols carries one). Study 6 is the bench validating the production feature that exists because of the bench's own correction, and it cost nothing to run: the corpus already held 148 reader texts of the same engraved pages, 52 from corrupted PDFs and 96 from clean ones, with expected labels mechanical from the committed specs. The program's first zero-model-spend study."
+						},
+						{
+							"heading": "Three Instruments, One Table",
+							"html": "The shipped rule works where it matters: 10 of 10 detectable corrupted reads fired. Its false-positive class is exactly the one its own source comment worries about, now measured at 4 of 42 clean production-reader cells: honest sharp-key charts whose chords legitimately carry no accidentals trip the all-or-nothing rule. The registered refinement (count only chords on the signature's own altered letters) removes that class and exposes one the registration did not predict: modulating charts, where pooling signatures across sections makes one key's honest naturals look suspicious against another key's letters. An exploratory key-in-force variant, disclosed as post-hoc, judges each chord against the signature active at its measure and resolves both classes at 1 of 42, and its single surviving flag is the best result in the study: it fired on a read whose modulation was placed three bars late, a genuine defect flagged for the wrong stated reason. The misses on undetectable reads are floor effects, stub reads that never reach eight chords, per the registered prediction."
+						},
+						{
+							"heading": "The Recommendation, and the Scorecard",
+							"html": "Briefed back to Stem Shovel: adopt key-in-force scoping, re-validated on the app's side or a registered extension since the bench's variant is exploratory, and soften the warning's stated cause, because the evidence says the flag earns trust as review-this-read generally, covering both file corruption and a doubtful read. Scorecard: predictions 1 and 3 right, 2 half-right (the predicted fix worked; the modulation class was not predicted). Zero model spend, both registered instruments and the label derivation committed and tested before evaluation."
+						}
+					]
+				}
+			],
+			"published": "2026-10-28",
+			"related": [
+				{
+					"title": "Study 3: the correction that produced the heuristic",
+					"href": "/research/stem-bench/3"
+				},
+				{
+					"title": "Study 5: the composed pipeline that caught the confound",
+					"href": "/research/stem-bench/5"
+				},
+				{
+					"title": "Stem Shovel, the product under test",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY6.md",
+			"quote": "The bench broke the pages, the correction built the guard, the app shipped it, and the bench measured it: 10 of 10 caught, and the one flag left standing found a real defect nobody was looking for."
 		}
 	]
 }

@@ -97,10 +97,12 @@ const proseCls = "text-[#c3c9d4]";
       listening-layer song check hears what it claims to hear, and found a
       text channel wearing headphones. Study 5 composed the reader with the
       listener, caught a fixture confound that forced a dated correction to
-      Study 3, and measured a chain that adds nothing of its own. 886
-      scored cells across seven models so far. Hypotheses, corpora, and
-      graders are committed before any scored run; results are published as
-      found, gate letters and corrections included.
+      Study 3, and measured a chain that adds nothing of its own. Study 6
+      validated the production warning heuristic that correction produced,
+      at zero model spend. 886 scored cells across seven models so far.
+      Hypotheses, corpora, and graders are committed before any scored
+      run; results are published as found, gate letters and corrections
+      included.
     </p>
   </header>
 
