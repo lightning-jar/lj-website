@@ -277,13 +277,17 @@
 						},
 						{
 							"heading": "What This Licenses",
-							"html": "For Stem Shovel, briefed back to the app the same day: never let the second opinion override the DSP detector on tempo or meter; gate or shrink the no-chart path, since a blind listen adds fabrication risk for no measured value; ignore the confidence field, which reads 1.0 on fabricated answers; and treat the song-check as a chart-anchoring tool, where it is measured perfect. For everyone else: an audio-capable model that answers confidently about a mix is most likely reading the text you sent with it, and the cheapest way to know is a fixture whose pulse you can prove."
+							"html": "For Stem Shovel, briefed back to the app the same day: never let the second opinion override the DSP detector on tempo or meter; gate or shrink the no-chart path, since a blind listen adds fabrication risk for no measured value; ignore the confidence field, which reads 1.0 on fabricated answers; and treat the song-check as a chart-anchoring tool, where it is measured perfect. For everyone else: an audio-capable model that answers confidently about a mix is most likely reading the text you sent with it, and the cheapest way to know is a fixture whose pulse you can prove. Stem Shovel rebuilt the feature on this guidance, and <a href=\"/research/stem-bench/7\">Study 7</a> re-measured the redesign: the deference failure is closed."
 						}
 					]
 				}
 			],
 			"published": "2026-10-23",
 			"related": [
+				{
+					"title": "Study 7: the redesign, re-measured",
+					"href": "/research/stem-bench/7"
+				},
 				{
 					"title": "Study 3: can a model read sheet music?",
 					"href": "/research/stem-bench/3"
@@ -432,6 +436,82 @@
 			],
 			"brief": "docs/BRIEF-STUDY6.md",
 			"quote": "The bench broke the pages, the correction built the guard, the app shipped it, and the bench measured it: 10 of 10 caught, and the one flag left standing found a real defect nobody was looking for."
+		},
+		{
+			"slug": "7",
+			"letters": "7",
+			"track": "Listening",
+			"title": "The redesigned song-check, re-measured: deference is closed, the instruction loses to the text, and the gate catches everything that matters",
+			"eyebrow": "Study 7 · listening, the loop closed · 96 cells across four arms",
+			"indexLine": "Stem Shovel rebuilt the song-check in response to Study 4, and Study 7 measured the replacement with the v0.192 call ported verbatim over the same truth-by-construction mixes. The verdict splits cleanly: the deference failure is closed decisively (zero wrong settings survived to application, against the retired design's 10 to 12 of 12 echo), while the no-ear-estimates instruction loses to the settings text on chord-only charts, every invented tempo the settings value verbatim, 47 of 47 cells across both models, with the application gate containing all of it. The program's recurring law, text beats instruction, makes its fourth appearance.",
+			"sections": [
+				{
+					"id": "sec-stem-study7",
+					"eyebrow": "Listening, the loop closed",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s7",
+					"figure": {
+						"id": "fig-redesign",
+						"title": "Wrong Values Echoed and Applied: the Retired Design, the Redesign, and the Gate"
+					},
+					"table": {
+						"id": "tbl-redesign",
+						"summary": "Both gates, raw and applied answers per arm, placement degradation, and the successor model's gate leak"
+					},
+					"body": [
+						{
+							"heading": "The Redesign Inventory",
+							"html": "Study 4 found the song-check echoing whatever candidates rode beside the audio, and Stem Shovel rebuilt the feature in response: the prompt reframes the model as a chart reader, adds an explicit instruction never to estimate a tempo by ear, presents the song's settings as bar-following facts rather than candidates to confirm or correct, applies answers through a chartStatedAnswer gate that only keeps fields the chart actually states, and deletes the confidence field Study 4 showed reading 1.0 on fabrications. Study 7 measured the replacement: the v0.192.0 call ported verbatim and pinned, four arms over Study 4's truth-by-construction mixes, crossing a tempo-stating score summary against a chord-only band chart (a committed generator whose no-tempo, no-meter property is asserted by test) with true against wrong settings. Two gemini generations, 96 cells, about $0.40 of the $5 fence, graded at two levels: the raw answer and what the gate lets through."
+						},
+						{
+							"heading": "The Deference Failure Is Closed",
+							"html": "S7-G1 passes decisively. Zero wrong settings survived to application on the production model, 0 of 24 per field, against the retired design's anchor of 10 to 12 of 12 echoed straight into the answer. The raw number underneath is the stronger result: told the song's settings say tempo 240 while the chart's mark reads 120, the model follows the chart, 12 of 12, before any gate touches the answer. When there is a chart statement to transcribe, the chart-transcription framing simply works."
+						},
+						{
+							"heading": "The Instruction Loses to the Text, Fourth Appearance",
+							"html": "S7-G2 fails at 24 of 24, and the values convict the mechanism beyond argument. On chord-only charts, where no tempo mark exists anywhere and the registered correct answer is null, the model never answered null, and it did not estimate by ear either: every single invented tempo equals the settings value verbatim. 120 in, 120 out; a lying 60 in, 60 out; both models, 47 of 47 cells, and meter behaves identically. The instruction says use the settings to follow the bars; the model reads that as this is the tempo; and when instruction and text contradict, the text wins. That is the program's recurring law in its fourth costume, after the hint-following of Study 1, the call shapes of Study 2, and the candidates of Study 4."
+						},
+						{
+							"heading": "Harm Containment, and the Guard's Design Limit",
+							"html": "Nothing wrong can reach a song: chartStatedAnswer nulls tempo and meter on a chart that states neither, 24 of 24 correct refusals, so the study gate fails by letter while its harm is fully contained, a shape this program has learned to read precisely. The guard's design limit also surfaced, once, on the successor model: 3.5-flash echoed a wrong setting under a truth-stating chart, and the presence-based gate (the chart states a tempo, so keep the model's) passed the wrong value through, 1 of 22. The production model never did, and the gate is production-scoped, so G1 stands; the leak names the next refinement, substitution by value rather than filtering by presence."
+						},
+						{
+							"heading": "What Still Works, and What Degrades",
+							"html": "The band-chart path's actual job measured perfect: key from chords alone, 12 of 12 on both models. And the registered degradation prediction held exactly: keyChange placement under wrong-tempo bar-following inherits the lie, falling from 3 of 3 to 1 of 3 on the production model and to 0 of 3 on 3.5-flash, because converting bars to seconds with a wrong tempo is just arithmetic on a false premise."
+						},
+						{
+							"heading": "Ship Guidance, and the Scorecard",
+							"html": "Briefed back to Stem Shovel: never display raw tempo or meter from chord-path answers, since the applied nulls are the real result; and the deeper fix is structural, because the chart summary's tempo marks and time signature are machine-readable text, so tempo and meter need no model at all. Parse them straight from the chart, substitute by value in the gate, and reserve the model for what measured perfect: keys from chords and placement in seconds. The scorecard: prediction 1 half-right, 2 wrong in both directions at once (score-chart echo fell to zero AND chord-chart echo rose to everything, the split being the finding the prediction missed), 3 right in both halves, 4 wrong, with the production model out-resisting its successor under the new prompt."
+						}
+					]
+				}
+			],
+			"published": "2026-10-28",
+			"related": [
+				{
+					"title": "Study 4: the listening layer this study re-measures",
+					"href": "/research/stem-bench/4"
+				},
+				{
+					"title": "Study 6: the warning heuristic, validated",
+					"href": "/research/stem-bench/6"
+				},
+				{
+					"title": "Study 5: the composed pipeline",
+					"href": "/research/stem-bench/5"
+				},
+				{
+					"title": "Stem Shovel, the product under test",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY7.md",
+			"quote": "Told to follow the bars, the model heard a tempo; told the truth by the chart, it ignored the lie. The instruction lost to the text both times, and the gate caught everything that mattered."
 		}
 	]
 }

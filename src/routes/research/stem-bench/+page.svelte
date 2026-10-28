@@ -99,7 +99,9 @@ const proseCls = "text-[#c3c9d4]";
       listener, caught a fixture confound that forced a dated correction to
       Study 3, and measured a chain that adds nothing of its own. Study 6
       validated the production warning heuristic that correction produced,
-      at zero model spend. 886 scored cells across seven models so far.
+      at zero model spend. Study 7 re-measured the song check Stem Shovel
+      rebuilt in response to Study 4, and the deference failure is closed.
+      982 scored cells across seven models so far.
       Hypotheses, corpora, and graders are committed before any scored
       run; results are published as found, gate letters and corrections
       included.
