@@ -715,6 +715,10 @@
 					"href": "/research/stem-bench/10"
 				},
 				{
+					"title": "Study 11: the tempo ladder rule",
+					"href": "/research/stem-bench/11"
+				},
+				{
 					"title": "Study 8: the loop invention this detector excludes",
 					"href": "/research/stem-bench/8"
 				},
@@ -779,13 +783,17 @@
 						},
 						{
 							"heading": "The Scorecard, and the Ledger",
-							"html": "The registered scorecard ran against the draft's hopes: prediction 3 right in full including the one-profile detail, 1 wrong at the registered letter and right at the disclosed wider read, 2 wrong in both clauses, 4 wrong except the hard-set edge, 5 half-right with the zero-false clause failing much harder than predicted, 6 wrong in the happy direction. The ledger: zero dollars in both arms, about 30 MB of hash-pinned weights, an 800 MB public-audio fetch with hashes committed, and the detector thread that began with Study 4 now closed end to end: the models read, the detectors hear, and every shipped choice is a measured one."
+							"html": "The registered scorecard ran against the draft's hopes: prediction 3 right in full including the one-profile detail, 1 wrong at the registered letter and right at the disclosed wider read, 2 wrong in both clauses, 4 wrong except the hard-set edge, 5 half-right with the zero-false clause failing much harder than predicted, 6 wrong in the happy direction. The ledger: zero dollars in both arms, about 30 MB of hash-pinned weights, an 800 MB public-audio fetch with hashes committed, and the detector thread that began with Study 4 now closed end to end: the models read, the detectors hear, and every shipped choice is a measured one. The octave classes this study left standing were then retired by representation in <a href=\"/research/stem-bench/11\">Study 11</a>'s tempo ladder."
 						}
 					]
 				}
 			],
 			"published": "2026-10-29",
 			"related": [
+				{
+					"title": "Study 11: the ladder that retires the octave class",
+					"href": "/research/stem-bench/11"
+				},
 				{
 					"title": "Study 9: the ship suggestion this study corrects",
 					"href": "/research/stem-bench/9"
@@ -805,6 +813,78 @@
 			],
 			"brief": "docs/BRIEF-STUDY10.md",
 			"quote": "On the material the templates were born on, the hand-rolled detector beat every published model at zero weight bytes; on the band's real recordings, the segmenter found the form the bench's own detector invented. The domain warning cut both ways, and both cuts are now measured."
+		},
+		{
+			"slug": "11",
+			"letters": "11",
+			"track": "Listening",
+			"title": "The tempo ladder rule: the octave error class retired by representation, and two gates failed by their own measuring stick",
+			"eyebrow": "Study 11 · listening, the ladder · 329 zero-spend cells, three runs, two registered amendments",
+			"indexLine": "The fourth cross-agent study, specified by the Stem Shovel agent and registered by the bench: instead of asking the detector to hear tempo better, represent its answer as a rung on an octave ladder and gate which rungs a declared value may match. Every count-class miss from Study 10 recovers at its correct rung while the one true hearing error is correctly rejected, the subdivision test names 6/8 for the first time, and zero genuinely wrong values were accepted in 255 rows. Both failing gates failed on defects of the wrong-value generator rather than the rule, which is the program's sixth registration lesson, earned twice in one study.",
+			"sections": [
+				{
+					"id": "sec-stem-study11",
+					"eyebrow": "Listening, the ladder",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s11",
+					"figure": {
+						"id": "fig-ladder",
+						"title": "Wrong-Value Acceptance: Ungated, Gated by Letter, and Genuinely Wrong"
+					},
+					"table": {
+						"id": "tbl-ladder",
+						"summary": "All four gates, the six-miss recovery map, both instrument amendments, and the pending shipped rule"
+					},
+					"body": [
+						{
+							"heading": "Retire the Error by Representation",
+							"html": "Five studies built the same file on the detector's one recurring failure: the octave family, a clean bass heard at half time, a 6/8 lilt read at 3:2. Study 11 runs the fix the Stem Shovel agent specified in its review of the bench's tempo-grid proposal: stop asking the detector to hear better, and represent its answer as a rung on an octave ladder, with a gate deciding which rungs a declared tempo may legitimately match and a subdivision test deciding duple against triple at a named hypothesis. The bench registered it with three disclosed restatements (production's shipped 2 percent ratio rule in place of an absolute tolerance, one item in the six-miss list corrected to the detector's own misses, and one gate redefined off Study 7's cells, whose registered wrong settings are octave-rung values by construction). Zero model spend: two pure functions over the stored Study 10 detections, 37 items, 255 mechanically wrong declared values, three runs."
+						},
+						{
+							"heading": "Two Instrument Defects, Caught and Amended Before Any Result",
+							"html": "The first runs caught two defects in the measuring instruments, both fixed by registered amendment and both findings in their own right. The slower-of-pair subdivision hypothesis is mathematically confounded: a straight song misread at two-thirds maps its true duple eighths exactly onto the slower pulse's thirds, so the test read compound on the one item it exists to reject; the hypothesis became the declared tempo, the claim actually under test. And at a bogus hypothesis tempo there is no beat peak at all, so the relative floor goes vacuous and 22 of 33 wrong rows were licensed; a beat floor now requires the hypothesis pulse to exist, three orders of magnitude of separation in the data, on the principle that a compound-count claim about a pulse that does not exist is no claim."
+						},
+						{
+							"heading": "The Gates That Passed",
+							"html": "G1, 5 of 5 plus the rejection that matters: both lilts, the 3/4 contrast item and the reverb item recover at the two-thirds rung on genuine compound evidence, the double-time song recovers at rung 2, and peaceful-dreams, the true hearing error the specification insisted must stay an error, is correctly refused by the gated ladder while the open ladder accepts it. G3, clean: subdivision reads 3 on all four compound items and 2 on all 31 straight items outside the swing pair, which splits honestly (a 0.67 swing ratio reads as a 3-feel because triplet swing is one; 0.62 reads 2), and the derived meter names 6/8 on every compound item, the first time the detector's vocabulary has been able to say it."
+						},
+						{
+							"heading": "The Gates That Failed, on Their Own Measuring Stick",
+							"html": "G2 failed by letter at 1 of 33, and the one accepted row is a true value: the generator built a wrong 108 from the first section's 72 on a song whose own second section is declared at 108. G4 failed by letter at 1 of 221, a pairing artifact: wrongness was defined against truth while the comparison runs against the detection, and on the one item where the detection itself was 3:2-off, the truth-derived wrong value lands on the double rung of the wrong grid. Across all 255 rows, zero genuinely wrong values were accepted, and the open ladder's 30 of 33 acceptances are the measured justification for gating. The sixth registration lesson, earned twice in one study: a mechanical wrong-value generator must respect every true label of an item, and define wrongness against the value actually being compared."
+						},
+						{
+							"heading": "The Shipping Question, and What Stays Pending",
+							"html": "The specification's own decision rule anticipated a full pass or a failed gate; neither branch matches two by-letter failures that transfer to the generator rather than the rule. Per program discipline the gates are not re-thresholded; the bench's read, on the table for Stem Shovel's call, is that the evidence supports the full build list, with a corrected generator a one-line registered follow-up. One thing this page deliberately does not claim: Stem Shovel built the ship items while the study ran, with a sharper subdivision rule than the sketch the bench tested, and that shipped rule is not validated by this study. The bench has committed to a follow-up validation of the shipped rule plus a swing-stress set once its commit lands, and until then it is pending, stated as such."
+						},
+						{
+							"heading": "The Scorecard, and the Thread",
+							"html": "The registered scorecard: prediction 1 right in full, 2 right in direction and wrong by letter through the generator collision, 3 right including the swing split, 4 wrong by letter through the pairing artifact it did not anticipate. Zero dollars, three runs, all local arithmetic, superseded runs kept in history. The thread Studies 4, 7, 8, 9 and 10 built closes on its intended note: the octave error class is retired not by a better ear but by a better representation of what the ear already says."
+						}
+					]
+				}
+			],
+			"published": "2026-10-29",
+			"related": [
+				{
+					"title": "Study 10: the detections this ladder reads",
+					"href": "/research/stem-bench/10"
+				},
+				{
+					"title": "Study 9: the summed envelope the ladder rides on",
+					"href": "/research/stem-bench/9"
+				},
+				{
+					"title": "Stem Shovel, the product under test, and this study's specifier",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY11.md",
+			"quote": "Zero genuinely wrong values accepted in 255 rows, every octave miss recovered at its rung, and both failed gates failed on their own measuring stick: the error class is retired by representation, not by a better ear."
 		}
 	]
 }

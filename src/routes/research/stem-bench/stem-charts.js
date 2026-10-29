@@ -749,6 +749,126 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 11: wrong-value acceptance under the ladder ---
+	(() => {
+		const ROWS = [
+			{
+				label: "open: ×1.5 accepted",
+				v: 30,
+				total: 33,
+				color: "#e66767",
+				tip: "the ungated ladder accepts 30/33 wrong ×1.5 declarations (it also accepts peaceful-dreams, the true hearing error): the measured cost of open 3:2 rungs, exactly as the gate design predicted",
+			},
+			{
+				label: "gated: ×1.5 accepted",
+				v: 1,
+				total: 33,
+				color: "#c98500",
+				tip: "G2's by-letter failure, and the 1 is a true value: the generator built a wrong 108 from section 1's 72 on a song whose own second section is declared at 108 · registration lesson six: a wrong-value generator must respect every true label",
+			},
+			{
+				label: "genuinely wrong accepted",
+				v: 0,
+				total: 255,
+				color: "#199e70",
+				tip: "across all 255 mechanically wrong rows, the gated ladder accepted zero genuinely wrong values; both by-letter gate failures transfer to the generator, not the rule",
+			},
+		];
+		byId("legend-s11").innerHTML =
+			'<span class="key"><span class="chip" style="background:#e66767"></span>the open ladder (no rung gate)</span>' +
+			'<span class="key"><span class="chip" style="background:#c98500"></span>the gated ladder, by letter</span>' +
+			'<span class="key"><span class="chip" style="background:#199e70"></span>the gated ladder, genuinely wrong values</span>' +
+			legendNote(
+				"wrong declared tempos accepted as matching the stored Study 10 detections, as a share of each row's cells · zero model spend, two pure functions, three runs · the six-miss recovery map (5/5 recovered at their rungs, the one true hearing error correctly refused) is in the table",
+			);
+		const W = 880,
+			BAR = 16,
+			GPAD = 12,
+			T = 8,
+			B = 42,
+			L = 255,
+			R = 84;
+		const H = T + ROWS.length * (BAR + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (f) => L + f * iw;
+		let g = "";
+		for (const tick of [0, 0.5, 1]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${Math.round(tick * 100)}%</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		ROWS.forEach((row, i) => {
+			const y = T + i * (BAR + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${y + BAR - 3}" text-anchor="end">${row.label}</text>`;
+			const w = Math.max((row.v / row.total) * iw, 2);
+			marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${row.color}" rx="3"/>`;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 4}">${row.v}/${row.total}</text>`;
+			hits += `<rect x="${L}" y="${y}" width="${iw}" height="${BAR}" fill="transparent" data-tip="${esc(row.label + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-ladder");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart of wrong tempo values accepted: the open ladder accepts thirty of thirty-three wrong one-point-five-times rows, the gated ladder accepts one of thirty-three by letter, and that one is a true value, so genuinely wrong acceptances across all two hundred fifty-five rows are zero.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the case for gating in three bars: open 3:2 rungs accept nearly everything, the gate's single by-letter acceptance turns out to be the song's own second-section tempo mislabeled wrong by the generator, and zero genuinely wrong values pass in 255 rows; both failed gates failed on their own measuring stick",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-ladder",
+			["cell", "result", "the read"],
+			[
+				[
+					"S11-G1: the six-miss recovery map",
+					"5/5 recovered at their rungs (both lilts, contrast-c and verb-y at 2/3 on genuine compound evidence; mop-heart at 2) and peaceful-dreams correctly refused · PASS",
+					"the octave error class retired by representation; the one true hearing error stays an error, which is the design working",
+				],
+				[
+					"S11-G3: subdivision and meter",
+					"3 on 4/4 compound items, 2 on 31/31 straight; the swing pair splits honestly (0.67 reads 3, 0.62 reads 2) · PASS",
+					"6/8 is expressible for the first time, at the registered cost of one swing item: the swing-needs-its-own-flag caveat confirmed",
+				],
+				[
+					"S11-G2: wrong ×1.5 rows",
+					"L-gated 1/33 · FAIL by letter",
+					"the 1 is shift-b's declared 108, which IS the song's second-section tempo: the generator respected only the first truth label",
+				],
+				[
+					"S11-G4: the Study 7 cells",
+					"1/221 silenced · FAIL by letter",
+					"a pairing artifact: truth-derived wrongness compared against an already-wrong detection lands on the double rung of the wrong grid",
+				],
+				[
+					"registration lesson six",
+					"earned twice in one study",
+					"a mechanical wrong-value generator must respect every true label of an item and define wrongness against the value actually compared",
+				],
+				[
+					"the two instrument amendments",
+					"the subdivision hypothesis moved to the declared tempo (the slower-of-pair form is mathematically confounded); a beat floor added (a claim about a pulse that does not exist is no claim)",
+					"both caught by the first runs and fixed by registered amendment before any result was accepted; superseded runs kept in history",
+				],
+				[
+					"the shipped rule",
+					"built by Stem Shovel while the study ran, with a sharper subdivision rule than the sketch tested here",
+					"NOT validated by this study; a follow-up validation plus a swing-stress set is committed and pending",
+				],
+				[
+					"spend",
+					"$0 · 329 cells · three runs, all local arithmetic",
+					"the fourth cross-agent study: specified by the production agent, registered and run by the bench",
+				],
+			],
+		);
+	})();
+
 	// --- Study 10: the two-arm section reversal, synthetic vs real ---
 	(() => {
 		const GROUPS = [

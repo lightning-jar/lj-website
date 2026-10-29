@@ -109,8 +109,10 @@ const proseCls = "text-[#c3c9d4]";
       Study 9 answered the app's own stem-aware question with zero-cost
       instruments, and Study 10 gave the shipped detector its neural
       rematch on both home fields: the classical code held its ground,
-      and the one reversal corrected Study 9's own suggestion. 1,499
-      scored cells across seven models so far.
+      and the one reversal corrected Study 9's own suggestion. Study 11
+      then retired the detector's octave error class by representation,
+      with a tempo ladder that accepted zero genuinely wrong values in
+      255 rows. 1,828 scored cells across seven models so far.
       Hypotheses, corpora, and graders are committed before any scored
       run; results are published as found, gate letters and corrections
       included.
