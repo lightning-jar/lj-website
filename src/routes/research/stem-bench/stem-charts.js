@@ -749,6 +749,119 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 9: false boundaries per uniform loop across three designs ---
+	(() => {
+		const ROWS = [
+			{
+				label: "Study 8: models blind",
+				v: 3.3,
+				color: "#e66767",
+				tip: "the production model blind invented 3 to 6 sections per uniform loop (3.3 false boundaries per item overall); 3.5-flash cleaner at 1.0 but not clean",
+			},
+			{
+				label: "Study 8: chart-anchored",
+				v: 1.2,
+				color: "#c98500",
+				tip: "even with the marked chart beside the mix, uniform loops gained about 1.2 invented boundaries per item: the chart's silence does not beat the form prior",
+			},
+			{
+				label: "Study 9: D-activity",
+				v: 0,
+				color: "#199e70",
+				tip: "the per-stem activity detector: 0 false boundaries on loops AND change items, 8/8 contrast boundaries found, identical on both grids, zero model cost · on a loop the active-stem set never changes, so the failure is excluded by construction · caveat: a sustained-noise stem toggles its own bit (+2 on one mislead item), hence the atonal-stem guard",
+			},
+		];
+		byId("legend-s9").innerHTML =
+			'<span class="key"><span class="chip" style="background:#e66767"></span>model, blind</span>' +
+			'<span class="key"><span class="chip" style="background:#c98500"></span>model, chart-anchored</span>' +
+			'<span class="key"><span class="chip" style="background:#199e70"></span>per-stem activity detector (zero model cost)</span>' +
+			legendNote(
+				"false section boundaries invented per uniform-loop item, same fixture family across both studies · the detector angle: a boundary only where the active-stem set changes and holds two bars · the tempo face-off (the sum beats the sharpest stem 18/21 to 11/21) is in the table",
+			);
+		const W = 880,
+			BAR = 16,
+			GPAD = 12,
+			T = 8,
+			B = 42,
+			L = 255,
+			R = 84;
+		const H = T + ROWS.length * (BAR + GPAD) + B;
+		const iw = W - L - R;
+		const max = 4;
+		const xOf = (v) => L + (v / max) * iw;
+		let g = "";
+		for (const tick of [0, 2, 4]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		ROWS.forEach((row, i) => {
+			const y = T + i * (BAR + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${y + BAR - 3}" text-anchor="end">${row.label}</text>`;
+			const w = Math.max((row.v / max) * iw, 2);
+			marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${row.color}" rx="3"/>`;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 4}">${row.v.toFixed(1)}/item</text>`;
+			hits += `<rect x="${L}" y="${y}" width="${iw}" height="${BAR}" fill="transparent" data-tip="${esc(row.label + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-stems");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart of false section boundaries invented per uniform loop: 3.3 per item for models listening blind in Study 8, about 1.2 even chart-anchored, and zero for Study 9's per-stem activity detector, which cannot invent a boundary on a loop by construction.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"three designs against the same failure: the model blind invents structure, the chart reduces it but cannot zero it because silence does not beat the form prior, and the zero-cost activity detector excludes it by construction while finding every contrast boundary the models heard",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-stems",
+			["cell", "result", "the read"],
+			[
+				[
+					"S9-G1: D-activity section boundaries",
+					"8/8 contrast found, 0 false on loops and change items, identical on truth and detected grids · PASS",
+					"the loop-invention failure is excluded by construction; the six tempo/key-change boundaries are structurally invisible, as registered: those belong to the chart",
+				],
+				[
+					"S9-G2: sharpest-stem tempo vs the summed envelope",
+					"D-prod 18/21 exact, D-stem-tempo 11/21, 7 regressions (5 octave errors), 0 rescues · FAIL, decisively",
+					"the failure is the finding: the sum survived all six misleading stems, so cross-stem reinforcement at the true period IS the tempo signal and production's design is vindicated",
+				],
+				[
+					"the shared tempo miss",
+					"two 6/8 lilts and one 3/4 item read at 1.5x in both paths",
+					"the 3:2 dotted-pulse confusion; no stem-aware variant fixed it",
+				],
+				[
+					"the registered octave-disagreement flag",
+					"fired on 10/21 items including clean ones",
+					"a half-time bass is normal music, not a hazard signal: useless as shipped, reported as measured",
+				],
+				[
+					"S9-G3: per-stem key agreement",
+					"UNEVALUABLE by registered fallback (keys 20/21 right)",
+					"the sting: the one wrong answer carried agreement 1.00 while production's own confidence ranked it 3rd-lowest of 21; the proposed score pointed the wrong way on the only available error",
+				],
+				[
+					"Q4 pilot (gemini-3-flash, 12 cells)",
+					"isolated stems helped nowhere, hurt twice; the 120/126/128 genre prior in both conditions",
+					"Study 4's reading-not-hearing, unchanged by stem isolation · the fenced matrix stays open, unneeded by the gates",
+				],
+				[
+					"spend",
+					"$0 for the gates; ~$0.08 pilot of the $8 cap",
+					"drafted by the Stem Shovel agent, finished and registered by the bench: the second cross-agent study, in the other direction",
+				],
+			],
+		);
+	})();
+
 	// --- Study 8: boundary detection by class, blind vs chart-anchored ---
 	(() => {
 		const GROUPS = [
