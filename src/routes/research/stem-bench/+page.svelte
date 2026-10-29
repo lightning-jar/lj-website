@@ -103,7 +103,10 @@ const proseCls = "text-[#c3c9d4]";
       rebuilt in response to Study 4, and the deference failure is closed.
       Study 8 ran the loophole test on the last unmeasured feature and
       recorded the program's first genuine listening result: they hear
-      texture, not form. 1,072 scored cells across seven models so far.
+      texture, not form. And Study 6b closed the program's longest loop:
+      the production agent registered its own validation of the rule it
+      shipped, and the bench ran it unmodified to a perfect sheet. 1,120
+      scored cells across seven models so far.
       Hypotheses, corpora, and graders are committed before any scored
       run; results are published as found, gate letters and corrections
       included.

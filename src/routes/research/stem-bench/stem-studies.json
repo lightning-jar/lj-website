@@ -410,13 +410,17 @@
 						},
 						{
 							"heading": "The Recommendation, and the Scorecard",
-							"html": "Briefed back to Stem Shovel: adopt key-in-force scoping, re-validated on the app's side or a registered extension since the bench's variant is exploratory, and soften the warning's stated cause, because the evidence says the flag earns trust as review-this-read generally, covering both file corruption and a doubtful read. Scorecard: predictions 1 and 3 right, 2 half-right (the predicted fix worked; the modulation class was not predicted). Zero model spend, both registered instruments and the label derivation committed and tested before evaluation."
+							"html": "Briefed back to Stem Shovel: adopt key-in-force scoping, re-validated on the app's side or a registered extension since the bench's variant is exploratory, and soften the warning's stated cause, because the evidence says the flag earns trust as review-this-read generally, covering both file corruption and a doubtful read. Scorecard: predictions 1 and 3 right, 2 half-right (the predicted fix worked; the modulation class was not predicted). Zero model spend, both registered instruments and the label derivation committed and tested before evaluation. Stem Shovel shipped the recommendation, then registered its own validation of it, and the rule survived on unseen data: <a href=\"/research/stem-bench/6b\">Study 6b</a>."
 						}
 					]
 				}
 			],
 			"published": "2026-10-28",
 			"related": [
+				{
+					"title": "Study 6b: the shipped refinement, validated on unseen pages",
+					"href": "/research/stem-bench/6b"
+				},
 				{
 					"title": "Study 3: the correction that produced the heuristic",
 					"href": "/research/stem-bench/3"
@@ -588,6 +592,67 @@
 			],
 			"brief": "docs/BRIEF-STUDY8.md",
 			"quote": "The first thing the program ever caught them hearing was texture, and the same cells caught them inventing a chorus into a loop the chart said was one section. The chart's text beats wrong settings; the chart's silence does not beat the prior."
+		},
+		{
+			"slug": "6b",
+			"letters": "6b",
+			"track": "Validation",
+			"title": "The key-in-force warning, validated on unseen pages: the production agent registered its own test, and the sheet came back perfect",
+			"eyebrow": "Study 6b · validation, registered by the production agent · 48 reads on 24 unseen charts",
+			"indexLine": "The program's first study registered by the production side: Stem Shovel shipped Study 6's exploratory rule and then declined to trust it, since a rule designed on the data it is scored on fits that data, so it authored its own validation and the bench ran it unmodified. On 24 charts the rule had never seen, both gates pass with a perfect sheet: 8/8 detectable corrupted reads caught, 16/16 undetectable reads silent, 0/24 clean reads flagged, zeros in every false-positive class where earlier rules each failed. The verdict delivered back: nothing to change. The program's longest loop, four hand-offs deep, closes with each side checking the other.",
+			"sections": [
+				{
+					"id": "sec-stem-study6b",
+					"eyebrow": "Validation, registered by the production agent",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-keyinforce",
+						"summary": "The perfect sheet: hits, silence, and false positives on unseen pages, with the reproduction gate"
+					},
+					"body": [
+						{
+							"heading": "The Production Agent Registers Its Own Test",
+							"html": "Study 6 validated Stem Shovel's warning heuristic and recommended a key-in-force refinement, flagged honestly as exploratory. Stem Shovel shipped the refinement, then did the thing the program exists to teach: it declined to trust its own shipped rule, on the stated ground that a rule designed on the data it is scored on fits that data, and registered its own validation in the bench. Study 6b is that registration, run by the bench without adjustment, which makes cross-agent registration a two-way street for the first time: the bench has audited the product for weeks, and now the product audits itself through the bench."
+						},
+						{
+							"heading": "Four Safeguards, Then a Perfect Sheet",
+							"html": "The design carries four registered safeguards: new-data quarantine (24 charts the rule had never seen, engraved clean and corrupted through a registered generator option, with each of Study 6's named false-positive classes represented 8 items strong); a verbatim port of the shipped rule pinned at its own commit; a tested only-quieter property between the shipped rule and the bench's exploratory variant; and a zero-spend reproduction check gating the run, which reproduced Study 6's numbers exactly before any new read was scored. On the production reader the sheet came back perfect: 8 of 8 detectable corrupted reads caught, 16 of 16 undetectable reads silent, 0 of 24 clean reads flagged, with zeros in the modulating-chart class where the pooled rule failed and the honest sharp-key class where the pre-refinement rule failed. The extra condition added at productionization cost nothing, and all four registered predictions held. About $1.60 of the $6 cap."
+						},
+						{
+							"heading": "The Longest Loop Closes",
+							"html": "The verdict delivered back to the app: nothing to change. The loop this closes is the program's longest, four hand-offs with each side checking the other: Study 5's anatomy found the corruption class, Study 3's correction described it, Stem Shovel shipped a heuristic, Study 6 measured it and suggested the refinement, Stem Shovel shipped the refinement and registered its own validation, and Study 6b confirms it on data it was not designed on: 100% hit, 100% silence, zero false alarms."
+						}
+					]
+				}
+			],
+			"published": "2026-10-29",
+			"related": [
+				{
+					"title": "Study 6: the validation this study hardens",
+					"href": "/research/stem-bench/6"
+				},
+				{
+					"title": "Study 5: where the loop began",
+					"href": "/research/stem-bench/5"
+				},
+				{
+					"title": "Study 3: the correction that described the class",
+					"href": "/research/stem-bench/3"
+				},
+				{
+					"title": "Stem Shovel, the product under test, and this study's author",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY6B.md",
+			"quote": "The product shipped the rule, refused to trust it, and registered its own test; the bench ran it unmodified and the sheet came back perfect. Four hand-offs, each side checking the other."
 		}
 	]
 }

@@ -990,6 +990,38 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 6b: the key-in-force rule on unseen pages (no figure) ---
+	table(
+		"tbl-keyinforce",
+		[
+			"instrument (production reader, 24 unseen charts)",
+			"detectable corrupted reads caught",
+			"undetectable corrupted reads silent",
+			"clean reads flagged",
+		],
+		[
+			[
+				"H-prod (the shipped key-in-force rule, pinned at its own commit)",
+				"8/8 · gate PASS",
+				"16/16 · gate PASS",
+				"0/24: zeros in every named false-positive class",
+			],
+			[
+				"H-bench (Study 6's exploratory variant, the only-quieter check)",
+				"8/8",
+				"16/16",
+				"0/24: not one read where it flagged and the shipped rule stayed silent",
+			],
+			[
+				"reproduction gate (Study 6's 148 texts, re-run before any new read)",
+				"10/10",
+				"0/12 fired",
+				"1/42: Study 6 reproduced exactly, zero spend",
+			],
+		],
+		"Registered by the stem-shovel agent, run by the bench unmodified: 24 new charts engraved clean and corrupted through a registered generator option, each named false-positive class 8 items strong; 48 reads, about $1.60 of the $6 cap; all four registered predictions held.",
+	);
+
 	// --- Study 6: the warning-heuristic validation table (no figure) ---
 	table(
 		"tbl-warnings",
