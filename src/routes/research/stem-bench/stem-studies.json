@@ -703,13 +703,17 @@
 						},
 						{
 							"heading": "Ship Guidance, and the Scorecard",
-							"html": "Briefed back to Stem Shovel: ship nothing for tempo and key, since the summed-envelope detector beat every stem-aware variant and its one weakness is not fixed by stems; and consider shipping D-activity as a browser-side section detector, zero model cost, structurally immune to the loop invention that survived even chart anchoring in Study 8, guarded against sustained-noise stems, with the model kept for names and the chart for harmonic boundaries. The scorecard: prediction 1 right in full, 2 refuted in both halves, 3 right except the agreement-floor guess (the real floor was indifference to the one actual error), 4 right in direction and wrong in count."
+							"html": "Briefed back to Stem Shovel: ship nothing for tempo and key, since the summed-envelope detector beat every stem-aware variant and its one weakness is not fixed by stems; and consider shipping D-activity as a browser-side section detector, zero model cost, structurally immune to the loop invention that survived even chart anchoring in Study 8, guarded against sustained-noise stems, with the model kept for names and the chart for harmonic boundaries. The scorecard: prediction 1 right in full, 2 refuted in both halves, 3 right except the agreement-floor guess (the real floor was indifference to the one actual error), 4 right in direction and wrong in count. One suggestion here did not survive its next test: <a href=\"/research/stem-bench/10\">Study 10</a>'s real-recording rematch dropped D-activity to 25/33 with 19 false boundaries on real stems, and the measured no-chart section fallback is now the LinkSeg segmenter. The correction is stated plainly there."
 						}
 					]
 				}
 			],
 			"published": "2026-10-29",
 			"related": [
+				{
+					"title": "Study 10: the rematch that corrects this study's ship suggestion",
+					"href": "/research/stem-bench/10"
+				},
 				{
 					"title": "Study 8: the loop invention this detector excludes",
 					"href": "/research/stem-bench/8"
@@ -729,6 +733,78 @@
 			],
 			"brief": "docs/BRIEF-STUDY9.md",
 			"quote": "The stems name the form, the sum keeps the time: the activity detector cannot invent a chorus by construction, and the summed envelope survived every stem built to pollute it."
+		},
+		{
+			"slug": "10",
+			"letters": "10",
+			"track": "Listening",
+			"title": "Neural MIR baselines: the classical detector holds its ground, and the home-field rematch cuts both ways",
+			"eyebrow": "Study 10 · listening, the detector thread closed · 283 zero-spend cells across two arms",
+			"indexLine": "Is the app hearing with obsolete code? Three published neural MIR models, hash-verified and run from vendored reference code, met production's hand-rolled detector on 35 synthetic items and then on 7 real recordings scored against the band's own declarations. All five synthetic gates failed in production's favor at zero weight bytes. The real-recording amendment then cut both ways: the neural segmenter that invented 54 boundaries on synthetic loops found real form at 29/33 while Study 9's perfect activity detector dropped to 25/33 with 19 false boundaries, a plain correction of that study's ship suggestion; and the literature key profiles that tied on synthetic material collapsed on real mixes, confirming production's Krumhansl choice. Zero model spend in both arms.",
+			"sections": [
+				{
+					"id": "sec-stem-study10",
+					"eyebrow": "Listening, the detector thread closed",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s10",
+					"figure": {
+						"id": "fig-mir",
+						"title": "False Section Boundaries, Synthetic vs Real: the Two-Arm Reversal"
+					},
+					"table": {
+						"id": "tbl-mir",
+						"summary": "All five synthetic gates, the real-recording rematch per instrument, and the amended ship guidance"
+					},
+					"body": [
+						{
+							"heading": "Drafted From the Landscape, Verified by the Bench",
+							"html": "The third cross-agent study: the Stem Shovel agent drafted it from its own landscape review, asking whether the app hears with obsolete code, and the bench finished and registered it after verifying that the three cited HuggingFace ONNX models exist with hashes matching their published tables. The candidates: Beat This! small (MIT) for tempo and meter, LinkSeg 7-class (CC-BY 4.0) for sections, ChordMini (MIT) for chords, plus two literature key-profile swaps; one published tracker was omitted on licensing (its library is CC BY-NC-SA). Runners are vendored reference code; the fixture adds a 12-item hard set (swing, octave-boundary tempi, reverb, dense mixes, mediant modulations) and 4 extended-chord progressions. Zero LLM spend in both arms."
+						},
+						{
+							"heading": "Five Gates, Five Fails, All in Production's Favor",
+							"html": "The synthetic arm's verdict is uniform: every registered gate failed in the shipped code's favor. The beat gate carries the study's most instructive nuance: at the registered plus-or-minus 1 bpm, production is exact on 29 of 33 to the neural tracker's 18, but the tracker derives tempo from a 20 ms frame grid, so it answers 142.9 for a true 140, musically right and numerically outside the letter; a disclosed sensitivity read at plus-or-minus 3 is a dead tie at 29 each, the program's fifth registration lesson (an absolute tolerance at DSP precision measures the candidate's output quantization, not its hearing). What the letter cannot take away: the tracker's per-beat grid scores an F-measure of 0.892, something production does not have at all, and it answered the pulseless pads honestly. Meter went 27/29 to 21/29 for production, with the hoped-for free 6/8 dead at 1 of 4; and the key profiles tied on synthetic material (29, 29, 30 of 33), deferring the real question to the amendment."
+						},
+						{
+							"heading": "The Segmenter and the Chord Reader",
+							"html": "The section gate failed decisively: LinkSeg placed 54 false boundaries across the 22 single-section items, about 2.5 per item, worse than Study 8's chart-anchored language models, while finding only 5 of 8 contrast boundaries; graph attention does not cure the loop-invention disease on this fixture, where Study 9's free activity detector scored 8 of 8 with zero. The chord gate split: the production matcher took the full vocabulary 483 to 418 of 504 bars (the neural model hears triads where the truth says sevenths), ChordMini edged the hard set on major-minor nuance 61 to 59 of 64, and one collapse earns its name: the N.C.-bar song fell to 4 of 28 under the neural reader while the matcher read 27. Deployment was never the blocker; every candidate fit the size and latency budget, and accuracy decided everything."
+						},
+						{
+							"heading": "The Home-Field Rematch",
+							"html": "The registered real-recordings amendment ran the same day on a public catalog of the band's own songs, scored against the band's declarations, including declared section start seconds. The domain warning was real, in both directions. Sections flip outright: LinkSeg finds real form at 29 of 33 declared boundaries within 4 seconds, including one song at 8 of 9 with zero false boundaries, while Study 9's D-activity, perfect on synthetic arrangements, drops to 25 of 33 with 19 false boundaries on real stems. That is a plain correction of Study 9's ship suggestion, and this page says so: the measured no-chart section fallback is now the 1.5 MB CC-BY segmenter, not the bench's own detector. Tempo kept its known shape with real teeth: production's two misses are gross, an exact half of a declared 224 and an exact two-thirds of a declared 145, the 3:2 family on real recordings, while the neural tracker leads 3 of 4 at the wider read (n of 4, direction not proof) by degrading gracefully instead of octave-jumping. Meter held for production, which read the real waltz the tracker missed. And the key question closed hard: Krumhansl 4 of 6 against 1 of 6 for both literature profiles, which collapse into parallel-minor and subdominant flips on real mixes. The synthetic arm said interchangeable; the real arm says production's choice is the right one."
+						},
+						{
+							"heading": "Ship Guidance",
+							"html": "Briefed back to Stem Shovel: nothing ships for tempo, since the detector's failure classes are known and the neural alternative is not plus-or-minus-1 accurate on real material either; keep Krumhansl without a second thought; and consider LinkSeg, behind the chart when one exists, as the no-chart section fallback that the real recordings earned it. The honest boundary runs both ways and is stated in the report: the synthetic corpus is the material production's templates were born on, and the real catalog is the material the neural models were trained for; both arms exist precisely so neither home field decides alone."
+						},
+						{
+							"heading": "The Scorecard, and the Ledger",
+							"html": "The registered scorecard ran against the draft's hopes: prediction 3 right in full including the one-profile detail, 1 wrong at the registered letter and right at the disclosed wider read, 2 wrong in both clauses, 4 wrong except the hard-set edge, 5 half-right with the zero-false clause failing much harder than predicted, 6 wrong in the happy direction. The ledger: zero dollars in both arms, about 30 MB of hash-pinned weights, an 800 MB public-audio fetch with hashes committed, and the detector thread that began with Study 4 now closed end to end: the models read, the detectors hear, and every shipped choice is a measured one."
+						}
+					]
+				}
+			],
+			"published": "2026-10-29",
+			"related": [
+				{
+					"title": "Study 9: the ship suggestion this study corrects",
+					"href": "/research/stem-bench/9"
+				},
+				{
+					"title": "Study 8: the loop-invention baseline",
+					"href": "/research/stem-bench/8"
+				},
+				{
+					"title": "Stem Shovel, the product under test, and this study's drafter",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY10.md",
+			"quote": "On the material the templates were born on, the hand-rolled detector beat every published model at zero weight bytes; on the band's real recordings, the segmenter found the form the bench's own detector invented. The domain warning cut both ways, and both cuts are now measured."
 		}
 	]
 }

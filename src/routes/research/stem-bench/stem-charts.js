@@ -749,6 +749,128 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 10: the two-arm section reversal, synthetic vs real ---
+	(() => {
+		const GROUPS = [
+			{
+				label: "synthetic (22 loops)",
+				vals: [54, 0],
+				max: 60,
+				tip: "the bench's home field: LinkSeg invented 54 false boundaries (~2.5/item, worse than Study 8's chart-anchored models) and found only 5/8 contrast boundaries · D-activity: 8/8 found, zero invented, by construction",
+			},
+			{
+				label: "real (7 songs)",
+				vals: [10, 19],
+				max: 60,
+				tip: "the models' home field, scored against the band's declared section seconds: LinkSeg finds real form, 29/33 declared boundaries within 4 s (one song 8/9 with ZERO false) · D-activity drops to 25/33 with 19 false boundaries: the plain correction of Study 9's ship suggestion",
+			},
+		];
+		const CLINK = "#c98500",
+			CACT = "#199e70";
+		byId("legend-s10").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CLINK +
+			'"></span>LinkSeg 7-class (published neural segmenter, CC-BY, 1.5 MB)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			CACT +
+			'"></span>D-activity (Study 9\'s per-stem detector, zero cost)</span>' +
+			legendNote(
+				"false section boundaries invented, total per arm · the same two instruments swap verdicts when the material changes domain, which is why the amendment existed: neither home field decides alone · detection rates, the other three gates and the amended guidance are in the table",
+			);
+		const W = 880,
+			BAR = 14,
+			GAP = 4,
+			GH = 2 * BAR + GAP,
+			GPAD = 18,
+			T = 8,
+			B = 42,
+			L = 255,
+			R = 84;
+		const H = T + GROUPS.length * (GH + GPAD) + B;
+		const iw = W - L - R;
+		const max = 60;
+		const xOf = (v) => L + (v / max) * iw;
+		let g = "";
+		for (const tick of [0, 30, 60]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		GROUPS.forEach((row, gi) => {
+			const top = T + gi * (GH + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${top + GH / 2 + 4}" text-anchor="end">${row.label}</text>`;
+			row.vals.forEach((v, ai) => {
+				const y = top + ai * (BAR + GAP);
+				const w = Math.max((v / max) * iw, 2);
+				marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${ai === 0 ? CLINK : CACT}" rx="3"/>`;
+				marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 3}">${v}</text>`;
+			});
+			hits += `<rect x="${L}" y="${top}" width="${iw}" height="${GH}" fill="transparent" data-tip="${esc(row.label + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-mir");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grouped bar chart of false section boundaries invented: on synthetic loops LinkSeg invents 54 and the activity detector zero; on real recordings LinkSeg invents 10 while the activity detector invents 19; the two instruments swap verdicts when the material changes domain.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the two-arm reversal in one frame: the published segmenter that drowned the synthetic fixture in invented boundaries finds real form on the band's recordings, and the bench's own detector, perfect at home, does the inventing on real stems; the measured no-chart fallback flips accordingly",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-mir",
+			["cell", "production (shipped)", "neural candidate"],
+			[
+				[
+					"G-beat: exact tempo at the registered ±1 (33 synthetic items)",
+					"29/33",
+					"18/33 · but the miss is 20 ms frame-grid quantization (142.9 for 140): a disclosed ±3 read is a dead tie 29/29, the program's fifth registration lesson",
+				],
+				[
+					"what the letter cannot take away",
+					"no per-beat grid exists in production",
+					"beat F-measure 0.892 at ±70 ms, downbeats 0.867, honest nulls on both pulseless pads",
+				],
+				[
+					"G-meter (synthetic)",
+					"27/29, and 4/4 on the real waltz",
+					"21/29; 6/8 named on 1 of 4 compound items; misread the real waltz",
+				],
+				[
+					"G-key: synthetic, then real",
+					"Krumhansl 29/33 · 4/6 on real mixes: keep-KK confirmed",
+					"Albrecht-Shanahan 29/33 and Temperley 30/33 tie on synth, then collapse to 1/6 each on real mixes (parallel-minor and subdominant flips)",
+				],
+				[
+					"G-seg: sections, synthetic then real",
+					"D-activity 8/8 with 0 false · drops to 25/33 with 19 false on real stems",
+					"LinkSeg 5/8 with 54 false · flips to 29/33 at ±4 s with 10 false on real songs: the measured no-chart fallback",
+				],
+				[
+					"G-chord (504 bars + 64 hard-set)",
+					"matcher 483/504 full-vocab, 59/64 hard set, 27/28 on the N.C. song",
+					"ChordMini 418/504; edges the hard set on maj-min 61/64; collapses to 4/28 on the N.C. song",
+				],
+				[
+					"real-recording tempo (4 declared, n too small for proof)",
+					"2/4 at ±1, both misses GROSS: exact half of 224, exact 2/3 of 145, the 3:2 family on real material",
+					"3/4 at ±3, one 4% miss; degrades gracefully where autocorrelation octave-jumps",
+				],
+				[
+					"the ledger",
+					"1.2 s per 90 s of audio, 0 MB of weights",
+					"all candidates fit the budget (≤ 10 s, ~30 MB hash-pinned); accuracy, not deployment, decided every gate",
+				],
+			],
+		);
+	})();
+
 	// --- Study 9: false boundaries per uniform loop across three designs ---
 	(() => {
 		const ROWS = [

@@ -107,7 +107,9 @@ const proseCls = "text-[#c3c9d4]";
       the production agent registered its own validation of the rule it
       shipped, and the bench ran it unmodified to a perfect sheet. And
       Study 9 answered the app's own stem-aware question with zero-cost
-      instruments: the stems name the form, the sum keeps the time. 1,216
+      instruments, and Study 10 gave the shipped detector its neural
+      rematch on both home fields: the classical code held its ground,
+      and the one reversal corrected Study 9's own suggestion. 1,499
       scored cells across seven models so far.
       Hypotheses, corpora, and graders are committed before any scored
       run; results are published as found, gate letters and corrections
