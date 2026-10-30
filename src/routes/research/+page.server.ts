@@ -1,9 +1,11 @@
 // shared headline numbers: src/lib/data/research-stats.json
 import researchStats from "#lib/data/research-stats.json";
 
-const studiesSentenceCase =
-	researchStats.barkupBench.studiesSpelled.charAt(0).toUpperCase() +
-	researchStats.barkupBench.studiesSpelled.slice(1);
+const sentenceCase = (word: string) =>
+	word.charAt(0).toUpperCase() + word.slice(1);
+const studiesSentenceCase = sentenceCase(
+	researchStats.barkupBench.studiesSpelled,
+);
 
 const projects = [
 	{
@@ -23,8 +25,9 @@ const projects = [
 		name: "Stem Bench",
 		slug: "stem-bench",
 		status: "Active",
-		summary:
-			"An open, pre-registered benchmark series measuring the AI features of Stem Shovel, Lightning Jar's music collaboration app. Sixteen studies, 3,499 scored cells across seven models: hint-following in the chart draft, the beat generator's reasoning-off claim, whether a model can read sheet music, whether the listening layer hears what it claims to hear, the composed chain that caught the confound behind the series' one dated correction, a zero-spend validation of the warning heuristic that correction produced, the re-measurement of the rebuilt song check, the section-detection loophole test that recorded the program's first genuine listening result, a validation registered by the production agent itself and run by the bench to a perfect sheet, a zero-spend stem-analysis study whose summed-envelope verdict vindicated the shipped detector, a neural-baselines rematch on synthetic and real recordings in which the classical code held its ground, a tempo-ladder rule that retires the octave error class by representation, the shipped ladder's own validation requested by the production side, the thread-closing study in which the patched gate validated and the bench retired its own rule on the record, and the arc-closer, in which chart-render alignment took the model's last hearing job with no model at all, and the real-audio reckoning, in which the chord path fell 60 points off its synthetic numbers and a text-only reconciler won 16 back without breaking a bar. Results published as found, gate letters and corrections included.",
+		// Keep this tile as short as its siblings: per-study detail belongs on
+		// /research/stem-bench, and the numbers come from research-stats.json.
+		summary: `An open, pre-registered benchmark series measuring the AI features of Stem Shovel, Lightning Jar's music collaboration app. ${sentenceCase(researchStats.stemBench.studiesSpelled)} studies, ${researchStats.stemBench.scoredRunsDisplay} scored cells, ${researchStats.stemBench.modelsSpelled} models, from chart drafting and sheet-music reading to whether a model can hear a song at all. Results published as found, gate letters and corrections included.`,
 	},
 ];
 
