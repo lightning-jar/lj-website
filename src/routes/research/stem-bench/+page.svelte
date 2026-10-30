@@ -112,7 +112,9 @@ const proseCls = "text-[#c3c9d4]";
       and the one reversal corrected Study 9's own suggestion. Study 11
       then retired the detector's octave error class by representation,
       with a tempo ladder that accepted zero genuinely wrong values in
-      255 rows. 1,828 scored cells across seven models so far.
+      255 rows, and Study 11b validated the shipped ladder itself,
+      finding the margins honest and one confound shipped. 2,212 scored
+      cells across seven models so far.
       Hypotheses, corpora, and graders are committed before any scored
       run; results are published as found, gate letters and corrections
       included.

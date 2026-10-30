@@ -749,6 +749,125 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 11b: the super-beat margin band ---
+	(() => {
+		const MIN = 0.9,
+			MAX = 1.12;
+		const ITEMS = [
+			{
+				label: "lilt-b",
+				v: 1.063,
+				color: "#199e70",
+				tip: "1.063, above the 1.05 margin: detects its 6/8 exactly at 76 bpm, one of Study 10's octave misses fixed outright by the re-pick",
+			},
+			{
+				label: "lilt-a",
+				v: 1.029,
+				color: "#c98500",
+				tip: "1.029, under the 1.05 margin: the app's own fixtures measured 1.02 to 1.12, and the bench's lighter accents land at the bottom of that band · the true dotted tempo still sits on the alternates ladder at top-rung strength",
+			},
+			{
+				label: "verb-y",
+				v: 0.991,
+				color: "#e66767",
+				tip: "0.991, reverb-smeared down among the straight items' own ratios: no margin reaches it without letting straight songs through, which is why the verdict says do not lower the margin",
+			},
+		];
+		byId("legend-s11b").innerHTML =
+			'<span class="key"><span class="chip" style="background:#199e70"></span>fires correctly (above the margin)</span>' +
+			'<span class="key"><span class="chip" style="background:#c98500"></span>missed, between the band and the margin</span>' +
+			'<span class="key"><span class="chip" style="background:#e66767"></span>missed, among the straight-item ratios</span>' +
+			legendNote(
+				"each compound item's shipped super-beat ratio against the straight items' 0.91 to 0.97 band (shaded) and the shipped 1.05 margin (dashed) · the distributions overlap, so the margin cannot be tuned: lowering it trades missed 6/8 for false 6/8 · contrast-c also fires correctly; the real-recording flips and the shipped confound are in the table",
+			);
+		const W = 880,
+			ROWH = 26,
+			T = 8,
+			B = 42,
+			L = 150,
+			R = 84;
+		const H = T + ITEMS.length * ROWH + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + ((v - MIN) / (MAX - MIN)) * iw;
+		let g = "";
+		// the straight band, shaded across the plot
+		g += `<rect x="${xOf(0.91)}" y="${T}" width="${xOf(0.97) - xOf(0.91)}" height="${H - T - B}" fill="rgba(139,147,163,0.18)"/>`;
+		g += `<text fill="#8b93a3" font-size="11" x="${(xOf(0.91) + xOf(0.97)) / 2}" y="${H - B + 34}" text-anchor="middle">straight band 0.91 to 0.97</text>`;
+		for (const tick of [0.9, 1.0, 1.1]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick.toFixed(2)}</text>`;
+		}
+		const mx = xOf(1.05);
+		g += `<line x1="${mx}" x2="${mx}" y1="${T}" y2="${H - B}" stroke="#e66767" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+		g += `<text fill="#e66767" font-size="11" x="${mx}" y="${H - B + 34}" text-anchor="middle">1.05 margin</text>`;
+		let marks = "";
+		let hits = "";
+		ITEMS.forEach((item, i) => {
+			const cy = T + i * ROWH + ROWH / 2;
+			g += `<text class="chart-tick" x="${L - 12}" y="${cy + 4}" text-anchor="end">${item.label}</text>`;
+			g += `<line x1="${L}" x2="${L + iw}" y1="${cy}" y2="${cy}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+			marks += `<circle cx="${xOf(item.v)}" cy="${cy}" r="7" fill="${item.color}"/>`;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${xOf(item.v) + 12}" y="${cy + 4}">${item.v.toFixed(3)}</text>`;
+			hits += `<rect x="${L}" y="${cy - ROWH / 2}" width="${iw}" height="${ROWH}" fill="transparent" data-tip="${esc(item.label + "\n" + item.tip)}"/>`;
+		});
+		const el = byId("fig-margins");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Dot plot of three compound items' super-beat ratios against the shipped 1.05 margin and the straight items' 0.91 to 0.97 band: lilt-b at 1.063 fires correctly above the margin, lilt-a at 1.029 is missed between band and margin, and verb-y at 0.991 falls among the straight items' own ratios where no margin can reach it.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"why the verdict says do not lower the margin: one missed item sits between the band and the margin, where tuning could reach it, but the other falls among the straight items' own ratios, so any margin low enough to catch it lets straight songs through; the alternates ladder carries the right count for both",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-margins",
+			["cell", "result", "the read"],
+			[
+				[
+					"V3: the swing-stress sweep (15 items, ratios 0.60 to 0.70)",
+					"15/15 straight, every tempo exact · PASS",
+					"TRIPLET_SHARE 0.55 and the swing-cannot-exceed-half argument validated in full, including the 0.67 triplet swing the bench's sketch rule misread",
+				],
+				[
+					"V4: the corrected wrong-tempo set",
+					"0/332 false accepts · PASS",
+					"retro-confirms Study 11's by-letter failures as generator collisions, not ladder defects",
+				],
+				[
+					"the super-beat re-pick",
+					"two of Study 10's octave misses now detect their 6/8 exactly",
+					"a detector-level fix that fell out of shipping the ladder",
+				],
+				[
+					"V1: the four compound items",
+					"2/4 fire · FAIL",
+					"the margin numbers forbid tuning (see the figure); the alternates ladder carries the true dotted tempo on all 4 at top-rung strength, so the rung picker surfaces the right count",
+				],
+				[
+					"V2: the real recordings",
+					"both scorable songs flipped to 6/8 · FAIL, the headline",
+					"mop-heart re-picked to 74.7, exactly declared 224 over 3: a defensible hearing with no rung to land on · peaceful-dreams fired on the detector's own 2/3-wrong pulse: Study 11 Amendment 1's confound, now in shipped code, silencing the warning the gates required to stay loud",
+				],
+				[
+					"the verdict delivered",
+					"keep the triplet share, the ladder util, and the re-pick; evaluate the compound flag at the DECLARED tempo's lag (0.72 vs 0.03 separates the two cases); add the times-3 rung; do not lower the margin",
+					"not a stop-ship: the flag fix contains the false fires at the warning surface, and the alternates carry the truth",
+				],
+				[
+					"the thread ledger",
+					"$0 this study · 384 cells · the four ladder-thread studies total about $0.08 of model spend, all of it Study 9's pilot",
+					"the fifth cross-agent study: requested by the production side, run verbatim-pinned by the bench",
+				],
+			],
+		);
+	})();
+
 	// --- Study 11: wrong-value acceptance under the ladder ---
 	(() => {
 		const ROWS = [
