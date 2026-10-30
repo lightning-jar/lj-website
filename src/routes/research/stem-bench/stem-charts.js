@@ -749,6 +749,122 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 12: the half-second precision league ---
+	(() => {
+		const ROWS = [
+			{
+				label: "Study 8: models, blind",
+				v: 0,
+				color: "#8b93a3",
+				tip: "both gemini generations found most contrast boundaries at a loose tolerance but placed about none of the 8 within half a second · the literature's best model reader scores 0.423 at this tolerance on real music",
+			},
+			{
+				label: "Study 10: neural segmenter",
+				v: 0,
+				color: "#8b93a3",
+				tip: "LinkSeg at ±0.5 s: 0/8 on the synthetic contrast set (5/8 even at ±4 s) · it later edges alignment 7/9 to 6/9 on one real song only at the edges, by being merely mediocre everywhere",
+			},
+			{
+				label: "Study 12: alignment",
+				v: 8,
+				color: "#199e70",
+				tip: "all 8 contrast boundaries within ±0.5 s, plus 7/8 tempo/key-change boundaries at the same tolerance (invisible to stem activity, half-found by blind models): the warp does not care that the tempo moved · zero model spend",
+			},
+		];
+		byId("legend-s12").innerHTML =
+			'<span class="key"><span class="chip" style="background:#8b93a3"></span>listeners and published models</span>' +
+			'<span class="key"><span class="chip" style="background:#199e70"></span>chart-render alignment (no model)</span>' +
+			legendNote(
+				"the 8 synthetic contrast boundaries placed within half a second, the precision metric every listener in the program failed · the real-recording anatomy (six mid-song boundaries at 0.02 to 0.11 s, the misses at the chart's edges) and the 6/6 wrong-chart probe are in the table",
+			);
+		const W = 880,
+			BAR = 16,
+			GPAD = 12,
+			T = 8,
+			B = 42,
+			L = 290,
+			R = 84;
+		const H = T + ROWS.length * (BAR + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 8) * iw;
+		let g = "";
+		for (const tick of [0, 4, 8]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}/8</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		ROWS.forEach((row, i) => {
+			const y = T + i * (BAR + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${y + BAR - 3}" text-anchor="end">${row.label}</text>`;
+			const w = Math.max((row.v / 8) * iw, 2);
+			marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${row.color}" rx="3"/>`;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 4}">${row.v}/8</text>`;
+			hits += `<rect x="${L}" y="${y}" width="${iw}" height="${BAR}" fill="transparent" data-tip="${esc(row.label + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-align");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart of contrast section boundaries placed within half a second: about zero of eight for the blind models, zero of eight for the neural segmenter, and eight of eight for chart-render alignment with no model.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the precision league across the program: the metric every listener failed is swept by rendering the chart and aligning it to the recording, with no model in the loop; the program's one genuine model hearing ability, texture contrast, is now overtaken twice, by stems in Study 9 and by charts here",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-align",
+			["cell", "result", "the read"],
+			[
+				[
+					"G1a: synthetic bar starts within ±0.25 s",
+					"532/560 (95.0%) · PASS at exactly the letter",
+					"errors live in reverb tails (worst 1.3 to 1.4 s) and dense mixes; mediant modulations perfect to the hop",
+				],
+				[
+					"G1b: contrast boundaries within ±0.5 s",
+					"8/8 · PASS, the headline · plus 7/8 tempo/key-change boundaries at the same tolerance",
+					"the warp does not care that the tempo moved; boundaries invisible to stem activity and half-found by blind models fall out of the method",
+				],
+				[
+					"the wrong-chart probe",
+					"6/6 pairs separated, path-cost ratios 8.6 to 16.3",
+					"the is-this-chart-this-recording question, asked by ear in production today, is now a number with an order-of-magnitude margin",
+				],
+				[
+					"G2: real letter-lands boundaries within ±0.5 s",
+					"6/9 vs the registered 7/9 · FAIL by one",
+					"the six mid-song boundaries landed at 0.02 to 0.11 s; the misses are the edges (intro 3.6 s, outro 9.1 s): sub-tenth wherever the performance follows the chart, lost where the chart stops describing it",
+				],
+				[
+					"the exploratory song",
+					"clean until the bench's own uncertain Bridge reading, then 2 to 8 s adrift, re-anchoring at the outro",
+					"a wrong transcription degrades locally and visibly, which is exactly what a shipping path-cost and edge gate can catch",
+				],
+				[
+					"the transcription scoping",
+					"one song gated, one exploratory with a disclosed 26 s mismatch, one excluded as untranscribable",
+					"chart quality is the binding constraint: a data problem, not a hearing problem",
+				],
+				[
+					"ship guidance",
+					"alignment takes placement behind the path-cost gate and an edge flag (the rung-picker pattern); the probe replaces the by-ear same-piece clause",
+					"with the edge flag accepted as UI, the model's remaining role in this feature is nothing",
+				],
+				[
+					"the arc, and the ledger",
+					"$0 · 583 cells · every hearing task measured across twelve stem studies now has a code-or-data answer that beats or matches the model",
+					"the bench's own registration, approved from the candidates memo; the MMKK transcriptions committed before any alignment ran",
+				],
+			],
+		);
+	})();
+
 	// --- Study 11c: the two-rule mirror verdict ---
 	(() => {
 		const ROWS = [

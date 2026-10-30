@@ -574,6 +574,10 @@
 			"published": "2026-10-28",
 			"related": [
 				{
+					"title": "Study 12: alignment takes the placement job",
+					"href": "/research/stem-bench/12"
+				},
+				{
 					"title": "Study 9: the detector that cannot invent",
 					"href": "/research/stem-bench/9"
 				},
@@ -711,6 +715,10 @@
 			"published": "2026-10-29",
 			"related": [
 				{
+					"title": "Study 12: the arc-closer",
+					"href": "/research/stem-bench/12"
+				},
+				{
 					"title": "Study 10: the rematch that corrects this study's ship suggestion",
 					"href": "/research/stem-bench/10"
 				},
@@ -790,6 +798,10 @@
 			],
 			"published": "2026-10-29",
 			"related": [
+				{
+					"title": "Study 12: out-placing the segmenter with no model",
+					"href": "/research/stem-bench/12"
+				},
 				{
 					"title": "Study 11: the ladder that retires the octave class",
 					"href": "/research/stem-bench/11"
@@ -1037,6 +1049,82 @@
 			],
 			"brief": "docs/BRIEF-STUDY11C.md",
 			"quote": "The bench registered the prediction of its own rule's defeat, ran the mirror built to cause it, and published the retirement. The gate that won accepts nothing wrong in 332 rows and gains three matches its predecessor missed. Ship the patch."
+		},
+		{
+			"slug": "12",
+			"letters": "12",
+			"track": "Listening",
+			"title": "Chart-to-seconds by synthesize-and-align: code takes the model's last job, and the edges talk back",
+			"eyebrow": "Study 12 · listening, the arc-closer · 583 zero-spend cells",
+			"indexLine": "The program's arc-closer, registered by the bench from its own candidates memo: render the chart as plain chord pads at the declared tempo, align the render against the recording by chroma DTW, and every bar gets a timestamp with no model. The alignment places all eight contrast boundaries within half a second, the precision metric every listener in the program failed, separates right charts from wrong ones by an order of magnitude in path cost, and on a real recording lands six mid-song boundaries within eleven hundredths of a second while missing exactly where the chart stops describing the performance. The one failed gate fails at the chart's edges, which is a data problem, not a hearing problem.",
+			"sections": [
+				{
+					"id": "sec-stem-study12",
+					"eyebrow": "Listening, the arc-closer",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s12",
+					"figure": {
+						"id": "fig-align",
+						"title": "Contrast Boundaries Placed Within Half a Second, Across the Program"
+					},
+					"table": {
+						"id": "tbl-align",
+						"summary": "All gates, the probe, the real-recording anatomy, the transcription scoping, and the arc"
+					},
+					"body": [
+						{
+							"heading": "The Arc-Closer, the Bench's Own Registration",
+							"html": "Study 8 left exactly one hearing job with the language model: placing section boundaries in seconds. Study 12, the candidates memo's recommendation A, registered by the bench and approved for its zero spend, takes it with code: render the chart as sustained chord pads at the declared tempo, knowing nothing the chart does not state; compute a 92.9 ms chromagram on the port's own FFT; and align render to recording with dynamic time warping, non-stalling reference steps, and a subsequence mode for count-ins and tails. The corpora: 33 synthetic items with truth by construction, a six-pair wrong-chart probe, and the bench's disclosed transcriptions of the public MMKK charts, scoped honestly: one song gated (unambiguous, duration cross-checked), one exploratory with a disclosed 26-second reading mismatch, and one excluded as untranscribable, which is itself the real-world limit of chart-driven anything."
+						},
+						{
+							"heading": "Bars to the Hop",
+							"html": "G1a passed at exactly the letter: 532 of 560 synthetic bar starts, 95.0 percent, within a quarter second. The errors live where physics says they should, in reverb tails (worst 1.3 to 1.4 seconds) and dense mixes, and the mediant modulations, the hard harmonic case, aligned perfectly to the hop."
+						},
+						{
+							"heading": "The Precision Every Listener Failed",
+							"html": "G1b is the headline: all eight contrast section boundaries within half a second. That is the precision metric every listener in the program failed, with Study 8's models near zero of eight there, Study 10's neural segmenter at zero of eight, and the literature's best model reader at 0.423 on real music. Beside it, seven of eight tempo and key-change boundaries landed within the same half second, boundaries structurally invisible to stem activity and half-found by blind models, because the warp does not care that the tempo moved. That indifference is the method."
+						},
+						{
+							"heading": "The Probe That Replaces an Ear",
+							"html": "The wrong-chart probe separated all six registered pairs, with the right chart's path cost sitting 8.6 to 16.3 times under the wrong one. The is-this-chart-this-recording question, which production currently asks the model to answer by ear in the song check, is now a number with an order-of-magnitude margin."
+						},
+						{
+							"heading": "Perfect in the Middle, Lost at the Edges",
+							"html": "G2 failed by one boundary, and the anatomy is the finding. On the real recording, the six mid-song boundaries landed at 0.02 to 0.11 seconds, placement precision nothing in the program has approached on real audio; the three misses are the edges, where the subsequence start absorbs the real intro (3.6 seconds) and the chart's eight-bar outro reading meets a three-second performance tail (9.1 seconds). Alignment is sub-tenth-second wherever the performance follows the chart and fails exactly where the chart stops describing the performance, which is how the neural segmenter edges it seven-to-six at the half-second tolerance on this one song: by being merely mediocre everywhere instead of perfect in the middle and lost at the ends. The exploratory song behaved exactly as predicted, clean until the bench's own uncertain Bridge reading, then two to eight seconds adrift before re-anchoring at the outro: a wrong transcription degrades placement locally and visibly, which is precisely what a shipping gate can catch."
+						},
+						{
+							"heading": "Ship Guidance, and the Arc",
+							"html": "Briefed back to Stem Shovel: alignment takes placement, behind two mechanical gates, the path cost (the probe's 8.6-times floor) and an edge flag that shows first and last boundaries hedged, the rung-picker pattern applied again; the probe ships separately as the same-piece check, replacing the by-ear clause; and chart quality is now the binding constraint, a data problem rather than a hearing problem, with one real song untranscribable to make the point. The scorecard: 1 right including the tempo-change tracking, 2 half (the error shape predicted, the count off by one), 3 and 4 right in full. And the arc line the page exists to state: with Study 12, every hearing task measured across the program's twelve stem studies has a code-or-data answer that beats or matches the model, and the models' one genuine hearing ability, texture contrast, was overtaken twice, by stems in Study 9 and by charts here."
+						}
+					]
+				}
+			],
+			"published": "2026-10-30",
+			"related": [
+				{
+					"title": "Study 8: the job this study takes from the model",
+					"href": "/research/stem-bench/8"
+				},
+				{
+					"title": "Study 9: texture contrast, overtaken by stems",
+					"href": "/research/stem-bench/9"
+				},
+				{
+					"title": "Study 10: the neural segmenter this method out-places",
+					"href": "/research/stem-bench/10"
+				},
+				{
+					"title": "Stem Shovel, the product under test",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY12.md",
+			"quote": "Six mid-song boundaries landed within eleven hundredths of a second on a real recording, and the misses are where the chart stops describing the song. The last hearing job moved from the model to code, and what remains is a data problem."
 		}
 	]
 }

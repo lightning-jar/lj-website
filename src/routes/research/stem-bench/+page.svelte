@@ -115,8 +115,10 @@ const proseCls = "text-[#c3c9d4]";
       255 rows, Study 11b validated the shipped ladder itself, and
       Study 11c closed the thread: the patched gate validated, and the
       bench's own proposed rule was retired on the record by the defeat
-      it registered in advance. 2,746 scored cells across seven models
-      so far.
+      it registered in advance. Study 12 closed the arc itself,
+      taking the model's last hearing job with chart-render alignment
+      that places boundaries to the hundredth of a second. 3,329 scored
+      cells across seven models so far.
       Hypotheses, corpora, and graders are committed before any scored
       run; results are published as found, gate letters and corrections
       included.
