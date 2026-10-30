@@ -749,6 +749,113 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 11c: the two-rule mirror verdict ---
+	(() => {
+		const ROWS = [
+			{
+				label: "the declared-lag rule",
+				v: 3,
+				color: "#e66767",
+				tip: "3/3 wrong mirror values accepted, exactly as the bench's registered prediction traced: on straight running eighths, a 2/3-wrong declared tempo puts its lag's third on the eighth grid and every clause licenses the rung · retired on the record, by the measurement its proposer registered",
+			},
+			{
+				label: "the gate: opens",
+				v: 0,
+				color: "#199e70",
+				tip: "the gates themselves never opened on any mirror item: the 3:2 and x3 rungs stay closed under a declared 4/4 · C1 over the full corpus: 0/332 wrong rows accepted, three true matches gained over v0.200.0",
+			},
+			{
+				label: "rung-1 collision",
+				v: 1,
+				color: "#c98500",
+				tip: "the by-letter miss, stated plainly: on mirror-138 the DETECTOR itself misread straight eighths at 92 with a false compound flag (the confound's first synthetic reproduction), and the wrong declared 92 matched the wrong detection directly at rung 1, which no gate governs · lesson-six collision class, not a gate leak",
+			},
+		];
+		byId("legend-s11c").innerHTML =
+			'<span class="key"><span class="chip" style="background:#e66767"></span>the bench\'s proposed rule, defeated as registered</span>' +
+			'<span class="key"><span class="chip" style="background:#199e70"></span>the shipped patch\'s gate, which never opened</span>' +
+			'<span class="key"><span class="chip" style="background:#c98500"></span>the ungoverned rung-1 collision</span>' +
+			legendNote(
+				"wrong declarations accepted on the three mirror items (straight running eighths declared wrongly at 2/3), the fixture Stem Shovel designed to defeat the bench\'s own rule · the full-corpus and x3-rung arms are in the table · zero model spend",
+			);
+		const W = 880,
+			BAR = 16,
+			GPAD = 12,
+			T = 8,
+			B = 42,
+			L = 290,
+			R = 84;
+		const H = T + ROWS.length * (BAR + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 3) * iw;
+		let g = "";
+		for (const tick of [0, 1, 2, 3]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}/3</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		ROWS.forEach((row, i) => {
+			const y = T + i * (BAR + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${y + BAR - 3}" text-anchor="end">${row.label}</text>`;
+			const w = Math.max((row.v / 3) * iw, 2);
+			marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${row.color}" rx="3"/>`;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 4}">${row.v}/3</text>`;
+			hits += `<rect x="${L}" y="${y}" width="${iw}" height="${BAR}" fill="transparent" data-tip="${esc(row.label + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-mirror");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart of wrong declarations accepted on the three mirror items: the bench's declared-lag rule accepts all three, the shipped declared-meter gate opens on none, and one collision passes at rung one where the wrong declaration equals the wrong detection, which no gate governs.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the mirror did its job twice over: the bench's rule lost 3 of 3 exactly as its own registered prediction traced, the shipped gate never opened, and the one accept is a rung-1 collision with a misread detection, the lesson-six class no ladder can govern; the fixture that caused it is now the detector confound's first synthetic regression test",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-mirror",
+			["cell", "result", "the read"],
+			[
+				[
+					"C1: the declared-meter gate over the full 11b corpus",
+					"0/332 wrong rows accepted, no true match lost, THREE gained · PASS",
+					"lilt-a and verb-y match at 2/3 through their declared 6/8 where the acoustic margin missed; mop-heart at x3 through declared 3/4, 224 counted three to the bar; peaceful-dreams stays loud, by data instead of by luck",
+				],
+				[
+					"C2: the mirror fixture",
+					"declared-lag 3/3 accepted · declared-meter 1/3 by letter",
+					"the bench's rule retired on the record as registered; the 1 is the rung-1 collision with a misread detection (lesson six), not a gate leak",
+				],
+				[
+					"C3: the x3 rung",
+					"opens nowhere but declared-triple meters; 0 leaks, 0 off-tolerance; exact-3x accepted on all 5 triple-declared items · PASS",
+					"the x2-class count ambiguity quantified, living where it belongs: in the rung picker",
+				],
+				[
+					"the bonus fixture",
+					"mirror-138: truth 138, detected 92 with a false compound flag, the truth on the alternates at strength 0.96",
+					"the first synthetic reproduction of the detection-side confound; a committed regression fixture replacing a single real recording",
+				],
+				[
+					"the verdict delivered",
+					"ship the patch to production as is",
+					"the declared-meter gate strictly dominates both predecessors on everything a gate controls; the one accept is detection-side and pre-existing",
+				],
+				[
+					"the thread ledger",
+					"$0 this study · 534 cells · five ladder studies for ~$0.08 of model spend total",
+					"the sixth cross-agent study, closing the thread with each side having corrected the other on the record",
+				],
+			],
+		);
+	})();
+
 	// --- Study 11b: the super-beat margin band ---
 	(() => {
 		const MIN = 0.9,
