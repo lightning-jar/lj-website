@@ -1039,6 +1039,10 @@
 			"published": "2026-10-30",
 			"related": [
 				{
+					"title": "Study 14: the loop's next four turns",
+					"href": "/research/stem-bench/14"
+				},
+				{
 					"title": "Study 11b: the validation this study's patch answers",
 					"href": "/research/stem-bench/11b"
 				},
@@ -1110,6 +1114,10 @@
 			],
 			"published": "2026-10-30",
 			"related": [
+				{
+					"title": "Study 14: the shipped aligner validated, the constant caught",
+					"href": "/research/stem-bench/14"
+				},
 				{
 					"title": "Study 13: the conditional these artifacts enabled",
 					"href": "/research/stem-bench/13"
@@ -1191,6 +1199,10 @@
 			"published": "2026-10-30",
 			"related": [
 				{
+					"title": "Study 14: the reconciler re-measured under production config",
+					"href": "/research/stem-bench/14"
+				},
+				{
 					"title": "Study 12: the artifacts that made the measurement possible",
 					"href": "/research/stem-bench/12"
 				},
@@ -1213,6 +1225,78 @@
 			],
 			"brief": "docs/BRIEF-STUDY13.md",
 			"quote": "The chord path that scored 96 at home reads a real recording at 38, and the model that fixed twelve bars without breaking one never heard a note: symbols in, symbols out. The law held even while the model helped."
+		},
+		{
+			"slug": "14",
+			"letters": "14",
+			"track": "Listening",
+			"title": "The shipped alignment and reconciler validated, and the same-piece constant caught before release",
+			"eyebrow": "Study 14 · listening, the validation sweep · 26 cells, five arms, one amendment",
+			"indexLine": "All four asks from Stem Shovel's Study 12 and 13 responses, run on verbatim ports pinned at their commits. The parsers round-trip the bench's material exactly, the shipped aligner reproduces Study 12's precision through its own code path, and production's reconciler configuration beats the bench's measurement of it in half the tokens. The study's reason to exist is the catch: the shipped same-piece constant of 3 rejects the band's own correct charts on real audio (right charts score 2.04 and 2.53 there against 24 to 49 on synthetic), the home-field lesson's third appearance, caught before release and already fixed in production at 1.6 within hours.",
+			"sections": [
+				{
+					"id": "sec-stem-study14",
+					"eyebrow": "Listening, the validation sweep",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s14",
+					"figure": {
+						"id": "fig-samepiece",
+						"title": "The Tritone Ratios on Real Audio, Against the Shipped and Recommended Thresholds"
+					},
+					"table": {
+						"id": "tbl-samepiece",
+						"summary": "All five arms, the constant's anatomy, the edge rules, and the closed loop"
+					},
+					"body": [
+						{
+							"heading": "Four Asks, Five Arms, Ten Files Ported Verbatim",
+							"html": "Stem Shovel shipped the Study 12 alignment and the Study 13 reconciler within hours of each report and sent back four validation asks. Study 14 runs all of them on verbatim ports pinned at the app's own commits: the alignment set, the reconciler utilities, and the band-markdown parsers. Five arms, about $0.40 of a $2 fence (two model calls in the reconciler arm), one registered amendment."
+						},
+						{
+							"heading": "What Validates Exactly",
+							"html": "G1 passed exactly: the app's parsers round-trip the bench's material bar for bar and section for section (76 of 76 and 86 of 86 on the two transcriptions, 24 of 24 on a marked measure summary, and the 6/8-in-eighths convention rendering the app's bar seconds to the millisecond), which means future bench studies can feed production's own parsers instead of maintaining ports. G3's aligner clause held too: fed through its own parser path, the shipped aligner reproduces Study 12's precision, six of eight non-edge boundaries within 0.11 seconds of the band's declared starts, aligning a 141-second song in 1.1 seconds."
+						},
+						{
+							"heading": "The Constant Caught Before Release",
+							"html": "G2 is the study's reason to exist. The shipped same-piece constant, a tritone-probe ratio threshold of 3, was set from synthetic numbers where right charts score 24 to 49. On the real recordings, right charts score 2.04 and 2.53, both below 3, so samePiece returns false on the band's own correct charts, every placement gets hedged, and the song-check card would tell the band their chart does not seem to match their own recording. Amendment 1 measured what the registered pairs could not see, the real-domain wrong charts: 1.17 and 1.24. On real audio the control separates cleanly, wrongs at or below 1.24 and rights at or above 2.04, just not at 3. The recommendation went back at about 1.6, the real-domain midpoint, with the caveats owned in the report: two pairs per class, one band, and a 1.6-times margin where Study 12 had an order of magnitude. The home-field lesson's third appearance, and this time caught before a release instead of after one."
+						},
+						{
+							"heading": "The Reconciler Needs Nothing, and the Edges Are Measured",
+							"html": "G4 passed with a bonus: under production's shipped thinking configuration, the reconciler scores 44 of 76 with 15 fixes and zero breaks, beating the bench's thinking-off measurement of 41 in half the output tokens, because adaptive thinking absorbs the per-bar narration that forced Study 13's cap amendment. Zero breaks now stand across every reconciler run in two studies, and the verdict on the reconciler is: leave it as shipped. Arm D measured the two edge rules the app asked about: the first-onset snap repairs both real intros outright (7.15 and 2.41 seconds to 0.00), and the last-sound rule repairs the 9.11-second outro miss to 0.03 seconds while inheriting chart quality exactly as feared (it would worsen the song whose outro length the bench's transcription guessed wrong), so both ship gated on samePiece and hedged."
+						},
+						{
+							"heading": "The Loop, Four Times Around in 36 Hours",
+							"html": "The scorecard: 1 right; 2 wrong in the direction that matters, since the real-domain collapse of the ratio was unpredicted and the amendment exists precisely because the registered pairs could not see it; 3 half; 4 right; 5 half. And the thread note this page exists to carry: request, ship, validate, catch, fix shipped, four times around the loop in under 36 hours. Stem Shovel has already taken the recommendation, the constant now sits at 1.6 in production, and their engineering log carries the standing rule the catch earned: a constant gating real recordings is provisional until measured on real recordings."
+						}
+					]
+				}
+			],
+			"published": "2026-10-30",
+			"related": [
+				{
+					"title": "Study 12: the alignment this study validates",
+					"href": "/research/stem-bench/12"
+				},
+				{
+					"title": "Study 13: the reconciler this study re-measures",
+					"href": "/research/stem-bench/13"
+				},
+				{
+					"title": "Study 11c: the previous turn of the cross-agent loop",
+					"href": "/research/stem-bench/11c"
+				},
+				{
+					"title": "Stem Shovel, the product under test, and this study's requester",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY14.md",
+			"quote": "The constant that would have told the band their own chart does not match was set on synthetic numbers production never sees. Caught before release, fixed in production within hours, and written into the app's own rules: a constant gating real recordings is provisional until measured on real recordings."
 		}
 	]
 }

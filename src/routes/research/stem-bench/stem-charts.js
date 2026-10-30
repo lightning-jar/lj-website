@@ -749,6 +749,106 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 14: the same-piece ratios against both thresholds ---
+	(() => {
+		const MIN = 1.0,
+			MAX = 3.4;
+		const ITEMS = [
+			{ label: "wrong charts, real", vals: [1.17, 1.24], color: "#e66767", tip: "the real-domain wrong pairs Amendment 1 added: 1.17 and 1.24 · the registered pairs could not see the collapse, which is why the amendment exists" },
+			{ label: "right charts, real", vals: [2.04, 2.53], color: "#199e70", tip: "the band's own correct charts on their real recordings: 2.04 and 2.53, both BELOW the shipped threshold of 3, so samePiece called them mismatches and hedged everything · on synthetic audio the same right charts score 24 to 49, far off this axis: the home-field lesson, third appearance" },
+		];
+		byId("legend-s14").innerHTML =
+			'<span class="key"><span class="chip" style="background:#e66767"></span>wrong charts (real recordings)</span>' +
+			'<span class="key"><span class="chip" style="background:#199e70"></span>right charts (real recordings)</span>' +
+			'<span class="key"><span class="chip" style="background:#8b93a3"></span>thresholds: shipped 3.0, recommended and now shipped 1.6</span>' +
+			legendNote(
+				"tritone-probe path-cost ratios on real audio, the only domain production sees · right charts on synthetic audio score 24 to 49, far beyond this axis, which is where the shipped 3.0 came from · the control separates on real audio (wrongs at or below 1.24, rights at or above 2.04), just not at 3 · caveats owned: n = 2 per class, one band, a 1.6x margin vs Study 12's order of magnitude",
+			);
+		const W = 880,
+			ROWH = 30,
+			T = 8,
+			B = 42,
+			L = 255,
+			R = 84;
+		const H = T + ITEMS.length * ROWH + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + ((v - MIN) / (MAX - MIN)) * iw;
+		let g = "";
+		for (const tick of [1.0, 2.0, 3.0]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick.toFixed(1)}</text>`;
+		}
+		const oldX = xOf(3.0);
+		g += `<line x1="${oldX}" x2="${oldX}" y1="${T}" y2="${H - B}" stroke="#e66767" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+		g += `<text fill="#e66767" font-size="11" x="${oldX}" y="${H - B + 34}" text-anchor="middle">shipped 3.0</text>`;
+		const newX = xOf(1.6);
+		g += `<line x1="${newX}" x2="${newX}" y1="${T}" y2="${H - B}" stroke="#199e70" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+		g += `<text fill="#199e70" font-size="11" x="${newX}" y="${H - B + 34}" text-anchor="middle">now 1.6</text>`;
+		let marks = "";
+		let hits = "";
+		ITEMS.forEach((item, i) => {
+			const cy = T + i * ROWH + ROWH / 2;
+			g += `<text class="chart-tick" x="${L - 12}" y="${cy + 4}" text-anchor="end">${item.label}</text>`;
+			g += `<line x1="${L}" x2="${L + iw}" y1="${cy}" y2="${cy}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+			item.vals.forEach((v, vi) => {
+				marks += `<circle cx="${xOf(v)}" cy="${cy}" r="7" fill="${item.color}"/>`;
+				marks += `<text fill="#c3c9d4" font-size="11" x="${xOf(v)}" y="${vi % 2 === 0 ? cy - 11 : cy + 20}" text-anchor="middle">${v.toFixed(2)}</text>`;
+			});
+			hits += `<rect x="${L}" y="${cy - ROWH / 2}" width="${iw}" height="${ROWH}" fill="transparent" data-tip="${esc(item.label + "\n" + item.tip)}"/>`;
+		});
+		const el = byId("fig-samepiece");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Dot plot of same-piece tritone ratios on real recordings: wrong charts at 1.17 and 1.24, right charts at 2.04 and 2.53, with the shipped threshold of 3 above all of them and the recommended 1.6 cleanly between the classes.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the constant that would have rejected the band's own charts, at a glance: every real ratio, right or wrong, sits below the shipped 3.0 that synthetic numbers inspired, while the recommended 1.6 splits the real classes cleanly; production took the fix within hours and wrote the standing rule into its own log",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-samepiece",
+			["cell", "result", "the read"],
+			[
+				[
+					"G1: the production parsers",
+					"76/76 and 86/86 bars round-tripped with sections; 24/24 on a marked summary; the 6/8 convention to the millisecond · PASS exact",
+					"future bench studies can feed production's own parsers instead of maintaining ports",
+				],
+				[
+					"G2: the same-piece constant",
+					"right charts 2.04 and 2.53 on real audio vs 24 to 49 synthetic, both under the shipped 3 · FAIL, the study's reason to exist",
+					"Amendment 1 measured the real wrong pairs (1.17, 1.24): the control separates on real audio, just not at 3 · recommended ~1.6, shipped by the app the same day with its caveats owned",
+				],
+				[
+					"G3: the shipped aligner through its own parser path",
+					"six of eight non-edge boundaries within 0.11 s of declared starts; 1.1 s to align a 141 s song · FAIL by letter via samePiece and nothing else",
+					"Study 12's precision reproduced in the production code path; the only failing clause is the constant above",
+				],
+				[
+					"G4: the reconciler under production's thinking config",
+					"44/76 (15 fixes, 0 breaks) vs the bench's thinking-off 41/76, in half the output tokens · PASS",
+					"adaptive thinking absorbs the narration that forced Study 13's cap amendment; zero breaks across every reconciler run in two studies; left as shipped",
+				],
+				[
+					"arm D: the edge rules",
+					"first-onset snap: both real intros to 0.00 s · last-sound rule: the 9.11 s outro miss to 0.03 s, but inherits chart quality",
+					"both shipped by the app gated on samePiece and hedged, exactly as the measurement suggested",
+				],
+				[
+					"the loop, and the ledger",
+					"~$0.40 of the $2 fence · 26 cells · request, ship, validate, catch, fix shipped: four turns in under 36 hours",
+					"the constant is 1.6 in production, and the app's log now carries the rule the catch earned: a constant gating real recordings is provisional until measured on real recordings",
+				],
+			],
+		);
+	})();
+
 	// --- Study 13: the home-field gap and the reconciler's climb ---
 	(() => {
 		const GROUPS = [
