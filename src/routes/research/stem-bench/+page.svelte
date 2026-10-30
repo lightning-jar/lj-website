@@ -73,63 +73,43 @@ const proseCls = "text-[#c3c9d4]";
   <header>
     <h1 class="heading-1">Stem Bench</h1>
     <p class="opacity-90 mb-4">
-      When a production app ships a feature built on a language model, the
-      design decisions inside it are empirical claims: which model, which
-      prompt scaffolding, whether a heuristic hint helps or hurts. Stem Bench
-      is our open, pre-registered benchmark series measuring those decisions
-      in <a
+      Stem Bench is our open research project measuring the AI features of
+      <a
         href="https://www.stemshovel.com"
         class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4 hover:text-maximumYellow"
         >Stem Shovel</a
-      >, Lightning Jar's music collaboration app: deterministic fixtures with
-      ground truth by construction, production-pinned prompts and pipelines,
-      mechanical grading, and spend fences.
+      >, Lightning Jar's music collaboration app. Every study is
+      pre-registered: the hypotheses, fixtures, prompts, and graders are
+      committed to a public repository before a single scored run, and the
+      results are published as found, corrections included.
     </p>
+    <h2 class="text-[1.22rem] font-600 tracking-[-0.01em] mt-6 mb-1">
+      The Findings in One Sentence
+    </h2>
     <p class="opacity-90 mb-4">
-      Study 1 measured the chart-draft pipeline: when the model reads a noisy
-      music transcription with a free template matcher's chord guess riding
-      along as a hint, does it read the notes or copy the hint? Study 2
-      measured the reasoning-off claim hard-coded in the Text-to-Beat
-      feature, and found the claim holds for the shipped model while the
-      call shape itself is not portable across models. Study 3 asked whether
-      a model can read sheet music at all, as a Verovio round trip with
-      every fact known by construction. Study 4 asked whether the
-      listening-layer song check hears what it claims to hear, and found a
-      text channel wearing headphones. Study 5 composed the reader with the
-      listener, caught a fixture confound that forced a dated correction to
-      Study 3, and measured a chain that adds nothing of its own. Study 6
-      validated the production warning heuristic that correction produced,
-      at zero model spend. Study 7 re-measured the song check Stem Shovel
-      rebuilt in response to Study 4, and the deference failure is closed.
-      Study 8 ran the loophole test on the last unmeasured feature and
-      recorded the program's first genuine listening result: they hear
-      texture, not form. Study 6b closed the program's longest loop:
-      the production agent registered its own validation of the rule it
-      shipped, and the bench ran it unmodified to a perfect sheet. And
-      Study 9 answered the app's own stem-aware question with zero-cost
-      instruments, and Study 10 gave the shipped detector its neural
-      rematch on both home fields: the classical code held its ground,
-      and the one reversal corrected Study 9's own suggestion. Study 11
-      then retired the detector's octave error class by representation,
-      with a tempo ladder that accepted zero genuinely wrong values in
-      255 rows, Study 11b validated the shipped ladder itself, and
-      Study 11c closed the thread: the patched gate validated, and the
-      bench's own proposed rule was retired on the record by the defeat
-      it registered in advance. Study 12 closed the arc itself,
-      taking the model's last hearing job with chart-render alignment
-      that places boundaries to the hundredth of a second. And Study 13
-      met real audio: the chord path fell to 38 percent off its synthetic
-      96, and a text-only reconciler pass won back 16 points without
-      breaking a bar. 3,499 scored cells across seven models so far.
-      Hypotheses, corpora, and graders are committed before any scored
-      run; results are published as found, gate letters and corrections
-      included.
+      Language models are excellent readers and unreliable listeners: given
+      the notes, a chart, or a page they are near-perfect, given audio alone
+      they repeat whatever text rides beside it, so every hearing job went to
+      code or data and the models kept the reading jobs. Every study and
+      article in the series is linked below.
     </p>
   </header>
 
   <!-- results dashboard -->
   <div class="text-16px leading-[1.55] text-white pb-6">
     <header>
+      <p class={eyebrowCls}>{@html stem.header.eyebrow}</p>
+      <h2
+        class="text-[1.55rem] font-600 tracking-[-0.015em] leading-[1.3] mb-2"
+      >
+        {@html stem.header.lede}
+      </h2>
+      {#each stem.header.intro as chunk (chunk.heading)}
+        <h3 class="text-[1.05rem] font-600 tracking-[-0.01em] mt-6 mb-1.5">
+          {chunk.heading}
+        </h3>
+        <p class="text-16px {proseCls} mb-3">{@html chunk.html}</p>
+      {/each}
       <h3
         class="text-[1.05rem] font-600 tracking-[-0.01em] mt-6 mb-1.5 pt-4 border-t border-white/14"
       >

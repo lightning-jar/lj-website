@@ -1,4 +1,26 @@
 {
+	"header": {
+		"eyebrow": "Stem Bench · pre-registered · corrected 2026-10-24 · studies 1 to 13",
+		"lede": "The models read; they do not hear. Every hearing job Stem Shovel gave a model went to code or data, and the one place a model now improves the audio pipeline is a reading job.",
+		"intro": [
+			{
+				"heading": "Reading Works",
+				"html": "Shown the notes, the chart or the page, the frontier tier is close to perfect. The shipped chart-draft configuration scores 99.8 percent per bar, and the production model reads engraved notation at 98.8 percent from a clean image and 99.3 percent from a clean PDF. It also ignores wrong hints: zero of 438 copied. Cheaper models do not hold that line, and Study&nbsp;2 found that a call shape that works for one model can silently break its sibling."
+			},
+			{
+				"heading": "Listening Does Not",
+				"html": "Given audio alone, the song check found the right tempo 2 times in 12, at full confidence, and echoed whatever numbers rode beside the audio. With the chart beside the mix it was perfect, because the value was the chart, not the hearing. Study&nbsp;8 recorded the program's first genuine listening result, and it was narrow: models hear texture change, not form."
+			},
+			{
+				"heading": "Code and Data Took the Hearing Jobs",
+				"html": "The summed tempo detector survived stems engineered to break it, the classical stack held its ground against published neural models, and a tempo ladder retired the octave error class by representation. Study&nbsp;12 took the last hearing job with no model at all: aligning a rendered chart against the recording placed mid-song section boundaries within about a tenth of a second on a real song."
+			},
+			{
+				"heading": "Real Audio Resets the Ceiling",
+				"html": "Study&nbsp;13 measured the chord path on a real recording: 38.2 percent, against 95.8 on the synthetic bench, so every synthetic number in this series is a ceiling, not an estimate. A text-only reconciler pass then fixed twelve bars and broke none, the first time in the series a model improved a hearing result, and it did so by reading the pipeline's outputs rather than listening."
+			}
+		]
+	},
 	"tiles": [
 		{
 			"num": "0/438",
