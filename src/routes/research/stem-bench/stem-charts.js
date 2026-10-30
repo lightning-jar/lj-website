@@ -861,7 +861,7 @@ export function initStemCharts() {
 				],
 				[
 					"the verdict, and the queue",
-					"$0 spend · 51 cells, no model calls · constant and edge rules registered as validated at this n with the margin stated; the LAST-SOUND ring-out refinement open",
+					"$0 spend · 50 cells, no model calls · constant and edge rules registered as validated at this n with the margin stated; the LAST-SOUND ring-out refinement open",
 					"Study 16 queued: the band's five stored chart texts through the production parser once the app's chart-idiom work lands · point of record corrected: the Peaceful Dreams eight-bar audit predates the band's revision, whose stored text now parses 152 bars clean",
 				],
 			],
