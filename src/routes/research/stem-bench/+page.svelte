@@ -6,6 +6,8 @@ import { onMount } from "svelte";
 // components
 import LinkButton from "#lib/components/LinkButton.svelte";
 
+import { interpolateResearchStats } from "#lib/utils/researchStats.js";
+
 import researchStats from "#lib/data/research-stats.json";
 
 // dashboard content and chart data
@@ -14,6 +16,10 @@ import stemStudies from "./stem-studies.json";
 
 // props
 let { data } = $props();
+
+// Counts in the provenance paragraph are {{stemBench.*}} tokens resolved
+// from research-stats.json, so they track each new study automatically.
+const provenance = interpolateResearchStats(stem.provenance);
 
 // Track-grouped study index (insertion order of first appearance).
 const tracks: { track: string; studies: typeof stemStudies.studies }[] = [];
@@ -116,7 +122,7 @@ const proseCls = "text-[#c3c9d4]";
         Methods &amp; Provenance
       </h3>
       <p class="text-16px {proseCls}">
-        {@html stem.provenance}
+        {@html provenance}
       </p>
     </header>
 

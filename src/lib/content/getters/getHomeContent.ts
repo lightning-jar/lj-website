@@ -1,26 +1,15 @@
+import { interpolateResearchStats } from "#lib/utils/researchStats.js";
+
 import home from "#lib/content/landing-pages/home.json";
-import researchStats from "#lib/data/research-stats.json";
 
-// Interpolate shared research stats so the home panel can never drift from
-// the research pages. Single source: src/lib/data/research-stats.json
-const substitutions: Record<string, string> = {
-	"{{researchStudies}}": researchStats.barkupBench.studiesSpelled,
-	"{{researchRuns}}": researchStats.totals.scoredRunsDisplay,
-	"{{researchModels}}": researchStats.barkupBench.modelsSpelled,
-};
-
-function interpolate(text: string): string {
-	return Object.entries(substitutions).reduce(
-		(acc, [token, value]) => acc.replaceAll(token, value),
-		text,
-	);
-}
-
+// Research numbers in the home topics are {{project.field}} tokens resolved
+// from research-stats.json, so the home panel can never drift from the
+// research pages.
 export const homeContent = {
 	...home,
 	topics: home.topics.map((topic) => ({
 		...topic,
-		text: topic.text.map(interpolate),
+		text: topic.text.map(interpolateResearchStats),
 	})),
 };
 
