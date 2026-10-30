@@ -117,8 +117,10 @@ const proseCls = "text-[#c3c9d4]";
       bench's own proposed rule was retired on the record by the defeat
       it registered in advance. Study 12 closed the arc itself,
       taking the model's last hearing job with chart-render alignment
-      that places boundaries to the hundredth of a second. 3,329 scored
-      cells across seven models so far.
+      that places boundaries to the hundredth of a second. And Study 13
+      met real audio: the chord path fell to 38 percent off its synthetic
+      96, and a text-only reconciler pass won back 16 points without
+      breaking a bar. 3,499 scored cells across seven models so far.
       Hypotheses, corpora, and graders are committed before any scored
       run; results are published as found, gate letters and corrections
       included.

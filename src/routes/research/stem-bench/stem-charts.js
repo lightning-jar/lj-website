@@ -749,6 +749,123 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 13: the home-field gap and the reconciler's climb ---
+	(() => {
+		const GROUPS = [
+			{
+				label: "synthetic bench",
+				rows: [{ name: "matcher at home", v: 95.8, color: "#8b93a3", note: "95.8%" }],
+				tip: "Basic Pitch + the v0.142 matcher on the synthetic bench: 95.8%, the Study 10 winner over the neural reader · the material its templates were born on",
+			},
+			{
+				label: "real recording (76 bars)",
+				rows: [
+					{ name: "matcher alone", v: 38.2, color: "#e66767", note: "29/76" },
+					{ name: "+ gemini reconciler", v: 47.4, color: "#c98500", note: "36/76" },
+					{ name: "+ fable reconciler", v: 53.9, color: "#199e70", note: "41/76" },
+				],
+				tip: "the real letter-lands recording: the matcher reads 29/76 (strict-first 20; the power-chord allowance did 9 bars of work) · one text-only reconciler pass lifts it to 36/76 (gemini, 7 fixes 0 breaks) and 41/76 (fable, 12 fixes 0 breaks across 27 changed bars) · the binding constraint is the transcription on real timbres",
+			},
+		];
+		const BAR = 14,
+			GAP = 4,
+			GPAD = 18,
+			T = 8,
+			B = 42,
+			L = 255,
+			R = 84,
+			W = 880;
+		let totalRows = 0;
+		for (const g0 of GROUPS) totalRows += g0.rows.length;
+		const H = T + totalRows * (BAR + GAP) + GROUPS.length * GPAD + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 50, 100]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+		}
+		byId("legend-s13").innerHTML =
+			'<span class="key"><span class="chip" style="background:#8b93a3"></span>synthetic home field</span>' +
+			'<span class="key"><span class="chip" style="background:#e66767"></span>the matcher on real audio</span>' +
+			'<span class="key"><span class="chip" style="background:#c98500"></span>reconciled by gemini-3.5-flash</span>' +
+			'<span class="key"><span class="chip" style="background:#199e70"></span>reconciled by claude-fable-5-1 (production)</span>' +
+			legendNote(
+				"bar-level chord accuracy · the home-field gap is near 60 points against a predicted 15 to 30, and both reconciler passes fixed bars without breaking a single right answer, passing the anti-agreement-trap gate at infinity · total spend about $0.60",
+			);
+		let marks = "";
+		let hits = "";
+		let y = T;
+		GROUPS.forEach((grp) => {
+			const top = y;
+			grp.rows.forEach((row) => {
+				g += `<text class="chart-tick" x="${L - 12}" y="${y + BAR - 3}" text-anchor="end">${row.name}</text>`;
+				const w = Math.max((row.v / 100) * iw, 2);
+				marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${row.color}" rx="3"/>`;
+				marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 3}">${row.note}</text>`;
+				y += BAR + GAP;
+			});
+			hits += `<rect x="${L}" y="${top}" width="${iw}" height="${y - top - GAP}" fill="transparent" data-tip="${esc(grp.label + "\n" + grp.tip)}"/>`;
+			y += GPAD;
+		});
+		const el = byId("fig-reconcile");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart of chord accuracy: the matcher scores 95.8 percent on the synthetic bench but 38.2 percent on a real recording; one reconciler pass lifts the real number to 47.4 percent with gemini and 53.9 percent with the production model, both with zero broken answers.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the cliff and the climb in one frame: the chord path that won every synthetic comparison falls to 38 percent on real audio, a text-only reconciler pass recovers 16 of those points without breaking a single correct bar, and the remaining gap belongs to the transcription, not the matcher or the model",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-reconcile",
+			["cell", "result", "the read"],
+			[
+				[
+					"arm 1: the chord path on real audio",
+					"38.2% on letter-lands (29/76; strict-first 20; the power-chord allowance 9 bars) · 27.9% exploratory · the <90% trigger fired",
+					"a near-60-point home-field gap against the predicted 15 to 30: Study 1's rich-harmonics gotcha, measured in production conditions; the transcription is the binding constraint",
+				],
+				[
+					"Amendment 1",
+					"all four pilot cells truncated at the 4000-token cap (narrate-then-JSON); cap to 16,000, re-run under the fence, truncated run kept",
+					"the Study 8 budget-conflation class, in the bench's own harness again · also disclosed: the production model ignores the temperature-0 deviation (gateway unsupported)",
+				],
+				[
+					"arm 2, S13-G2: claude-fable-5-1 (production)",
+					"29 → 41/76 (53.9%) · 12 fixes, 0 breaks, 27 changed bars · PASS at infinity",
+					"the double-fix gate, registered against Study 9's agreement trap, came back spotless",
+				],
+				[
+					"arm 2: gemini-3.5-flash",
+					"29 → 36/76 (47.4%) · 7 fixes, 0 breaks · PASS",
+					"on the exploratory song it burned the full 16k budget narrating 86 bars and never reached the JSON: the budget failure mode of that family (Studies 2 and 8), not the predicted over-editing",
+				],
+				[
+					"the exploratory song",
+					"fable +3 bars, 0 breaks",
+					"the same direction, under a transcription even weaker than letter-lands",
+				],
+				[
+					"ship guidance",
+					"a UI hedge on chord drafts now; the reconciler inside the chart-draft job (symbols in, symbols out; keep the detector's chord on a non-parse; cap output generously)",
+					"the honest ceiling: 54% reconciled is better, not good; the next investment is a stronger transcription on real timbres, not more model",
+				],
+				[
+					"the arc note, and the ledger",
+					"~$0.60 of the $3 fence · 170 cells",
+					"the program's first study in which an LLM improved a hearing pipeline, by never hearing anything: the twelve-study law applied rather than broken",
+				],
+			],
+		);
+	})();
+
 	// --- Study 12: the half-second precision league ---
 	(() => {
 		const ROWS = [
