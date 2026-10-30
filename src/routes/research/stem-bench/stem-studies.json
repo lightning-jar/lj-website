@@ -1115,6 +1115,10 @@
 			"published": "2026-10-30",
 			"related": [
 				{
+					"title": "Study 15: the ratio's margin measured thin, and the clause that restores it",
+					"href": "/research/stem-bench/15"
+				},
+				{
 					"title": "Study 14: the shipped aligner validated, the constant caught",
 					"href": "/research/stem-bench/14"
 				},
@@ -1259,7 +1263,7 @@
 						},
 						{
 							"heading": "The Constant Caught Before Release",
-							"html": "G2 is the study's reason to exist. The shipped same-piece constant, a tritone-probe ratio threshold of 3, was set from synthetic numbers where right charts score 24 to 49. On the real recordings, right charts score 2.04 and 2.53, both below 3, so samePiece returns false on the band's own correct charts, every placement gets hedged, and the song-check card would tell the band their chart does not seem to match their own recording. Amendment 1 measured what the registered pairs could not see, the real-domain wrong charts: 1.17 and 1.24. On real audio the control separates cleanly, wrongs at or below 1.24 and rights at or above 2.04, just not at 3. The recommendation went back at about 1.6, the real-domain midpoint, with the caveats owned in the report: two pairs per class, one band, and a 1.6-times margin where Study 12 had an order of magnitude. The home-field lesson's third appearance, and this time caught before a release instead of after one."
+							"html": "G2 is the study's reason to exist. The shipped same-piece constant, a tritone-probe ratio threshold of 3, was set from synthetic numbers where right charts score 24 to 49. On the real recordings, right charts score 2.04 and 2.53, both below 3, so samePiece returns false on the band's own correct charts, every placement gets hedged, and the song-check card would tell the band their chart does not seem to match their own recording. Amendment 1 measured what the registered pairs could not see, the real-domain wrong charts: 1.17 and 1.24. On real audio the control separates cleanly, wrongs at or below 1.24 and rights at or above 2.04, just not at 3. The recommendation went back at about 1.6, the real-domain midpoint, with the caveats owned in the report: two pairs per class, one band, and a 1.6-times margin where Study 12 had an order of magnitude. The home-field lesson's third appearance, and this time caught before a release instead of after one. Study 15 has since run the shipped constant at three right charts and six wrong pairs: it survives, by two hundredths, and the local-cost clause flagged here as the second check is what restores the margin."
 						},
 						{
 							"heading": "The Reconciler Needs Nothing, and the Edges Are Measured",
@@ -1274,6 +1278,10 @@
 			],
 			"published": "2026-10-30",
 			"related": [
+				{
+					"title": "Study 15: the patch registered at a larger n, the margin stated",
+					"href": "/research/stem-bench/15"
+				},
 				{
 					"title": "Study 12: the alignment this study validates",
 					"href": "/research/stem-bench/12"
@@ -1297,6 +1305,78 @@
 			],
 			"brief": "docs/BRIEF-STUDY14.md",
 			"quote": "The constant that would have told the band their own chart does not match was set on synthetic numbers production never sees. Caught before release, fixed in production within hours, and written into the app's own rules: a constant gating real recordings is provisional until measured on real recordings."
+		},
+		{
+			"slug": "15",
+			"letters": "15",
+			"track": "Listening",
+			"title": "The patch registered at a larger n, the ratio's margin collapses to two hundredths, and the local-cost clause restores it",
+			"eyebrow": "Study 15 · listening, the registration · 51 zero-spend cells",
+			"indexLine": "The Study 14 response's remaining asks, run the day the band revised the Peaceful Dreams chart to machine-true form: all ten sections grid-match its declared starts, the first fully machine-true chart in the catalog, qualifying it as the second gated song. The 1.6 constant survives its first expansion of n by two hundredths, with the two new wrong pairings landing at 1.57 and 1.58, and the deliverable lands beside it: a second same-piece clause stated by number, median local cost at or below 0.30, whose real-domain bands do not touch. The headline is the complementarity: the ratio's two near-misses carry local-cost medians of 0.365 and 0.400, caught comfortably, so the clauses fail in different directions and AND-ing them restores the margin the ratio lost.",
+			"sections": [
+				{
+					"id": "sec-stem-study15",
+					"eyebrow": "Listening, the registration",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s15",
+					"figure": {
+						"id": "fig-complement",
+						"title": "The Two-Clause Complementarity: Ratio Against Median Local Cost on Real Audio"
+					},
+					"table": {
+						"id": "tbl-complement",
+						"summary": "All three gates, the near-misses, the edge-rule anatomy, lesson seven, and the queue"
+					},
+					"body": [
+						{
+							"heading": "The Second Gated Song, and the Registration",
+							"html": "The two remaining asks from Stem Shovel's Study 14 response, run the day the band revised the Peaceful Dreams chart to machine-true form: all ten sections grid-match its declared starts exactly, the first fully machine-true chart in the catalog, which qualifies it as the second gated song. The port is verbatim at the app's bc683871 (v0.201.2: the bench-recommended 1.6 constant, audibleSpan, and the FIRST-ONSET and LAST-SOUND edge rules), with the parsers reused from the Study 14 pins. The corpus: three real songs with two gated, six real wrong cross-pairs (every recording against every other song's chart), and the six synthetic probe pairs for context. Zero spend."
+						},
+						{
+							"heading": "The Constant Survives by Two Hundredths",
+							"html": "G1 passed, barely. The three right-chart ratios land at 2.04, 3.21 and 2.53, and all six wrong cross-pairs stay below 1.6, but the two new pairings involving Peaceful Dreams land at 1.57 and 1.58, a margin of two hundredths. The constant survives its first expansion of n and is officially thin: same-key, same-tonality wrong pairings close most of the gap the Study 14 pairs showed."
+						},
+						{
+							"heading": "The Deliverable: the Second Clause, Stated by Number",
+							"html": "G3 passed clean, and it is the study's deliverable: the second same-piece clause the app asked for, stated by number exactly as the 1.6 was derived. The real-domain median per-bar local costs separate completely, right charts at 0.172 to 0.243 against wrong charts at 0.365 to 0.482, so the recommended clause is median local cost at or below 0.30, AND-ed with the ratio. The complementarity is the headline: the ratio's two 0.02-margin near-misses carry medians of 0.365 and 0.400, comfortably caught, so the two clauses fail in different directions and together restore the margin the ratio lost. Disclosed per the home-field rule: three synthetic wrong pairs would pass both clauses, in a domain production never sees."
+						},
+						{
+							"heading": "The Gate That Failed by Its Own Letter",
+							"html": "G2 failed, and the anatomy splits three ways. First, the edge rules work where they were aimed: letter-lands' intro miss of 3.61 seconds goes to 0.00 and its outro miss of 9.11 to 0.08, and peaceful's intro lands at 0.00. Second, peaceful's outro lands 3.33 seconds late against the 1.0-second gate: a 20-bar single-chord decay rings out above audibleSpan's 2 percent floor, inflating the LAST-SOUND anchor, a real and bounded residual left open with the app as one more refinement. Third, the bench mis-drafted its own interior clause, writing a no-regression intent as an absolute ceiling that letter-lands' pre-existing stragglers never met in any prior study; the data shows zero interior regressions against Study 14's values, and the gate fails by the letter the bench wrote. Registration lesson seven: a no-regression clause must name its baseline, not restate a hope."
+						},
+						{
+							"heading": "Verdict, Scorecard, and the Queue",
+							"html": "The scorecard: 1 right, including eat-all-the-clocks near 2.5; 2 half, with both intros and letter's outro repaired exactly as traced while peaceful's ring-out residual and the mis-drafted clause went unpredicted; 3 right in full, including the margin claim. The verdict delivered: v0.201.2's constant and edge rules are registered as validated at n of 3 right and 6 wrong with the margin stated; the local-cost clause is no longer optional belt and braces, it is what restores the same-piece check's margin; and the LAST-SOUND refinement for long ring-outs stays open. Study 16 is queued by the app's chart-idiom response: re-running on the band's five stored chart texts through the production parser once that work lands, with one point of record corrected on the way, since their Peaceful Dreams eight-bar audit predates the band's revision, whose stored text now parses 152 bars clean."
+						}
+					]
+				}
+			],
+			"published": "2026-10-30",
+			"related": [
+				{
+					"title": "Study 14: the asks this study closes, and where the 1.6 came from",
+					"href": "/research/stem-bench/14"
+				},
+				{
+					"title": "Study 12: where the alignment and the ratio began",
+					"href": "/research/stem-bench/12"
+				},
+				{
+					"title": "Study 13: the reconciler thread beside this one",
+					"href": "/research/stem-bench/13"
+				},
+				{
+					"title": "Stem Shovel, the product under test, and this study's requester",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY15.md",
+			"quote": "The constant survived its first expansion by two hundredths, and the clause that rescues it fails the other way: the ratio's near-misses carry local costs a third above the line. Each check is thin alone; AND-ed, the margin comes back."
 		}
 	]
 }

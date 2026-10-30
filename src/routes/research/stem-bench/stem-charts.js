@@ -749,6 +749,125 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 15: the two-clause complementarity on real audio ---
+	(() => {
+		const XMIN = 1.0,
+			XMAX = 3.4,
+			YMAX = 0.55;
+		const POINTS = [
+			{ x: 2.04, y: 0.243, color: "#199e70", label: "letter-lands", tip: "letter-lands, right chart on its own recording · ratio 2.04, median local cost 0.243 · passes both clauses" },
+			{ x: 3.21, y: 0.172, color: "#199e70", label: "peaceful-dreams", tip: "peaceful-dreams, the band's machine-true revision on its own recording · ratio 3.21, median local cost 0.172 · the strongest point in the real set, and the song that qualified as the second gated chart" },
+			{ x: 2.53, y: 0.224, color: "#199e70", label: "eat-all-the-clocks", tip: "eat-all-the-clocks, right chart on its own recording · ratio 2.53, median local cost 0.224 · lands near the 2.5 the bench predicted" },
+			{ x: 1.13, y: 0.47, color: "#e66767", tip: "letter-lands recording against the peaceful-dreams chart · ratio 1.13, median local cost 0.470 · fails both clauses" },
+			{ x: 1.17, y: 0.482, color: "#e66767", tip: "letter-lands recording against the eat-all-the-clocks chart · ratio 1.17, median local cost 0.482 · fails both clauses" },
+			{ x: 1.15, y: 0.456, color: "#e66767", tip: "peaceful-dreams recording against the letter-lands chart · ratio 1.15, median local cost 0.456 · fails both clauses" },
+			{ x: 1.58, y: 0.365, color: "#e66767", near: true, tip: "peaceful-dreams recording against the eat-all-the-clocks chart · ratio 1.58, two hundredths under the 1.6 constant · its median local cost of 0.365 sits well above the 0.30 line, so the second clause catches it comfortably" },
+			{ x: 1.24, y: 0.417, color: "#e66767", tip: "eat-all-the-clocks recording against the letter-lands chart · ratio 1.24, median local cost 0.417 · fails both clauses" },
+			{ x: 1.57, y: 0.4, color: "#e66767", near: true, tip: "eat-all-the-clocks recording against the peaceful-dreams chart · ratio 1.57, three hundredths under the 1.6 constant · its median local cost of 0.400 sits well above the 0.30 line, so the second clause catches it comfortably" },
+		];
+		byId("legend-s15").innerHTML =
+			'<span class="key"><span class="chip" style="background:#199e70"></span>right chart on its own recording (3)</span>' +
+			'<span class="key"><span class="chip" style="background:#e66767"></span>wrong cross-pair (6)</span>' +
+			'<span class="key"><span class="chip" style="background:#8b93a3"></span>the two clauses: ratio at 1.6, median local cost at 0.30</span>' +
+			legendNote(
+				"every real pair in the study, placed by both same-piece checks at once · a right chart must land right of the ratio line AND below the local-cost line · the two wrong pairs that come within hundredths of the ratio carry medians a third above the cost line, so the clauses fail in different directions and AND-ing them restores the margin · zero spend, no model calls",
+			);
+		const W = 880,
+			T = 18,
+			B = 46,
+			L = 70,
+			R = 24,
+			H = 380;
+		const iw = W - L - R;
+		const ih = H - T - B;
+		const xOf = (v) => L + ((v - XMIN) / (XMAX - XMIN)) * iw;
+		const yOf = (v) => T + (1 - v / YMAX) * ih;
+		let g = "";
+		for (const tick of [1.0, 1.5, 2.0, 2.5, 3.0]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick.toFixed(1)}</text>`;
+		}
+		for (const tick of [0.1, 0.2, 0.3, 0.4, 0.5]) {
+			const y = yOf(tick);
+			g += `<line x1="${L}" x2="${L + iw}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${L - 10}" y="${y + 4}" text-anchor="end">${tick.toFixed(1)}</text>`;
+		}
+		g += `<text class="chart-tick" x="${L + iw / 2}" y="${H - 6}" text-anchor="middle">tritone-probe path-cost ratio (higher is more same-piece)</text>`;
+		g += `<text class="chart-tick" x="14" y="${T + ih / 2}" text-anchor="middle" transform="rotate(-90 14 ${T + ih / 2})">median local cost (lower is better)</text>`;
+		// the pass region: right of the ratio clause AND below the cost clause
+		g += `<rect x="${xOf(1.6)}" y="${yOf(0.3)}" width="${L + iw - xOf(1.6)}" height="${H - B - yOf(0.3)}" fill="rgba(25,158,112,0.07)"/>`;
+		const rx = xOf(1.6);
+		g += `<line x1="${rx}" x2="${rx}" y1="${T}" y2="${H - B}" stroke="#8b93a3" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+		g += `<text fill="#8b93a3" font-size="11" x="${rx + 6}" y="${T + 12}" text-anchor="start">ratio 1.6</text>`;
+		const cy30 = yOf(0.3);
+		g += `<line x1="${L}" x2="${L + iw}" y1="${cy30}" y2="${cy30}" stroke="#8b93a3" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+		g += `<text fill="#8b93a3" font-size="11" x="${L + iw - 4}" y="${cy30 - 7}" text-anchor="end">median 0.30</text>`;
+		g += `<text fill="#199e70" font-size="11" x="${L + iw - 4}" y="${H - B - 10}" text-anchor="end">both clauses pass here</text>`;
+		let marks = "";
+		let hits = "";
+		POINTS.forEach((p) => {
+			const cx = xOf(p.x);
+			const cy = yOf(p.y);
+			marks += `<circle cx="${cx}" cy="${cy}" r="7" fill="${p.color}"/>`;
+			if (p.label)
+				marks += `<text fill="#c3c9d4" font-size="11" x="${cx}" y="${cy - 12}" text-anchor="middle">${p.label}</text>`;
+			if (p.near)
+				marks += `<text fill="#c3c9d4" font-size="11" x="${cx - 12}" y="${cy + 4}" text-anchor="end">${p.x.toFixed(2)} · ${p.y.toFixed(3)}</text>`;
+			hits += `<circle cx="${cx}" cy="${cy}" r="16" fill="transparent" data-tip="${esc(p.tip)}"/>`;
+		});
+		const el = byId("fig-complement");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Scatter plot of all nine real pairs by tritone ratio and median local cost: three right charts sit right of the 1.6 ratio line and below the 0.30 cost line, six wrong cross-pairs sit left and above, and the two near-miss pairs at ratios 1.57 and 1.58 carry medians of 0.400 and 0.365, well above the cost line.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the complementarity at a glance: the three right charts land alone in the quadrant where both clauses pass, and the two wrong pairs that come within hundredths of the ratio line sit a third above the local-cost line, so each clause catches exactly the cases the other nearly misses",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-complement",
+			["cell", "result", "the read"],
+			[
+				[
+					"G1: the 1.6 constant at n = 3 right / 6 wrong",
+					"right charts 2.04 / 3.21 / 2.53; all six wrong cross-pairs under 1.6, the two Peaceful-vs-Eat pairings at 1.57 and 1.58 · PASS by two hundredths",
+					"the constant survives its first expansion of n and is officially thin: same-key, same-tonality wrong pairings close most of the gap",
+				],
+				[
+					"G3: the local-cost clause, stated by number",
+					"right-real medians 0.172 to 0.243 vs wrong-real 0.365 to 0.482 · the clause: median local cost at or below 0.30 · PASS clean",
+					"the deliverable: the ratio's two near-misses carry medians of 0.365 and 0.400, so the clauses fail in different directions and AND-ing them restores the margin · disclosed: three synthetic wrong pairs would pass both, in a domain production never sees",
+				],
+				[
+					"G2: the edge rules",
+					"letter-lands intro 3.61 to 0.00 s, outro 9.11 to 0.08 s; peaceful's intro to 0.00 · peaceful's outro +3.33 s against the 1.0 s gate · FAIL by letter",
+					"the rules work where aimed; a 20-bar single-chord decay rings out above audibleSpan's 2 percent floor (a bounded refinement left open with the app); and the interior clause was mis-drafted as an absolute ceiling, with zero actual regressions against Study 14's values",
+				],
+				[
+					"registration lesson seven",
+					"the interior clause asserted a 0.5 s ceiling that letter-lands' pre-existing stragglers never met in any prior study",
+					"a no-regression clause must name its baseline, not restate a hope: the gate failed by the letter the bench wrote",
+				],
+				[
+					"the scorecard",
+					"1 right (including eat near 2.5) · 2 half (the repairs traced exactly; the ring-out and the mis-draft were not) · 3 right in full, including the margin claim",
+					"the local statistic's band gap now beats the ratio's, which is what makes the second clause load-bearing rather than belt and braces",
+				],
+				[
+					"the verdict, and the queue",
+					"$0 spend · 51 cells, no model calls · constant and edge rules registered as validated at this n with the margin stated; the LAST-SOUND ring-out refinement open",
+					"Study 16 queued: the band's five stored chart texts through the production parser once the app's chart-idiom work lands · point of record corrected: the Peaceful Dreams eight-bar audit predates the band's revision, whose stored text now parses 152 bars clean",
+				],
+			],
+		);
+	})();
+
 	// --- Study 14: the same-piece ratios against both thresholds ---
 	(() => {
 		const MIN = 1.0,
