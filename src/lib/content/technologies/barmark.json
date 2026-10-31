@@ -12,6 +12,10 @@
 	"link": {
 		"href": "https://github.com/kevinpeckham/barmark"
 	},
+	"relatedArticle": {
+		"href": "/blog/introducing-barmark",
+		"title": "Barmark: Chord Charts Bands and Machines Can Both Read"
+	},
 	"useCases": [
 		"Writing chord charts in plain text that software can read without guessing",
 		"Parsing charts into bars, sections and chords for playback, alignment or analysis",

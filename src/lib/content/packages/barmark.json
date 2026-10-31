@@ -13,7 +13,10 @@
 	],
 	"install": "bun add barmark @barmark/render",
 	"links": [
-		{ "label": "GitHub", "href": "https://github.com/kevinpeckham/barmark" },
+		{
+			"label": "GitHub",
+			"href": "https://github.com/kevinpeckham/barmark"
+		},
 		{
 			"label": "npm: barmark",
 			"href": "https://www.npmjs.com/package/barmark"
@@ -29,6 +32,12 @@
 		"A canonical printer that changes spelling and layout only, never meaning",
 		"Harte chord labels in both directions, checked against the McGill Billboard and Isophonics Beatles datasets",
 		"@barmark/render: HTML with Declarative Shadow DOM, or the <barmark-chart> web component, with light and dark themes and screen-reader support"
+	],
+	"relatedArticles": [
+		{
+			"title": "Barmark: Chord Charts Bands and Machines Can Both Read",
+			"href": "/blog/introducing-barmark"
+		}
 	],
 	"techId": "barmark"
 }
