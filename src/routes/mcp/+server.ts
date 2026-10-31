@@ -149,7 +149,7 @@ function handlerFor(fetch: Fetch) {
 				"list_packages",
 				{
 					description:
-						"List Lightning Jar's open-source packages and tools (barkup, barkdown, woof-editor, …): name, npm package, status, tagline, links, url.",
+						"List Lightning Jar's open-source packages and tools (barkup, barkdown, woof-editor, barmark, …): name, npm package, status, tagline, links, url.",
 					inputSchema: z.object({}),
 				},
 				() => text(listPackages()),

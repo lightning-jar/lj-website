@@ -12,9 +12,10 @@ export const ABOUT_LIGHTNING_JAR = {
 		"https://github.com/kevinpeckham/barkup-bench",
 		"https://github.com/kevinpeckham/barkdown",
 		"https://github.com/kevinpeckham/aeo-bench",
+		"https://github.com/kevinpeckham/barmark",
 	],
 	summary:
-		"Design, build, and brand technology studio. Websites, web applications, and custom software for businesses and civic clients; open LLM research (Barkup Bench, AEO Bench) and open-source libraries (barkup, barkdown, woof-editor); AI-era marketing technology including Replicator, an LLM-powered brand operating system.",
+		"Design, build, and brand technology studio. Websites, web applications, and custom software for businesses and civic clients; open LLM research (Barkup Bench, AEO Bench) and open-source libraries (barkup, barkdown, woof-editor, barmark); AI-era marketing technology including Replicator, an LLM-powered brand operating system.",
 	surfaces: {
 		blog: `${SITE_BASE}/blog`,
 		customerStories: `${SITE_BASE}/customer-stories`,

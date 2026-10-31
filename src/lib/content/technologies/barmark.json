@@ -1,0 +1,21 @@
+{
+	"id": "barmark",
+	"packagePage": "/packages/barmark",
+	"name": "barmark",
+	"shortDescription": "Our open-source plain-text notation for chord charts: the bar grid musicians already write, specified precisely enough for machines to parse and render.",
+	"description": [
+		"barmark is a Markdown-inspired notation for chord charts. It takes the bar-grid convention musicians already write in plain text (\"| D | A | Bm | G |\") and specifies it precisely: what an empty cell means, how far \"x 2\" reaches, how repeats, sections, key, meter and tempo are written. A barmark file is a markdown file (.chart.md), so it reads well anywhere markdown does.",
+		"It ships as two packages. barmark itself is the parser, canonical printer and Harte-label converter, with no runtime dependencies. @barmark/render renders a chart as an accessible, evenly spaced bar grid, as static HTML or as a web component. We extracted it from Stem Shovel's chart parser and validated its rules in our stem-bench research. The code is MIT licensed; the grammar is a v0.1 draft."
+	],
+	"license": "Open Source (MIT)",
+	"category": "Chord Chart Notation & Parser",
+	"link": {
+		"href": "https://github.com/kevinpeckham/barmark"
+	},
+	"useCases": [
+		"Writing chord charts in plain text that software can read without guessing",
+		"Parsing charts into bars, sections and chords for playback, alignment or analysis",
+		"Rendering clean, accessible chord-chart grids on web pages with or without JavaScript"
+	],
+	"supercategory": "content-management-pim"
+}

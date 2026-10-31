@@ -19,7 +19,7 @@ async function loadAllPackagesJson() {
 export const packagesLandingMeta = {
 	title: "Packages & Tools | Lightning Jar",
 	description:
-		"Open-source packages and tools from the Lightning Jar studio: barkup, barkdown, woof-editor, and more to come. Built for production, published for everyone.",
+		"Open-source packages and tools from the Lightning Jar studio: barkup, barkdown, woof-editor, barmark, and more to come. Built for production, published for everyone.",
 };
 
 // export all packages (alphabetical by name)
