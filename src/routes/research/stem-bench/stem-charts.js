@@ -1195,7 +1195,7 @@ export function initStemCharts() {
 				[
 					"the arc, and the ledger",
 					"$0 · 583 cells · every hearing task measured across twelve stem studies now has a code-or-data answer that beats or matches the model",
-					"the bench's own registration, approved from the candidates memo; the MMKK transcriptions committed before any alignment ran",
+					"the bench's own registration, approved from the candidates memo; the Badverbs transcriptions committed before any alignment ran",
 				],
 			],
 		);
