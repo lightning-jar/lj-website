@@ -1,6 +1,7 @@
 <script lang="ts">
 import { page } from "$app/state";
 
+import { formatCalendarDate } from "#lib/utils/formatCalendarDate.js";
 // utils
 import {
 	parseMarkdownTextToHtml,
@@ -102,11 +103,7 @@ let title = $derived(
 	typeof fm.title === "string" && fm.title ? fm.title : (article?.title ?? ""),
 );
 let image = $derived(safeLinkUrl(fm.image));
-let formattedDate = $derived(
-	typeof fm.date === "string" && fm.date
-		? new Date(fm.date).toLocaleDateString()
-		: "",
-);
+let formattedDate = $derived(formatCalendarDate(fm.date));
 
 function getAttributionFromSource(source: ArticleSource): string {
 	const array: string[] = [];
@@ -117,7 +114,7 @@ function getAttributionFromSource(source: ArticleSource): string {
 		array.push(source.author);
 	}
 	if (source?.date) {
-		const sourceDate = new Date(source.date)?.toLocaleDateString() || "";
+		const sourceDate = formatCalendarDate(source.date);
 		if (sourceDate) array.push(sourceDate);
 	}
 	return array.join(", ");

@@ -3,14 +3,13 @@ import { page } from "$app/state";
 
 import { addIntegration } from "@sentry/sveltekit";
 
+import { formatCalendarDate } from "#lib/utils/formatCalendarDate.js";
 import { jsonLdScript, LJ_PUBLISHER } from "#lib/utils/jsonLd.js";
 import { safeLinkUrl } from "#lib/utils/safeLinkUrl.js";
 
 let { data } = $props();
 
-let formattedDate = $derived(
-	data.meta?.date ? new Date(data?.meta.date).toLocaleDateString() : "",
-);
+let formattedDate = $derived(formatCalendarDate(data.meta?.date));
 
 let image = $derived(safeLinkUrl(data.image));
 
@@ -53,7 +52,7 @@ function getAttributionFromSource(source: ArticleSource): string {
 		array.push(source.author);
 	}
 	if (source?.date) {
-		const formattedDate = new Date(source.date)?.toLocaleDateString() || "";
+		const formattedDate = formatCalendarDate(source.date);
 		if (formattedDate) array.push(formattedDate);
 	}
 	return array.join(", ");
