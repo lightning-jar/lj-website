@@ -30,7 +30,7 @@ export interface CustomerStory {
 	notice?: {
 		label?: string;
 		text: string;
-		link: { href: string; text: string };
+		link?: { href: string; text: string };
 	};
 	date?: string;
 	tags?: string[];

@@ -88,12 +88,14 @@ let storyLd = $derived.by(() => {
       {/if}
       <p class="max-w-prose">
         {data.notice.text}
-        <a
-          href={data.notice.link.href}
-          class="text-maximumYellow underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4"
-        >
-          {data.notice.link.text}
-        </a>
+        {#if data.notice.link}
+          <a
+            href={data.notice.link.href}
+            class="text-maximumYellow underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4"
+          >
+            {data.notice.link.text}
+          </a>
+        {/if}
       </p>
     </aside>
   {/if}
