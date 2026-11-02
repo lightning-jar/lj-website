@@ -2228,6 +2228,82 @@
 			],
 			"brief": "BRIEF-AV.md",
 			"quote": "AU measured that the judges disagree; AV measured what the disagreement costs: a median 0.014 of structure, for a thousandfold cheaper stage that builds 41 percent fewer widgets. The default flips."
+		},
+		{
+			"slug": "aw",
+			"letters": "AW",
+			"track": "Whole-system baselines",
+			"title": "Does Turso enforce foreign keys? The two database kinds are opposites, and one mechanism explains both apps",
+			"eyebrow": "Study AW · Turso foreign-key enforcement · 148 matrix cells + 48 first-connection probes, zero model calls",
+			"indexLine": "Two production apps built real engineering on opposite answers to the same question: Stem Shovel shipped 441 lines of hand-written cascades because its onDelete rules never fired, while Replicator's 159 FK actions depend on cascades passing with no pragma set. Study AW, the series' first database-behavior study (zero model calls, $0 spend), measured both claims on throwaway sandbox databases and passed all three gates: the three FK behaviors cohere in all 148 cells, the pragma reading predicted behavior in every steady-state cell, and nothing flapped. The finding: Turso's two database kinds behave oppositely. The classic libsql kind always enforces, and PRAGMA foreign_keys = OFF does not stick, even in a transaction; the engine (TursoDB) kind does not enforce by default, on the first and every later connection, but ON persists at the database level once set through any connection. Replicator's 'cascades pass with no pragma' was its own probe's footprint; Stem Shovel's 'onDelete never fired' is the engine default. Predictions scored honestly: 1 of 3, with the bench naming the wrong winner.",
+			"sections": [
+				{
+					"id": "sec-aw",
+					"eyebrow": "Whole-system baselines",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-39",
+					"figure": {
+						"id": "fig-aw",
+						"title": "Foreign-Key Enforcement by Database Kind and Pragma Arm, 148 Cells and 48 First-Connection Probes"
+					},
+					"table": {
+						"id": "tbl-aw",
+						"summary": "Defaults, first-connection behavior, pragma persistence, the drizzle arm, gates, and the exposure per kind"
+					},
+					"body": [
+						{
+							"heading": "Two Apps, Opposite Answers",
+							"html": "Stem Shovel measured in September that Turso runs with PRAGMA foreign_keys = 0 and the schema's onDelete rules never fire, and shipped 441 lines of hand-written cascades plus an orphan sweep. Replicator measured in October that cascade, set null and violation rejection all pass with no pragma set anywhere, and 159 FK actions in production depend on that. At least one had to be wrong, or they measured different things. A verified inconsistency sharpened the design before registration: Replicator's own probe script runs PRAGMA foreign_keys = ON before testing the cascade, while its verdict note says the cascade fired with no pragma set. So pragma state entered the matrix as a measured axis, never an assumption. Study AW, registered at b718e0b from the two-app handoff, is the series' first database-behavior study: no LLM anywhere in it, $0 of model spend."
+						},
+						{
+							"heading": "A Self-Proving Instrument on Throwaway Databases",
+							"html": "The instrument is one connection-shaped probe that reads PRAGMA foreign_keys first, then measures three behaviors on its own prefixed throwaway tables: ON DELETE cascade, ON DELETE set null, and violating-insert rejection. Before it touched anything remote, its tests proved it detects both states on a local file database, under both client versions the apps pin (0.17.4 and 0.18.0). The matrix crossed database kind, client version, four connection usages and three pragma arms at 3 repetitions, plus a drizzle arm wired exactly as both apps wire it; 48 first-connection probes on 12 fresh databases separated cold-start claims from steady state. Two harness fixes landed before any data: regional hostnames, and the discovery that the platform API cannot create engine-kind databases at all, only the CLI's --tursodb flag can. Every database was created by the runner, named aw-fk-*, and destroyed at the end; zero errors across the run."
+						},
+						{
+							"heading": "All Three Gates Pass",
+							"html": "AW-G1, coherence: in all 148 cells the three behaviors move together, all enforced or none. AW-G2, prediction: in every steady-state cell the PRAGMA foreign_keys reading predicted the observed behavior exactly. AW-G3, determinism: no cell flapped across repetitions. The pragma never lies; the apps' assumptions about it did."
+						},
+						{
+							"heading": "The Kinds Are Opposites",
+							"html": "On the classic libsql kind, foreign_keys reads 1 and enforces on every connection, every usage, both clients, and PRAGMA foreign_keys = OFF does not stick: it reads back 1 and still enforces, even inside an interactive transaction. Enforcement is on and effectively immutable. On the engine (TursoDB/MVCC) kind, foreign_keys reads 0 and does not enforce: no cascade, no set null, violating inserts accepted. All 24 first-connection probes on 6 fresh engine databases read 0 and meant it, on connection one and on every later connection, so the claimed cold-start artifact does not exist. But PRAGMA foreign_keys = ON sticks at the database level: set through one connection, it read 1 and enforced through every subsequent fresh connection, both clients, including the fresh-client-per-statement usage where the pragma and the probe never share a connection. Durability across engine restarts and long idle is the one unmeasured question."
+						},
+						{
+							"heading": "One Mechanism Explains Both Apps",
+							"html": "Replicator's verdict probe ran PRAGMA foreign_keys = ON before testing the cascade, and on an engine database that ON persisted: the six subsequent fresh connections reading 1 were the probe's own footprint, and the verdict note misdescribes evidence produced with the pragma set. Stem Shovel's September observation, pragma 0 and onDelete rules never firing, is exactly the engine kind's default behavior; its hand-written cascades are load-bearing on an engine database and redundant on a classic one. The exposure is Replicator's: it has run engine databases in production since 2026-10-24 with 159 FK actions and no pragma anywhere in the app, so per this study those actions are unenforced unless some probe already flipped each database's persistent setting. The hand-off carries the one-line check per environment and the remediation options, led by setting the pragma at client construction, which is cheap and correct on both kinds."
+						},
+						{
+							"heading": "Predictions Scored Honestly: 1 of 3",
+							"html": "P1 is refuted: enforcement is not on by default on the engine kind, so the bench predicted the wrong winner and says so. P2 is refuted: the engine's first connection reads 0 AND does not enforce, so the cold-start reporting artifact the prediction banked on does not exist. P3 is half right: a pragma set in a prior separate execute does carry over, the stateless-HTTP worry was wrong, and on the engine it sticks database-wide, which is stronger than predicted. P4 stands as the disclosed limit: September's database kind was never recorded, so the verdict is about the stack as it stands, never about what Stem Shovel's database did then. A side finding rides along for the release notes: the platform API has no engine parameter, so which kind an app gets is decided at creation by tooling, and the kind is a fact worth recording."
+						}
+					]
+				}
+			],
+			"published": "2026-11-02",
+			"related": [
+				{
+					"title": "Study AS: the whole-system baseline",
+					"href": "/research/barkup-bench/as"
+				},
+				{
+					"title": "Study AV: the previous production-system study",
+					"href": "/research/barkup-bench/av"
+				},
+				{
+					"title": "Stem Bench, the Stem Shovel research series",
+					"href": "/research/stem-bench"
+				},
+				{
+					"title": "Replicator, the product under test",
+					"href": "https://replicator.lj.dev"
+				},
+				{
+					"title": "barkup-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/barkup-bench"
+				}
+			],
+			"brief": "BRIEF-AW.md",
+			"quote": "Classic libsql always enforces, and OFF does not stick. The engine enforces nothing until someone sets ON once, and then the database itself remembers. Both apps measured correctly; both apps concluded wrongly."
 		}
 	]
 }

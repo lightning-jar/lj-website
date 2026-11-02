@@ -8147,6 +8147,167 @@ export function initBenchCharts() {
 		);
 	})();
 
+	// --- Study AW: FK enforcement by database kind and pragma arm ---
+	(() => {
+		const CON = "#199e70",
+			COFF = "#e66767";
+		const COLS = [
+			"first connection",
+			"no pragma (steady)",
+			"OFF set first",
+			"ON set first",
+		];
+		const ROWS = [
+			{
+				label: "classic libsql kind",
+				cells: [
+					{
+						on: true,
+						tip: "24/24 probes on 6 fresh databases: pragma reads 1 on the very first connection and cascade, set null and rejection all fire",
+					},
+					{
+						on: true,
+						tip: "26/26 cells (four usages x both clients x 3 reps, plus the drizzle arm): pragma 1, enforced everywhere",
+					},
+					{
+						on: true,
+						tip: "24/24: OFF does not stick: it reads back 1 and still enforces, even inside an interactive transaction. Enforcement is effectively immutable",
+					},
+					{
+						on: true,
+						tip: "24/24: a no-op, enforcement was already on",
+					},
+				],
+			},
+			{
+				label: "engine (TursoDB) kind",
+				cells: [
+					{
+						on: false,
+						tip: "24/24 probes on 6 fresh databases: pragma reads 0 and MEANS it, on connection 1 and on connections 2 through 4. The claimed cold-start artifact does not exist",
+					},
+					{
+						on: false,
+						tip: "26/26 cells (including drizzle wired as the apps wire it): pragma 0, no cascade, no set null, violating inserts accepted",
+					},
+					{
+						on: false,
+						tip: "24/24: the default is already off, OFF changes nothing",
+					},
+					{
+						on: true,
+						tip: "24/24: ON sticks at the DATABASE level: set through one connection, every later fresh connection read 1 and enforced, both clients, including fresh-client-per-statement where the pragma and the probe never share a connection",
+					},
+				],
+			},
+		];
+		byId("legend-39").innerHTML =
+			'<span class="key"><span class="chip" style="background:' +
+			CON +
+			'"></span>foreign keys enforced (pragma reads 1)</span>' +
+			'<span class="key"><span class="chip" style="background:' +
+			COFF +
+			'"></span>not enforced (pragma reads 0)</span>' +
+			legendNote(
+				"148 matrix cells (kind x client 0.17.4/0.18.0 x four usages x three pragma arms x 3 reps, plus drizzle as the apps wire it) + 48 first-connection probes on 12 fresh throwaway databases · zero errors, zero model spend, every database destroyed · all three gates pass",
+			);
+		const W = 880,
+			L = 196,
+			T = 34,
+			CH = 58,
+			GAP = 10,
+			B = 10;
+		const iw = (W - L - 16) / COLS.length;
+		const H = T + ROWS.length * (CH + GAP) - GAP + B;
+		let g = "";
+		COLS.forEach((c, j) => {
+			g += `<text class="chart-tick" x="${L + j * iw + iw / 2}" y="${T - 14}" text-anchor="middle">${c}</text>`;
+		});
+		let marks = "";
+		let hits = "";
+		ROWS.forEach((row, i) => {
+			const y = T + i * (CH + GAP);
+			g += `<text class="chart-tick" x="${L - 14}" y="${y + CH / 2 + 4}" text-anchor="end">${row.label}</text>`;
+			row.cells.forEach((cell, j) => {
+				const x = L + j * iw;
+				const color = cell.on ? CON : COFF;
+				marks += `<rect x="${x + 3}" y="${y}" width="${iw - 6}" height="${CH}" fill="${color}" fill-opacity="0.16" stroke="${color}" stroke-width="1.5" rx="6"/>`;
+				marks += `<text fill="${color}" font-size="13" font-weight="600" x="${x + iw / 2}" y="${y + CH / 2 + 5}" text-anchor="middle">${cell.on ? "1 · enforced" : "0 · off"}</text>`;
+				hits += `<rect x="${x + 3}" y="${y}" width="${iw - 6}" height="${CH}" fill="transparent" data-tip="${esc(row.label + " · " + COLS[j] + "\n" + cell.tip)}"/>`;
+			});
+		});
+		const el = byId("fig-aw");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grid of foreign-key enforcement by database kind and pragma arm. The classic libsql kind reads pragma 1 and enforces in all four columns: first connection, steady state with no pragma, after OFF is set, which does not stick, and after ON. The engine TursoDB kind reads pragma 0 and does not enforce on the first connection, in steady state, and after OFF; only after ON is set does it read 1 and enforce, and that setting persists at the database level.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the two-app contradiction, dissolved: the classic kind enforces no matter what you set, and the engine kind enforces nothing until ON is set once through any connection, after which the database itself holds the setting; both apps measured correctly and both concluded wrongly",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-aw",
+			["cell", "classic libsql kind", "engine (TursoDB/MVCC) kind"],
+			[
+				[
+					"default, no pragma set",
+					"pragma 1 · enforced (26/26 cells)",
+					"pragma 0 · NOT enforced (26/26 cells): no cascade, no set null, violating inserts accepted",
+				],
+				[
+					"first connection on a fresh database",
+					"1 · enforced, 24/24 probes",
+					"0 · unenforced, 24/24 probes: the claimed cold-start artifact does not exist",
+				],
+				[
+					"PRAGMA foreign_keys = OFF set first",
+					"does not stick: reads back 1, still enforces, even in an interactive transaction",
+					"the default is already off",
+				],
+				[
+					"PRAGMA foreign_keys = ON set first",
+					"a no-op, already on",
+					"enforces AND persists at the database level: later fresh connections read 1, both clients, every usage (restart durability unmeasured)",
+				],
+				[
+					"drizzle-orm/libsql, wired as the apps wire it",
+					"enforced",
+					"not enforced",
+				],
+				[
+					"how you get this kind",
+					"the platform API's only product: it has no engine parameter",
+					"only the CLI's --tursodb flag can create one (a harness fix disclosed before any data)",
+				],
+				[
+					"gates",
+					"AW-G1 coherence · AW-G2 the pragma predicts · AW-G3 determinism",
+					"ALL PASS: behaviors cohere in all 148 cells, the pragma predicted every steady-state cell, zero flapping",
+				],
+				[
+					"which app it explains",
+					"where Stem Shovel's 441-line cascade.ts would be redundant but harmless",
+					"Stem Shovel's 'onDelete never fired' is this default; Replicator's 'cascades pass with no pragma' was its own probe's ON, persisted",
+				],
+				[
+					"the exposure",
+					"none: enforcement is on and effectively immutable",
+					"Replicator production since 2026-10-24: 159 FK actions, no pragma in the app, unenforced unless a probe already flipped each database; the hand-off carries the one-line check and the remediation options",
+				],
+				[
+					"predictions scored",
+					"P1 refuted: the bench predicted steady enforcement everywhere, the wrong winner",
+					"P2 refuted (no cold-start artifact) · P3 half right (a prior-execute pragma sticks, database-wide is stronger than predicted) · P4 stands: September's kind was never recorded",
+				],
+			],
+		);
+	})();
+
 	// Every legend gets a "Legend" label as its first child — a styled
 	// paragraph, not a heading, so legends don't skip levels in the
 	// document outline. Runs after the builders above have set each
