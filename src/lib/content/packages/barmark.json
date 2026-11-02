@@ -5,14 +5,18 @@
 	"status": "Beta",
 	"license": "MIT",
 	"category": "Chord Chart Notation",
-	"tagline": "A Markdown-inspired plain-text notation for chord charts: the bar grid musicians already write, specified precisely enough for machines, with a parser and a bar-grid renderer.",
+	"tagline": "A Markdown-inspired plain-text notation for chord charts: the bar grid musicians already write, specified precisely enough for machines, with a parser, a bar-grid renderer and a command-line tool.",
 	"description": [
 		"Musicians have written chord charts in plain text for decades: a row of bars between pipes, a chord or two in each, a heading for the verse. People read them easily. Machines do not, because the conventions are ambiguous in exactly the places that matter. Does an empty cell mean silence or the same chord again? Does \"x 2\" repeat the last chord or the whole line? barmark answers those questions in a written grammar, so a chart means the same thing to a band, a parser and a renderer.",
-		"A barmark file is a markdown file with the extension .chart.md, so any markdown tool shows it sensibly on day one. The barmark package parses a chart into bars in play order, sections, key, meter and tempo, and line-numbered diagnostics; it never throws, prints charts back in a canonical spelling, and converts chord symbols to and from Harte labels. @barmark/render turns a chart into a clean, evenly spaced bar grid, either as server-rendered HTML that needs no browser JavaScript or as the <barmark-chart> web component.",
+		"A barmark file is a markdown file with the extension .chart.md, so any markdown tool shows it sensibly on day one. The barmark package parses a chart into bars in play order, sections, key, meter and tempo, and line-numbered diagnostics; it never throws, prints charts back in a canonical spelling, and converts chord symbols to and from Harte labels. @barmark/render turns a chart into a clean, evenly spaced bar grid, either as server-rendered HTML that needs no browser JavaScript or as the <barmark-chart> web component. @barmark/cli puts both in a terminal or a CI pipeline: the barmark command checks charts and reports problems by file and line, prints them in standard form, renders a standalone page and transposes, with standalone binaries for machines without Node.",
 		"barmark was extracted from the chart parser in Stem Shovel, our music collaboration app, and its rules were checked by our stem-bench studies against real recordings. The grammar is a v0.1 draft, open for review. The code is MIT licensed, and the specification will be published under CC-BY 4.0."
 	],
 	"install": "bun add barmark @barmark/render",
 	"links": [
+		{
+			"label": "barmark.dev",
+			"href": "https://www.barmark.dev"
+		},
 		{
 			"label": "GitHub",
 			"href": "https://github.com/kevinpeckham/barmark"
@@ -24,6 +28,10 @@
 		{
 			"label": "npm: @barmark/render",
 			"href": "https://www.npmjs.com/package/@barmark/render"
+		},
+		{
+			"label": "npm: @barmark/cli",
+			"href": "https://www.npmjs.com/package/@barmark/cli"
 		}
 	],
 	"features": [
@@ -31,7 +39,8 @@
 		"parseChart never throws: broken lines are reported with line numbers and the rest still reads",
 		"A canonical printer that changes spelling and layout only, never meaning",
 		"Harte chord labels in both directions, checked against the McGill Billboard and Isophonics Beatles datasets",
-		"@barmark/render: HTML with Declarative Shadow DOM, or the <barmark-chart> web component, with light and dark themes and screen-reader support"
+		"@barmark/render: HTML with Declarative Shadow DOM, or the <barmark-chart> web component, with light and dark themes and screen-reader support",
+		"@barmark/cli: check, format, render and transpose .chart.md files from a terminal or in CI, with GitHub annotations and pinned library versions"
 	],
 	"relatedArticles": [
 		{
