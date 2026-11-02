@@ -749,6 +749,143 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 16: the two clauses on every real pair after the adoption ---
+	(() => {
+		const XMIN = 1.0,
+			XMAX = 3.4,
+			YMAX = 0.55;
+		const POINTS = [
+			{ x: 1.9, y: 0.21, color: "#199e70", label: "letter-lands", labelBelow: true, tip: "letter-lands, migrated chart on its own recording · ratio 1.90, median local cost 0.210 · passes both clauses; Study 15's 2.04 moved by 0.14, inside the registered prediction, because the migrated chart's beat-level refinements change the rendered reference" },
+			{ x: 3.18, y: 0.177, color: "#199e70", label: "peaceful-dreams", tip: "peaceful-dreams, migrated chart on its own recording · ratio 3.18, median local cost 0.177 · the strongest point in the real set, within 0.03 of its Study 15 value" },
+			{ x: 2.63, y: 0.207, color: "#199e70", label: "eat-all-the-clocks", tip: "eat-all-the-clocks, the band's corrected chart on its own recording · ratio 2.63, median local cost 0.207 · above its Study 15 value, as registered: the chart only got truer" },
+			{ x: 1.96, y: 0.248, color: "#199e70", hollow: true, label: "mop-heart (exploratory)", tip: "mop-heart, first alignment ever: 3/4 at 224 bpm with a mid-chart key change · ratio 1.96, median local cost 0.248 · passes both clauses, exactly as predicted" },
+			{ x: 1.13, y: 0.475, color: "#e66767", tip: "letter-lands recording against the peaceful-dreams chart · ratio 1.13, median local cost 0.475 · fails both clauses" },
+			{ x: 1.21, y: 0.439, color: "#e66767", tip: "letter-lands recording against the eat-all-the-clocks chart · ratio 1.21, median local cost 0.439 · fails both clauses" },
+			{ x: 1.18, y: 0.397, color: "#e66767", tip: "peaceful-dreams recording against the letter-lands chart · ratio 1.18, median local cost 0.397 · fails both clauses" },
+			{ x: 1.55, y: 0.341, color: "#e66767", near: true, tip: "peaceful-dreams recording against the eat-all-the-clocks chart · ratio 1.55, five hundredths under the 1.6 gate · its median local cost of 0.341 sits above the 0.30 line, so the second clause catches it" },
+			{ x: 1.23, y: 0.333, color: "#e66767", tip: "eat-all-the-clocks recording against the letter-lands chart · ratio 1.23, median local cost 0.333 · fails both clauses" },
+			{ x: 1.57, y: 0.401, color: "#e66767", near: true, tip: "eat-all-the-clocks recording against the peaceful-dreams chart · ratio 1.57, three hundredths under the 1.6 gate · its median local cost of 0.401 sits well above the 0.30 line, so the second clause catches it" },
+			{ x: 1.19, y: 0.359, color: "#e66767", hollow: true, tip: "exploratory: mop-heart recording against the letter-lands chart · ratio 1.19, median local cost 0.359 · fails both clauses" },
+			{ x: 1.29, y: 0.437, color: "#e66767", hollow: true, tip: "exploratory: letter-lands recording against the mop-heart chart · ratio 1.29, median local cost 0.437 · fails both clauses" },
+			{ x: 1.56, y: 0.314, color: "#e66767", hollow: true, tip: "exploratory: peaceful-dreams recording against the mop-heart chart · ratio 1.56, median local cost 0.314 · fails both clauses, the cost clause by less than usual" },
+			{ x: 1.56, y: 0.341, color: "#e66767", hollow: true, tip: "exploratory: mop-heart recording against the eat-all-the-clocks chart · ratio 1.56, median local cost 0.341 · fails both clauses; it plots almost on top of the registered peaceful-against-eat pair at 1.55" },
+			{ x: 1.74, y: 0.323, color: "#e66767", hollow: true, headline: true, tip: "THE HEADLINE, exploratory: eat-all-the-clocks recording against the mop-heart chart · ratio 1.74, the first real wrong pair ABOVE the 1.6 ratio gate · rejected only by the second clause, median local cost 0.323 over the 0.30 line · production's shipped samePiece is still ratio-only, so the ask to AND the clause in is now urgent" },
+		];
+		byId("legend-s16").innerHTML =
+			'<span class="key"><span class="chip" style="background:#199e70"></span>right chart on its own recording, registered (3)</span>' +
+			'<span class="key"><span class="chip" style="background:transparent;border:2px solid #199e70"></span>right, exploratory: the first mop-heart alignment (1)</span>' +
+			'<span class="key"><span class="chip" style="background:#e66767"></span>wrong cross-pair, registered (6)</span>' +
+			'<span class="key"><span class="chip" style="background:transparent;border:2px solid #e66767"></span>wrong cross-pair, exploratory (5 plotted)</span>' +
+			'<span class="key"><span class="chip" style="background:#8b93a3"></span>the two clauses: ratio at 1.6, median local cost at 0.30</span>' +
+			legendNote(
+				"every real pair in the study on both same-piece clauses at once · solid marks are registered cells, hollow marks exploratory · the eat-all-the-clocks recording against the mop-heart chart is the first real wrong pair to cross the 1.6 ratio line, and only the 0.30 local-cost clause rejects it · the sixth exploratory pair, the mop-heart recording against the peaceful-dreams chart, cannot be plotted: production's own chart-too-long rule refused it before alignment ran, the right answer by construction · zero spend, no model calls",
+			);
+		const W = 880,
+			T = 18,
+			B = 46,
+			L = 70,
+			R = 24,
+			H = 380;
+		const iw = W - L - R;
+		const ih = H - T - B;
+		const xOf = (v) => L + ((v - XMIN) / (XMAX - XMIN)) * iw;
+		const yOf = (v) => T + (1 - v / YMAX) * ih;
+		let g = "";
+		for (const tick of [1.0, 1.5, 2.0, 2.5, 3.0]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick.toFixed(1)}</text>`;
+		}
+		for (const tick of [0.1, 0.2, 0.3, 0.4, 0.5]) {
+			const y = yOf(tick);
+			g += `<line x1="${L}" x2="${L + iw}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${L - 10}" y="${y + 4}" text-anchor="end">${tick.toFixed(1)}</text>`;
+		}
+		g += `<text class="chart-tick" x="${L + iw / 2}" y="${H - 6}" text-anchor="middle">tritone-probe path-cost ratio (higher is more same-piece)</text>`;
+		g += `<text class="chart-tick" x="14" y="${T + ih / 2}" text-anchor="middle" transform="rotate(-90 14 ${T + ih / 2})">median local cost (lower is better)</text>`;
+		// the pass region: right of the ratio clause AND below the cost clause
+		g += `<rect x="${xOf(1.6)}" y="${yOf(0.3)}" width="${L + iw - xOf(1.6)}" height="${H - B - yOf(0.3)}" fill="rgba(25,158,112,0.07)"/>`;
+		// the zone the headline pair exposes: past the ratio line, above the cost line
+		g += `<rect x="${xOf(1.6)}" y="${T}" width="${L + iw - xOf(1.6)}" height="${yOf(0.3) - T}" fill="rgba(201,133,0,0.06)"/>`;
+		const rx = xOf(1.6);
+		g += `<line x1="${rx}" x2="${rx}" y1="${T}" y2="${H - B}" stroke="#8b93a3" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+		g += `<text fill="#8b93a3" font-size="11" x="${rx + 6}" y="${T + 12}" text-anchor="start">ratio 1.6</text>`;
+		const cy30 = yOf(0.3);
+		g += `<line x1="${L}" x2="${L + iw}" y1="${cy30}" y2="${cy30}" stroke="#8b93a3" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+		g += `<text fill="#8b93a3" font-size="11" x="${L + iw - 4}" y="${cy30 - 7}" text-anchor="end">median 0.30</text>`;
+		g += `<text fill="#c98500" font-size="11" x="${L + iw - 4}" y="${T + 14}" text-anchor="end">ratio alone says same piece here; only the cost clause rejects</text>`;
+		g += `<text fill="#199e70" font-size="11" x="${L + iw - 4}" y="${H - B - 10}" text-anchor="end">both clauses pass here</text>`;
+		let marks = "";
+		let hits = "";
+		POINTS.forEach((p) => {
+			const cx = xOf(p.x);
+			const cy = yOf(p.y);
+			marks += p.hollow
+				? `<circle cx="${cx}" cy="${cy}" r="6" fill="none" stroke="${p.color}" stroke-width="2.5"/>`
+				: `<circle cx="${cx}" cy="${cy}" r="7" fill="${p.color}"/>`;
+			if (p.headline) {
+				marks += `<circle cx="${cx}" cy="${cy}" r="13" fill="none" stroke="#ebf92f" stroke-width="1.5" stroke-dasharray="3 3"/>`;
+				marks += `<text fill="#ebf92f" font-size="11" x="${cx + 18}" y="${cy - 4}" text-anchor="start">the first wrong pair past the ratio gate</text>`;
+				marks += `<text fill="#c3c9d4" font-size="11" x="${cx + 18}" y="${cy + 10}" text-anchor="start">eat recording against the mop-heart chart · 1.74 / 0.323</text>`;
+			}
+			if (p.label)
+				marks += `<text fill="#c3c9d4" font-size="11" x="${cx}" y="${p.labelBelow ? cy + 20 : cy - 12}" text-anchor="middle">${p.label}</text>`;
+			if (p.near)
+				marks += `<text fill="#c3c9d4" font-size="11" x="${cx - 12}" y="${cy + 4}" text-anchor="end">${p.x.toFixed(2)} · ${p.y.toFixed(3)}</text>`;
+			hits += `<circle cx="${cx}" cy="${cy}" r="16" fill="transparent" data-tip="${esc(p.tip)}"/>`;
+		});
+		const el = byId("fig-adoption");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Scatter plot of fifteen real pairs by tritone ratio and median local cost after the barmark adoption: four right charts sit right of the 1.6 ratio line and below the 0.30 cost line, ten wrong cross-pairs fail at least one clause, and the highlighted exploratory pair at ratio 1.74 and median 0.323 is the first wrong pair past the ratio line, rejected only by the cost clause.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the adoption's same-piece landscape: the four right charts land alone where both clauses pass, ten wrong pairs fail at least one clause, and the highlighted pair crosses the ratio line for the first time in the program, which is exactly the failure mode the AND of the two clauses exists to catch",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-adoption",
+			["cell", "result", "the read"],
+			[
+				[
+					"G1: cross-parser agreement",
+					"the three committed app-dialect texts through the retired chordChartBars and through barmark 0.5.0 behind the production adapter: 76 / 152 / 86 bars, zero differences, zero warnings · PASS",
+					"the retired parser is the yardstick and the new one matches it bar for bar: nothing the app could read was lost in the adoption",
+				],
+				[
+					"G2: the migration, graded",
+					"every public migrated chart parses with zero warnings and lands every band-declared section start at 0.0000 s on its own grid: letter-lands 76 bars / 10 sections, peaceful-dreams 153 / 10, eat-all-the-clocks 71 / 9, exploratory mop-heart 140 / 8 · letter and peaceful also match the verified content exactly · PASS",
+					"grid-perfect against a ±0.10 s gate, including the hardest chart in the catalog, 3/4 at 224 bpm with a mid-chart key change",
+				],
+				[
+					"G3: the two-clause same-piece",
+					"right pairs 1.90 / 3.18 / 2.63 with medians 0.177 to 0.210 (exploratory mop-heart 1.96 / 0.248); all six registered wrong pairs fail, ratios 1.13 to 1.57 against medians 0.333 to 0.475 · PASS",
+					"the headline: the exploratory eat-recording against mop-chart pair scores 1.74, the first real wrong pair above the 1.6 ratio gate, rejected only by the local-cost clause at 0.323 · production's shipped samePiece is still ratio-only, so the ask to AND the clause in is now urgent",
+				],
+				[
+					"the refusal, recorded",
+					"one exploratory pair, the mop-heart recording against the peaceful-dreams chart, was refused outright: production's own rule that a chart running more than twice the recording must be turned away",
+					"the right answer by construction, recorded under Amendment 1; the production path rejected a wrong pair before alignment ever ran",
+				],
+				[
+					"G4: placement no-regression, baseline named",
+					"letter-lands median |section error| 0.05 s against Study 15's 0.08; peaceful-dreams 0.11 against 0.11 · and eat-all-the-clocks drops from 1.99 s to 0.09 s with the band's corrected chart · PASS",
+					"the entirely new parse path costs nothing in placement, and the Study 12 verdict that the chart, not the aligner, was the bottleneck is confirmed by the fix",
+				],
+				[
+					"the predictions, and the verdict",
+					"4/4: bar counts exactly 76 / 153 / 71; eat gate-grade at 0.09 s; ratios moved at most 0.14 where content was preserved; mop-heart's first alignment passes both clauses · $0 spend, 95 cells, no model calls",
+					"adoption validated, ship with confidence · the standing asks: the LAST-SOUND ring-out refinement from Study 15, and the medianLocal clause in production samePiece, promoted from recommendation to urgent",
+				],
+			],
+		);
+	})();
+
 	// --- Study 15: the two-clause complementarity on real audio ---
 	(() => {
 		const XMIN = 1.0,

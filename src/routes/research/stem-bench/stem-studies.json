@@ -1107,13 +1107,17 @@
 						},
 						{
 							"heading": "Ship Guidance, and the Arc",
-							"html": "Briefed back to Stem Shovel: alignment takes placement, behind two mechanical gates, the path cost (the probe's 8.6-times floor) and an edge flag that shows first and last boundaries hedged, the rung-picker pattern applied again; the probe ships separately as the same-piece check, replacing the by-ear clause; and chart quality is now the binding constraint, a data problem rather than a hearing problem, with one real song untranscribable to make the point. The scorecard: 1 right including the tempo-change tracking, 2 half (the error shape predicted, the count off by one), 3 and 4 right in full. And the arc line the page exists to state: with Study 12, every hearing task measured across the program's twelve stem studies has a code-or-data answer that beats or matches the model, and the models' one genuine hearing ability, texture contrast, was overtaken twice, by stems in Study 9 and by charts here."
+							"html": "Briefed back to Stem Shovel: alignment takes placement, behind two mechanical gates, the path cost (the probe's 8.6-times floor) and an edge flag that shows first and last boundaries hedged, the rung-picker pattern applied again; the probe ships separately as the same-piece check, replacing the by-ear clause; and chart quality is now the binding constraint, a data problem rather than a hearing problem, with one real song untranscribable to make the point. The scorecard: 1 right including the tempo-change tracking, 2 half (the error shape predicted, the count off by one), 3 and 4 right in full. And the arc line the page exists to state: with Study 12, every hearing task measured across the program's twelve stem studies has a code-or-data answer that beats or matches the model, and the models' one genuine hearing ability, texture contrast, was overtaken twice, by stems in Study 9 and by charts here. Study 16 closed the data problem by the fix: with the band's corrected chart, the song this study could only hold as exploratory dropped from a 1.99 second median section error to 0.09 through the production path, confirming that the chart, not the aligner, was the bottleneck."
 						}
 					]
 				}
 			],
 			"published": "2026-10-30",
 			"related": [
+				{
+					"title": "Study 16: the corrected chart confirms the bottleneck finding by the fix",
+					"href": "/research/stem-bench/16"
+				},
 				{
 					"title": "Study 15: the ratio's margin measured thin, and the clause that restores it",
 					"href": "/research/stem-bench/15"
@@ -1347,13 +1351,17 @@
 						},
 						{
 							"heading": "Verdict, Scorecard, and the Queue",
-							"html": "The scorecard: 1 right, including eat-all-the-clocks near 2.5; 2 half, with both intros and letter's outro repaired exactly as traced while peaceful's ring-out residual and the mis-drafted clause went unpredicted; 3 right in full, including the margin claim. The verdict delivered: v0.201.2's constant and edge rules are registered as validated at n of 3 right and 6 wrong with the margin stated; the local-cost clause is no longer optional belt and braces, it is what restores the same-piece check's margin; and the LAST-SOUND refinement for long ring-outs stays open. Study 16 is queued by the app's chart-idiom response: re-running on the band's five stored chart texts through the production parser once that work lands, with one point of record corrected on the way, since their Peaceful Dreams eight-bar audit predates the band's revision, whose stored text now parses 152 bars clean."
+							"html": "The scorecard: 1 right, including eat-all-the-clocks near 2.5; 2 half, with both intros and letter's outro repaired exactly as traced while peaceful's ring-out residual and the mis-drafted clause went unpredicted; 3 right in full, including the margin claim. The verdict delivered: v0.201.2's constant and edge rules are registered as validated at n of 3 right and 6 wrong with the margin stated; the local-cost clause is no longer optional belt and braces, it is what restores the same-piece check's margin; and the LAST-SOUND refinement for long ring-outs stays open. Study 16 is queued by the app's chart-idiom response: re-running on the band's five stored chart texts through the production parser once that work lands, with one point of record corrected on the way, since their Peaceful Dreams eight-bar audit predates the band's revision, whose stored text now parses 152 bars clean. Study 16 has since run on the migrated charts: all four gates pass, and a real wrong pair finally crosses the 1.6 ratio gate at 1.74, rejected only by this study's local-cost clause, which turned the recommendation from prophylactic to urgent."
 						}
 					]
 				}
 			],
 			"published": "2026-10-30",
 			"related": [
+				{
+					"title": "Study 16: the adoption study, where this clause becomes load-bearing",
+					"href": "/research/stem-bench/16"
+				},
 				{
 					"title": "Study 14: the asks this study closes, and where the 1.6 came from",
 					"href": "/research/stem-bench/14"
@@ -1377,6 +1385,82 @@
 			],
 			"brief": "docs/BRIEF-STUDY15.md",
 			"quote": "The constant survived its first expansion by two hundredths, and the clause that rescues it fails the other way: the ratio's near-misses carry local costs a third above the line. Each check is thin alone; AND-ed, the margin comes back."
+		},
+		{
+			"slug": "16",
+			"letters": "16",
+			"track": "Listening",
+			"title": "The chart reads barmark: the adoption validated end to end, the migration grid-perfect, and a wrong pair finally defeats the ratio clause",
+			"eyebrow": "Study 16 · listening, the adoption · 95 zero-spend cells",
+			"indexLine": "The adoption study: Stem Shovel retired its in-house chord-chart parser for the open barmark standard, migrated all five stored Badverbs charts, and the bench graded the whole move with zero model calls. All four gates pass and all four registered predictions hit: the retired parser and barmark agree bar for bar on every committed text, every public migrated chart lands every band-declared section start at 0.0000 seconds on its own grid, and placement does not regress through the entirely new parse path. The headline comes from the exploratory cross-pairs: a real wrong pair scores ratio 1.74, the first ever above the 1.6 same-piece gate, and is rejected only by Study 15's local-cost clause, so the bench's recommendation to AND that clause into production went from prophylactic to urgent.",
+			"sections": [
+				{
+					"id": "sec-stem-study16",
+					"eyebrow": "Listening, the adoption",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s16",
+					"figure": {
+						"id": "fig-adoption",
+						"title": "The Two Clauses on Every Real Pair: a Wrong Pair Crosses the Ratio Gate and the Cost Clause Catches It"
+					},
+					"table": {
+						"id": "tbl-adoption",
+						"summary": "All four gates, the headline pair, the refusal, the predictions, and the standing asks"
+					},
+					"body": [
+						{
+							"heading": "The Adoption, and the Registration",
+							"html": "Stem Shovel retired its in-house chord-chart parser and adopted the open barmark standard end to end: barmark 0.5.0 from npm parses every chart behind a production adapter, the renderer draws from the same parse, and sections are known by name rather than numeral (the app's pins 371831ae, b5ed9ed2 and a0926c65). All five stored Badverbs charts were migrated under a refuse-not-guess rule and confirmed by the band against its recordings' section markers; the four public ones are the corpus, fetched verbatim, with the fifth not on a public page and disclosed as out of scope. Registered at b589daf with one amendment, recorded before results were accepted, for handling a refusal in the exploratory cross-pairs. Zero spend, 95 mechanically graded cells, no model calls, and the alignment ports unchanged from Study 15's pin."
+						},
+						{
+							"heading": "The Parsers Agree Bar for Bar",
+							"html": "G1 passed with nothing to report, which is the point. The three committed app-dialect texts ran through the retired chordChartBars parser and through barmark 0.5.0 behind the production adapter, identical bodies with each parser reading its own registered dialect header: 76, 152 and 86 bars, zero differences under the registered per-bar comparison, zero warnings from either parser. Nothing the app could read was lost in the adoption."
+						},
+						{
+							"heading": "The Migration Is Grid-Perfect",
+							"html": "G2 passed at a precision the gate did not ask for. The gate allowed each band-declared section start within a tenth of a second on the chart's own grid; every public migrated chart lands every declared start at 0.0000 seconds with zero parser warnings. letter-lands parses 76 bars with 10 sections, peaceful-dreams 153 with 10 (the verified 152 plus the grammar's ring-out attack bar), eat-all-the-clocks 71 with 9 in the band's corrected play-order form, and exploratory mop-heart 140 with 8, in 3/4 at 224 bpm with a mid-chart key change. letter-lands and peaceful-dreams also match the verified content lists exactly under the registered normalization."
+						},
+						{
+							"heading": "A Real Wrong Pair Finally Crosses the Ratio Gate",
+							"html": "G3 passed, and it carries the study's headline. The right pairs pass both same-piece clauses comfortably: ratios 1.90, 3.18 and 2.63 with median local costs of 0.177 to 0.210, plus exploratory mop-heart's first-ever alignment at 1.96 and 0.248. All six registered wrong pairs fail, ratios 1.13 to 1.57, caught by local costs of 0.333 to 0.475. Then the exploratory cross-pairs delivered what three studies of eroding margin predicted: the eat-all-the-clocks recording against the mop-heart chart scores ratio 1.74, the first real wrong pair above the 1.6 gate, and is rejected only by the second clause, its median local cost of 0.323 sitting over the 0.30 line. Production's shipped samePiece is still ratio-only, so the bench's standing recommendation to AND the local-cost clause in is now urgent rather than prophylactic: a real catalog pair crosses the ratio gate. One other exploratory pair never produced a number at all, and that is also a result: production's own rule that a chart running more than twice the recording's length must be refused turned the mop-heart recording against the peaceful-dreams chart away, the right answer by construction."
+						},
+						{
+							"heading": "No Regression, the Chart Was the Bottleneck, and the Verdict",
+							"html": "G4 passed against its named baseline: through the entirely new parse path, letter-lands' median section error is 0.05 seconds against Study 15's 0.08, and peaceful-dreams holds at 0.11. The predictions went four for four, and the second is the satisfying one: eat-all-the-clocks, exploratory in every prior study because its chart was wrong, drops from a 1.99 second median error to 0.09 with the band's corrected chart and is now gate-grade on every measure, confirming Study 12's verdict that the chart, not the aligner, was the bottleneck, this time by the fix rather than the failure. The verdict delivered: adoption validated, ship with confidence. Two asks stand: the LAST-SOUND ring-out refinement from Study 15, still visible in peaceful-dreams' tail sections, and the medianLocal clause in production's samePiece, promoted from recommendation to urgent ask."
+						}
+					]
+				}
+			],
+			"published": "2026-11-01",
+			"related": [
+				{
+					"title": "Study 15: the clause this study proves load-bearing",
+					"href": "/research/stem-bench/15"
+				},
+				{
+					"title": "Study 12: the bottleneck finding, confirmed here by the fix",
+					"href": "/research/stem-bench/12"
+				},
+				{
+					"title": "Study 14: where the 1.6 constant came from",
+					"href": "/research/stem-bench/14"
+				},
+				{
+					"title": "barmark, the standard the app adopted",
+					"href": "/packages/barmark"
+				},
+				{
+					"title": "Stem Shovel, the product under test",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY16.md",
+			"quote": "The first real wrong pair crossed the ratio gate, and the second clause caught it exactly as the complementarity analysis predicted. The ratio alone is no longer enough on real material; the AND is load-bearing, and the recommendation is now urgent rather than prophylactic."
 		}
 	]
 }
