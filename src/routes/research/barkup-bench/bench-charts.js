@@ -8196,7 +8196,7 @@ export function initBenchCharts() {
 					},
 					{
 						on: true,
-						tip: "24/24: ON sticks at the DATABASE level: set through one connection, every later fresh connection read 1 and enforced, both clients, including fresh-client-per-statement where the pragma and the probe never share a connection",
+						tip: "24/24 on the 2026-11-02 run: ON read 1 and enforced through every later fresh connection, both clients, including fresh-client-per-statement. This column shows that day's engine build, not reproducible on 2026-11-03: a fresh engine database read 0 after a prior-execute ON (see the dated correction in the entry)",
 					},
 				],
 			},
@@ -8209,7 +8209,7 @@ export function initBenchCharts() {
 			COFF +
 			'"></span>not enforced (pragma reads 0)</span>' +
 			legendNote(
-				"148 matrix cells (kind x client 0.17.4/0.18.0 x four usages x three pragma arms x 3 reps, plus drizzle as the apps wire it) + 48 first-connection probes on 12 fresh throwaway databases · zero errors, zero model spend, every database destroyed · all three gates pass",
+				"148 matrix cells (kind x client 0.17.4/0.18.0 x four usages x three pragma arms x 3 reps, plus drizzle as the apps wire it) + 48 first-connection probes on 12 fresh throwaway databases · zero errors, zero model spend, every database destroyed · all three gates pass · the engine ON column shows the 2026-11-02 build; a dated correction in the entry withdraws its persistence",
 			);
 		const W = 880,
 			L = 196,
@@ -8238,13 +8238,13 @@ export function initBenchCharts() {
 		});
 		const el = byId("fig-aw");
 		el.innerHTML =
-			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grid of foreign-key enforcement by database kind and pragma arm. The classic libsql kind reads pragma 1 and enforces in all four columns: first connection, steady state with no pragma, after OFF is set, which does not stick, and after ON. The engine TursoDB kind reads pragma 0 and does not enforce on the first connection, in steady state, and after OFF; only after ON is set does it read 1 and enforce, and that setting persists at the database level.">` +
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grid of foreign-key enforcement by database kind and pragma arm. The classic libsql kind reads pragma 1 and enforces in all four columns: first connection, steady state with no pragma, after OFF is set, which does not stick, and after ON. The engine TursoDB kind reads pragma 0 and does not enforce on the first connection, in steady state, and after OFF; only after ON is set did it read 1 and enforce on the 2026-11-02 run, and the apparent database-level persistence of that setting was withdrawn by a dated correction the next day.">` +
 			g +
 			marks +
 			hits +
 			"</svg>" +
 			figCap(
-				"the two-app contradiction, dissolved: the classic kind enforces no matter what you set, and the engine kind enforces nothing until ON is set once through any connection, after which the database itself holds the setting; both apps measured correctly and both concluded wrongly",
+				"the two-app contradiction, dissolved: the classic kind enforces no matter what you set, and the engine kind enforces nothing by default; the ON column records the 2026-11-02 build, where one set appeared to persist database-wide, a behavior the 2026-11-03 correction withdraws as not reproducible on the next engine build",
 			);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
@@ -8272,7 +8272,7 @@ export function initBenchCharts() {
 				[
 					"PRAGMA foreign_keys = ON set first",
 					"a no-op, already on",
-					"enforces AND persists at the database level: later fresh connections read 1, both clients, every usage (restart durability unmeasured)",
+					"on the 2026-11-02 run: enforced and persisted at the database level, later fresh connections read 1, both clients, every usage. Not reproducible on 2026-11-03: a fresh engine database read 0 after a prior-execute ON (dated correction in the entry)",
 				],
 				[
 					"drizzle-orm/libsql, wired as the apps wire it",
@@ -8292,17 +8292,17 @@ export function initBenchCharts() {
 				[
 					"which app it explains",
 					"where Stem Shovel's 441-line cascade.ts would be redundant but harmless",
-					"Stem Shovel's 'onDelete never fired' is this default; Replicator's 'cascades pass with no pragma' was its own probe's ON, persisted",
+					"Stem Shovel's 'onDelete never fired' is this default; Replicator's 'cascades pass with no pragma' was its own probe's ON, persisted on the engine build then current",
 				],
 				[
 					"the exposure",
 					"none: enforcement is on and effectively immutable",
-					"Replicator production since 2026-10-24: 159 FK actions, no pragma in the app, unenforced unless a probe already flipped each database; the hand-off carries the one-line check and the remediation options",
+					"Replicator production since 2026-10-24: 159 FK actions, no pragma in the app, unenforced; per the 2026-11-03 correction the pragma remediation is withdrawn, deletes must handle their children explicitly, and the pragma probe stays only as a change detector",
 				],
 				[
 					"predictions scored",
 					"P1 refuted: the bench predicted steady enforcement everywhere, the wrong winner",
-					"P2 refuted (no cold-start artifact) · P3 half right (a prior-execute pragma sticks, database-wide is stronger than predicted) · P4 stands: September's kind was never recorded",
+					"P2 refuted (no cold-start artifact) · P3 half right (a prior-execute pragma stuck that day; the database-wide persistence is withdrawn by the correction) · P4 stands: September's kind was never recorded",
 				],
 			],
 		);
