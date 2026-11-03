@@ -749,6 +749,39 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 16b: the shipped two-clause samePiece on the full matrix (no figure) ---
+	table(
+		"tbl-samepiece-ship",
+		[
+			"pair class (shipped samePiece, ported verbatim and pinned by test)",
+			"verdicts through the shipped code",
+			"against Study 16's committed results",
+		],
+		[
+			[
+				"four right pairs (three gated plus exploratory mop-heart)",
+				"4/4 samePiece true · gate PASS",
+				"ratios 1.90 / 3.18 / 2.63 / 1.96, unchanged; every section placement and every hedge flag byte-equal, 74/74 comparisons · gate PASS",
+			],
+			[
+				"six registered wrong pairs",
+				"6/6 samePiece false",
+				"ratios 1.13 to 1.57, under the ratio gate as in Study 16",
+			],
+			[
+				"five alignable exploratory cross-pairs, including the escapee",
+				"5/5 samePiece false · gate PASS",
+				"the eat-all-the-clocks recording against the mop-heart chart crosses the ratio gate at 1.74 and is rejected by the shipped 0.30 local-cost clause; the previous ratio-only production check would have called it the same piece",
+			],
+			[
+				"the one non-alignable pair",
+				"refused",
+				"by production's own chart-too-long rule, as in Study 16, the right answer by construction",
+			],
+		],
+		"Stem Shovel shipped Study 16's urgent ask, citing the escapee pair by name in the commit message: samePiece = ratio at or above 1.6 AND median local cost at or below 0.30, constants exactly as the bench recommended, the 0.30 boundary inclusive and pinned by test before the run. Zero spend, zero model calls; both registered predictions hit.",
+	);
+
 	// --- Study 16: the two clauses on every real pair after the adoption ---
 	(() => {
 		const XMIN = 1.0,

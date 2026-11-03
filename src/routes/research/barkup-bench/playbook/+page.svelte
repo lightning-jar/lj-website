@@ -226,7 +226,7 @@ it>" instead of a patch.`,
       <p class="text-16px {proseCls} mb-4 mt-4">
         Ten guidelines for building document-editing apps with LLM agents,
         distilled from {researchStats.barkupBench.studiesSpelled} pre-registered studies
-        and more than {researchStats.barkupBench.scoredRunsDisplay} scored model runs.
+        and more than {researchStats.barkupBench.scoredRunsDisplay} scored runs.
         Each one is an action you can take this week, with the measurement
         that earned it a place on the list and a link to its chart on the
         <a class={linkCls} href={dash}>research dashboard</a>.

@@ -1427,13 +1427,17 @@
 						},
 						{
 							"heading": "No Regression, the Chart Was the Bottleneck, and the Verdict",
-							"html": "G4 passed against its named baseline: through the entirely new parse path, letter-lands' median section error is 0.05 seconds against Study 15's 0.08, and peaceful-dreams holds at 0.11. The predictions went four for four, and the second is the satisfying one: eat-all-the-clocks, exploratory in every prior study because its chart was wrong, drops from a 1.99 second median error to 0.09 with the band's corrected chart and is now gate-grade on every measure, confirming Study 12's verdict that the chart, not the aligner, was the bottleneck, this time by the fix rather than the failure. The verdict delivered: adoption validated, ship with confidence. Two asks stand: the LAST-SOUND ring-out refinement from Study 15, still visible in peaceful-dreams' tail sections, and the medianLocal clause in production's samePiece, promoted from recommendation to urgent ask."
+							"html": "G4 passed against its named baseline: through the entirely new parse path, letter-lands' median section error is 0.05 seconds against Study 15's 0.08, and peaceful-dreams holds at 0.11. The predictions went four for four, and the second is the satisfying one: eat-all-the-clocks, exploratory in every prior study because its chart was wrong, drops from a 1.99 second median error to 0.09 with the band's corrected chart and is now gate-grade on every measure, confirming Study 12's verdict that the chart, not the aligner, was the bottleneck, this time by the fix rather than the failure. The verdict delivered: adoption validated, ship with confidence. Two asks stand: the LAST-SOUND ring-out refinement from Study 15, still visible in peaceful-dreams' tail sections, and the medianLocal clause in production's samePiece, promoted from recommendation to urgent ask. The urgent ask has since shipped: Stem Shovel AND-ed the local-cost clause into its production samePiece two days later, citing this study's escapee pair by name in the commit message, and Study 16b validated the shipped code against this study's full pairing matrix with a perfect sheet."
 						}
 					]
 				}
 			],
 			"published": "2026-11-01",
 			"related": [
+				{
+					"title": "Study 16b: the shipped clause validated, the escapee class closed",
+					"href": "/research/stem-bench/16b"
+				},
 				{
 					"title": "Study 15: the clause this study proves load-bearing",
 					"href": "/research/stem-bench/15"
@@ -1461,6 +1465,67 @@
 			],
 			"brief": "docs/BRIEF-STUDY16.md",
 			"quote": "The first real wrong pair crossed the ratio gate, and the second clause caught it exactly as the complementarity analysis predicted. The ratio alone is no longer enough on real material; the AND is load-bearing, and the recommendation is now urgent rather than prophylactic."
+		},
+		{
+			"slug": "16b",
+			"letters": "16b",
+			"track": "Validation",
+			"title": "The shipped two-clause samePiece, validated: the escapee class is closed by production code",
+			"eyebrow": "Study 16b · validation, the shipped clause · 89 zero-spend cells",
+			"indexLine": "The Study 6b micro pattern, this time closing the alignment thread: Stem Shovel shipped Study 16's urgent ask, AND-ing the median local-cost clause into its production samePiece check with the constants exactly as the bench recommended and the escapee pair cited by name in the commit message, and the bench validated the ship by porting the shipped code verbatim and re-running Study 16's full pairing matrix at zero spend. All gates pass and both predictions hit: 15 of 15 pair verdicts correct, all four right pairs still samePiece true, all eleven alignable wrong pairs false including the escapee at ratio 1.74 that the previous ratio-only check would have accepted, and every placement and hedge byte-equal to Study 16. The thread that opened at Study 12 closes on shipped code, and the verdict delivered back is the one the pattern exists to earn: nothing to change.",
+			"sections": [
+				{
+					"id": "sec-stem-study16b",
+					"eyebrow": "Validation, the shipped clause",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-samepiece-ship",
+						"summary": "The full pairing matrix through the shipped two-clause samePiece, with the escapee, the refusal, and the byte-equality check against Study 16"
+					},
+					"body": [
+						{
+							"heading": "The Urgent Ask, Shipped",
+							"html": "Study 16 ended with one urgent ask: a real catalog wrong pair, the Eat All the Clocks recording against the Mop Heart chart, clears the 1.6 ratio gate at 1.74 and is told apart only by its median local cost of 0.323, so production's ratio-only samePiece would call two different Badverbs songs the same piece. Stem Shovel shipped the fix the next day, citing the escapee pair by name in the commit message: samePiece now requires the ratio at or above 1.6 AND the median local cost at or below 0.30, both constants exactly the numbers the bench recommended, with the alignment core untouched. Study 16b is the micro validation of that ship, registered before any scored run: the shipped code ported verbatim and pinned by test, including a check that the 0.30 boundary is inclusive, then run against Study 16's full pairing matrix on the migrated Badverbs corpus. Zero spend, zero model calls, 89 mechanically graded cells."
+						},
+						{
+							"heading": "A Perfect Matrix Through the Shipped Code",
+							"html": "All gates pass and both registered predictions hit. The four right pairs stay samePiece true at ratios 1.90, 3.18, 2.63 and 1.96. All eleven alignable wrong pairs come back false, including the escapee: the shipped second clause rejects the 1.74 pair that the previous production check would have accepted, which is the one verdict the ship existed to change. The one non-alignable pair stays refused by production's own rule that a chart running more than twice the recording's length is turned away, recorded as in Study 16. And nothing else moved: the clause touches only the verdict, so every section placement and every hedge flag on the right pairs is byte-equal to Study 16's committed results, 74 of 74 comparisons."
+						},
+						{
+							"heading": "The Alignment Thread Closes",
+							"html": "The verdict delivered back to the app: nothing to change. This closes the thread that opened at Study 12, when alignment first took placement from the models: placement validated across Studies 12, 15 and 16, and the same-piece gate validated twice and hardened once along the way, with Study 14 catching the constant before release, Study 15 designing the local-cost clause from the complementarity analysis, Study 16 finding the real pair that made it urgent, and Study 16b confirming the shipped code on the full matrix. The two-clause check is no longer a bench recommendation; it is production behavior, measured."
+						}
+					]
+				}
+			],
+			"published": "2026-11-03",
+			"related": [
+				{
+					"title": "Study 16: the escapee pair, and the ask this ship answers",
+					"href": "/research/stem-bench/16"
+				},
+				{
+					"title": "Study 15: where the local-cost clause was designed",
+					"href": "/research/stem-bench/15"
+				},
+				{
+					"title": "Study 12: where the alignment thread opened",
+					"href": "/research/stem-bench/12"
+				},
+				{
+					"title": "Stem Shovel, the product under test",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY16B.md",
+			"quote": "The bench asked for the clause, the product shipped it citing the escapee by name, and the ported ship ran the full matrix perfect: the wrong pair that crossed the ratio gate is closed by production code, and nothing else moved."
 		}
 	]
 }
