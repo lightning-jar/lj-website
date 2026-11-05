@@ -69,17 +69,6 @@
 			}
 		},
 		{
-			"name": "Bunny Fonts",
-			"category": "Font Hosting CDN",
-			"description": [
-				"Bunny Fonts is a privacy-friendly, GDPR-compliant, and high-performance font delivery service provided by Bunny.net. It offers a drop-in, open alternative to Google Fonts with global CDN caching, subsetting, and fast TLS, helping reduce layout shifts and improving Core Web Vitals. We use Bunny Fonts to serve web fonts reliably without leaking user IPs to third-party ad networks."
-			],
-			"license": "Free Tier / Proprietary CDN",
-			"link": {
-				"href": "https://fonts.bunny.net/"
-			}
-		},
-		{
 			"name": "Claude Code",
 			"category": "AI Coding Agent",
 			"description": [

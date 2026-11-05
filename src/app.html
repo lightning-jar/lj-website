@@ -3,30 +3,29 @@
 	<head>
 		<meta charset="utf-8">
 
-		<!-- fonts load from bunny.net; preconnect keeps the handshake out of
-		     the critical window, and preloading the three latin faces gets
-		     them in before first paint so the font swap has nothing to
-		     shift (the metric fallbacks in uno.config cover the residue) -->
-		<link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+		<!-- fonts are self-hosted (static/fonts, declared in uno.config);
+		     preloading the three latin faces gets them in before first
+		     paint so the font swap has nothing to shift (the metric
+		     fallbacks in uno.config cover the residue) -->
 		<link
 			rel="preload"
 			as="font"
 			type="font/woff2"
-			href="https://fonts.bunny.net/bungee-shade/files/bungee-shade-latin-400-normal.woff2"
+			href="/fonts/bungee-shade-latin-400-normal.woff2"
 			crossorigin
 		>
 		<link
 			rel="preload"
 			as="font"
 			type="font/woff2"
-			href="https://fonts.bunny.net/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2"
+			href="/fonts/atkinson-hyperlegible-latin-400-normal.woff2"
 			crossorigin
 		>
 		<link
 			rel="preload"
 			as="font"
 			type="font/woff2"
-			href="https://fonts.bunny.net/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2"
+			href="/fonts/atkinson-hyperlegible-latin-700-normal.woff2"
 			crossorigin
 		>
 
@@ -61,7 +60,7 @@
 		<!-- CSP -->
 		<!--<meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; frame-src 'self'; font-src 'self' https://fonts.bunny.net; img-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; media-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; style-src 'unsafe-inline' 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; script-src 'self' 'sha256-YXOoinyatmABOduEfvaFA6G330E20K7l6OY8MBuERxw=' 'sha256-YXOoinyatmABOduEfvaFA6G330E20K7l6OY8MBuERxw=' 'sha256-NoqqQBFMr/TstJFNyv5+bfNEnPLEFhisISsVbIcl25E='; worker-src 'self' blob:"
+      content="default-src 'self'; frame-src 'self'; font-src 'self'; img-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; media-src 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; style-src 'unsafe-inline' 'self' https://lj-01.nyc3.cdn.digitaloceanspaces.com; script-src 'self' 'sha256-YXOoinyatmABOduEfvaFA6G330E20K7l6OY8MBuERxw=' 'sha256-YXOoinyatmABOduEfvaFA6G330E20K7l6OY8MBuERxw=' 'sha256-NoqqQBFMr/TstJFNyv5+bfNEnPLEFhisISsVbIcl25E='; worker-src 'self' blob:"
     />-->
 
 		<!-- viewport -->

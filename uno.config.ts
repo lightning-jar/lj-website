@@ -3,7 +3,6 @@ import presetWind4 from "@unocss/preset-wind4";
 import {
 	defineConfig,
 	presetIcons,
-	presetWebFonts,
 	transformerDirectives,
 	transformerVariantGroup,
 } from "unocss";
@@ -29,6 +28,25 @@ export default defineConfig({
 			layer: "components",
 			getCSS: () =>
 				"#svelte-announcer { position: absolute; left: 0; top: 0; clip: rect(0 0 0 0); clip-path: inset(50%); overflow: hidden; white-space: nowrap; width: 1px; height: 1px }",
+		},
+		{
+			// Self-hosted webfonts (static/fonts, OFL). These used to come
+			// from presetWebFonts' bunny provider, which fetches bunny's CSS
+			// API at build time; on 2026-11-05 that API began answering with
+			// cdn.jsdelivr.net URLs, which the CSP's font-src blocks, and the
+			// live site lost both fonts. Serving them from 'self' removes the
+			// build-time fetch and the third-party origin. Keep the filenames
+			// in sync with the preloads in src/app.html.
+			layer: "preflights",
+			getCSS: () =>
+				[
+					'@font-face{font-family:"Bungee Shade";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/bungee-shade-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}',
+					'@font-face{font-family:"Bungee Shade";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/bungee-shade-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}',
+					'@font-face{font-family:"Atkinson Hyperlegible";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/atkinson-hyperlegible-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}',
+					'@font-face{font-family:"Atkinson Hyperlegible";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/atkinson-hyperlegible-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}',
+					'@font-face{font-family:"Atkinson Hyperlegible";font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/atkinson-hyperlegible-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}',
+					'@font-face{font-family:"Atkinson Hyperlegible";font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/atkinson-hyperlegible-latin-ext-700-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}',
+				].join("\n"),
 		},
 		{
 			// Metric-matched local fallbacks for the two web fonts, so text
@@ -84,16 +102,6 @@ export default defineConfig({
 		presetWind4({ preflights: { reset: true } }),
 		presetIcons({
 			warn: true,
-		}),
-		presetWebFonts({
-			provider: "bunny",
-			fonts: {
-				display: "Bungee Shade",
-				sans: {
-					name: "Atkinson Hyperlegible",
-					weights: ["400", "700"],
-				},
-			},
 		}),
 	],
 	theme: {
