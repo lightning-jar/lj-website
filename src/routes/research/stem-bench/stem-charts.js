@@ -788,21 +788,110 @@ export function initStemCharts() {
 			XMAX = 3.4,
 			YMAX = 0.55;
 		const POINTS = [
-			{ x: 1.9, y: 0.21, color: "#199e70", label: "letter-lands", labelBelow: true, tip: "letter-lands, migrated chart on its own recording · ratio 1.90, median local cost 0.210 · passes both clauses; Study 15's 2.04 moved by 0.14, inside the registered prediction, because the migrated chart's beat-level refinements change the rendered reference" },
-			{ x: 3.18, y: 0.177, color: "#199e70", label: "peaceful-dreams", tip: "peaceful-dreams, migrated chart on its own recording · ratio 3.18, median local cost 0.177 · the strongest point in the real set, within 0.03 of its Study 15 value" },
-			{ x: 2.63, y: 0.207, color: "#199e70", label: "eat-all-the-clocks", tip: "eat-all-the-clocks, the band's corrected chart on its own recording · ratio 2.63, median local cost 0.207 · above its Study 15 value, as registered: the chart only got truer" },
-			{ x: 1.96, y: 0.248, color: "#199e70", hollow: true, label: "mop-heart (exploratory)", tip: "mop-heart, first alignment ever: 3/4 at 224 bpm with a mid-chart key change · ratio 1.96, median local cost 0.248 · passes both clauses, exactly as predicted" },
-			{ x: 1.13, y: 0.475, color: "#e66767", tip: "letter-lands recording against the peaceful-dreams chart · ratio 1.13, median local cost 0.475 · fails both clauses" },
-			{ x: 1.21, y: 0.439, color: "#e66767", tip: "letter-lands recording against the eat-all-the-clocks chart · ratio 1.21, median local cost 0.439 · fails both clauses" },
-			{ x: 1.18, y: 0.397, color: "#e66767", tip: "peaceful-dreams recording against the letter-lands chart · ratio 1.18, median local cost 0.397 · fails both clauses" },
-			{ x: 1.55, y: 0.341, color: "#e66767", near: true, tip: "peaceful-dreams recording against the eat-all-the-clocks chart · ratio 1.55, five hundredths under the 1.6 gate · its median local cost of 0.341 sits above the 0.30 line, so the second clause catches it" },
-			{ x: 1.23, y: 0.333, color: "#e66767", tip: "eat-all-the-clocks recording against the letter-lands chart · ratio 1.23, median local cost 0.333 · fails both clauses" },
-			{ x: 1.57, y: 0.401, color: "#e66767", near: true, tip: "eat-all-the-clocks recording against the peaceful-dreams chart · ratio 1.57, three hundredths under the 1.6 gate · its median local cost of 0.401 sits well above the 0.30 line, so the second clause catches it" },
-			{ x: 1.19, y: 0.359, color: "#e66767", hollow: true, tip: "exploratory: mop-heart recording against the letter-lands chart · ratio 1.19, median local cost 0.359 · fails both clauses" },
-			{ x: 1.29, y: 0.437, color: "#e66767", hollow: true, tip: "exploratory: letter-lands recording against the mop-heart chart · ratio 1.29, median local cost 0.437 · fails both clauses" },
-			{ x: 1.56, y: 0.314, color: "#e66767", hollow: true, tip: "exploratory: peaceful-dreams recording against the mop-heart chart · ratio 1.56, median local cost 0.314 · fails both clauses, the cost clause by less than usual" },
-			{ x: 1.56, y: 0.341, color: "#e66767", hollow: true, tip: "exploratory: mop-heart recording against the eat-all-the-clocks chart · ratio 1.56, median local cost 0.341 · fails both clauses; it plots almost on top of the registered peaceful-against-eat pair at 1.55" },
-			{ x: 1.74, y: 0.323, color: "#e66767", hollow: true, headline: true, tip: "THE HEADLINE, exploratory: eat-all-the-clocks recording against the mop-heart chart · ratio 1.74, the first real wrong pair ABOVE the 1.6 ratio gate · rejected only by the second clause, median local cost 0.323 over the 0.30 line · production's shipped samePiece is still ratio-only, so the ask to AND the clause in is now urgent" },
+			{
+				x: 1.9,
+				y: 0.21,
+				color: "#199e70",
+				label: "letter-lands",
+				labelBelow: true,
+				tip: "letter-lands, migrated chart on its own recording · ratio 1.90, median local cost 0.210 · passes both clauses; Study 15's 2.04 moved by 0.14, inside the registered prediction, because the migrated chart's beat-level refinements change the rendered reference",
+			},
+			{
+				x: 3.18,
+				y: 0.177,
+				color: "#199e70",
+				label: "peaceful-dreams",
+				tip: "peaceful-dreams, migrated chart on its own recording · ratio 3.18, median local cost 0.177 · the strongest point in the real set, within 0.03 of its Study 15 value",
+			},
+			{
+				x: 2.63,
+				y: 0.207,
+				color: "#199e70",
+				label: "eat-all-the-clocks",
+				tip: "eat-all-the-clocks, the band's corrected chart on its own recording · ratio 2.63, median local cost 0.207 · above its Study 15 value, as registered: the chart only got truer",
+			},
+			{
+				x: 1.96,
+				y: 0.248,
+				color: "#199e70",
+				hollow: true,
+				label: "mop-heart (exploratory)",
+				tip: "mop-heart, first alignment ever: 3/4 at 224 bpm with a mid-chart key change · ratio 1.96, median local cost 0.248 · passes both clauses, exactly as predicted",
+			},
+			{
+				x: 1.13,
+				y: 0.475,
+				color: "#e66767",
+				tip: "letter-lands recording against the peaceful-dreams chart · ratio 1.13, median local cost 0.475 · fails both clauses",
+			},
+			{
+				x: 1.21,
+				y: 0.439,
+				color: "#e66767",
+				tip: "letter-lands recording against the eat-all-the-clocks chart · ratio 1.21, median local cost 0.439 · fails both clauses",
+			},
+			{
+				x: 1.18,
+				y: 0.397,
+				color: "#e66767",
+				tip: "peaceful-dreams recording against the letter-lands chart · ratio 1.18, median local cost 0.397 · fails both clauses",
+			},
+			{
+				x: 1.55,
+				y: 0.341,
+				color: "#e66767",
+				near: true,
+				tip: "peaceful-dreams recording against the eat-all-the-clocks chart · ratio 1.55, five hundredths under the 1.6 gate · its median local cost of 0.341 sits above the 0.30 line, so the second clause catches it",
+			},
+			{
+				x: 1.23,
+				y: 0.333,
+				color: "#e66767",
+				tip: "eat-all-the-clocks recording against the letter-lands chart · ratio 1.23, median local cost 0.333 · fails both clauses",
+			},
+			{
+				x: 1.57,
+				y: 0.401,
+				color: "#e66767",
+				near: true,
+				tip: "eat-all-the-clocks recording against the peaceful-dreams chart · ratio 1.57, three hundredths under the 1.6 gate · its median local cost of 0.401 sits well above the 0.30 line, so the second clause catches it",
+			},
+			{
+				x: 1.19,
+				y: 0.359,
+				color: "#e66767",
+				hollow: true,
+				tip: "exploratory: mop-heart recording against the letter-lands chart · ratio 1.19, median local cost 0.359 · fails both clauses",
+			},
+			{
+				x: 1.29,
+				y: 0.437,
+				color: "#e66767",
+				hollow: true,
+				tip: "exploratory: letter-lands recording against the mop-heart chart · ratio 1.29, median local cost 0.437 · fails both clauses",
+			},
+			{
+				x: 1.56,
+				y: 0.314,
+				color: "#e66767",
+				hollow: true,
+				tip: "exploratory: peaceful-dreams recording against the mop-heart chart · ratio 1.56, median local cost 0.314 · fails both clauses, the cost clause by less than usual",
+			},
+			{
+				x: 1.56,
+				y: 0.341,
+				color: "#e66767",
+				hollow: true,
+				tip: "exploratory: mop-heart recording against the eat-all-the-clocks chart · ratio 1.56, median local cost 0.341 · fails both clauses; it plots almost on top of the registered peaceful-against-eat pair at 1.55",
+			},
+			{
+				x: 1.74,
+				y: 0.323,
+				color: "#e66767",
+				hollow: true,
+				headline: true,
+				tip: "THE HEADLINE, exploratory: eat-all-the-clocks recording against the mop-heart chart · ratio 1.74, the first real wrong pair ABOVE the 1.6 ratio gate · rejected only by the second clause, median local cost 0.323 over the 0.30 line · production's shipped samePiece is still ratio-only, so the ask to AND the clause in is now urgent",
+			},
 		];
 		byId("legend-s16").innerHTML =
 			'<span class="key"><span class="chip" style="background:#199e70"></span>right chart on its own recording, registered (3)</span>' +
@@ -925,15 +1014,65 @@ export function initStemCharts() {
 			XMAX = 3.4,
 			YMAX = 0.55;
 		const POINTS = [
-			{ x: 2.04, y: 0.243, color: "#199e70", label: "letter-lands", tip: "letter-lands, right chart on its own recording · ratio 2.04, median local cost 0.243 · passes both clauses" },
-			{ x: 3.21, y: 0.172, color: "#199e70", label: "peaceful-dreams", tip: "peaceful-dreams, the band's machine-true revision on its own recording · ratio 3.21, median local cost 0.172 · the strongest point in the real set, and the song that qualified as the second gated chart" },
-			{ x: 2.53, y: 0.224, color: "#199e70", label: "eat-all-the-clocks", tip: "eat-all-the-clocks, right chart on its own recording · ratio 2.53, median local cost 0.224 · lands near the 2.5 the bench predicted" },
-			{ x: 1.13, y: 0.47, color: "#e66767", tip: "letter-lands recording against the peaceful-dreams chart · ratio 1.13, median local cost 0.470 · fails both clauses" },
-			{ x: 1.17, y: 0.482, color: "#e66767", tip: "letter-lands recording against the eat-all-the-clocks chart · ratio 1.17, median local cost 0.482 · fails both clauses" },
-			{ x: 1.15, y: 0.456, color: "#e66767", tip: "peaceful-dreams recording against the letter-lands chart · ratio 1.15, median local cost 0.456 · fails both clauses" },
-			{ x: 1.58, y: 0.365, color: "#e66767", near: true, tip: "peaceful-dreams recording against the eat-all-the-clocks chart · ratio 1.58, two hundredths under the 1.6 constant · its median local cost of 0.365 sits well above the 0.30 line, so the second clause catches it comfortably" },
-			{ x: 1.24, y: 0.417, color: "#e66767", tip: "eat-all-the-clocks recording against the letter-lands chart · ratio 1.24, median local cost 0.417 · fails both clauses" },
-			{ x: 1.57, y: 0.4, color: "#e66767", near: true, tip: "eat-all-the-clocks recording against the peaceful-dreams chart · ratio 1.57, three hundredths under the 1.6 constant · its median local cost of 0.400 sits well above the 0.30 line, so the second clause catches it comfortably" },
+			{
+				x: 2.04,
+				y: 0.243,
+				color: "#199e70",
+				label: "letter-lands",
+				tip: "letter-lands, right chart on its own recording · ratio 2.04, median local cost 0.243 · passes both clauses",
+			},
+			{
+				x: 3.21,
+				y: 0.172,
+				color: "#199e70",
+				label: "peaceful-dreams",
+				tip: "peaceful-dreams, the band's machine-true revision on its own recording · ratio 3.21, median local cost 0.172 · the strongest point in the real set, and the song that qualified as the second gated chart",
+			},
+			{
+				x: 2.53,
+				y: 0.224,
+				color: "#199e70",
+				label: "eat-all-the-clocks",
+				tip: "eat-all-the-clocks, right chart on its own recording · ratio 2.53, median local cost 0.224 · lands near the 2.5 the bench predicted",
+			},
+			{
+				x: 1.13,
+				y: 0.47,
+				color: "#e66767",
+				tip: "letter-lands recording against the peaceful-dreams chart · ratio 1.13, median local cost 0.470 · fails both clauses",
+			},
+			{
+				x: 1.17,
+				y: 0.482,
+				color: "#e66767",
+				tip: "letter-lands recording against the eat-all-the-clocks chart · ratio 1.17, median local cost 0.482 · fails both clauses",
+			},
+			{
+				x: 1.15,
+				y: 0.456,
+				color: "#e66767",
+				tip: "peaceful-dreams recording against the letter-lands chart · ratio 1.15, median local cost 0.456 · fails both clauses",
+			},
+			{
+				x: 1.58,
+				y: 0.365,
+				color: "#e66767",
+				near: true,
+				tip: "peaceful-dreams recording against the eat-all-the-clocks chart · ratio 1.58, two hundredths under the 1.6 constant · its median local cost of 0.365 sits well above the 0.30 line, so the second clause catches it comfortably",
+			},
+			{
+				x: 1.24,
+				y: 0.417,
+				color: "#e66767",
+				tip: "eat-all-the-clocks recording against the letter-lands chart · ratio 1.24, median local cost 0.417 · fails both clauses",
+			},
+			{
+				x: 1.57,
+				y: 0.4,
+				color: "#e66767",
+				near: true,
+				tip: "eat-all-the-clocks recording against the peaceful-dreams chart · ratio 1.57, three hundredths under the 1.6 constant · its median local cost of 0.400 sits well above the 0.30 line, so the second clause catches it comfortably",
+			},
 		];
 		byId("legend-s15").innerHTML =
 			'<span class="key"><span class="chip" style="background:#199e70"></span>right chart on its own recording (3)</span>' +
@@ -1043,8 +1182,18 @@ export function initStemCharts() {
 		const MIN = 1.0,
 			MAX = 3.4;
 		const ITEMS = [
-			{ label: "wrong charts, real", vals: [1.17, 1.24], color: "#e66767", tip: "the real-domain wrong pairs Amendment 1 added: 1.17 and 1.24 · the registered pairs could not see the collapse, which is why the amendment exists" },
-			{ label: "right charts, real", vals: [2.04, 2.53], color: "#199e70", tip: "the band's own correct charts on their real recordings: 2.04 and 2.53, both BELOW the shipped threshold of 3, so samePiece called them mismatches and hedged everything · on synthetic audio the same right charts score 24 to 49, far off this axis: the home-field lesson, third appearance" },
+			{
+				label: "wrong charts, real",
+				vals: [1.17, 1.24],
+				color: "#e66767",
+				tip: "the real-domain wrong pairs Amendment 1 added: 1.17 and 1.24 · the registered pairs could not see the collapse, which is why the amendment exists",
+			},
+			{
+				label: "right charts, real",
+				vals: [2.04, 2.53],
+				color: "#199e70",
+				tip: "the band's own correct charts on their real recordings: 2.04 and 2.53, both BELOW the shipped threshold of 3, so samePiece called them mismatches and hedged everything · on synthetic audio the same right charts score 24 to 49, far off this axis: the home-field lesson, third appearance",
+			},
 		];
 		byId("legend-s14").innerHTML =
 			'<span class="key"><span class="chip" style="background:#e66767"></span>wrong charts (real recordings)</span>' +
@@ -1143,15 +1292,27 @@ export function initStemCharts() {
 		const GROUPS = [
 			{
 				label: "synthetic bench",
-				rows: [{ name: "matcher at home", v: 95.8, color: "#8b93a3", note: "95.8%" }],
+				rows: [
+					{ name: "matcher at home", v: 95.8, color: "#8b93a3", note: "95.8%" },
+				],
 				tip: "Basic Pitch + the v0.142 matcher on the synthetic bench: 95.8%, the Study 10 winner over the neural reader · the material its templates were born on",
 			},
 			{
 				label: "real recording (76 bars)",
 				rows: [
 					{ name: "matcher alone", v: 38.2, color: "#e66767", note: "29/76" },
-					{ name: "+ gemini reconciler", v: 47.4, color: "#c98500", note: "36/76" },
-					{ name: "+ fable reconciler", v: 53.9, color: "#199e70", note: "41/76" },
+					{
+						name: "+ gemini reconciler",
+						v: 47.4,
+						color: "#c98500",
+						note: "36/76",
+					},
+					{
+						name: "+ fable reconciler",
+						v: 53.9,
+						color: "#199e70",
+						note: "41/76",
+					},
 				],
 				tip: "the real letter-lands recording: the matcher reads 29/76 (strict-first 20; the power-chord allowance did 9 bars of work) · one text-only reconciler pass lifts it to 36/76 (gemini, 7 fixes 0 breaks) and 41/76 (fable, 12 fixes 0 breaks across 27 changed bars) · the binding constraint is the transcription on real timbres",
 			},
@@ -1741,7 +1902,7 @@ export function initStemCharts() {
 			'"></span>LinkSeg 7-class (published neural segmenter, CC-BY, 1.5 MB)</span>' +
 			'<span class="key"><span class="chip" style="background:' +
 			CACT +
-			'"></span>D-activity (Study 9\'s per-stem detector, zero cost)</span>' +
+			"\"></span>D-activity (Study 9's per-stem detector, zero cost)</span>" +
 			legendNote(
 				"false section boundaries invented, total per arm · the same two instruments swap verdicts when the material changes domain, which is why the amendment existed: neither home field decides alone · detection rates, the other three gates and the amended guidance are in the table",
 			);
@@ -2034,16 +2195,8 @@ export function initStemCharts() {
 					"14/14 found, every placement within 4 s · noise 0.53/item vs the registered 0.50 bound: FAIL, eight false boundaries where it allowed seven and a half",
 					"14/14 · 0.47/item · passes",
 				],
-				[
-					"blind: texture-contrast boundaries",
-					"7/8",
-					"8/8",
-				],
-				[
-					"blind: harmonic/tempo-change boundaries",
-					"3/6",
-					"3/6",
-				],
+				["blind: texture-contrast boundaries", "7/8", "8/8"],
+				["blind: harmonic/tempo-change boundaries", "3/6", "3/6"],
 				[
 					"blind false boundaries per item",
 					"3.3 (3 to 6 invented sections per uniform loop)",
@@ -2246,6 +2399,163 @@ export function initStemCharts() {
 		],
 		"148 existing reader texts (52 corrupted, 96 clean) from Studies 3 and 5; expected labels mechanical from the committed specs; zero model calls. Undetectable reads are stub texts that never reach the rule's eight-chord floor.",
 	);
+
+	// --- Study 17: the cliff, the successors, and the reconciler's first breaks ---
+	(() => {
+		const GROUPS = [
+			{
+				label: "production today",
+				rows: [
+					{
+						name: "Basic Pitch + matcher",
+						v: 38.2,
+						color: "#e66767",
+						note: "29/76",
+					},
+					{
+						name: "+ the reconciler (Study 14)",
+						v: 57.9,
+						color: "#c98500",
+						note: "44/76",
+					},
+				],
+				tip: "the anchor, reproduced to the digit before any new number was read (gate S17-G1 PASS exact): the shipped chord path at 29/76 on the gated real recording, and production's reconciled ceiling at 44/76",
+			},
+			{
+				label: "the successors, registered grade",
+				rows: [
+					{
+						name: "per-stem Basic Pitch",
+						v: 42.1,
+						color: "#8b93a3",
+						note: "32/76",
+					},
+					{
+						name: "bar-pooled chroma",
+						v: 0,
+						color: "#8b93a3",
+						note: "0/76 (roots 68/76)",
+					},
+					{
+						name: "ChordMini on the mix",
+						v: 77.6,
+						color: "#199e70",
+						note: "59/76",
+					},
+				],
+				tip: "per-stem helps here (no vocal stem) and falls to 15/86 on the exploratory song, whose vocal stem's transcribed melody pollutes the merged harmony · chroma holds 68/76 roots but dresses them in hallucinated sevenths, the disclosed self-proof class at full scale · ChordMini passes the successor gate (37) and production's reconciled number (44): gates S17-G2 and S17-G3 both PASS",
+			},
+			{
+				label: "the reconciler stacked on ChordMini",
+				rows: [
+					{
+						name: "4 fixes, 16 breaks",
+						v: 61.8,
+						color: "#e66767",
+						note: "47/76",
+					},
+				],
+				tip: "gate S17-G4 FAIL, the reconciler's first breaks in three studies: ChordMini's chords are better than the transcribed notes support, so a pass that corrects the chords toward the notes destroys information · on the exploratory song it changed nothing",
+			},
+		];
+		const BAR = 14,
+			GAP = 4,
+			GPAD = 18,
+			T = 8,
+			B = 42,
+			L = 255,
+			R = 118,
+			W = 880;
+		let totalRows = 0;
+		for (const g0 of GROUPS) totalRows += g0.rows.length;
+		const H = T + totalRows * (BAR + GAP) + GROUPS.length * GPAD + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 50, 100]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+		}
+		byId("legend-s17").innerHTML =
+			'<span class="key"><span class="chip" style="background:#e66767"></span>the current path, and the harmful stack</span>' +
+			'<span class="key"><span class="chip" style="background:#c98500"></span>production’s reconciled ceiling</span>' +
+			'<span class="key"><span class="chip" style="background:#8b93a3"></span>successor arms that lost</span>' +
+			'<span class="key"><span class="chip" style="background:#199e70"></span>ChordMini on the mix, the rematch winner</span>' +
+			legendNote(
+				"bar-level chord accuracy on the gated real recording (letter-lands, 76 bars) · every arm shares Study 12’s bar grid and Study 13’s grader · arms A to D cost nothing; the whole study ran at about $0.30",
+			);
+		let marks = "";
+		let hits = "";
+		let y = T;
+		GROUPS.forEach((grp) => {
+			const top = y;
+			grp.rows.forEach((row) => {
+				g += `<text class="chart-tick" x="${L - 12}" y="${y + BAR - 3}" text-anchor="end">${row.name}</text>`;
+				const w = Math.max((row.v / 100) * iw, 2);
+				marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${row.color}" rx="3"/>`;
+				marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 3}">${row.note}</text>`;
+				y += BAR + GAP;
+			});
+			hits += `<rect x="${L}" y="${top}" width="${iw}" height="${y - top - GAP}" fill="transparent" data-tip="${esc(grp.label + "\n" + grp.tip)}"/>`;
+			y += GPAD;
+		});
+		const el = byId("fig-rematch");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart of chord accuracy on the real recording: the current path reads 38.2 percent and production's reconciled ceiling is 57.9 percent; among the successors, per-stem transcription reads 42.1 percent, bar-pooled chroma zero, and ChordMini on the mix 77.6 percent; stacking the reconciler on ChordMini falls back to 61.8 percent with sixteen broken bars.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the rematch in one frame: the neural reader that lost every synthetic comparison reads the real recording at 78 percent, past the reconciled ceiling of the shipped path, and the reconciler that never broke a bar in two studies breaks sixteen the moment the draft no longer comes from the notes it reads",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-rematch",
+			["cell", "result", "the read"],
+			[
+				[
+					"S17-G1: the anchor",
+					"arm A reproduces Study 13 arm 1 to the digit: 29/76 (strict-first 20, power allowance 9), exploratory 24/86 · PASS exact",
+					"the instrument proved before any new number was read; the pipeline is deterministic end to end",
+				],
+				[
+					"S17-G2 and G3: a successor exists, and beats code-plus-model",
+					"ChordMini on the mix: 59/76 (77.6%) gated, 53/86 exploratory · both PASS",
+					"past the 37/76 successor gate AND production's reconciled 44/76, so the front-end swap outranks the reconciler in ship order · Study 10's synthetic verdict reversed, the home-field lesson's third instrument class · the disclosed harmonic-sum read won the gated song and collapsed exploratory, so the registered mix choice survives",
+				],
+				[
+					"the anatomy: roots, not dressings",
+					"gated truth: 74 power-chord and 50 sus4 slots · ChordMini's credit all through the power-chord allowance (strict-first 0) · disclosed root-only read: current path 53/76, per-stem 65, chroma 68, ChordMini 70 (75/84 exploratory)",
+					"every successor out-reads the anchor at the root level; the registered differences are quality dressing, and ChordMini will never spell F#5 or Esus4, so the draft layer decides the dressing",
+				],
+				[
+					"arm C: bar-pooled chroma into the shipped matcher",
+					"0/76 registered while holding 68/76 roots",
+					"right roots dressed in hallucinated sevenths, the exact over-read class the pre-registration self-proof surfaced and the brief disclosed; a quality fix needs a tuned mass threshold the arm was registered not to have, so it belongs to a registered follow-up or nowhere",
+				],
+				[
+					"arm B: per-stem transcription",
+					"32/76 gated (up from 29) · 15/86 exploratory (down from 24)",
+					"the split is legible: the gated song has no vocal stem, the exploratory one does, and transcribed melody pollutes the merged harmony · one song each way is a hypothesis, with a rule attached: vocal-labeled stems stay out of chord evidence",
+				],
+				[
+					"S17-G4: the reconciler stacked on the winner",
+					"59 → 47/76: 4 fixes, 16 breaks · FAIL, the first breaks in three studies",
+					"ChordMini's chords are better than the transcribed notes support, so correcting toward the notes destroys information; the reconciler's value is conditional on its evidence channel producing the draft, and it stays on the Basic Pitch path only",
+				],
+				[
+					"the scorecard, and the ledger",
+					"predictions 2 right, 1 half, 3 wrong (the reconciler clause wrong in the instructive direction: 2 or fewer breaks predicted, 16 measured) · ~$0.30 of the $2 fence · 650 cells",
+					"ship guidance delivered: ChordMini on the mix as the real-recording chord front end (~30 MB pinned ONNX, 4 to 6 s a song on CPU, zero API spend), a root-plus-power draft layer, and no reconciler on its output",
+				],
+			],
+		);
+	})();
 
 	// Legend title post-pass (idempotent), mirroring bench-charts.js.
 	document.querySelectorAll(".chart-legend").forEach((el) => {

@@ -795,13 +795,17 @@
 						},
 						{
 							"heading": "The Scorecard, and the Ledger",
-							"html": "The registered scorecard ran against the draft's hopes: prediction 3 right in full including the one-profile detail, 1 wrong at the registered letter and right at the disclosed wider read, 2 wrong in both clauses, 4 wrong except the hard-set edge, 5 half-right with the zero-false clause failing much harder than predicted, 6 wrong in the happy direction. The ledger: zero dollars in both arms, about 30 MB of hash-pinned weights, an 800 MB public-audio fetch with hashes committed, and the detector thread that began with Study 4 now closed end to end: the models read, the detectors hear, and every shipped choice is a measured one. The octave classes this study left standing were then retired by representation in <a href=\"/research/stem-bench/11\">Study 11</a>'s tempo ladder."
+							"html": "The registered scorecard ran against the draft's hopes: prediction 3 right in full including the one-profile detail, 1 wrong at the registered letter and right at the disclosed wider read, 2 wrong in both clauses, 4 wrong except the hard-set edge, 5 half-right with the zero-false clause failing much harder than predicted, 6 wrong in the happy direction. The ledger: zero dollars in both arms, about 30 MB of hash-pinned weights, an 800 MB public-audio fetch with hashes committed, and the detector thread that began with Study 4 now closed end to end: the models read, the detectors hear, and every shipped choice is a measured one. The octave classes this study left standing were then retired by representation in <a href=\"/research/stem-bench/11\">Study 11</a>'s tempo ladder. And the chord gate's synthetic verdict was reversed on real audio by <a href=\"/research/stem-bench/17\">Study 17</a>: ChordMini, the loser here, reads a real recording at 77.6 percent against the matcher path's 38.2, the rematch lesson's third instrument class."
 						}
 					]
 				}
 			],
 			"published": "2026-10-29",
 			"related": [
+				{
+					"title": "Study 17: the chord rematch on real audio",
+					"href": "/research/stem-bench/17"
+				},
 				{
 					"title": "Study 13: the chord numbers on real audio",
 					"href": "/research/stem-bench/13"
@@ -1195,7 +1199,7 @@
 						},
 						{
 							"heading": "Ship Guidance",
-							"html": "Two findings, delivered in order of weight. First, chord drafts on real user audio are far weaker than any synthetic number suggested, and that reframes the feature's honest quality bar: a UI hedge is worth shipping now, regardless of anything else. Second, the reconciler is real and cheap, a text-only pass by the model production already runs for chart drafts, lifting the real-audio number 16 points with zero breaks for about a cent a song: ship it inside the chart-draft job, symbols in and symbols out, keep the detector's chord whenever the model's answer parses to nothing, and cap output generously. The honest ceiling stands: 54 percent reconciled is better, not good, and if the chord feature matters, the next investment is a stronger transcription on real timbres, not more model."
+							"html": "Two findings, delivered in order of weight. First, chord drafts on real user audio are far weaker than any synthetic number suggested, and that reframes the feature's honest quality bar: a UI hedge is worth shipping now, regardless of anything else. Second, the reconciler is real and cheap, a text-only pass by the model production already runs for chart drafts, lifting the real-audio number 16 points with zero breaks for about a cent a song: ship it inside the chart-draft job, symbols in and symbols out, keep the detector's chord whenever the model's answer parses to nothing, and cap output generously. The honest ceiling stands: 54 percent reconciled is better, not good, and if the chord feature matters, the next investment is a stronger transcription on real timbres, not more model. <a href=\"/research/stem-bench/17\">Study 17</a> has since made that investment and measured it: a zero-model neural front end reads the same recording at 77.6 percent, past this study's reconciled ceiling, and the reconciler stays valid only on the note path that feeds it."
 						},
 						{
 							"heading": "The Scorecard, and the Arc Note",
@@ -1206,6 +1210,10 @@
 			],
 			"published": "2026-10-30",
 			"related": [
+				{
+					"title": "Study 17: the transcription successor, measured",
+					"href": "/research/stem-bench/17"
+				},
 				{
 					"title": "Study 14: the reconciler re-measured under production config",
 					"href": "/research/stem-bench/14"
@@ -1526,6 +1534,82 @@
 			],
 			"brief": "docs/BRIEF-STUDY16B.md",
 			"quote": "The bench asked for the clause, the product shipped it citing the escapee by name, and the ported ship ran the full matrix perfect: the wrong pair that crossed the ratio gate is closed by production code, and nothing else moved."
+		},
+		{
+			"slug": "17",
+			"letters": "17",
+			"track": "Listening",
+			"title": "The transcription successor: the neural loser wins the real-audio rematch, and the reconciler meets its first breaks",
+			"eyebrow": "Study 17 · listening, the rematch · 650 cells",
+			"indexLine": "Study 13 named the transcription stage as the binding constraint on real-recording chord drafts and pointed the next investment at a successor, not more model. Study 17 measured three zero-model successors against the 38.2 percent cliff, and the rematch reversed Study 10: ChordMini, which lost the synthetic chord gate, reads the real recording at 77.6 percent, past production's reconciled ceiling of 44 of 76, so the front-end swap now outranks the reconciler in ship order. The anatomy matters as much as the number: the band writes roots, not sevenths, and every successor out-reads the anchor at the root level while differing in the dressing. And the gate built against the agreement trap finally caught something: stacked on ChordMini's chords, the reconciler that never broke a bar in two studies broke sixteen, because its note evidence no longer produced the draft it was correcting.",
+			"sections": [
+				{
+					"id": "sec-stem-study17",
+					"eyebrow": "Listening, the rematch",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s17",
+					"figure": {
+						"id": "fig-rematch",
+						"title": "The Cliff, the Successors, and the Reconciler's First Breaks on the Real Recording"
+					},
+					"table": {
+						"id": "tbl-rematch",
+						"summary": "All four gates, the root-only anatomy, the per-arm reads, the reconciler's breaks, and the ship guidance"
+					},
+					"body": [
+						{
+							"heading": "The Question Study 13 Left",
+							"html": "Study 13's closing guidance was explicit: if the chord feature matters, the next investment is Basic Pitch's successor on real timbres, not more model. Study 17 measured three zero-model successors, all built from things production already holds: per-stem transcription (the app stores the stems separately, and Study 13's path summed them first, feeding Basic Pitch the polyphonic mixture it fails on), bar-pooled chroma into production's own template matcher (nothing requires its 12-bin profile to come from transcribed notes), and ChordMini, the neural reader that lost Study 10's synthetic chord gate and had never been scored on real audio with bar-aligned chord truth, because that truth did not exist until Study 12. A conditional reconciler arm rode on the winner. The anchor gate passed exactly: the current path reproduced Study 13 arm 1 to the digit, 29 of 76 gated and 24 of 86 exploratory, before any new number was read."
+						},
+						{
+							"heading": "The Rematch",
+							"html": "ChordMini on the mix, its native domain, reads the gated recording at 59 of 76 bars, 77.6 percent, and the exploratory song at 53 of 86. That passes the successor gate at 37 with twenty-two bars to spare and, more consequentially, passes 44 of 76, production's reconciled number from Study 14: a zero-model front end now beats code plus model, which flips the ship order. Study 10's synthetic verdict reversed on real audio, the home-field lesson's third instrument class after sections (LinkSeg) and the same-piece constant, and the rule is now three for three: no detector decision for real recordings gets made on synthetic numbers. A disclosed secondary read on the summed harmonic audio beat the mix on the gated song and collapsed on the exploratory one, so the registered choice of the mix survives its own alternative."
+						},
+						{
+							"heading": "Roots, Not Dressings",
+							"html": "The gated chart's truth is 74 power-chord and 50 sus4 slots in 76 bars: this band writes roots and colors, not sevenths. ChordMini's gated credit came entirely through the registered power-chord allowance, with zero strict-first matches, because its vocabulary is root-level triads; it will never spell F#5 or Esus4, so the draft layer decides the dressing. A disclosed root-only read makes the real ranking visible: the current path holds 53 of 76 roots, per-stem 65, chroma 68, ChordMini 70, and 75 of 84 on the exploratory song. Every successor out-reads the anchor at the root level; the registered differences are quality dressing. The sharpest case is the chroma arm: 0 of 76 under the registered grade while holding 68 of 76 roots, because its pooled mass dresses nearly every right root in a hallucinated seventh, the exact over-read class its pre-registration self-proof surfaced and the brief disclosed, and the allowance admits only major, minor and power qualities. A quality fix needs a tuned mass threshold, which the arm was registered not to have, so it belongs to a registered follow-up or nowhere. Per-stem transcription split by stem inventory, and the mechanism is legible: letter-lands has no vocal stem and improved to 32; eat-all-the-clocks includes one, whose transcribed melody pollutes the merged harmony, and fell to 15 of 86. One song each way is a hypothesis, not a finding, but it ships with a rule attached: if per-stem transcription goes anywhere, vocal-labeled stems stay out of the chord evidence."
+						},
+						{
+							"heading": "The Reconciler's First Breaks",
+							"html": "Arm E stacked Study 14's measured production reconciler path on the winner, with the registered design choice disclosed in the brief: ChordMini produces no note events, so the model saw ChordMini's chords beside the current path's transcribed note lines. The result is the study's most instructive number: 59 fell to 47, four fixes against sixteen breaks, the first breaks in three studies of reconciler runs, and the double-fix gate registered against Study 9's agreement trap failed for the first time, exactly as built. The mechanism is clean: ChordMini's chords are better than the transcribed notes support, so a pass that corrects the chords toward the notes destroys information. On the exploratory song it changed nothing. The reconciler's measured value is conditional on its evidence channel being the one that produced the draft, and the verdict delivered to the app says so: keep it on the Basic Pitch path it was measured on, and never run it on a non-note front end."
+						},
+						{
+							"heading": "Ship Guidance, and the Scorecard",
+							"html": "Delivered to Stem Shovel in order of weight: ChordMini on the mix is the measured chord front end for real recordings, about 30 MB of hash-pinned ONNX weights already vendored since Study 10, four to six seconds a song on CPU, zero API spend, lifting the real number from 38 to 78 percent registered and from 53 to 70 of 76 at the root level; its root-level vocabulary ships with it, so the chart-draft layer renders the dressing, and for this catalog root-plus-power spelling covers most of the page; and the reconciler stays off its output. The scorecard kept the program honest: two predictions right, one half, three wrong, with the chroma favorite scoring zero under the registered grade and the reconciler prediction wrong in the instructive direction, two or fewer breaks predicted against sixteen measured. About $0.30 of the $2 fence, all of it in the two reconciler calls; arms A through D cost nothing."
+						}
+					]
+				}
+			],
+			"published": "2026-11-05",
+			"related": [
+				{
+					"title": "Study 13: the cliff this study attacks",
+					"href": "/research/stem-bench/13"
+				},
+				{
+					"title": "Study 10: the synthetic verdict this study reverses",
+					"href": "/research/stem-bench/10"
+				},
+				{
+					"title": "Study 14: the reconciled ceiling the winner passes",
+					"href": "/research/stem-bench/14"
+				},
+				{
+					"title": "Study 12: the bar grid every arm shares",
+					"href": "/research/stem-bench/12"
+				},
+				{
+					"title": "Stem Shovel, the product under test",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY17.md",
+			"quote": "The detector that lost every synthetic comparison read the real recording at 78 percent, and the reconciler that never broke a bar broke sixteen the moment the draft no longer came from the notes it reads. Both verdicts were only visible on real audio."
 		}
 	]
 }
