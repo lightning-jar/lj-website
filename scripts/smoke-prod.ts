@@ -31,12 +31,24 @@
  * The concierge check deliberately does not POST: that would spend AI
  * Gateway credits every 30 minutes. A 405 still proves the route module
  * imported, which is the init-time class this probe exists for.
+ *
+ * Vercel's Security Checkpoint can challenge plain requests from this VM
+ * (403/429 + x-vercel-mitigated: challenge), which reads like an outage but
+ * is not one. The smoketest bypass token (SMOKETEST_TOKEN, or
+ * ~/.lj-smoketest-token) is sent as x-smoketest-token, matched by a WAF
+ * custom rule with action `bypass` on GET requests (same pattern as
+ * slx-web). It is sent ONLY to the production origin, never to a --base
+ * override, so a hostile --base cannot harvest it.
  */
 
 import {
 	assessDeployFreshness,
 	parseLiveSha,
 } from "#lib/utils/deployFreshness.js";
+
+import { existsSync, readFileSync } from "node:fs";
+import { homedir } from "node:os";
+import { join } from "node:path";
 
 const PROD = "https://www.lightningjar.com";
 const baseArg = process.argv.find((a) => a.startsWith("--base="));
@@ -45,6 +57,33 @@ const TIMEOUT_MS = 15_000;
 // 48 articles at port time; a floor well below that catches "the CMS
 // answered with a near-empty list" without tripping on normal unpublishing.
 const MIN_BLOG = 10;
+
+function smoketestToken(): string | undefined {
+	const fromEnv = process.env.SMOKETEST_TOKEN?.trim();
+	if (fromEnv) return fromEnv;
+	const file = join(homedir(), ".lj-smoketest-token");
+	if (!existsSync(file)) return undefined;
+	return readFileSync(file, "utf8").trim() || undefined;
+}
+
+const TOKEN = BASE === PROD ? smoketestToken() : undefined;
+
+function baseHeaders(): Record<string, string> {
+	const h: Record<string, string> = {
+		"user-agent": "LightningJarProdSmoke/1.0 (+https://www.lightningjar.com)",
+	};
+	if (TOKEN) h["x-smoketest-token"] = TOKEN;
+	return h;
+}
+
+/** A Vercel challenge reads like a 403/429; name it as such. */
+function statusProblem(res: Response, want: number): string | null {
+	if (res.status === want) return null;
+	const mitigated = res.headers.get("x-vercel-mitigated");
+	return mitigated
+		? `status ${res.status}: Vercel ${mitigated} (firewall), not an app failure; check the smoketest token`
+		: `status ${res.status} (want ${want})`;
+}
 
 interface Check {
 	name: string;
@@ -57,13 +96,14 @@ async function probe(
 	name: string,
 	path: string,
 	expect: (res: Response, body: string) => string | null,
-	init: RequestInit = {},
+	init: RequestInit & { headers?: Record<string, string> } = {},
 ): Promise<void> {
 	try {
 		const res = await fetch(`${BASE}${path}`, {
 			redirect: "manual",
 			signal: AbortSignal.timeout(TIMEOUT_MS),
 			...init,
+			headers: { ...baseHeaders(), ...init.headers },
 		});
 		const body = await res.text();
 		const problem = expect(res, body);
@@ -89,7 +129,8 @@ function countEntryLinks(body: string, section: string): number {
 
 function listing(section: string, min: number) {
 	return (res: Response, body: string): string | null => {
-		if (res.status !== 200) return `status ${res.status} (want 200)`;
+		const bad = statusProblem(res, 200);
+		if (bad) return bad;
 		const n = countEntryLinks(body, section);
 		if (n < min) {
 			return `${n} entry links (want ≥ ${min}) — CMS fetch or API key likely failing`;
@@ -99,7 +140,8 @@ function listing(section: string, min: number) {
 }
 
 await probe("home", "/", (res, body) => {
-	if (res.status !== 200) return `status ${res.status} (want 200)`;
+	const bad = statusProblem(res, 200);
+	if (bad) return bad;
 	if (!body.includes("sentry-release=")) {
 		return "SSR shell marker missing (sentry-release)";
 	}
@@ -115,7 +157,8 @@ await probe(
 	"mcp",
 	"/mcp",
 	(res, body) => {
-		if (res.status !== 200) return `status ${res.status} (want 200)`;
+		const bad = statusProblem(res, 200);
+		if (bad) return bad;
 		if (!body.includes('"lightning-jar"')) {
 			return "initialize response missing serverInfo lightning-jar";
 		}
@@ -141,8 +184,7 @@ await probe(
 );
 
 await probe("concierge", "/api/concierge", (res) => {
-	if (res.status !== 405) return `status ${res.status} (want 405)`;
-	return null;
+	return statusProblem(res, 405);
 });
 
 // ---- deployed: is production serving what `production` holds? -------------
@@ -189,6 +231,7 @@ if (BASE === PROD) {
 	try {
 		// Cache-bust so a CDN copy can't report a sha that is no longer served.
 		const res = await fetch(`${BASE}/?deploy-check=${Date.now()}`, {
+			headers: baseHeaders(),
 			signal: AbortSignal.timeout(TIMEOUT_MS),
 		});
 		liveSha = parseLiveSha(await res.text());

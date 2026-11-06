@@ -201,6 +201,17 @@ Deployed to Vercel. Configuration in `vercel.ts` (typed via `@vercel/config`) in
 - No trailing slashes
 - Build/install commands and output directory
 
+**Firewall bypass for probes.** Vercel's Security Checkpoint sometimes
+challenges plain requests from this VM (403/429 with
+`x-vercel-mitigated: challenge`), which looks like an outage but is not.
+`scripts/smoke-prod.ts` sends the smoketest token (`SMOKETEST_TOKEN`, or
+`~/.lj-smoketest-token`, mode 0600) as an `x-smoketest-token` header, and
+only to `https://www.lightningjar.com`. A WAF custom rule ("Smoketest
+bypass", action `bypass`, header equals the token AND method GET, first in
+the list) lets it through. Same pattern as slx-web, but with a separate
+token. When checking a deploy by hand, send that header, or check the
+deployment in Vercel instead of polling the public domain in a loop.
+
 Server runtime pinned to `nodejs24.x` via the adapter's `runtime` option in
 `vite.config.ts`. Do not move this to a `config` export in
 `src/hooks.server.ts`: adapters only read `config` from route files, so a
