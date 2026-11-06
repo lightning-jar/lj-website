@@ -34,8 +34,8 @@
  *
  * Vercel's Security Checkpoint can challenge plain requests from this VM
  * (403/429 + x-vercel-mitigated: challenge), which reads like an outage but
- * is not one. The smoketest bypass token (SMOKETEST_TOKEN, or
- * ~/.lj-smoketest-token) is sent as x-smoketest-token, matched by a WAF
+ * is not one. The smoketest bypass token (SMOKETEST_TOKEN, from the
+ * 1Password environment via varlock) is sent as x-smoketest-token, matched by a WAF
  * custom rule with action `bypass` on GET requests (same pattern as
  * slx-web). It is sent ONLY to the production origin, never to a --base
  * override, so a hostile --base cannot harvest it.
@@ -46,10 +46,6 @@ import {
 	parseLiveSha,
 } from "#lib/utils/deployFreshness.js";
 
-import { existsSync, readFileSync } from "node:fs";
-import { homedir } from "node:os";
-import { join } from "node:path";
-
 const PROD = "https://www.lightningjar.com";
 const baseArg = process.argv.find((a) => a.startsWith("--base="));
 const BASE = (baseArg?.split("=")[1] ?? PROD).replace(/\/$/, "");
@@ -58,15 +54,8 @@ const TIMEOUT_MS = 15_000;
 // answered with a near-empty list" without tripping on normal unpublishing.
 const MIN_BLOG = 10;
 
-function smoketestToken(): string | undefined {
-	const fromEnv = process.env.SMOKETEST_TOKEN?.trim();
-	if (fromEnv) return fromEnv;
-	const file = join(homedir(), ".lj-smoketest-token");
-	if (!existsSync(file)) return undefined;
-	return readFileSync(file, "utf8").trim() || undefined;
-}
-
-const TOKEN = BASE === PROD ? smoketestToken() : undefined;
+const TOKEN =
+	BASE === PROD ? process.env.SMOKETEST_TOKEN?.trim() || undefined : undefined;
 
 function baseHeaders(): Record<string, string> {
 	const h: Record<string, string> = {
