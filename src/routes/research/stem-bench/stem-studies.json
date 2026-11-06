@@ -1584,6 +1584,10 @@
 			"published": "2026-11-05",
 			"related": [
 				{
+					"title": "Study 19: the app ships this chord reader, gated at perfect parity",
+					"href": "/research/stem-bench/19"
+				},
+				{
 					"title": "Study 18: the matcher floor rises beneath this ceiling",
 					"href": "/research/stem-bench/18"
 				},
@@ -1679,6 +1683,71 @@
 			],
 			"brief": "docs/BRIEF-STUDY18.md",
 			"quote": "The author hedged its own rule from reconstructed notes, the bench registered that hedge as its prediction, and the proper measurement overturned both: the presence rule earns real audio, the reconstruction was the artifact, and the shipped constants stand as measured."
+		},
+		{
+			"slug": "19",
+			"letters": "19",
+			"track": "Validation",
+			"title": "The ChordMini port gated: perfect frame parity, and the bench's numbers become the app's by measurement",
+			"eyebrow": "Study 19 · validation, the chord reader's port · 7,264 zero-spend cells",
+			"indexLine": "Study 17 made ChordMini on the mix the measured chord front end, and Stem Shovel shipped exactly that pipeline in TypeScript: librosa's constant-Q transform baked into a plan and evaluated in TS, the same hash-pinned network under a WebAssembly ONNX runtime in a child process, the reference smoothing, and the bench's own vote and label map. Study 19 gated the port, running the app's code as committed from a pinned worktree against the pinned Python reference. The result is the cleanest in the program: zero disagreeing frames across all four public mixes, 7,102 frames in all, and per-bar scores of 59 of 76 and 53 of 86, Study 17's registered numbers to the bar. The one difference found anywhere is which way the two implementations break an exact tie, and at both bars where it happens either reading grades right. The bench's real-audio chord numbers are now the app's own, by measurement rather than citation.",
+			"sections": [
+				{
+					"id": "sec-stem-study19",
+					"eyebrow": "Validation, the chord reader's port",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-chordmini-port",
+						"summary": "Both gates, the pre-registration map checks, the tie-break anatomy, and the ledger"
+					},
+					"body": [
+						{
+							"heading": "The Port, and What Gating It Means",
+							"html": "Study 17's verdict was that the neural chord reader on the original mix beats everything the note path can reach on real audio. The app acted on it: version 0.236.0 reads a song's chords from its mix on the server, with the whole Study 17 pipeline rebuilt in TypeScript. The pieces that could drift are exactly the pieces that were rewritten: librosa's constant-Q transform became a baked plan of sparse kernels over a short-time Fourier transform, with a 255-tap Kaiser half-band filter standing in for the reference resampler; the network runs under a WebAssembly ONNX runtime instead of Python's; the smoothing and the per-bar vote were retyped. The app's brief asked the bench to gate the port so the bench's numbers remain the app's, and proposed the pass lines itself: frame agreement of at least 99.5 percent, and per-bar scores within one bar of Study 17. The brief promised a parity table from the app's own run and the committed file did not contain it, so every number in this study was measured fresh. The bench ran the app's code as committed, imported from a worktree pinned at the shipping commit, against the Python reference exactly as Study 10 pinned it, on the bench's own decoded audio, so the gates isolate the rewritten pieces."
+						},
+						{
+							"heading": "Perfect Parity",
+							"html": "Zero disagreeing frames. On all four public Badverbs mixes, 7,102 frames in total, the TypeScript pipeline's per-frame label equals the Python reference's, and the frame counts match exactly per song. The transform, the resampler, the inference and the smoothing reproduce numpy and librosa at the level that matters, the argmax. The registered prediction said at least 99.9 percent with any differences at window edges or label boundaries; the measurement left nothing to locate. On the two songs with chord truth, the app's per-bar vote reads 59 of 76 on the gated song and 53 of 86 on the exploratory one, Study 17's registered numbers to the bar rather than merely within the one-bar tolerance. The pre-registration checks had already pinned the label maps: the app's chart-symbol file is the bench's vocabulary map, 170 entries with zero differences, and the vocabulary order matches index for index."
+						},
+						{
+							"heading": "The Two Bars of Daylight",
+							"html": "The study's one finding beyond the passes came from an internal cross-check: the app's vote run over the reference's own frames, compared with the reference's own per-bar answer. They differ at exactly two bars of one song, and both bars are the same case, an exact five-to-five frame tie between F sharp major and F sharp minor. Numpy's argmax breaks a tie toward the lower vocabulary index and says F sharp minor; the app's vote breaks it toward the first label the bar encounters and says F sharp major. The truth at both bars is the power chord F sharp five, the grading allowance admits either reading, and the score is identical either way. Tie-break order on exact ties is the entire remaining daylight between the two implementations, and it is disclosed here rather than papered over."
+						},
+						{
+							"heading": "What Stands",
+							"html": "Ship stands, nothing to change. The standing rule from Study 17 rides along in the shipped code's own comments: the app never runs the AI reconciler on the model's chords, because the one measured attempt broke sixteen right bars. The chord numbers the dashboard cites for real audio, 77.6 percent on the gated song, now describe the production feature itself, not a Python harness that resembles it. Zero model calls, zero dollars, about thirty seconds of compute per song."
+						}
+					]
+				}
+			],
+			"published": "2026-11-06",
+			"related": [
+				{
+					"title": "Study 17: the rematch whose numbers this port carries",
+					"href": "/research/stem-bench/17"
+				},
+				{
+					"title": "Study 10: where ChordMini and the Python reference entered the bench",
+					"href": "/research/stem-bench/10"
+				},
+				{
+					"title": "Study 18: the same cross-agent loop on the matcher, the same day",
+					"href": "/research/stem-bench/18"
+				},
+				{
+					"title": "Stem Shovel, the product under test and this study's drafter",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY19.md",
+			"quote": "Seven thousand one hundred and two frames, zero disagreements, and the per-bar scores land on Study 17's numbers to the bar. The only daylight left between the port and the reference is which way an exact tie breaks, and at both bars where one happens, either answer is right."
 		}
 	]
 }

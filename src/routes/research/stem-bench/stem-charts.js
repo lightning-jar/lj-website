@@ -2346,6 +2346,44 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 19: the ChordMini port gated (no figure) ---
+	table(
+		"tbl-chordmini-port",
+		["cell", "result", "the read"],
+		[
+			[
+				"S19-G1: frame parity (pass line 99.5%, the app's own)",
+				"100.000% on all four public mixes: 0 of 7,102 frames differ (1,522 + 1,588 + 2,764 + 1,228), frame counts exact per song",
+				"the TS constant-Q transform (Kaiser resampler included), the wasm ONNX inference and the smoothing reproduce numpy + librosa at argmax level; the registered prediction said at least 99.9% with differences at window edges, and the measurement left nothing to locate",
+			],
+			[
+				"S19-G2: bar parity (within one of Study 17)",
+				"59/76 gated and 53/86 exploratory: Study 17's registered numbers to the bar, not merely within tolerance",
+				"the dashboard's real-audio chord numbers now describe the production feature itself, not a Python harness that resembles it",
+			],
+			[
+				"pre-registration map checks",
+				"the app's chart-symbol file is the bench's vocabulary map: 170 entries, zero diffs, index order equal",
+				"pinned before the run, so a label-mapping drift could not masquerade as model behavior",
+			],
+			[
+				"the tie-break anatomy (disclosed)",
+				"the app's vote on the reference's own frames differs from the reference's per-bar answer at exactly 2 bars of one song: both exact 5-to-5 frame ties between F# and F#m",
+				"numpy argmax breaks a tie toward the lower vocabulary index, the app's vote toward the first label the bar encounters; truth at both bars is F#5, either reading grades right, and tie order on exact ties is the entire remaining daylight",
+			],
+			[
+				"the standing rule",
+				"the app never runs the AI reconciler on the model's chords; the shipped code's comment carries Study 17 G4 (16 right bars broken)",
+				"restated, not re-gated; nothing here changes it",
+			],
+			[
+				"the ledger",
+				"$0, zero model calls, ~30 seconds of compute per song · 7,264 cells",
+				"drafted by the Stem Shovel agent (its promised parity table was missing from the committed brief, so these are the canonical numbers), registered and run by the bench from a worktree pinned at the shipping commit",
+			],
+		],
+	);
+
 	// --- Study 18: the v0.231 matcher rules on real audio (no figure) ---
 	table(
 		"tbl-matcher231",
