@@ -2346,6 +2346,49 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 18: the v0.231 matcher rules on real audio (no figure) ---
+	table(
+		"tbl-matcher231",
+		["cell", "result", "the read"],
+		[
+			[
+				"S18-G1: the anchor",
+				"v0.142 constants over re-transcribed notes: 29/76 (strict-first 20, power 9) and 24/86 · PASS exact, the third reproduction",
+				"every comparison sits on the stored footing, not the app's lossy barNotes reconstruction (whose baseline read 48/76)",
+			],
+			[
+				"S18-G2: the fixture table",
+				"424 / 432 / 432 / 439 / 439 of 440 across the five configurations, static-bloom 20 → 28 of 28 · PASS to the digit",
+				"re-derived through the bench's registered port, pinned bar for bar (440/440) to the retired matcher at the old constants; matcher3 fields added beside v0.141/v0.142",
+			],
+			[
+				"S18-G3: the bass rule alone (15% duration to earn the root bonus)",
+				"29 → 39/76 gated, 24 → 26/86 exploratory · PASS, both central estimates hit",
+				"the pickup class closed on real audio: a bar no longer renames after the chord that follows it",
+			],
+			[
+				"S18-G4: the presence rule (12% line, 0.12 cost)",
+				"shipped 41/76 + 30/86 = 71 vs bass-only 65: net +6 · PASS by the author's own registered decision rule",
+				"the overturned hedge: the handoff read this rule as a wash or a loss from reconstructed notes, and the bench registered that hedge as its prediction; both were wrong, the reconstruction was the artifact · strict-first rises 20 → 24 and 18 → 23, genuine readings, not allowance credit",
+			],
+			[
+				"the sweep (disclosed, ungated)",
+				"presentShare 0.08–0.15 × bassMinShare 0.10–0.25: shipped (0.12/0.15) on the plateau; bass 0.10 readmits pickups (41 → 37), bass 0.25 regresses the faster-bass song",
+				"no re-tuning recommended, none performed; the constants were set before the real measurement and survive it",
+			],
+			[
+				"the floor and the ceiling",
+				"the real chord path moves 38.2% → 53.9% gated, exactly Study 13's reconciled 41/76, from two constants and one duration check",
+				"ChordMini on the mix still reads 59/76 (+18), so Study 17's ship order is unchanged: v0.231.0 raises the shipped floor, the front-end swap remains the ceiling move · hint baseline for future studies moves 29 → 41",
+			],
+			[
+				"the ledger",
+				"$0, zero model calls, ~8 minutes of transcription CPU · 2,686 cells",
+				"drafted by the Stem Shovel agent from the bench's own fixture, registered and run by the bench: the cross-agent loop, fourth instrument class",
+			],
+		],
+	);
+
 	// --- Study 6b: the key-in-force rule on unseen pages (no figure) ---
 	table(
 		"tbl-keyinforce",

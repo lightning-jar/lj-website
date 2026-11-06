@@ -1,6 +1,6 @@
 {
 	"header": {
-		"eyebrow": "Stem Bench · pre-registered · corrected 2026-10-24 · studies 1 to 17",
+		"eyebrow": "Stem Bench · pre-registered · corrected 2026-10-24 · studies 1 to 18",
 		"lede": "The models read; they do not hear. Every hearing job Stem Shovel gave a model went to code or data, and the one place a model now improves the audio pipeline is a reading job.",
 		"intro": [
 			{
@@ -17,7 +17,7 @@
 			},
 			{
 				"heading": "Real Audio Resets the Ceiling",
-				"html": "Study&nbsp;13 measured the chord path on a real recording: 38.2 percent, against 95.8 on the synthetic bench, so every synthetic number in this series is a ceiling, not an estimate. A text-only reconciler pass then fixed twelve bars and broke none, the first time in the series a model improved a hearing result, and it did so by reading the pipeline's outputs rather than listening. Study&nbsp;17 then ran the rematch: the neural chord reader that lost the synthetic gate reads the same recording at 77.6 percent, past the reconciled ceiling, and the reconciler broke sixteen bars the moment the draft no longer came from the notes it reads."
+				"html": "Study&nbsp;13 measured the chord path on a real recording: 38.2 percent, against 95.8 on the synthetic bench, so every synthetic number in this series is a ceiling, not an estimate. A text-only reconciler pass then fixed twelve bars and broke none, the first time in the series a model improved a hearing result, and it did so by reading the pipeline's outputs rather than listening. Study&nbsp;17 then ran the rematch: the neural chord reader that lost the synthetic gate reads the same recording at 77.6 percent, past the reconciled ceiling, and the reconciler broke sixteen bars the moment the draft no longer came from the notes it reads. Study&nbsp;18 validated two matcher fixes the app found in the bench's own fixture: the shipped floor moved from 38.2 to 53.9 percent, worth as much as the reconciler pass, with the ceiling unchanged."
 			}
 		]
 	},

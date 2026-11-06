@@ -1584,6 +1584,10 @@
 			"published": "2026-11-05",
 			"related": [
 				{
+					"title": "Study 18: the matcher floor rises beneath this ceiling",
+					"href": "/research/stem-bench/18"
+				},
+				{
 					"title": "Study 13: the cliff this study attacks",
 					"href": "/research/stem-bench/13"
 				},
@@ -1610,6 +1614,71 @@
 			],
 			"brief": "docs/BRIEF-STUDY17.md",
 			"quote": "The detector that lost every synthetic comparison read the real recording at 78 percent, and the reconciler that never broke a bar broke sixteen the moment the draft no longer came from the notes it reads. Both verdicts were only visible on real audio."
+		},
+		{
+			"slug": "18",
+			"letters": "18",
+			"track": "Validation",
+			"title": "The matcher's two new rules validated on real audio: both earn their keep, and the author's own hedge is overturned in their favor",
+			"eyebrow": "Study 18 · validation, the matcher rules · 2,686 zero-spend cells",
+			"indexLine": "Stem Shovel found two bar-level faults in its chord matcher by re-scoring this bench's own fixture notes, shipped the fixes in v0.231.0, and handed the bench the one measurement it could not make properly itself: the rules on real audio, where its approximation from reconstructed notes said the two rules pull apart. The bench re-transcribed from the committed raws, reproduced the anchor exactly for the third time, and measured each rule alone. All four gates pass. The bass rule lifts the gated song ten bars on its own; the presence rule, which the author hedged as a wash or a loss on real audio, is net plus six, because the lossy reconstruction was the artifact, not the rule. The shipped constants stand, and the real chord path moves from 38.2 to 53.9 percent, exactly Study 13's reconciled number, from two constants and one duration check.",
+			"sections": [
+				{
+					"id": "sec-stem-study18",
+					"eyebrow": "Validation, the matcher rules",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-matcher231",
+						"summary": "All four gates, the per-rule real-audio anatomy, the overturned hedge, the sweep, and the unchanged ship order"
+					},
+					"body": [
+						{
+							"heading": "The Handoff, and the Registration",
+							"html": "Stem Shovel ran the app's own chordsPerBar over the bench's stored Study 1 notes, reproduced the committed 424 of 440 exactly, and found two faults: a bass pickup into the next section renamed the bar it ended (the lowest note earned the root bonus whatever its length), and a power chord's ninth harmonic leaked a faint second over the old 5 percent presence line, so sus2 explained the bar by exactly the leak. v0.231.0 shipped the fixes: a bass note must sound for 15 percent of the bar, and a template tone under 12 percent of the profile counts as missing at a 0.12 cost. The synthetic verdict was clean, 424 to 439 of 440 with the power-chord song going 20 to 28 of 28. The open question was real audio: the app could only approximate it by rebuilding notes from Study 13's stored text lines, losing short notes and all start times, and that reconstruction read the presence rule as a wash or a small loss there. Its brief, committed verbatim in the bench repo, left the proper measurement to the bench and proposed the decision rule itself. The bench registered one parameterized port of the v0.231 matcher, pinned bar for bar against the retired port across all 440 fixture bars at the old constants, and measured the two rules separately, because a joint number would hide one rule behind the other."
+						},
+						{
+							"heading": "Four Gates, Four Passes",
+							"html": "The anchor reproduced Study 13 arm 1 exactly for the third time, 29 of 76 and 24 of 86 on freshly re-transcribed notes, so every comparison sits on the stored footing rather than the approximation. The fixture table reproduced the handoff's five configurations to the digit through the bench's registered port, and the fixture gained matcher3 fields beside the v0.141 and v0.142 ones, nothing rewritten. On real audio the bass rule alone lifts the gated song from 29 to 39 of 76 and the exploratory song from 24 to 26 of 86, inside the registered central estimates. And the shipped pair reads 41 of 76 and 30 of 86, a net of plus six over bass-only across both songs, so the presence rule passes the author's own registered decision rule, keep it if and only if its real net is at least zero."
+						},
+						{
+							"heading": "The Overturned Hedge",
+							"html": "The satisfying result is whose prediction failed. The handoff hedged its own presence rule, reading it from reconstructed notes as trading strict power-chord wins for majors with a weak third, and the bench registered that hedge as its prediction: a small negative net and a revert recommendation. The proper measurement overturned both. Strict-first accuracy rises too, 20 to 24 on the gated song and 18 to 23 on the exploratory one, so the gain is genuine readings rather than allowance credit. The lossy reconstruction was the artifact, not the rule, and the app's stated judgment, that an under-claimed power chord is the better failure for a chart hint, turned out right on the numbers as well as the merits. The disclosed sweep says the shipped constants sit on a plateau: a bass line of 0.10 readmits the pickups, 0.25 regresses the faster-bass exploratory song exactly as the handoff reasoned, and nothing in the grid earns a re-tune."
+						},
+						{
+							"heading": "The Floor Moves, the Ceiling Does Not",
+							"html": "Two constants and one duration check take the real chord path from 38.2 to 53.9 percent on the gated song, which is exactly Study 13's reconciled 41 of 76: the free code change is worth as much on this song as the language-model reconciler pass. The ordering from Study 17 is unchanged and the report says so plainly: ChordMini on the mix still reads 59 of 76, eighteen bars past the improved matcher, so the front-end swap remains the measured next step. v0.231.0 raises the floor the app already ships. The hint baseline for anything measured after it moves from 29 to 41 of 76, and future studies gate their anchors against the version they pin. The verdict delivered: ship stands, nothing to change."
+						}
+					]
+				}
+			],
+			"published": "2026-11-06",
+			"related": [
+				{
+					"title": "Study 1: where the matcher and this fixture began",
+					"href": "/research/stem-bench/1"
+				},
+				{
+					"title": "Study 13: the cliff, and the reconciled number the new floor equals",
+					"href": "/research/stem-bench/13"
+				},
+				{
+					"title": "Study 17: the ceiling this validation does not move",
+					"href": "/research/stem-bench/17"
+				},
+				{
+					"title": "Stem Shovel, the product under test and this study's drafter",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY18.md",
+			"quote": "The author hedged its own rule from reconstructed notes, the bench registered that hedge as its prediction, and the proper measurement overturned both: the presence rule earns real audio, the reconstruction was the artifact, and the shipped constants stand as measured."
 		}
 	]
 }
