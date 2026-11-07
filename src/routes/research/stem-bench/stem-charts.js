@@ -2898,7 +2898,7 @@ export function initStemCharts() {
 			[
 				"eat-all-the-clocks (120 bpm declared)",
 				"P1 2.0064s, P2 2.0004s vs a 1.6155s fit \u00b7 draft 24/84 vs baseline 68/84",
-				"true period 2.0000s: P2 exact to 0.02%, P1 to 0.3% \u00b7 the real defect is arrangement: the chart needs 172s of audio and the recording is 147.5s, so ~13 chart bars were never played \u00b7 true-grid hints 55/84, the mismatch's honest ceiling",
+				"true period 2.0000s: P2 exact to 0.02%, P1 to 0.3% \u00b7 the apparent defect was arrangement; the second correction traced it to the bench's 86-bar fixture vs the band's live 71-bar chart \u00b7 true-grid hints on the corrected chart: 65/71, uniform",
 			],
 			[
 				"peaceful-dreams (145 bpm declared)",
@@ -2916,7 +2916,7 @@ export function initStemCharts() {
 				"gates stand as registered measurements of their constructions; the tempo interpretation is withdrawn \u00b7 the standing lesson entered the ledger: take the alignment truth's BINS, never its GEOMETRY",
 			],
 		],
-		"The registered study asked the joint phase-and-period comb search to find the tempo the bench believed the recordings had wandered from; Kevin's same-day correction, verified off the raw audio with a DTW-free comb sweep (131.97 to 131.99, 120.00, 144.96 to 144.98 and 223.82 to 223.97 bpm against declared 132, 120, 145, 224), showed the combs had found the exact truth and the bench had graded that perfection as failure against its own broken ruler. Corrected guidance to the app: use the declared bpm, anchor bar one near t equals zero, and treat chart-versus-recording arrangement mismatch as the open problem. Study 25, the corrected end-to-end draft on the true grid, registered as the follow-up.",
+		"The registered study asked the joint phase-and-period comb search to find the tempo the bench believed the recordings had wandered from; Kevin's same-day correction, verified off the raw audio with a DTW-free comb sweep (131.97 to 131.99, 120.00, 144.96 to 144.98 and 223.82 to 223.97 bpm against declared 132, 120, 145, 224), showed the combs had found the exact truth and the bench had graded that perfection as failure against its own broken ruler. Corrected guidance to the app: use the declared bpm, anchor bar one near t equals zero, and audit the chart fixture before blaming the arrangement: the second same-day correction (Study 25b) traced eat's apparent mismatch to the bench's own fixture. Study 25, the corrected end-to-end draft on the true grid, registered as the follow-up.",
 	);
 
 	// --- Study 25: the corrected end-to-end on the true grid (no figure) ---
@@ -2950,11 +2950,11 @@ export function initStemCharts() {
 			[
 				"eat-all-the-clocks",
 				"0.415s \u00b7 after Amendment 1 excluded a non-physical \u22127.59s candidate chosen on a one-root margin (void run preserved)",
-				"prefix 49/71 vs 55/71 \u00b7 S25-G2 MISS \u00b7 the arrangement mismatch extends into the played span, where the alignment-binned baseline hides it",
+				"prefix 49/71 vs 55/71 \u00b7 S25-G2 MISS, first read as the mismatch extending into the played span \u00b7 the second correction (Study 25b): the mismatch was the bench's 86-bar fixture; on the band's live 71-bar chart the draft reaches 56/69, the same 81% as the old baseline",
 				"0.39s",
 			],
 		],
-		"Gates S25-G1 and S25-G2 both FAIL as registered, and both failures carry the study's information; the parity results carry its verdict. The synthesis across Studies 24 and 25, handed to the app: declared bpm as the period, onset-comb phase, bar one near t=0 \u00b7 better arm per song 72/76, 152/153, 136/140 against baselines 72, 151, 131 \u00b7 open problems: beat-level phase at fast tempos, and the bars a recording never played. \u2248$0.35 of a $2 fence, 473 cells, predictions 3 of 4 scored right with the registered open question resolving to its disclosed FAIL reading.",
+		"Gates S25-G1 and S25-G2 both FAIL as registered, and both failures carry the study's information; the parity results carry its verdict. The synthesis across Studies 24 and 25, handed to the app: declared bpm as the period, onset-comb phase, bar one near t=0 \u00b7 better arm per song 72/76, 152/153, 136/140 against baselines 72, 151, 131 \u00b7 open problem: beat-level phase at fast tempos; the apparent eat mismatch dissolved under the second correction (the bench's fixture, Study 25b). \u2248$0.35 of a $2 fence, 473 cells, predictions 3 of 4 scored right with the registered open question resolving to its disclosed FAIL reading.",
 	);
 
 	// --- Studies 26/26b/26c: the alignment-ends repair (no figure) ---
@@ -2987,18 +2987,18 @@ export function initStemCharts() {
 			],
 			[
 				"eat-all-the-clocks",
-				"2.0s / 25\u201327.5s \u00b7 middle mean 7.8s (arrangement mismatch)",
+				"2.0s / 25\u201327.5s \u00b7 middle mean 7.8s (the bench's fixture, as the second correction found)",
 				"refused \u2192 refused \u2192 refused (interior-trust check: trusted span under half the bars)",
-				"the registered right answer: a chart ~13 bars longer than its recording plays cannot be repaired, only named \u00b7 S26C-G3 ok",
+				"the refusal detected a real disagreement whose cause was the bench's 86-bar fixture vs the band's live 71-bar chart; on the corrected chart the recipe repairs eat's ends to within a quarter bar \u00b7 S26C-G3 ok",
 			],
 			[
 				"the ablation and the lessons",
-				"trim-to-drums: ends as broken as before on every song \u2192 the hazy-audio cause REFUTED; the compression is forced (every chart bar must land somewhere), not seduced",
+				"trim-to-drums: ends as broken as before \u2192 first read as refuting the hazy-audio cause; the second correction re-graded the construction as ill-posed (the slice removes audio the chart's first bars need), so the cause is OPEN",
 				"estimators priced: duration median skew-biased (1.699 vs 1.818s) \u00b7 LSQ slope 1% biased \u00b7 onset comb \u22640.02% on all four \u00b7 the quarter-bar slide is a half-bar-ambiguity fence, not a knob",
 				"the app's bar-1 rule fails ALL FOUR songs today: the shipped refusal refuses the whole MMKK set until the recipe lands",
 			],
 		],
-		"Three registrations, each gate honestly failed and priced before the next (26: G1 FAIL on the LSQ bias, G3 FAIL refuting the ablation's premise; 26b: G1 FAIL on the wide slide; 26c: all gates PASS). $0 throughout: no model calls, pure DSP over the committed corpus. The worker recipe ships as a tested reference implementation in the bench; cost is one alignment as today plus comb sweeps.",
+		"Three registrations, each gate honestly failed and priced before the next (26: G1 FAIL on the LSQ bias, G3 FAIL with its construction later re-graded ill-posed; 26b: G1 FAIL on the wide slide; 26c: all gates PASS). The second same-day correction resolved the eat refusal's cause as the bench's own chart fixture, not the band's arrangement; see the entry's correction and Study 25b. $0 throughout: no model calls, pure DSP over the committed corpus. The worker recipe ships as a tested reference implementation in the bench; cost is one alignment as today plus comb sweeps.",
 	);
 
 	// --- Study 19: the ChordMini port gated (no figure) ---
