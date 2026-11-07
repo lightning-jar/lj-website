@@ -12,10 +12,12 @@
 	"link": {
 		"href": "https://github.com/kevinpeckham/barkdown"
 	},
-	"relatedArticle": {
-		"href": "/blog/the-untested-half-of-your-wysiwyg",
-		"title": "The Untested Half of Your WYSIWYG"
-	},
+	"relatedReading": [
+		{
+			"href": "/blog/the-untested-half-of-your-wysiwyg",
+			"title": "The Untested Half of Your WYSIWYG"
+		}
+	],
 	"useCases": [
 		"Serializing WYSIWYG and contenteditable output back to clean markdown",
 		"Round-tripping markdown through programmatic DOM transforms without drift",

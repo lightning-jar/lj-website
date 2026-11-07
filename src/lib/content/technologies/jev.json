@@ -17,9 +17,11 @@
 	"link": {
 		"href": "https://www.typesafe.ai"
 	},
-	"relatedArticle": {
-		"href": "/research/barkup-bench/au",
-		"title": "Study AU: The match-stage engine A/B, where Jev proved to be a looser policy rather than a drop-in judge"
-	},
+	"relatedReading": [
+		{
+			"href": "/research/barkup-bench/au",
+			"title": "Study AU: The match-stage engine A/B, where Jev proved to be a looser policy rather than a drop-in judge"
+		}
+	],
 	"supercategory": "ai-llm"
 }

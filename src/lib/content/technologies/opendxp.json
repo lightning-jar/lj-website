@@ -17,10 +17,12 @@
 	"link": {
 		"href": "https://www.opendxp.io/en"
 	},
-	"relatedArticle": {
-		"href": "/blog/opendxp-pimcore-fork",
-		"title": "Pimcore or OpenDXP: A Fork in the Road for Long-Tenured DXP Stacks"
-	},
+	"relatedReading": [
+		{
+			"href": "/blog/opendxp-pimcore-fork",
+			"title": "Pimcore or OpenDXP: A Fork in the Road for Long-Tenured DXP Stacks"
+		}
+	],
 	"useCases": [
 		"GPLv3-preserving migration path for existing Pimcore CE deployments",
 		"Multi-language, multi-catalog product data with governance",

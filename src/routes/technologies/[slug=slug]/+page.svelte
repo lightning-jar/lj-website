@@ -77,19 +77,6 @@ let tech = $derived(data.technology);
         </section>
       {/if}
 
-      <!-- related article -->
-      {#if tech.relatedArticle}
-        <p class="opacity-90 mb-8">
-          Related reading:
-          <a
-            href={tech.relatedArticle.href}
-            class="underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4"
-          >
-            {tech.relatedArticle.title}
-          </a>
-        </p>
-      {/if}
-
       <!-- supercategory context -->
       {#if data.supercategory}
         <section class="mb-8 border border-slate-100/15 rounded px-4 pt-4 pb-5 max-w-prose">
@@ -123,6 +110,32 @@ let tech = $derived(data.technology);
             loading="lazy"
           />
         </div>
+      {/if}
+
+      {#if tech.relatedReading?.length}
+        <nav
+          aria-labelledby="related-reading-heading"
+          class="border px-3 pt-4 pb-5 rounded border-maximumYellow/40 bg-maximumYellow/5 max-h-fit"
+        >
+          <h2
+            id="related-reading-heading"
+            class="text-17px font-serif text-maximumYellow font-700 mb-3"
+          >
+            Related Reading
+          </h2>
+          <ul class="grid grid-cols-1 gap-3 pl-0 ml-0">
+            {#each tech.relatedReading as item (item.href)}
+              <li class="leading-tight">
+                <a
+                  href={item.href}
+                  class="opacity-90 underline decoration-current hover:(text-maximumYellow opacity-100) underline-offset-4"
+                >
+                  {item.title}
+                </a>
+              </li>
+            {/each}
+          </ul>
+        </nav>
       {/if}
 
       {#if data.related.length}

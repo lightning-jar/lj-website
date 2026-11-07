@@ -10,10 +10,11 @@ export interface Technology {
 	license?: string;
 	logo?: Image;
 	link?: Link;
-	relatedArticle?: {
+	/** articles and studies about this technology, shown in the sidebar */
+	relatedReading?: {
 		href: string;
 		title: string;
-	};
+	}[];
 	/** for Lightning Jar's own packages: path of the /packages page */
 	packagePage?: string;
 	supercategory?: string;

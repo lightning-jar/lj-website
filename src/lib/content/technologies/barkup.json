@@ -13,10 +13,12 @@
 	"link": {
 		"href": "https://github.com/kevinpeckham/barkup"
 	},
-	"relatedArticle": {
-		"href": "/blog/stable-ids-are-all-you-need",
-		"title": "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees"
-	},
+	"relatedReading": [
+		{
+			"href": "/blog/stable-ids-are-all-you-need",
+			"title": "Stable IDs Are All You Need: Seven Studies on Letting LLMs Edit Trees"
+		}
+	],
 	"useCases": [
 		"Handing structured tree data to an LLM as HTML instead of JSON",
 		"Reliable id-anchored edits from an agent, at a fraction of whole-tree cost",

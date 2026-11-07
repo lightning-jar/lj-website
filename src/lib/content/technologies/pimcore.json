@@ -12,10 +12,12 @@
 	"link": {
 		"href": "https://pimcore.com/"
 	},
-	"relatedArticle": {
-		"href": "/blog/opendxp-pimcore-fork",
-		"title": "Pimcore or OpenDXP: A Fork in the Road for Long-Tenured DXP Stacks"
-	},
+	"relatedReading": [
+		{
+			"href": "/blog/opendxp-pimcore-fork",
+			"title": "Pimcore or OpenDXP: A Fork in the Road for Long-Tenured DXP Stacks"
+		}
+	],
 	"useCases": [
 		"Multi-language, multi-catalog product data with governance",
 		"Omnichannel content and asset syndication",
