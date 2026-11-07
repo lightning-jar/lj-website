@@ -2005,6 +2005,66 @@
 			],
 			"brief": "docs/BRIEF-STUDY23.md",
 			"quote": "The model heard 151 of 153 roots, wrote D7sus4 eleven times where the reader has no word for it, and then serialized the whole answer into a chart the app cannot parse. The music was never the problem; the last step was."
+		},
+		{
+			"slug": "23b",
+			"letters": "23b",
+			"track": "The chart-draft pipeline",
+			"title": "The chartless-song grid: a perfect tap does not save the declared tempo, and the missing leg is true-tempo estimation",
+			"eyebrow": "Study 23b · the chartless grid · 922 cells · ≈$0.60 of a $2 fence",
+			"indexLine": "Study 23 ran grid-given; a chartless song cannot. This study swaps in the grids the feature would actually have, period from the declared bpm, bar count from the recording's length, and the result kills the obvious design twice. With a PERFECT downbeat anchor (a simulated user tap), the draft's roots collapse on all four songs, as far as 151 of 153 down to 64: the grid hits the truth lattice at exactly its anchor bar and then drifts whole seconds, so the entire error is the period, and no tap UX can fix a wrong tempo. The inversion nobody predicted: the blind onset comb beat the perfect tap on every song, mop-heart even edging its grid-given baseline, but its grids are no truer (seven lattice hits at best); repeating progressions forgive shifted bars, and its wrong-by-bars phase accidentally recenters a wrong-period lattice. The registered decision table fires its third row: uniform grids are insufficient even anchored, and the feature needs the true tempo measured from the recording. A $0 downbeat shootout answers the tap-free question on the side: the onset comb anchors three of four songs within 15 percent of a bar, and a music-start detector catches the one uncharted intro no comb can express.",
+			"sections": [
+				{
+					"id": "sec-stem-study23b",
+					"eyebrow": "The chart-draft pipeline, chartless",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s23b",
+					"figure": {
+						"id": "fig-chartless",
+						"title": "Root Accuracy by Song: Grid-Given Baseline, Perfect Tap, Blind Comb"
+					},
+					"table": {
+						"id": "tbl-chartless",
+						"summary": "Both gates, the grid anatomy that explains them, the downbeat shootout, and the registered decision"
+					},
+					"body": [
+						{
+							"heading": "The Arms",
+							"html": "Both arms build the grid a chartless song would actually have: the period from the song's declared bpm and meter, the bar count from the recording's length, the transcription binned by that grid, the shipped reader's labels over that grid as hints, and Study 23's prompt, model and call shape verbatim. B2 anchors the grid at the aligned truth's first bar start, simulating a user who taps the downbeat perfectly once. B1 takes Study 22's blind onset-comb phase, the zero-UX option. Gates sat on the JSON chords channel, index-paired against the chart, with the grid-given baselines recomputed in-run from Study 23's committed results."
+						},
+						{
+							"heading": "Gate One: the Perfect Tap Fails Everywhere",
+							"html": "The tap arm was the worst arm measured. Roots against the grid-given baseline: letter-lands 39 of 76 against 72, eat-all-the-clocks 21 of 84 against 68, peaceful-dreams 64 of 153 against 151, mop-heart 53 of 140 against 131. The mechanical anatomy leaves no room for argument: B2's grid hits the truth lattice at exactly one bar per song, its own anchor, and its mean per-bar error runs 3.3 to 8.4 seconds, multiple bars adrift by mid-song. The phase was perfect by construction, so the entire error is the period. The declared bpm is not the recording's tempo, and a uniform grid built from it walks off the music within a dozen bars no matter where it starts."
+						},
+						{
+							"heading": "The Inversion: the Blind Comb Beats the Tap",
+							"html": "Gate two passed, but inverted: the blind comb landed above the perfect tap on all four songs (52, 51, 138 and 133 roots), with mop-heart at 133 of 140, above its own grid-given baseline. Two mechanisms, both visible in the committed records, neither a vindication of blind grids. The comb fits the whole recording's onsets, so its wrong-by-whole-bars phase acts as a crude mid-song recentering of the wrong-period lattice, roughly halving the mean error. And these songs' progressions repeat, so index-paired roots forgive a grid shifted by whole loops. B1's grids are still not truth, seven lattice hits at best; the scores survive because the music is periodic, not because the bars are right. The dialect casualty confirms the stakes: peaceful-dreams' 62 chart-dialect bars, eleven exactly right grid-given, drop to four under the tap and six under the comb."
+						},
+						{
+							"heading": "The Shootout and the Decision",
+							"html": "The $0 side-measurement answered the tap-free downbeat question: graded by circular anchor error against the truth's first bar start, the onset comb hits three of four songs within 15 percent of a bar, the chord-change comb two, the bass comb one, and the music-start anchor two, including the one case no mod-period comb can express, letter-lands' charted music starting 7.15 seconds in, caught at 121 ms. So anchoring is nearly solved and it is the wrong question: B2 just proved a perfect anchor is worth nothing under a wrong period. The registered decision table fires its third row: uniform grids are insufficient even anchored, and the feature needs alignment-grade grids or the true tempo measured from the recording. The cheapest candidate reuses the shipped reader with zero new UX, extending the chord-change comb from a phase search to a joint phase-and-period search, and is registered as the program's next study. The prediction scorecard is honest about the surprise: the gate-one failure was called but not its universality, and the comb-beats-tap inversion was predicted in the opposite direction."
+						}
+					]
+				}
+			],
+			"published": "2026-11-07",
+			"related": [
+				{
+					"title": "Study 23: the end-to-end pilot this study removes the training wheels from",
+					"href": "/research/stem-bench/23"
+				},
+				{
+					"title": "Study 22: why the grid cannot be certified from the recording",
+					"href": "/research/stem-bench/22"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY23B.md",
+			"quote": "The user taps the downbeat perfectly, and the chart is still wrong, because the tempo on the tin is not the tempo in the recording. The grid's missing leg was never the phase."
 		}
 	]
 }

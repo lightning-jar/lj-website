@@ -2746,6 +2746,141 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 23b: the chartless-song grid (baseline vs tap vs blind comb) ---
+	(() => {
+		const SONGS = [
+			{
+				song: "letter-lands",
+				base: 94.7,
+				tap: 51.3,
+				comb: 68.4,
+				baseN: "72/76",
+				tapN: "39/76",
+				combN: "52/76",
+				tip: "declared 132 bpm, charted music starts 7.15s in \u00b7 tap grid hits truth only at its anchor bar, mean error 7.7s \u00b7 the comb's earlier phase recenters the wrong-period lattice (mean error 3.7s)",
+			},
+			{
+				song: "eat-all-the-clocks",
+				base: 81.0,
+				tap: 25.0,
+				comb: 60.7,
+				baseN: "68/84",
+				tapN: "21/84",
+				combN: "51/84",
+				tip: "the worst tap collapse: 21/84 with a PERFECT anchor \u00b7 the recording plays ~7% off its declared 120 bpm, a full bar of drift every ~15 bars",
+			},
+			{
+				song: "peaceful-dreams",
+				base: 98.7,
+				tap: 41.8,
+				comb: 90.2,
+				baseN: "151/153",
+				tapN: "64/153",
+				combN: "138/153",
+				tip: "the dialect casualty: 11 of 62 chart-dialect bars exactly right grid-given, 4 under the tap, 6 under the comb \u00b7 color spelling needs the right notes in the right bar",
+			},
+			{
+				song: "mop-heart",
+				base: 93.6,
+				tap: 37.9,
+				comb: 95.0,
+				baseN: "131/140",
+				tapN: "53/140",
+				combN: "133/140",
+				tip: "the inversion's sharpest frame: the blind comb lands ABOVE the grid-given baseline (133 vs 131) while the perfect tap reads 53/140 \u00b7 repeating progressions forgive whole-bar shifts; the comb's grid is still not truth (6 lattice hits of 140)",
+			},
+		];
+		byId("legend-s23b").innerHTML =
+			'<span class="key"><span class="chip" style="background:#199e70"></span>grid-given baseline (Study 23, recomputed in-run)</span>' +
+			'<span class="key"><span class="chip" style="background:#e66767"></span>B2: perfect tap, declared tempo</span>' +
+			'<span class="key"><span class="chip" style="background:#c98500"></span>B1: blind onset comb, declared tempo</span>' +
+			legendNote(
+				"root-level accuracy over chord-bearing bars, JSON chords channel, index-paired against the chart \u00b7 S23B-G1 FAIL on every song (tap within 5 points of baseline: never) \u00b7 S23B-G2 PASS inverted (the comb beat the tap everywhere) \u00b7 registered decision: true-tempo estimation, not more taps",
+			);
+		const W = 880,
+			BAR = 11,
+			PAIR = 2,
+			GPAD = 16,
+			T = 8,
+			B = 42,
+			L = 190,
+			R = 110;
+		const groupH = BAR * 3 + PAIR * 2;
+		const H = T + SONGS.length * (groupH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 50, 100]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		const series = [
+			["base", "baseN", "#199e70"],
+			["tap", "tapN", "#e66767"],
+			["comb", "combN", "#c98500"],
+		];
+		SONGS.forEach((row, i) => {
+			const y = T + i * (groupH + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${y + groupH / 2 + 4}" text-anchor="end">${row.song}</text>`;
+			series.forEach(([k, kn, color], j) => {
+				const v = row[k];
+				const w = Math.max((v / 100) * iw, 2);
+				const by = y + j * (BAR + PAIR);
+				marks += `<rect x="${L}" y="${by}" width="${w}" height="${BAR}" fill="${color}" rx="3"/>`;
+				marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${by + BAR - 1}">${v}% (${row[kn]})</text>`;
+			});
+			hits += `<rect x="${L}" y="${y}" width="${iw}" height="${groupH}" fill="transparent" data-tip="${esc(row.song + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-chartless");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grouped bar chart of root accuracy by song: the grid-given baseline reads 94.7, 81, 98.7 and 93.6 percent; the perfect-tap arm reads 51.3, 25, 41.8 and 37.9; the blind comb reads 68.4, 60.7, 90.2 and 95.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the tap arm (red) is the worst arm measured despite a perfect anchor, and the blind comb (amber) beats it everywhere without being right: the period is the broken input, so the decision is true-tempo estimation",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-chartless",
+			["cell", "result", "the read"],
+			[
+				[
+					"S23B-G1 (tap arm roots within 5 points of the grid-given baseline, every song)",
+					"FAIL on all four songs: 39/76 vs 72, 21/84 vs 68, 64/153 vs 151, 53/140 vs 131",
+					"the registered prediction called the failure but not its universality (mop-heart was predicted to survive at 0.9% period error and lost 56 points) \u00b7 the declared-tempo rot is universal on this corpus",
+				],
+				[
+					"the grid anatomy (mechanical, $0)",
+					"B2 hits the truth lattice at EXACTLY ONE bar per song, its own anchor; mean per-bar error 3.3 to 8.4 seconds \u00b7 B1's mean error is roughly half of B2's with 3 to 7 lattice hits",
+					"the phase was perfect by construction, so the entire tap-arm error is the period \u00b7 the comb's wrong-by-bars phase recenters a wrong-period lattice mid-song, which is compensation, not correctness",
+				],
+				[
+					"S23B-G2 (blind comb within 5 points of the tap, every song)",
+					"PASS, inverted: the comb BEAT the tap on all four songs, and mop-heart's 133/140 sits above its own grid-given baseline (131/140)",
+					"repeating progressions forgive index shifts by whole loops, so a periodic song grades gently on a shifted grid \u00b7 registered lesson: any future grid gate should also report a shift-sensitive measure",
+				],
+				[
+					"the downbeat shootout ($0, no gate)",
+					"onset comb 3/4 hits within 15% of a bar (53, 15, 115 ms; misses peaceful at 766) \u00b7 chord-change comb 2/4 \u00b7 bass comb 1/4 \u00b7 music-start anchor 2/4, catching letter-lands' 7.15s uncharted intro at 121 ms",
+					"tap-free anchoring is already roughly tap-grade on this corpus, and the tap arm just proved anchors are not the problem \u00b7 the period is",
+				],
+				[
+					"the registered decision and the ledger",
+					"decision table row three: uniform grids are insufficient even anchored; the feature needs true-tempo estimation \u00b7 \u2248$0.60 of the $2 fence, 8 fable calls, 922 cells \u00b7 predictions: 2 right, 2 half right, 2 wrong (the inversion was called in the opposite direction)",
+					"the cheapest next instrument reuses the shipped reader at zero new UX: extend the chord-change comb to a joint phase-and-period search \u00b7 registered as the program's next study",
+				],
+			],
+		);
+	})();
+
 	// --- Study 19: the ChordMini port gated (no figure) ---
 	table(
 		"tbl-chordmini-port",

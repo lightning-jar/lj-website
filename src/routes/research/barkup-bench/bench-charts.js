@@ -8308,6 +8308,121 @@ export function initBenchCharts() {
 		);
 	})();
 
+	// --- Study AZ: the slot-sizing static block, three arms ---
+	(() => {
+		const ARMS = [
+			{
+				arm: "A0: main (what ships today)",
+				sizing: 0,
+				control: 100,
+				sizingN: "0/6",
+				controlN: "6/6",
+				dead: "0 scored (2 in the void run)",
+				tip: "the attributes are absent from its prompt: sizing requests got improvised container wrappers or a question, never a slot attribute \u00b7 controls clean \u00b7 in the void first run this arm wrote the removed attribute twice on one constraint task",
+			},
+			{
+				arm: "A: dev v3.334.0 as-is",
+				sizing: 50,
+				control: 100,
+				sizingN: "3/6",
+				controlN: "6/6",
+				dead: "1 \u00b7 gate FAIL",
+				tip: "the digest row teaches existence, not usage: slotHeightPx requests landed (2/2), span requests made the model ask \u00b7 one dead requiredWidgetWidth write on a constraint task fails AZ-G1 by the letter \u00b7 the stale prose line is the inviter, and both A0 and A carry it",
+			},
+			{
+				arm: "B: A + corrected prose",
+				sizing: 100,
+				control: 100,
+				sizingN: "6/6",
+				controlN: "6/6",
+				dead: "0 \u00b7 gate PASS",
+				tip: "ceiling: every sizing request is the exact registered op, right node, right enum value, compound two-slot tasks included \u00b7 zero dead writes in 12/12 constraint cells across both runs \u00b7 the registered text is the asker's proposed wording verbatim",
+			},
+		];
+		byId("legend-az").innerHTML =
+			'<span class="key"><span class="chip" style="background:#c98500"></span>sizing requests, exact registered op</span>' +
+			'<span class="key"><span class="chip" style="background:#199e70"></span>control edits, clean (no sizing invention)</span>' +
+			legendNote(
+				"18 tasks per arm on the shipped tier (fable-5.1) through a verbatim apply_template_patch port \u00b7 the third bucket's grade is a census of writes to the REMOVED attribute, shown per arm \u00b7 AZ-G2 PASS (B green), AZ-G1 FAIL (dev-as-is not certified) \u00b7 verdict: ship the corrected line inside v3.334.0",
+			);
+		const W = 880,
+			BAR = 13,
+			PAIR = 3,
+			GPAD = 22,
+			T = 8,
+			B = 42,
+			L = 250,
+			R = 110;
+		const groupH = BAR * 2 + PAIR;
+		const H = T + ARMS.length * (groupH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 50, 100]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		ARMS.forEach((row, i) => {
+			const y = T + i * (groupH + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${y + groupH / 2 + 4}" text-anchor="end">${row.arm}</text>`;
+			const wS = Math.max((row.sizing / 100) * iw, 2);
+			const wC = Math.max((row.control / 100) * iw, 2);
+			marks += `<rect x="${L}" y="${y}" width="${wS}" height="${BAR}" fill="#c98500" rx="3"/>`;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${L + wS + 8}" y="${y + BAR - 2}">${row.sizingN} \u00b7 dead writes ${row.dead}</text>`;
+			marks += `<rect x="${L}" y="${y + BAR + PAIR}" width="${wC}" height="${BAR}" fill="#199e70" rx="3"/>`;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${L + wC + 8}" y="${y + BAR * 2 + PAIR - 2}">${row.controlN}</text>`;
+			hits += `<rect x="${L}" y="${y}" width="${iw}" height="${groupH}" fill="transparent" data-tip="${esc(row.arm + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-az");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grouped bar chart by static-block arm: sizing accuracy 0, 50 and 100 percent for main, dev as-is and corrected prose; control cleanliness 100 percent on all three; dead-attribute writes 0, 1 and 0.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the whole study in one frame: the corrected prose (bottom) is perfect on every bucket, dev-as-is (middle) half-learns sizing from the digest and still writes the removed attribute once, and the fix belongs inside the release that makes the stale line harmful",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-az",
+			["cell", "result", "the read"],
+			[
+				[
+					"AZ-G2 (Arm B green: sizing >= 5/6, controls clean, zero dead writes)",
+					"PASS at ceiling: 6/6 exact sizing ops, 6/6 clean controls, 0 dead writes (12/12 constraint cells clean across both runs)",
+					"the registered text is the Replicator agent's proposed wording verbatim, so the app pastes it unchanged \u00b7 one behavior flagged, not a defect: width-constraint phrasing now mostly lands as slotSpan, arguably the right translation in the column-grid model",
+				],
+				[
+					"AZ-G1 (Arm A safe to ship as-is)",
+					"FAIL by the letter: one dead requiredWidgetWidth write on a constraint task, where the reference arm wrote none in the scored run",
+					"the anatomy acquits the digest delta (controls 6/6 everywhere, zero sizing invention in 36 control cells across both runs); the dead attribute is invited by the stale prose BOTH arms carry and fires stochastically wherever that line exists",
+				],
+				[
+					"what a digest row teaches",
+					"existence, not usage: slotHeightPx in the digest got height requests through (2/2 exact on Arm A) while span requests made the model ask or decline",
+					"the prose clause is what converts a listed name into correct operations (Arm B's 6/6) \u00b7 consistent with the series' prompt-anatomy findings: placement and teaching beat mere presence",
+				],
+				[
+					"Amendment 1 (defective-instrument rule)",
+					"the bench registered kebab-case keys; the patch channel applies camelCase \u00b7 first run declared void, preserved, disclosed; keys corrected, censuses widened to both spellings, gates and values untouched, full re-run",
+					"the void run's numbers (S 0/6 on every arm, D 3/6, dead 0) measured the bench's spelling assumption, not the model \u00b7 the same defect had hidden two dead writes the widened census now catches",
+				],
+				[
+					"the verdict and the ledger",
+					"ship v3.334.0 WITH the corrected line; do not ship dev as-is \u00b7 \u2248$1–2 of the $5 fence, 108 calls total (54 scored, 54 void) \u00b7 predictions: 1 right, 1 half, 1 wrong (the bench predicted G1 would pass)",
+					"deliverable three answered by existence: the slice persists (corpus, grader, runner committed), and once the corrected text lands in dev a slot-sizing gate joins the regression manifest by dated amendment at about $0.30 a run",
+				],
+			],
+		);
+	})();
+
 	// Every legend gets a "Legend" label as its first child — a styled
 	// paragraph, not a heading, so legends don't skip levels in the
 	// document outline. Runs after the builders above have set each

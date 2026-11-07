@@ -2312,6 +2312,70 @@
 			],
 			"brief": "BRIEF-AW.md",
 			"quote": "Classic libsql always enforces, and OFF does not stick. The engine enforces nothing, and the build that remembered ON was gone the next day. Behavior measured against a managed service is a snapshot of a rolling build, not a contract."
+		},
+		{
+			"slug": "az",
+			"letters": "AZ",
+			"track": "Agent-surface steering",
+			"title": "The slot-sizing static block: the corrected prose is perfect, dev-as-is is not certified, so the fix ships inside the release that makes it necessary",
+			"eyebrow": "Study AZ · template-chat prompt gating · 54 scored cells (plus 54 disclosed void) · ≈$1–2 of a $5 fence",
+			"indexLine": "Replicator v3.334.0 adds two slot-sizing attributes and removes a third, which turns one line of the template-chat static block stale: the prose still advertises an attribute whose writes are now silent no-ops. The Replicator agent asked the bench to gate the release's prompt text both ways. One premise corrected first: the 13 regression gates do not carry that text, so the instrument was a dedicated slice over the REAL static block, extracted by replicator's own builder with the main and dev texts identity-pinned by test, 18 registered tasks by 3 arms on the shipped tier through a verbatim apply_template_patch port. The corrected-prose arm passed at ceiling: every sizing request landed as the exact registered operation, every control edit stayed clean, and zero writes to the removed attribute in 12 of 12 constraint cells across both runs. Dev-as-is failed its safety gate by the letter, one dead-attribute write invited by exactly the stale line the correction removes; the new digest names themselves caused no harm but taught only existence, not usage. One mid-study amendment under the defective-instrument rule, disclosed: the bench registered kebab-case attribute keys where the patch channel applies camelCase, and the void first run is preserved beside the scored one. Verdict delivered: ship the corrected line inside v3.334.0, and the slice persists toward a standing slot-sizing regression gate.",
+			"sections": [
+				{
+					"id": "sec-az",
+					"eyebrow": "Agent-surface steering",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-az",
+					"figure": {
+						"id": "fig-az",
+						"title": "Sizing Accuracy and Control Cleanliness by Static-Block Arm, 18 Tasks Each"
+					},
+					"table": {
+						"id": "tbl-az",
+						"summary": "Both gates, the dead-attribute census, the amendment, and the verdict delivered to the app"
+					},
+					"body": [
+						{
+							"heading": "The Ask, and a Premise Corrected",
+							"html": "Replicator v3.334.0 (on dev, unshipped) changes the template-chat static block in one place: the grammar digest's widget-slot row gains slotHeightPx and slotSpan, two new attributes from the column-grid sizing release. The release also REMOVES data-required-widget-width, and the block's widget-slot prose line still advertises it, so a model that follows that line writes an attribute the app silently ignores. The Replicator agent asked the bench to gate Arm A (ship dev as-is) and Arm B (plus a corrected prose line) with the regression suite. The premise needed correcting before the spend: the 13 gates protect the template-chat surfaces through the bench's own registered constructions and none of their prompt stacks carries the app's static block text, so running the suite twice would have spent tens of dollars measuring nothing about the edit. The instrument the ask's own third deliverable anticipated ran instead: a dedicated registered slice over the real block."
+						},
+						{
+							"heading": "The Slice",
+							"html": "The arm texts are the app's own: Arm A extracted by replicator's buildTemplateEditorPromptSegments at the dev commit, Arm A0 constructed as main's text (the only model-facing delta between branches is the digest row, verified by diff and pinned by identity test), Arm B as Arm A with the prose line replaced by the asker's proposed wording verbatim. 18 registered single-turn tasks over a small fixture template with three widget-slots, in three buckets: six explicit sizing requests with exact expected operations, six ordinary edits near slots as controls with a zero-sizing-invention rule, and six legacy width-constraint requests probing the stale line's territory, graded by a census of writes to the removed attribute. One tool, a verbatim port of apply_template_patch; model anthropic/claude-fable-5.1, the shipped tier; 54 calls inside a $5 fence."
+						},
+						{
+							"heading": "Amendment 1: the Bench's Own Key-Form Defect",
+							"html": "The first run exposed a registration defect in the fixture, not the model: the expected operations spelled attribute keys in the data-kebab serialization while the production patch channel applies camelCase, which the static block's own worked example demonstrates. Every model attribute operation in the run was camelCase, and the same defect made the dead-write census miss requiredWidgetWidth entirely (the main-text arm wrote it twice in that run, counted zero). Per the defective-instrument rule the run was declared void with its numbers disclosed, the keys corrected, the censuses widened to both spellings, values and gates untouched, and the study fully re-run. Both result files are committed side by side."
+						},
+						{
+							"heading": "Results and the Verdict",
+							"html": "Arm B passed at ceiling: sizing 6 of 6 exact (right node, right key, right enum value, including the two-slot compound tasks), controls 6 of 6 with zero sizing-attribute invention, and zero dead writes, 12 of 12 constraint cells clean across both runs. Arm A0 cannot size at all (the attributes are absent from its prompt; it improvised container wrappers or asked). Arm A, dev as-is, failed gate one by the letter: one dead requiredWidgetWidth write on a constraint task, where the reference arm wrote none in the scored run. The anatomy acquits the digest delta, because the dead attribute is invited by the stale prose both arms carry and fires stochastically wherever that line exists; it also shows a digest row teaches existence but not usage, since slotHeightPx in the digest got height requests through while span requests made the model ask. The verdict to the app: do not ship Arm A alone; fold the corrected line into v3.334.0 itself, since the release is what makes the stale line harmful. One measured behavior flagged, not a defect: under the corrected line, width-constraint phrasing mostly lands as slotSpan writes, which in the column-grid model is arguably the right translation. The slice persists: corpus, grader and runner are committed, and once the corrected text is in dev a slot-sizing gate joins the regression manifest by dated amendment."
+						}
+					]
+				}
+			],
+			"published": "2026-11-07",
+			"related": [
+				{
+					"title": "Study AO: the previous agent-surface steering study (canonical tags)",
+					"href": "/research/barkup-bench/ao"
+				},
+				{
+					"title": "The regression suite the ask pointed at",
+					"href": "/research/barkup-bench/playbook"
+				},
+				{
+					"title": "Replicator, the product under test",
+					"href": "https://replicator.lj.dev"
+				},
+				{
+					"title": "barkup-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/barkup-bench"
+				}
+			],
+			"brief": "BRIEF-AZ.md",
+			"quote": "The two new names in the digest moved nothing. The one stale sentence did: as long as the prompt advertises a removed attribute, the shipped tier will sometimes write it, and the user experiences a constraint that silently did not take."
 		}
 	]
 }

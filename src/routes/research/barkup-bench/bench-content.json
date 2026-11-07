@@ -1,6 +1,6 @@
 {
 	"header": {
-		"eyebrow": "Barkup Bench · pre-registered · corrected 2026-07-06 · studies F–AO",
+		"eyebrow": "Barkup Bench · pre-registered · corrected 2026-07-06 · studies F–AZ",
 		"lede": "Every id-stable interface works, until trees get big or sessions get long. Then only anchored patches do, and they barely need to see the tree.",
 		"provenance": "Main study: 200 seeded tasks × 6 conditions × 4 models × 2 regimes at temperature&nbsp;0 (July&nbsp;2026). Every follow-up study is pre-registered by commit before its first scored run and published as found, corrections included; the full catalog lives in the <a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"#studies\">study index below</a>, one page per study. <strong>All numbers are protocol-v2 corrected</strong>: the original interface-reliability gaps were an artifact of conversation histories that hid the model's own tool calls (<a class=\"text-maximumYellow hover:underline underline-offset-3\" href=\"https://github.com/vercel/ai/issues/16840\">vercel/ai#16840</a>). Charts show parity prompts, models pooled unless noted, with Wilson&nbsp;95% intervals. Conditions: <span class=\"font-mono\">A</span>&nbsp;HTML&nbsp;+&nbsp;whole-tree rewrite, <span class=\"font-mono\">B</span>&nbsp;JSON&nbsp;+&nbsp;rewrite, <span class=\"font-mono\">C</span>&nbsp;JSON&nbsp;+&nbsp;mutation tools, <span class=\"font-mono\">D</span>&nbsp;HTML&nbsp;+&nbsp;tools, <span class=\"font-mono\">E</span>&nbsp;JSON&nbsp;Patch, and <span class=\"font-mono\">F</span>&nbsp;id-anchored patch.",
 		"intro": [
