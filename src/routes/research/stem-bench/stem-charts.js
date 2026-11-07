@@ -2757,7 +2757,7 @@ export function initStemCharts() {
 				baseN: "72/76",
 				tapN: "39/76",
 				combN: "52/76",
-				tip: "declared 132 bpm, charted music starts 7.15s in \u00b7 tap grid hits truth only at its anchor bar, mean error 7.7s \u00b7 the comb's earlier phase recenters the wrong-period lattice (mean error 3.7s)",
+				tip: "declared 132 bpm, exact per the correction \u00b7 the '7.15s intro' was the ruler's start error: the recording opens on chart bar one at t near 0, so the 'tap' anchor was four bars late",
 			},
 			{
 				song: "eat-all-the-clocks",
@@ -2767,7 +2767,7 @@ export function initStemCharts() {
 				baseN: "68/84",
 				tapN: "21/84",
 				combN: "51/84",
-				tip: "the worst tap collapse: 21/84 with a PERFECT anchor \u00b7 the recording plays ~7% off its declared 120 bpm, a full bar of drift every ~15 bars",
+				tip: "the worst collapse: 21/84 \u00b7 corrected same day: the recording is exactly 120 bpm; its chart is ~13 bars longer than the recording plays (172s of chart, 147.5s of audio), so the tail bars are unchartable from the audio",
 			},
 			{
 				song: "peaceful-dreams",
@@ -2795,7 +2795,7 @@ export function initStemCharts() {
 			'<span class="key"><span class="chip" style="background:#e66767"></span>B2: perfect tap, declared tempo</span>' +
 			'<span class="key"><span class="chip" style="background:#c98500"></span>B1: blind onset comb, declared tempo</span>' +
 			legendNote(
-				"root-level accuracy over chord-bearing bars, JSON chords channel, index-paired against the chart \u00b7 S23B-G1 FAIL on every song (tap within 5 points of baseline: never) \u00b7 S23B-G2 PASS inverted (the comb beat the tap everywhere) \u00b7 registered decision: true-tempo estimation, not more taps",
+				"root-level accuracy over chord-bearing bars, JSON chords channel, index-paired against the chart \u00b7 S23B-G1 FAIL on every song (tap within 5 points of baseline: never) \u00b7 S23B-G2 PASS inverted (the comb beat the tap everywhere) \u00b7 corrected same day: the recordings are metronome-exact at declared bpm, and the tap arm was anchored four bars late by the bench's own ruler; see the correction section",
 			);
 		const W = 880,
 			BAR = 11,
@@ -2842,7 +2842,7 @@ export function initStemCharts() {
 			hits +
 			"</svg>" +
 			figCap(
-				"the tap arm (red) is the worst arm measured despite a perfect anchor, and the blind comb (amber) beats it everywhere without being right: the period is the broken input, so the decision is true-tempo estimation",
+				"the tap arm (red) is the worst arm measured, and the same-day correction explains why: its 'perfect' anchor was the bench ruler's first bar, four bars late on two songs, so index-paired grading punished every uniform arm by whole-bar shifts; the recordings themselves are metronome-exact at declared bpm",
 			);
 		el.querySelectorAll("[data-tip]").forEach((n) => {
 			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
@@ -2874,8 +2874,8 @@ export function initStemCharts() {
 				],
 				[
 					"the registered decision and the ledger",
-					"decision table row three: uniform grids are insufficient even anchored; the feature needs true-tempo estimation \u00b7 \u2248$0.60 of the $2 fence, 8 fable calls, 922 cells \u00b7 predictions: 2 right, 2 half right, 2 wrong (the inversion was called in the opposite direction)",
-					"the cheapest next instrument reuses the shipped reader at zero new UX: extend the chord-change comb to a joint phase-and-period search \u00b7 registered as the program's next study",
+					"decision as first published: true-tempo estimation \u00b7 WITHDRAWN same day: the tempo is exact and the ruler was broken (see the correction section) \u00b7 \u2248$0.60 of the $2 fence, 8 fable calls, 922 cells \u00b7 predictions: 2 right, 2 half right, 2 wrong (the inversion was called in the opposite direction)",
+					"the follow-up ran and its onset joint comb recovered the exact tempo on all four songs \u00b7 the corrected guidance: declared bpm as the period, bar one near t=0, arrangement mismatch as the open problem",
 				],
 			],
 		);
