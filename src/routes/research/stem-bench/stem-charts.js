@@ -2869,7 +2869,7 @@ export function initStemCharts() {
 				],
 				[
 					"the downbeat shootout ($0, no gate)",
-					"onset comb 3/4 hits within 15% of a bar (53, 15, 115 ms; misses peaceful at 766) \u00b7 chord-change comb 2/4 \u00b7 bass comb 1/4 \u00b7 music-start anchor 2/4, catching letter-lands' 7.15s uncharted intro at 121 ms",
+					"onset comb 3/4 hits within 15% of a bar (53, 15, 115 ms; misses peaceful at 766) \u00b7 chord-change comb 2/4 \u00b7 bass comb 1/4 \u00b7 music-start anchor 2/4 by circular error only (corrected same day: its letter-lands anchor is t=0, four bars before the charted music; 121 ms was mod-period coincidence)",
 					"tap-free anchoring is already roughly tap-grade on this corpus, and the tap arm just proved anchors are not the problem \u00b7 the period is",
 				],
 				[
