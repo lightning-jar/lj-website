@@ -5,10 +5,10 @@
 	"status": "Beta",
 	"license": "MIT",
 	"category": "Chord Chart Notation",
-	"tagline": "A Markdown-inspired plain-text notation for chord charts: the bar grid musicians already write, specified precisely enough for machines, with a parser, a bar-grid renderer, a command-line tool and MusicXML conversion.",
+	"tagline": "A Markdown-inspired plain-text notation for chord charts: the bar grid musicians already write, specified precisely enough for machines, with a parser, a bar-grid renderer, a command-line tool, MusicXML conversion and sync with recordings.",
 	"description": [
 		"Musicians have written chord charts in plain text for decades: a row of bars between pipes, a chord or two in each, a heading for the verse. People read them easily. Machines do not, because the conventions are ambiguous in exactly the places that matter. Does an empty cell mean silence or the same chord again? Does \"x 2\" repeat the last chord or the whole line? barmark answers those questions in a written grammar, so a chart means the same thing to a band, a parser and a renderer.",
-		"A barmark file is a markdown file with the extension .chart.md, so any markdown tool shows it sensibly on day one. The barmark package parses a chart into bars in play order, sections, key, meter and tempo, and line-numbered diagnostics; it never throws, prints charts back in a canonical spelling, and converts chord symbols to and from Harte labels. @barmark/render turns a chart into a clean, evenly spaced bar grid, either as server-rendered HTML that needs no browser JavaScript or as the <barmark-chart> web component. @barmark/cli puts both in a terminal or a CI pipeline: the barmark command checks charts and reports problems by file and line, prints them in standard form, renders a standalone page and transposes, with standalone binaries for machines without Node. @barmark/musicxml carries a chart into notation software and back: it exports MusicXML 4.0 that opens in MuseScore, Dorico, Sibelius or Finale with the same bars, chords, repeats, sections and parts, in play order, and imports a MusicXML or compressed .mxl file as a canonical barmark chart.",
+		"A barmark file is a markdown file with the extension .chart.md, so any markdown tool shows it sensibly on day one. The barmark package parses a chart into bars in play order, sections, key, meter and tempo, and line-numbered diagnostics; it never throws, prints charts back in a canonical spelling, and converts chord symbols to and from Harte labels. @barmark/render turns a chart into a clean, evenly spaced bar grid, either as server-rendered HTML that needs no browser JavaScript or as the <barmark-chart> web component. @barmark/cli puts both in a terminal or a CI pipeline: the barmark command checks charts and reports problems by file and line, prints them in standard form, renders a standalone page and transposes, with standalone binaries for machines without Node. @barmark/musicxml carries a chart into notation software and back: it exports MusicXML 4.0 that opens in MuseScore, Dorico, Sibelius or Finale with the same bars, chords, repeats, sections and parts, in play order, and imports a MusicXML or compressed .mxl file as a canonical barmark chart. @barmark/sync ties a chart to a recording: it builds a first-draft chart from a chord detector's bar grid and chord runs, and defines the timing map, a small JSON format that records when each played bar starts, with a checker and the lookups a player needs to follow along.",
 		"barmark was extracted from the chart parser in Stem Shovel, our music collaboration app, and its rules were checked by our stem-bench studies against real recordings. The grammar is a v0.1 draft, open for review. The code is MIT licensed, and the specification will be published under CC-BY 4.0."
 	],
 	"install": "bun add barmark @barmark/render",
@@ -36,6 +36,10 @@
 		{
 			"label": "npm: @barmark/musicxml",
 			"href": "https://www.npmjs.com/package/@barmark/musicxml"
+		},
+		{
+			"label": "npm: @barmark/sync",
+			"href": "https://www.npmjs.com/package/@barmark/sync"
 		}
 	],
 	"features": [
@@ -45,7 +49,8 @@
 		"Harte chord labels in both directions, checked against the McGill Billboard and Isophonics Beatles datasets",
 		"@barmark/render: HTML with Declarative Shadow DOM, or the <barmark-chart> web component, with light and dark themes and screen-reader support",
 		"@barmark/cli: check, format, render and transpose .chart.md files from a terminal or in CI, with GitHub annotations and pinned library versions",
-		"@barmark/musicxml: MusicXML 4.0 export and import, with chord symbols, voicings, repeats, endings, jumps and several parts, checked against real MuseScore 4 files"
+		"@barmark/musicxml: MusicXML 4.0 export and import, with chord symbols, voicings, repeats, endings, jumps and several parts, checked against real MuseScore 4 files",
+		"@barmark/sync: build a draft chart from chord detection, and a checked timing map that lines each played bar up with a recording"
 	],
 	"relatedArticles": [
 		{
