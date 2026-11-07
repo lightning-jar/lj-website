@@ -2957,6 +2957,50 @@ export function initStemCharts() {
 		"Gates S25-G1 and S25-G2 both FAIL as registered, and both failures carry the study's information; the parity results carry its verdict. The synthesis across Studies 24 and 25, handed to the app: declared bpm as the period, onset-comb phase, bar one near t=0 \u00b7 better arm per song 72/76, 152/153, 136/140 against baselines 72, 151, 131 \u00b7 open problems: beat-level phase at fast tempos, and the bars a recording never played. \u2248$0.35 of a $2 fence, 473 cells, predictions 3 of 4 scored right with the registered open question resolving to its disclosed FAIL reading.",
 	);
 
+	// --- Studies 26/26b/26c: the alignment-ends repair (no figure) ---
+	table(
+		"tbl-ends26",
+		[
+			"song",
+			"baseline ends |err| vs the true grid (first 4 / last 4 bars)",
+			"v1 (LSQ tempo) \u2192 v2 (comb, wide slide) \u2192 v3 (comb + quarter-bar fence)",
+			"v3 verdict",
+		],
+		[
+			[
+				"letter-lands",
+				"7.3\u20134.6s / 12.6\u201315.3s \u00b7 middle mean 0.18s",
+				"intro fixed, tail 1.3s (1% LSQ bias \u00d7 29 bars) \u2192 perfect \u2192 perfect",
+				"0.05s / 0.02s \u00b7 through the app's acceptance gate unloosened \u00b7 S26C-G1 ok",
+			],
+			[
+				"peaceful-dreams",
+				"6.6\u20134.2s / 21.1\u201323.3s \u00b7 middle mean 0.16s",
+				"perfect \u2192 intro BROKEN +0.60s (the half-bar slide reached the backbeat) \u2192 perfect",
+				"0.06s / 0.11s \u00b7 S26C-G1 ok",
+			],
+			[
+				"mop-heart",
+				"~3.1s / 2.5\u20133.6s \u00b7 middle mean 0.42s",
+				"0.66s intro \u2192 0.11s intro, 0.32s tail \u2192 same",
+				"app acceptance ok \u00b7 0.32s outro residual is the middle's own phase offset (the 224 bpm problem, next remedy: whole-grid re-phasing) \u00b7 S26C-G2 ok",
+			],
+			[
+				"eat-all-the-clocks",
+				"2.0s / 25\u201327.5s \u00b7 middle mean 7.8s (arrangement mismatch)",
+				"refused \u2192 refused \u2192 refused (interior-trust check: trusted span under half the bars)",
+				"the registered right answer: a chart ~13 bars longer than its recording plays cannot be repaired, only named \u00b7 S26C-G3 ok",
+			],
+			[
+				"the ablation and the lessons",
+				"trim-to-drums: ends as broken as before on every song \u2192 the hazy-audio cause REFUTED; the compression is forced (every chart bar must land somewhere), not seduced",
+				"estimators priced: duration median skew-biased (1.699 vs 1.818s) \u00b7 LSQ slope 1% biased \u00b7 onset comb \u22640.02% on all four \u00b7 the quarter-bar slide is a half-bar-ambiguity fence, not a knob",
+				"the app's bar-1 rule fails ALL FOUR songs today: the shipped refusal refuses the whole MMKK set until the recipe lands",
+			],
+		],
+		"Three registrations, each gate honestly failed and priced before the next (26: G1 FAIL on the LSQ bias, G3 FAIL refuting the ablation's premise; 26b: G1 FAIL on the wide slide; 26c: all gates PASS). $0 throughout: no model calls, pure DSP over the committed corpus. The worker recipe ships as a tested reference implementation in the bench; cost is one alignment as today plus comb sweeps.",
+	);
+
 	// --- Study 19: the ChordMini port gated (no figure) ---
 	table(
 		"tbl-chordmini-port",

@@ -2187,6 +2187,67 @@
 			],
 			"brief": "docs/BRIEF-STUDY25.md",
 			"quote": "Two studies of collapse were the ruler's doing. On the grid the recordings actually have, the chartless draft equals the chart on letter-lands and beats it on peaceful-dreams; what remains is a 115 millisecond phase and the bars a recording never played."
+		},
+		{
+			"slug": "26",
+			"letters": "26–26c",
+			"track": "Listening",
+			"title": "The alignment's broken ends: the hazy-audio hypothesis refuted, and a three-iteration repair recipe measured to pass the app's own acceptance gate",
+			"eyebrow": "Studies 26, 26b, 26c · the ends repair · 109 cells · $0",
+			"indexLine": "Stem Shovel's ask arrived the same day the correction gave the bench a true ruler: the shipped chart alignment's bar map is unusable at the ends (bar one eight seconds late, the last bar fifteen seconds early), the app now refuses such maps, and the deliverable was a cause and a browser-worker recipe that gets Letter Lands through the acceptance gate without loosening it. The baseline split the hypothesis in half: the middle is good (0.16 to 0.42 seconds against true bars) and the ends are broken (3 to 23 seconds) exactly as the app agent suspected, but the suspected cause failed its own direct test, because slicing the audio to the drum span fixed nothing: the end compression is forced, the chart's bars must all land somewhere and the ends have no room, not seduced by sparse chroma. The repair converged in three registered iterations, each gate honestly failed and priced: the proposed least-squares tempo was one percent biased and compounded to 1.3 seconds over an extrapolated tail; the onset comb measures the period to 0.02 percent but a widened end slide reached the half-bar backbeat and broke a working intro by 0.6 seconds; the third registration combined the comb period with the quarter-bar slide fence and passed everything. Letter-lands' ends went from 7.3 and 15.3 seconds to 0.05 and 0.02; peaceful-dreams to 0.06 and 0.11; mop-heart passes the app's shipped acceptance with a 0.32 second residual inherited from its own middle; eat-all-the-clocks is refused by the recipe's interior-trust check, the right answer for a chart thirteen bars longer than its recording plays. One more finding rode along: the app's bar-one acceptance rule currently fails every MMKK song, so the refusal is refusing the whole set.",
+			"sections": [
+				{
+					"id": "sec-stem-study26",
+					"eyebrow": "Listening · the ends repair",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-ends26",
+						"summary": "Per song: baseline end errors against the true grid, the three recipe iterations, the ablation, and the gates"
+					},
+					"body": [
+						{
+							"heading": "The Ask and the New Ruler",
+							"html": "Stem Shovel's player gained a consumer that follows the alignment's bar map in real time (the bar readout, the click, the sections), which exposed what the section-placement consumer never saw: on Letter Lands the map puts bar one at 8.06 seconds into a song whose music starts at zero, compresses the intro to 0.9 second bars, and ends the chart 15 seconds early. The app shipped a refusal gate rather than show a wrong grid, and asked the bench for a cause and a repair. The bench could answer with a ruler it did not have a day earlier: the same-day correction established the recordings as metronome-exact at their declared tempos with verified bar-one anchors, so per-bar alignment error is measurable everywhere, not just at the ends. The baseline measured the ask's shape precisely: middle mean error 0.16 to 0.42 seconds on the three arrangement-matched songs, ends 3 to 23 seconds, and eat-all-the-clocks' interior corrupted (7.8 seconds mean) by its known arrangement mismatch. The app's bar-one acceptance check, computed on the bench corpus, fails all four songs."
+						},
+						{
+							"heading": "The Cause: Forced, Not Seduced",
+							"html": "The ask's hypothesis blamed sparse intros and ringing outros for misleading the chroma comparison, and named its own direct test: align against the recording cut to the span where the drums play. The ablation ran and refuted it: the trimmed alignment's ends are as broken as the full one's, because the chart still cannot fit the sliced span. The end compression is forced, not seduced: a subsequence alignment must place every chart bar inside the recording, the charts run two to three bars longer than the audio on every song, and the path pays that debt at the ends, where nothing anchors it. Removing the 'hazy' audio removes nothing, since the bars it hosted still need somewhere to go."
+						},
+						{
+							"heading": "Three Registrations to a Green Recipe",
+							"html": "Iteration one ran the ask's proposed remedy: trust the middle, extrapolate the ends at the interior tempo, slide to onsets. It repaired peaceful-dreams completely and letter-lands' intro from 7.3 seconds to 0.05, and its registered gate still failed, because the least-squares interior tempo came out one percent biased and compounded to 1.3 seconds over 29 extrapolated tail bars. Iteration two replaced the estimator with the onset joint comb, which measures the period to 0.02 percent on all four songs, and widened the end slide to half a bar; letter-lands became perfect and the widened slide broke peaceful-dreams' intro by 0.60 seconds, reaching the half-bar backbeat lattice the narrow range had excluded by construction. Iteration three registered the obvious composition, comb period with the quarter-bar slide fence, and passed every gate: letter-lands 0.05 and 0.02 seconds through the app's acceptance unloosened, peaceful-dreams 0.06 and 0.11, mop-heart through the shipped acceptance with a 0.32 second outro residual that is its own middle's phase offset (the 224 bpm whole-grid phase problem, named as the next remedy and out of an end repair's scope), and eat-all-the-clocks refused by the recipe's interior-trust check, which is the right user-facing answer for an arrangement mismatch and a better message than the bar-one refusal it replaces."
+						},
+						{
+							"heading": "What the Worker Ships",
+							"html": "The recipe costs one alignment as today plus an onset envelope and comb sweeps, no second pass, no model, no server: align; take the period from the onset comb within ten percent of the chart's declared tempo, never from the median bar duration (skew-biased, 1.699 against a true 1.818 seconds) or a least-squares slope (one percent biased); take the phase as the median residual over the middle sixty percent of bars and trust bars within a quarter period of that line, refusing when under half the bars cohere; keep the aligned trusted span and extrapolate the ends at the comb period; slide each end within a quarter bar toward onset energy; and emit per-bar confidence, aligned versus extrapolated. The reference implementation with unit tests is committed in the bench (src/study26/recipe.ts), and the refusal doubles as an arrangement-mismatch detector: a band whose chart carries bars the recording never plays now hears that, instead of a generic failure."
+						}
+					]
+				}
+			],
+			"published": "2026-11-07",
+			"related": [
+				{
+					"title": "Study 25: the true grid and the verified bar-one anchors this study measures against",
+					"href": "/research/stem-bench/25"
+				},
+				{
+					"title": "Study 24: the onset joint comb the recipe adopts as its tempo instrument",
+					"href": "/research/stem-bench/24"
+				},
+				{
+					"title": "Study 12: the chroma DTW alignment under repair",
+					"href": "/research/stem-bench/12"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY26.md",
+			"quote": "Cutting out the hazy audio fixed nothing, because the bars it hosted still needed somewhere to go. The ends were never seduced; they were forced. Three honest gate failures later, Letter Lands walks through the app's own acceptance check at five hundredths of a second."
 		}
 	]
 }
