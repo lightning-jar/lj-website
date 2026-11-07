@@ -1,0 +1,6 @@
+{
+	"name": "Content Formats & Parsing",
+	"shortName": "Formats",
+	"id": "content-formats-parsing",
+	"description": "Why this matters: Content lives longest in plain-text formats people can read and machines can parse without guessing, so it survives tools, platforms and migrations. We use and build notations, parsers and converters that keep content in readable text, parse it with documented rules, and round-trip it to rendered output and other formats without silent changes. Preferred defaults: marked for spec-tested markdown rendering; barkdown for markdown edited as a live DOM; barmark for chord charts."
+}

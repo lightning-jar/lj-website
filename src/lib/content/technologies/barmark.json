@@ -28,5 +28,5 @@
 		"Rendering clean, accessible chord-chart grids on web pages with or without JavaScript",
 		"Checking chord-chart files in CI, with problems reported by file and line"
 	],
-	"supercategory": "content-management-pim"
+	"supercategory": "content-formats-parsing"
 }

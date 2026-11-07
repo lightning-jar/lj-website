@@ -23,5 +23,5 @@
 		"Round-tripping markdown through programmatic DOM transforms without drift",
 		"Keeping footnotes, tables, and raw HTML intact across repeated edit cycles"
 	],
-	"supercategory": "content-management-pim"
+	"supercategory": "content-formats-parsing"
 }

@@ -15,5 +15,5 @@
 		"Custom renderers for brand-specific typography and link policies",
 		"Footnotes and extensions without forking the parser"
 	],
-	"supercategory": "content-management-pim"
+	"supercategory": "content-formats-parsing"
 }

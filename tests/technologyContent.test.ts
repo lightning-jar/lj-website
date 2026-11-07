@@ -13,6 +13,37 @@ const entries = Object.entries(files).map(([path, mod]) => ({
 	tech: mod.default,
 }));
 
+const supercategoryFiles = import.meta.glob<{
+	default: Record<string, unknown>;
+}>("../src/lib/content/technologySuperCategories/*.json", { eager: true });
+
+const supercategories = Object.entries(supercategoryFiles).map(
+	([path, mod]) => ({
+		path: path.split("/").pop() ?? path,
+		sc: mod.default,
+	}),
+);
+const supercategoryIds = new Set(supercategories.map((s) => s.sc.id));
+
+describe("technology supercategories", () => {
+	// A misspelled key (once "shoreName") is silently ignored, and the
+	// detail page's sidebar falls back to "More Related Technologies".
+	it.each(supercategories)(
+		"$path has id, name and shortName",
+		({ path, sc }) => {
+			expect(`${sc.id}.json`).toBe(path);
+			for (const key of ["id", "name", "shortName", "description"]) {
+				expect(typeof sc[key]).toBe("string");
+				expect((sc[key] as string).trim()).not.toBe("");
+			}
+		},
+	);
+
+	it.each(entries)("$path names a supercategory that exists", ({ tech }) => {
+		expect(supercategoryIds).toContain(tech.supercategory);
+	});
+});
+
 describe("technology content", () => {
 	it("loads the technology files", () => {
 		expect(entries.length).toBeGreaterThan(0);

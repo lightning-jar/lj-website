@@ -154,7 +154,7 @@ Blog copy follows house rules: no em/en dashes in prose, plain phrasing over cle
 
 ## Testing
 
-**Vitest** (config: `vitest.config.ts`), 314 tests in `tests/*.test.ts`.
+**Vitest** (config: `vitest.config.ts`), 404 tests in `tests/*.test.ts`.
 
 ```bash
 bun run test                         # Run all tests
