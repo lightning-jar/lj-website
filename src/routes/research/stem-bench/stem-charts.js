@@ -2471,6 +2471,121 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 21: the reader on the rest of the catalog ---
+	(() => {
+		const ROWS = [
+			{
+				song: "peaceful-dreams (HELD OUT)",
+				v: 97.4,
+				n: "149/153",
+				color: "#199e70",
+				tip: "the best root performance in the program · extended-allowance grade 73/153 (the registered gate misses by 4 bars) because 62 bars carry qualities outside the allowance vocabulary: the model answers X7 on 24 of 32 X5(7) bars (it hears the optional seventh) and X7/Xsus4 on the 7sus4 bars (roots 29/30, half-right, zero credit)",
+			},
+			{
+				song: "letter-lands (anchor)",
+				v: 92.1,
+				n: "70/76",
+				color: "#199e70",
+				tip: "anchor reproduced exactly, fourth time: 59/76 under the power allowance · the root-only read from Study 17's disclosed anatomy",
+			},
+			{
+				song: "eat-all-the-clocks (anchor)",
+				v: 89.3,
+				n: "75/84",
+				color: "#199e70",
+				tip: "anchor reproduced exactly, fourth time: 53/86 under the power allowance · 84 chord-bearing bars",
+			},
+			{
+				song: "mop-heart (HELD OUT)",
+				v: 82.1,
+				n: "115/140",
+				color: "#199e70",
+				tip: "the program's first big STRICT result: 107/140 bars EXACTLY right, zero allowance credit — plain triads are the model's native vocabulary, on the same sparse 3/4 arrangement whose silence broke the note-channel power hint 16 times out of 16",
+			},
+		];
+		byId("legend-s21").innerHTML =
+			'<span class="key"><span class="chip" style="background:#199e70"></span>root-level accuracy</span>' +
+			legendNote(
+				"the shipped reader's roots per song, anchors and held-out: 409/453 = 90.3% combined · S21-G1 (anchors exact) PASS · S21-G2 (each held-out song at least 50% under the registered extended allowance) FAIL by 4 bars on peaceful-dreams — the anatomy puts the miss in the grade's vocabulary, not the hearing",
+			);
+		const W = 880,
+			BAR = 16,
+			GPAD = 12,
+			T = 8,
+			B = 42,
+			L = 230,
+			R = 100;
+		const H = T + ROWS.length * (BAR + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 50, 100]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		ROWS.forEach((row, i) => {
+			const y = T + i * (BAR + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${y + BAR - 3}" text-anchor="end">${row.song}</text>`;
+			const w = Math.max((row.v / 100) * iw, 2);
+			marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${row.color}" rx="3"/>`;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 4}">${row.v}% (${row.n})</text>`;
+			hits += `<rect x="${L}" y="${y}" width="${iw}" height="${BAR}" fill="transparent" data-tip="${esc(row.song + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-reader21");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart of the shipped chord reader's root-level accuracy by song: 97.4 percent on held-out peaceful-dreams, 92.1 and 89.3 percent on the two anchors, and 82.1 percent on held-out mop-heart, where 107 of 140 bars were exactly right with no allowance.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the generalization verdict: the reader's roots hold 82 to 97 percent on songs it never saw, with the held-out power-chord song reading best of all, so the two-song headline was not an artifact of the development material",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-reader21",
+			["cell", "result", "the read"],
+			[
+				[
+					"S21-G1: the anchors",
+					"letter-lands 59/76 and eat-all-the-clocks 53/86, reproduced to the digit · PASS exact, the fourth reproduction",
+					"the instrument proved before any new number was read, as in Studies 17, 19 and 20",
+				],
+				[
+					"the registered grading decision",
+					"the power allowance extends to truth quality 5(7) (a power chord with an optional seventh declares no third either), decided and committed before the data existed · a pin test proves the extended grade identical to Study 13's wherever 5(7) is absent",
+					"no prior study's number could move, and the extension's effect is reported beside the verbatim grade on every song",
+				],
+				[
+					"S21-G2: each held-out song at least 50%",
+					"mop-heart 107/140 (76.4%) PASS · peaceful-dreams 73/153 (47.7%) FAIL by 4 bars · the gate fails as registered",
+					"the honest headline and the anatomy sit side by side: the gate's grade speaks the anchors' chart dialect, and peaceful-dreams is written in a different one",
+				],
+				[
+					"the anatomy: dialect, not hearing",
+					"peaceful-dreams roots 149/153 (97.4%) · on the 32 X5(7) bars the model says X7 on 24 (it hears the optional seventh; 7 is not in the allowance set) · on the 30 7sus4 bars it says X7 or Xsus4 (roots 29/30, each half the truth, credit zero)",
+					"62 bars (40% of the song) carry qualities outside the registered vocabulary, and the model's answers on them are more specific than the allowance anticipated — the predicted 5(7) windfall came to 6 bars instead of 15 to 30 for exactly that reason",
+				],
+				[
+					"mop-heart: the first big strict result",
+					"107/140 bars EXACTLY right, zero allowance credit · roots 115/140 · strict-first equals right, as predicted, to the bar",
+					"plain triads are the model's native vocabulary, and the sparse 3/4 arrangement that broke the note-channel power hint (Study 20b: 16 fires, 16 misses) does not trouble a reader that hears the mix",
+				],
+				[
+					"the ledger",
+					"$0, zero model calls, no transcription · combined roots 409/453 = 90.3% · combined extended-allowance 292/453 = 64.5%, within ten points of the two-song 69.1% · predictions 3 right, 2 wrong",
+					"the reader's numbers now stand on four songs instead of two; registered lesson: allowance vocabularies are set against each chart's own symbol census before the run, never patched after",
+				],
+			],
+		);
+	})();
+
 	// --- Study 19: the ChordMini port gated (no figure) ---
 	table(
 		"tbl-chordmini-port",

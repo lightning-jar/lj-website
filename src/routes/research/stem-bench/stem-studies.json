@@ -1820,6 +1820,70 @@
 			],
 			"brief": "docs/BRIEF-STUDY20.md",
 			"quote": "The synthetic fixture said 438 of 440 and the real recording said 22 of 76. The one rule that survived was perfect on the power-chord songs and wrong sixteen times out of sixteen on the sparse one, and a hint that cannot tell which song it is in has no precision to print on a card."
+		},
+		{
+			"slug": "21",
+			"letters": "21",
+			"track": "Listening",
+			"title": "The chord reader on the rest of the catalog: the roots generalize at 90 percent, and the gate it fails is the grade's vocabulary, not the hearing",
+			"eyebrow": "Study 21 · held-out validation · 455 zero-spend cells",
+			"indexLine": "Every real-audio chord number in the program rested on the two songs the pipeline was developed against. Study 20b banked bar-level truth for the other two charted Badverbs songs after the reader shipped, so Study 21 graded the shipped reader there, with one grading decision registered before the data existed. The anchors reproduced exactly, for the fourth time. The held-out gate failed by four bars on peaceful-dreams and passed easily on mop-heart, and the anatomy flips the failure: peaceful-dreams' roots are 149 of 153, the best root performance in the program, and the lost credit is chart dialect the grade's allowance vocabulary does not speak — the model answers G7 on G5(7) bars because it hears the optional seventh, and D7 or Dsus4 on D7sus4 bars, each half of the truth, credit zero. mop-heart is the program's first big strict result: 107 of 140 bars exactly right with no allowance involved, on the same sparse waltz that broke the note-channel power hint sixteen times out of sixteen. Across all four songs the roots stand at 90.3 percent.",
+			"sections": [
+				{
+					"id": "sec-stem-study21",
+					"eyebrow": "Listening, held-out validation",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s21",
+					"figure": {
+						"id": "fig-reader21",
+						"title": "The Shipped Reader's Root-Level Accuracy by Song, Anchors and Held-Out"
+					},
+					"table": {
+						"id": "tbl-reader21",
+						"summary": "Both gates, the per-song grades under three graders, and the dialect anatomy of the held-out miss"
+					},
+					"body": [
+						{
+							"heading": "The Design, and One Pre-Data Decision",
+							"html": "The two held-out charts arrived for Study 20b, after the reader shipped and after Study 19 gated its port, so for the model they are held out in the sense that matters: nothing in the pipeline or its studies ever touched them. The study ran the pinned reference pipeline on each song's mix over the aligned bar grid, exactly as every prior real-audio study, at zero spend. One grading decision had to be made before the data existed, and was registered: peaceful-dreams' chart writes X5(7) on 32 bars, and Study 13's power allowance keys on the quality 5 exactly. A power chord with an optional seventh declares no third either, so the registered primary grade extends the allowance to 5(7), changing nothing else, with a pin test proving it identical to the Study 13 grade wherever that quality is absent — both anchors, mop-heart, and the whole synthetic fixture — so no prior number could move."
+						},
+						{
+							"heading": "The Gates",
+							"html": "S21-G1 passed exactly: letter-lands and eat-all-the-clocks reproduced 59 of 76 and 53 of 86 to the digit, the fourth reproduction of the anchor numbers. S21-G2 asked each held-out song for at least half of its chord-bearing bars under the extended allowance. mop-heart passed easily at 76.4 percent. peaceful-dreams missed by four bars, 73 of 153, and the gate fails as registered. The anatomy below is reported beside the gate, not in place of it."
+						},
+						{
+							"heading": "The Anatomy: Dialect, Not Hearing",
+							"html": "peaceful-dreams' roots are 149 of 153, 97.4 percent, the best root performance the program has measured. The lost credit sits on the 62 bars, forty percent of the song, whose truth qualities the allowance vocabulary does not speak. On the 32 X5(7) bars the model answers X7 on 24 — it hears the optional seventh — but 7 is not in the registered allowance set, so only its six plain-major answers credited. On the 30 D7sus4 bars it answers D7 or Dsus4, roots right on 29 of 30, each answer half of the truth, credit zero. The expected windfall from the 5(7) extension never came, six bars instead of the predicted fifteen to thirty, and for the best possible reason: the model was saying something more specific than the allowance anticipated. mop-heart is the opposite pole: plain major triads are the model's native vocabulary, and it read 107 of 140 bars exactly right, no allowance involved, with roots at 115 of 140 — on the same sparse three-four arrangement whose silence the note-channel power hint misread sixteen times out of sixteen. A reader that hears the mix does not need the transcription to have written the third."
+						},
+						{
+							"heading": "What Stands",
+							"html": "Nothing changes in the app; the reader is already shipped and Study 17's hedge already covers the colors. What changed is the evidence: the reader's roots now stand on four songs instead of two, 82 to 97 percent per song and 90.3 percent combined, and the colors it misses are half-heard rather than unheard — exactly the raw material a draft layer reads. That is the registered baseline for the recording-to-chart question. One lesson is registered for the program itself: allowance vocabularies are registered against each chart's own symbol census before the run, never patched after. Predictions: three right, including mop-heart's strict-equals-right landing exactly at 107, and two wrong, one of them wrong in the most informative direction."
+						}
+					]
+				}
+			],
+			"published": "2026-11-07",
+			"related": [
+				{
+					"title": "Studies 20 and 20b: the refutation that banked these held-out charts",
+					"href": "/research/stem-bench/20"
+				},
+				{
+					"title": "Study 19: the port gate that made this reader the app's",
+					"href": "/research/stem-bench/19"
+				},
+				{
+					"title": "Study 17: where the reader won its place on the real recordings",
+					"href": "/research/stem-bench/17"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY21.md",
+			"quote": "The gate failed by four bars and the roots were 149 of 153. The model answered G7 on the G5(7) bars because it heard the seventh the chart calls optional, and the registered allowance had no word for that — the reader outgrew the grade before the grade met the song."
 		}
 	]
 }
