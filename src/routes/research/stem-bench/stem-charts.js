@@ -2500,13 +2500,13 @@ export function initStemCharts() {
 				v: 82.1,
 				n: "115/140",
 				color: "#199e70",
-				tip: "the program's first big STRICT result: 107/140 bars EXACTLY right, zero allowance credit — plain triads are the model's native vocabulary, on the same sparse 3/4 arrangement whose silence broke the note-channel power hint 16 times out of 16",
+				tip: "the program's first big STRICT result: 107/140 bars EXACTLY right, zero allowance credit, plain triads are the model's native vocabulary, on the same sparse 3/4 arrangement whose silence broke the note-channel power hint 16 times out of 16",
 			},
 		];
 		byId("legend-s21").innerHTML =
 			'<span class="key"><span class="chip" style="background:#199e70"></span>root-level accuracy</span>' +
 			legendNote(
-				"the shipped reader's roots per song, anchors and held-out: 409/453 = 90.3% combined · S21-G1 (anchors exact) PASS · S21-G2 (each held-out song at least 50% under the registered extended allowance) FAIL by 4 bars on peaceful-dreams — the anatomy puts the miss in the grade's vocabulary, not the hearing",
+				"the shipped reader's roots per song, anchors and held-out: 409/453 = 90.3% combined · S21-G1 (anchors exact) PASS · S21-G2 (each held-out song at least 50% under the registered extended allowance) FAIL by 4 bars on peaceful-dreams, the anatomy puts the miss in the grade's vocabulary, not the hearing",
 			);
 		const W = 880,
 			BAR = 16,
@@ -2570,7 +2570,7 @@ export function initStemCharts() {
 				[
 					"the anatomy: dialect, not hearing",
 					"peaceful-dreams roots 149/153 (97.4%) · on the 32 X5(7) bars the model says X7 on 24 (it hears the optional seventh; 7 is not in the allowance set) · on the 30 7sus4 bars it says X7 or Xsus4 (roots 29/30, each half the truth, credit zero)",
-					"62 bars (40% of the song) carry qualities outside the registered vocabulary, and the model's answers on them are more specific than the allowance anticipated — the predicted 5(7) windfall came to 6 bars instead of 15 to 30 for exactly that reason",
+					"62 bars (40% of the song) carry qualities outside the registered vocabulary, and the model's answers on them are more specific than the allowance anticipated, the predicted 5(7) windfall came to 6 bars instead of 15 to 30 for exactly that reason",
 				],
 				[
 					"mop-heart: the first big strict result",
@@ -2581,6 +2581,166 @@ export function initStemCharts() {
 					"the ledger",
 					"$0, zero model calls, no transcription · combined roots 409/453 = 90.3% · combined extended-allowance 292/453 = 64.5%, within ten points of the two-song 69.1% · predictions 3 right, 2 wrong",
 					"the reader's numbers now stand on four songs instead of two; registered lesson: allowance vocabularies are set against each chart's own symbol census before the run, never patched after",
+				],
+			],
+		);
+	})();
+
+	// --- Study 22: the bar grid from the recording alone (table only) ---
+	(() => {
+		table(
+			"tbl-grid22",
+			["cell", "result", "the read"],
+			[
+				[
+					"S22-G1, first run: the sanity gate",
+					"0% on all four synthetic renders, whose true bar starts are exact",
+					"the bench's registered metric was defective: index-paired scoring against a phase that exists only modulo the bar period scored a 68 ms-accurate comb as zero, one bar shifted",
+				],
+				[
+					"amendment 1, re-registered",
+					"lattice distance: each truth bar start against the nearest lattice point, with each arm's period reported beside its rate (a half-period lattice contains the true one and would otherwise take silent octave credit) · thresholds untouched · the defective run's numbers disclosed as seen",
+					"the program's defective-grader rule applied: stop, fix, re-register, re-run · re-run sanity: 100.0% on all four renders, S22-G1 PASS",
+				],
+				[
+					"S22-G2: the decision gate (declared tempo + blind phase >= 80% per song)",
+					"FAIL everywhere: 68.8% (letter-lands), 19.5% (eat), 16.2% (peaceful), 8.5% (mop-heart)",
+					"the end-to-end draft study may NOT assume a derivable uniform grid; it runs grid-given",
+				],
+				[
+					"the ceiling: least-squares fit to the truth itself",
+					"27.3 to 37.9% with ~400 ms mean error, against tolerances of 122 to 280 ms",
+					"when the best possible uniform grid misses two-thirds of the truth, the limit is the ruler: the chart-anchored DTW truth is quantized at 93 ms and its path wanders by hundreds of ms per bar, which per-bar chord grading tolerates (Study 21 read 97% roots on these grids) and a bar-position gate cannot see through · band drift and ruler wander are inseparable with current instruments",
+				],
+				[
+					"the blind detector arm",
+					"detected tempo on a Study 11 ladder rung of the declared on all four songs (1.0, 1.0, 1.499, 2.0) · raw-octave grids score under 30%",
+					"the ladder fold is load-bearing for any future grid work; the 224 bpm waltz can only ever appear as half time (the detector's range caps at 210, disclosed at registration, as was the octave prior's tuning on this very catalog)",
+				],
+				[
+					"the ledger",
+					"$0 · 910 cells across the valid run's gated arms · what would unlock the question: human-tapped downbeats on one or two songs",
+					"predictions: two right, two wrong (the ceiling, decisively), one not evaluable, and one wrong-then-right through the amendment its failure forced",
+				],
+			],
+		);
+	})();
+
+	// --- Study 23: recording to chart, the end-to-end pilot ---
+	(() => {
+		const SONGS = [
+			{
+				song: "letter-lands",
+				chart: 94.7,
+				json: 94.7,
+				chartN: "72/76",
+				jsonN: "72/76",
+				tip: "the one song whose chart carried the right bar count (76): both channels read 72/76 roots, ABOVE the hint's 70",
+			},
+			{
+				song: "eat-all-the-clocks",
+				chart: 35.7,
+				json: 81.0,
+				chartN: "30/84",
+				jsonN: "68/84",
+				tip: "the chart renders 68 of 86 bars, so index-paired roots collapse · the JSON is bar-exact at 68/84, the pilot's one true musical regression (hint 74/84) on the vocal-heavy song",
+			},
+			{
+				song: "peaceful-dreams",
+				chart: 0,
+				json: 98.7,
+				chartN: "unparseable",
+				jsonN: "151/153",
+				tip: "the chart does not parse: cell-level repeats (| D5 x8 |) the notation does not define, invited by the prompt's own compact example · the JSON reads 151/153 roots, above the reader's 149, with strict credit on 84 bars vs the reader's 20 and 11 of 62 dialect bars EXACTLY right (D7sus4 written strictly 11 times; G7 on the G5(7) bars)",
+			},
+			{
+				song: "mop-heart",
+				chart: 27.1,
+				json: 93.6,
+				chartN: "38/140",
+				jsonN: "131/140",
+				tip: "the chart under-writes its section repeats and loses 56 bars · the JSON is bar-exact: 131/140 roots and 129/140 strict on the all-triad waltz",
+			},
+		];
+		byId("legend-s23").innerHTML =
+			'<span class="key"><span class="chip" style="background:#e66767"></span>the chart the app parses (every gate sat here)</span>' +
+			'<span class="key"><span class="chip" style="background:#199e70"></span>the same answer\u2019s JSON chords field</span>' +
+			legendNote(
+				"root-level accuracy over chord-bearing bars, per channel · all four gates FAIL on the chart channel (one chart unparseable, two missing 18 and 56 bars) · the JSON channel is bar-exact on every song and carries the program's best chord numbers · the verdict: build the chart from the JSON by code, stop trusting model markdown",
+			);
+		const W = 880,
+			BAR = 13,
+			PAIR = 3,
+			GPAD = 16,
+			T = 8,
+			B = 42,
+			L = 190,
+			R = 110;
+		const groupH = BAR * 2 + PAIR;
+		const H = T + SONGS.length * (groupH + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 50, 100]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+		}
+		let marks = "";
+		let hits = "";
+		SONGS.forEach((row, i) => {
+			const y = T + i * (groupH + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${y + groupH / 2 + 4}" text-anchor="end">${row.song}</text>`;
+			const wChart = Math.max((row.chart / 100) * iw, 2);
+			const wJson = Math.max((row.json / 100) * iw, 2);
+			marks += `<rect x="${L}" y="${y}" width="${wChart}" height="${BAR}" fill="#e66767" rx="3"/>`;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${L + wChart + 8}" y="${y + BAR - 2}">${row.chart}% (${row.chartN})</text>`;
+			marks += `<rect x="${L}" y="${y + BAR + PAIR}" width="${wJson}" height="${BAR}" fill="#199e70" rx="3"/>`;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${L + wJson + 8}" y="${y + BAR * 2 + PAIR - 2}">${row.json}% (${row.jsonN})</text>`;
+			hits += `<rect x="${L}" y="${y}" width="${iw}" height="${groupH}" fill="transparent" data-tip="${esc(row.song + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-autochart");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Paired bar chart of root accuracy by song and channel: the chart channel reads 94.7, 35.7, 0 and 27.1 percent while the same answers' JSON channel reads 94.7, 81, 98.7 and 93.6 percent.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the pilot in one frame: the model hears the songs (green, the JSON it returns) and loses them in serialization (red, the markdown chart the app would parse), so the fix is deterministic rendering, not better ears",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-autochart",
+			["cell", "result", "the read"],
+			[
+				[
+					"S23-G1 (every chart parses) and G2 (bar count exact on >= 3 of 4)",
+					"FAIL and FAIL: peaceful-dreams unparseable; eat renders 68/86 bars, mop-heart 84/140; only letter-lands exact (1/4)",
+					"the failure modes are legible: cell-level repeats (| D5 x8 |) the notation does not define, invited by the production prompt's own compact example (D(7)sus4 \u00b7 D5 x2), and under-written section repeats",
+				],
+				[
+					"S23-G3 (chart roots >= hint roots minus 5 points, every song)",
+					"FAIL on the gated channel · on the JSON channel three of four songs sit ABOVE their hint (72/76 vs 70, 151/153 vs 149, 131/140 vs 115) and one below (eat: 68/84 vs 74)",
+					"the draft layer preserves or improves the reader's roots whenever its answer is read at bar-exact granularity; the vocal-heavy song is the one true musical regression and the thing a re-test should examine",
+				],
+				[
+					"S23-G4 (the color question: peaceful's 62 dialect bars, strict, >= 10)",
+					"FAIL at 0 on the chart channel · 11/62 on the JSON channel, where the gate's line was 10",
+					"the recovery the whole arc pointed at is real: D7sus4 (named in the prompt's examples) written strictly 11 times where the reader scores zero by vocabulary, and G7 on ten G5(7) bars, the seventh heard, the spelling absent from every example · one example line showing the 5(7) spelling would likely convert those ten",
+				],
+				[
+					"the verdict to the app",
+					"build the chart deterministically from the JSON's chords and sections fields; stop trusting model markdown as the document of record · constraining the prompt's examples to row notation is the weaker second option · any re-test is a new registration",
+					"the composition is one deterministic step from viable: with a code-built chart, G1, G2 and G4 would have passed this pilot as run",
+				],
+				[
+					"the ledger",
+					"$0.31 of the registered $2 fence · 4 fable calls, production shape · 455 gated cells · all five predictions wrong on the gated channel, every predicted mechanism visible in the JSON",
+					"the bench predicted the music and failed to predict the serialization; the gates stand as registered because the chart is what ships",
 				],
 			],
 		);
