@@ -2069,6 +2069,67 @@
 			],
 			"brief": "docs/BRIEF-STUDY23B.md",
 			"quote": "The user taps the downbeat perfectly, and the chart is still wrong, because the tempo on the tin is not the tempo in the recording. The grid's missing leg was never the phase."
+		},
+		{
+			"slug": "24",
+			"letters": "24",
+			"track": "The chart-draft pipeline",
+			"title": "True-tempo estimation found the tempo was never lost: the combs recover the exact declared bpm, and the same-day correction rebuilt the grid story from the audio up",
+			"eyebrow": "Study 24 · the joint phase-and-period search · 916 cells · ≈$0.30 of a $2 fence",
+			"indexLine": "Registered as the fix Study 23b named, the joint phase-and-period comb search ran over the shipped reader's grid-free segment boundaries, and its first reading split the catalog: steady songs reached baseline parity chartless, with peaceful-dreams writing 18 of its 62 dialect bars exactly, above grid-given's 11 and the program's best color number, while letter-lands and eat-all-the-clocks stayed collapsed and the in-run least-squares fit to the aligned truth itself hit almost nothing, which the bench read as tempo wander. Kevin corrected the premise the same day, a DTW-free comb sweep verified him within the hour, and the study's own data re-scored into the opposite story: the recordings are metronome-exact at their declared tempos, the onset joint comb had found that exact tempo on all four songs to 0.02 percent or better, and the bench had graded that perfection as 24 percent off against its own broken ruler. What actually failed was the alignment truth's bar geometry, including two four-bar start errors that had turned 23b's simulated tap into a four-bars-late anchor, and one genuine arrangement mismatch: eat-all-the-clocks' chart is about 13 bars longer than its recording plays. The corrected guidance inverts the registration's premise: use the declared bpm, anchor bar one near t equals zero, and treat arrangement mismatch as the open problem.",
+			"sections": [
+				{
+					"id": "sec-stem-study24",
+					"eyebrow": "The chart-draft pipeline, chartless",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-tempo24",
+						"summary": "Both gates as registered, the first reading, the re-scored comb results, and the correction's three findings"
+					},
+					"body": [
+						{
+							"heading": "The Registered Design",
+							"html": "P1, the chord-change joint comb, searched period across the declared value plus or minus 10 percent jointly with phase, two-stage, minimizing the circular distance of the shipped reader's grid-free segment boundaries to the lattice; P2 ran the same search on Study 22's onset objective. Arm B3 re-ran the chartless draft pipeline with P1's fitted grid, the period the only variable against 23b's blind arm. Gate one asked whether the fitted grid reaches the in-run uniform ceiling on the aligned truth; gate two asked whether the draft comes within 5 points of the grid-given baseline on every song."
+						},
+						{
+							"heading": "The First Reading",
+							"html": "Gate two failed as a whole and the split looked like the finding: peaceful-dreams reached 148 of 153 roots chartless, within 2 points of its grid-given 151, with 18 of 62 dialect bars written exactly, above grid-given's 11 and the best color number the program has measured; mop-heart reached 136 of 140, above its 131 baseline. Letter-lands and eat-all-the-clocks stayed collapsed, and the in-run least-squares uniform fit to the aligned truth itself hit only 3 to 17 bars per song, which the bench published as the deep fact: the tempo is not a constant. Gate one passed hollow, its least-squares ceiling disclosed the same day as the wrong objective for a hit-rate gate."
+						},
+						{
+							"heading": "The Correction Rebuilt the Story From the Audio",
+							"html": "Kevin's correction, that the recordings are precisely metronomic, was verified within the hour by a comb sweep over the raw onset envelope with no alignment involved: razor-sharp peaks at 131.97 to 131.99, 120.00, 144.96 to 144.98 and 223.82 to 223.97 bpm against declared 132, 120, 145 and 224. Re-scored against those true periods, this study's P2 had found the exact tempo on all four songs, 0.02 percent or better, and P1 on three of four; the bench had graded both against its own broken ruler and reported perfection as failure. The ruler's damage was then localized: its bar geometry drifts up to 22 seconds while its per-bar bins stay musically chart-aligned (so the program's chord grades stand), the 7.15 and 6.5 second 'intros' on letter-lands and peaceful-dreams were four-bar start errors (both recordings open on chart bar one, which is what actually collapsed 23b's tap arm and this study's letter grades, by whole-bar index shifts), and eat-all-the-clocks' chart needs 172 seconds of audio against a 147.5 second recording, an arrangement mismatch no grid can chart."
+						},
+						{
+							"heading": "What Survives and What Comes Next",
+							"html": "Surviving on the positive side: the dialect result (18 of 62 exact on a chartless grid), the onset joint comb as an exact mechanical tempo check, and the shipped reader's near chart-grade inputs under the true grid (70 of 76, 134 of 153, 111 of 140 roots on the arrangement-matched songs). Withdrawn: both tempo verdicts and every geometric use of the alignment truth; the standing lesson entered the program's ledger as 'bins only, never geometry.' The corrected grid guidance to the app: use the declared bpm, it is exact; anchor bar one near t equals zero; the open problem is chart-versus-recording arrangement. Study 25, the corrected end-to-end draft on the true grid, was registered as the follow-up with the prediction that the three arrangement-matched songs reach baseline."
+						}
+					]
+				}
+			],
+			"published": "2026-11-07",
+			"related": [
+				{
+					"title": "Study 23b: the chartless-grid study this corrected, and the withdrawn tap verdict",
+					"href": "/research/stem-bench/23b"
+				},
+				{
+					"title": "Study 22: where 'the truth is the ruler' was first measured",
+					"href": "/research/stem-bench/22"
+				},
+				{
+					"title": "Study 23: the grid-given baseline both gates grade against",
+					"href": "/research/stem-bench/23"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY24.md",
+			"quote": "The comb found the exact tempo on every song, and the bench graded that perfection as 24 percent off, against a ruler it had trusted for eleven studies. The recordings were never the ones drifting."
 		}
 	]
 }

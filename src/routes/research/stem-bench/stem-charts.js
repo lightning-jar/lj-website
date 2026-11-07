@@ -2881,6 +2881,44 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Study 24: the joint phase-and-period combs, corrected same day (no figure) ---
+	table(
+		"tbl-tempo24",
+		[
+			"song",
+			"first reading (as registered: combs vs the in-run fit to the aligned truth, draft vs baseline)",
+			"re-read under the same-day correction (true periods: the declared ones, exactly)",
+		],
+		[
+			[
+				"letter-lands (132 bpm declared)",
+				"P1 1.9142s, P2 1.8185s, both 'off' the 1.6534s fit \u00b7 draft 36/76 vs baseline 72/76",
+				"true period 1.8182s: P2 was 0.02% from exact and the 'fit' was the broken ruler \u00b7 the draft collapse was a whole-bar index shift (the recording opens on chart bar one at t\u22480; the '7.15s intro' never existed) \u00b7 true-grid reader hints alone: 70/76",
+			],
+			[
+				"eat-all-the-clocks (120 bpm declared)",
+				"P1 2.0064s, P2 2.0004s vs a 1.6155s fit \u00b7 draft 24/84 vs baseline 68/84",
+				"true period 2.0000s: P2 exact to 0.02%, P1 to 0.3% \u00b7 the real defect is arrangement: the chart needs 172s of audio and the recording is 147.5s, so ~13 chart bars were never played \u00b7 true-grid hints 55/84, the mismatch's honest ceiling",
+			],
+			[
+				"peaceful-dreams (145 bpm declared)",
+				"P1 1.6558s, P2 1.6552s \u00b7 draft 148/153 vs baseline 151/153 \u00b7 dialect 18/62 exact, above grid-given's 11",
+				"P2 found the exact period \u00b7 the parity result and the program's best color number stand",
+			],
+			[
+				"mop-heart (224 bpm declared, 3/4)",
+				"P1 0.8031s, P2 0.8036s \u00b7 draft 136/140, ABOVE the 131/140 baseline",
+				"P2 exact \u00b7 the above-baseline result stands",
+			],
+			[
+				"gates and ledger",
+				"S24-G1 PASS (disclosed hollow: a least-squares ceiling is the wrong objective for a hit-rate gate) \u00b7 S24-G2 FAIL on letter-lands and eat-all-the-clocks \u00b7 916 cells \u00b7 \u2248$0.30 of a $2 fence",
+				"gates stand as registered measurements of their constructions; the tempo interpretation is withdrawn \u00b7 the standing lesson entered the ledger: take the alignment truth's BINS, never its GEOMETRY",
+			],
+		],
+		"The registered study asked the joint phase-and-period comb search to find the tempo the bench believed the recordings had wandered from; Kevin's same-day correction, verified off the raw audio with a DTW-free comb sweep (131.97 to 131.99, 120.00, 144.96 to 144.98 and 223.82 to 223.97 bpm against declared 132, 120, 145, 224), showed the combs had found the exact truth and the bench had graded that perfection as failure against its own broken ruler. Corrected guidance to the app: use the declared bpm, anchor bar one near t equals zero, and treat chart-versus-recording arrangement mismatch as the open problem. Study 25, the corrected end-to-end draft on the true grid, registered as the follow-up.",
+	);
+
 	// --- Study 19: the ChordMini port gated (no figure) ---
 	table(
 		"tbl-chordmini-port",
