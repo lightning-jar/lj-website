@@ -168,7 +168,7 @@ const proseCls = "text-[#c3c9d4]";
               >
                 Study {study.letters} · {study.title}
               </a>
-              <span class="block text-14px text-[#c3c9d4] mt-0.5">
+              <span class="block text-16px text-[#c3c9d4] mt-0.5">
                 {study.indexLine}
               </span>
             </li>
@@ -247,7 +247,7 @@ const proseCls = "text-[#c3c9d4]";
         >
           The Packages
         </h2>
-        <p class="opacity-90 text-14px mb-5">
+        <p class="opacity-90 text-16px mb-5">
           The harness and every artifact of the research, open source.
         </p>
         <div class="grid grid-cols-1 gap-6">
@@ -256,7 +256,7 @@ const proseCls = "text-[#c3c9d4]";
               <h3 class="font-mono text-16px text-maximumYellow mb-1.5">
                 {pkg.name}
               </h3>
-              <p class="opacity-90 text-14px leading-snug mb-3">
+              <p class="opacity-90 text-16px leading-snug mb-3">
                 {pkg.tagline}
               </p>
               <div class="flex flex-wrap gap-3">
