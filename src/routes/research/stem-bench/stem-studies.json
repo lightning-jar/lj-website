@@ -1748,6 +1748,78 @@
 			],
 			"brief": "docs/BRIEF-STUDY19.md",
 			"quote": "Seven thousand one hundred and two frames, zero disagreements, and the per-bar scores land on Study 17's numbers to the bar. The only daylight left between the port and the reference is which way an exact tie breaks, and at both bars where one happens, either answer is right."
+		},
+		{
+			"slug": "20",
+			"letters": "20",
+			"track": "Listening",
+			"title": "The color experiment: the notes cannot dress the model's chords, and the one surviving rule fails its held-out test by splitting 81 to zero",
+			"eyebrow": "Studies 20 and 20b · the refutation and its held-out sequel · 941 zero-spend cells",
+			"indexLine": "The chord reader has the roots; the band's charts are made of colors it never writes, 74 power-chord and 50 sus4 slots on the gated song alone. Stem Shovel proposed dressing the model's roots from the free note channel, and Study 20 refuted the whole candidate: 438 of 440 on the synthetic fixture collapsed to 22 of 76 on the real recording, the recoloring destroyed twenty bars of credit the bare model already had, and the negative control beat the candidate outright. One asset survived the wreck, a power-chord call that was right 22 of 23 times it fired. Study 20b froze that rule and took it to two songs whose charts the bench had never seen, registered before the truth arrived. It failed there too, and the way it failed is the finding: 81 percent on the power-chord song, zero percent on the sparse triadic one, sixteen fires and sixteen misses. The hint's precision is not a number, it is a function of arrangement density, and the rule cannot tell which song it is in. These are the program's first full refutations, published as found, including two registration errors the bench made and owns.",
+			"sections": [
+				{
+					"id": "sec-stem-study20",
+					"eyebrow": "Listening, the color experiment",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s20",
+					"figure": {
+						"id": "fig-colorhint",
+						"title": "The Power Rule's Precision by Song, Against the 75 Percent Gate"
+					},
+					"table": {
+						"id": "tbl-colorhint",
+						"summary": "Both studies' gates, the anatomy of the collapse, the held-out regime split, and the bench's own disclosed errors"
+					},
+					"body": [
+						{
+							"heading": "The Candidate, and the Refutation",
+							"html": "ChordMini has the roots, 70 of 76 and 75 of 84 bars, but it never writes what this band's charts are made of: power chords, sus colors, the occasional slash bass. The app proposed colorChord, a pure function that would dress the model's per-bar root in whatever color the bar's transcribed notes support, never touching the root. The bench verified every premise in the brief, registered pass lines at the shape the app suggested, built the candidate to spec with instruments pinned to the Study 18 matcher arithmetic, and added a strict grade through barmark, the band's own notation package, where F sharp five and F sharp are different answers. All four gates failed. The candidate read 438 of 440 on the synthetic fixture and 22 of 76 on the real recording, the sharpest home-field collapse the program has measured. Worse than useless, it was destructive: on the exploratory song the recoloring turned twenty allowance-credited bars into wrong sus and slash dressings, dropping root-level credit from 53 to 33. And the negative control, the shipped matcher's own templates with the root forced and sevenths allowed, beat the hand-built rules 48 to 36 strict, refuting the premise that fencing out sevenths was the protective piece."
+						},
+						{
+							"heading": "Why the Notes Cannot Color These Bars",
+							"html": "The anatomy found the cause in the transcription, not the rules. On roughly fifty of the gated song's 74 power-chord bars, the re-transcribed note profile shows a third or a fourth above the 12 percent presence line that the recording's guitars never played: harmonic smear and bleed, the same artifact class Study 13 documented at the chromagram floor. On those bars the right color is unreachable by any profile-threshold rule, because the note evidence itself contradicts it. The sus rules were the damage, 33 calls across both songs and zero right. The slash rule was flagged before the run as unvalidatable, since no corpus anywhere holds a slash chord in truth, and behaved exactly that way: fourteen firings, all cost. The major-minor flip fired three times on a song whose truth contains no major or minor triad, and the registered decision rule dropped it. One cell in the wreckage pointed the other way: when the candidate said power chord, it was right 22 of 23 times on the gated song."
+						},
+						{
+							"heading": "The Held-Out Sequel",
+							"html": "That 22 of 23 was observed after the fact, on data the bench had already seen, so it proved nothing by itself. Study 20b froze the rule exactly as measured and registered blind gates before the bench had looked at the held-out truth: Kevin confirmed every public Badverbs song carries a bar-level chart, the registration committed first, and the charts for peaceful-dreams and mop-heart arrived afterward, committed verbatim with their provenance recorded. A blind variant rode along as a disclosed secondary arm, the same rule with its absence tests computed above a fixed pitch floor, reasoned from the smear's register before any new data existed. The result: 60.9 percent held-out precision against the registered 75 percent line, and the split is the finding. On peaceful-dreams, a power-chord song, the rule read 81 percent, and on bars whose truth is a bare power chord it was perfect, 39 of 39; six more fires were power-class right but spelled X5 where the chart writes X5(7), a vocabulary gap, not a hearing error. On mop-heart, a sparse waltz-time song of plain major triads, it fired sixteen times and missed sixteen times: about five and a half transcribed notes a bar never put the third on the page, and the rule read that silence as a power chord. An absent third is evidence only when the arrangement is dense enough that a played third would have been transcribed. The blind variant was worse, 48.8 percent, because that song carries its thirds in the bass register the floor strips."
+						},
+						{
+							"heading": "The Bench's Own Errors, Disclosed",
+							"html": "Two mistakes in these studies belong to the bench and are published beside the results. Registering Study 20, the bench reordered the brief's color rules so sus4 is tested before the power chord, because the literal order made sus4 unreachable; on real audio that interpretation cost three and eleven strict bars against the alternative, and the report carries both readings, with every gate failing either way. Registering Study 20b, the bench derived the anchor-reproduction constants from the wrong column, counting bare power-chord symbols where the frozen rule counts firings, which include power calls the full candidate had dressed with a slash. The gate failed as registered and was not re-thresholded; the diagnosis reproduces the firing record bar for bar from Study 20's committed results, so the pipeline itself was bit-exact, and the error was in the registration's arithmetic, not the instrument."
+						},
+						{
+							"heading": "What Stands",
+							"html": "Nothing ships. The card's hedge stays exactly what Study 17 set: the chord reader will never spell a power chord or a sus voicing, and the app says so rather than guessing. The verdicts, delivered the same day each study closed, recommend no further spend unprompted; if the app ever wants a third pass, the data names its two ingredients, a density precondition and the chart's X5(7) spelling, registered fresh and blind. The program also banked a durable asset: bar-level truth for two more real songs, including a trap song of plain triads in waltz time that every future chord study should keep in its corpus. A benchmark that only publishes wins is an advertisement; these two entries are the receipts that this one is not."
+						}
+					]
+				}
+			],
+			"published": "2026-11-07",
+			"related": [
+				{
+					"title": "Study 17: the chord reader whose roots these studies tried to color",
+					"href": "/research/stem-bench/17"
+				},
+				{
+					"title": "Study 19: the port gate that made the model's numbers the app's",
+					"href": "/research/stem-bench/19"
+				},
+				{
+					"title": "Study 13: where the home-field lesson and the smear artifact were first measured",
+					"href": "/research/stem-bench/13"
+				},
+				{
+					"title": "Stem Shovel, the product under test and both studies' drafter",
+					"href": "https://www.stemshovel.com"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY20.md",
+			"quote": "The synthetic fixture said 438 of 440 and the real recording said 22 of 76. The one rule that survived was perfect on the power-chord songs and wrong sixteen times out of sixteen on the sparse one, and a hint that cannot tell which song it is in has no precision to print on a card."
 		}
 	]
 }

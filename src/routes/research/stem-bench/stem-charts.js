@@ -2346,6 +2346,131 @@ export function initStemCharts() {
 		);
 	})();
 
+	// --- Studies 20 and 20b: the color experiment and the held-out power hint ---
+	(() => {
+		const ROWS = [
+			{
+				song: "letter-lands (anchor)",
+				v: 96,
+				n: "24/25",
+				color: "#199e70",
+				tip: "power-chord rock, ~15.5 transcribed notes a bar · the rule fires 25 times, 24 right · every fire on a right root",
+			},
+			{
+				song: "peaceful-dreams (HELD OUT)",
+				v: 81,
+				n: "39/48",
+				color: "#199e70",
+				tip: "held-out truth, never seen before registration · 48 fires, 39 right, and on bare power-chord truth it was PERFECT, 39 of 39 · six misses are the X5(7) vocabulary gap: power-class right, chart spelling absent · all 48 fires on a right root",
+			},
+			{
+				song: "eat-all-the-clocks (anchor)",
+				v: 63,
+				n: "10/16",
+				color: "#c98500",
+				tip: "mixed material: 50 power slots but also 32 minor and 4 major · 16 fires, 10 right · 3 of the 6 misses are inherited wrong roots",
+			},
+			{
+				song: "mop-heart (HELD OUT)",
+				v: 0,
+				n: "0/16",
+				color: "#e66767",
+				tip: "sparse 3/4 triads (Vox, Bass, Keys; ~5.5 transcribed notes a bar at 224 bpm) · 16 fires, 16 misses, every one on a plain major-triad bar: the transcription never wrote the third, and the rule read that silence as a power chord",
+			},
+		];
+		byId("legend-s20").innerHTML =
+			'<span class="key"><span class="chip" style="background:#199e70"></span>above the gate alone</span>' +
+			'<span class="key"><span class="chip" style="background:#c98500"></span>below the gate</span>' +
+			'<span class="key"><span class="chip" style="background:#e66767"></span>every fire a miss</span>' +
+			legendNote(
+				"the frozen power rule's strict precision per song (Study 20b) · the registered gate: combined HELD-OUT precision at least 75% · measured: 60.9% (39 of 64), S20B-G1 FAIL · the blind pitch-floor variant read 48.8% and is not recommended",
+			);
+		const W = 880,
+			BAR = 16,
+			GPAD = 12,
+			T = 8,
+			B = 42,
+			L = 230,
+			R = 84;
+		const H = T + ROWS.length * (BAR + GPAD) + B;
+		const iw = W - L - R;
+		const xOf = (v) => L + (v / 100) * iw;
+		let g = "";
+		for (const tick of [0, 50, 100]) {
+			const x = xOf(tick);
+			g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>`;
+			g += `<text class="chart-tick" x="${x}" y="${H - B + 20}" text-anchor="middle">${tick}%</text>`;
+		}
+		const gateX = xOf(75);
+		g += `<line x1="${gateX}" x2="${gateX}" y1="${T}" y2="${H - B}" stroke="#c3c9d4" stroke-width="1" stroke-dasharray="4 4"/>`;
+		g += `<text class="chart-tick" x="${gateX}" y="${H - B + 34}" text-anchor="middle">the 75% gate</text>`;
+		let marks = "";
+		let hits = "";
+		ROWS.forEach((row, i) => {
+			const y = T + i * (BAR + GPAD);
+			g += `<text class="chart-tick" x="${L - 12}" y="${y + BAR - 3}" text-anchor="end">${row.song}</text>`;
+			const w = Math.max((row.v / 100) * iw, 2);
+			marks += `<rect x="${L}" y="${y}" width="${w}" height="${BAR}" fill="${row.color}" rx="3"/>`;
+			marks += `<text fill="#c3c9d4" font-size="11" x="${L + w + 8}" y="${y + BAR - 4}">${row.v}% (${row.n})</text>`;
+			hits += `<rect x="${L}" y="${y}" width="${iw}" height="${BAR}" fill="transparent" data-tip="${esc(row.song + "\n" + row.tip)}"/>`;
+		});
+		const el = byId("fig-colorhint");
+		el.innerHTML =
+			`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart of the frozen power rule's precision by song against the 75 percent gate: 96 percent on letter-lands and 81 percent on peaceful-dreams, both power-chord material; 63 percent on eat-all-the-clocks; zero percent on mop-heart, the sparse triadic waltz, where all sixteen fires missed.">` +
+			g +
+			marks +
+			hits +
+			"</svg>" +
+			figCap(
+				"the held-out verdict in one frame: the rule is near-perfect on dense power-chord material and wrong every single time on sparse triads, so its precision is a function of arrangement density, and the hint cannot tell which song it is in",
+			);
+		el.querySelectorAll("[data-tip]").forEach((n) => {
+			n.addEventListener("mousemove", (e) => showTip(e, n.dataset.tip));
+			n.addEventListener("mouseleave", hideTip);
+		});
+		table(
+			"tbl-colorhint",
+			["cell", "result", "the read"],
+			[
+				[
+					"Study 20, all four gates",
+					"FAIL · strict 22/76 and 14/86 vs pass lines 46 and 38, after 438/440 on the synthetic fixture · root-level falls 59 to 55 and 53 to 33 · cost of guessing 4 and 20 · the negative control beats the candidate 48 to 36 strict",
+					"the program's first full refutation: the recoloring destroys credit the bare model had, and the forced-root matcher with sevenths allowed outscores the hand rules, so the seventh fence was not the protective piece",
+				],
+				[
+					"the cause",
+					"on ~50 of the gated song's 74 power bars the re-transcription shows a third or fourth above the 12% line that the guitars never played",
+					"the Study 13 smear class: on those bars the right color is unreachable by any profile-threshold rule, because the note evidence itself contradicts it · the sus rules were the damage (33 calls, 0 right), the slash rule fired 14 times with no slash truth anywhere, the flip was dropped by its registered decision rule",
+				],
+				[
+					"Study 20b protocol",
+					"the surviving power rule frozen verbatim; gates registered BEFORE the bench saw the held-out truth; charts committed verbatim with provenance on arrival; a blind pitch-floor variant as a disclosed secondary arm",
+					"the program's first held-out-truth study: registration first, truth second, run third, nothing re-thresholded after",
+				],
+				[
+					"S20B-G1 (held-out precision >= 75%)",
+					"FAIL: 60.9% (39 of 64 fires) · peaceful-dreams 81% with 39/39 PERFECT on bare power truth · mop-heart 0% (16 fires, 16 misses, all on plain triads)",
+					"precision is a function of arrangement density (~15.5 notes a bar vs ~5.5): an absent third is evidence only when density says a played third would have been transcribed · six peaceful misses are the X5(7) spelling gap, and crediting them still reads 70.3%, a fail either way",
+				],
+				[
+					"S20B-G2 (anchors) and the bench's own errors",
+					"FAIL as registered: 25/24 and 16/10 vs constants of 23/22 and 12/7 · diagnosed bar for bar: the constants counted bare X5 symbols where the rule counts firings (slash-dressed power calls included) · the pipeline itself reproduced bit-exactly",
+					"disclosed beside Study 20's sus4-before-power interpretation (cost 3 + 11 bars, gates fail under either order): two bench errors, owned in the report, neither re-thresholded",
+				],
+				[
+					"arm B (the blind pitch floor)",
+					"48.8% (39 of 80) · on mop-heart 33 fires, all wrong",
+					"the floor strips the bass register where that arrangement carries its thirds, manufacturing false absences · registered decision rule keeps A; the floor idea is dead on this material",
+				],
+				[
+					"the ledger",
+					"$0 across both studies, zero model calls · 941 cells · verdicts delivered same-day; nothing ships; the hedge stays 'never a power chord'",
+					"banked for the program: bar-level truth for two more real songs, including the sparse-triad trap song every future chord study should keep",
+				],
+			],
+		);
+	})();
+
 	// --- Study 19: the ChordMini port gated (no figure) ---
 	table(
 		"tbl-chordmini-port",
