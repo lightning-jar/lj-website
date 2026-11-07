@@ -2130,6 +2130,63 @@
 			],
 			"brief": "docs/BRIEF-STUDY24.md",
 			"quote": "The comb found the exact tempo on every song, and the bench graded that perfection as 24 percent off, against a ruler it had trusted for eleven studies. The recordings were never the ones drifting."
+		},
+		{
+			"slug": "25",
+			"letters": "25",
+			"track": "The chart-draft pipeline",
+			"title": "On the true grid the chartless draft reaches the chart: parity on letter-lands, above baseline on peaceful-dreams, and the two gate failures name the real remaining problems",
+			"eyebrow": "Study 25 · the corrected end-to-end · 473 cells · ≈$0.35 of a $2 fence",
+			"indexLine": "The correction's follow-up put the end-to-end draft on the grid the recordings actually have: the declared period, now known exact, anchored at chart bar one by a committed best-shift procedure disclosed as an oracle construction. The result inverts two studies of collapse: letter-lands drafts 72 of 76 roots, exact parity with the chart-given baseline, and peaceful-dreams drafts 152 of 153, one bar above it. Both registered gates still failed, and both failures are the useful kind. mop-heart missed on sub-bar anchor phase alone: the oracle anchor carried a 115 millisecond residue from the alignment start, about 43 percent of a beat at 224 bpm, while Study 24's onset-comb phase on the same song had drafted 136 of 140, above baseline, so the comb is the better anchor and fast tempos need beat-level precision. eat-all-the-clocks failed its playable-prefix gate, 49 of 71 against 55, proving the chart-versus-recording arrangement mismatch extends into the played span rather than hiding in the unplayed tail. A same-day amendment excluded a non-physical anchor candidate after the shift search chose bar one 7.6 seconds before the audio on a one-root margin; the void run is preserved and disclosed. The synthesis across Studies 24 and 25 is the measured recipe for the feature: declared bpm as the period, onset-comb phase with bar one near t equals zero, with the better arm per song reaching 72 of 76, 152 of 153 and 136 of 140 against baselines of 72, 151 and 131. The one problem no grid can close is arrangement mismatch.",
+			"sections": [
+				{
+					"id": "sec-stem-study25",
+					"eyebrow": "The chart-draft pipeline, corrected",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-truegrid25",
+						"summary": "Per song: the derived anchor, the true-grid draft against the chart-given baseline, both gates, and the corrected anchor shootout's bar-one placements"
+					},
+					"body": [
+						{
+							"heading": "The Registered Design and the Amendment",
+							"html": "Arm B4 drafted each song once (same prompt, model and parameters as Studies 23, 23b and 24) on a grid built from the declared period and an anchor derived in-run: a uniform grid from the alignment start, the shipped reader's hints over it, and the whole-bar shift whose index pairing maximizes the hint root score against the chart. The brief discloses this as an oracle construction, the upper bound for the chartless feature, since it resolves whole-bar ambiguity using the chart itself. Gate one asked for draft roots within 5 points of the chart-given baseline on the three arrangement-matched songs; gate two asked the same of eat-all-the-clocks over its playable prefix, registered as a genuine open question. One defect surfaced and was amended the same day, before reporting: on eat the shift search chose a non-physical anchor, bar one 7.6 seconds before the audio, on a one-root hint margin, and the bar-zero clamp then produced a non-monotonic grid head. The void first run is preserved and disclosed, the fix (candidate anchors more than one bar before the audio are excluded) was registered with a unit test, and only eat re-ran. The near-tie itself, 56 against 55 hint roots for 'the recording skips the chart's first four bars' versus 'it opens on bar one', is a corollary of that song's arrangement mismatch."
+						},
+						{
+							"heading": "Parity, and What Each Failure Means",
+							"html": "letter-lands drafted 72 of 76 roots, exactly its chart-given baseline, on a grid anchored at t near zero where two studies of ruler-anchored arms had scored 36 and 52. peaceful-dreams drafted 152 of 153, one above its baseline, with 12 of its 62 dialect bars written exactly. mop-heart missed its gate at 103 of 140 against 131, and the anatomy is pure anchor phase: the oracle anchor inherits the alignment start's sub-bar residue, 115 milliseconds off the onset-comb phase, which at 224 bpm is about 43 percent of a beat, so the bins straddle the notes. Study 24's comb-phase arm on the same song, same period, drafted 136 of 140, above baseline: the whole-bar shift search cannot repair a sub-bar phase error, and the hint-maximizing anchor is not the draft-maximizing anchor. eat-all-the-clocks failed its prefix gate at 49 of 71 against 55 of 71, which answers the registered open question: the arrangement mismatch extends into the played span, where the alignment-binned baseline hides it by construction. Predictions: one wrong (the mop miss), three right (the dialect floor, the music-start estimator's bar-one placements of 0.12, 0.12 and 0.39 seconds with mop missed by 3.7 bars, and spend), and the open question resolved to its disclosed FAIL reading."
+						},
+						{
+							"heading": "The Measured Recipe",
+							"html": "Across Studies 24 and 25 the corrected grid story is now measured end to end, and the recipe the bench hands the app is short: use the declared bpm as the period, it is exact; take the bar phase from the onset comb; place bar one near t equals zero. The better arm per song reaches 72 of 76, 152 of 153 and 136 of 140 against baselines of 72, 151 and 131, parity or above on every arrangement-matched song. The two open problems are beat-level anchor precision at fast tempos and chart-versus-recording arrangement mismatch, and the second is not a grid problem at all: a recording cannot chart bars that were never played, and on eat the divergence starts before the tail."
+						}
+					]
+				}
+			],
+			"published": "2026-11-07",
+			"related": [
+				{
+					"title": "Study 24: the joint combs and the same-day correction this study follows",
+					"href": "/research/stem-bench/24"
+				},
+				{
+					"title": "Study 23b: the ruler-anchored arms whose collapse the true grid reverses",
+					"href": "/research/stem-bench/23b"
+				},
+				{
+					"title": "Study 23: the chart-given baseline the gates grade against",
+					"href": "/research/stem-bench/23"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY25.md",
+			"quote": "Two studies of collapse were the ruler's doing. On the grid the recordings actually have, the chartless draft equals the chart on letter-lands and beats it on peaceful-dreams; what remains is a 115 millisecond phase and the bars a recording never played."
 		}
 	]
 }

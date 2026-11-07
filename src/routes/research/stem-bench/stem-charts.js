@@ -2919,6 +2919,44 @@ export function initStemCharts() {
 		"The registered study asked the joint phase-and-period comb search to find the tempo the bench believed the recordings had wandered from; Kevin's same-day correction, verified off the raw audio with a DTW-free comb sweep (131.97 to 131.99, 120.00, 144.96 to 144.98 and 223.82 to 223.97 bpm against declared 132, 120, 145, 224), showed the combs had found the exact truth and the bench had graded that perfection as failure against its own broken ruler. Corrected guidance to the app: use the declared bpm, anchor bar one near t equals zero, and treat chart-versus-recording arrangement mismatch as the open problem. Study 25, the corrected end-to-end draft on the true grid, registered as the follow-up.",
 	);
 
+	// --- Study 25: the corrected end-to-end on the true grid (no figure) ---
+	table(
+		"tbl-truegrid25",
+		[
+			"song",
+			"anchor (derived chart bar one)",
+			"B4 draft vs chart-given baseline, and the gate",
+			"corrected shootout: E4 music-start's bar-one placement",
+		],
+		[
+			[
+				"letter-lands",
+				"\u22120.121s (four bars before the ruler's start, as the correction predicted)",
+				"72/76 vs 72/76 \u00b7 S25-G1 ok \u00b7 exact parity, where the ruler-anchored arms scored 36 and 52",
+				"0.12s \u00b7 within a tenth of a bar",
+			],
+			[
+				"peaceful-dreams",
+				"\u22120.119s",
+				"152/153 vs 151/153 \u00b7 S25-G1 ok \u00b7 above baseline, dialect 12/62 exact",
+				"0.12s",
+			],
+			[
+				"mop-heart",
+				"0.315s \u00b7 carries the alignment start's 115ms sub-bar residue",
+				"103/140 vs 131/140 \u00b7 S25-G1 MISS \u00b7 pure anchor phase: 115ms is ~43% of a beat at 224 bpm; Study 24's comb-phase arm drafted 136/140 on this song",
+				"2.93s \u00b7 misses by 3.7 bars (quiet opening bars in the transcription)",
+			],
+			[
+				"eat-all-the-clocks",
+				"0.415s \u00b7 after Amendment 1 excluded a non-physical \u22127.59s candidate chosen on a one-root margin (void run preserved)",
+				"prefix 49/71 vs 55/71 \u00b7 S25-G2 MISS \u00b7 the arrangement mismatch extends into the played span, where the alignment-binned baseline hides it",
+				"0.39s",
+			],
+		],
+		"Gates S25-G1 and S25-G2 both FAIL as registered, and both failures carry the study's information; the parity results carry its verdict. The synthesis across Studies 24 and 25, handed to the app: declared bpm as the period, onset-comb phase, bar one near t=0 \u00b7 better arm per song 72/76, 152/153, 136/140 against baselines 72, 151, 131 \u00b7 open problems: beat-level phase at fast tempos, and the bars a recording never played. \u2248$0.35 of a $2 fence, 473 cells, predictions 3 of 4 scored right with the registered open question resolving to its disclosed FAIL reading.",
+	);
+
 	// --- Study 19: the ChordMini port gated (no figure) ---
 	table(
 		"tbl-chordmini-port",
