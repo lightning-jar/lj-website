@@ -56,6 +56,10 @@
 		{
 			"title": "Barmark: Chord Charts Bands and Machines Can Both Read",
 			"href": "/blog/introducing-barmark"
+		},
+		{
+			"title": "Barmark, One Week In",
+			"href": "/blog/barmark-one-week-in"
 		}
 	],
 	"techId": "barmark"
