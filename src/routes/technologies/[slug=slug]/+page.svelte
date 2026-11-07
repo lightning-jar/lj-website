@@ -112,6 +112,28 @@ let tech = $derived(data.technology);
         </div>
       {/if}
 
+      {#if data.related.length}
+        <nav
+          class="border px-3 pt-4 pb-5 rounded border-slate-100/60 max-h-fit"
+        >
+          <h2 class="text-17px font-serif text-maximumYellow font-700 mb-3">
+            More {data.supercategory?.shortName ?? "Related Technologies"}
+          </h2>
+          <ul class="grid grid-cols-1 gap-3 pl-0 ml-0">
+            {#each data.related as item}
+              <li class="leading-tight">
+                <a
+                  href="/technologies/{item.id}"
+                  class="opacity-90 underline decoration-current hover:(text-maximumYellow opacity-100) underline-offset-4"
+                >
+                  {item.name}
+                </a>
+              </li>
+            {/each}
+          </ul>
+        </nav>
+      {/if}
+
       {#if tech.relatedReading?.length}
         <nav
           aria-labelledby="related-reading-heading"
@@ -131,28 +153,6 @@ let tech = $derived(data.technology);
                   class="opacity-90 underline decoration-current hover:(text-maximumYellow opacity-100) underline-offset-4"
                 >
                   {item.title}
-                </a>
-              </li>
-            {/each}
-          </ul>
-        </nav>
-      {/if}
-
-      {#if data.related.length}
-        <nav
-          class="border px-3 pt-4 pb-5 rounded border-slate-100/60 max-h-fit"
-        >
-          <h2 class="text-17px font-serif text-maximumYellow font-700 mb-3">
-            More {data.supercategory?.shortName ?? "Related Technologies"}
-          </h2>
-          <ul class="grid grid-cols-1 gap-3 pl-0 ml-0">
-            {#each data.related as item}
-              <li class="leading-tight">
-                <a
-                  href="/technologies/{item.id}"
-                  class="opacity-90 underline decoration-current hover:(text-maximumYellow opacity-100) underline-offset-4"
-                >
-                  {item.name}
                 </a>
               </li>
             {/each}
