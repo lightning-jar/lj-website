@@ -3196,6 +3196,55 @@ export function initStemCharts() {
 		"Registered in four committed stages (docs/BRIEF-STUDY31.md, 31B, 31C, 31D), family spend \u2248$0.39 of a $0.5 fence; weights and margins fixed before the first run and never tuned. Source: the app's downbeat-witnesses brief, amended per the bench's accepted review (categorical gate, corrected reference numbers, the eat adjudication as a named arm, nchord as the disclosed chord-run substitution). The gateway ignores temperature on this model family, so draft scores carry a few bars of sampling noise, disclosed in the 31b registration.",
 	);
 
+	// --- Study 32 family: the adversarial corpus (no figure) ---
+	table(
+		"tbl-adversarial32",
+		["arm", "result", "the read"],
+		[
+			[
+				"Study 32 as registered (reg 4981bbb, the app's own brief)",
+				"S32-G1 FAIL by fixture: the mini-synth's pure 65 Hz kick is nearly invisible to spectral flux, so every synthetic 'correct base' sat on beat 2 \u00b7 S32-G3 PASS: all four real originals keep their 31d verdicts 5\u20130 by class \u00b7 arm 7 PASS",
+				"the backbeat fooled the bench's own synthesizer design \u00b7 the real songs supplied the correct bases instead, and the gate's teeth bit there: the crash witness voted to move a correct base 3/3 times and is formally dead \u00b7 no shipping witness ever moved a correct base",
+			],
+			[
+				"32b: the flux-visible kick (reg b424c7c, 6 ms beater click, committed with tests)",
+				"every synthetic base correct as constructed \u00b7 S32B-G1: every SHIPPING witness clean on 6/6 correct bases at 100/132/180 bpm, 3/4 and 6/8 \u00b7 S32B-G2 PASS: eleven adversarial synthetics, zero wrong decisions, one honest undecided",
+				"the humility gate finally has teeth and the ship vote passes through them",
+			],
+			[
+				"the hostile starts",
+				"one-beat pickup, half-bar silence, 2 s silence, 4-click count-in: all resolve to the correct class \u00b7 the count-in is self-defeating in 4/4 (four clicks = one bar), as registered",
+				"time zero is fooled by a pickup but the chord and section witnesses hold the base through the humility margin",
+			],
+			[
+				"the harmonic foolers",
+				"changes on 1 and 3 equally: run one decided WRONG; with the honest fixture it resolves UNDECIDED, held by the humility margin, not the registered 1.2 ratio rule (the histogram cleared 1.2 and voted wrong) \u00b7 vamp: chord and section witnesses abstain, time zero holds \u00b7 anticipations an eighth early did NOT fool the chord model (it snaps to the bar)",
+				"the margin rule earns its keep where the confidence rule failed; both predictions about mechanisms were wrong, published with the result",
+			],
+			[
+				"the backbeat, both directions",
+				"run one (base wrong by the flux defect): vote moves it to the truth 5\u20130 \u00b7 run two (base correct): vote keeps it 5\u20130",
+				"the vote neither chases the snare nor freezes on its starting guess",
+			],
+			[
+				"the real songs re-cut (16 cuts + 4 originals)",
+				"fifteen right, four undecided (base kept, honest), ONE WRONG: mop-heart's 0.3-beat pad \u00b7 the fractional start puts time zero off-lattice (uncorrected time zero was RIGHT there; the 0.07 s lead correction hurts on non-beat-aligned starts) and thins the chord ratio at once, leaving a lone 1-point section vote holding a wrong base",
+				"the do-not-place rule, detectable at decision time: time zero off-lattice AND chord ratio under threshold firing together means keep the declared grid or ask",
+			],
+			[
+				"the end witness, auditioned and declined",
+				"the app's eighth-note fix implemented as v2 with tests \u00b7 real songs: still abstains on all 12 reads, now a measurement (endings run 8\u201322% short of the lattice beat; swing intervals pass the 0.75-beat filter) \u00b7 synthetics: votes the LAST onset's class, a beat-4 snare, wrong on the waltz's correct base, the sole 32b humility violation",
+				"'songs end on a downbeat' fails even on steady renders \u00b7 the weight-1 seat is declined on the evidence; the gate bit the applicant",
+			],
+			[
+				"arm 7: the re-drafts follow the moved bar one",
+				"drafts on the 1.0-beat pads with the voted class under the 31c placement rule: letter 72/76 = 94.7%, EXACTLY the chart-grid reference \u00b7 peaceful 152/153 = 99.3%, above its reference",
+				"a one-beat cut of the audio moves bar one, the vote follows it, and the draft loses nothing",
+			],
+		],
+		"Registered in two committed stages (docs/BRIEF-STUDY32.md, 32B) from the app's own adversarial brief, adopted whole with six reconciliations; weights, margins and gates fixed before each run. Spend 41,478 in / 6,976 out \u2248 $0.16 of a $0.3 fence; 744 cells. The registered stand-in for the missing fifth and sixth songs resolves: humility gate passed by every shipping witness, no false moves on synthetics, one named real-world do-not-place case. The real songs remain the confirmation when they arrive.",
+	);
+
 	// --- Study 19: the ChordMini port gated (no figure) ---
 	table(
 		"tbl-chordmini-port",

@@ -13,7 +13,7 @@ describe("home content interpolation", () => {
 			researchStats.aeoBench,
 			researchStats.stemBench,
 		]) {
-			expect(block.studiesSpelled).toMatch(/^[a-z-]+$/);
+			expect(block.studiesSpelled).toMatch(/^[a-z-]+( [a-z-]+)*$/); // "one hundred" crossed the single-word assumption
 			expect(block.scoredRunsDisplay).toMatch(/^[\d,]+$/);
 			expect(block.modelsSpelled).toMatch(/^[a-z-]+$/);
 		}

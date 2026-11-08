@@ -2565,6 +2565,47 @@
 			],
 			"brief": "docs/BRIEF-STUDY31.md",
 			"quote": "The witnesses did not fail the gate; the gate's ruler failed the witnesses. On the corrected ruler the vote went four for four, and the chartless draft matched the chart's own grid for the first time."
+		},
+		{
+			"slug": "32",
+			"letters": "32",
+			"track": "The chart-draft pipeline",
+			"title": "The adversarial corpus gives the humility gate teeth, the ship vote survives every honest fooler, and the one wrong answer names the rule the app needed",
+			"eyebrow": "Study 32 · 32b · the adversarial corpus · 744 cells · ≈$0.16",
+			"indexLine": "Study 31 ended on a condition: the humility screen was vacuous once the ruler was corrected, so the vote ships behind two more songs. The band had no more songs ready, and the app's agent wrote the substitute brief itself: build songs designed to fool the witnesses, and make the gates bite. The bench adopted it whole with six registered reconciliations and ran 37 items, synthetic correct bases at three tempos and three meters, five hostile starts, four harmonic foolers, a backbeat mix, and the four real recordings re-cut by pads and trims against the Correction 4 truths shifted. Run one failed its humility gate by a fixture defect worth publishing: the bench's synthetic kick was a pure 65 hertz sine, nearly invisible to the spectral flux onset envelope, so every CORRECT base sat on beat 2, the backbeat all over again, this time inside the bench's own synthesizer. The real songs supplied correct bases anyway, and the gate's teeth bit something real there: the crash witness voted to move a correct base three times out of three and is now formally dead. Study 32b gave the kick a six millisecond beater click and re-ran everything: every base correct as constructed, and the ship vote, lead-corrected time zero at weight two, ratio-ruled chord changes at weight two, sections at one, never decided a wrong class on any synthetic adversary. The pickup, the half-bar silence, the two-second silence and the four-click count-in all resolved correctly, the count-in self-defeating in 4/4 exactly as predicted. The backbeat case got tested in both directions across the two runs: a wrong base moved to the truth five to nothing, a correct base kept five to nothing. The two-chord-bar fooler produced run one's confident wrong vote and resolved to an honest undecided with the fixture fixed, held not by the registered ratio rule but by the humility margin itself. On the real re-cuts: fifteen right, four undecided, one wrong, and the one wrong names the do-not-place rule, a start that is not beat-aligned silences time zero and the chord witness at once and leaves a one-point section vote holding a wrong base; when both fire, keep the declared grid or ask. The app's eighth-note fix for the end witness was implemented and measured: still abstains on all twelve real-song reads, now as a measurement rather than an artifact, and on synthetics it faithfully votes the last onset's class, which is a beat-four snare, so the end witness's seat is declined on the evidence. Re-drafts on the one-beat pads followed the voted bar one to reference parity, 72 of 76 and 152 of 153. The registered stand-in for songs five and six resolves: the humility gate passes for every shipping witness, no false moves on synthetics, one named real case.",
+			"sections": [
+				{
+					"id": "sec-stem-study32",
+					"eyebrow": "The chart-draft pipeline · the adversarial corpus",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-adversarial32",
+						"summary": "Per arm: the construction, the vote's behavior across both runs, and the verdicts"
+					},
+					"body": [
+						{
+							"heading": "The App Wrote the Brief",
+							"html": "With no fifth and sixth songs available, the app's agent drafted the adversarial study itself: renders where the base is right and no witness may move it, starts that are not a bar line (a one-beat pickup, a half bar of silence, two seconds of silence, a four-click count-in), harmonic rhythms built to fool the chord witness (changes on one and three equally, one chord per two bars, a one-chord vamp that demands abstention, anticipations an eighth early), a backbeat-heavy mix, 3/4 and 6/8 beside 4/4, and the four real recordings re-cut by 0.3, 1.0 and 2.5-beat pads plus a one-beat trim. The bench adopted the brief whole and registered six reconciliations before the run, including its own mini-synth, since the fixture synthesizer is bar-granular and cannot place an anticipation. The ship vote under test is exactly what the app shipped to its dev branch the same day: lead-corrected time zero at weight two, chord changes under a 1.2 confidence ratio at weight two, section scale at one, the 31b humility rule, undecided keeps the declared grid."
+						},
+						{
+							"heading": "The Bench's Kick Could Not Be Heard",
+							"html": "Run one failed the humility gate before any witness got the chance to: every synthetic correct base measured one beat late, because the mini-synth's kick was a pure 65 hertz sine and the spectral flux onset envelope barely registers it. The renders were backbeat-dominant in flux at any kick amplitude, the comb landed on beat 2, and the construction never produced its premise. That is the program's recurring lesson wearing a new costume: the backbeat does not only fool detectors, it fooled the bench's own synthesizer design. The disclosed fix in Study 32b is six milliseconds of broadband beater click, committed with a test that measures the flux difference. Meanwhile the real songs had supplied correct bases on their own, and the gate found its first genuine violation there: the crash witness voted to move letter-lands' correct base on all three of its correct-base cuts. It was already outside the ship vote; it is now formally dead. No shipping witness ever moved a correct base in either run."
+						},
+						{
+							"heading": "No False Moves, Both Directions, One Named Rule",
+							"html": "With the fixture honest, the re-run passed the no-false-moves gate outright: eleven adversarial synthetics, zero wrong decisions, one honest undecided, and that undecided was the two-chord-bar fooler that had produced run one's confident wrong vote. The instructive detail is which mechanism held: the registered prediction said the chord witness's 1.2 ratio rule would abstain on two equal change classes, but the histogram favored one class past the threshold and voted wrong anyway, and the HUMILITY MARGIN refused the move. The count-in was self-defeating in 4/4 as predicted, four clicks being exactly one bar. The anticipation fooler failed to fool: the chord model snaps eighth-early changes to their bars. The backbeat mix got both directions across the two runs, a wrong base moved to the truth five to nothing in run one, a correct base kept five to nothing in run two. On the real re-cuts the vote went fifteen right, four undecided, one wrong, and the single wrong is worth more than a pass: mop-heart's 0.3-beat pad puts time zero off-lattice (the 0.07-second lead correction makes this worse, and UNCORRECTED time zero was right there) and thins the chord histogram under the ratio at the same time, leaving a lone one-point section vote holding a wrong base. Both failures are detectable in the app at decision time, so the rule ships as: when time zero is off-lattice AND the chord ratio is under threshold, keep the declared grid or ask."
+						},
+						{
+							"heading": "The End Witness Is Declined, and the Stand-In Resolves",
+							"html": "The app's note on Study 31d had diagnosed the end witness's universal ritardando abstention as an eighth-note artifact: a half-beat gap rounds to one beat and halves the local tempo estimate. The bench implemented the app's fix as a second version beside the first, with tests, and measured it. On the real songs it still abstains on all twelve reads, now as a measurement rather than an artifact, letter's ending runs eight percent short of the lattice beat and mop's twenty-two percent, swing intervals passing the filter and dragging the median. On steady synthetics it votes faithfully, but it votes the LAST ONSET'S class, and these songs end on a beat-four snare, so the assumption that songs end on a downbeat fails even in the cleanest case; its one wrong vote on the waltz's correct base was the sole humility-gate violation of run two, teeth doing their job on the applicant. The weight-one seat the app hoped for is declined on the evidence. The re-draft arm closed the loop: drafts on the one-beat pads, bars placed by the voted class under the 31c rule, scored 72 of 76 on letter, exactly its chart-grid reference, and 152 of 153 on peaceful, above its reference. The registered stand-in for the missing fifth and sixth songs resolves as: humility gate passed by every shipping witness, no false moves on synthetics, one named real-world case, and the real songs remain the confirmation when they arrive. Family spend 16 cents of a 30-cent fence."
+						}
+					]
+				}
+			],
+			"published": "2026-11-08"
 		}
 	]
 }
