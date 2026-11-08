@@ -4,6 +4,10 @@ import { handleErrorWithSentry } from "@sentry/sveltekit";
 Sentry.init({
 	dsn: "https://0a0947e58c272d15c7846335bc4d1a20@o4505247956860928.ingest.us.sentry.io/4510386382569479",
 
+	// Without an explicit environment the SDK defaults to "production", so
+	// errors from `vite dev` (e.g. HMR mid-edit) were filed as production.
+	environment: import.meta.env.DEV ? "development" : "production",
+
 	tracesSampleRate: 1.0,
 
 	// (enableLogs is gone in Sentry 11; logs are on by default.)
