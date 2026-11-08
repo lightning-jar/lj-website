@@ -16,6 +16,7 @@ const seriesSlugs: string[] = [
 	"the-home-field-rematch",
 	"seventy-eight-percent",
 	"the-band-was-right",
+	"the-witnesses-were-right",
 ];
 
 function buildSeriesArticles(allBlogArticles: { frontMatter: FrontMatter }[]) {
