@@ -2427,6 +2427,63 @@
 			],
 			"brief": "docs/BRIEF-STUDY29.md",
 			"quote": "Inside the half-beat fence no other beat is reachable, so the backbeat's weight cannot matter. The construction that got captured was the one with nothing to hold on to."
+		},
+		{
+			"slug": "30",
+			"letters": "30",
+			"track": "The chart-draft pipeline",
+			"title": "Downbeat disambiguation fails both gates: chroma novelty is not a downbeat detector, and bar one turns out to be a bit the user should supply",
+			"eyebrow": "Study 30 · the disambiguation study · 258 cells · ≈$0.15",
+			"indexLine": "Study 28 named the chartless grid's one missing instrument, downbeat disambiguation, and the obvious candidates were cheap, so this study registered two and measured them: every whole-beat shift of the Study 28 anchor scored by mean detrended energy at all bar lines, with chroma novelty as the registered primary (harmony moves on downbeats, a signal the backbeat does not carry) and kick-band onsets as the secondary (the mix low-passed at 150 Hz, the exact complement of Study 29's construction). Both gates failed, published as found. Chroma novelty went zero for four, and the committed scores show why: on letter-lands the BACKBEAT outscores the true downbeat 0.0585 to 0.0468, on mop-heart the two leading candidates tie to four decimals, on peaceful-dreams the winning margin is four percent, and on eat-all-the-clocks, the one song whose anchor was already right, novelty moved it off. The same chroma smear that broke the DTW's bar geometry makes frame-to-frame novelty mush at beat granularity. The kick band went two of four and also derailed eat. The re-drafts failed by consequence: letter repeated Study 28's 81.3 percent and peaceful got worse, 61.4, because novelty had moved it to a different wrong beat. The cross-study tally is the real product: three cheap chartless scorers are now measured, raw comb phase, chroma novelty and kick band, and none earns the right to overrule a correct base. Everything else in the grid is machine-exact, period to 0.02 percent, length within one bar, lattice right, so the remaining uncertainty is one bit per song, which beat is bar one, and the named remedy is a product gesture: a single bar-one tap from the user, zero DSP risk. The alignment feature's v5 is unaffected; its DTW tether already supplies that bit.",
+			"sections": [
+				{
+					"id": "sec-stem-study30",
+					"eyebrow": "The chart-draft pipeline · the disambiguation study",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-downbeat30",
+						"summary": "Per song: the two scorers' chosen anchors vs truth, the committed score margins, and the re-drafts"
+					},
+					"body": [
+						{
+							"heading": "Two Scorers, Registered in Advance",
+							"html": "The candidates were the Study 28 anchor's whole-beat shifts, every distinct lattice position in one bar, each kept inside the physicality window. The scorer was the mean detrended energy at all bar lines of the candidate grid. D1, the registered primary, used chroma novelty, one minus the cosine similarity of adjacent chromagram frames, on the theory that harmony moves on downbeats and the backbeat carries drums, not chord changes. D2, the reported secondary, used the onset envelope of the mix low-passed at 150 Hz, the kick band, with the registered expectation that kick-on-one-and-three patterns would leave a half-bar ambiguity in 4/4. The registered prediction was that D1 would pass on all four songs. It passed on none."
+						},
+						{
+							"heading": "The Anatomy of the Zero",
+							"html": "The committed candidate scores tell the story plainly. letter-lands' backbeat outscores its true downbeat. mop-heart's two leading candidates tie to four decimal places. peaceful-dreams' winner leads by four percent, inside the noise. And eat-all-the-clocks, the one song Study 28 had anchored correctly, was moved off its correct base to a wrong shift. The mechanism is an old acquaintance: the chromagram's long analysis windows smear harmonic content across neighboring beats, the same smear that made the DTW's interior bar geometry wander in Study 26, so a frame-to-frame novelty signal has no beat-level resolution left to offer. The kick band did better, right on letter-lands and mop-heart, but kept peaceful-dreams' backbeat and also derailed eat. The re-drafts closed the loop: letter repeated its 81.3 percent and peaceful fell to 61.4, worse than Study 28, because its anchor was now wrong in a new way."
+						},
+						{
+							"heading": "One Bit, and Whose It Is",
+							"html": "The useful product of three studies is a precise division of labor. The bench has now measured three cheap chartless downbeat scorers, raw comb phase in Study 28 and chroma novelty and kick-band onsets here, and on every song at least one of them preferred a wrong shift over a correct base, so no measured signal earns the right to overrule the anchor it was asked to check. Meanwhile the rest of the chartless grid is machine-exact: the period to 0.02 percent, the bar count within one of the chart, the lattice itself right. The entire remaining uncertainty is one bit per song, which beat is bar one. The named remedy, delivered to the app, is to collect that bit from the user as a single bar-one tap, not a tempo tap, since the grid is already exact, while the alignment feature ships v5 unchanged because its DTW tether supplies the same bit mechanically. Two DSP candidates stay on the table unregistered, bass-note changes at candidate bar lines and hint-change concentration, if a zero-tap answer is ever worth another study."
+						}
+					]
+				}
+			],
+			"published": "2026-11-08",
+			"related": [
+				{
+					"title": "Study 28: the capstone that named this study's question",
+					"href": "/research/stem-bench/28"
+				},
+				{
+					"title": "Study 29: why the tethered v5 placement never needed this bit",
+					"href": "/research/stem-bench/29"
+				},
+				{
+					"title": "Study 26: where the chroma smear was first measured",
+					"href": "/research/stem-bench/26"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY30.md",
+			"quote": "Three cheap scorers are now measured, and none earns the right to overrule a correct base. The grid is machine-exact; bar one is one bit, and it belongs to the user."
 		}
 	]
 }

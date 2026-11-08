@@ -3113,6 +3113,50 @@ export function initStemCharts() {
 		"Registered before the run (docs/BRIEF-STUDY29.md) from the app's ask, $0, pure DSP. Verdict delivered: ship v5 as the chart placement; the downbeat check the ask proposed belongs to the auto-chart feature's chartless grid, whose capture Study 28 measured the same morning. Predictions: all five right, with arm 2's mechanism right and its geometry corrected (the pickup sits at the boundary, not inside the window).",
 	);
 
+	// --- Study 30: downbeat disambiguation fails both gates (no figure) ---
+	table(
+		"tbl-downbeat30",
+		[
+			"song",
+			"D1 chroma novelty (registered primary)",
+			"D2 kick band (secondary)",
+			"the read",
+		],
+		[
+			[
+				"letter-lands",
+				"kept the BACKBEAT (shift 0): the backbeat outscores the true downbeat 0.0585 vs 0.0468 \u00b7 re-draft 61/75 = 81.3%, Study 28 repeated",
+				"shift 2 \u00b7 DOWNBEAT",
+				"novelty prefers the wrong beat outright; the kick finds the right one",
+			],
+			[
+				"peaceful-dreams",
+				"shift 2, a DIFFERENT wrong beat (margin 0.0251 vs 0.0241, 4%, noise) \u00b7 re-draft 94/153 = 61.4%, WORSE than Study 28's 89.5%",
+				"kept the backbeat \u00b7 wrong",
+				"both scorers wrong, two different ways",
+			],
+			[
+				"mop-heart",
+				"kept shift 0, one beat late: the two leading candidates TIE to four decimals (0.0349 = 0.0349)",
+				"shift 2 \u00b7 DOWNBEAT",
+				"novelty has no opinion at beat granularity; the kick does",
+			],
+			[
+				"eat-all-the-clocks",
+				"moved OFF the already correct anchor to shift 3 (0.0577 vs 0.0398 for the truth)",
+				"moved off to shift 3 \u00b7 wrong",
+				"the one song Study 28 got right, derailed by both scorers",
+			],
+			[
+				"the gates and the tally",
+				"D1: 0/4 \u00b7 S30-G1 FAIL \u00b7 S30-G2 FAIL by consequence",
+				"D2: 2/4, as the registered half-bar-ambiguity expectation predicted in shape",
+				"three cheap chartless scorers measured across Studies 28 and 30 (comb phase, novelty, kick band): on every song at least one preferred a wrong shift over a correct base \u00b7 named remedy: a one-tap bar-one gesture from the user; the grid is already machine-exact, so bar one is one bit",
+			],
+		],
+		"Registered before the run (docs/BRIEF-STUDY30.md), \u2248$0.15 of a $0.5 fence. The mechanism behind the zero is the chroma smear first measured in Study 26: long analysis windows blur harmony across neighboring beats, so frame-to-frame novelty has no beat-level resolution. The alignment feature's v5 placement is unaffected; its DTW tether supplies the bar-one bit mechanically (Study 29). Predictions: 1 and 2 wrong, published with the result; spend right.",
+	);
+
 	// --- Study 19: the ChordMini port gated (no figure) ---
 	table(
 		"tbl-chordmini-port",
