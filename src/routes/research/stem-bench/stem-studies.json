@@ -2162,6 +2162,10 @@
 						{
 							"heading": "The Measured Recipe",
 							"html": "Across Studies 24 and 25 the corrected grid story is now measured end to end, and the recipe the bench hands the app is short: use the declared bpm as the period, it is exact; take the bar phase from the onset comb; place bar one near t equals zero. The better arm per song reaches 72 of 76, 152 of 153 and 136 of 140 against baselines of 72, 151 and 131, parity or above on every arrangement-matched song. The open problem that survives the second correction is beat-level anchor precision at fast tempos; the apparent arrangement mismatch was the bench's own chart fixture, and the standing rule it leaves is to verify the fixture against the live chart before blaming the band's arrangement."
+						},
+						{
+							"heading": "Correction 4 (2026-11-08)",
+							"html": "The eat-all-the-clocks anchor this study registered, +0.415 s, hint-fit at 55 of 84 against what Correction 2 later exposed as the phantom-bars chart, is one beat late. Study 31's witnesses and the chart-informed DTW agree on −0.085 s, and the hint instrument is measured flat across a two-beat range on this song (65, 66 and 66 of 69 at zero, one and two beats early), so it never had the power to pin eat's phase. The letter, peaceful and mop anchors stand, mop as refined by Study 27."
 						}
 					]
 				}
@@ -2288,6 +2292,10 @@
 						{
 							"heading": "What Ships",
 							"html": "v5 supersedes v3 as the recommended browser-worker recipe, at the cost of one additional comb slide over an envelope the worker already computes. The fast-tempo phase problem named in the alignment-ends answer is closed: bar lines at fast tempos come from the onset lattice, not from the alignment's phase. The reference implementation is committed in the bench (src/study27/rephase.ts) with the fence test, and the guidance to the app gains one line: when the player and the alignment disagree about where the beat is, trust the drums."
+						},
+						{
+							"heading": "Correction 4 (2026-11-08)",
+							"html": "The eat-71 reading above, ends 0.45 to 0.48 s within the quarter-bar line, was measured against an anchor one beat late (Study 31). Against the corrected truth of −0.085 s, v5's eat ends sit 0.03 to 0.05 s from the bar lines: v5 was right on eat all along, and the 0.47 s was the ruler's missing beat, not a residual."
 						}
 					]
 				}
@@ -2320,7 +2328,7 @@
 			"track": "The chart-draft pipeline",
 			"title": "The capstone chartless draft fails its gate and names the missing instrument: the comb's phase is a beat detector, not a downbeat detector",
 			"eyebrow": "Study 28 · the capstone draft · 440 cells · ≈$0.25",
-			"indexLine": "Every chartless number so far was a synthesis of best arm per song across Studies 24 and 25, so this study measured the ONE grid recipe the auto-chart feature would actually ship: period from the onset comb at the declared tempo, anchor from the comb's own lattice registered near the first audible sound, length from the audible span, then one draft call per song graded against the corrected charts. The gate failed honestly on two songs and the failure is the finding. The raw comb phase picks the strongest beat of the bar, not beat one: letter-lands and peaceful-dreams anchored about 2.1 beats late, on the backbeat lattice, drafting 81.3 and 89.5 percent against references of 94.7 and 98.7. mop-heart anchored one beat late and still drafted 135 of 140, above its reference, because long same-chord spans tolerate a beat; eat-all-the-clocks anchored on the downbeat and drafted at its corrected-chart baseline. The other gate passed cleanly: the derived bar counts came out 75, 153, 140 and 70 against charts of 76, 153, 140 and 71, every song within one bar from the audible span and the exact period alone, so the length leg of the feature is solid. The comb period stays exact everywhere. What the auto-chart grid lacks is one instrument, downbeat disambiguation, and the app's own backbeat brief (answered the same morning as Study 29) had already proposed its shape: score the grid against itself shifted by whole beats. Named as the next remedy, not yet registered.",
+			"indexLine": "Every chartless number so far was a synthesis of best arm per song across Studies 24 and 25, so this study measured the ONE grid recipe the auto-chart feature would actually ship: period from the onset comb at the declared tempo, anchor from the comb's own lattice registered near the first audible sound, length from the audible span, then one draft call per song graded against the corrected charts. The gate failed honestly on two songs and the failure is the finding. The raw comb phase picks the strongest beat of the bar, not beat one: letter-lands and peaceful-dreams anchored about 2.1 beats late, on the backbeat lattice, drafting 81.3 and 89.5 percent against references of 94.7 and 98.7. mop-heart anchored one beat late and still drafted 135 of 140, above its reference, because long same-chord spans tolerate a beat; eat-all-the-clocks anchored on the downbeat and drafted at its corrected-chart baseline [Correction 4, 2026-11-08: the downbeat claim was the ruler's own; eat's registered anchor was one beat late, so the comb phase missed all four downbeats; see the correction below]. The other gate passed cleanly: the derived bar counts came out 75, 153, 140 and 70 against charts of 76, 153, 140 and 71, every song within one bar from the audible span and the exact period alone, so the length leg of the feature is solid. The comb period stays exact everywhere. What the auto-chart grid lacks is one instrument, downbeat disambiguation, and the app's own backbeat brief (answered the same morning as Study 29) had already proposed its shape: score the grid against itself shifted by whole beats. Named as the next remedy, not yet registered.",
 			"sections": [
 				{
 					"id": "sec-stem-study28",
@@ -2345,6 +2353,10 @@
 						{
 							"heading": "What Passed, and What Ships Next",
 							"html": "The length gate passed on all four songs, derived counts within one bar of the charts, so a recording plus a declared tempo recovers the song's bar length mechanically. The comb period leg is exact. The one missing instrument is downbeat disambiguation for the anchor, and the app's backbeat brief proposed its shape before this study measured the need: score the chosen grid against itself shifted by one and two beats and prefer the winner. That is the named next remedy for the auto-chart feature, a candidate Study 30, not yet registered. Spend: about a quarter dollar of a one dollar fence; predictions one wrong (the gate, on two songs), length and spend right."
+						},
+						{
+							"heading": "Correction 4 (2026-11-08)",
+							"html": "The claim that eat anchored on the downbeat was the ruler's: eat's registered truth was itself one beat late (Study 31), and the chartless anchor matched the broken ruler, not the music. The corrected tally is that the raw comb phase missed the downbeat on all FOUR songs. The length gate, the period finding and the backbeat anatomy on letter and peaceful are unaffected."
 						}
 					]
 				}
@@ -2402,6 +2414,10 @@
 						{
 							"heading": "The Knife-Edge, and Whose Remedy It Is",
 							"html": "The in-window arm produced the only captures: against a downbeat at 0.3 weight, a 0.8-energy pickup or matching hi-hat off-eighths take the slide to the fence edge, half a beat off. These are boundary ties on synthetic impulses, never approached by the kick-removed real mixes, so the registered conditional remedy arm did not run and v5 ships unmodified. The remedy the ask proposed, scoring the grid against itself shifted by whole beats, is still the right instrument for the construction that DID get captured the same morning: Study 28's chartless anchor, which has no DTW tether and landed on the backbeat on two songs. The failure study and the capstone study answered each other within hours, and the downbeat check moves to the auto-chart feature's queue."
+						},
+						{
+							"heading": "Correction 4 (2026-11-08)",
+							"html": "The phrase 'eat-71 at its usual quarter-bar edge' was the ruler: against the corrected anchor (−0.085 s, Study 31), the kick-removed eat grid sits a few hundredths of a second from the bar lines, like the other songs. Both gates' verdicts stand; every eat reading improves."
 						}
 					]
 				}
@@ -2434,7 +2450,7 @@
 			"track": "The chart-draft pipeline",
 			"title": "Downbeat disambiguation fails both gates: chroma novelty is not a downbeat detector, and bar one turns out to be a bit the user should supply",
 			"eyebrow": "Study 30 · the disambiguation study · 258 cells · ≈$0.15",
-			"indexLine": "Study 28 named the chartless grid's one missing instrument, downbeat disambiguation, and the obvious candidates were cheap, so this study registered two and measured them: every whole-beat shift of the Study 28 anchor scored by mean detrended energy at all bar lines, with chroma novelty as the registered primary (harmony moves on downbeats, a signal the backbeat does not carry) and kick-band onsets as the secondary (the mix low-passed at 150 Hz, the exact complement of Study 29's construction). Both gates failed, published as found. Chroma novelty went zero for four, and the committed scores show why: on letter-lands the BACKBEAT outscores the true downbeat 0.0585 to 0.0468, on mop-heart the two leading candidates tie to four decimals, on peaceful-dreams the winning margin is four percent, and on eat-all-the-clocks, the one song whose anchor was already right, novelty moved it off. The same chroma smear that broke the DTW's bar geometry makes frame-to-frame novelty mush at beat granularity. The kick band went two of four and also derailed eat. The re-drafts failed by consequence: letter repeated Study 28's 81.3 percent and peaceful got worse, 61.4, because novelty had moved it to a different wrong beat. The cross-study tally is the real product: three cheap chartless scorers are now measured, raw comb phase, chroma novelty and kick band, and none earns the right to overrule a correct base. Everything else in the grid is machine-exact, period to 0.02 percent, length within one bar, lattice right, so the remaining uncertainty is one bit per song, which beat is bar one, and the named remedy is a product gesture: a single bar-one tap from the user, zero DSP risk. The alignment feature's v5 is unaffected; its DTW tether already supplies that bit.",
+			"indexLine": "Study 28 named the chartless grid's one missing instrument, downbeat disambiguation, and the obvious candidates were cheap, so this study registered two and measured them: every whole-beat shift of the Study 28 anchor scored by mean detrended energy at all bar lines, with chroma novelty as the registered primary (harmony moves on downbeats, a signal the backbeat does not carry) and kick-band onsets as the secondary (the mix low-passed at 150 Hz, the exact complement of Study 29's construction). Both gates failed, published as found. Chroma novelty went zero for four, and the committed scores show why: on letter-lands the BACKBEAT outscores the true downbeat 0.0585 to 0.0468, on mop-heart the two leading candidates tie to four decimals, on peaceful-dreams the winning margin is four percent, and on eat-all-the-clocks, the one song whose anchor was already right, novelty moved it off [Correction 4, 2026-11-08: that anchor was one beat late, and novelty's choice was in fact the correct class; see the correction below]. The same chroma smear that broke the DTW's bar geometry makes frame-to-frame novelty mush at beat granularity. The kick band went two of four and also derailed eat. The re-drafts failed by consequence: letter repeated Study 28's 81.3 percent and peaceful got worse, 61.4, because novelty had moved it to a different wrong beat. The cross-study tally is the real product: three cheap chartless scorers are now measured, raw comb phase, chroma novelty and kick band, and none earns the right to overrule a correct base. Everything else in the grid is machine-exact, period to 0.02 percent, length within one bar, lattice right, so the remaining uncertainty is one bit per song, which beat is bar one, and the named remedy is a product gesture: a single bar-one tap from the user, zero DSP risk. The alignment feature's v5 is unaffected; its DTW tether already supplies that bit.",
 			"sections": [
 				{
 					"id": "sec-stem-study30",
@@ -2459,6 +2475,10 @@
 						{
 							"heading": "One Bit, and Whose It Is",
 							"html": "The useful product of three studies is a precise division of labor. The bench has now measured three cheap chartless downbeat scorers, raw comb phase in Study 28 and chroma novelty and kick-band onsets here, and on every song at least one of them preferred a wrong shift over a correct base, so no measured signal earns the right to overrule the anchor it was asked to check. Meanwhile the rest of the chartless grid is machine-exact: the period to 0.02 percent, the bar count within one of the chart, the lattice itself right. The entire remaining uncertainty is one bit per song, which beat is bar one. The named remedy, delivered to the app, is to collect that bit from the user as a single bar-one tap, not a tempo tap, since the grid is already exact, while the alignment feature ships v5 unchanged because its DTW tether supplies the same bit mechanically. Two DSP candidates stay on the table unregistered, bass-note changes at candidate bar lines and hint-change concentration, if a zero-tap answer is ever worth another study."
+						},
+						{
+							"heading": "Correction 4 (2026-11-08)",
+							"html": "Re-read against the corrected eat anchor and by beat class (Study 31c showed the class is what transfers, with the whole-bar representative placed separately): chroma novelty was 2 of 4 and the kick band 3 of 4, not 0 and 2. Novelty's eat and peaceful choices were the right class; peaceful failed only the absolute tolerance plus the whole-bar placement defect Study 31c fixed, and eat's base was not correct to begin with, so nothing was moved off a correct base there. Letter's anatomy stands: its backbeat genuinely outscores its downbeat on novelty. The one-tap remedy this entry closed with is superseded: Study 31b's witness vote finds all four downbeats, and harmonic rhythm alone is 4 of 4."
 						}
 					]
 				}
@@ -2483,7 +2503,68 @@
 				}
 			],
 			"brief": "docs/BRIEF-STUDY30.md",
-			"quote": "Three cheap scorers are now measured, and none earns the right to overrule a correct base. The grid is machine-exact; bar one is one bit, and it belongs to the user."
+			"quote": "Three cheap scorers are now measured, and none earns the right to overrule a correct base. The grid is machine-exact; bar one is one bit, and Study 31 found the witnesses that supply it."
+		},
+		{
+			"slug": "31",
+			"letters": "31",
+			"track": "The chart-draft pipeline",
+			"title": "The witness vote finds every downbeat, exposes the bench's fourth ruler error on the way, and carries the chartless draft to chart parity",
+			"eyebrow": "Study 31 · 31b · 31c · 31d · the witness vote · 776 cells · ≈$0.39",
+			"indexLine": "The app answered Study 30 with a brief of its own: the three dead scorers all read energy at beat granularity and were blind to where a song begins, ends and moves its chords, so measure the witnesses a musician uses, vote among them with pre-registered weights, and keep the humility rule. The bench registered seven witnesses voting by beat class on the Study 28 lattice. The first run failed every gate, and the failure pattern was the finding: time zero, harmonic rhythm (margin 35) and all twenty section boundaries agreed with the truth exactly on letter, peaceful and mop, and agreed WITH EACH OTHER on eat, one beat before the registered truth. They were right. Correction 4: eat's anchor is minus 0.085 seconds, not plus 0.415; the old value was Study 25's hint-fit made against the phantom-bars chart before Correction 2, with an instrument measured flat across a two-beat range, and the chart-informed DTW's dissent had been sitting in Studies 27 and 29's committed numbers all along as the constant 0.474-second offset politely misread as eat's quarter-bar edge. The non-drum stems sound from the file's first sample, so the bar line is at time zero, exactly the app's DAW-export argument, which holds on the whole corpus. On the corrected ruler, Study 31b passed the hard gate: the vote finds the true class on all four songs, five to one, six to one, three to one and five to one, none undecided, and HARMONIC RHYTHM ALONE IS FOUR OF FOUR, the single witness the app ships first. One more defect surfaced and was fixed in a registered amendment: a beat class is modulo one bar, and placing the voted anchor a whole bar wrong had collapsed the re-drafts (it also retro-explains Study 30's peaceful number). With Study 31c's placement rule, bar one contains the first sound, the chartless drafts reached letter 71 of 75, which is 94.7 percent, EXACTLY the chart-given reference, and peaceful 152 of 153, which is 99.3 percent, ABOVE its 98.7 reference: the first chartless drafts at reference parity. The bar-one tap retreats to a fallback behind an honest undecided. The humility screen went vacuous once the ruler was fixed, so the app's fifth and sixth songs are the registered condition for shipping the vote. A coda, same day: the app's agent reviewed the committed results and caught an instrument defect the bench had missed, a 90-second cap on the onset envelope that had left the ends witnesses unmeasured rather than measured, and read time zero's four distances as the envelope's 0.07-second lead. Study 31d lifted the cap and re-scored: the song's end is honestly dead as a witness (ritardando abstentions on all four full songs), the lead-corrected time zero is FOUR OF FOUR with distances of 0.02, 0.03, 0.008 and 0.000 beat, and both vote variants still find every downbeat.",
+			"sections": [
+				{
+					"id": "sec-stem-study31",
+					"eyebrow": "The chart-draft pipeline · the witness vote",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-witnesses31",
+						"summary": "Per song: the witnesses' classes, the vote, Correction 4, and the parity re-drafts"
+					},
+					"body": [
+						{
+							"heading": "Seven Witnesses, One Class Each",
+							"html": "Every candidate is a whole-beat shift of the Study 28 anchor, so each witness votes for a beat class or abstains: time zero (weight 2), the last strong onset (1, abstaining on fades and ritardandos), the beat count between the ends (1), harmonic rhythm from per-beat chord labels (2, run on the bench's own reader as a disclosed substitution for production's chord runs), crashes with beat-long decays (1), the drum and bass stems (2, bass can veto), and checkerboard section boundaries (1). The weighted vote moves off the base only when the winner leads it by two points and the runner-up by one. Weights, margins and gates were committed before the run and never tuned."
+						},
+						{
+							"heading": "The Failure That Was a Finding, and Correction 4",
+							"html": "Study 31 as registered failed all three gates, and the pattern said why: three independent witnesses agreed with the truth exactly on three songs and agreed with each other on eat, one beat before the registered truth. The adjudication confirmed the witnesses. Eat's +0.415-second anchor was Study 25's hint-fit, 55 of 84, made against the phantom-bars chart before Correction 2 and never re-derived after it, and the hint instrument is measured flat across a two-beat range on this song, 65, 66 and 66 of 69, so it never had the power to pin the phase. Four independent constructions put bar one at minus 0.06 to minus 0.07 seconds: the chart-informed DTW, whose constant 0.474-second offset in Studies 27 and 29 had been misread as eat's quarter-bar edge; the chord-change histogram at margin 35; all twenty section boundaries; and time zero. v5 was right on eat all along, to a few hundredths of a second. The corrections ripple in place: Study 28's comb phase missed all four downbeats, not three, and Study 30's scorers re-read by class go two and three of four rather than zero and two."
+						},
+						{
+							"heading": "The Vote, the Placement Rule, and Parity",
+							"html": "On the corrected ruler, Study 31b's vote found the true class on all four songs with none undecided, and harmonic rhythm alone went four for four, the witness the app's brief says it ships first; time zero went three of four, abstaining on mop and never wrong. The post-mortem is honest: crashes voted one of four, the stem witness vetoed itself on every song, and the two ends witnesses abstained everywhere. The re-draft gate then exposed the family's second instrument defect: a beat class names a position modulo one bar, and the runner had placed voted anchors a whole bar from the song's bar one, collapsing the drafts below even the backbeat base and retro-explaining Study 30's worst number. Study 31c registered the placement rule, bar one contains the first sound, and re-ran the arm: letter 71 of 75, exactly its chart-grid reference, and peaceful 152 of 153, above its reference. Chart parity without the chart. Family spend 39 cents of a 50-cent fence; the gateway ignores temperature on this model family, so draft scores carry a few bars of sampling noise, disclosed in the registration. The condition that stands: the humility screen was vacuous once the ruler was fixed, so the vote ships behind the app's fifth and sixth songs."
+						},
+						{
+							"heading": "The App's Review, and Study 31d",
+							"html": "The collaboration ran both directions: the app's agent read the committed results and found what the bench had missed. The onset envelope's extractor caps at 90 seconds, so the last-onset, both-ends and stem witnesses had never seen the back half of letter (138 seconds) or peaceful (254 seconds); their abstentions were unmeasured, not measured. And time zero's four committed distances, 0.079, 0.058, 0.068 and 0.070 seconds at four different tempos, are one number: the envelope's documented lead, measured by a witness that does not read the envelope. Study 31d registered both fixes and ran for free. Uncapped, the ends witnesses are honestly dead on this corpus, abstaining by ritardando on all four full songs, and the stem witness still vetoes itself. The lead-corrected time zero is four of four with distances of 0.02, 0.03, 0.008 and 0.000 beat, mop's earlier abstention revealed as the fence catching the lead. Both vote variants pass the gate. The final roster the app ships: lead-corrected time zero, harmonic rhythm and section scale, each four of four alone; the vote over them; undecided keeps the base; the tap stays out. Every truth in the family is the downbeat at or near time zero read 0.07 seconds early, a uniform disclosed ruler bias that beat-class scoring is immune to."
+						}
+					]
+				}
+			],
+			"published": "2026-11-08",
+			"related": [
+				{
+					"title": "Study 28: the lattice these witnesses vote on",
+					"href": "/research/stem-bench/28"
+				},
+				{
+					"title": "Study 30: the dead scorers that motivated the brief",
+					"href": "/research/stem-bench/30"
+				},
+				{
+					"title": "Study 27: the tethered recipe vindicated on eat by this correction",
+					"href": "/research/stem-bench/27"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY31.md",
+			"quote": "The witnesses did not fail the gate; the gate's ruler failed the witnesses. On the corrected ruler the vote went four for four, and the chartless draft matched the chart's own grid for the first time."
 		}
 	]
 }

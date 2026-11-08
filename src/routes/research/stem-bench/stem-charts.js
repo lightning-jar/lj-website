@@ -2949,7 +2949,7 @@ export function initStemCharts() {
 			],
 			[
 				"eat-all-the-clocks",
-				"0.415s \u00b7 after Amendment 1 excluded a non-physical \u22127.59s candidate chosen on a one-root margin (void run preserved)",
+				"0.415s \u00b7 after Amendment 1 excluded a non-physical \u22127.59s candidate chosen on a one-root margin (void run preserved) \u00b7 Correction 4 (2026-11-08): this anchor is one beat late; the corrected truth is \u22120.085s (Study 31)",
 				"prefix 49/71 vs 55/71 \u00b7 S25-G2 MISS, first read as the mismatch extending into the played span \u00b7 the second correction (Study 25b): the mismatch was the bench's 86-bar fixture; on the band's live 71-bar chart the draft reaches 56/69, the same 81% as the old baseline",
 				"0.39s",
 			],
@@ -3023,7 +3023,7 @@ export function initStemCharts() {
 			],
 			[
 				"eat-all-the-clocks on v5, both charts",
-				"vs the superseded 86-bar fixture: REFUSED \u00b7 vs the corrected 71-bar chart: ends 0.45\u20130.48s, within the quarter-bar line",
+				"vs the superseded 86-bar fixture: REFUSED \u00b7 vs the corrected 71-bar chart: ends 0.45\u20130.48s, within the quarter-bar line \u00b7 Correction 4 (2026-11-08): the 0.47s was the ruler's missing beat; against the corrected anchor (\u22120.085s) v5's eat ends are 0.03\u20130.05s",
 				"S27-G3 ok \u00b7 re-phasing does not blunt the wrong-chart detector, and the corrected chart still passes",
 			],
 			[
@@ -3065,7 +3065,7 @@ export function initStemCharts() {
 			],
 			[
 				"eat-all-the-clocks (corrected 71-bar chart)",
-				"+0.430s vs +0.415s: the DOWNBEAT \u00b7 70 vs 71 ok",
+				"+0.430s vs +0.415s as then registered \u00b7 70 vs 71 ok \u00b7 Correction 4 (2026-11-08): the truth is \u22120.085s, so this anchor was one beat LATE like the ruler it matched, and the comb phase missed all four downbeats",
 				"55/68 = 80.9% vs 81.2% \u00b7 S28-G1 ok",
 				"at its corrected-chart baseline: eat's ceiling is song difficulty, not grid, confirmed chartless",
 			],
@@ -3096,7 +3096,7 @@ export function initStemCharts() {
 			],
 			[
 				"3 \u00b7 kick-removed remixes (drum stems high-passed at 150 Hz, 4th-order), the gated arm",
-				"all four songs keep every Study 27 standard \u00b7 deltas \u22120.05 to \u22120.14 beats \u00b7 letter 0.04\u20130.06s ends / 0.051s middle \u00b7 peaceful 0.02\u20130.07 / 0.042 \u00b7 mop exact \u00b7 eat-71 at its quarter-bar edge \u00b7 S29-G1 PASS",
+				"all four songs keep every Study 27 standard \u00b7 deltas \u22120.05 to \u22120.14 beats \u00b7 letter 0.04\u20130.06s ends / 0.051s middle \u00b7 peaceful 0.02\u20130.07 / 0.042 \u00b7 mop exact \u00b7 eat-71 at 0.47s [Correction 4, 2026-11-08: the ruler's missing beat; truly 0.03\u20130.05s] \u00b7 S29-G1 PASS",
 				"snare and hats alone cannot move the slide off the downbeat; the registered conditional remedy arm therefore did not run",
 			],
 			[
@@ -3143,18 +3143,57 @@ export function initStemCharts() {
 			],
 			[
 				"eat-all-the-clocks",
-				"moved OFF the already correct anchor to shift 3 (0.0577 vs 0.0398 for the truth)",
-				"moved off to shift 3 \u00b7 wrong",
+				"moved OFF the already correct anchor to shift 3 (0.0577 vs 0.0398 for the truth) [Correction 4, 2026-11-08: that base was one beat late, and shift 3 was the correct class]",
+				"moved off to shift 3 \u00b7 wrong [Correction 4: the right class]",
 				"the one song Study 28 got right, derailed by both scorers",
 			],
 			[
 				"the gates and the tally",
-				"D1: 0/4 \u00b7 S30-G1 FAIL \u00b7 S30-G2 FAIL by consequence",
+				"D1: 0/4 as registered \u00b7 S30-G1 FAIL \u00b7 S30-G2 FAIL by consequence \u00b7 Correction 4 re-read by class: D1 2/4, D2 3/4",
 				"D2: 2/4, as the registered half-bar-ambiguity expectation predicted in shape",
 				"three cheap chartless scorers measured across Studies 28 and 30 (comb phase, novelty, kick band): on every song at least one preferred a wrong shift over a correct base \u00b7 named remedy: a one-tap bar-one gesture from the user; the grid is already machine-exact, so bar one is one bit",
 			],
 		],
-		"Registered before the run (docs/BRIEF-STUDY30.md), \u2248$0.15 of a $0.5 fence. The mechanism behind the zero is the chroma smear first measured in Study 26: long analysis windows blur harmony across neighboring beats, so frame-to-frame novelty has no beat-level resolution. The alignment feature's v5 placement is unaffected; its DTW tether supplies the bar-one bit mechanically (Study 29). Predictions: 1 and 2 wrong, published with the result; spend right.",
+		"Registered before the run (docs/BRIEF-STUDY30.md), \u2248$0.15 of a $0.5 fence. The mechanism behind the zero is the chroma smear first measured in Study 26: long analysis windows blur harmony across neighboring beats, so frame-to-frame novelty has no beat-level resolution. The alignment feature's v5 placement is unaffected; its DTW tether supplies the bar-one bit mechanically (Study 29). Predictions: 1 and 2 wrong, published with the result; spend right. Correction 4 (2026-11-08): re-read by beat class against the corrected eat anchor, novelty was 2/4 and the kick band 3/4, and eat's base was not correct to begin with; Study 31 supplies the witnesses that work.",
+	);
+
+	// --- Study 31 family: the witness vote (no figure) ---
+	table(
+		"tbl-witnesses31",
+		["stage", "result", "the read"],
+		[
+			[
+				"Study 31 as registered (reg 7a821f4)",
+				"all three gates FAIL \u00b7 time zero, harmonic rhythm (margin 35) and all 20 section boundaries agree with the truth exactly on letter/peaceful/mop and WITH EACH OTHER on eat, one beat before the registered truth",
+				"the witnesses did not fail the gate; the gate's ruler failed the witnesses",
+			],
+			[
+				"Correction 4 (2026-11-08)",
+				"eat's truth anchor is \u22120.085s, not +0.415s \u00b7 the old value: Study 25's hint-fit (55/84) against the phantom-bars chart, pre-Correction-2, with an instrument measured flat across two beats (65/66/66 of 69)",
+				"four constructions agree on \u22120.06 to \u22120.07s: the chart DTW (the committed 0.474s 'eat quarter-bar edge' of Studies 27/29 was the ruler's missing beat; v5 was right on eat all along), chord changes, sections, time zero \u00b7 the non-drum stems sound from the first sample: bar line AT time zero, the app's DAW-export argument",
+			],
+			[
+				"31b: the vote on the corrected ruler (reg b90a3b6)",
+				"S31B-G1 PASS: the vote finds the true class on ALL FOUR (5\u20131, 6\u20131, 3\u20131, 5\u20131), none undecided \u00b7 A2 harmonic rhythm ALONE 4/4 \u00b7 A1 time zero 3/4 (mop abstains, never wrong)",
+				"crashes 1/4 and the stem witness self-vetoed on every song \u00b7 G2 vacuous once the ruler was fixed: the app's fifth and sixth songs are the registered condition for shipping the vote",
+			],
+			[
+				"31c: the whole-bar placement (reg b26da2d)",
+				"a beat class is modulo one bar; placing the voted anchor at base + shift put bar one a whole bar wrong and collapsed the re-drafts (68.0/61.4%) \u00b7 with the registered rule (bar one contains the first sound): letter 71/75 = 94.7%, EXACTLY the chart-grid reference \u00b7 peaceful 152/153 = 99.3%, ABOVE its 98.7% reference",
+				"the first chartless drafts at reference parity \u00b7 the defect also re-reads Study 30's peaceful 61.4% as right class, wrong bar",
+			],
+			[
+				"31d: the app's review acted on (reg a545263)",
+				"the app's agent caught the bench's 90s envelope cap (the ends witnesses were unmeasured, not measured) and read time zero's four distances as the envelope's 0.07s lead \u00b7 uncapped: the ends abstain by ritardando on all four full songs \u00b7 lead-corrected time zero: 4/4 at 0.02/0.03/0.008/0.000 beat \u00b7 both vote variants PASS",
+				"the review ran both directions \u00b7 every family truth is the downbeat at or near time zero read ~0.07s early: a uniform ruler bias that beat-class scoring is immune to",
+			],
+			[
+				"the roster the app ships",
+				"lead-corrected time zero, harmonic rhythm and section scale: each 4/4 ALONE \u00b7 the vote over them \u00b7 undecided keeps the base \u00b7 the bar-one tap stays out",
+				"with bar one from the witnesses, the chartless pipeline is machine-complete on this corpus: period exact, length within a bar, downbeat voted, drafts at chart parity",
+			],
+		],
+		"Registered in four committed stages (docs/BRIEF-STUDY31.md, 31B, 31C, 31D), family spend \u2248$0.39 of a $0.5 fence; weights and margins fixed before the first run and never tuned. Source: the app's downbeat-witnesses brief, amended per the bench's accepted review (categorical gate, corrected reference numbers, the eat adjudication as a named arm, nchord as the disclosed chord-run substitution). The gateway ignores temperature on this model family, so draft scores carry a few bars of sampling noise, disclosed in the 31b registration.",
 	);
 
 	// --- Study 19: the ChordMini port gated (no figure) ---
