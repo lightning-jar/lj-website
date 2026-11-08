@@ -5,9 +5,13 @@ import type { FrontMatter } from "#lib/types/FrontMatter.js";
 
 import { getAllBlogArticles } from "#lib/content/getters/getBlogArticles.js";
 
-// The benchmark series, in narrative (chronological) order. Empty until
-// the first stem-bench article publishes; the section is length-guarded.
-const seriesSlugs: string[] = [];
+// The benchmark series, in narrative (chronological) order.
+const seriesSlugs: string[] = [
+	"thirty-eight-percent",
+	"the-home-field-rematch",
+	"seventy-eight-percent",
+	"the-band-was-right",
+];
 
 function buildSeriesArticles(allBlogArticles: { frontMatter: FrontMatter }[]) {
 	return seriesSlugs
