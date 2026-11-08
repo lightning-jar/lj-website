@@ -3035,6 +3035,84 @@ export function initStemCharts() {
 		"Registered before the run (docs/BRIEF-STUDY27.md), $0, pure DSP over the committed corpus. Predictions: the comb anchor winning was predicted, though the registered 'within 150 ms of the oracle' was wrong by construction of the surprise, the move was 381 ms; the gate predictions were right. Downstream consequence registered in the brief and applied: Study 26c's mop row was measured against the superseded anchor, noted there.",
 	);
 
+	// --- Study 28: the capstone chartless draft (no figure) ---
+	table(
+		"tbl-capstone28",
+		[
+			"song",
+			"chartless grid: anchor vs truth \u00b7 derived bars vs chart",
+			"draft vs reference",
+			"the read",
+		],
+		[
+			[
+				"letter-lands",
+				"+0.830s vs \u22120.121s: 2.1 beats late, the BACKBEAT \u00b7 75 vs 76 bars ok",
+				"61/75 = 81.3% vs 94.7% \u00b7 S28-G1 MISS",
+				"whole-bar index pairing grades every bar against its neighbor's window; 81% measures how much root information survives a wrong phase",
+			],
+			[
+				"peaceful-dreams",
+				"+0.770s vs \u22120.119s: 2.15 beats late, the backbeat again \u00b7 153 vs 153 ok",
+				"137/153 = 89.5% vs 98.7% \u00b7 S28-G1 MISS",
+				"same mechanism, same verdict",
+			],
+			[
+				"mop-heart",
+				"+0.200s vs \u22120.066s: one beat late \u00b7 140 vs 140 ok",
+				"135/140 = 96.4% vs 93.6% \u00b7 S28-G1 ok",
+				"long same-chord spans tolerate a beat; above its chart-given reference even so",
+			],
+			[
+				"eat-all-the-clocks (corrected 71-bar chart)",
+				"+0.430s vs +0.415s: the DOWNBEAT \u00b7 70 vs 71 ok",
+				"55/68 = 80.9% vs 81.2% \u00b7 S28-G1 ok",
+				"at its corrected-chart baseline: eat's ceiling is song difficulty, not grid, confirmed chartless",
+			],
+			[
+				"the gates and the lesson",
+				"S28-G2 PASS: every derived bar count within 1 of the chart, from the audible span and the exact period alone",
+				"S28-G1 FAIL on two songs \u00b7 \u2248$0.25 of a $1 fence",
+				"the comb period is exact everywhere; the comb PHASE is a beat detector, not a downbeat detector \u00b7 named next remedy: downbeat disambiguation (the app's own shifted-grid check), a Study 30 candidate",
+			],
+		],
+		"Registered before the run (docs/BRIEF-STUDY28.md). The grid used only feature-available inputs: declared tempo and meter plus the audio. Study 29, answered the same morning, explains why the tethered v5 placement is immune to the capture that broke this construction: the DTW line pins the index and the half-beat fence bounds the slide; the chartless anchor has no tether, so the fence has nothing to hold on to.",
+	);
+
+	// --- Study 29: the backbeat failure study (no figure) ---
+	table(
+		"tbl-backbeat29",
+		["arm", "result", "the read"],
+		[
+			[
+				"1 \u00b7 synthetic catch map (120 and 200 bpm, 60 bars, downbeat weight w vs backbeat 1.0)",
+				"downbeat caught for x in about [\u22120.4, +0.45] beats at EVERY w in {1.0, 0.6, 0.3, 0.1} \u00b7 never 'elsewhere'",
+				"inside the half-beat fence no other beat is reachable, so backbeat weight cannot matter; the shaved edges are the 0.05-beat sweep grid and the 10ms comb step \u00b7 the ask's fence arithmetic confirmed",
+			],
+			[
+				"2 \u00b7 in-window competitors (weak downbeat w = 0.3)",
+				"a 0.8-energy pickup takes the slide to \u22120.5 beat; hi-hat off-eighths take it to +0.5 at h \u2265 w",
+				"the knife-edge exists exactly where the ask guessed, at the fence BOUNDARY (an eighth is half a beat, the ask's one unit slip), on synthetic impulses only",
+			],
+			[
+				"3 \u00b7 kick-removed remixes (drum stems high-passed at 150 Hz, 4th-order), the gated arm",
+				"all four songs keep every Study 27 standard \u00b7 deltas \u22120.05 to \u22120.14 beats \u00b7 letter 0.04\u20130.06s ends / 0.051s middle \u00b7 peaceful 0.02\u20130.07 / 0.042 \u00b7 mop exact \u00b7 eat-71 at its quarter-bar edge \u00b7 S29-G1 PASS",
+				"snare and hats alone cannot move the slide off the downbeat; the registered conditional remedy arm therefore did not run",
+			],
+			[
+				"4 \u00b7 the real phase errors, in beats",
+				"letter 0.10 \u00b7 peaceful 0.09 \u00b7 mop 0.05 (DTW phase to lattice: 0.05) \u00b7 eat 0.06",
+				"an order of magnitude inside the fence \u00b7 the ask's '0.38s = 1.4 beats' was right arithmetic on the superseded truth anchor (the ruler Study 27 corrected), not on the alignment's phase",
+			],
+			[
+				"control",
+				"full-mix v5 reproduces Study 27's deltas within 2ms on all four songs \u00b7 S29-G2 PASS",
+				"same code, same data, no instrument drift",
+			],
+		],
+		"Registered before the run (docs/BRIEF-STUDY29.md) from the app's ask, $0, pure DSP. Verdict delivered: ship v5 as the chart placement; the downbeat check the ask proposed belongs to the auto-chart feature's chartless grid, whose capture Study 28 measured the same morning. Predictions: all five right, with arm 2's mechanism right and its geometry corrected (the pickup sits at the boundary, not inside the window).",
+	);
+
 	// --- Study 19: the ChordMini port gated (no figure) ---
 	table(
 		"tbl-chordmini-port",

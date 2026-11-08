@@ -2313,6 +2313,120 @@
 			],
 			"brief": "docs/BRIEF-STUDY27.md",
 			"quote": "Two envelopes that share no computation, the full mix and the drum kit alone, named the same lattice to the millisecond. The oracle had been 381 milliseconds out, at the tempo where that is half a bar."
+		},
+		{
+			"slug": "28",
+			"letters": "28",
+			"track": "The chart-draft pipeline",
+			"title": "The capstone chartless draft fails its gate and names the missing instrument: the comb's phase is a beat detector, not a downbeat detector",
+			"eyebrow": "Study 28 · the capstone draft · 440 cells · ≈$0.25",
+			"indexLine": "Every chartless number so far was a synthesis of best arm per song across Studies 24 and 25, so this study measured the ONE grid recipe the auto-chart feature would actually ship: period from the onset comb at the declared tempo, anchor from the comb's own lattice registered near the first audible sound, length from the audible span, then one draft call per song graded against the corrected charts. The gate failed honestly on two songs and the failure is the finding. The raw comb phase picks the strongest beat of the bar, not beat one: letter-lands and peaceful-dreams anchored about 2.1 beats late, on the backbeat lattice, drafting 81.3 and 89.5 percent against references of 94.7 and 98.7. mop-heart anchored one beat late and still drafted 135 of 140, above its reference, because long same-chord spans tolerate a beat; eat-all-the-clocks anchored on the downbeat and drafted at its corrected-chart baseline. The other gate passed cleanly: the derived bar counts came out 75, 153, 140 and 70 against charts of 76, 153, 140 and 71, every song within one bar from the audible span and the exact period alone, so the length leg of the feature is solid. The comb period stays exact everywhere. What the auto-chart grid lacks is one instrument, downbeat disambiguation, and the app's own backbeat brief (answered the same morning as Study 29) had already proposed its shape: score the grid against itself shifted by whole beats. Named as the next remedy, not yet registered.",
+			"sections": [
+				{
+					"id": "sec-stem-study28",
+					"eyebrow": "The chart-draft pipeline · the capstone",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-capstone28",
+						"summary": "Per song: the chartless grid's anchor vs truth, the draft vs its reference, and the length inference"
+					},
+					"body": [
+						{
+							"heading": "One Recipe, No Oracle",
+							"html": "The grid used only inputs the feature has: the audio and the user-declared tempo and meter. The onset joint comb supplies the period (measured exact to 0.02 percent on all four songs since Study 24); the comb's own phase, registered at the lattice point nearest the first audible sound with the Study 25 physicality fence, supplies bar one; the audible span divided by the period supplies the bar count. One fable call per song on production-parity inputs (the shipped reader's hints and the transcription's bar notes over the derived grid), graded by root score against the chart, index-paired from bar one. eat-all-the-clocks graded against the corrected 71-bar chart."
+						},
+						{
+							"heading": "The Gate Failed Where the Lattice Is Ambiguous",
+							"html": "The comb cannot tell beat one from beat two or three: it maximizes onset energy at one lattice spacing, and on letter-lands and peaceful-dreams the backbeat carries more of it, so the anchor landed about 2.1 beats late and whole-bar index pairing then graded every bar against its neighbor's window. The drafts still held 81.3 and 89.5 percent, which measures how much root information survives a wrong phase, but the registered gate asked for within 5 points of the chart-given references and missed by 8 to 13. mop-heart, one beat late, drafted above its reference anyway; eat, downbeat-exact, drafted 80.9 percent against its 81.2 percent corrected-chart reference. The split is exactly Study 27's lesson inverted: v5's alignment placement is safe because the DTW line tethers the index and the half-beat fence bounds the slide, and the chartless construction has no tether, so the fence has nothing to hold on to."
+						},
+						{
+							"heading": "What Passed, and What Ships Next",
+							"html": "The length gate passed on all four songs, derived counts within one bar of the charts, so a recording plus a declared tempo recovers the song's bar length mechanically. The comb period leg is exact. The one missing instrument is downbeat disambiguation for the anchor, and the app's backbeat brief proposed its shape before this study measured the need: score the chosen grid against itself shifted by one and two beats and prefer the winner. That is the named next remedy for the auto-chart feature, a candidate Study 30, not yet registered. Spend: about a quarter dollar of a one dollar fence; predictions one wrong (the gate, on two songs), length and spend right."
+						}
+					]
+				}
+			],
+			"published": "2026-11-08",
+			"related": [
+				{
+					"title": "Study 29: the backbeat study that explains this failure's mechanism",
+					"href": "/research/stem-bench/29"
+				},
+				{
+					"title": "Study 27: the tethered construction that is safe from it",
+					"href": "/research/stem-bench/27"
+				},
+				{
+					"title": "Study 25: the oracle-anchored predecessor this study replaces",
+					"href": "/research/stem-bench/25"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY28.md",
+			"quote": "The comb knows the tempo to a fiftieth of a percent and cannot tell you which beat is one. Two songs anchored on the backbeat, a third a beat late, and the length still came out right on all four."
+		},
+		{
+			"slug": "29",
+			"letters": "29",
+			"track": "Listening",
+			"title": "Can a backbeat-heavy mix pull recipe v5 off the downbeat? No: the catch map, the kick-removed remixes and the real phase errors all hold the fence",
+			"eyebrow": "Study 29 · the backbeat failure study · 380 cells · $0",
+			"indexLine": "Stem Shovel is porting recipe v5 as its chart placement and asked for the failure study before users' recordings find it: the whole-grid slide maximizes onset energy at the bar lines, so can a mix whose beats two and four outweigh beat one capture it? The study answered on four fronts, all gates green. The synthetic catch map: the downbeat is caught for phase errors within about 0.45 beat at EVERY downbeat weight, including one ten times weaker than the backbeat, at 120 and 200 bpm, because inside the half-beat fence no other beat is reachable, so the backbeat's weight cannot matter. The gated arm: all four songs with their drum stems high-passed at 150 Hz (the kick gone, snare and hats remaining) keep every Study 27 standard, with slide deltas of 0.05 to 0.14 beats. The arithmetic check the ask requested: real phase errors are 0.05 to 0.10 beats, an order of magnitude inside the fence, and the ask's alarming 1.4-beat figure for mop-heart was correct arithmetic on the superseded truth anchor, the ruler Study 27 corrected, not on the alignment's phase. The in-window arm found the one knife-edge exactly where the ask guessed, a weak downbeat against a pickup or hi-hat at the fence boundary, synthetic impulses only, never approached by a real arm, so the registered conditional remedy did not run. The verdict delivered to the app: ship v5; the downbeat check the ask proposed belongs to the other feature, because the same morning the capstone chartless draft watched the untethered comb anchor land on the backbeat on two songs.",
+			"sections": [
+				{
+					"id": "sec-stem-study29",
+					"eyebrow": "Listening · the failure study",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-backbeat29",
+						"summary": "The four arms: catch map, in-window competitors, kick-removed remixes, and the real phase errors in beats"
+					},
+					"body": [
+						{
+							"heading": "The Ask and the Fence Arithmetic",
+							"html": "The app's brief did its own analysis before asking: with the slide fenced at half a beat, a phase error under half a beat can only reach the downbeat, whatever the backbeat weighs, and a phase error beyond it can only land a beat late. The study's job was to confirm the geometry, find how big real phase errors get, and probe the window's interior. The geometry confirmed exactly: the catch map holds the downbeat for errors within about 0.45 beat at every weight tried, the 0.05 shaved at the edges being the sweep grid and the 10 millisecond comb step, and nothing ever landed anywhere but a beat."
+						},
+						{
+							"heading": "Real Material Never Gets Close",
+							"html": "The gated arm rebuilt each song's mix with the drum stem high-passed at 150 Hz, a fourth-order skirt that removes the kick and keeps the snare and hats, the backbeat-heavy construction the ask feared. All four songs kept their Study 27 standards: letter-lands ends 0.04 to 0.06 seconds with a 0.051 middle, peaceful-dreams 0.02 to 0.07 with 0.042, mop-heart exact, eat-all-the-clocks at its usual quarter-bar edge on the corrected chart, and a control confirmed the full-mix runs reproduce Study 27's deltas within 2 milliseconds. The measured phase errors the slide actually corrected are 0.05 to 0.10 beats. The ask's 1.4-beat arithmetic for mop-heart was right and its premise was not: that 0.38 seconds was the superseded truth anchor's error, the ruler, not the alignment's phase, which sat 0.05 beats from the lattice. One unit correction went back in the answer: an eighth note is half a beat, so the proposed pickup sits at the fence boundary, not inside it."
+						},
+						{
+							"heading": "The Knife-Edge, and Whose Remedy It Is",
+							"html": "The in-window arm produced the only captures: against a downbeat at 0.3 weight, a 0.8-energy pickup or matching hi-hat off-eighths take the slide to the fence edge, half a beat off. These are boundary ties on synthetic impulses, never approached by the kick-removed real mixes, so the registered conditional remedy arm did not run and v5 ships unmodified. The remedy the ask proposed, scoring the grid against itself shifted by whole beats, is still the right instrument for the construction that DID get captured the same morning: Study 28's chartless anchor, which has no DTW tether and landed on the backbeat on two songs. The failure study and the capstone study answered each other within hours, and the downbeat check moves to the auto-chart feature's queue."
+						}
+					]
+				}
+			],
+			"published": "2026-11-08",
+			"related": [
+				{
+					"title": "Study 28: the untethered construction that was captured",
+					"href": "/research/stem-bench/28"
+				},
+				{
+					"title": "Study 27: recipe v5 and the half-beat fence under test here",
+					"href": "/research/stem-bench/27"
+				},
+				{
+					"title": "Studies 26 to 26c: where the fence lesson was first paid for",
+					"href": "/research/stem-bench/26"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY29.md",
+			"quote": "Inside the half-beat fence no other beat is reachable, so the backbeat's weight cannot matter. The construction that got captured was the one with nothing to hold on to."
 		}
 	]
 }
