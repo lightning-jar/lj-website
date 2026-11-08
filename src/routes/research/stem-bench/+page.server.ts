@@ -7,7 +7,12 @@ import { getAllBlogArticles } from "#lib/content/getters/getBlogArticles.js";
 
 // The benchmark series, in narrative (chronological) order.
 const seriesSlugs: string[] = [
+	"the-models-that-can-read-music-don-t-cheat",
 	"thirty-eight-percent",
+	"the-second-opinion-wasn-t-listening",
+	"they-hear-texture-not-form",
+	"the-stems-name-the-form-the-sum-keeps-the-time",
+	"the-study-that-audited-its-predecessors",
 	"the-home-field-rematch",
 	"seventy-eight-percent",
 	"the-band-was-right",

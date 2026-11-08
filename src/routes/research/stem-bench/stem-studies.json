@@ -2252,6 +2252,67 @@
 			],
 			"brief": "docs/BRIEF-STUDY26.md",
 			"quote": "The refusal was right for a reason the bench had not earned yet: the chart it was handed disagreed with the recording because the bench had mis-copied it. The band's 71 bars fit the song to five hundredths of a second, and the detector's first catch was its own maker."
+		},
+		{
+			"slug": "27",
+			"letters": "27",
+			"track": "Listening",
+			"title": "Whole-grid re-phasing at fast tempos: recipe v5 snaps every song onto the onset lattice, and the anchor adjudication moves mop-heart's truth by 0.381 seconds",
+			"eyebrow": "Study 27 · whole-grid re-phasing · 465 cells · $0",
+			"indexLine": "Designed at Kevin's prompt the morning after the ends repair shipped: mop-heart, the 224 bpm song, was the one arrangement-matched recording the Studies 26 recipe could not bring onto the true grid, because its aligned middle carries a coherent whole-grid phase offset that end extrapolation faithfully copies. The study ran two arms for nothing. Arm A adjudicated the anchor before scoring the remedy, since the incumbent truth (0.315 seconds, Study 25's oracle) was itself under suspicion: the onset lattice measured from the full mix and the onset lattice measured from the drums stem alone agree exactly at minus 0.066 seconds, two independent envelopes naming the same grid, 0.381 seconds (47 percent of a bar) earlier than the oracle, and the registered hint rule picked it on a thin, disclosed 2-root margin that Study 24's committed drafting split (136 of 140 at the comb phase against 103 at the oracle) had already foreshadowed. That is the arc's third ruler correction: the DTW geometry, then the eat chart fixture, now the oracle anchor at the one tempo where sub-bar error matters most. Arm B then measured recipe v5, which adds exactly one move to v3: a single whole-grid comb slide of the uniform line onto the onset lattice, fenced at half a beat so it can correct sub-beat phase and can never hop to the neighboring beat. All three gates pass: mop-heart snaps onto the lattice exactly, letter-lands and peaceful-dreams move about 40 milliseconds with no regression (ends 0.05 to 0.07 seconds), the corrected-chart eat stays within the quarter-bar line, and the wrong-chart refusal fires unchanged on the superseded 86-bar fixture. v5 supersedes v3 as the recommended worker recipe at the cost of one comb slide.",
+			"sections": [
+				{
+					"id": "sec-stem-study27",
+					"eyebrow": "Listening · whole-grid re-phasing",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-rephase27",
+						"summary": "Arm A's anchor adjudication and recipe v5's per-song results against the refined truth"
+					},
+					"body": [
+						{
+							"heading": "The Problem and the Suspicion",
+							"html": "Study 26c left one number standing that no end repair could touch: mop-heart's 0.32 second outro residual, inherited from its own aligned middle, whose whole-grid phase sits off the beat at a tempo (224 bpm, 3/4) where a bar lasts 0.8 seconds and 115 milliseconds is 43 percent of a beat. Study 25 had measured the suspicion without naming it: the oracle anchor and the onset comb's phase disagreed by those 115 milliseconds, and Study 24's comb-phase arm drafted 136 of 140 on this song where the oracle-anchored arm drafted 103. The notes live on the onset lattice. The question was whether the truth did too, because the program's 'true' mop anchor was itself the Study 25 oracle construction, inherited by Study 26 as the ruler."
+						},
+						{
+							"heading": "Arm A: the Anchor Was the Ruler, Again",
+							"html": "Registered before the remedy was scored: three candidate anchors, each defining a uniform 140-bar grid, decided by the shipped reader's hint roots against the chart. The oracle scored 113 of 140. The v5 anchor measured from the full mix and the v5 anchor measured from the drums stem alone, two envelopes that share no computation, agree exactly at minus 0.066 seconds and score 115. The margin is two roots, disclosed as thin: the hint instrument pools chroma per bar and this song holds long same-chord spans, so it tolerates phase. The persuasive evidence is physical, the two combs' exact agreement, with Study 24's 33-bar drafting split as committed corroboration. The refined anchor sits 0.381 seconds, 47 percent of a bar, before the incumbent. The registered consequence lands on Study 26c's mop row: its 0.42 second middle offset and 0.32 second outro residual were mostly this ruler error, not the map, while its app-acceptance verdict stands. Third ruler correction of the arc, and the second one caught by instruments the arc itself built."
+						},
+						{
+							"heading": "Recipe v5: One More Move",
+							"html": "v5 is v3 with a single addition. After the comb period and the median-phase trust line, slide the entire uniform grid, every bar with one delta, onto the onset lattice with the committed comb-slide instrument, fenced at half a beat (the period divided by the meter's beats). The fence is the 26c lesson transposed down a level: half a beat cannot reach the neighboring beat, so the slide corrects sub-beat phase and can never hop the lattice, and a unit test proves it against a lattice of louder off-beat impulses. Measured: mop-heart lands at 0.000 seconds everywhere against the refined truth, a number disclosed as partly circular since the refined truth is the lattice v5 itself names on this song; the non-circular content is the two combs' agreement, the hint win and the app's shipped acceptance passing. Letter-lands and peaceful-dreams moved about 40 milliseconds onto the lattice with ends at 0.05 to 0.07 seconds and middles near 0.06, inside the no-regression gate. The corrected-chart eat passes within the quarter-bar line, and the interior-trust refusal fires unchanged against the superseded 86-bar fixture: re-phasing does not blunt the wrong-chart detector."
+						},
+						{
+							"heading": "What Ships",
+							"html": "v5 supersedes v3 as the recommended browser-worker recipe, at the cost of one additional comb slide over an envelope the worker already computes. The fast-tempo phase problem named in the alignment-ends answer is closed: bar lines at fast tempos come from the onset lattice, not from the alignment's phase. The reference implementation is committed in the bench (src/study27/rephase.ts) with the fence test, and the guidance to the app gains one line: when the player and the alignment disagree about where the beat is, trust the drums."
+						}
+					]
+				}
+			],
+			"published": "2026-11-08",
+			"related": [
+				{
+					"title": "Studies 26 to 26c: the ends repair this study completes",
+					"href": "/research/stem-bench/26"
+				},
+				{
+					"title": "Study 25: the oracle anchor this study retires",
+					"href": "/research/stem-bench/25"
+				},
+				{
+					"title": "Study 24: the comb instrument and the drafting split that foreshadowed the verdict",
+					"href": "/research/stem-bench/24"
+				},
+				{
+					"title": "stem-bench on GitHub",
+					"href": "https://github.com/kevinpeckham/stem-bench"
+				}
+			],
+			"brief": "docs/BRIEF-STUDY27.md",
+			"quote": "Two envelopes that share no computation, the full mix and the drum kit alone, named the same lattice to the millisecond. The oracle had been 381 milliseconds out, at the tempo where that is half a bar."
 		}
 	]
 }

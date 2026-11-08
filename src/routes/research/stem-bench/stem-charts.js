@@ -2983,7 +2983,7 @@ export function initStemCharts() {
 				"mop-heart",
 				"~3.1s / 2.5\u20133.6s \u00b7 middle mean 0.42s",
 				"0.66s intro \u2192 0.11s intro, 0.32s tail \u2192 same",
-				"app acceptance ok \u00b7 0.32s outro residual is the middle's own phase offset (the 224 bpm problem, next remedy: whole-grid re-phasing) \u00b7 S26C-G2 ok",
+				"app acceptance ok \u00b7 0.32s outro residual, read then as the middle's own phase offset; Study 27's anchor adjudication later showed it was mostly the truth anchor itself (the oracle sat 0.381s off the onset lattice) \u00b7 S26C-G2 ok",
 			],
 			[
 				"eat-all-the-clocks",
@@ -2999,6 +2999,40 @@ export function initStemCharts() {
 			],
 		],
 		"Three registrations, each gate honestly failed and priced before the next (26: G1 FAIL on the LSQ bias, G3 FAIL with its construction later re-graded ill-posed; 26b: G1 FAIL on the wide slide; 26c: all gates PASS). The second same-day correction resolved the eat refusal's cause as the bench's own chart fixture, not the band's arrangement; see the entry's correction and Study 25b. $0 throughout: no model calls, pure DSP over the committed corpus. The worker recipe ships as a tested reference implementation in the bench; cost is one alignment as today plus comb sweeps.",
+	);
+
+	// --- Study 27: whole-grid re-phasing at fast tempos (no figure) ---
+	table(
+		"tbl-rephase27",
+		["measurement", "result", "the read"],
+		[
+			[
+				"Arm A: mop-heart anchor adjudication (hint roots on each 140-bar grid)",
+				"oracle 0.315s \u2192 113/140 \u00b7 mix-comb \u22120.066s \u2192 115/140 \u00b7 drums-comb \u22120.066s \u2192 115/140",
+				"the mix and drums lattices agree EXACTLY; the registered rule picks the comb anchor on a thin 2-root margin (disclosed: the hint instrument is phase-tolerant on long same-chord spans); Study 24's 136-vs-103 drafting split is the committed corroboration \u00b7 the oracle was 0.381s (47% of a bar) off \u00b7 third ruler correction of the arc",
+			],
+			[
+				"mop-heart on v5 (vs the refined truth)",
+				"delta \u22120.014s \u00b7 ends 0.00/0.00s \u00b7 middle mean 0.000s \u00b7 app acceptance ok",
+				"S27-G1 ok \u00b7 the zeros are partly circular (the refined truth IS the lattice v5 names here, disclosed); the non-circular content is the comb agreement, the hint win and the acceptance pass",
+			],
+			[
+				"letter-lands and peaceful-dreams on v5 (no-regression gate)",
+				"deltas \u22120.047s / \u22120.037s \u00b7 ends 0.05\u20130.07s \u00b7 middles 0.060s / 0.064s",
+				"S27-G2 ok \u00b7 both songs move ~40ms ONTO the lattice; the whole-grid slide helps even where v3 already passed",
+			],
+			[
+				"eat-all-the-clocks on v5, both charts",
+				"vs the superseded 86-bar fixture: REFUSED \u00b7 vs the corrected 71-bar chart: ends 0.45\u20130.48s, within the quarter-bar line",
+				"S27-G3 ok \u00b7 re-phasing does not blunt the wrong-chart detector, and the corrected chart still passes",
+			],
+			[
+				"the recipe delta and the fence",
+				"v5 = v3 + ONE whole-grid comb slide, fenced at \u00b10.5 beat (period / meter beats) \u00b7 unit test proves the fence cannot hop to a louder neighboring-beat lattice",
+				"supersedes v3 as the recommended worker recipe \u00b7 cost: one comb slide over an envelope the worker already computes \u00b7 the 224 bpm problem named in the 26 answer is closed",
+			],
+		],
+		"Registered before the run (docs/BRIEF-STUDY27.md), $0, pure DSP over the committed corpus. Predictions: the comb anchor winning was predicted, though the registered 'within 150 ms of the oracle' was wrong by construction of the surprise, the move was 381 ms; the gate predictions were right. Downstream consequence registered in the brief and applied: Study 26c's mop row was measured against the superseded anchor, noted there.",
 	);
 
 	// --- Study 19: the ChordMini port gated (no figure) ---
