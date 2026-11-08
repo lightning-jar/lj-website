@@ -10,10 +10,13 @@
 // 3. When there is truly no copy to serve, callers in page loads get a
 //    503 (come back later) instead of a generic 500.
 
+import * as Sentry from "@sentry/sveltekit";
 import { error } from "@sveltejs/kit";
 
 import { createLastKnownGood } from "#lib/server/lastKnownGood.js";
 import { ENV } from "varlock/env";
+
+import { cmsSpanInfo } from "./cmsSpan";
 
 type Fetch = typeof globalThis.fetch;
 
@@ -36,23 +39,32 @@ export async function cmsJson<T>(
 	headers: HeadersInit,
 	notFoundValue?: T,
 ): Promise<T> {
+	// Named parent span per CMS request: the auto http.client spans drop
+	// the query string (urlQueryParams: false), so without this the
+	// per-collection list fetches are indistinguishable in traces.
+	const span = cmsSpanInfo(url);
 	try {
-		return await lkg.wrap<T>(url, async () => {
-			const res = await fetch(url, { headers, cache: "force-cache" });
-			if (res.status === 404 && notFoundValue !== undefined) {
-				return notFoundValue;
-			}
-			if (!res.ok) throw new Error(`CMS fetch failed: ${res.status} ${url}`);
-			const contentType = res.headers.get("content-type") ?? "";
-			if (!contentType.includes("json")) {
-				// an HTML response here usually means an auth redirect — the
-				// exact signature of the anonymous-lockout incident
-				throw new Error(
-					`CMS returned ${contentType || "unknown content"} instead of JSON (redirect or error page?): ${url}`,
-				);
-			}
-			return (await res.json()) as T;
-		});
+		return await Sentry.startSpan(
+			{ op: "cms.fetch", name: span.name, attributes: span.attributes },
+			() =>
+				lkg.wrap<T>(url, async () => {
+					const res = await fetch(url, { headers, cache: "force-cache" });
+					if (res.status === 404 && notFoundValue !== undefined) {
+						return notFoundValue;
+					}
+					if (!res.ok)
+						throw new Error(`CMS fetch failed: ${res.status} ${url}`);
+					const contentType = res.headers.get("content-type") ?? "";
+					if (!contentType.includes("json")) {
+						// an HTML response here usually means an auth redirect — the
+						// exact signature of the anonymous-lockout incident
+						throw new Error(
+							`CMS returned ${contentType || "unknown content"} instead of JSON (redirect or error page?): ${url}`,
+						);
+					}
+					return (await res.json()) as T;
+				}),
+		);
 	} catch (err) {
 		// no live response and no stored copy: tell crawlers and humans to
 		// come back rather than presenting a permanent-looking failure
