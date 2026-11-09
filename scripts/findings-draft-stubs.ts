@@ -20,6 +20,13 @@
 
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import {
+	type ClaimStyle,
+	isClaimLike,
+	readSource,
+	SOURCES,
+	stripDateNote,
+} from "./findings-sweep";
 
 // CLI script: runs under `bunx varlock run -- bun …` (the lj-ops-script
 // behavior wraps it), so resolved env arrives via process.env — the
@@ -29,9 +36,10 @@ const HOME = process.env.HOME ?? "/home/exedev";
 const OPS = join(HOME, "projects/lj-website/ops");
 const FINDINGS_BLOG_ID = "n52rePFua2SDvsie_srrX";
 
-// Source corpora (keep aligned with findings-sweep.ts SOURCES) plus the
-// per-source defaults a stub needs.
-const SOURCE_META: Record<
+// Per-source defaults a stub needs. The corpora themselves (path,
+// style, git ref) come from findings-sweep.ts SOURCES; a test keeps the
+// two lists aligned.
+export const SOURCE_META: Record<
 	string,
 	{ path: string; project: string; defaultArea: string }
 > = {
@@ -44,6 +52,21 @@ const SOURCE_META: Record<
 		path: join(HOME, "projects/woof-editor/CHANGELOG.md"),
 		project: "Woof Editor",
 		defaultArea: "Web Platform",
+	},
+	replicator: {
+		path: join(HOME, "projects/replicator/FINDINGS.md"),
+		project: "Replicator",
+		defaultArea: "Tooling",
+	},
+	"ccrta-website": {
+		path: join(HOME, "projects/ccrta-website/FINDINGS.md"),
+		project: "CCRTA Website",
+		defaultArea: "Web Platform",
+	},
+	barmark: {
+		path: join(HOME, "projects/barmark/FINDINGS.md"),
+		project: "Barmark",
+		defaultArea: "Tooling",
 	},
 };
 
@@ -71,8 +94,69 @@ export interface SourceEntry {
 	heading: string | null;
 }
 
-/** Every finding-shaped bullet with its full block and nearest heading. */
-export function extractEntries(markdown: string): SourceEntry[] {
+/**
+ * Entries in a corpus. "bullets": every finding-shaped bullet with its
+ * block and nearest h2/h3. "headings": every h3/h4 with the text under
+ * it up to the next heading of the same or higher level, and its h2.
+ * Only claim-like leads are kept (the sweep's own filter).
+ */
+export function extractEntries(
+	markdown: string,
+	style: ClaimStyle = "bullets",
+): SourceEntry[] {
+	const all =
+		style === "headings"
+			? extractHeadingEntries(markdown)
+			: extractBulletEntries(markdown);
+	return all.filter((e) => isClaimLike(e.claim));
+}
+
+function extractHeadingEntries(markdown: string): SourceEntry[] {
+	const entries: SourceEntry[] = [];
+	let section: string | null = null;
+	let current: {
+		level: number;
+		claim: string;
+		lines: string[];
+		section: string | null;
+	} | null = null;
+	const flush = () => {
+		if (current) {
+			entries.push({
+				claim: current.claim,
+				block: current.lines.join("\n").trimEnd(),
+				heading: current.section,
+			});
+		}
+		current = null;
+	};
+	for (const line of markdown.split("\n")) {
+		const h = line.match(/^(#{2,4}) (.+)$/);
+		if (h) {
+			const level = h[1].length;
+			if (level === 2) {
+				flush();
+				section = h[2].trim();
+				continue;
+			}
+			if (!current || level <= current.level) {
+				flush();
+				current = {
+					level,
+					claim: stripDateNote(h[2].replace(/\s+/g, " ").trim()),
+					lines: [line],
+					section,
+				};
+				continue;
+			}
+		}
+		current?.lines.push(line);
+	}
+	flush();
+	return entries;
+}
+
+function extractBulletEntries(markdown: string): SourceEntry[] {
 	const lines = markdown.split("\n");
 	const entries: SourceEntry[] = [];
 	let heading: string | null = null;
@@ -130,6 +214,7 @@ export function slugFromClaim(claim: string): string {
 export function descriptionFrom(entry: SourceEntry): string {
 	const afterClaim = entry.block
 		.replace(/^[-*] \*\*[\s\S]+?\*\*/, "")
+		.replace(/^#{3,4} .*\n?/, "")
 		.replace(/\s+/g, " ")
 		.trim();
 	const firstSentence = afterClaim.match(/^(.+?[.!?])(\s|$)/)?.[1] ?? "";
@@ -206,6 +291,46 @@ async function mcpCallOnce(
 	return inner ? JSON.parse(inner) : parsed.result;
 }
 
+/**
+ * Fail early, and say why, when the key cannot write to the blog. On
+ * 2026-10-28 and again 2026-11-09 REPLICATOR_AGENT_KEY resolved to the
+ * chat-log key, and the stage died on "Tool article_create not found".
+ */
+async function assertBlogScope(): Promise<void> {
+	const base = (process.env.BLOG_CMS_BASE_URL ?? "").replace(/\/$/, "");
+	const key = process.env.REPLICATOR_AGENT_KEY;
+	if (!base || !key) {
+		throw new Error("BLOG_CMS_BASE_URL / REPLICATOR_AGENT_KEY not set");
+	}
+	const res = await fetch(`${base}/api/mcp`, {
+		method: "POST",
+		headers: {
+			authorization: `Bearer ${key}`,
+			"content-type": "application/json",
+			accept: "application/json, text/event-stream",
+		},
+		body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/list" }),
+		signal: AbortSignal.timeout(30_000),
+	});
+	const text = await res.text();
+	const tools = [...text.matchAll(/"name"\s*:\s*"([a-z_]+)"/g)].map(
+		(m) => m[1],
+	);
+	if (tools.includes("article_create")) return;
+	let label = "unknown";
+	try {
+		const who = (await mcpCallOnce("whoami", {})) as { agentKeyLabel?: string };
+		label = who.agentKeyLabel ?? label;
+	} catch {
+		// the label is a diagnostic nicety
+	}
+	throw new Error(
+		`REPLICATOR_AGENT_KEY has no blog scope: it resolves to agent key "${label}" ` +
+			`(tools: ${tools.join(", ") || "none"}). Put a blog-scoped org agent key ` +
+			"in the 1Password environment as REPLICATOR_AGENT_KEY.",
+	);
+}
+
 // --- main -------------------------------------------------------------
 
 async function main() {
@@ -243,13 +368,19 @@ async function main() {
 		? (JSON.parse(readFileSync(numberingPath, "utf8")) as { next: number })
 		: { next: 29 };
 
+	if (!dryRun) await assertBlogScope();
+
 	const created: { number: number; title: string; previewUrl?: string }[] = [];
 	const stubRecords: Record<string, unknown>[] = [];
 	for (const [sourceName, claims] of Object.entries(report.newBySource)) {
 		if (claims.length === 0) continue;
 		const meta = SOURCE_META[sourceName];
-		if (!meta) continue;
-		const entries = extractEntries(readFileSync(meta.path, "utf8"));
+		const source = SOURCES.find((s) => s.name === sourceName);
+		if (!meta || !source) {
+			console.error(`no stub metadata for source ${sourceName}, skipping`);
+			continue;
+		}
+		const entries = extractEntries(readSource(source), source.style);
 		for (const claim of claims) {
 			const entry = entries.find(
 				(e) => e.claim.toLowerCase() === claim.toLowerCase(),

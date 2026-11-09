@@ -1,8 +1,17 @@
 import { describe, expect, test } from "vitest";
 import {
+	areaFor,
+	descriptionFrom,
+	extractEntries,
+	SOURCE_META,
+	slugFromClaim,
+} from "../scripts/findings-draft-stubs";
+import {
 	diffClaims,
 	extractClaims,
+	isClaimLike,
 	parseFeedTitles,
+	SOURCES,
 } from "../scripts/findings-sweep";
 
 describe("findings sweep", () => {
@@ -48,6 +57,79 @@ describe("findings sweep", () => {
 		]);
 	});
 
+	test("heading-style corpora: h3/h4 titles are claims, date notes stripped", () => {
+		const md = [
+			"## Packages",
+			"",
+			"### `bun pm pack` takes a workspace dependency's version from bun.lock (2026-10-31, render)",
+			"",
+			"Prose under it, with a **bold phrase** that is not a claim.",
+			"",
+			"#### The fix",
+			"",
+			"## Next section",
+			"### A smoke test that imports dist by path never reads exports",
+		].join("\n");
+		expect(extractClaims(md, "headings")).toEqual([
+			"`bun pm pack` takes a workspace dependency's version from bun.lock",
+			"A smoke test that imports dist by path never reads exports",
+		]);
+		// the h4 "The fix" is a label inside the entry, not a claim
+	});
+
+	test("section labels and study verdicts are not claims", () => {
+		for (const label of [
+			"Colors",
+			"Folders:",
+			"The fix.",
+			"Lessons.",
+			"Since then.",
+			"Landed the same day:",
+			"One Svelte.",
+			"Study 30 (stem-bench ad39959, ~$0.15): downbeat disambiguation failed",
+			"CORRECTION 2 (same day): the fixture carried phantom bars",
+		]) {
+			expect(isClaimLike(label), label).toBe(false);
+		}
+		for (const claim of [
+			"`Math.hypot` is slow.",
+			"An `AnalyserNode` downmixes to mono.",
+			"Tempo units differ.",
+		]) {
+			expect(isClaimLike(claim), claim).toBe(true);
+		}
+	});
+
+	test("draft stage knows how to stub every sweep source", () => {
+		expect(SOURCES.map((s) => s.name).sort()).toEqual(
+			Object.keys(SOURCE_META).sort(),
+		);
+		for (const s of SOURCES) expect(SOURCE_META[s.name].path).toBe(s.path);
+	});
+
+	test("heading entries carry the text under the heading", () => {
+		const md = [
+			"## Testing",
+			"### Bun's mock.module leaks across test files (2026-11-03)",
+			"",
+			"It replaced the module for the whole process. More text.",
+			"#### Fix",
+			"Use spyOn.",
+			"### Next claim here today",
+			"Body two.",
+		].join("\n");
+		const entries = extractEntries(md, "headings");
+		expect(entries.map((e) => e.claim)).toEqual([
+			"Bun's mock.module leaks across test files",
+			"Next claim here today",
+		]);
+		expect(entries[0].block).toContain("Use spyOn.");
+		expect(entries[0].heading).toBe("Testing");
+		expect(descriptionFrom(entries[0])).toBe(
+			"It replaced the module for the whole process.",
+		);
+	});
+
 	test("extraction against the real stem-shovel corpus finds the known shape", () => {
 		const path = `${process.env.HOME}/projects/stem-shovel/FINDINGS.md`;
 		const md = require("node:fs").readFileSync(path, "utf8") as string;
@@ -57,13 +139,6 @@ describe("findings sweep", () => {
 		expect(claims.some((c) => c.includes("downmixes to mono"))).toBe(true);
 	});
 });
-
-import {
-	areaFor,
-	descriptionFrom,
-	extractEntries,
-	slugFromClaim,
-} from "../scripts/findings-draft-stubs";
 
 describe("findings draft stubs", () => {
 	const md = [
