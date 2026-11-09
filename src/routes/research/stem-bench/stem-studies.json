@@ -2745,6 +2745,55 @@
 					]
 				}
 			]
+		},
+		{
+			"slug": "35",
+			"letters": "35",
+			"track": "The chart-draft pipeline",
+			"title": "On modern material the draft mostly lands, compound meter is a units bug, and the confidence refusal keeps only mistakes",
+			"eyebrow": "Study 35 · modern material · 1,904 cells · ≈$1.00",
+			"published": "2026-11-09",
+			"indexLine": "Ten modern CC BY recordings whose artist pages state tempo, key, meter and chords, run in declared mode with the app's new holds registered in advance. The texture flips: every 4/4 grid lands within 1.4 percent, five drafts grade good (three with perfect root sequences, one at a declared 240 bpm) and three more sit at 83 to 86 percent. The two failures are both 6/8 songs, and the cause is a units mismatch, not music: the artist states dotted-quarter tempo, the product reads beats of the bar per minute, and the declared bar comes out three times too long while the drift hold compares the grid to the same misread value. The registered 0.84 tempo-confidence refusal inverts out of sample, refusing both right detections and passing only wrong ones. An exploratory tempo-following beat tracker recovers the unevenly cut 78 that every fixed comb failed, 89.6 percent roots against 17 to 31.",
+			"sections": [
+				{
+					"id": "sec-stem-study35",
+					"eyebrow": "The chart-draft pipeline",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s35",
+					"figure": null,
+					"table": {
+						"id": "tbl-modern35",
+						"summary": "Per slot: declared values, the grid's landing, roots and qualities, class and what held or refused"
+					},
+					"body": [
+						{
+							"heading": "The Question",
+							"html": "Studies 34 and 34b stress-tested the chartless draft on acoustic-era recordings and found two failure modes the app answered with holds: a grid-drift bound and a notes-per-bar floor, plus a tempo-confidence refusal read off the same fifteen recordings. None of that had touched the material the product will actually meet. The app's brief asked for declared mode on ten modern rights-clear recordings with the holds and the refusal registered in advance, so their first out-of-sample test would be scored, not argued. The bench proposed ten Josh Woodward songs whose pages publish tempo, key, meter and full chord charts under CC BY 4.0; Kevin cleared the rights; three proposed songs whose pages carry only guitar tablature or no chord symbols were swapped for charted ones from the same catalog, disclosed in the registration."
+						},
+						{
+							"heading": "Truth from the Artist's Own Hand",
+							"html": "Each page's chord chart became tier-3 sequence truth, transcribed verbatim beside the committed original blocks. Capo songs sound above their written shapes, so each slot's transposition was decided by the gated chroma calibration before registration: five gates accepted, and every accepted value equals the capo the artist states on the page, the instrument confirming itself five times on known ground. Three thin-margin gates refused into interval-invariant grading. A pre-registration census found the corpus carries no measurable pickups and, for free, an early headline: all eight new declared grids land 0.0 to 1.4 percent off the page's tempo before any model spend. One grading defect surfaced after the run and was corrected the same day: the first pass compared the draft's sounding roots to the chart's written shapes without applying the calibrated capo, the tell being that every misgraded slot was exactly a capo slot with a near-perfect transposition-free quality score. The grader gained a transposition-aware scorer with unit tests, the nine persisted drafts were regraded at zero model spend, and both gradings are preserved in the committed results."
+						},
+						{
+							"heading": "The Texture Flips",
+							"html": "Five of ten grade good: afterglow 15 of 15 roots, cherubs 28 of 28, goodbye-to-spring 43 of 43 at a declared 240 bpm, california-lullabye 49 of 53, swansong 28 of 30. Three more sit at 83 to 86 percent, just under the registered 90 percent bar. Transcription feeds 11 to 50 notes per bar where the acoustic-era slots starved at 1.3 to 2.2, and unknown share never exceeds 0.006. Both gates still fail, S35-G2 at five of ten, but for the first time in this program the sentence \"declared mode drafts a usable chart on most of this corpus\" is writable."
+						},
+						{
+							"heading": "The Two Failures Are One Units Bug",
+							"html": "gravity and my-favorite-regret, the two 6/8 songs, land confidently wrong and saved, failing S35-G1 on their own. Their quality scores are near perfect, 12 of 12 and 13 of 17, which is the signature of a grid problem rather than a harmony problem. The cause is mechanical: the artist states compound tempo in dotted quarters, as musicians do, and the product's declared path reads a typed tempo as beats of the bar per minute, six eighths in 6/8, so the declared bar comes out exactly three times too long. The drift hold cannot see it because it compares the landed grid to the same misread value, reporting 0.0 to 1.4 percent off. The app had fixed precisely this units disease on its chart-aligned path the same day; the chartless declared path needs the same input adapter, and no threshold can substitute for it."
+						},
+						{
+							"heading": "The Refusal That Keeps Only Mistakes",
+							"html": "The automatic detector's tempo is wrong on eight of ten modern recordings, and the 0.84 confidence refusal registered from the acoustic-era corpus inverts: it refuses both right detections, at 0.809 and 0.797, and the only two detections it passes are wrong, 88.0 bpm at 0.845 and 82.5 at 0.860. The registered prediction said it would fire on every wrong detection and at most two right ones; out of sample it kept only mistakes. The bench's answer to the app: do not ship tempo confidence as a refusal signal. The two 34b holds fared better but not well, firing on nothing modern as predicted and holding no good draft, S35-G3 passing, while also catching neither compound-meter failure."
+						},
+						{
+							"heading": "The Tracker That Earns Its Design",
+							"html": "Arm D, exploratory and gateless, asked whether a tempo-following grid rescues the two unevenly cut 78s that drift off every fixed comb. On livery-stable-blues a dynamic-programming beat tracker seeded at the declared tempo tracks 510 beats into 128 bars against 125 truth bars, and the draft grades 112 of 125 roots, 89.6 percent, against 17 to 31 percent for every fixed-comb attempt across three studies. Per the registered reading, a tempo-following grid earns a design section in the app's listening package. st-louis-blues stays at 3 of 53 with its bars landing, so its limit is transcription and key, not the grid. Spend for the whole study: one dollar even, eleven paid drafts at nine cents each, under the three dollar fence."
+						}
+					]
+				}
+			]
 		}
 	]
 }

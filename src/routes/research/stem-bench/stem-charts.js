@@ -3294,6 +3294,87 @@ export function initStemCharts() {
 		"Registered 88fceeb before any scored run (docs/BRIEF-STUDY33.md); pilot letter-lands \u2248$0.30 at the $0.3 fence, matrix peaceful-dreams alone per the registered scope (runner corrected c396220 before any paid call) \u2248$0.68 against the $0.6 fence, exceeded and disclosed: the two-buffer arms carry nearly twice the notes, so peaceful's drafts grew to \u224838k tokens in each. Study total \u2248$0.98 across 1,158 cells (5 arms \u00d7 229 graded bars + 13 sweep purities). The gateway ignores temperature on this model family; all five arms span three bars on letter, the disclosed noise scale.",
 	);
 
+	// --- Study 35: modern material ---
+	table(
+		"tbl-modern35",
+		["slot (declared)", "grid landing", "roots \u00b7 qualities", "class"],
+		[
+			[
+				"let-it-in (121, 4/4) \u00b7 Study 34 record reused",
+				"121 bars, 0.0% off",
+				"18/21 = 85.7% \u00b7 20/25",
+				"saved below threshold",
+			],
+			[
+				"same-boat (93, 4/4) \u00b7 redrafted at declared",
+				"75 bars, 0.0% off",
+				"15/18 = 83.3% \u00b7 11/11",
+				"saved below threshold",
+			],
+			[
+				"gravity (48, 6/8 swing)",
+				"1.4% off the misread 7.5 s bar (true bar 2.5 s)",
+				"16/26 = 61.5% \u00b7 12/12",
+				"confidently wrong AND saved: the units bug",
+			],
+			[
+				"my-favorite-regret (65, 6/8 straight)",
+				"0.0% off the misread bar, same 3\u00d7 stretch",
+				"26/42 = 61.9% \u00b7 13/17",
+				"confidently wrong AND saved: the units bug",
+			],
+			[
+				"california-lullabye (176, 4/4)",
+				"181 bars, 0.0% off",
+				"49/53 = 92.5% \u00b7 33/35",
+				"good",
+			],
+			[
+				"swansong (170, 4/4)",
+				"178 bars, 0.0% off",
+				"28/30 = 93.3% (interval-invariant) \u00b7 19/19",
+				"good",
+			],
+			[
+				"afterglow (98, 4/4)",
+				"85 bars, 1.0% off",
+				"15/15 = 100% \u00b7 5/5",
+				"good",
+			],
+			[
+				"cherubs (165, 4/4)",
+				"171 bars, 0.0% off",
+				"28/28 = 100% (interval-invariant) \u00b7 17/17",
+				"good",
+			],
+			[
+				"goodbye-to-spring (240, 4/4)",
+				"223 bars, 0.0% off at the extreme declared tempo",
+				"43/43 = 100% (interval-invariant) \u00b7 22/23",
+				"good",
+			],
+			[
+				"im-letting-go (76, 4/4, sparse)",
+				"59 bars, 0.3% off",
+				"28/33 = 84.8% \u00b7 15/15",
+				"saved below threshold",
+			],
+			[
+				"automatic mode, the 0.84 refusal (reported)",
+				"detector tempo wrong on 8 of 10",
+				"refuses BOTH right detections (0.809, 0.797)",
+				"passes only wrong ones (88.0 at 0.845, 82.5 at 0.860)",
+			],
+			[
+				"arm D (exploratory): tempo-following tracker",
+				"livery: 510 beats \u2192 128 bars vs 125 truth",
+				"livery 112/125 = 89.6% vs 17\u201331% on every fixed comb",
+				"st-louis stays 3/53 with bars landing: transcription, not grid",
+			],
+		],
+		"Registered 4f8f831 after the corpus freeze 69ea88c (docs/BRIEF-STUDY35.md); nine paid drafts plus two arm D, $1.000 of the $3.00 fence across 1,904 cells. Same-day grading correction disclosed in the registration: tier-3 roots regraded at the calibrated capo transposition at zero model spend, both gradings preserved. Holds: grid drift and notes-per-bar fire on nothing (S35-G3 passes) and catch neither 6/8 failure. The gateway ignores temperature on this model family.",
+	);
+
 	// --- Study 34b: declared priors ---
 	table(
 		"tbl-declared34b",
