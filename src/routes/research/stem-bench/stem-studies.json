@@ -2700,6 +2700,51 @@
 					]
 				}
 			]
+		},
+		{
+			"slug": "34b",
+			"letters": "34b",
+			"track": "The chart-draft pipeline",
+			"title": "Declared priors are not enough: the five wrong charts stay wrong with the true tempo and meter supplied",
+			"eyebrow": "Study 34b · declared priors · 1,465 cells · ≈$0.41",
+			"published": "2026-11-09",
+			"indexLine": "Study 34 blamed the detector, so the app asked the obvious follow-up: re-run the five confidently wrong recordings with the true tempo and meter declared, the shape its planned tool takes. All five stayed confidently wrong. Two failure modes emerged, both visible before the model runs: unevenly cut 78s drift off any fixed grid at the comb stage, and where the grid lands to the bar the transcription is starved, 1.3 to 2.2 notes per bar against 10 or more on modern material. The detector's tempo confidence separates its own failures exploratorily; its key confidence does not.",
+			"sections": [
+				{
+					"id": "sec-stem-study34b",
+					"eyebrow": "The chart-draft pipeline",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s34b",
+					"figure": null,
+					"table": {
+						"id": "tbl-declared34b",
+						"summary": "Per slot: the declared grid's landing, roots before and after, and the failure stage"
+					},
+					"body": [
+						{
+							"heading": "The Question",
+							"html": "Study 34 located the breadth failure at the declared-input stage: the production detector misread tempo, meter or key on every early or sparse recording, and the drafter wrote a faithful chart on each wrong grid. The app's planned public tool would not detect unattended; a visitor would tap the tempo and pick the meter. So the app asked two questions before building anything: could detection have known it was guessing, and is the drafter good when a person supplies what detection got wrong? The bench registered the brief whole, with one reconciliation: both sheet-music recordings demonstrably perform more of the piece than the publication, so the bar-count clause was re-registered against committed form evidence (the hymn sings its 16-bar form 4.75 times; the waltz adds one repeated 31-bar strain) before any data existed."
+						},
+						{
+							"heading": "Truth for a Tap",
+							"html": "The two sheet-music slots have bar truth but no time truth, so their declared tempos needed an instrument independent of the detector under test. The publication fixes each repeat's length in beats; the recording's chroma self-similarity fixes the repeat's period in seconds; tempo follows. The hymn's verse lag agrees with itself at two, and three times the lag within 0.2 percent, giving 97.1 bpm, and the waltz's strain lag gives 141.6, at which tempo the audible span holds exactly the published 118 bars plus one repeated strain. The neural beat tracker from Study 10 cross-checks the waltz and cannot tap the hymn at all, both disclosed. This instrument also corrected the Study 34 report's unlabeled estimate of the hymn's tempo."
+						},
+						{
+							"heading": "Both Gates Fail Again, Differently",
+							"html": "With the true tempo and meter declared, the five grids split. The two drifting 78s failed at the comb: a single fixed period settled 7.2 and 8.9 percent off the declared tempo, because an unevenly cut side has no single tempo to find. The other three landed to the bar: Dippermouth Blues at 114 bars of 114, the hymn and the waltz on their committed form expectations exactly. And the drafts were still confidently wrong, at 66, 17 to 31, and 6 to 8 percent roots, because the transcription is starved on acoustic-era audio: 1.3 to 2.2 notes per bar where every modern recording gives 10 or more. The model fills the silence confidently. Declaring the key too (the second arm) helped where the grid held, moving the hymn from 13 to 23 roots of 75, and nowhere near safety."
+						},
+						{
+							"heading": "What Detection Knew, and the Free Columns",
+							"html": "The exploratory reading the app asked for: the detector's tempo confidence separates its wrong detections from its right ones at about 0.84, with two errors in twelve, and both errors are right detections flagged, the safe direction for a refuse-or-ask mode. Six recordings sit within ten percent of that line, and fifteen recordings make a hypothesis, not a finding; the report says so in those words. The tempo ladder's rungs carry the truth for only three of seven wrong tempos, so an automatic mode built on picking a better rung cannot rescue the rest; one built on refusal could. Key confidence does not separate at all: the waltz detected A minor at confidence 1.000, a maximally confident wrong key. The pickup column came back clean: zero false pickup calls under the half-bar bound on ten recordings, including a real 3.3-beat late entrance it correctly left alone."
+						},
+						{
+							"heading": "The Production Answer",
+							"html": "A declared tempo is necessary and not sufficient. The app's new hold on detected-tempo drafts is right as far as it goes, but no shipped hold catches these eight drafts: the unknown-chord share peaked at 0.36 against a 0.5 threshold and was zero on the most confident failure, and the draft preserves the grid's bar count everywhere. The refusal this material needs lives upstream of the draft, in two signals the pipeline already computes before spending anything on a model: a grid that settled more than 4 percent off its declared tempo, and a transcription below a notes-per-bar floor. On everything measured so far those two flags catch all five wrong charts and none of the good ones. Setting them is the next registered study. Spend: $0.408 of the $2 fence, $0.051 a draft, 1,465 scored cells."
+						}
+					]
+				}
+			]
 		}
 	]
 }

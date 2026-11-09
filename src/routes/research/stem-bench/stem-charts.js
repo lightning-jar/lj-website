@@ -3294,6 +3294,61 @@ export function initStemCharts() {
 		"Registered 88fceeb before any scored run (docs/BRIEF-STUDY33.md); pilot letter-lands \u2248$0.30 at the $0.3 fence, matrix peaceful-dreams alone per the registered scope (runner corrected c396220 before any paid call) \u2248$0.68 against the $0.6 fence, exceeded and disclosed: the two-buffer arms carry nearly twice the notes, so peaceful's drafts grew to \u224838k tokens in each. Study total \u2248$0.98 across 1,158 cells (5 arms \u00d7 229 graded bars + 13 sweep purities). The gateway ignores temperature on this model family; all five arms span three bars on letter, the disclosed noise scale.",
 	);
 
+	// --- Study 34b: declared priors ---
+	table(
+		"tbl-declared34b",
+		[
+			"slot",
+			"declared grid's landing",
+			"roots: detected -> declared priors",
+			"failure stage",
+		],
+		[
+			[
+				"dippermouth-blues (186 bpm declared)",
+				"114 bars of 114, 0.8% off declared",
+				"46% -> 66% (unknown share 0.000)",
+				"transcription: 2.2 notes/bar on the 1923 side; the draft fills the silence confidently",
+			],
+			[
+				"st-louis-blues (67 bpm declared)",
+				"49 bars vs 53, settled 7.2% off",
+				"8% -> 6%; 39% with the key declared too",
+				"comb: an unevenly cut 78 has no single tempo to find",
+			],
+			[
+				"livery-stable-blues (164 bpm declared)",
+				"115 bars vs 125, settled 8.9% off",
+				"64% -> 53%",
+				"comb: the same drift",
+			],
+			[
+				"roll-called-up-yonder (97 bpm declared)",
+				"76 bars, the committed form expectation exactly",
+				"0% -> 17%; 31% with the key declared too",
+				"transcription: 1.9 notes/bar from four a cappella voices",
+			],
+			[
+				"three-oclock-waltz (142 bpm, 3/4 declared)",
+				"149 bars, the published 118 plus the repeated strain exactly",
+				"8% -> 6%; 8% with the key declared too",
+				"transcription: 1.3 notes/bar on the 1921 orchestra",
+			],
+			[
+				"Part A over fifteen recordings",
+				"tempo confidence separates at \u22480.84 (2 errors of 12, both the safe direction)",
+				"truth on a ladder rung for only 3 of 7 wrong tempos",
+				"key confidence does not separate: one wrong key at confidence 1.000",
+			],
+			[
+				"Part C over ten recordings",
+				"half-bar pickup bound: zero false calls",
+				"a real 3.3-beat late entrance correctly left alone",
+				"the corpus holds no true pickups, so the catch rate stays unmeasured",
+			],
+		],
+	);
+
 	// --- Study 34: the chartless draft outside MMKK ---
 	table(
 		"tbl-breadth34",
