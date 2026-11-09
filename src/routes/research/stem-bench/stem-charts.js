@@ -3294,6 +3294,74 @@ export function initStemCharts() {
 		"Registered 88fceeb before any scored run (docs/BRIEF-STUDY33.md); pilot letter-lands \u2248$0.30 at the $0.3 fence, matrix peaceful-dreams alone per the registered scope (runner corrected c396220 before any paid call) \u2248$0.68 against the $0.6 fence, exceeded and disclosed: the two-buffer arms carry nearly twice the notes, so peaceful's drafts grew to \u224838k tokens in each. Study total \u2248$0.98 across 1,158 cells (5 arms \u00d7 229 graded bars + 13 sweep purities). The gateway ignores temperature on this model family; all five arms span three bars on letter, the disclosed noise scale.",
 	);
 
+	// --- Study 34: the chartless draft outside MMKK ---
+	table(
+		"tbl-breadth34",
+		["recording", "tier \u00b7 detected prior", "roots", "class"],
+		[
+			[
+				"eat-all-the-clocks (control)",
+				"1 \u00b7 page 120 4/4 Em",
+				"67/68 = 98.5%",
+				"control reproduces its ceiling; quality families 59% on power-chord notation scope",
+			],
+			[
+				"interbellum",
+				"1 \u00b7 page 115 4/4 C",
+				"\u2014",
+				"refused: the only draft with no parseable answer, on the clean DAW export",
+			],
+			[
+				"dippermouth-blues (1923)",
+				"1 \u00b7 dsp 91 bpm 4/4 C",
+				"26/56 = 46.4%",
+				"confidently wrong: grid at exactly half tempo, 57 bars against 114",
+			],
+			[
+				"st-louis-blues (1925)",
+				"1 \u00b7 dsp 106 bpm 4/4 Bb",
+				"6/75 = 8.0%",
+				"confidently wrong: wrong tempo level entirely",
+			],
+			[
+				"livery-stable-blues (1917)",
+				"1 \u00b7 dsp 83 bpm 4/4 Eb",
+				"43/67 = 64.2%",
+				"confidently wrong on bar count, yet 11/11 section boundaries placed",
+			],
+			[
+				"roll-called-up-yonder (quartet)",
+				"2 \u00b7 dsp 78.6 bpm 4/4 Cm",
+				"0/16 = 0%",
+				"confidently wrong: the detector missed tempo and key on sparse voices",
+			],
+			[
+				"three-oclock-waltz (1921)",
+				"2 \u00b7 dsp 77.9 bpm 4/4 Am",
+				"5/61 = 8.2%",
+				"confidently wrong: a 3/4 waltz read as 4/4",
+			],
+			[
+				"jw-let-it-in",
+				"3 \u00b7 dsp 121.0 bpm 4/4 Dm",
+				"18/21 = 85.7% (sequence)",
+				"saved just below threshold; the detector matched the artist's declared 121",
+			],
+			[
+				"jw-same-boat",
+				"3 \u00b7 dsp 123.1 bpm 4/4 Bbm",
+				"16/18 = 88.9% (sequence)",
+				"saved just below threshold; quality families 11/11",
+			],
+			[
+				"kitten-on-the-keys \u00b7 sp-today-live \u00b7 irish-jigs-medley",
+				"class-only",
+				"\u2014",
+				"all three saved a draft; the 6/8 jig was declared 4/4, the detector cannot say 6/8",
+			],
+		],
+	);
+
 	// --- Study 19: the ChordMini port gated (no figure) ---
 	table(
 		"tbl-chordmini-port",

@@ -2655,6 +2655,51 @@
 				}
 			],
 			"published": "2026-11-09"
+		},
+		{
+			"slug": "34",
+			"letters": "34",
+			"track": "The chart-draft pipeline",
+			"title": "The chartless draft meets the wild: both breadth gates fail, and the break is upstream of the model",
+			"eyebrow": "Study 34 · the chartless draft outside MMKK · 802 cells · ≈$0.71",
+			"published": "2026-11-09",
+			"indexLine": "Twelve rights-clear recordings, from 1917 acoustic 78s to a live phone-era audience tape, went through the shipped chartless pipeline against publication-grade truth. Both registered gates failed, with zero of eight accuracy-graded slots good, and every confidently wrong chart traced to the production tempo, meter and key detector misreading acoustic-era or sparse-vocal material before the grid ran. On modern full-band recordings the priors held and the drafts landed at 86 to 89 percent sequence roots. The public signed-out upload tool does not ship on this evidence.",
+			"sections": [
+				{
+					"id": "sec-stem-study34",
+					"eyebrow": "The chart-draft pipeline",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": "legend-s34",
+					"figure": null,
+					"table": {
+						"id": "tbl-breadth34",
+						"summary": "Per recording: the truth tier, the detected prior, roots, and the class"
+					},
+					"body": [
+						{
+							"heading": "The Question",
+							"html": "Study 33 settled that a stereo file drafts from its mono downmix. The app's next question was breadth: can the same chartless pipeline face recordings it has never seen, by other artists, from other eras, at other capture quality? The answer decides whether a public signed-out upload tool ships. Twelve rights-clear recordings were pinned: three public-domain 78s with beat-aligned JAAH chord annotations, two Badverbs songs with band charts, a hymn and a 1921 waltz whose published settings exist as source-matching MIDIs, two Josh Woodward songs whose artist publishes his own progressions, and three slots graded class-only for lack of registrable truth."
+						},
+						{
+							"heading": "Truth Without Trust",
+							"html": "The hard part of grading wild recordings is truth that owes nothing to the system under test. Three chroma-based aligners were built to place published chord sequences on each recording's timeline, then validated against the Badverbs songs where per-bar truth is already known. All three failed, at 33 to 74 percent label agreement, because repetitive vamps let any phase shift score the same. They were rejected before registration and stay in the repo as evidence. What truth rests on instead: JAAH's beat annotations fitted to our transfers through a contrast gate, mechanical per-bar chord extraction from the source-matching MIDIs, the artists' own published progressions, and the band's charts on adjudicated anchors. One capo defeated the key calibration gate, so that song's roots are graded on successive root intervals, which no transposition can disturb."
+						},
+						{
+							"heading": "The Gates Fail at the Front Door",
+							"html": "S34-G1 asked that no recording be confidently wrong; five of eight were. S34-G2 asked that six of eight be good; zero were. But the drafter is not where it broke. A public upload carries no declared tempo, meter or key, so the pipeline leans on the production detector, and that detector misread every early or sparse recording: the a cappella style hymn quartet came back as 78.6 bpm C minor against a truth near 105 in A flat major and scored zero of sixteen bars; the 3/4 waltz came back as 4/4 and scored 8 percent; Dippermouth Blues got a grid at exactly half tempo, 57 bars against 114. The grid inherits the wrong prior, the draft inherits the wrong grid, and the chart is confidently wrong before the model sees a note. One striking survival: section boundaries. Livery Stable Blues placed 11 of 11 section marks while its harmony timeline was wrong. Structure sensing and harmony fail independently."
+						},
+						{
+							"heading": "The Modern-Material Contrast",
+							"html": "On the two modern full-band recordings the detector was right, 121.0 bpm against the artist's declared 121 on one, a 4:3 tempo confusion on the other that sequence grading does not see, and the drafts were nearly good: 86 and 89 percent sequence roots, 80 and 100 percent quality families. The clean control reproduced its known ceiling at 67 of 68 roots, so the harness is sound. The breadth failure is specifically a failure on material the detector was never tuned for, not a general collapse."
+						},
+						{
+							"heading": "What the App Does Next",
+							"html": "The app had just shipped a hold-for-review verdict on generated drafts and asked the bench to read its two rules against the classes. The changed-bar-count hold would have saved all five confidently wrong charts, because the draft preserves the grid's bar count and the error lives upstream of both numbers the rule compares. The one error-diagnostic hold that occurred, the study's only refusal, it would have held correctly. The unknown-share threshold could not be bounded this run and the runner now records what future runs need to bound it. The production answer: do not ship the public tool; the component to fix first is tempo, meter and key detection on non-modern material, not the chart drafter. Spend: $0.708 of the $5.00 fence, 802 scored cells."
+						}
+					]
+				}
+			]
 		}
 	]
 }
