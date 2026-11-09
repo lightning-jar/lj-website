@@ -3245,6 +3245,55 @@ export function initStemCharts() {
 		"Registered in two committed stages (docs/BRIEF-STUDY32.md, 32B) from the app's own adversarial brief, adopted whole with six reconciliations; weights, margins and gates fixed before each run. Spend 41,478 in / 6,976 out \u2248 $0.16 of a $0.3 fence; 744 cells. The registered stand-in for the missing fifth and sixth songs resolves: humility gate passed by every shipping witness, no false moves on synthetics, one named real-world do-not-place case. The real songs remain the confirmation when they arrive.",
 	);
 
+	// --- Study 33: the stereo file as two stems (no figure) ---
+	table(
+		"tbl-stereo33",
+		["arm", "letter-lands \u00b7 peaceful-dreams", "the read"],
+		[
+			[
+				"the scoping measurement ($0, pre-registration)",
+				"corr(L,R) 0.83\u20130.90 across the four mixes \u00b7 side channel 10\u201313 dB under the mid, weakest below 200 Hz",
+				"kick and bass dead center: each channel is a near copy of the whole band, not anything stem-like",
+			],
+			[
+				"R \u00b7 the non-drum stem sum (the stems ceiling)",
+				"72/76 = 94.7% \u00b7 151/153 = 98.7%",
+				"S33-G1 PASS twice, to the bar: the frozen 31c references reproduced exactly on both songs",
+			],
+			[
+				"A \u00b7 the plain mono downmix (the naive path)",
+				"74/76 = 97.4% \u00b7 152/153 = 99.3%",
+				"the unregistered headline, twice: ABOVE the stems sum on both songs \u00b7 Basic Pitch transcribes drums weakly and the draft model reads through the bleed",
+			],
+			[
+				"B \u00b7 L and R as two pseudo-stems (the question)",
+				"73/76 = 96.1% \u00b7 152/153 = 99.3%",
+				"S33-G2 PASS twice: one bar under mono, then a tie, at double the transcription cost \u00b7 not worth it, final",
+			],
+			[
+				"C \u00b7 mid and side (the steelman)",
+				"75/76 = 98.7% \u00b7 146/153 = 95.4%",
+				"the pilot's one-bar edge was noise with the sign flipped: the side channel's \u22482,270 extra cymbal and reverb notes poisoned six bars on peaceful",
+			],
+			[
+				"D \u00b7 the HPSS harmonic of the mono mix (the comparator)",
+				"72/76 = 94.7% \u00b7 152/153 = 99.3%",
+				"S33-G3 FAIL on the pilot (published as found), PASS on the matrix: inconsistent per song and never better, pure cost",
+			],
+			[
+				"the panned-synthetic sweep ($0, chord-tone purity, ceiling 99.7%)",
+				"HPSS 99.6\u201399.7% at every pan width \u00b7 side channel: silence at width 0, 99.7% at width 0.5 and 1.0 \u00b7 mono 96.1% \u2192 94.5% as width grows",
+				"the trap named: clean synthetic sustains are the median filter's best case, and the side channel is pure harmony exactly when the mix pans harmony, which these mixes do not",
+			],
+			[
+				"the production answer",
+				"a chartless stereo upload goes in as its mono downmix: same grid, same hints, same draft, stems-ceiling quality on both songs measured",
+				"no channel splitting, no mid/side, no source separation",
+			],
+		],
+		"Registered 88fceeb before any scored run (docs/BRIEF-STUDY33.md); pilot letter-lands \u2248$0.30 at the $0.3 fence, matrix peaceful-dreams alone per the registered scope (runner corrected c396220 before any paid call) \u2248$0.68 against the $0.6 fence, exceeded and disclosed: the two-buffer arms carry nearly twice the notes, so peaceful's drafts grew to \u224838k tokens in each. Study total \u2248$0.98 across 1,158 cells (5 arms \u00d7 229 graded bars + 13 sweep purities). The gateway ignores temperature on this model family; all five arms span three bars on letter, the disclosed noise scale.",
+	);
+
 	// --- Study 19: the ChordMini port gated (no figure) ---
 	table(
 		"tbl-chordmini-port",

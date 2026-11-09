@@ -2610,6 +2610,51 @@
 				}
 			],
 			"published": "2026-11-08"
+		},
+		{
+			"slug": "33",
+			"letters": "33",
+			"track": "The chart-draft pipeline",
+			"title": "The stereo file needs no stems: the mono downmix drafts above the stems sum, and every clever split loses",
+			"eyebrow": "Study 33 · the stereo file as two stems · 1,158 cells · ≈$0.98",
+			"indexLine": "Study 32 shipped the chartless grid, so a fresh stereo upload already gets its bars for free; what nobody had measured is the draft, whose reference numbers came from transcribing the non-drum stem sum, something a stereo file does not have. Kevin asked the question directly: how well does the auto-draft work on a stereo file, and is it worth treating the file as two stems and running the same process? A zero-dollar scoping measurement framed it: the four corpus mixes correlate left to right at 0.83 to 0.90, the side channel sits 10 to 13 dB under the mid and weakest below 200 Hz, kick and bass dead center, so each channel is a near copy of the whole band. The registered design put five transcription inputs through one identical pipeline per song: the stems sum as the ceiling, the plain mono downmix, left and right as two pseudo-stems, mid and side as the steelman, and the harmonic half of a median-filtering HPSS as the DSP comparator, graded by root score against the chart with the grid, vote, placement and hints computed once and shared. The reproduction gate passed to the bar on both songs, the stems arm landing exactly on the frozen references, 72 of 76 and 151 of 153. The headline nobody registered: the plain mono mix drafted ABOVE the stems sum on both songs, 74 of 76 and 152 of 153; Basic Pitch transcribes drums weakly, the mix yields fewer notes than the stems sum, and the draft model reads through the bleed. Kevin's question closed in the registered direction twice: the L/R split went one bar under mono on letter and tied it on peaceful, at double the transcription cost both times. Mid/side, the pilot's best arm by one bar, crashed six bars under mono on the matrix song, the side channel's 2,270 extra cymbal and reverb notes reading as harmony in enough bars to poison the draft; the pilot edge was sampling noise with the sign flipped. HPSS failed its gate on the pilot song, two bars under mono, then tied mono on the matrix song, inconsistent and never better, and the zero-dollar panned-synthetic sweep names the trap: on clean synthetic sustains the median filter is perfect, 99.6 to 99.7 percent chord-tone purity at every pan width, and on a real song it reads strummed attacks and vibrato as percussive and takes harmony with them. The production answer is the simplest one on the table: a chartless stereo upload goes straight in as its mono downmix, same grid, same hints, same draft, stems-ceiling quality on both songs measured, no channel splitting, no mid/side, no source separation. Two disclosures published with the results: the matrix runner as first committed would have re-run the pilot song and was corrected to the registered scope before any paid call, and the matrix fence was exceeded, $0.68 spent against the registered $0.60, because the two-buffer arms carry nearly twice the notes and peaceful's drafts grew to about 38k tokens each.",
+			"sections": [
+				{
+					"id": "sec-stem-study33",
+					"eyebrow": "The chart-draft pipeline · the stereo file",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-stereo33",
+						"summary": "Per arm: the transcription input, both songs' root scores, and the verdicts"
+					},
+					"body": [
+						{
+							"heading": "The Question, and What Was Already Settled",
+							"html": "Kevin asked whether the auto-draft works on a stereo file, and whether the file is worth treating as two stems. The grid half was already answered: every study since 28 ran on mono downmixes of these exact stereo mixes (the fetch converter runs ffmpeg -ac 1), so a fresh stereo upload gets the validated grid for free. The untested half was the draft, whose Study 31c reference numbers came from transcribing the non-drum stem sum. A zero-dollar scoping measurement set expectations: the four mixes correlate L/R at 0.83 to 0.90, the side channel sits 10 to 13 dB under the mid, weakest below 200 Hz. Kick and bass live dead center; each channel is a near copy of the whole band, not anything stem-like."
+						},
+						{
+							"heading": "Five Arms, One Variable",
+							"html": "Per song, five transcription inputs went through one identical pipeline: the non-drum stem sum (R, the ceiling), the plain mono mix (A, the naive path), L and R as two pseudo-stems (B, the question as asked), mid and side (C, the steelman), and the HPSS harmonic of the mono mix (D, the DSP comparator). The grid, ship vote, placement and nchord hints were computed once on the mono mix and shared by every arm, so the transcription input is the only variable. Grades are root scores against the chart. The pilot ran letter-lands under a $0.30 fence; the registered matrix, peaceful-dreams alone under $0.60, ran on Kevin's go after the pilot's results were committed."
+						},
+						{
+							"heading": "The Mono Mix Beats the Stems",
+							"html": "The reproduction gate passed to the bar twice: arm R landed exactly on the frozen references, 72 of 76 on letter and 151 of 153 on peaceful. Then the unregistered headline, twice: the plain mono mix drafted ABOVE the stems sum on both songs, 74 of 76 (97.4 percent) and 152 of 153 (99.3 percent). The registered prediction said drum bleed would cost bars; it was wrong in direction. Basic Pitch transcribes drums weakly, the mix yielded fewer notes than the stems sum on letter, and the draft model reads through what bleed remains. S33-G2 passed on both songs and closes Kevin's question: the L/R split went one bar under mono on letter and tied it on peaceful, at double the transcription cost both times. Not worth it."
+						},
+						{
+							"heading": "Mid/Side Was Noise, HPSS Is a Trap",
+							"html": "Mid/side was the pilot's best arm at 75 of 76, one bar above mono and inside the disclosed sampling noise; the matrix flipped the sign hard, 146 of 153, six bars under mono. The side channel added about 2,270 cymbal, reverb and width notes on peaceful, and enough of them read as harmony to poison six bars. HPSS failed its gate on the pilot (two bars under mono, published as found), then tied mono on the matrix song: inconsistent per song and never better, pure cost. The zero-dollar panned-synthetic sweep names the mechanism: with centered drums and the chord instrument panned at width 0, 0.5 and 1.0, HPSS sits at the 99.6 to 99.7 percent chord-tone purity ceiling at every width, and the side channel is pure harmony exactly when the mix pans harmony. Clean synthetic sustains are the filter's best case; real strummed attacks and vibrato read as percussive, and the filter takes harmony with them."
+						},
+						{
+							"heading": "The Production Answer, and Two Disclosures",
+							"html": "A chartless stereo upload goes into the pipeline as its mono downmix: same grid, same hints, same draft, stems-ceiling quality on both songs measured. No channel splitting, no mid/side, no source separation. Two disclosures rode with the results: the matrix runner as first committed would have re-run the pilot song's five drafts outside the registered scope and was corrected before any paid call; and the matrix fence was exceeded, $0.68 against the registered $0.60, because the two-buffer arms carry nearly twice the notes and peaceful's drafts grew to about 38k tokens in each. The study total is about $0.98 across 1,158 cells."
+						}
+					]
+				}
+			],
+			"published": "2026-11-09"
 		}
 	]
 }
