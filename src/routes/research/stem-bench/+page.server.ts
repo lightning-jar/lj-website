@@ -17,6 +17,7 @@ const seriesSlugs: string[] = [
 	"seventy-eight-percent",
 	"the-band-was-right",
 	"the-witnesses-were-right",
+	"the-file-that-needed-no-stems",
 ];
 
 function buildSeriesArticles(allBlogArticles: { frontMatter: FrontMatter }[]) {
