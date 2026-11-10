@@ -318,11 +318,13 @@ const COMMIT_FILES = ["package.json", "bun.lock", "biome.json"];
  * bun and its cache, none of the varlock-resolved secrets this script runs
  * under.
  */
+// Cast: varlock's generated types add the schema's keys to ProcessEnv as
+// required, and leaving them out is the point (hence via unknown).
 const SCRUBBED_ENV = {
 	PATH: process.env.PATH ?? "/usr/bin:/bin",
 	HOME: homedir(),
 	TMPDIR: process.env.TMPDIR ?? "/tmp",
-};
+} as unknown as NodeJS.ProcessEnv;
 
 interface Bump {
 	name: string;

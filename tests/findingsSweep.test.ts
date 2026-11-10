@@ -1,3 +1,4 @@
+import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, test } from "vitest";
 import {
 	areaFor,
@@ -130,14 +131,19 @@ describe("findings sweep", () => {
 		);
 	});
 
-	test("extraction against the real stem-shovel corpus finds the known shape", () => {
-		const path = `${process.env.HOME}/projects/stem-shovel/FINDINGS.md`;
-		const md = require("node:fs").readFileSync(path, "utf8") as string;
-		const claims = extractClaims(md);
-		// the corpus is large and every claim is a bolded lead sentence
-		expect(claims.length).toBeGreaterThan(80);
-		expect(claims.some((c) => c.includes("downmixes to mono"))).toBe(true);
-	});
+	// Reads the sibling stem-shovel checkout, which exists only on the bench
+	// VM; CI (no sibling repos) skips it rather than failing.
+	const corpusPath = `${process.env.HOME}/projects/stem-shovel/FINDINGS.md`;
+	test.skipIf(!existsSync(corpusPath))(
+		"extraction against the real stem-shovel corpus finds the known shape",
+		() => {
+			const md = readFileSync(corpusPath, "utf8");
+			const claims = extractClaims(md);
+			// the corpus is large and every claim is a bolded lead sentence
+			expect(claims.length).toBeGreaterThan(80);
+			expect(claims.some((c) => c.includes("downmixes to mono"))).toBe(true);
+		},
+	);
 });
 
 describe("findings draft stubs", () => {
