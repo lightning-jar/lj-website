@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
-
 import { cmsSpanInfo } from "#lib/content/getters/cmsSpan.js";
+
+import { describe, expect, it } from "vitest";
 
 const base = "https://replicator.lj.dev";
 

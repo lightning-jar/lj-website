@@ -10,12 +10,12 @@
 // 3. When there is truly no copy to serve, callers in page loads get a
 //    503 (come back later) instead of a generic 500.
 
-import * as Sentry from "@sentry/sveltekit";
 import { error } from "@sveltejs/kit";
+
+import * as Sentry from "@sentry/sveltekit";
 
 import { createLastKnownGood } from "#lib/server/lastKnownGood.js";
 import { ENV } from "varlock/env";
-
 import { cmsSpanInfo } from "./cmsSpan";
 
 type Fetch = typeof globalThis.fetch;

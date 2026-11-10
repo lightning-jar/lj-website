@@ -93,6 +93,7 @@ function isUnsafeUrl(url: string | null | undefined): boolean {
 		.replace(/&#x?([0-9a-f]+);?/gi, (_, code: string) =>
 			String.fromCodePoint(Number.parseInt(code, /x/i.test(_) ? 16 : 10)),
 		)
+		// biome-ignore lint/suspicious/noControlCharactersInRegex: stripping control characters is the point; browsers ignore them in a scheme, so "java\x01script:" must not slip past the check below
 		.replace(/[\s\x00-\x1f]/g, "")
 		.toLowerCase();
 	return /^(javascript|vbscript|data):/.test(decoded);

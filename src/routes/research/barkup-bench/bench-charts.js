@@ -5158,16 +5158,16 @@ export function initBenchCharts() {
 			L = 250,
 			R = 24;
 		const rows = [];
-		ROWS.forEach((a) =>
-			MODELS.forEach((m, mi) =>
+		for (const a of ROWS) {
+			MODELS.forEach((m, mi) => {
 				rows.push({
 					arm: a.label,
 					model: m,
 					asked: a.asked[mi],
 					guessed: a.guessed[mi],
-				}),
-			),
-		);
+				});
+			});
+		}
 		const H = T + rows.length * ROW + B + 12;
 		const iw = W - L - R;
 		const xOf = (v) => L + (v / 45) * iw;

@@ -140,6 +140,9 @@ Blog copy follows house rules: no em/en dashes in prose, plain phrasing over cle
   frozen corpus whose bytes must not drift. SVGs (committed assets) and
   `ops/swamp/vaults` (generated) are excluded in `files.includes`. Do not
   re-enable these without a deliberate, separate reformat commit.
+  Biome also honors `.gitignore` (`vcs.useIgnoreFile`), so swamp's run
+  history under `ops/swamp/.swamp/` (thousands of generated YAML files) is
+  never checked; `bunx biome check .` is clean and should stay that way.
 - **Imports**: Organized by Biome with specific grouping (SvelteKit first,
   then external libs, then `#lib/...` groups). `bun run format` does NOT
   apply import grouping: it is an assist, so it needs

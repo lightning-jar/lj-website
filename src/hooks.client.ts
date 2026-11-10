@@ -1,5 +1,6 @@
 import * as Sentry from "@sentry/sveltekit";
 import { handleErrorWithSentry } from "@sentry/sveltekit";
+
 import {
 	handlePreloadError,
 	type PreloadErrorEvent,
