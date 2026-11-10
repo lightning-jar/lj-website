@@ -97,6 +97,22 @@ describe("deps update: file edits and output", () => {
 		expect(() => setSpec(pkg, "missing", "1.0.0")).toThrow();
 	});
 
+	test("setSpec never touches an npm script that shares the package's name", () => {
+		const pkg =
+			'{\n\t"scripts": {\n\t\t"storybook": "storybook dev -p 6006"\n\t},\n\t"devDependencies": {\n\t\t"storybook": "^10.4.6"\n\t}\n}\n';
+		const out = setSpec(pkg, "storybook", "^10.6.5");
+		expect(out).toContain('"storybook": "storybook dev -p 6006"');
+		expect(JSON.parse(out).devDependencies.storybook).toBe("^10.6.5");
+	});
+
+	test("setSpec finds a devDependency when dependencies exist too", () => {
+		const pkg =
+			'{\n\t"dependencies": { "ai": "^7.0.1" },\n\t"devDependencies": { "vite": "8.3.5" }\n}\n';
+		expect(JSON.parse(setSpec(pkg, "vite", "8.3.6")).devDependencies.vite).toBe(
+			"8.3.6",
+		);
+	});
+
 	test("lockPackageNames reads names, including nested and scoped entries", () => {
 		const lock = [
 			"{",

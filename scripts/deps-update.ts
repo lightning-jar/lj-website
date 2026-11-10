@@ -118,14 +118,28 @@ export function decide(
 	return { target, held };
 }
 
-/** Swap one dependency's spec in package.json text, keeping its layout. */
+/**
+ * Swap one dependency's spec in package.json text, keeping its layout.
+ * Only the `dependencies` and `devDependencies` objects are searched: an
+ * npm script can share a package's name (slx-web has `"storybook":
+ * "storybook dev -p 6006"` above its `storybook` devDependency), and a
+ * whole-file match would overwrite the script with a version. Found by
+ * slx-web's port of this script, 2026-11-10.
+ */
 export function setSpec(pkgText: string, name: string, spec: string): string {
-	const key = JSON.stringify(name);
-	const re = new RegExp(
-		`(${key.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&")}\\s*:\\s*)"[^"]*"`,
-	);
-	if (!re.test(pkgText)) throw new Error(`${name} not found in package.json`);
-	return pkgText.replace(re, `$1${JSON.stringify(spec)}`);
+	const key = JSON.stringify(name).replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
+	const entry = new RegExp(`(${key}\\s*:\\s*)"[^"]*"`);
+	for (const section of ["dependencies", "devDependencies"]) {
+		const open = new RegExp(`"${section}"\\s*:\\s*\\{`).exec(pkgText);
+		if (!open) continue;
+		const start = open.index + open[0].length;
+		const end = pkgText.indexOf("}", start);
+		const body = pkgText.slice(start, end);
+		if (!entry.test(body)) continue;
+		const swapped = body.replace(entry, `$1${JSON.stringify(spec)}`);
+		return pkgText.slice(0, start) + swapped + pkgText.slice(end);
+	}
+	throw new Error(`${name} not found in package.json dependencies`);
 }
 
 /** Package names in a bun.lock (from each "packages" entry's "name@version"). */
