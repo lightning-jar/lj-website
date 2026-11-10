@@ -1,10 +1,15 @@
 import { describe, expect, test } from "vitest";
 import {
+	bumpBiomeSchema,
+	ciVerdict,
 	decide,
 	emailSafe,
 	lockPackageNames,
+	lockVersion,
+	nextSpec,
 	parseSpec,
 	type RegistryDoc,
+	type RequiredCheck,
 	sameLine,
 	setSpec,
 } from "../scripts/deps-update";
@@ -142,5 +147,127 @@ describe("deps update: file edits and output", () => {
 	test("email body cannot carry a double quote into the --body flag", () => {
 		expect(emailSafe('say "hi"')).toBe("say 'hi'");
 		expect(emailSafe("\x1b[31mred\x1b[39m text")).toBe("red text");
+	});
+});
+
+describe("deps update: bare-major ranges", () => {
+	test('"^7" is accepted and keeps its spec; only the lockfile moves', () => {
+		const spec = parseSpec("^7");
+		expect(spec).toEqual({ prefix: "^", version: null });
+		if (!spec) throw new Error("unparsed");
+		expect(nextSpec("^7", spec, "7.0.165")).toBe("^7");
+	});
+
+	test("lockVersion reads the top-level resolution, not a nested one", () => {
+		const lock = [
+			"{",
+			'  "packages": {',
+			'    "ai": ["ai@7.0.165", "", {}, "sha512-y"],',
+			'    "ai/@ai-sdk/gateway": ["@ai-sdk/gateway@4.0.100", "", {}, "sha512-z"],',
+			'    "@ai-sdk/gateway": ["@ai-sdk/gateway@4.0.138", "", {}, "sha512-x"],',
+			"  }",
+			"}",
+		].join("\n");
+		expect(lockVersion(lock, "ai")).toBe("7.0.165");
+		expect(lockVersion(lock, "@ai-sdk/gateway")).toBe("4.0.138");
+		expect(lockVersion(lock, "vite")).toBeNull();
+	});
+
+	test("bumpBiomeSchema rewrites only the version in the schema URL", () => {
+		const json =
+			'{\n\t"$schema": "https://biomejs.dev/schemas/2.6.3/schema.json"\n}\n';
+		expect(bumpBiomeSchema(json, "2.6.6")).toBe(json.replace("2.6.3", "2.6.6"));
+	});
+});
+
+describe("deps update: the CI verdict that gates the merge", () => {
+	const required: RequiredCheck[] = [
+		{ name: "typecheck", app: "github-actions" },
+		{ name: "Vercel", status: true },
+	];
+	const run = (
+		name: string,
+		status: string,
+		conclusion: string | null,
+		app = "github-actions",
+	) => ({ name, status, conclusion, app: { slug: app } });
+	const vercelOk = { context: "Vercel", state: "success" };
+
+	test("waits for required checks that have not reported", () => {
+		expect(
+			ciVerdict([run("typecheck", "completed", "success")], [], required),
+		).toEqual({ state: "pending", waitingOn: ["Vercel"] });
+	});
+
+	test("waits for anything still running", () => {
+		expect(
+			ciVerdict(
+				[run("typecheck", "in_progress", null)],
+				[{ context: "Vercel", state: "pending" }],
+				required,
+			),
+		).toEqual({ state: "pending", waitingOn: ["typecheck", "Vercel"] });
+	});
+
+	test("is green when everything passed, an optional neutral counting as a pass", () => {
+		expect(
+			ciVerdict(
+				[
+					run("typecheck", "completed", "success"),
+					run("Vercel Agent Review", "completed", "neutral", "vercel"),
+				],
+				[
+					vercelOk,
+					{ context: "security/snyk (kevinpeckham)", state: "success" },
+				],
+				required,
+			),
+		).toEqual({ state: "green" });
+	});
+
+	test("fails a required check that was skipped or neutral", () => {
+		for (const conclusion of ["skipped", "neutral"]) {
+			expect(
+				ciVerdict(
+					[run("typecheck", "completed", conclusion)],
+					[vercelOk],
+					required,
+				),
+			).toEqual({ state: "failed", failed: ["typecheck"] });
+		}
+	});
+
+	test("fails as soon as any check fails, required or not", () => {
+		expect(
+			ciVerdict(
+				[run("typecheck", "in_progress", null)],
+				[{ context: "security/snyk (kevinpeckham)", state: "failure" }],
+				required,
+			),
+		).toEqual({ state: "failed", failed: ["security/snyk (kevinpeckham)"] });
+	});
+
+	test("a same-named success from another source can't mask a failure", () => {
+		expect(
+			ciVerdict(
+				[run("typecheck", "completed", "failure")],
+				[vercelOk, { context: "typecheck", state: "success" }],
+				required,
+			),
+		).toEqual({ state: "failed", failed: ["typecheck"] });
+	});
+
+	test("a required check only counts from its pinned source", () => {
+		// typecheck from the wrong app, Vercel as a check run instead of a status
+		expect(
+			ciVerdict(
+				[
+					run("typecheck", "completed", "success", "some-other-app"),
+					run("Vercel", "completed", "success", "some-other-app"),
+				],
+				[{ context: "typecheck", state: "success" }],
+				required,
+			),
+		).toEqual({ state: "pending", waitingOn: ["typecheck", "Vercel"] });
 	});
 });

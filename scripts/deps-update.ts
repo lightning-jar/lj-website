@@ -1,58 +1,69 @@
 // scripts/deps-update.ts
 //
-// Weekly dependency update (the swamp `deps-update` workflow). Kevin chose
-// "straight to production" on 2026-11-10: when every gate passes, the
-// update is committed and pushed to production and dev with no review.
-// Because nothing reviews it, the rules for WHAT moves are strict:
+// Weekly dependency update (the swamp `deps-update` workflow).
 //
-// - Only exact pins ("1.2.3") and caret ranges ("^1.2.3") are touched.
-// - Only same-line releases: same major, and for 0.x the same minor too
-//   (semver treats 0.x minors as breaking). Majors are reported, never
-//   applied.
-// - Cooldown: a version must have been on npm for 7 days. bunfig.toml sets
-//   the same rule for ranges and transitive deps, but Bun lets an exact pin
-//   bypass it, so pins are checked here.
-// - No prereleases, no deprecated versions.
+// What moves is strict, because a green update merges with no human
+// review: exact pins, "^x.y.z" and bare-major ("^7") ranges only; the
+// newest same-line release (same major, same minor under 0.x) that has
+// been on npm for 7 days; no prereleases or deprecated versions. Majors
+// and too-new releases are listed in the email, never applied. bunfig.toml
+// sets the same 7-day rule for ranges and transitive deps, but Bun lets an
+// exact pin bypass it, hence the check here.
 //
-// It never touches the shared checkout (other sessions work in it): the
-// update runs in its own worktree at origin/production. Gates: svelte-check,
-// Vitest (includes the supply-chain lockfile watchlist), Biome, a full
-// build. A failed gate leaves the worktree for inspection and pushes
-// nothing. The prod-smoke workflow (every 30 min) then confirms production
-// is serving the pushed sha and emails if not.
+// How it ships (Kevin's call, 2026-11-10, replacing "straight to
+// production"): as a pull request into production that merges itself only
+// when every required check ends in success: typecheck, biome and vitest
+// (.github/workflows/ci.yml, which runs with NO secrets), Socket's
+// supply-chain scan and the Vercel preview build. Then dev is
+// fast-forwarded to production. A red check, a timeout or a refused merge
+// leaves the PR open and emails why.
+//
+// It runs NO updated package code on this VM. It only rewrites
+// package.json and resolves bun.lock with `bun install --lockfile-only`
+// (no node_modules, no lifecycle scripts), in its own worktree, with a
+// scrubbed environment and no .env.local. The first version installed and
+// ran check, tests and build here under varlock: a compromised release
+// would have executed next to every project's 1Password tokens before any
+// scanner saw it (Vercel's security review on slx-web's port, 2026-11-10).
 //
 // Exit codes (the workflow branches on these): 0 = nothing to update,
-// 3 = updated and pushed, 4 = stopped on purpose (gate failed, push
-// conflict, agent-surface alert), 1 = the script itself broke.
-// stdout is the email body; everything else goes to stderr.
+// 3 = merged, 4 = stopped on purpose (lockfile miss, CI red or slow, merge
+// refused, last week's PR still open, agent-surface alert), 1 = the script
+// itself broke. stdout is the email body; everything else goes to stderr.
 //
 // Usage: bun scripts/deps-update.ts [--dry-run [--base <ref>]]
-// --base (dry runs only) starts from another ref, to exercise the gates.
+// --dry-run stops after planning and resolving the lockfile; --base (dry
+// runs only) starts from another ref.
 
 import { spawnSync } from "node:child_process";
-import {
-	copyFileSync,
-	existsSync,
-	readFileSync,
-	rmSync,
-	writeFileSync,
-} from "node:fs";
+import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { homedir } from "node:os";
 import { join } from "node:path";
 
-const HOME = process.env.HOME ?? "/home/exedev";
-const REPO = join(import.meta.dirname, "..");
-const WORKTREE = join(HOME, "projects/.worktrees/lj-website-deps");
 export const MIN_AGE_MS = 7 * 24 * 60 * 60 * 1000;
 
 export interface Spec {
+	/** "" = exact pin, "^" = caret range. */
 	prefix: "" | "^";
-	version: string;
+	/** The full version in the spec, or null for a bare-major range ("^7"). */
+	version: string | null;
 }
 
-/** "1.2.3" or "^1.2.3"; anything else (tags, ~, ranges, prereleases) is left alone. */
+/**
+ * "1.2.3", "^1.2.3" or "^7". Anything else (tags, "~", "*", ranges,
+ * prereleases, a bare exact "7") is left alone.
+ */
 export function parseSpec(spec: string): Spec | null {
-	const m = /^(\^?)(\d+\.\d+\.\d+)$/.exec(spec);
-	return m ? { prefix: m[1] as Spec["prefix"], version: m[2] } : null;
+	const full = /^(\^?)(\d+\.\d+\.\d+)$/.exec(spec);
+	if (full) return { prefix: full[1] as Spec["prefix"], version: full[2] };
+	if (/^\^\d+$/.test(spec)) return { prefix: "^", version: null };
+	return null;
+}
+
+/** The spec to write for `target`: pins stay pins, a bare major stays as is. */
+export function nextSpec(raw: string, spec: Spec, target: string): string {
+	if (spec.version === null) return raw;
+	return `${spec.prefix}${target}`;
 }
 
 function parts(v: string): [number, number, number] {
@@ -83,7 +94,7 @@ export interface RegistryDoc {
 export interface Decision {
 	/** Newest eligible version above current, or null. */
 	target: string | null;
-	/** Newest stable version overall, when it is beyond what we may apply. */
+	/** Newest stable version overall, when it is beyond what may be applied. */
 	held: { version: string; reason: string } | null;
 }
 
@@ -100,31 +111,26 @@ export function decide(
 		.filter((v) => compare(v, current) > 0)
 		.sort(compare)
 		.reverse();
-	const old = (v: string) => {
+	const oldEnough = (v: string) => {
 		const t = Date.parse(doc.time[v] ?? "");
 		return Number.isFinite(t) && now - t >= minAgeMs;
 	};
-	const target = newer.find((v) => sameLine(current, v) && old(v)) ?? null;
+	const target =
+		newer.find((v) => sameLine(current, v) && oldEnough(v)) ?? null;
 	const newest = newer[0];
-	let held: Decision["held"] = null;
-	if (newest && newest !== target) {
-		held = {
-			version: newest,
-			reason: !sameLine(current, newest)
-				? "breaking per semver"
-				: "under 7 days old",
-		};
-	}
-	return { target, held };
+	if (!newest || newest === target) return { target, held: null };
+	const reason = sameLine(current, newest)
+		? `under ${Math.round(minAgeMs / 86_400_000)} days old`
+		: "breaking per semver";
+	return { target, held: { version: newest, reason } };
 }
 
 /**
  * Swap one dependency's spec in package.json text, keeping its layout.
- * Only the `dependencies` and `devDependencies` objects are searched: an
- * npm script can share a package's name (slx-web has `"storybook":
- * "storybook dev -p 6006"` above its `storybook` devDependency), and a
- * whole-file match would overwrite the script with a version. Found by
- * slx-web's port of this script, 2026-11-10.
+ * Only the `dependencies` and `devDependencies` objects are searched: a
+ * script can share a package's name (`"storybook": "storybook dev -p
+ * 6006"` sits above the `storybook` devDependency), and a whole-file match
+ * would overwrite the script.
  */
 export function setSpec(pkgText: string, name: string, spec: string): string {
 	const key = JSON.stringify(name).replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
@@ -142,55 +148,231 @@ export function setSpec(pkgText: string, name: string, spec: string): string {
 	throw new Error(`${name} not found in package.json dependencies`);
 }
 
-/** Package names in a bun.lock (from each "packages" entry's "name@version"). */
+/** Point biome.json's `$schema` at a new Biome version's schema. */
+export function bumpBiomeSchema(text: string, version: string): string {
+	return text.replace(
+		/(biomejs\.dev\/schemas\/)\d+\.\d+\.\d+(\/schema\.json)/,
+		`$1${version}$2`,
+	);
+}
+
+/** Every "name@version" entry in a bun.lock "packages" section. */
+function lockEntries(lockText: string): IterableIterator<RegExpMatchArray> {
+	const start = lockText.indexOf('"packages"');
+	return lockText
+		.slice(start === -1 ? lockText.length : start)
+		.matchAll(/^\s+"([^"]+)": \["((?:@[^/"]+\/)?[^@"]+)@([^"]+)"/gm);
+}
+
+/** The version bun.lock resolved for a top-level dependency, or null. */
+export function lockVersion(lockText: string, name: string): string | null {
+	for (const m of lockEntries(lockText)) {
+		if (m[1] === name && m[2] === name) return m[3];
+	}
+	return null;
+}
+
+/** Package names in a bun.lock, to spot packages an update newly pulls in. */
 export function lockPackageNames(lockText: string): Set<string> {
 	const names = new Set<string>();
-	const start = lockText.indexOf('"packages"');
-	if (start === -1) return names;
-	for (const m of lockText
-		.slice(start)
-		.matchAll(/^\s+"[^"]+": \["((?:@[^/"]+\/)?[^@"]+)@/gm)) {
-		names.add(m[1]);
-	}
+	for (const m of lockEntries(lockText)) names.add(m[2]);
 	return names;
 }
 
 /**
- * The email travels as a --body="…" flag: a double quote would split it.
- * Terminal color codes from gate output are noise in an email.
+ * The email body travels as a workflow input: strip terminal color codes
+ * from gate output and swap double quotes, as lj-website's emailSafe does.
  */
+/** ESC `[` … `m`: a terminal color code (built from the char code, not a regex literal). */
+const ANSI_COLOR = new RegExp(`${String.fromCharCode(27)}\\[[0-9;]*m`, "g");
+
 export function emailSafe(text: string): string {
-	// biome-ignore lint/suspicious/noControlCharactersInRegex: matching the ESC that starts an ANSI color code is the point
-	return text.replace(/\x1b\[[0-9;]*m/g, "").replace(/"/g, "'");
+	return text.replace(ANSI_COLOR, "").replace(/"/g, "'");
+}
+
+// ---- CI verdict -------------------------------------------------------------
+
+export interface CheckRun {
+	name: string;
+	status: string;
+	conclusion: string | null;
+	/** The GitHub App that reported it (`github-actions`, `socket-security`, …). */
+	app?: { slug: string } | null;
+}
+
+export interface CommitStatus {
+	context: string;
+	state: string;
+}
+
+/**
+ * A required check, pinned to where it must come from: a check run from
+ * one GitHub App, or a commit status. A name alone isn't enough: anyone who
+ * can post a status or install an app could report a same-named success.
+ */
+export type RequiredCheck =
+	| { name: string; app: string }
+	| { name: string; status: true };
+
+/**
+ * Checks that must end in success before a PR may merge. The GitHub Actions
+ * jobs (.github/workflows/ci.yml, run with no secrets) gate correctness; Socket's PR alerts are the supply-chain scan;
+ * `Vercel` (a commit status) is the preview build. Snyk and the Vercel
+ * reviews are judged when present but not waited for.
+ */
+export const REQUIRED_CHECKS: readonly RequiredCheck[] = [
+	{ name: "typecheck", app: "github-actions" },
+	{ name: "vitest", app: "github-actions" },
+	{ name: "biome", app: "github-actions" },
+	{ name: "Socket Security: Pull Request Alerts", app: "socket-security" },
+	{ name: "Vercel", status: true },
+];
+
+/**
+ * A required check passes only on `success`: a skipped or neutral Socket
+ * scan or test job must not let an unreviewed update merge. Optional
+ * checks (the Vercel reviews, which go neutral when billing is off) may
+ * also end neutral or skipped.
+ */
+const OPTIONAL_PASSING = new Set(["success", "neutral", "skipped"]);
+
+type CheckResult = "pass" | "fail" | "pending";
+
+const SEVERITY: Record<CheckResult, number> = { pass: 0, pending: 1, fail: 2 };
+
+export type CiVerdict =
+	| { state: "pending"; waitingOn: string[] }
+	| { state: "green" }
+	| { state: "failed"; failed: string[] };
+
+function runResult(r: CheckRun, required: boolean): CheckResult {
+	if (r.status !== "completed") return "pending";
+	const conclusion = r.conclusion ?? "";
+	if (required) return conclusion === "success" ? "pass" : "fail";
+	return OPTIONAL_PASSING.has(conclusion) ? "pass" : "fail";
+}
+
+function statusResult(s: CommitStatus): CheckResult {
+	if (s.state === "success") return "pass";
+	return s.state === "pending" ? "pending" : "fail";
+}
+
+function reported(
+	req: RequiredCheck,
+	runs: CheckRun[],
+	statuses: CommitStatus[],
+): boolean {
+	if ("app" in req) {
+		return runs.some((r) => r.name === req.name && r.app?.slug === req.app);
+	}
+	return statuses.some((s) => s.context === req.name);
+}
+
+/**
+ * Fold a PR head's check runs and commit statuses into one verdict.
+ * Entries are grouped by name and the WORST result wins, so a same-named
+ * success from another source can't mask a failure. A required check
+ * counts as reported only when it comes from its pinned source.
+ */
+export function ciVerdict(
+	runs: CheckRun[],
+	statuses: CommitStatus[],
+	required: readonly RequiredCheck[] = REQUIRED_CHECKS,
+): CiVerdict {
+	const requiredNames = new Set(required.map((r) => r.name));
+	const results = new Map<string, CheckResult>();
+	const add = (name: string, result: CheckResult) => {
+		const prev = results.get(name);
+		if (!prev || SEVERITY[result] > SEVERITY[prev]) results.set(name, result);
+	};
+	for (const r of runs) add(r.name, runResult(r, requiredNames.has(r.name)));
+	for (const s of statuses) add(s.context, statusResult(s));
+
+	const named = (want: CheckResult) =>
+		[...results].filter(([, v]) => v === want).map(([k]) => k);
+	const failed = named("fail");
+	if (failed.length) return { state: "failed", failed };
+	const missing = required
+		.filter((req) => !reported(req, runs, statuses))
+		.map((req) => req.name);
+	const waitingOn = [...new Set([...missing, ...named("pending")])];
+	return waitingOn.length
+		? { state: "pending", waitingOn }
+		: { state: "green" };
 }
 
 // ---- main -----------------------------------------------------------------
+
+const REPO = join(import.meta.dirname, "..");
+const WORKTREE = join(homedir(), "projects/.worktrees/lj-website-deps");
+const GH_REPO = "lightning-jar/lj-website";
+const BASE = "production";
+const GH_HOST = "github.int.exe.xyz";
+const BRANCH_PREFIX = "chore/deps-weekly-";
+const CI_WAIT_MS = 30 * 60_000;
+const CI_POLL_MS = 30_000;
+const COMMIT_FILES = ["package.json", "bun.lock", "biome.json"];
+
+/**
+ * The only environment `bun install --lockfile-only` gets: enough to find
+ * bun and its cache, none of the varlock-resolved secrets this script runs
+ * under.
+ */
+// Cast: varlock's generated types add the schema's keys to ProcessEnv as
+// required, and leaving them out is the point (hence via unknown).
+const SCRUBBED_ENV = {
+	PATH: process.env.PATH ?? "/usr/bin:/bin",
+	HOME: homedir(),
+	TMPDIR: process.env.TMPDIR ?? "/tmp",
+} as unknown as NodeJS.ProcessEnv;
+
+interface Bump {
+	name: string;
+	raw: string;
+	from: string;
+	to: string;
+	finalSpec: string;
+}
+
+// ---- process helpers --------------------------------------------------------
 
 function sh(
 	cmd: string,
 	args: string[],
 	cwd: string,
-	timeoutMs = 600_000,
-): { ok: boolean; out: string } {
+	env: NodeJS.ProcessEnv = { ...process.env, GH_HOST },
+) {
 	const r = spawnSync(cmd, args, {
 		cwd,
 		encoding: "utf8",
 		maxBuffer: 64 * 1024 * 1024,
-		timeout: timeoutMs,
+		timeout: 600_000,
+		env,
 	});
-	const out = `${r.stdout ?? ""}${r.stderr ?? ""}`;
 	process.stderr.write(`$ ${cmd} ${args.join(" ")} -> ${r.status}\n`);
-	return { ok: r.status === 0, out };
+	return { ok: r.status === 0, out: `${r.stdout ?? ""}${r.stderr ?? ""}` };
 }
 
-function git(args: string[], cwd = REPO) {
-	return sh("git", args, cwd, 120_000);
+const git = (args: string[], cwd = WORKTREE) => sh("git", args, cwd);
+
+function gh<T>(args: string[]): T {
+	const r = spawnSync("gh", ["api", ...args], {
+		encoding: "utf8",
+		env: { ...process.env, GH_HOST },
+		timeout: 60_000,
+	});
+	if (r.status !== 0) {
+		throw new Error(`gh api ${args[0]} failed: ${r.stderr || r.stdout}`);
+	}
+	return JSON.parse(r.stdout || "null") as T;
 }
 
 function finish(code: number, body: string): never {
 	console.log(emailSafe(body));
 	process.exit(code);
 }
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 async function fetchDoc(name: string): Promise<RegistryDoc> {
 	const url = `https://registry.npmjs.org/${name.replace("/", "%2f")}`;
@@ -199,13 +381,273 @@ async function fetchDoc(name: string): Promise<RegistryDoc> {
 	return (await res.json()) as RegistryDoc;
 }
 
+// ---- steps ------------------------------------------------------------------
+
+interface OpenPr {
+	html_url: string;
+	head: { ref: string; repo: { full_name: string } | null };
+}
+
+/**
+ * A stopped week leaves its PR open; don't stack another on top of it.
+ * Only branches in this repo count: a fork PR can pick any branch name,
+ * and must not be able to switch the updater off.
+ */
+function guardNoOpenPr() {
+	const open = gh<OpenPr[]>([
+		`repos/${GH_REPO}/pulls?state=open&per_page=100`,
+	]).filter(
+		(p) =>
+			p.head.repo?.full_name === GH_REPO &&
+			p.head.ref.startsWith(BRANCH_PREFIX),
+	);
+	if (open.length) {
+		finish(
+			4,
+			`Weekly package update did not run: last update's PR is still open. Merge or close it first:\n${open.map((p) => `  ${p.html_url}`).join("\n")}`,
+		);
+	}
+}
+
+function prepareWorktree(baseRef: string): string {
+	if (!git(["fetch", "--quiet", "origin"], REPO).ok) {
+		throw new Error("git fetch failed");
+	}
+	if (existsSync(WORKTREE)) {
+		git(["worktree", "remove", "--force", WORKTREE], REPO);
+		rmSync(WORKTREE, { recursive: true, force: true });
+		git(["worktree", "prune"], REPO);
+	}
+	if (!git(["worktree", "add", "--detach", WORKTREE, baseRef], REPO).ok) {
+		throw new Error("git worktree add failed");
+	}
+	return git(["rev-parse", "--short", "HEAD"]).out.trim();
+}
+
+/** One dependency's plan: a bump, a held-back note, both or neither. */
+async function planOne(name: string, raw: string, lock: string, now: number) {
+	const spec = parseSpec(raw);
+	const current = spec && (lockVersion(lock, name) ?? spec.version);
+	if (!spec || !current) return { bump: null, held: null };
+	const d = decide(current, await fetchDoc(name), now);
+	const bump: Bump | null = d.target
+		? {
+				name,
+				raw,
+				from: current,
+				to: d.target,
+				finalSpec: nextSpec(raw, spec, d.target),
+			}
+		: null;
+	const held = d.held ? `${name} ${d.held.version} (${d.held.reason})` : null;
+	return { bump, held };
+}
+
+async function planBumps(): Promise<{ bumps: Bump[]; held: string[] }> {
+	const pkg = JSON.parse(readFileSync(join(WORKTREE, "package.json"), "utf8"));
+	const lock = readFileSync(join(WORKTREE, "bun.lock"), "utf8");
+	const deps: Record<string, string> = {
+		...pkg.dependencies,
+		...pkg.devDependencies,
+	};
+	const now = Date.now();
+	const bumps: Bump[] = [];
+	const held: string[] = [];
+	for (const [name, raw] of Object.entries(deps)) {
+		const plan = await planOne(name, raw, lock, now);
+		if (plan.bump) bumps.push(plan.bump);
+		if (plan.held) held.push(plan.held);
+	}
+	return { bumps, held };
+}
+
+/** Write specs and re-resolve bun.lock without installing anything. */
+function writeSpecsAndInstall(bumps: Bump[], spec: (b: Bump) => string) {
+	const path = join(WORKTREE, "package.json");
+	let text = readFileSync(path, "utf8");
+	for (const b of bumps) text = setSpec(text, b.name, spec(b));
+	writeFileSync(path, text);
+	return sh("bun", ["install", "--lockfile-only"], WORKTREE, SCRUBBED_ENV);
+}
+
+/**
+ * Pin every target exactly first so the lockfile resolves to it (a bare
+ * "^7" would otherwise stay on its locked version), then restore each
+ * spec's own style; the second install keeps the satisfied resolutions.
+ */
+function applyBumps(bumps: Bump[], table: string): string[] {
+	const lockPath = join(WORKTREE, "bun.lock");
+	const before = lockPackageNames(readFileSync(lockPath, "utf8"));
+	for (const pass of [(b: Bump) => b.to, (b: Bump) => b.finalSpec]) {
+		const r = writeSpecsAndInstall(bumps, pass);
+		if (!r.ok) {
+			finish(
+				4,
+				`Weekly package update stopped: bun install --lockfile-only failed.\n\n${table}\n\n${r.out.slice(-1500)}`,
+			);
+		}
+	}
+	const lock = readFileSync(lockPath, "utf8");
+	const missed = bumps.filter((b) => lockVersion(lock, b.name) !== b.to);
+	if (missed.length) {
+		finish(
+			4,
+			`Weekly package update stopped: the lockfile did not land on ${missed.map((b) => `${b.name}@${b.to}`).join(", ")}.\n\n${table}`,
+		);
+	}
+	// The schema URL names Biome's version. Edit it as text: running the new
+	// Biome (`biome migrate`) would execute unreviewed code here.
+	const biome = bumps.find((b) => b.name === "@biomejs/biome");
+	const biomePath = join(WORKTREE, "biome.json");
+	if (biome && existsSync(biomePath)) {
+		writeFileSync(
+			biomePath,
+			bumpBiomeSchema(readFileSync(biomePath, "utf8"), biome.to),
+		);
+	}
+	return [...lockPackageNames(lock)].filter((n) => !before.has(n));
+}
+
+function commitAndPush(branch: string, message: string): string {
+	const changed = git(["status", "--porcelain"])
+		.out.split("\n")
+		.map((l) => l.slice(3).trim())
+		.filter((f) => COMMIT_FILES.includes(f));
+	git(["add", "--", ...changed]);
+	const msgPath = join(WORKTREE, "..", "lj-website-deps-commit-msg.txt");
+	writeFileSync(msgPath, message);
+	const commit = git(["commit", "-q", "-F", msgPath]);
+	rmSync(msgPath, { force: true });
+	if (!commit.ok) throw new Error(`git commit failed: ${commit.out}`);
+	const push = git(["push", "origin", `HEAD:refs/heads/${branch}`]);
+	if (!push.ok) throw new Error(`git push failed: ${push.out}`);
+	return git(["rev-parse", "HEAD"]).out.trim();
+}
+
+/** Poll the PR head's checks until they settle or CI_WAIT_MS runs out. */
+async function waitForCi(sha: string) {
+	const deadline = Date.now() + CI_WAIT_MS;
+	let verdict = ciVerdict([], []);
+	while (Date.now() < deadline) {
+		await sleep(CI_POLL_MS);
+		const runs = gh<{ check_runs: CheckRun[] }>([
+			`repos/${GH_REPO}/commits/${sha}/check-runs?per_page=100`,
+		]).check_runs;
+		const statuses = gh<{ statuses: CommitStatus[] }>([
+			`repos/${GH_REPO}/commits/${sha}/status`,
+		]).statuses;
+		verdict = ciVerdict(runs, statuses);
+		if (verdict.state !== "pending") return verdict;
+	}
+	return verdict;
+}
+
+function openPr(branch: string, title: string, base: string, summary: string) {
+	return gh<{ number: number; html_url: string }>([
+		"-X",
+		"POST",
+		`repos/${GH_REPO}/pulls`,
+		"-f",
+		`title=${title}`,
+		"-f",
+		`head=${branch}`,
+		"-f",
+		`base=${BASE}`,
+		"-f",
+		`body=Weekly dependency update from the swamp \`deps-update\` workflow (scripts/deps-update.ts). Based on production ${base}. Nothing was installed or run on the ops VM; this PR merges itself when every check (CI with no secrets, Socket, the Vercel preview build) is green.\n\n\`\`\`\n${summary}\n\`\`\``,
+	]);
+}
+
+/** Exit 4 unless CI settled green; the PR stays open either way. */
+function requireGreen(verdict: CiVerdict, url: string, summary: string) {
+	if (verdict.state === "failed") {
+		finish(
+			4,
+			`Weekly package update stopped: CI failed on ${url} (${verdict.failed.join(", ")}). The PR is left open; nothing was merged.\n\n${summary}`,
+		);
+	}
+	if (verdict.state === "pending") {
+		finish(
+			4,
+			`Weekly package update stopped: CI had not finished after ${CI_WAIT_MS / 60_000} minutes on ${url} (waiting on ${verdict.waitingOn.join(", ")}). The PR is left open; merge it by hand once green.\n\n${summary}`,
+		);
+	}
+}
+
+function mergePr(
+	pr: { number: number; html_url: string },
+	sha: string,
+	title: string,
+	summary: string,
+) {
+	try {
+		gh([
+			"-X",
+			"PUT",
+			`repos/${GH_REPO}/pulls/${pr.number}/merge`,
+			"-f",
+			"merge_method=merge",
+			"-f",
+			`sha=${sha}`,
+			"-f",
+			`commit_title=${title} (#${pr.number})`,
+		]);
+	} catch (err) {
+		finish(
+			4,
+			`Weekly package update stopped: CI was green but the merge of ${pr.html_url} was refused (main may have moved into a conflict). The PR is left open.\n\n${err instanceof Error ? err.message : String(err)}\n\n${summary}`,
+		);
+	}
+}
+
+/**
+ * lj-website keeps dev level with production (CLAUDE.md). After the merge,
+ * fast-forward dev to the new production; report rather than fail if dev
+ * has drifted.
+ */
+function syncDev(): string {
+	git(["fetch", "--quiet", "origin"], REPO);
+	const pushed = git(["push", "origin", `origin/${BASE}:refs/heads/dev`], REPO);
+	return pushed.ok
+		? ""
+		: "\n\nWARNING: production was updated but dev could not be fast-forwarded, so dev has drifted. Fix it: git push origin production:dev";
+}
+
+/** Commit, open the PR, wait for CI, merge. Never returns. */
+async function ship(
+	bumps: Bump[],
+	base: string,
+	summary: string,
+): Promise<never> {
+	const branch = `${BRANCH_PREFIX}${new Date().toISOString().slice(0, 10)}`;
+	const n = bumps.length;
+	const title = `chore(deps): weekly update, ${n} package${n === 1 ? "" : "s"}`;
+	const sha = commitAndPush(
+		branch,
+		`${title}\n\n${summary}\n\nAutomated by the swamp deps-update workflow (scripts/deps-update.ts):\nsame-line releases at least 7 days old, lockfile resolved without\ninstalling; merged only when every GitHub check is green.\n`,
+	);
+	const pr = openPr(branch, title, base, summary);
+	git(["worktree", "remove", "--force", WORKTREE], REPO);
+	requireGreen(await waitForCi(sha), pr.html_url, summary);
+	mergePr(pr, sha, title, summary);
+	git(["push", "origin", "--delete", branch], REPO);
+	const devNote = syncDev();
+	finish(
+		3,
+		`Weekly package update merged: ${pr.html_url}. Every GitHub check passed (CI with no secrets, Socket, the Vercel preview build). Vercel is deploying it; prod-smoke confirms production is serving the merge within its freshness window and emails if not.\n\n${summary}${devNote}`,
+	);
+}
+
+const listing = (title: string, items: string[]) =>
+	items.length ? `\n\n${title}${items.join(", ")}` : "";
+
+// ---- main -------------------------------------------------------------------
+
 async function main() {
 	const dryRun = process.argv.includes("--dry-run");
 	const baseFlag = process.argv.indexOf("--base");
 	const baseRef =
-		dryRun && baseFlag !== -1
-			? process.argv[baseFlag + 1]
-			: "origin/production";
+		dryRun && baseFlag !== -1 ? process.argv[baseFlag + 1] : `origin/${BASE}`;
 
 	if (existsSync(join(REPO, "AGENT-SURFACE-CHANGED-ALERT.md"))) {
 		finish(
@@ -213,154 +655,29 @@ async function main() {
 			"Weekly package update did not run: AGENT-SURFACE-CHANGED-ALERT.md exists in lj-website. Review the agent-surface change first.",
 		);
 	}
-
-	if (!git(["fetch", "--quiet", "origin"]).ok) {
-		throw new Error("git fetch failed");
-	}
-	if (existsSync(WORKTREE)) {
-		git(["worktree", "remove", "--force", WORKTREE]);
-		rmSync(WORKTREE, { recursive: true, force: true });
-		git(["worktree", "prune"]);
-	}
-	if (!git(["worktree", "add", "--detach", WORKTREE, baseRef]).ok) {
-		throw new Error("git worktree add failed");
-	}
-	// varlock needs the 1Password environment pointers (OP_ENV_ID,
-	// OP_TOKEN) that live only in the gitignored .env.local.
-	if (existsSync(join(REPO, ".env.local"))) {
-		copyFileSync(join(REPO, ".env.local"), join(WORKTREE, ".env.local"));
-	}
-	const base = git(["rev-parse", "--short", "HEAD"], WORKTREE).out.trim();
-
-	const pkgPath = join(WORKTREE, "package.json");
-	let pkgText = readFileSync(pkgPath, "utf8");
-	const pkg = JSON.parse(pkgText) as {
-		dependencies?: Record<string, string>;
-		devDependencies?: Record<string, string>;
-	};
-	const deps = { ...pkg.dependencies, ...pkg.devDependencies };
-
-	const now = Date.now();
-	const bumps: { name: string; from: string; to: string }[] = [];
-	const held: string[] = [];
-	for (const [name, raw] of Object.entries(deps)) {
-		const spec = parseSpec(raw);
-		if (!spec) continue;
-		const d = decide(spec.version, await fetchDoc(name), now);
-		if (d.target) {
-			bumps.push({ name, from: spec.version, to: d.target });
-			pkgText = setSpec(pkgText, name, `${spec.prefix}${d.target}`);
-		}
-		if (d.held) held.push(`${name} ${d.held.version} (${d.held.reason})`);
-	}
+	if (!dryRun) guardNoOpenPr();
+	const base = prepareWorktree(baseRef);
+	const { bumps, held } = await planBumps();
 	const heldText = held.length
 		? `\n\nNot applied:\n${held.map((h) => `  ${h}`).join("\n")}`
 		: "";
-
 	if (bumps.length === 0) {
-		git(["worktree", "remove", "--force", WORKTREE]);
+		git(["worktree", "remove", "--force", WORKTREE], REPO);
 		finish(0, `Nothing to update on production ${base}.${heldText}`);
 	}
 
 	const table = bumps.map((b) => `  ${b.name} ${b.from} -> ${b.to}`).join("\n");
-	writeFileSync(pkgPath, pkgText);
-
-	const lockBefore = lockPackageNames(
-		readFileSync(join(WORKTREE, "bun.lock"), "utf8"),
-	);
-	const install = sh("bun", ["install"], WORKTREE);
-	if (!install.ok) {
-		finish(
-			4,
-			`Weekly package update stopped: bun install failed.\n\n${table}\n\n${install.out.slice(-1500)}`,
-		);
-	}
-	const added = [
-		...lockPackageNames(readFileSync(join(WORKTREE, "bun.lock"), "utf8")),
-	].filter((n) => !lockBefore.has(n));
-	if (bumps.some((b) => b.name === "@biomejs/biome")) {
-		sh("bunx", ["biome", "migrate", "--write"], WORKTREE);
-	}
-
-	const gates: [string, string, string[]][] = [
-		["type check", "bun", ["run", "check"]],
-		["tests", "bun", ["run", "test"]],
-		["biome", "bunx", ["biome", "check", "."]],
-		["build", "bun", ["run", "build"]],
-	];
-	for (const [label, cmd, args] of gates) {
-		const r = sh(cmd, args, WORKTREE, 900_000);
-		if (!r.ok) {
-			finish(
-				4,
-				`Weekly package update stopped: the ${label} gate failed, so nothing was pushed. The worktree is left at ${WORKTREE} for inspection.\n\nAttempted:\n${table}\n\nLast output:\n${r.out.slice(-2000)}`,
-			);
-		}
-	}
-
-	const addedText = added.length
-		? `\n\nNew packages in the lockfile (not just new versions): ${added.join(", ")}`
-		: "";
+	const added = applyBumps(bumps, table);
+	const summary = `${table}${listing("New packages in the lockfile (not just new versions): ", added)}${heldText}`;
 
 	if (dryRun) {
-		git(["worktree", "remove", "--force", WORKTREE]);
+		git(["worktree", "remove", "--force", WORKTREE], REPO);
 		finish(
 			0,
-			`DRY RUN, all gates passed on ${base}; nothing committed.\n\n${table}${addedText}${heldText}`,
+			`DRY RUN on ${base}: lockfile resolved, nothing pushed. CI and the Vercel preview are the gates.\n\n${summary}`,
 		);
 	}
-
-	const files = ["package.json", "bun.lock"];
-	if (git(["diff", "--quiet", "--", "biome.json"], WORKTREE).ok === false) {
-		files.push("biome.json");
-	}
-	git(["add", "--", ...files], WORKTREE);
-	const message = `chore(deps): weekly update, ${bumps.length} package${bumps.length === 1 ? "" : "s"}\n\n${table}${addedText}${heldText}\n\nAutomated by the swamp deps-update workflow (scripts/deps-update.ts):\nsame-line releases at least 7 days old; check, tests, Biome and build\npassed before push.\n`;
-	const msgPath = join(WORKTREE, "..", "lj-website-deps-commit-msg.txt");
-	writeFileSync(msgPath, message);
-	const commit = git(["commit", "-q", "-F", msgPath], WORKTREE);
-	rmSync(msgPath, { force: true });
-	if (!commit.ok) throw new Error(`git commit failed: ${commit.out}`);
-
-	// Push. Other sessions push to production often; if it moved, rebase
-	// once, re-run the fast gates on the new base, and try again.
-	let pushed = git(["push", "origin", "HEAD:production"], WORKTREE);
-	if (!pushed.ok) {
-		git(["fetch", "--quiet", "origin"], WORKTREE);
-		if (!git(["rebase", "origin/production"], WORKTREE).ok) {
-			git(["rebase", "--abort"], WORKTREE);
-			finish(
-				4,
-				`Weekly package update stopped: production moved and the update no longer rebases cleanly (someone else changed package.json or bun.lock). Nothing was pushed.\n\n${table}`,
-			);
-		}
-		for (const [label, cmd, args] of gates.slice(0, 2)) {
-			const r = sh(cmd, args, WORKTREE, 900_000);
-			if (!r.ok) {
-				finish(
-					4,
-					`Weekly package update stopped: after rebasing onto the new production, the ${label} gate failed. Nothing was pushed.\n\n${table}\n\n${r.out.slice(-2000)}`,
-				);
-			}
-		}
-		pushed = git(["push", "origin", "HEAD:production"], WORKTREE);
-		if (!pushed.ok) {
-			finish(
-				4,
-				`Weekly package update stopped: push to production was rejected twice. Nothing was pushed.\n\n${table}`,
-			);
-		}
-	}
-	const sha = git(["rev-parse", "--short", "HEAD"], WORKTREE).out.trim();
-	const dev = git(["push", "origin", "HEAD:dev"], WORKTREE);
-	const devNote = dev.ok
-		? ""
-		: "\n\nWARNING: production was pushed but the dev push failed, so dev has drifted. Fast-forward it: git push origin production:dev";
-	git(["worktree", "remove", "--force", WORKTREE]);
-	finish(
-		3,
-		`Weekly package update shipped ${sha} to production (base ${base}). Check, tests, Biome and build passed. Vercel is deploying it; prod-smoke confirms production is serving ${sha} within 30 minutes and emails if not.\n\n${table}${addedText}${heldText}${devNote}`,
-	);
+	await ship(bumps, base, summary);
 }
 
 if (import.meta.main) {

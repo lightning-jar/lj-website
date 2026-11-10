@@ -206,16 +206,28 @@ Deployed to Vercel. Configuration in `vercel.ts` (typed via `@vercel/config`) in
 
 **Weekly dependency updates (automated, straight to production).** The
 swamp `deps-update` workflow (`ops/swamp/workflows/`, Tuesdays 14:00 UTC)
-runs `scripts/deps-update.ts` in its own worktree
-(`~/projects/.worktrees/lj-website-deps`, never the shared checkout). It
-moves exact pins and `^` ranges to the newest same-line release (same
-major; same minor under 0.x) that has been on npm at least 7 days, gates on
-check, tests, Biome and build, then pushes to production and dev and emails.
-Majors and too-new releases are listed in the email, never applied: do
-those by hand. `bunfig.toml` sets the same 7-day `minimumReleaseAge` for
-every install (Bun lets exact pins bypass it, which is why the script checks
-pins itself). Try it safely with
-`bunx varlock run -- bun scripts/deps-update.ts --dry-run`.
+runs `scripts/deps-update.ts`. It moves exact pins, `^` ranges and
+bare-major ranges (`^7`, lockfile only) to the newest same-line release
+(same major; same minor under 0.x) that has been on npm at least 7 days.
+**It runs no updated package code on this VM**: in its own worktree
+(`~/projects/.worktrees/lj-website-deps`) it only rewrites `package.json`
+and resolves `bun.lock` with `bun install --lockfile-only` under a scrubbed
+environment. It then opens a `chore/deps-weekly-<date>` PR into production
+that merges itself only when typecheck, biome and vitest
+(`.github/workflows/ci.yml`), Socket's PR alerts and the Vercel preview all
+end in success, and fast-forwards dev. Otherwise the PR stays open and the
+email says why; the next run won't start while it's open. Majors and
+too-new releases are listed in the email, never applied: do those by hand.
+`bunfig.toml` sets the same 7-day `minimumReleaseAge` for every install
+(Bun lets exact pins bypass it, which is why the script checks pins
+itself). Dry run: `bun scripts/deps-update.ts --dry-run [--base <ref>]`.
+
+**CI has no secrets.** `.github/workflows/ci.yml` sets `SKIP_VARLOCK=1`,
+which drops the varlock Vite plugin (`vite.config.ts`, the same switch as
+stem-shovel), and runs `svelte-kit sync && svelte-check` rather than
+`bun run check` (whose `varlock codegen` needs 1Password). A compromised
+dependency running in CI therefore has no credentials to take. Never set
+`SKIP_VARLOCK` for a build; Vercel builds always run varlock.
 
 **Firewall bypass for probes.** Vercel's Security Checkpoint sometimes
 challenges plain requests from this VM (403/429 with

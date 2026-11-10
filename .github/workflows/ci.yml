@@ -1,0 +1,64 @@
+name: CI
+
+# Pull requests into production (the weekly deps-update PR among them) and
+# pushes to production. The deps-update workflow merges its PR only when
+# typecheck, biome and vitest below are green, together with Socket's
+# supply-chain scan and the Vercel preview build.
+on:
+  push:
+    branches: [production]
+  pull_request:
+
+permissions:
+  contents: read
+
+# No 1Password and no secrets of any kind: the varlock Vite plugin is
+# skipped (vite.config.ts, the same switch as stem-shovel) and the tests
+# mock the environment. So a compromised dependency that runs here has no
+# credentials to steal. Builds run only on Vercel, with 1Password.
+env:
+  SKIP_VARLOCK: "1"
+
+jobs:
+  check:
+    name: typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      # `bun run check` starts with `varlock codegen`, which needs
+      # 1Password; sync and svelte-check are the parts that type-check.
+      - name: svelte-check
+        run: bunx svelte-kit sync && bunx svelte-check --tsconfig ./tsconfig.json --threshold error
+
+  lint:
+    name: biome
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: biome ci
+        run: bunx biome ci .
+
+  test:
+    name: vitest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Sync SvelteKit
+        run: bunx svelte-kit sync
+      - name: vitest
+        run: bun run test
