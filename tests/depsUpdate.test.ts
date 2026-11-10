@@ -9,6 +9,7 @@ import {
 	nextSpec,
 	parseSpec,
 	type RegistryDoc,
+	type RequiredCheck,
 	sameLine,
 	setSpec,
 } from "../scripts/deps-update";
@@ -180,12 +181,17 @@ describe("deps update: bare-major ranges", () => {
 });
 
 describe("deps update: the CI verdict that gates the merge", () => {
-	const required = ["typecheck", "Vercel"];
-	const run = (name: string, status: string, conclusion: string | null) => ({
-		name,
-		status,
-		conclusion,
-	});
+	const required: RequiredCheck[] = [
+		{ name: "typecheck", app: "github-actions" },
+		{ name: "Vercel", status: true },
+	];
+	const run = (
+		name: string,
+		status: string,
+		conclusion: string | null,
+		app = "github-actions",
+	) => ({ name, status, conclusion, app: { slug: app } });
+	const vercelOk = { context: "Vercel", state: "success" };
 
 	test("waits for required checks that have not reported", () => {
 		expect(
@@ -193,38 +199,75 @@ describe("deps update: the CI verdict that gates the merge", () => {
 		).toEqual({ state: "pending", waitingOn: ["Vercel"] });
 	});
 
-	test("green when every check passed; an optional neutral is fine", () => {
+	test("waits for anything still running", () => {
+		expect(
+			ciVerdict(
+				[run("typecheck", "in_progress", null)],
+				[{ context: "Vercel", state: "pending" }],
+				required,
+			),
+		).toEqual({ state: "pending", waitingOn: ["typecheck", "Vercel"] });
+	});
+
+	test("is green when everything passed, an optional neutral counting as a pass", () => {
 		expect(
 			ciVerdict(
 				[
 					run("typecheck", "completed", "success"),
-					run("Vercel Agent Review", "completed", "neutral"),
+					run("Vercel Agent Review", "completed", "neutral", "vercel"),
 				],
-				[{ context: "Vercel", state: "success" }],
+				[
+					vercelOk,
+					{ context: "security/snyk (kevinpeckham)", state: "success" },
+				],
 				required,
 			),
 		).toEqual({ state: "green" });
 	});
 
-	test("a skipped or neutral REQUIRED check fails", () => {
+	test("fails a required check that was skipped or neutral", () => {
 		for (const conclusion of ["skipped", "neutral"]) {
 			expect(
 				ciVerdict(
 					[run("typecheck", "completed", conclusion)],
-					[{ context: "Vercel", state: "success" }],
+					[vercelOk],
 					required,
 				),
 			).toEqual({ state: "failed", failed: ["typecheck"] });
 		}
 	});
 
-	test("any red check fails, required or not", () => {
+	test("fails as soon as any check fails, required or not", () => {
 		expect(
 			ciVerdict(
 				[run("typecheck", "in_progress", null)],
-				[{ context: "some/other", state: "failure" }],
+				[{ context: "security/snyk (kevinpeckham)", state: "failure" }],
 				required,
 			),
-		).toEqual({ state: "failed", failed: ["some/other"] });
+		).toEqual({ state: "failed", failed: ["security/snyk (kevinpeckham)"] });
+	});
+
+	test("a same-named success from another source can't mask a failure", () => {
+		expect(
+			ciVerdict(
+				[run("typecheck", "completed", "failure")],
+				[vercelOk, { context: "typecheck", state: "success" }],
+				required,
+			),
+		).toEqual({ state: "failed", failed: ["typecheck"] });
+	});
+
+	test("a required check only counts from its pinned source", () => {
+		// typecheck from the wrong app, Vercel as a check run instead of a status
+		expect(
+			ciVerdict(
+				[
+					run("typecheck", "completed", "success", "some-other-app"),
+					run("Vercel", "completed", "success", "some-other-app"),
+				],
+				[{ context: "typecheck", state: "success" }],
+				required,
+			),
+		).toEqual({ state: "pending", waitingOn: ["typecheck", "Vercel"] });
 	});
 });

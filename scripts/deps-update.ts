@@ -196,6 +196,8 @@ export interface CheckRun {
 	name: string;
 	status: string;
 	conclusion: string | null;
+	/** The GitHub App that reported it (`github-actions`, `socket-security`, …). */
+	app?: { slug: string } | null;
 }
 
 export interface CommitStatus {
@@ -204,18 +206,27 @@ export interface CommitStatus {
 }
 
 /**
- * Checks that must end in success before the PR may merge: the GitHub
- * Actions jobs (.github/workflows/ci.yml, run with no secrets), Socket's
- * supply-chain scan, and `Vercel`, the preview build. The Vercel reviews
- * are judged when present but not waited for.
+ * A required check, pinned to where it must come from: a check run from
+ * one GitHub App, or a commit status. A name alone isn't enough: anyone who
+ * can post a status or install an app could report a same-named success.
  */
-export const REQUIRED_CHECKS = [
-	"typecheck",
-	"vitest",
-	"biome",
-	"Socket Security: Pull Request Alerts",
-	"Vercel",
-] as const;
+export type RequiredCheck =
+	| { name: string; app: string }
+	| { name: string; status: true };
+
+/**
+ * Checks that must end in success before a PR may merge. The GitHub Actions
+ * jobs (.github/workflows/ci.yml, run with no secrets) gate correctness; Socket's PR alerts are the supply-chain scan;
+ * `Vercel` (a commit status) is the preview build. Snyk and the Vercel
+ * reviews are judged when present but not waited for.
+ */
+export const REQUIRED_CHECKS: readonly RequiredCheck[] = [
+	{ name: "typecheck", app: "github-actions" },
+	{ name: "vitest", app: "github-actions" },
+	{ name: "biome", app: "github-actions" },
+	{ name: "Socket Security: Pull Request Alerts", app: "socket-security" },
+	{ name: "Vercel", status: true },
+];
 
 /**
  * A required check passes only on `success`: a skipped or neutral Socket
@@ -227,15 +238,17 @@ const OPTIONAL_PASSING = new Set(["success", "neutral", "skipped"]);
 
 type CheckResult = "pass" | "fail" | "pending";
 
+const SEVERITY: Record<CheckResult, number> = { pass: 0, pending: 1, fail: 2 };
+
 export type CiVerdict =
 	| { state: "pending"; waitingOn: string[] }
 	| { state: "green" }
 	| { state: "failed"; failed: string[] };
 
-function runResult(r: CheckRun, required: ReadonlySet<string>): CheckResult {
+function runResult(r: CheckRun, required: boolean): CheckResult {
 	if (r.status !== "completed") return "pending";
 	const conclusion = r.conclusion ?? "";
-	if (required.has(r.name)) return conclusion === "success" ? "pass" : "fail";
+	if (required) return conclusion === "success" ? "pass" : "fail";
 	return OPTIONAL_PASSING.has(conclusion) ? "pass" : "fail";
 }
 
@@ -244,27 +257,45 @@ function statusResult(s: CommitStatus): CheckResult {
 	return s.state === "pending" ? "pending" : "fail";
 }
 
-function namesWith(results: Map<string, CheckResult>, want: CheckResult) {
-	return [...results].filter(([, v]) => v === want).map(([k]) => k);
+function reported(
+	req: RequiredCheck,
+	runs: CheckRun[],
+	statuses: CommitStatus[],
+): boolean {
+	if ("app" in req) {
+		return runs.some((r) => r.name === req.name && r.app?.slug === req.app);
+	}
+	return statuses.some((s) => s.context === req.name);
 }
 
-/** Fold a PR head's check runs and commit statuses into one verdict. */
+/**
+ * Fold a PR head's check runs and commit statuses into one verdict.
+ * Entries are grouped by name and the WORST result wins, so a same-named
+ * success from another source can't mask a failure. A required check
+ * counts as reported only when it comes from its pinned source.
+ */
 export function ciVerdict(
 	runs: CheckRun[],
 	statuses: CommitStatus[],
-	required: readonly string[] = REQUIRED_CHECKS,
+	required: readonly RequiredCheck[] = REQUIRED_CHECKS,
 ): CiVerdict {
-	const requiredSet = new Set(required);
-	const results = new Map<string, CheckResult>([
-		...runs.map((r) => [r.name, runResult(r, requiredSet)] as const),
-		...statuses.map((s) => [s.context, statusResult(s)] as const),
-	]);
-	const failed = namesWith(results, "fail");
+	const requiredNames = new Set(required.map((r) => r.name));
+	const results = new Map<string, CheckResult>();
+	const add = (name: string, result: CheckResult) => {
+		const prev = results.get(name);
+		if (!prev || SEVERITY[result] > SEVERITY[prev]) results.set(name, result);
+	};
+	for (const r of runs) add(r.name, runResult(r, requiredNames.has(r.name)));
+	for (const s of statuses) add(s.context, statusResult(s));
+
+	const named = (want: CheckResult) =>
+		[...results].filter(([, v]) => v === want).map(([k]) => k);
+	const failed = named("fail");
 	if (failed.length) return { state: "failed", failed };
-	const waitingOn = [
-		...required.filter((name) => !results.has(name)),
-		...namesWith(results, "pending"),
-	];
+	const missing = required
+		.filter((req) => !reported(req, runs, statuses))
+		.map((req) => req.name);
+	const waitingOn = [...new Set([...missing, ...named("pending")])];
 	return waitingOn.length
 		? { state: "pending", waitingOn }
 		: { state: "green" };
