@@ -3294,6 +3294,26 @@ export function initStemCharts() {
 		"Registered 88fceeb before any scored run (docs/BRIEF-STUDY33.md); pilot letter-lands \u2248$0.30 at the $0.3 fence, matrix peaceful-dreams alone per the registered scope (runner corrected c396220 before any paid call) \u2248$0.68 against the $0.6 fence, exceeded and disclosed: the two-buffer arms carry nearly twice the notes, so peaceful's drafts grew to \u224838k tokens in each. Study total \u2248$0.98 across 1,158 cells (5 arms \u00d7 229 graded bars + 13 sweep purities). The gateway ignores temperature on this model family; all five arms span three bars on letter, the disclosed noise scale.",
 	);
 
+	// --- Study 40: detector sweeps ---
+	table(
+		"tbl-detector40",
+		["variant", "bar strict \u00b7 folded \u00b7 meter right (of 261)", "6/8 named: false \u00b7 true (of 37)", "right to wrong \u00b7 wrong to right"],
+		[
+			["production detector (Study 36b baseline)", "95 \u00b7 176 \u00b7 180", "63 \u00b7 21", "\u2014"],
+			["duple-bar witness, r 0.80", "109 \u00b7 195 \u00b7 192", "19 \u00b7 4", "3 \u00b7 17"],
+			["duple-bar witness, r 1.00", "114 \u00b7 201 \u00b7 214", "10 \u00b7 4", "0 \u00b7 19"],
+			["duple-bar witness, r 1.15", "112 \u00b7 201 \u00b7 216", "3 \u00b7 1", "2 \u00b7 19"],
+			["never emit 6/8", "112 \u00b7 200 \u00b7 217", "0 \u00b7 0", "2 \u00b7 19"],
+			["sub-beat test off, super-beat kept", "100 \u00b7 191 \u00b7 207", "22 \u00b7 10", "2 \u00b7 7"],
+			["sub-beat grid, best of 60 cells (margin 1.50, share 0.80)", "100 \u00b7 179 \u00b7 188", "45 \u00b7 13", "1 \u00b7 6"],
+			["finer bar: take \u00d72 at strength \u2265 0.60", "51 \u00b7 159 \u00b7 180", "63 \u00b7 21", "71 \u00b7 27 (147 moves)"],
+			["finer bar: \u00d72 at \u2265 0.85", "73 \u00b7 167 \u00b7 180", "63 \u00b7 21", "34 \u00b7 12 (67 moves)"],
+			["finer bar: \u00d72 at \u2265 1.00", "80 \u00b7 172 \u00b7 180", "63 \u00b7 21", "17 \u00b7 2 (27 moves)"],
+			["finer bar, tempo cap", "fixable songs detected 70 to 149 bpm (median 89.5); strict-right 80 to 170 (median 119)", "cap 90: fixes 19, endangers 13", "cap 100: fixes 29, endangers 29"],
+		],
+		"Registered 8ba7ec3 (docs/BRIEF-STUDY40.md) before any sweep; zero model spend; 261 regular mixes, one feature extraction each, probe pinned to the detector on 261 of 261 (two earlier extractions failed the pin on 15 and 16 songs and are disclosed). Grading as Study 36b: bar = beats of the named meter \u00d7 60 / bpm against the declared bar, strict within 4%, folded, meter class. Answers the app's brief of 2026-11-10; written back into that brief. Predictions: P2, P3 right; P1, P4 wrong; P5 wrong by two points.",
+	);
+
 	// --- Study 38: the fully automatic chart ---
 	table(
 		"tbl-automatic38",

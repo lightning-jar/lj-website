@@ -2982,6 +2982,47 @@
 					]
 				}
 			]
+		},
+		{
+			"slug": "40",
+			"letters": "40",
+			"track": "Listening",
+			"title": "The detector's 6/8 call protects nothing, so dropping it raises its bar on every count, and the finer-bar rule is net negative",
+			"eyebrow": "Study 40 · detector sweeps · 1,044 cells · $0",
+			"published": "2026-11-10",
+			"indexLine": "The app asked the bench three threshold questions about its own tempo detector before shipping rules: which second witness keeps the true 6/8 calls and drops the 63 false ones, whether the triplet test is a threshold away from right, and at what strength of the double-tempo rung the automatic grid should take the finer bar. Swept at zero spend on the 261-song catalog through a probe pinned to the detector on every song. No witness separates true 6/8 from false, but the call carries no bar value to protect: the detector's 6/8 bar is right on 2 of the 21 songs it is right to name, so gating or removing the call raises the strict bar from 95 to 114 songs, the folded bar from 176 to 201 and the meter from 180 to 214 with none made wrong. The triplet test's 56 false straight songs are a different test, not a threshold away. The finer-bar rule breaks two to three bars for every one it fixes at every strength, and no tempo cap rescues it. Study 38's answer stands: a tracker's bar as read.",
+			"sections": [
+				{
+					"id": "sec-stem-study40",
+					"eyebrow": "Listening",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-detector40",
+						"summary": "The duple-bar witness and the finer-bar rule swept over the catalog, graded as Study 36b graded the detector"
+					},
+					"body": [
+						{
+							"heading": "The Instrument",
+							"html": "The production port keeps its tempo stage private, so the bench copied the pulse finder, the autocorrelation readers and the meter lean verbatim into a probe that exposes, per song, the pulse before the compound re-pick, the re-pick, and the autocorrelation at every lag the two subdivision tests and the proposed witnesses read. One extraction per regular mix; every sweep is arithmetic on that file. The registered gate was a reproduction pin: the probe at production thresholds must give the detector's own tempo and meter on every song. It failed twice, on 15 and 16 songs, because the meter lean was read on the detrended envelope at the unrounded tempo where the detector reads the raw envelope at the rounded one; the corrected probe pins 261 of 261 and the earlier extraction is preserved in the repository."
+						},
+						{
+							"heading": "The 6/8 Call Protects Nothing",
+							"html": "The duple-bar witness compares the autocorrelation at the compound bar's lags with the straight bar's on every 6/8 call and falls back to the straight meter at the detector's first pulse when the ratio is under r. At every r it drops the 21 true calls faster than the 63 false ones, reaching 4 true against 10 false at r equal to 1. Yet it raises the strict bar from 95 to 114 songs with none made wrong, and never naming 6/8 at all is within two songs of that on every count. The reason was already in Study 36b: when the detector names 6/8 on a true 6/8 song its bar is strict on 2 of 21, so every 6/8 call is a wrong bar whether the meter is right or not. The triplet test's own thresholds cannot help: across 60 cells the best keeps 13 true against 45 false, and turning the test off leaves 22 false. The bench's advice to the app is to stop emitting 6/8 from the subdivision read while the detector remains in the scan offer, and Study 38 reached the same place from the other side, where a tracker's bar charted both 6/8 songs good with no meter label."
+						},
+						{
+							"heading": "The Finer-Bar Rule Fails on the Detector",
+							"html": "Taking the double-tempo rung when its strength is at least s breaks two to three bars for every one it fixes at every s from 0.6 to 1.0 and leaves the strict count below the baseline's 95 everywhere. The rung's strength does not mark the half-bar readings, and neither does tempo: the 37 songs the rule would fix have detected tempos from 70 to 149 against 80 to 170 for the 95 already right, so a cap at 90 fixes 19 and endangers 13 and a cap at 100 fixes 29 and endangers 29. The Study 36b observation the rule came from was about the trackers' half bars, which are merge-safe because a tracker's beat is the beat; the detector's double rung is the wrong octave as often as the right one."
+						},
+						{
+							"heading": "Predictions and Decision",
+							"html": "Right: no triplet-test cell separates the populations, and the best witness cell raises the strict bar by at least ten songs. Wrong: a witness keeping at least fifteen true 6/8 calls at ten or fewer false ones, and a net-positive finer-bar threshold. Wrong by two points: 78 percent of the fixable songs sit under 100 bpm against a registered 80. No cell met its registered floor, so the decision rule returns Study 38's recommendation alone, a tracker's bar as read on full-band material, and the bench adds, outside the floors and labelled so, that the detector should not name 6/8 from the subdivision read. Both answers were written back into the app's brief in its repository."
+						}
+					]
+				}
+			]
 		}
 	]
 }
