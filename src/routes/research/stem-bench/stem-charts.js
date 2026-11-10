@@ -3294,6 +3294,25 @@ export function initStemCharts() {
 		"Registered 88fceeb before any scored run (docs/BRIEF-STUDY33.md); pilot letter-lands \u2248$0.30 at the $0.3 fence, matrix peaceful-dreams alone per the registered scope (runner corrected c396220 before any paid call) \u2248$0.68 against the $0.6 fence, exceeded and disclosed: the two-buffer arms carry nearly twice the notes, so peaceful's drafts grew to \u224838k tokens in each. Study total \u2248$0.98 across 1,158 cells (5 arms \u00d7 229 graded bars + 13 sweep purities). The gateway ignores temperature on this model family; all five arms span three bars on letter, the disclosed noise scale.",
 	);
 
+	// --- Study 38: the fully automatic chart ---
+	table(
+		"tbl-automatic38",
+		["arm \u00b7 slot or system", "automatic draft", "baseline or oracle", "note"],
+		[
+			["A \u00b7 ten modern songs on madmom's bar", "10 of 10 within 2 roots of baseline or above; 8 good, 0 wrong", "declared-grid drafts of Studies 34 and 35", "no tempo, meter or key typed"],
+			["A \u00b7 gravity (6/8)", "24/26 roots, good", "16/26, confidently wrong at the typed 6/8 tempo", "madmom's 3-beat bar is the dotted-quarter bar"],
+			["A \u00b7 my-favorite-regret (6/8)", "40/42, good", "26/42, confidently wrong", "three-dotted-quarter bar lands on true bar lines every other bar"],
+			["A \u00b7 im-letting-go (half bar) \u00b7 goodbye-to-spring (double bar)", "33/33 \u00b7 43/43", "28/33 \u00b7 43/43", "the Study 37 fold policy at work"],
+			["B \u00b7 36 GuitarSet comping excerpts, annotated bars", "mean roots 99%, 28 good, 0 wrong (35 graded)", "the chord-reading ceiling", "qualities 89%: sevenths the sheet does not name"],
+			["B \u00b7 same excerpts, madmom's bars", "mean roots 96%, 24 good, 3 wrong (32 graded)", "2.9 points under the oracle, paired", "all 3 wrong on one dense lead sheet"],
+			["B \u00b7 trackers vs annotated bars (36)", "madmom strict 61%, folded 100%, downbeat F 0.69", "Beat This strict 86%, folded 97%, F 0.97", "without drums Beat This wins the bar"],
+			["C \u00b7 24 Winterreise songs (SC06), madmom's bars", "roots median 41% (sequence), 67% (per bar); 24 of 24 confidently wrong", "1.5 chord changes per tracker bar", "a one-chord bar is bounded near 50% before any error"],
+			["C \u00b7 trackers vs annotated measures (SC06 \u00b7 HU33 1933)", "madmom downbeat F 0.39 \u00b7 0.38; bar count within 10% on 12 \u00b7 11 of 24", "Beat This F 0.68 \u00b7 0.61", "the DBN does not follow rubato; Beat This does, at half the written bar"],
+			["gateway", "5 of 72 guitar answers empty or cut off, labelled refused", "3 of 5 empty again on an unregistered retry", "an empty answer needs its own retry path"],
+		],
+		"Registered 62c3d63 (docs/BRIEF-STUDY38.md) before any paid draft; 106 drafts at $3.84 of an $8 fence plus 168 metrical cells at $0. Truth: artist charts (A), GuitarSet's instructed chord annotation (B), the Winterreise audio-time chord annotation (C). Decision rules: S38-D1 fires (automatic mode is the tracker's bar as read, shorter bar preferred, no confidence refusal); S38-D2 fires (the chord reader is the next target on acoustic material); S38-D3 sends free tempo to a tracker comparison (Study 39) before more drafts. Predictions: A1, A3, A4, B1, B2, B4 right; A2, B3, C3 half right; C1, C2, C4 wrong, C4 reversed.",
+	);
+
 	// --- Study 37: witness and policy ---
 	table(
 		"tbl-witness37",

@@ -2937,6 +2937,51 @@
 					]
 				}
 			]
+		},
+		{
+			"slug": "38",
+			"letters": "38",
+			"track": "Listening",
+			"title": "A visitor who types nothing gets a chart as good as one who types the artist's tempo, and free tempo is where the next work is",
+			"eyebrow": "Study 38 · fully automatic chart · 274 cells · $3.84",
+			"published": "2026-11-10",
+			"indexLine": "The first charts drafted with no visitor input at all: a beat tracker's downbeats as the bar lines, its median beat as the tempo, its beats per bar as the meter, the detector's key. On the ten modern songs with artist-chart truth every automatic draft lands within two roots of the draft made at the artist's declared tempo or above it, eight of ten good, none wrong; the two 6/8 songs that Study 35 charted three bars long per bar come out 24 of 26 and 40 of 42 with no meter typed. On 36 solo acoustic-guitar excerpts (GuitarSet, the player's lead sheet as truth) the automatic grid averages 96 percent roots against 99 on the annotated bars, so the remaining cost on acoustic material is the chord reader, not the bar. On 24 free-tempo voice-and-piano songs (Winterreise) every draft is confidently wrong: the steady-tempo tracker's downbeats drift and the music changes chord one and a half times a bar, more than a one-chord-per-bar chart can carry. The tracker that follows rubato is the one that lost on full-band songs.",
+			"sections": [
+				{
+					"id": "sec-stem-study38",
+					"eyebrow": "Listening",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-automatic38",
+						"summary": "Per arm: the automatic drafts against their baselines or oracle grids, and the trackers' bars against the annotated bars"
+					},
+					"body": [
+						{
+							"heading": "The Automatic Pipeline",
+							"html": "Bar lines are madmom's downbeats as read (the Study 36 winner on full-band recordings), the tempo its median beat, the meter its beats per bar, the key the production detector's; from the bar lines on, the Study 35 pipeline runs verbatim, with no harmonic-rhythm correction (Study 37) and a bar half the written length accepted as read (Study 37). Three arms, registered before any paid draft with a fence of eight dollars: the ten modern songs with artist-chart truth against their declared-grid baselines; 36 GuitarSet singer-songwriter comping excerpts drafted twice, on the annotated bars and on the tracker's; and the 24 songs of the Schubert Winterreise Dataset's SC06 performance, voice and piano at a free tempo, against the audio-time chord annotation. A zero-cost metrical arm graded madmom and Beat This against the annotated bars on the two proxies, including the dataset's public-domain 1933 performance."
+						},
+						{
+							"heading": "Modern Songs: Automatic Equals Typed",
+							"html": "All ten drafts land within two roots of the declared-grid baseline or above it: eight equal or better, two one root under; eight good, none confidently wrong. Gravity and My Favorite Regret, which Study 35 charted three bars long per bar from the artist's own 6/8 tempo, come out 24 of 26 and 40 of 42 roots with nothing typed, because madmom's three-beat bar at the dotted quarter is the bar. Goodbye to Spring stays perfect at a double bar and I'm Letting Go goes from 28 of 33 to 33 of 33 at a half bar, both as Study 37 predicted. The first decision rule fires: automatic mode is the tracker's bar as read, the shorter bar preferred, and the tempo-confidence refusal retired."
+						},
+						{
+							"heading": "Acoustic Guitar: The Bar Is Nearly Free",
+							"html": "On the annotated bars the 35 graded drafts average 99 percent roots, 28 good, none wrong; on madmom's bars the 32 graded average 96 percent, 24 good, three confidently wrong, all three on one dense lead sheet. Paired, the tracker grid costs 2.9 points. Qualities sit at 86 to 89 percent on both grids because the players voice sevenths the sheet does not name, so on acoustic material the chord reader is the next target, not the bar. Without drums the trackers swap places: Beat This's bar is strict on 86 percent of excerpts with downbeat F 0.97, madmom's on 61 percent with F 0.69, every madmom miss a half bar."
+						},
+						{
+							"heading": "Free Tempo: Both Halves Fail",
+							"html": "Every Winterreise draft is confidently wrong, roots 41 percent against the chord sequence and 67 against the chord at each annotated bar start. Two structural causes. The material changes chord 1.5 times per tracker bar, so a one-chord-per-bar chart is bounded near 50 percent on the sequence truth before any error. And madmom's dynamic Bayesian network, built for steady tempo, does not follow the rubato: downbeat F 0.39 against Beat This's 0.68, the same on the 1933 recording of the same songs. For the acoustic-demo target this sets Study 39: a tracker comparison on free-tempo material with Beat This's downbeats as the lead, and a draft format that carries two chords per bar."
+						},
+						{
+							"heading": "Predictions and Disclosures",
+							"html": "Right: all four modern predictions but one clause (My Favorite Regret was predicted to misalign at madmom's three-dotted-quarter bar and did not, because its phrases are six dotted quarters long), the guitar oracle and tracker-grid predictions, and the guitar downbeat prediction. Wrong: Beat This was predicted within ten points of madmom on guitar and was 25 points better; every free-tempo prediction failed, and the tracker ordering reversed. Disclosed: the SC06 audio is CC BY-NC-ND, read from the dataset's license file after download, used unmodified for measurement only and never redistributed, with the public-domain 1933 performance added to the metrical arm for that reason; five of 72 guitar answers came back from the gateway empty or cut off and are labelled refused, three of them again on an unregistered retry; chord truth on the two proxies is a sequence while a draft carries one chord per bar, the Study 34 convention, with the per-bar bound reported beside it."
+						}
+					]
+				}
+			]
 		}
 	]
 }
