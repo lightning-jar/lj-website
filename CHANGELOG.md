@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- GitHub Actions CI (`.github/workflows/ci.yml`): typecheck, biome and vitest on every PR into production and every push to it. It runs with **no secrets**: `SKIP_VARLOCK=1` drops the varlock Vite plugin (`vite.config.ts`, the same switch as stem-shovel), and the typecheck runs `svelte-kit sync && svelte-check` without `varlock codegen`.
+
+### Changed
+- The weekly `deps-update` now ships as a PR into production that merges itself only when typecheck, biome, vitest, Socket's PR alerts and the Vercel preview all end in success. It then fast-forwards dev. Before, it pushed straight to production after local checks. **It no longer runs any updated package code on the ops VM.** It rewrites `package.json` and resolves `bun.lock` with `bun install --lockfile-only` under a scrubbed environment. The old version installed and ran check, tests and build under varlock next to every project's credentials, which Vercel's security review flagged on slx-web's port. It also updates bare-major ranges (`^7`) through the lockfile, and its open-PR guard ignores fork PRs.
+
 ## [0.20.0] - 2026-10-25
 
 ### Added

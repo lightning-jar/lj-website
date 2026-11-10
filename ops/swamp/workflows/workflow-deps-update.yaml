@@ -1,19 +1,23 @@
-# Weekly dependency update, straight to production (Kevin's call,
-# 2026-11-10). scripts/deps-update.ts does the work in its own worktree:
-# same-line releases at least 7 days old, gated by check, tests (including
-# the supply-chain lockfile watchlist), Biome and a full build, then pushed
-# to production and dev. Majors and too-new releases are listed, never
-# applied. Exit codes: 0 nothing to update (no email), 3 shipped, 4 stopped
-# on purpose (gate failed, push conflict, agent-surface alert), 1 script
-# error. The script's stdout is the email body (double quotes and color
-# codes already stripped, see emailSafe). prod-smoke, every 30 minutes,
-# then confirms production is serving the pushed sha.
+# Weekly dependency update, merged as a pull request on green checks
+# (Kevin's call, 2026-11-10, replacing "straight to production").
+# scripts/deps-update.ts plans same-line releases at least 7 days old and
+# resolves bun.lock with `bun install --lockfile-only` in its own worktree:
+# no updated package code runs on this VM. It opens a PR into production
+# that merges itself only when typecheck, biome and vitest
+# (.github/workflows/ci.yml, no secrets), Socket's supply-chain scan and
+# the Vercel preview build all end in success, then fast-forwards dev.
+# Majors and too-new releases are listed, never applied. Exit codes: 0
+# nothing to update (no email), 3 merged, 4 stopped on purpose (CI red or
+# slow, merge refused, last week's PR still open, agent-surface alert; the
+# PR stays open), 1 script error. The script's stdout is the email body.
+# prod-smoke, every 30 minutes, then confirms production is serving it.
 #
 # Tuesday 14:00 UTC: a US weekday morning, so a deploy lands while someone
 # is around to read the email. Clear of findings-sweep (Mondays 06:30).
+# The timeout covers planning (under a minute) plus up to 30 minutes of CI.
 id: befacf9c-ae23-4c9c-91fa-897293ae3065
 name: deps-update
-description: Weekly same-line dependency update, gated, pushed to production; email on ship or stop
+description: Weekly same-line dependency update, merged as a PR into production when CI, Socket and the Vercel preview are green; email on merge or stop
 version: 1
 tags:
   team: lj-website
@@ -33,14 +37,14 @@ jobs:
             script: scripts/deps-update.ts
             args: ""
             ignoreExitCode: true
-            timeoutMs: 2400000
+            timeoutMs: 3600000
         dataOutputOverrides:
           - specName: result
             lifetime: 180d
             tags:
               audit: deps-update
 
-      - name: notify-shipped
+      - name: notify-merged
         dependsOn:
           - step: run-update
             condition:
@@ -52,7 +56,7 @@ jobs:
           behavior: replicator-notify
           methodName: execute
           inputs:
-            subject: "lj-website: weekly package update shipped"
+            subject: "lj-website: weekly package update merged"
             body: ${{ data.latest("lj-ops-script", "result").content.stdout }}
 
       - name: notify-stopped
@@ -67,7 +71,7 @@ jobs:
           behavior: replicator-notify
           methodName: execute
           inputs:
-            subject: "lj-website: weekly package update STOPPED, nothing pushed"
+            subject: "lj-website: weekly package update STOPPED, nothing merged"
             body: ${{ data.latest("lj-ops-script", "result").content.stdout }}
 
       - name: notify-script-error
@@ -87,11 +91,11 @@ jobs:
           inputs:
             subject: "lj-website: weekly package update SCRIPT ERROR"
             body: >-
-              scripts/deps-update.ts failed (registry, git or setup error, not
-              a gate verdict). Inspect: swamp workflow history deps-update on
-              lj-bench, run-update step log. If the worktree at
-              ~/projects/.worktrees/lj-website-deps exists, it holds the
-              half-finished state.
+              scripts/deps-update.ts failed (registry, git, GitHub API or
+              setup error, not a check verdict). Inspect: swamp workflow
+              history deps-update on lj-bench, run-update step log. Check for
+              an open chore/deps-weekly-* PR or branch, and the worktree at
+              ~/projects/.worktrees/lj-website-deps.
 
       - name: notify-run-broken
         dependsOn:
@@ -108,4 +112,5 @@ jobs:
             body: >-
               The deps-update step itself failed (timeout or behavior error).
               Inspect: swamp workflow history deps-update on lj-bench. Check
-              whether production was pushed before it died.
+              for an open chore/deps-weekly-* PR before the next run; the
+              script refuses to start while one is open.

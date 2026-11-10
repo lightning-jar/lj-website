@@ -1,8 +1,12 @@
 import { describe, expect, test } from "vitest";
 import {
+	bumpBiomeSchema,
+	ciVerdict,
 	decide,
 	emailSafe,
 	lockPackageNames,
+	lockVersion,
+	nextSpec,
 	parseSpec,
 	type RegistryDoc,
 	sameLine,
@@ -142,5 +146,85 @@ describe("deps update: file edits and output", () => {
 	test("email body cannot carry a double quote into the --body flag", () => {
 		expect(emailSafe('say "hi"')).toBe("say 'hi'");
 		expect(emailSafe("\x1b[31mred\x1b[39m text")).toBe("red text");
+	});
+});
+
+describe("deps update: bare-major ranges", () => {
+	test('"^7" is accepted and keeps its spec; only the lockfile moves', () => {
+		const spec = parseSpec("^7");
+		expect(spec).toEqual({ prefix: "^", version: null });
+		if (!spec) throw new Error("unparsed");
+		expect(nextSpec("^7", spec, "7.0.165")).toBe("^7");
+	});
+
+	test("lockVersion reads the top-level resolution, not a nested one", () => {
+		const lock = [
+			"{",
+			'  "packages": {',
+			'    "ai": ["ai@7.0.165", "", {}, "sha512-y"],',
+			'    "ai/@ai-sdk/gateway": ["@ai-sdk/gateway@4.0.100", "", {}, "sha512-z"],',
+			'    "@ai-sdk/gateway": ["@ai-sdk/gateway@4.0.138", "", {}, "sha512-x"],',
+			"  }",
+			"}",
+		].join("\n");
+		expect(lockVersion(lock, "ai")).toBe("7.0.165");
+		expect(lockVersion(lock, "@ai-sdk/gateway")).toBe("4.0.138");
+		expect(lockVersion(lock, "vite")).toBeNull();
+	});
+
+	test("bumpBiomeSchema rewrites only the version in the schema URL", () => {
+		const json =
+			'{\n\t"$schema": "https://biomejs.dev/schemas/2.6.3/schema.json"\n}\n';
+		expect(bumpBiomeSchema(json, "2.6.6")).toBe(json.replace("2.6.3", "2.6.6"));
+	});
+});
+
+describe("deps update: the CI verdict that gates the merge", () => {
+	const required = ["typecheck", "Vercel"];
+	const run = (name: string, status: string, conclusion: string | null) => ({
+		name,
+		status,
+		conclusion,
+	});
+
+	test("waits for required checks that have not reported", () => {
+		expect(
+			ciVerdict([run("typecheck", "completed", "success")], [], required),
+		).toEqual({ state: "pending", waitingOn: ["Vercel"] });
+	});
+
+	test("green when every check passed; an optional neutral is fine", () => {
+		expect(
+			ciVerdict(
+				[
+					run("typecheck", "completed", "success"),
+					run("Vercel Agent Review", "completed", "neutral"),
+				],
+				[{ context: "Vercel", state: "success" }],
+				required,
+			),
+		).toEqual({ state: "green" });
+	});
+
+	test("a skipped or neutral REQUIRED check fails", () => {
+		for (const conclusion of ["skipped", "neutral"]) {
+			expect(
+				ciVerdict(
+					[run("typecheck", "completed", conclusion)],
+					[{ context: "Vercel", state: "success" }],
+					required,
+				),
+			).toEqual({ state: "failed", failed: ["typecheck"] });
+		}
+	});
+
+	test("any red check fails, required or not", () => {
+		expect(
+			ciVerdict(
+				[run("typecheck", "in_progress", null)],
+				[{ context: "some/other", state: "failure" }],
+				required,
+			),
+		).toEqual({ state: "failed", failed: ["some/other"] });
 	});
 });

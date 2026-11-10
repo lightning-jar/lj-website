@@ -7,7 +7,6 @@ import { sentrySvelteKit } from "@sentry/sveltekit/vite";
 
 import { default as vercel } from "@sveltejs/adapter-vercel";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
-import { varlockVitePlugin } from "@varlock/vite-integration";
 
 // SvelteKit 3 removed svelte.config.js: project config is passed to the
 // sveltekit() plugin below, with what used to live under `kit.*` hoisted
@@ -17,6 +16,19 @@ import { varlockVitePlugin } from "@varlock/vite-integration";
 // `#lib/*` subpath import declared in package.json, which Vite, TypeScript
 // and Bun all resolve natively (matching slx-web). Subpath imports need an
 // explicit extension, so `.ts` modules are imported as `#lib/utils/x.js`.
+// CI has no 1Password: it sets SKIP_VARLOCK=1 and runs svelte-check, Biome
+// and the tests (which mock the env) without the varlock plugin, the same
+// switch as stem-shovel. The plugin reads .env.schema the moment it is
+// imported and fails without a token, so it is imported only when used.
+// Never set SKIP_VARLOCK for a build: Vercel builds always run varlock.
+const varlockPlugins = process.env.SKIP_VARLOCK
+	? []
+	: [
+			(await import("@varlock/vite-integration")).varlockVitePlugin({
+				ssrInjectMode: "resolved-env",
+			}),
+		];
+
 export default defineConfig(({ mode }) => {
 	// loadEnv reads .env / .env.local at config-load time so SENTRY_AUTH_TOKEN
 	// (used only for source-map upload) can come from .env.local locally or
@@ -33,7 +45,7 @@ export default defineConfig(({ mode }) => {
 			//
 			// Order matters: varlock must come before sentrySvelteKit() and
 			// sveltekit().
-			varlockVitePlugin({ ssrInjectMode: "resolved-env" }),
+			...varlockPlugins,
 			// Sentry 11 moved this plugin to the /vite subpath and flattened
 			// sourceMapsUploadOptions to the top level.
 			sentrySvelteKit({
