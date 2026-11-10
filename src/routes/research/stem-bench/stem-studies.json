@@ -2794,6 +2794,108 @@
 					]
 				}
 			]
+		},
+		{
+			"slug": "36",
+			"letters": "36",
+			"track": "Listening",
+			"title": "The field's beat trackers find the bar the detector cannot, and the one with a bar model earns the automatic re-draft",
+			"eyebrow": "Study 36 · tracker bake-off · 161 cells · $0",
+			"published": "2026-11-10",
+			"indexLine": "Kevin asked the program to stop treating a tap-and-pick input as the realistic product and break through to a fully automatic bar. The first registered step compares the field's joint beat and downbeat trackers (Beat This!, madmom) with the production detector on the 23 recordings the program holds bar-level truth for, at zero model spend. On the ten modern songs the detector's bar period is strict on three; the trackers reach six or seven, with madmom folded on all ten and the only system to meet the registered decision rule, so the Study 38 automatic re-draft will run on its bar. On the jazz 78s every neural tracker reads the bar the detector halves, and madmom places downbeats within 70 ms on up to 96 percent of bars with counts of 114 of 114, 52 of 53 and 126 of 125, the Study 34 tempo-following result with no declared tempo supplied. Compound meter is where the trackers lose: Beat This has no 6/8 class and reads both compound songs as three-beat bars, while the detector's automatic mode gets one of them exactly, which makes Study 35's failure there the declared-tempo units bug alone.",
+			"sections": [
+				{
+					"id": "sec-stem-study36",
+					"eyebrow": "Listening",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-trackers36",
+						"summary": "Per system: bar period strict and folded, meter class, downbeat phase and bar counts, on the ten modern songs and the acoustic-era six"
+					},
+					"body": [
+						{
+							"heading": "The Question",
+							"html": "Thirty-five studies in, the program's standing read was that the automatic detector's tempo and meter are the weak link and that a visitor who taps the tempo and picks the meter is the realistic product. Kevin rejected that framing and asked for a research pass on what had not been tried. The resulting proposal reframed the target: the product needs the bar (its period, its grouping, and where it starts), not a tempo number, and the field has spent a decade on exactly that object under the name downbeat tracking. Study 36 is the proposal's first step, registered before any run: the published trackers against the production detector, graded at the bar, on every recording the program already holds truth for."
+						},
+						{
+							"heading": "Systems and Truth",
+							"html": "Production is the v0.200 detector port followed by the shipped grid, vote and placement, automatic mode exactly as the product would run it. Against it: Beat This! (ISMIR 2024, MIT weights) in its 78 MB and 8 MB checkpoints with the authors' minimal peak-picking, and the 78 MB model with madmom's dynamic Bayesian postprocessor; madmom's own RNN and DBN downbeat tracker with bars of three or four beats, and an exploratory variant that also allows six; librosa's unseeded tracker as the classical tempo baseline. Truth is the 23-recording union of Studies 34 and 35: five click-exact Badverbs mixes with uniform downbeat grids, three JAAH jazz 78s with beat-aligned downbeats and bar counts, the hymn and the waltz with tempo from the self-similarity instrument, ten Josh Woodward songs at the artist's declared tempo and meter (a 6/8 bar being two dotted quarters), and three meter-only slots. Graders are mechanical and unit-tested: bar period strict within 4 percent or folded at a metrical ratio, meter class, downbeat F-measure within 70 ms where time truth exists, bar counts on the 78s."
+						},
+						{
+							"heading": "The Modern Ten",
+							"html": "Bar period strict, folded, and meter right, of ten: production 3, 7, 8; Beat This final 6, 9, 8; Beat This small 7, 8, 8; madmom 7, 10, 8. The registered decision rule (strict on seven, folded on all ten, meter on eight) is met by madmom and by no Beat This variant, so the automatic-mode re-draft registered as Study 38 will run on madmom's bar. The misses are instructive. Every system reads goodbye-to-spring, declared 240, at 120, the registered counter-case that is a convention rather than an error. The small Beat This model's one clean failure is a three-beat bar on that same straight 4/4 song. And im-letting-go, declared 76, comes back at double tempo from every tracker, the other direction of the same convention."
+						},
+						{
+							"heading": "The 78s and the Phase",
+							"html": "On livery-stable-blues every neural tracker reads the 1.46 second bar that production reads as 2.71; on dippermouth 1.28 against 2.56; on st-louis 3.53 to 3.58 against 6.12. madmom places the downbeat within 70 ms on 96 percent of livery's bars and 66 percent of dippermouth's, with bar counts of 126 against 125 truth, 114 of 114 and 52 of 53, which is Study 34's exploratory tempo-following result delivered by a published system with no declared tempo given to it. Beat This gets the same periods but puts every downbeat on beat three of dippermouth's bars, a half-bar phase error that scores zero on downbeat F while the bars themselves are right; its DBN variant lands st-louis at 53 of 53. The hymn defeats every system, 2.30, 3.01 and 3.33 seconds against 2.47 declared, the recording the field's own literature names as the hard class. Beat This alone names the waltz's three; madmom reads four at half tempo."
+						},
+						{
+							"heading": "Compound Meter Cuts the Other Way",
+							"html": "Production's automatic mode gets gravity's 6/8 bar exactly: an eighth-note pulse of 145.9 with triplet subdivision becomes a 2.466 second bar against the true 2.5. Study 35's confidently wrong draft on that song was therefore the declared-tempo units bug alone, and the app's input adapter remains the whole fix there. The trackers are worse than the detector on this class. Beat This has no compound meter in its vocabulary and reads both 6/8 songs as three-beat bars, gravity as three eighths (half the bar) and my-favorite-regret as three beats of two per dotted quarter, a reading that folds to nothing. madmom with a six-beat class names both, then hears sixes in 4/4 jazz. If a tracker replaces the detector for the bar, the detector's subdivision read should keep the meter label."
+						},
+						{
+							"heading": "Disclosures and Cost",
+							"html": "On eat-all-the-clocks all five trackers place every downbeat 85 ms after the registered grid, uniformly, which is the registered bar-one offset itself; the 70 ms window makes that a zero for every tracker while production scores 0.99 from the same onset grid that produced the truth. Reported as registered; it is a fixture question and it treats every tracker alike. Prediction tally: P2, P3 and P5 right; P1 wrong on all three clauses (Beat This strict on six, folded on nine, compound on neither); P4 wrong as a conjunction through the dippermouth phase and the halved st-louis bar. Runtime on this VM was 27 to 47 seconds a song for the large Beat This model with the small one not reliably faster on CPU, because the spectrogram front end dominates; browser timing on WebGPU is a Study 38 matter. No model spend."
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "36b",
+			"letters": "36b",
+			"track": "Listening",
+			"title": "On 261 songs the detector's bar is right one time in three, a tracker's three in four, and the detector's own 6/8 call is its largest error",
+			"eyebrow": "Study 36b · catalog census · 1,776 cells · $0",
+			"published": "2026-11-10",
+			"indexLine": "Every tempo and meter number in this series had rested on at most ten modern songs. Kevin purchased Josh Woodward's complete catalog bundle and authorized a fetch of the 262 song pages that state each song's tempo, meter and feel under CC BY 4.0, giving 261 modern recordings with the author's own numbers and 244 paired instrumental mixes. Registered before any catalog run and scored at zero model spend: the production detector's bar is strict on 36 percent and folded at an octave on 67; Beat This reaches 70 and 90, madmom 66 and 89. On straight 4/4 songs the trackers are at 73 to 76 percent strict against the detector's 38. The detector's largest error class is its own compound-meter call: it names 6/8 on 63 of 223 songs in 4/4, every one through a triplet subdivision read, and 59 of those bars fold to nothing, the Study 11b confound at catalog scale. The instrumental mixes change little for anyone, so the voice is not the problem. Where a tracker disagrees with the page it is usually a bar half the declared length, on songs declared around 72 bpm, which is the merge-safe direction for a chart.",
+			"sections": [
+				{
+					"id": "sec-stem-study36b",
+					"eyebrow": "Listening",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-census36b",
+						"summary": "Per system and meter class: bar period strict and folded and meter right on the regular mixes, with the paired instrumental arm and the fold direction"
+					},
+					"body": [
+						{
+							"heading": "The Corpus",
+							"html": "The artist publishes tempo, key, meter and feel on every song page, and sells the whole catalog as one download rather than offering it as a bulk scrape, so the clean path was to buy it. The bench matched 262 bundle files to pages by normalized title (twelve covers and parodies have no original-song page and are excluded), hashed every file and every zip into the committed manifest, and froze the census one commit before the registration: 223 songs in 4/4 (177 straight, 46 swing), 37 in 6/8 (17 straight, 20 swing), one waltz; declared tempos 40 to 280 with a median of 105. The parse reproduces every Study 35 slot value exactly. Truth is the artist's declaration: four quarters in 4/4, two dotted quarters in 6/8, the convention Study 35 checked against the audio. Declared values are the session click, not beat-aligned time truth, so there is no downbeat phase score here."
+						},
+						{
+							"heading": "The Headline Rates",
+							"html": "Regular mixes, bar strict within 4 percent, folded at a metrical ratio, and meter class right: production 36, 67 and 69 percent; Beat This final 70, 90 and 85; Beat This small 69, 90 and 87; madmom 66, 89 and 85. On the 177 straight 4/4 songs the trackers reach 73 to 76 strict and 91 to 93 folded against production's 38 and 64, and madmom names the 4/4 class on every one of them. The 95 percent Wilson interval on Beat This's 4/4 strict rate runs 70 to 81 percent on 223 songs, the first tempo number in the series with an interval worth printing. Swing cost the trackers nothing, 76 against 76, where the registration had predicted a ten-point penalty. The registered decision rule for adopting a tracker's bar outright, 80 percent strict and 95 folded, is met by none; the nearest is Beat This at 76 and 94."
+						},
+						{
+							"heading": "The Detector's Own 6/8",
+							"html": "Production names 6/8 on 63 of the 223 songs the artist wrote in 4/4, 56 of them straight. Every one arrives through the subdivision test reading three, and 59 of the 63 bars it then builds fold to no metrical ratio of the truth at all. This is the peaceful-dreams confound that Study 11b found and 11c reproduced synthetically, now at catalog scale: the sub-beat test fires on straight running eighths and the ladder constructs a bar the song does not have. The instrumental mixes show it is not the voice (42 of 208 there). When the detector names 6/8 on a song that is in 6/8, 21 of 37, the bar is strict on two. And its tempo confidence does not separate right from wrong on 261 songs: medians 0.762 against 0.685, with twelve right and eleven wrong detections above the 0.84 line Study 34b had read off fifteen recordings. Study 35's advice to the app, do not ship the refusal, stands at scale."
+						},
+						{
+							"heading": "Compound Meter Is Unsolved for Everyone",
+							"html": "On the 37 songs in 6/8 the bar is strict for 8 percent of them under production, 32 to 35 under Beat This, 16 under madmom. Beat This reads them as six beats to the bar on eighteen, three on twelve, and lands at the 3/2 fold on eight, a 4/4 bar laid over a 6/8 song. madmom, with bars of three or four only, never satisfies the class. The one song in 3/4 is named by every tracker and read at a fold by all of them. Compound meter is the class the proposal's later tiers (a harmonic-rhythm witness, band-split accents) are for, and this census gives them 37 songs to be graded on."
+						},
+						{
+							"heading": "The Voice Is Not the Problem",
+							"html": "The paired arm asked the separation question without running a separator: the same song with and without the vocal. Beat This fixes 10 of its 74 regular-mix failures when the voice is removed and breaks 11 of its 170 passes; the small model fixes 5 and breaks 6; production's outcome changes on 35 of 244 songs, 14 percent, in both directions. The registered threshold for moving source separation up the list was a 50 percent fix rate. At 14 percent, separation goes back down it and the harmonic-rhythm witness comes first."
+						},
+						{
+							"heading": "The Fold Is a Convention, and It Is Merge-Safe",
+							"html": "Of Beat This's 39 readings on 4/4 songs that fold but are not strict, 28 are a bar half the declared length and 8 a bar twice it. The half readings sit on songs declared at a median of 72 bpm; the double readings at 212. The trackers live in the 80 to 160 lane, and the artist's slow and fast declarations are session choices outside it. A grid at half the declared bar is a finer grid, which a chart can merge into the coarser one without losing a chord; the coarser direction, where a bar would have to be split, is three and a half times rarer. The proposal's collapse-safe octave policy, prefer the shorter bar and merge identical neighbours, covers 28 of the 39. Ten songs disagree with their page under all three trackers while the trackers agree with each other within 4 percent (among them a page saying 75 where the trackers say 106, and 124 swing against 164); they are listed in the brief, not re-graded."
+						},
+						{
+							"heading": "Predictions and Disclosures",
+							"html": "Mostly wrong in the details, right in the shape: the trackers landed four points under the registered 80 percent strict on straight 4/4 and two under the 95 folded line; the small checkpoint beat the large one on swing meter by eight points where five was the registered margin; the instrumental break rate was 6.5 percent against a predicted 5. Right: madmom within eight points of Beat This on 4/4 and worse on 6/8, the instrumental fix rate under 25 percent, the fold direction, and the interval width. One labelling disclosure: the fold-direction prediction was written in tempo terms (a 240 song read at 120 called the half fold) while the grader's ratio is on the bar, where that same reading is a two; the prediction is scored under its own words and the brief says so. The twelve Study 34 and 35 songs sit inside this corpus and move no rate. The run took five hours of CPU on this VM, not the fourteen the registration estimated, and cost nothing in model spend."
+						}
+					]
+				}
+			]
 		}
 	]
 }

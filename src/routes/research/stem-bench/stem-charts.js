@@ -3294,6 +3294,49 @@ export function initStemCharts() {
 		"Registered 88fceeb before any scored run (docs/BRIEF-STUDY33.md); pilot letter-lands \u2248$0.30 at the $0.3 fence, matrix peaceful-dreams alone per the registered scope (runner corrected c396220 before any paid call) \u2248$0.68 against the $0.6 fence, exceeded and disclosed: the two-buffer arms carry nearly twice the notes, so peaceful's drafts grew to \u224838k tokens in each. Study total \u2248$0.98 across 1,158 cells (5 arms \u00d7 229 graded bars + 13 sweep purities). The gateway ignores temperature on this model family; all five arms span three bars on letter, the disclosed noise scale.",
 	);
 
+	// --- Study 36b: the catalog census ---
+	table(
+		"tbl-census36b",
+		["system \u00b7 class (n)", "bar strict", "bar folded", "meter right"],
+		[
+			["production \u00b7 all regular (261)", "36%", "67%", "69%"],
+			["production \u00b7 4/4 straight (177)", "38%", "64%", "68%"],
+			["production \u00b7 4/4 swing (46)", "54%", "85%", "83%"],
+			["production \u00b7 6/8 (37)", "8%", "62%", "57% (names 6/8 on 21; bar strict on 2 of those)"],
+			["Beat This final \u00b7 all regular (261)", "70%", "90%", "85%"],
+			["Beat This final \u00b7 4/4 straight (177)", "76% (Wilson 70 to 81)", "93%", "92%"],
+			["Beat This final \u00b7 4/4 swing (46)", "76%", "96%", "85%"],
+			["Beat This final \u00b7 6/8 (37)", "32%", "68%", "57%"],
+			["Beat This small \u00b7 all regular (261)", "69%", "90%", "87%"],
+			["Beat This small \u00b7 4/4 straight (177)", "75%", "92%", "91%"],
+			["madmom [3, 4] \u00b7 all regular (261)", "66%", "89%", "85%"],
+			["madmom [3, 4] \u00b7 4/4 straight (177)", "73%", "91%", "100%"],
+			["madmom [3, 4] \u00b7 6/8 (37)", "16%", "68%", "0% (no compound class)"],
+			["production \u00b7 false 6/8 on 4/4 songs", "63 of 223 (28%)", "56 straight, all via subdivision 3", "59 of the 63 bars fold to nothing"],
+			["paired arm \u00b7 Beat This final (244 songs)", "instrumental fixes 10 of 74 failures", "breaks 11 of 170 passes", "production changes on 35 of 244"],
+			["fold direction \u00b7 Beat This final, 4/4 folded not strict (39)", "28 at half the declared bar (declared median 72)", "8 at twice it (declared median 212)", "merge-safe direction 28 of 39"],
+		],
+		"Registered a249201 after the corpus freeze ba8b277 (docs/BRIEF-STUDY36B.md); zero model spend; 1,776 cells (261 regular mixes \u00d7 4 systems + 244 instrumental mixes \u00d7 3). Audio from the artist's purchased catalog bundle, hashes committed, audio not. Truth is the artist's declared tempo and meter; a 6/8 bar is two dotted quarters. Neither registered decision rule fired: no tracker reaches 80% strict and 95% folded on 4/4, and the instrumental fix rate of 14% keeps source separation down the list.",
+	);
+
+	// --- Study 36: tracker bake-off ---
+	table(
+		"tbl-trackers36",
+		["system", "modern ten: strict \u00b7 folded \u00b7 meter", "acoustic six: bar strict", "downbeat phase and bar counts on the 78s"],
+		[
+			["production (v0.200 detector + shipped placement)", "3 \u00b7 7 \u00b7 8", "0 of 6", "livery 68 bars vs 125, dippermouth 56 vs 114, st-louis 30 vs 53"],
+			["Beat This final (78 MB, peak-picking)", "6 \u00b7 9 \u00b7 8", "4 of 6", "livery F 0.86, 128 bars; dippermouth F 0.00 (downbeats on beat 3), 114 bars; st-louis 57"],
+			["Beat This small (8 MB)", "7 \u00b7 8 \u00b7 8", "3 of 6", "livery F 0.83, 127; dippermouth F 0.00, 115; st-louis halved the bar, 80"],
+			["Beat This final + madmom DBN", "6 \u00b7 9 \u00b7 8", "4 of 6", "livery F 0.85, 126; dippermouth F 0.00, 114; st-louis 53 of 53"],
+			["madmom RNN + DBN, bars of 3 or 4", "7 \u00b7 10 \u00b7 8 (meets S36-D1)", "3 of 6", "livery F 0.96, 126; dippermouth F 0.66, 114; st-louis F 0.69, 52"],
+			["madmom, bars of 3, 4 or 6 (exploratory)", "7 \u00b7 10 \u00b7 9", "1 of 6", "hears six-beat bars in dippermouth and st-louis"],
+			["librosa unseeded (tempo only)", "4 \u00b7 10 \u00b7 n/a", "3 of 6", "beats only, no downbeats"],
+			["6/8 songs (gravity, my-favorite-regret)", "production: gravity EXACT in automatic mode (2.466 s vs 2.5)", "Beat This: three-beat bars on both", "madmom with a 6 class names both, then hears sixes in jazz"],
+			["the hymn (declared 97.1, bar 2.47 s)", "every system wrong", "2.30 Beat This, 3.01 madmom, 3.33 production", "the field's own hard class"],
+		],
+		"Registered 6ed6b20 (docs/BRIEF-STUDY36.md) before any run; zero model spend; 161 cells (23 recordings \u00d7 7 systems). Truth: the Study 34 and 35 union with bar-level truth (click-exact Badverbs grids, JAAH beat annotations, the 34b self-similarity tempos, the artist's declared values). Disclosed: on eat-all-the-clocks every tracker sits 85 ms after the registered grid, exactly the registered bar-one offset, so downbeat F is 0.00 for all of them at the 70 ms window while production scores 0.99 from the same onset grid that made the truth. Predictions: P2, P3, P5 right; P1 and P4 wrong.",
+	);
+
 	// --- Study 35: modern material ---
 	table(
 		"tbl-modern35",
