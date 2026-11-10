@@ -3308,7 +3308,7 @@ export function initStemCharts() {
 			["B \u00b7 trackers vs annotated bars (36)", "madmom strict 61%, folded 100%, downbeat F 0.69", "Beat This strict 86%, folded 97%, F 0.97", "without drums Beat This wins the bar"],
 			["C \u00b7 24 Winterreise songs (SC06), madmom's bars", "roots median 41% (sequence), 67% (per bar); 24 of 24 confidently wrong", "1.5 chord changes per tracker bar", "a one-chord bar is bounded near 50% before any error"],
 			["C \u00b7 trackers vs annotated measures (SC06 \u00b7 HU33 1933)", "madmom downbeat F 0.39 \u00b7 0.38; bar count within 10% on 12 \u00b7 11 of 24", "Beat This F 0.68 \u00b7 0.61", "the DBN does not follow rubato; Beat This does, at half the written bar"],
-			["gateway", "5 of 72 guitar answers empty or cut off, labelled refused", "3 of 5 empty again on an unregistered retry", "an empty answer needs its own retry path"],
+			["gateway", "5 of 72 guitar answers empty or cut off, labelled refused", "3 of 5 empty again on an unregistered retry, finish reason content filter", "the gateway's content filter stops the draft on three excerpts; production needs a visible retry"],
 		],
 		"Registered 62c3d63 (docs/BRIEF-STUDY38.md) before any paid draft; 106 drafts at $3.84 of an $8 fence plus 168 metrical cells at $0. Truth: artist charts (A), GuitarSet's instructed chord annotation (B), the Winterreise audio-time chord annotation (C). Decision rules: S38-D1 fires (automatic mode is the tracker's bar as read, shorter bar preferred, no confidence refusal); S38-D2 fires (the chord reader is the next target on acoustic material); S38-D3 sends free tempo to a tracker comparison (Study 39) before more drafts. Predictions: A1, A3, A4, B1, B2, B4 right; A2, B3, C3 half right; C1, C2, C4 wrong, C4 reversed.",
 	);
