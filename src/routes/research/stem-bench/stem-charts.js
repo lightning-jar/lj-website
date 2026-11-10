@@ -3294,6 +3294,27 @@ export function initStemCharts() {
 		"Registered 88fceeb before any scored run (docs/BRIEF-STUDY33.md); pilot letter-lands \u2248$0.30 at the $0.3 fence, matrix peaceful-dreams alone per the registered scope (runner corrected c396220 before any paid call) \u2248$0.68 against the $0.6 fence, exceeded and disclosed: the two-buffer arms carry nearly twice the notes, so peaceful's drafts grew to \u224838k tokens in each. Study total \u2248$0.98 across 1,158 cells (5 arms \u00d7 229 graded bars + 13 sweep purities). The gateway ignores temperature on this model family; all five arms span three bars on letter, the disclosed noise scale.",
 	);
 
+	// --- Study 37: witness and policy ---
+	table(
+		"tbl-witness37",
+		["arm \u00b7 base or slot", "before", "after", "note"],
+		[
+			["C \u00b7 Beat This final, 4/4 (223)", "strict 165 (74%)", "strict 136 (61%)", "fixed 1, broke 30, abstained 146; strict bar among candidates on 199"],
+			["C \u00b7 Beat This final, 6/8 (36)", "strict 13", "strict 13", "fixed 1, broke 1"],
+			["C \u00b7 madmom [3, 4], 4/4 (223)", "strict 164", "strict 135", "fixed 4, broke 33"],
+			["C \u00b7 madmom [3, 4], 6/8 (37)", "strict 6", "strict 12", "fixed 6, broke 0: the 2/3 ratio undoes a double bar"],
+			["C \u00b7 production, 4/4 (223)", "strict 92", "strict 89", "fixed 13, broke 16"],
+			["C \u00b7 production, 6/8 (37)", "strict 3", "strict 9", "fixed 6, broke 0"],
+			["C \u00b7 anatomy, Beat This final 4/4", "77 actions", "26 at ratio 1/2, 11 at ratio 2", "60 to 124 chord changes per song; the stability term votes for the shorter bar"],
+			["D \u00b7 let-it-in at 242 (half bar)", "18/21 roots, saved below threshold", "20/21 roots, 21/25 quals, good", "240 bars drafted, 98 merged, 120 at the declared grid"],
+			["D \u00b7 same-boat at 186 (half bar)", "15/18, saved below threshold", "16/18, 11/11, saved below threshold", "151 drafted, 56 merged, 74 declared"],
+			["D \u00b7 im-letting-go at 152 (half bar)", "28/33, saved below threshold", "33/33, 15/15, good", "117 drafted, 51 merged, 58 declared"],
+			["D \u00b7 gravity at 144 (6/8 adapter)", "16/26, confidently wrong", "23/26, 12/12, saved below threshold", "grid 1.4% off the typed value, the largest drift"],
+			["D \u00b7 my-favorite-regret at 195 (6/8 adapter)", "26/42, confidently wrong", "40/42, 17/17, good", "both 6/8 drafts saved"],
+		],
+		"Registered 3dc106b (docs/BRIEF-STUDY37.md) before any scored run; part C zero spend over 1,043 cells (261 songs \u00d7 4 base systems), part D five drafts at $0.452 of a $0.60 fence. Disclosed: the first witness pass measured the bar from the mean beat interval and failed to reproduce Study 36b; it is preserved as results/study37c-defective-run1.json and the corrected median run, which reproduces 1,022 of 1,043 Study 36b grades, is the result. Predictions: C5, D2, D3, D4 right; C1 to C4, C6, C7 and D1 wrong (D1 in the favourable direction).",
+	);
+
 	// --- Study 36b: the catalog census ---
 	table(
 		"tbl-census36b",

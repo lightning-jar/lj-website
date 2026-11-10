@@ -2896,6 +2896,47 @@
 					]
 				}
 			]
+		},
+		{
+			"slug": "37",
+			"letters": "37",
+			"track": "Listening",
+			"title": "Chord changes cannot pick the bar's octave, and a chart drafted at half the bar loses nothing",
+			"eyebrow": "Study 37 · witness and policy · 1,048 cells · $0.45",
+			"published": "2026-11-10",
+			"indexLine": "Study 36b left the automatic bar at 70 percent strict and 90 percent folded: the gap is the metrical octave, a bar half or twice the written length. Study 37 tried the two ways of closing it. A harmonic-rhythm witness that scores candidate bars by how often chord changes land on bar lines is net negative on every base system, fixing 1 of Beat This's 34 folded readings and breaking 30 of its 165 correct ones, because the chord reader emits 60 to 124 changes per song and any stability term votes for the shorter bar. The policy that makes the fold harmless works instead: three songs drafted at half the declared bar grade 20 of 21, 16 of 18 and 33 of 33 roots against 18, 15 and 28 at the declared bar, and merging identical neighbours brings the chart under the declared-grid length. The two 6/8 slots drafted at the adapter's true bar move from confidently wrong to 23 of 26 and 40 of 42, confirming Study 35's units fix where it costs money.",
+			"sections": [
+				{
+					"id": "sec-stem-study37",
+					"eyebrow": "Listening",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-witness37",
+						"summary": "Part C: the witness per base system and meter class; part D: the five re-drafts against their Study 35 baselines"
+					},
+					"body": [
+						{
+							"heading": "The Two Instruments",
+							"html": "Part C is a mechanical witness over the 261 regular mixes at zero spend. For each base system (Beat This final and small, madmom, the production detector) the candidate bars are the base bar at the ratios one half, two thirds, one, three halves and two; ChordMini's chord-change times are snapped to the base beat lattice and each candidate is scored at its best phase by the share of bars that start with a change times the share with no change inside, with abstention under eight changes or a margin under a tenth. Part D re-drafts five Study 35 slots through the Study 35 pipeline verbatim with the typed tempo changed to what an automatic grid would hand the product: the three 4/4 near-misses at twice the declared tempo (the trackers' common fold) and the two 6/8 songs at three times the declared dotted-quarter tempo (the input adapter's reading). The new measure is the merged bar count after identical neighbours collapse."
+						},
+						{
+							"heading": "The Witness Fails",
+							"html": "On Beat This final's 223 songs in 4/4 the witness fixes one folded reading and breaks thirty correct ones, taking strict from 74 to 61 percent; madmom fixes four and breaks thirty-three; production fixes thirteen and breaks sixteen. It abstains on two thirds of songs, and when it acts it votes for the half bar twenty-six times in seventy-seven. The score profiles show why: the chord reader emits sixty to one hundred twenty-four changes per song, most of them inside the bar as suspensions, passing chords and inversions, so a stability term punishes every longer bar. An unregistered pass that removed segments shorter than a beat or two stayed net negative. The one place it helps is compound meter on madmom and production, where the two-thirds ratio moves six 6/8 songs each from a double bar to the declared bar and breaks none."
+						},
+						{
+							"heading": "The Half Bar Is Free",
+							"html": "Drafted at half the declared bar, let-it-in, same-boat and im-letting-go grade 20 of 21, 16 of 18 and 33 of 33 roots against 18, 15 and 28 at the declared bar in Study 34 and 35, and two cross into the good class. The model given twice the bars with half the notes each reads the harmony at least as well. The merged charts run 98, 56 and 51 bars against declared-grid drafts of 120, 74 and 58, because merging identical neighbours also collapses the song's own repeats: a merged chart is a progression, not a bar chart, and its readability is the product's question. The two 6/8 slots drafted at the adapter's true bar move from 16 of 26 and 26 of 42 roots, both confidently wrong in Study 35, to 23 of 26 and 40 of 42, one of them good. Spend 45 cents of a 60 cent fence."
+						},
+						{
+							"heading": "Predictions and Disclosures",
+							"html": "Part C: six of seven predictions wrong, in the direction of the witness being useless rather than harmful by less than expected: it fixed one reading, not half of them; broke 18 percent of correct bars, not under 15; left 6/8 unchanged; and the strict bar was among its candidates on 89 percent of songs against a registered 90. Only the abstention rate came in as predicted. Part D: the merged-length, 6/8 and grid-drift predictions were right; the two-root band was wrong under its words because two drafts improved past it and changed class upward. One instrument correction is disclosed: the first witness pass measured the bar from the mean beat interval, which tracker gaps bias and which failed to reproduce Study 36b; that run is preserved in the repository, the runner was corrected to the registered median with a reproduction check, and re-run, with no threshold or prediction changed. The decision for Study 38: draft on the tracker's bar as read, prefer the shorter candidate when two fold into each other, apply no harmonic-rhythm correction, and keep the 6/8 adapter fix."
+						}
+					]
+				}
+			]
 		}
 	]
 }
