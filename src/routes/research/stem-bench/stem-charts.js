@@ -3294,6 +3294,24 @@ export function initStemCharts() {
 		"Registered 88fceeb before any scored run (docs/BRIEF-STUDY33.md); pilot letter-lands \u2248$0.30 at the $0.3 fence, matrix peaceful-dreams alone per the registered scope (runner corrected c396220 before any paid call) \u2248$0.68 against the $0.6 fence, exceeded and disclosed: the two-buffer arms carry nearly twice the notes, so peaceful's drafts grew to \u224838k tokens in each. Study total \u2248$0.98 across 1,158 cells (5 arms \u00d7 229 graded bars + 13 sweep purities). The gateway ignores temperature on this model family; all five arms span three bars on letter, the disclosed noise scale.",
 	);
 
+	// --- Study 39: free tempo ---
+	table(
+		"tbl-freetempo39",
+		["system", "Winterreise (48): F \u00b7 P \u00b7 R at 70 ms", "strict bar \u00b7 folded (half, double)", "chartable (R \u2265 0.8 at bar or half)", "JAAH 78s (3): F at 70 \u00b7 150 ms"],
+		[
+			["Beat This final0, peak-picking", "0.66 \u00b7 0.55 \u00b7 0.86", "6 \u00b7 19 (14, 2)", "11", "0.49 \u00b7 0.75"],
+			["Beat This small0, peak-picking", "0.60 \u00b7 0.48 \u00b7 0.75", "7 \u00b7 23 (20, 2)", "8", "0.39 \u00b7 0.60"],
+			["Beat This final0 + DBN", "0.55 \u00b7 0.62 \u00b7 0.54", "24 \u00b7 36 (5, 7)", "10", "0.47 \u00b7 0.76"],
+			["madmom 3/4, \u03bb 100 (Studies 36, 38)", "0.39 \u00b7 0.43 \u00b7 0.37", "16 \u00b7 28 (4, 10)", "7", "0.69 \u00b7 0.97"],
+			["madmom 3/4, \u03bb 30", "0.46 \u00b7 0.49 \u00b7 0.45", "16 \u00b7 29 (4, 12)", "7", "0.39 \u00b7 0.45"],
+			["madmom 3/4, \u03bb 10", "0.50 \u00b7 0.56 \u00b7 0.44", "17 \u00b7 28 (4, 12)", "5", "0.47 \u00b7 0.53"],
+			["madmom 3/4, \u03bb 3", "0.47 \u00b7 0.51 \u00b7 0.43", "17 \u00b7 26 (4, 10)", "3", "0.29 \u00b7 0.33"],
+			["madmom 3/4/6, \u03bb 100", "0.28 \u00b7 0.38 \u00b7 0.23", "7 \u00b7 26 (0, 9)", "4", "0.28 \u00b7 0.39"],
+			["recall at 70 ms by edition, 2006 / 1933", "final0 0.87 / 0.84 \u00b7 small0 0.87 / 0.71 \u00b7 final0 + DBN 0.65 / 0.54 \u00b7 madmom \u03bb 100 0.37 / 0.37 \u00b7 \u03bb 10 0.55 / 0.39", "\u2014", "floor for adoption: 36 of 48", "\u2014"],
+		],
+		"Registered ca362ee (docs/BRIEF-STUDY39.md) before any tracker ran; zero model spend; 51 recordings \u00d7 8 systems. Winterreise: Schubert Winterreise Dataset v2.1, 24 songs in the 2006 and 1933 editions, annotated bars; JAAH: three 1930s jazz 78s with annotated bars. Group medians. Predictions: P1, P3, P4 right; P2 (loosened penalty gains 0.15 of recall) and P5 (editions agree within 0.10 for every system) wrong. S39-D1: no system chartable on 75 percent, no free-tempo tracker adopted.",
+	);
+
 	// --- Study 40: detector sweeps ---
 	table(
 		"tbl-detector40",

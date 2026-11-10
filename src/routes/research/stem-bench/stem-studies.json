@@ -2984,6 +2984,47 @@
 			]
 		},
 		{
+			"slug": "39",
+			"letters": "39",
+			"track": "Listening",
+			"title": "No tracker follows a free tempo well enough to chart it: Beat This keeps the beats and splits the bars, every DBN keeps the bar and loses the beats",
+			"eyebrow": "Study 39 · free tempo · 408 cells · $0",
+			"published": "2026-11-10",
+			"indexLine": "Eight downbeat systems over 48 performances of Schubert's Winterreise with annotated bars, the proxy for acoustic demos without a fixed tempo, plus three steadily drifting 1930s jazz 78s. Beat This with its minimal peak-picking follows the rubato, finding 86 percent of the annotated downbeats within 70 milliseconds, but places a half bar on 14 of the 48 and a strict bar on only 6. Every Dynamic Bayesian Network, Beat This's own included, does the opposite: it holds a bar length on up to 24 of 48 and loses the beats under it. Loosening madmom's tempo penalty bought half the predicted recall. On steady drift madmom is best by a wide margin. No system was chartable, recall at least 0.8 at the bar or half bar, on more than 11 of 48 against a floor of 36, so no free-tempo tracker is adopted; the next study on this material is the draft format on Beat This's bars.",
+			"sections": [
+				{
+					"id": "sec-stem-study39",
+					"eyebrow": "Listening",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-freetempo39",
+						"summary": "Eight downbeat systems against annotated bars on 48 Winterreise performances and three JAAH 78s"
+					},
+					"body": [
+						{
+							"heading": "The Corpus and the Measure",
+							"html": "The target is a live acoustic demo without a fixed tempo. Until real demos arrive the bench used the Schubert Winterreise Dataset, 24 songs in two recorded editions, a 2006 studio recording and a 1933 one, with every bar annotated, and three steadily drifting jazz 78s from the JAAH annotations as a second kind of free tempo. Eight systems ran at zero model spend: Beat This in its big and small checkpoints with the minimal peak-picking postprocessor, the big one with the madmom Dynamic Bayesian Network added, madmom's own network at four tempo-transition penalties, and madmom allowing bars of six. Each was scored by precision and recall of its downbeats within 70 and 150 milliseconds of the annotated bars, by whether its median bar matched the annotated bar strictly or at a metrical fold, and by a registered chartable test: recall of at least 0.8 with the bar at unity or the half."
+						},
+						{
+							"heading": "Two Opposite Failures",
+							"html": "Beat This with peak-picking follows the rubato: the big model finds 86 percent of the annotated downbeats within 70 milliseconds, the small one 75. But each places too many downbeats, precision around a half, and the big model's median bar is half the annotated one on 14 of 48 performances with a strict bar on only 6. Every Dynamic Bayesian Network inverts this. Beat This with the DBN holds a strict bar on 24 of 48 and finds 54 percent of the downbeats; madmom holds 16 to 17 strict bars and finds 37 to 45 percent. Loosening madmom's transition penalty from 100 to 10 raised its recall by 0.08, half the predicted 0.15, and cost it chartable performances. The DBN's trouble on lieder is not the transition cost alone but the assumption of a tempo to transition between."
+						},
+						{
+							"heading": "Steady Drift Is Different",
+							"html": "On the three jazz 78s, which drift steadily rather than breathe, the order reverses as predicted: madmom at its default penalty is best by a wide margin, F 0.97 at 150 milliseconds against 0.75 for Beat This, and its bar is strict on all three. The 1933 Winterreise edition decides more than predicted: the small Beat This model loses 0.16 of recall from the 2006 to the 1933 recording and the DBN systems 0.10 to 0.16, while the big peak-picking model and madmom at its default are indifferent. On poor audio the model size matters more than the postprocessor."
+						},
+						{
+							"heading": "Predictions and Decision",
+							"html": "Right: the big Beat This model's recall at or above 0.75, the DBN below peak-picking on the lieder, and madmom best on the 78s. Wrong: the loosened penalty's gain, and the two editions agreeing within 0.10 for every system, which held only for the two systems whose numbers were already public. No system was chartable on more than 11 of 48 against a registered floor of 36, so the decision rule adopts no free-tempo tracker. The best available bar lines for the next study are the big Beat This model's at the half-bar fold where it sits, since Study 37 showed half-bar drafts grade no worse, and that study asks the format question: two chords a bar on recordings where the harmony changes 1.5 times a bar."
+						}
+					]
+				}
+			]
+		},
+		{
 			"slug": "40",
 			"letters": "40",
 			"track": "Listening",
