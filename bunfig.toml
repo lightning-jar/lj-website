@@ -1,0 +1,6 @@
+# Supply-chain cooldown: never resolve a version published in the last
+# 7 days (seconds). Bun applies this to ranges, including transitive
+# dependencies; exact pins bypass it, so scripts/deps-update.ts enforces
+# the same rule when it moves a pin. Added 2026-11-10.
+[install]
+minimumReleaseAge = 604800

@@ -1,0 +1,111 @@
+# Weekly dependency update, straight to production (Kevin's call,
+# 2026-11-10). scripts/deps-update.ts does the work in its own worktree:
+# same-line releases at least 7 days old, gated by check, tests (including
+# the supply-chain lockfile watchlist), Biome and a full build, then pushed
+# to production and dev. Majors and too-new releases are listed, never
+# applied. Exit codes: 0 nothing to update (no email), 3 shipped, 4 stopped
+# on purpose (gate failed, push conflict, agent-surface alert), 1 script
+# error. The script's stdout is the email body (double quotes and color
+# codes already stripped, see emailSafe). prod-smoke, every 30 minutes,
+# then confirms production is serving the pushed sha.
+#
+# Tuesday 14:00 UTC: a US weekday morning, so a deploy lands while someone
+# is around to read the email. Clear of findings-sweep (Mondays 06:30).
+id: befacf9c-ae23-4c9c-91fa-897293ae3065
+name: deps-update
+description: Weekly same-line dependency update, gated, pushed to production; email on ship or stop
+version: 1
+tags:
+  team: lj-website
+  pattern: maintenance
+trigger:
+  schedule: "0 14 * * 2"
+
+jobs:
+  - name: update
+    steps:
+      - name: run-update
+        task:
+          type: behavior
+          behavior: lj-ops-script
+          methodName: execute
+          inputs:
+            script: scripts/deps-update.ts
+            args: ""
+            ignoreExitCode: true
+            timeoutMs: 2400000
+        dataOutputOverrides:
+          - specName: result
+            lifetime: 180d
+            tags:
+              audit: deps-update
+
+      - name: notify-shipped
+        dependsOn:
+          - step: run-update
+            condition:
+              type: succeeded
+        guard: ${{ data.latest("lj-ops-script", "result").content.exitCode != 3 }}
+        allowFailure: true
+        task:
+          type: behavior
+          behavior: replicator-notify
+          methodName: execute
+          inputs:
+            subject: "lj-website: weekly package update shipped"
+            body: ${{ data.latest("lj-ops-script", "result").content.stdout }}
+
+      - name: notify-stopped
+        dependsOn:
+          - step: run-update
+            condition:
+              type: succeeded
+        guard: ${{ data.latest("lj-ops-script", "result").content.exitCode != 4 }}
+        allowFailure: true
+        task:
+          type: behavior
+          behavior: replicator-notify
+          methodName: execute
+          inputs:
+            subject: "lj-website: weekly package update STOPPED, nothing pushed"
+            body: ${{ data.latest("lj-ops-script", "result").content.stdout }}
+
+      - name: notify-script-error
+        dependsOn:
+          - step: run-update
+            condition:
+              type: succeeded
+        guard: >-
+          ${{ data.latest("lj-ops-script", "result").content.exitCode == 0
+              || data.latest("lj-ops-script", "result").content.exitCode == 3
+              || data.latest("lj-ops-script", "result").content.exitCode == 4 }}
+        allowFailure: true
+        task:
+          type: behavior
+          behavior: replicator-notify
+          methodName: execute
+          inputs:
+            subject: "lj-website: weekly package update SCRIPT ERROR"
+            body: >-
+              scripts/deps-update.ts failed (registry, git or setup error, not
+              a gate verdict). Inspect: swamp workflow history deps-update on
+              lj-bench, run-update step log. If the worktree at
+              ~/projects/.worktrees/lj-website-deps exists, it holds the
+              half-finished state.
+
+      - name: notify-run-broken
+        dependsOn:
+          - step: run-update
+            condition:
+              type: failed
+        allowFailure: true
+        task:
+          type: behavior
+          behavior: replicator-notify
+          methodName: execute
+          inputs:
+            subject: "lj-website: weekly package update did not run"
+            body: >-
+              The deps-update step itself failed (timeout or behavior error).
+              Inspect: swamp workflow history deps-update on lj-bench. Check
+              whether production was pushed before it died.

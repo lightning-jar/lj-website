@@ -157,7 +157,7 @@ Blog copy follows house rules: no em/en dashes in prose, plain phrasing over cle
 
 ## Testing
 
-**Vitest** (config: `vitest.config.ts`), 416 tests in `tests/*.test.ts`.
+**Vitest** (config: `vitest.config.ts`), 426 tests in `tests/*.test.ts`.
 
 ```bash
 bun run test                         # Run all tests
@@ -203,6 +203,19 @@ Deployed to Vercel. Configuration in `vercel.ts` (typed via `@vercel/config`) in
 - 301 redirects for legacy URLs
 - No trailing slashes
 - Build/install commands and output directory
+
+**Weekly dependency updates (automated, straight to production).** The
+swamp `deps-update` workflow (`ops/swamp/workflows/`, Tuesdays 14:00 UTC)
+runs `scripts/deps-update.ts` in its own worktree
+(`~/projects/.worktrees/lj-website-deps`, never the shared checkout). It
+moves exact pins and `^` ranges to the newest same-line release (same
+major; same minor under 0.x) that has been on npm at least 7 days, gates on
+check, tests, Biome and build, then pushes to production and dev and emails.
+Majors and too-new releases are listed in the email, never applied: do
+those by hand. `bunfig.toml` sets the same 7-day `minimumReleaseAge` for
+every install (Bun lets exact pins bypass it, which is why the script checks
+pins itself). Try it safely with
+`bunx varlock run -- bun scripts/deps-update.ts --dry-run`.
 
 **Firewall bypass for probes.** Vercel's Security Checkpoint sometimes
 challenges plain requests from this VM (403/429 with
