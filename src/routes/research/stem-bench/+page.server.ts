@@ -18,6 +18,8 @@ const seriesSlugs: string[] = [
 	"the-band-was-right",
 	"the-witnesses-were-right",
 	"the-file-that-needed-no-stems",
+	"the-detector-not-the-drafter",
+	"the-bar-that-was-three-bars-long",
 ];
 
 function buildSeriesArticles(allBlogArticles: { frontMatter: FrontMatter }[]) {
