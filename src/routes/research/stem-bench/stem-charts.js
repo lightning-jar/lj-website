@@ -3320,7 +3320,7 @@ export function initStemCharts() {
 			["Arm 0, bar grid: quality positions lost \u00b7 hint already wrong \u00b7 power chord \u00b7 model's own", "40 of 97 \u00b7 25 \u00b7 13 \u00b7 2", "38 of 91 \u00b7 12 \u00b7 25 \u00b7 1", "\u2014"],
 			["paired takes: qualities up \u00b7 down \u00b7 roots down", "6 takes paired with the control: up 6 \u00b7 down 1 \u00b7 roots down 0 (both sheets together)", "\u2014", "up 1 \u00b7 down 0 \u00b7 roots down 1 (50 \u2192 48, class unchanged)"],
 			["good drafts, production \u2192 quality clause", "1 of 6 \u2192 2 of 6 (04 from confidently wrong to good)", "2 of 4 answered (2 refused) \u2192 3 of 6", "8 of 10 \u2192 8 of 10"],
-			["half-diminished spelled (m7b5)", "0 of 6 \u2192 3 of 6", "0 of 4 \u2192 4 of 6", "\u2014"],
+			["half-diminished spelled (m7b5)", "1 of 6 \u2192 3 of 6", "2 of 4 answered \u2192 4 of 6", "\u2014"],
 			["drafts with a power chord", "1 of 6 \u2192 3 of 6", "2 of 4 \u2192 2 of 6", "\u2014"],
 			["content-filter stops", "0 \u2192 0", "2 of 6 \u2192 0 of 6", "0 \u2192 0"],
 		],
