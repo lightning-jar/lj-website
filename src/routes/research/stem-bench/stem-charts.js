@@ -3312,6 +3312,38 @@ export function initStemCharts() {
 		"Registered ca362ee (docs/BRIEF-STUDY39.md) before any tracker ran; zero model spend; 51 recordings \u00d7 8 systems. Winterreise: Schubert Winterreise Dataset v2.1, 24 songs in the 2006 and 1933 editions, annotated bars; JAAH: three 1930s jazz 78s with annotated bars. Group medians. Predictions: P1, P3, P4 right; P2 (loosened penalty gains 0.15 of recall) and P5 (editions agree within 0.10 for every system) wrong. S39-D1: no system chartable on 75 percent, no free-tempo tracker adopted.",
 	);
 
+	// --- Study 43: the draft format ---
+	table(
+		"tbl-format43",
+		["set", "bar grid (as read)", "half grid (two cells a bar)", "Study 38 on madmom bars"],
+		[
+			["dense sheet SS2-107-Ab, 6 takes: roots right of 14", "14, 14, 14, 12, 11, 14 \u00b7 1 good", "14, 14, 14, 12, 14, 14 \u00b7 1 good", "11, 14, 10, 11, refused, 13 \u00b7 3 confidently wrong"],
+			["dense sheet: qualities right of 11", "9, 7, 2, 7, 8, 7", "7, 7, 1, 9, 9, 7", "7, 7, 3, 7, \u2014, 6"],
+			["control sheet SS2-88-F, 6 takes: roots right of 14", "refused, 14, 12, refused, 14, 14 \u00b7 2 good", "14, 14, 14, 14, 14, 14 \u00b7 4 good", "14, 14, 12, 13, 14, 14 \u00b7 4 good"],
+			["guitar, 12 takes: half grid against bar grid", "\u2014", "lifts 2 \u00b7 lowers 0 \u00b7 equal 8 \u00b7 roots median 1.00 both", "\u2014"],
+			["Winterreise, 8 shortest songs: roots median", "0.36 (7 graded, 1 refused) \u00b7 D911-19 good at 37/41", "0.58 \u00b7 lifts 5 \u00b7 lowers 2 \u00b7 none good", "0.25 \u00b7 none good"],
+			["input tokens, half grid against bar grid \u00b7 spend", "126,701", "141,474 (1.12\u00d7) \u00b7 $1.54 of $3", "\u2014"],
+		],
+		"Registered 8bfdacd (docs/BRIEF-STUDY43.md) before any draft. Study 41's pipeline verbatim on Beat This small0's downbeats; the half grid splits each bar at the tracker beat nearest its middle, typed tempo scaled to the cell. Sequence grading (LCS over collapsed roots and quality families), Study 35's class rule (roots under 80 % confidently wrong; roots 90 % and qualities 80 % good). Three drafts stopped at the gateway's content filter with empty text, counted and ungraded. Predictions: P4 right; P1, P2, P3 wrong (P3 at 0.58 against 0.60). S43-D1: no grid change.",
+	);
+
+	// --- Study 44: grid rules ---
+	table(
+		"tbl-gridrules44",
+		["measure", "threshold", "census readings removed (of 261)", "bar wrong at every fold among them (of 27)", "bar right at some fold among them"],
+		[
+			["the app's share after joining", "< 0.6 (the app's rule)", "35", "13", "22"],
+			["the app's share after joining", "< 0.7 (the registered criterion's pick)", "57", "17", "40"],
+			["the app's share after joining", "< 0.4 (the bench's judgment)", "12", "5", "7"],
+			["share as read (before joining)", "< 0.6", "62", "17", "45"],
+			["fold-tolerant share", "< 0.6", "19", "8", "11"],
+			["beat interval CV", "> 0.3", "61", "12", "49"],
+			["joining: bar count against the declared count", "census: toward 73 \u00b7 away 61", "at the declared level: toward 44 \u00b7 away 36 \u00b7 mean error 8.7 % \u2192 6.1 %", "gravity 118 \u2192 94 bars (94 declared), share 0.46 \u2192 0.84", "the app's five: toward 2 \u00b7 away 2"],
+			["mop heart, 3/4 at 224: share \u00b7 stands", "small0 0.30 \u00b7 no", "final0 0.47 \u00b7 no", "final0 + DBN 1.00 \u00b7 yes, 3/4 at 111", "madmom 1.00 \u00b7 yes, 3/4 at 111"],
+		],
+		"Registered f007124 (docs/BRIEF-STUDY44.md) before the run; $0. The app's trackerBarGrid.ts and beatThisGrid.ts (dev 36e7a919) ported verbatim and pinned to its thirteen tests. Readings: Beat This small0 over the 261-song Josh Woodward census (Study 36b, declared tempo and meter), the ten Woodward songs and five MMKK recordings (Study 36), the twelve Study 43 guitar takes; 887 cells with final0, final0 + DBN and madmom beside. Among the 22 drafts on small0 bars the app's rule removes two sound drafts and misses the one confidently wrong (share 0.93). The app's beats-per-bar counts match the package on all five of its recordings. Predictions: P2, P3, P5 right; P1, P4 wrong.",
+	);
+
 	// --- Study 42: the export ---
 	table(
 		"tbl-export42",

@@ -3146,6 +3146,88 @@
 					]
 				}
 			]
+		},
+		{
+			"slug": "43",
+			"letters": "43",
+			"track": "Drafting",
+			"title": "Two cells a bar on fast-moving harmony: the dense guitar sheet was a quality gap, and the lieder lift but stay wrong",
+			"eyebrow": "Study 43 · the draft format · 40 drafts · $1.54",
+			"published": "2026-11-11",
+			"indexLine": "The two failures left on the automatic chart looked like one failure: a one-chord-per-bar draft cannot score a bar with two chords. The study drafted twelve GuitarSet takes and the eight shortest Winterreise songs twice each on Beat This small's bars, once as read and once with each bar split at its middle beat. The premise was wrong on the guitar: the dense sheet is one chord a bar with repeats, its roots are already right on the tracker's bars, and what holds five of six takes below good is chord quality. On the lieder the half grid lifted the root median from 0.36 to 0.58 and left every song confidently wrong. One song reached good on the tracker's bars as read, the first Winterreise song to do so. No grid change recommended.",
+			"sections": [
+				{
+					"id": "sec-stem-study43",
+					"eyebrow": "Drafting",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-format43",
+						"summary": "Root and quality scores by grid for the guitar takes and the lieder, beside Study 38's madmom-bar drafts"
+					},
+					"body": [
+						{
+							"heading": "The Premise, and What Was Wrong With It",
+							"html": "Study 38's three confidently wrong guitar drafts all came from one GuitarSet sheet with fourteen chord positions in sixteen bars, and the Winterreise songs average a chord change and a half a bar. The draft writes one chord per cell and the pipeline hands it one cell per bar, so the bench registered a controlled test: the same pipeline, the same tracker's bars, each item drafted on the bar as read and on the bar split at the beat nearest its middle. The sheet turned out to be one chord a bar with two repeats, so the format was never its ceiling. Its earlier failures were madmom's bar lines; on Beat This small's bars as read, four of six takes score every root right and the fifth misses two."
+						},
+						{
+							"heading": "The Guitar Gap Is Quality",
+							"html": "What keeps five of the six dense-sheet takes below good is the quality column: seven of eleven on four takes and two of eleven on one. The sheet carries a dominant seventh and two minor chords, and the drafts write the roots and miss the colours. Splitting the bar changed nothing on eight of the twelve takes, lifted two, and lowered none. The acoustic guitar question therefore moves from the tracker and the grid to the drafting prompt and the per-bar hints, where the chord quality is decided."
+						},
+						{
+							"heading": "The Lieder Lift and Stay Wrong",
+							"html": "On the eight shortest Winterreise songs the half grid lifted five, lowered two, and moved the root median from 0.36 to 0.58, two hundredths short of the registered prediction. Every song remained confidently wrong on the half grid, and one dropped hard where 283 cells of four tenths of a second were more than the draft could hold together. The format was part of the ceiling on fast-moving harmony and the audio and the truth are the rest. Unlooked for, one song drafted good on the tracker's bars as read, where the same recording on madmom's bars had scored eighteen of forty-one: the first Winterreise song to reach good in the program, with nothing typed."
+						},
+						{
+							"heading": "Decision and Disclosures",
+							"html": "The half grid lifted seven of twenty items and lowered two, so the registered rule recommends no grid change: two cells a bar cost twelve percent more input and buy nothing where chords change by the bar. Three of the forty drafts stopped at the gateway's content filter with empty text, each at the bar grid while the same audio drafted normally at the half grid; they are counted as drafts, left ungraded and not retried. Spend was $1.54 against a $3 fence. One prediction right and three wrong, one of those by two hundredths."
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "44",
+			"letters": "44",
+			"track": "Listening",
+			"title": "Two rules on the tracker's bars, measured: joining is a wash with one clear win, and the steady share enriches without separating",
+			"eyebrow": "Study 44 · grid rules · 887 cells · $0",
+			"published": "2026-11-11",
+			"indexLine": "The app now draws its generated draft on Beat This small's downbeats with two rules from five of its own recordings: adjacent half bars are joined, and a reading whose bars do not settle on one beat count is not used. The bench ported both rules verbatim, pinned them to the app's tests, and measured them over the 261-song census, the Woodward songs, the app's five recordings and the Study 43 guitar takes. Joining moves the bar count toward the artist's count about as often as away, but rescues a 6/8 song the steadiness rule would otherwise reject. The steady share removes more right readings than wrong at the app's threshold and misses the one bad draft. The 3/4 at 224 that tripped the rule trips the big checkpoint too.",
+			"sections": [
+				{
+					"id": "sec-stem-study44",
+					"eyebrow": "Listening",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-gridrules44",
+						"summary": "What each steadiness measure removes at each threshold on the census, and what joining does to the bar count"
+					},
+					"body": [
+						{
+							"heading": "The Rules, Ported",
+							"html": "The app's grid code was ported line for line and pinned to its own thirteen test cases, so the bench measured the rule the app ships and not a reading of it. All five of the app's dev recordings were already in the bench's corpus with package readings committed, and the app's beats-per-bar table matched those readings count for count on all five, which answers the port comparison at the bar level before any new work."
+						},
+						{
+							"heading": "Joining",
+							"html": "Over the census, joining moves the tracker's bar count toward the declared count on 73 songs and away on 61; among the 180 songs the tracker reads at the declared level it is 44 to 36, with the mean count error falling from 8.7 to 6.1 percent. Two of the app's own five moved toward and two away, the latter two having been under the declared count before joining, so their joined pairs were by count real bars. The clear win is a 6/8 song the tracker reads as bars of three and six by turns: joining turns it into 94 bars against 94 declared and lifts its steady share from 0.46 to 0.84, without which a good draft fails the second rule. The bench's reading is to keep joining, because its failure is cheaper than its success is valuable."
+						},
+						{
+							"heading": "The Steady Share",
+							"html": "At the app's threshold the share removes 35 census readings, 13 with the bar wrong at every fold and 22 with it right at some fold, so it enriches for a wrong bar without separating. Among the 22 drafts the bench holds on this tracker's bars it removes two sound drafts and misses the one confidently wrong draft, whose share is 0.93. A fold-tolerant share and the beat interval's coefficient of variation were swept beside it and did no better at any threshold. The registered criterion lands on 0.7, which the bench reports and does not like; its labelled judgment is 0.4, the least that keeps the one chaotic reading off the chart while keeping both good 6/8 drafts."
+						},
+						{
+							"heading": "The Fast Waltz",
+							"html": "The 3/4 at 224 beats per minute is not a weakness of the small checkpoint: the big one fails the same rule with the same beat and a different modal bar, and only the dynamic Bayesian postprocessor, like madmom, reads it steadily, at half the declared tempo. The program's other 3/4 stands under both checkpoints, the census's one 3/4 is steady, and its seventeen fastest songs have a median share of 0.88. Fast is not the problem; this song's bar is. The fold-tolerant share tells the case apart from the small checkpoint's output alone on this corpus; the beat interval's variation does not."
+						}
+					]
+				}
+			]
 		}
 	]
 }
