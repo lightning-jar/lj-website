@@ -3312,6 +3312,21 @@ export function initStemCharts() {
 		"Registered ca362ee (docs/BRIEF-STUDY39.md) before any tracker ran; zero model spend; 51 recordings \u00d7 8 systems. Winterreise: Schubert Winterreise Dataset v2.1, 24 songs in the 2006 and 1933 editions, annotated bars; JAAH: three 1930s jazz 78s with annotated bars. Group medians. Predictions: P1, P3, P4 right; P2 (loosened penalty gains 0.15 of recall) and P5 (editions agree within 0.10 for every system) wrong. S39-D1: no system chartable on 75 percent, no free-tempo tracker adopted.",
 	);
 
+	// --- Study 46: the hint's ceiling ---
+	table(
+		"tbl-hint46",
+		["input (bars)", "root right", "quality family right", "both right", "hint absent (N.C.)"],
+		[
+			["comping, Rock + Singer-Songwriter (1,056)", "95.1 %", "83.1 %", "82.4 %", "under 1 %"],
+			["comping, Bossa Nova + Jazz + Funk (1,584)", "65.8 %", "56.1 %", "52.7 %", "8 %"],
+			["comping, all five styles (2,640)", "77.5 %", "66.9 %", "64.6 %", "8.2 %"],
+			["single melodic line, all styles (2,640)", "11.1 %", "21.1 %", "7.8 %", "56.2 %"],
+			["by the sheet's quality, comping: major (1,680) \u00b7 minor (600) \u00b7 dominant (240) \u00b7 diminished (120)", "81 \u00b7 76 \u00b7 74 \u00b7 38 %", "77 \u00b7 63 \u00b7 41 \u00b7 2 %", "\u2014", "8 \u00b7 8 \u00b7 9 \u00b7 10 %"],
+			["against the performed chords instead of the sheet", "unchanged", "comping +4.8 \u00b7 solo \u22120.3 \u00b7 all +2.3 points", "\u2014", "\u2014"],
+		],
+		"Registered 3bcaa68 (docs/BRIEF-STUDY46.md) before the run; $0, no gateway call. All 360 GuitarSet excerpts (6 players, 5 styles, comp and solo), 5,280 bars whose sheet chord parses. The hint is the bench's ChordMini majority vote per annotated bar (scripts/study10/nchord.py), the per-bar hint every draft since Study 23 received; truth is the lead sheet's chord at the bar start; families are Study 34's. Predictions: P1 (comp roots at least 85 %) wrong at 77.5; P2 (family at least 70 % overall) wrong at 44.0; P3 (diminished under 25 %) right at 1.7; P4 (dominant under 60 %) right at 23.8; P5 (solos at least 10 points under comping on roots) right by 66; P6 (performed truth at least 3 points above the sheet) wrong at +2.3. S46-D1: minor, dominant and diminished under 50 % over all excerpts, so the hint's quality is recommended advisory for those families; the comp-only cut is a labelled post-hoc view.",
+	);
+
 	// --- Study 45: chord quality ---
 	table(
 		"tbl-quality45",

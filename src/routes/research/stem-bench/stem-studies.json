@@ -3273,6 +3273,47 @@
 					]
 				}
 			]
+		},
+		{
+			"slug": "46",
+			"letters": "46",
+			"track": "Drafting",
+			"title": "The hint's ceiling on acoustic guitar: the chord model's root holds on strummed material, and its sevenths and diminished chords hold nowhere",
+			"eyebrow": "Study 46 · hint ceiling · 360 excerpts · $0",
+			"published": "2026-11-11",
+			"indexLine": "Study 45 traced most of the chord quality lost on the dense guitar sheet to bars where the chord model's hint was already wrong. This study measured that hint directly: over all 360 GuitarSet excerpts, 5,280 bars across five styles, comping and single-line solos, how often the per-bar hint the drafts see names the right root and the right quality family. On rock-shaped comping the root is right 95 percent of the time and the quality family 83 percent; on jazz-shaped comping 66 and 56. By quality, on comping, major is right 77 percent, minor 63, dominant seventh 41 and diminished 2. On a single melodic line the hint is absent on 56 percent of bars. The bench recommends the prompt treat the hint's root as reliable and its quality as advisory for sevenths and diminished chords, the sentence to be tested in a paired study.",
+			"sections": [
+				{
+					"id": "sec-stem-study46",
+					"eyebrow": "Drafting",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-hint46",
+						"summary": "The chord model's per-bar hint against the lead sheet, by input and by the sheet's quality family"
+					},
+					"body": [
+						{
+							"heading": "The Measurement",
+							"html": "Every GuitarSet excerpt was decoded as the drafts hear it and the chord model's per-bar vote computed on the annotated bars, the same hint Studies 23 to 45's drafts received. The truth per bar is the lead sheet's chord at the bar start, with the player's performed chords as a secondary truth. Each bar scores root right and quality family right, tallied by the sheet's family with a confusion table of what the hint said instead. No model call was made; the study cost nothing."
+						},
+						{
+							"heading": "Where the Root Holds",
+							"html": "On comping the root is right on 77 percent of bars, but the average hides a split: 96 percent on Rock and 94 on Singer-Songwriter, 79 on Bossa Nova, 61 on Jazz and 58 on Funk. Study 1's trust in the hint's root was earned on a rock-shaped corpus and holds there. On a single melodic line the hint votes no chord on 56 percent of bars and names the right root on 11 percent; a lead line alone gives the model nothing to follow."
+						},
+						{
+							"heading": "Where the Quality Fails",
+							"html": "On comping the quality family is right on 77 percent of major bars and 63 percent of minor bars. Dominant sevenths are right on 41 percent, heard as a plain major more often than as a seventh. Diminished and half-diminished chords are right on 2 percent, four bars of 240 over the whole set, heard as a minor or a major; the vocabulary carries the label and the model does not reach for it. Against the players' performed chords every figure rises by two to five points, so the players' departures from the sheet explain little of the gap."
+						},
+						{
+							"heading": "Predictions and Decision",
+							"html": "Three of six predictions held: the diminished and dominant families fell under their lines and the solos fell far under comping. Three did not: comping roots missed 85 percent, the overall family rate missed 70 percent, and the performed truth lifted the figures by less than three points. By the registered rule, over all excerpts, minor, dominant and diminished fall under 50 percent, so the bench recommends the hint's quality be treated as advisory for those families; on the labelled comp-only view, minor clears the line and dominant and diminished do not. The sentence that tells the model the hint's root is reliable and its quality is not belongs to a later paired study."
+						}
+					]
+				}
+			]
 		}
 	]
 }
