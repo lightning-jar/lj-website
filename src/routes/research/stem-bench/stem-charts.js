@@ -3312,6 +3312,21 @@ export function initStemCharts() {
 		"Registered ca362ee (docs/BRIEF-STUDY39.md) before any tracker ran; zero model spend; 51 recordings \u00d7 8 systems. Winterreise: Schubert Winterreise Dataset v2.1, 24 songs in the 2006 and 1933 editions, annotated bars; JAAH: three 1930s jazz 78s with annotated bars. Group medians. Predictions: P1, P3, P4 right; P2 (loosened penalty gains 0.15 of recall) and P5 (editions agree within 0.10 for every system) wrong. S39-D1: no system chartable on 75 percent, no free-tempo tracker adopted.",
 	);
 
+	// --- Study 45: chord quality ---
+	table(
+		"tbl-quality45",
+		["measure", "dense sheet SS2-107-Ab", "control sheet SS2-88-F", "ten Woodward songs (guard)"],
+		[
+			["Arm 0, bar grid: quality positions lost \u00b7 hint already wrong \u00b7 power chord \u00b7 model's own", "40 of 97 \u00b7 25 \u00b7 13 \u00b7 2", "38 of 91 \u00b7 12 \u00b7 25 \u00b7 1", "\u2014"],
+			["paired takes: qualities up \u00b7 down \u00b7 roots down", "6 takes paired with the control: up 6 \u00b7 down 1 \u00b7 roots down 0 (both sheets together)", "\u2014", "up 1 \u00b7 down 0 \u00b7 roots down 1 (50 \u2192 48, class unchanged)"],
+			["good drafts, production \u2192 quality clause", "1 of 6 \u2192 2 of 6 (04 from confidently wrong to good)", "2 of 4 answered (2 refused) \u2192 3 of 6", "8 of 10 \u2192 8 of 10"],
+			["half-diminished spelled (m7b5)", "0 of 6 \u2192 3 of 6", "0 of 4 \u2192 4 of 6", "\u2014"],
+			["drafts with a power chord", "1 of 6 \u2192 3 of 6", "2 of 4 \u2192 2 of 6", "\u2014"],
+			["content-filter stops", "0 \u2192 0", "2 of 6 \u2192 0 of 6", "0 \u2192 0"],
+		],
+		"Registered cedaf0b (docs/BRIEF-STUDY45.md) before any draft. Arm 0 ($0): Study 43's 24 guitar cells, hints recomputed with the same ChordMini vote, truth the sheet's chord at each cell, each quality-bearing bar classed by Study 34's quality families. Arm 1 ($1.46 of $2.50): Study 43's pipeline on Beat This small0's bars as read with the production system prompt's rock clause replaced by a style-neutral quality clause (src/study45/prompt45.ts, pinned to differ in that clause only); twelve SS2 takes paired with Study 43's bar-grid drafts, ten Woodward songs paired with Study 41's. Predictions: P1, P3, P4 right; P2 (two more good) and P5 (no power chords) wrong. S45-D1 by the registered rule: reported without a recommendation; the runner's printed line was looser and is corrected in the brief.",
+	);
+
 	// --- Study 43: the draft format ---
 	table(
 		"tbl-format43",

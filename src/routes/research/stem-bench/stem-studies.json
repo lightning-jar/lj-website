@@ -3193,7 +3193,7 @@
 			"letters": "44",
 			"track": "Listening",
 			"title": "Two rules on the tracker's bars, measured: joining is a wash with one clear win, and the steady share enriches without separating",
-			"eyebrow": "Study 44 · grid rules · 887 cells · $0",
+			"eyebrow": "Study 44 · grid rules · 891 cells · $0.35",
 			"published": "2026-11-11",
 			"indexLine": "The app now draws its generated draft on Beat This small's downbeats with two rules from five of its own recordings: adjacent half bars are joined, and a reading whose bars do not settle on one beat count is not used. The bench ported both rules verbatim, pinned them to the app's tests, and measured them over the 261-song census, the Woodward songs, the app's five recordings and the Study 43 guitar takes. Joining moves the bar count toward the artist's count about as often as away, but rescues a 6/8 song the steadiness rule would otherwise reject. The steady share removes more right readings than wrong at the app's threshold and misses the one bad draft. The 3/4 at 224 that tripped the rule trips the big checkpoint too.",
 			"sections": [
@@ -3224,6 +3224,51 @@
 						{
 							"heading": "The Fast Waltz",
 							"html": "The 3/4 at 224 beats per minute is not a weakness of the small checkpoint: the big one fails the same rule with the same beat and a different modal bar, and only the dynamic Bayesian postprocessor, like madmom, reads it steadily, at half the declared tempo. The program's other 3/4 stands under both checkpoints, the census's one 3/4 is steady, and its seventeen fastest songs have a median share of 0.88. Fast is not the problem; this song's bar is. The fold-tolerant share tells the case apart from the small checkpoint's output alone on this corpus; the beat interval's variation does not."
+						},
+						{
+							"heading": "Addendum: Joining and the Chords",
+							"html": "With the approved spend of thirty-five cents, the four Woodward songs where joining removes four or more bar lines were drafted again on the joined grid. All four scored identically to the drafts on the bars as read in roots, qualities and class, with five, five, four and twenty-four fewer bars. Joining changes the chart's bar count and not its chords, so the recommendation to keep it rests on the bar count alone."
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "45",
+			"letters": "45",
+			"track": "Drafting",
+			"title": "Chord quality on the one-chord-a-bar sheet: the hint carries most of the loss, and a style-neutral clause recovers some of it",
+			"eyebrow": "Study 45 · chord quality · 46 cells · $1.46",
+			"published": "2026-11-11",
+			"indexLine": "Study 43 left the dense GuitarSet sheet with its roots right and its qualities wrong. This study first attributed every lost quality position in Study 43's guitar drafts to its cause: most sit on bars where the chord model's hint was already wrong, since its vocabulary has no half-diminished chord, and the rest are power chords on two thin takes. It then replaced the one clause of the production prompt that asks the model to think like a rock musician with a style-neutral instruction about chord quality, pinned to differ in nothing else, and drafted the twelve guitar takes and the ten modern songs. Qualities rose on six takes and fell on one, the only confidently wrong draft on the shipped tracker's bars became good, the half-diminished was named in seven of twelve drafts, and the modern songs lost nothing. Power chords persisted on the thin takes. Reported without a recommendation by the registered rule; the bench's labelled judgment favours the clause.",
+			"sections": [
+				{
+					"id": "sec-stem-study45",
+					"eyebrow": "Drafting",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-quality45",
+						"summary": "Where the quality was lost, and the paired drafts under production's clause and the quality clause"
+					},
+					"body": [
+						{
+							"heading": "Where the Quality Goes",
+							"html": "For each of Study 43's 24 guitar cells the bench recomputed the per-bar hints with the same chord model, took the sheet's chord at each bar as truth, and classed every quality-bearing bar by what the hint and the draft did. On the dense sheet at the bar grid, 25 of the 40 lost positions are bars where the hint's quality family was already wrong; the model followed the hint on fourteen and wrote a third family on eleven. Thirteen are power chords on one take, and two are bars where the model lost a right hint. The chord model's vocabulary has no half-diminished, so every such bar arrives with a wrong or empty hint."
+						},
+						{
+							"heading": "The Clause",
+							"html": "The production system prompt tells the model to think like a rock musician reading a chart, prefer simple progressions over exotic spellings, and expect power chords and sus chords. The variant replaces that clause with an instruction to name the quality the notes support, a seventh when the seventh sounds, a plain triad when it does not, and a power chord only when neither third sounds, and is pinned by test to differ from production in nothing else. Both the guitar takes and the ten modern songs were drafted under it on the shipped tracker's bars, the modern songs as the guard against a clause that helps a jazz sheet and hurts a rock chart."
+						},
+						{
+							"heading": "What Moved",
+							"html": "On the ten paired guitar takes, qualities rose on six and fell on one, roots fell on none, and the one confidently wrong draft on Beat This small's bars became good with its half-diminished named. Across all twelve takes five drafts are good under the clause against three of the ten production drafts that answered, and the half-diminished is spelled in seven of twelve where production spelled it in none. Power chords did not retreat: five drafts carry one against three before, the two thin takes among them. The modern songs changed in nothing that matters: one quality count up by one, one root count down by two with the class unchanged, eight good drafts before and after."
+						},
+						{
+							"heading": "Decision and Disclosures",
+							"html": "The registered rule required qualities up on six takes and two more good drafts; good rose by one, so the registered outcome is a report without a recommendation, and the runner's own summary line, which used a looser condition and printed a recommendation, is corrected in the brief. The bench's labelled judgment favours the clause on the evidence and names the chord model's missing half-diminished as the larger remaining gap. Two guitar takes whose production drafts had stopped at the gateway's content filter drafted normally under the new clause; the bench records that and draws no causal line from two cases. Spend was $1.46 against a $2.50 fence; predictions P1, P3 and P4 right, P2 and P5 wrong."
 						}
 					]
 				}
