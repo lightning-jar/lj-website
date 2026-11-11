@@ -3312,6 +3312,21 @@ export function initStemCharts() {
 		"Registered ca362ee (docs/BRIEF-STUDY39.md) before any tracker ran; zero model spend; 51 recordings \u00d7 8 systems. Winterreise: Schubert Winterreise Dataset v2.1, 24 songs in the 2006 and 1933 editions, annotated bars; JAAH: three 1930s jazz 78s with annotated bars. Group medians. Predictions: P1, P3, P4 right; P2 (loosened penalty gains 0.15 of recall) and P5 (editions agree within 0.10 for every system) wrong. S39-D1: no system chartable on 75 percent, no free-tempo tracker adopted.",
 	);
 
+	// --- Study 42: the export ---
+	table(
+		"tbl-export42",
+		["item", "static 1500-frame export", "dynamic-length export (cache off)", "Study 10 export (for contrast)"],
+		[
+			["exporter \u00b7 size", "TorchScript, opset 17 \u00b7 9.9 MB", "dynamo, opset 18 \u00b7 10.5 MB", "third-party \u00b7 10.4 MB"],
+			["frame logits vs the package, max abs difference (3 songs)", "3e-5 to 4e-5 at 1500 frames", "1e-5 to 7e-5 at 750, 1500, 3000 frames", "identical at 250 frames; breaks past 300"],
+			["reference inference vs the package, ten songs", "beat F 1.000 \u00b7 downbeat F 1.000 \u00b7 counts identical on 10 of 10", "\u2014", "downbeat F 0.51 to 0.78 \u00b7 bar counts off by up to 82"],
+			["model time per 30 s chunk: torch (16 threads) \u00b7 ONNX Runtime CPU 4 threads \u00b7 1 thread", "0.56 s \u00b7 0.54 s \u00b7 1.31 s", "\u2014", "\u2014"],
+			["ONNX Runtime Web 1.31.1, WebAssembly, Node 22: 1 thread \u00b7 4 requested", "4.46 s \u00b7 4.86 s (threads did not engage)", "\u2014", "\u2014"],
+			["per minute of audio, wasm \u00b7 placement rule (browser if under 15 s)", "8.9 s \u00b7 browser, server fallback at about 1 s", "\u2014", "\u2014"],
+		],
+		"Registered 4792e1f (docs/BRIEF-STUDY42.md) before any run; zero model spend. Exports from the package's small0 checkpoint (sha256 6074be2c), torch 2.15; static export sha256 d57ae630, dynamic 8c009d90; files not committed, hashes are. Timings: mean of 5 after warm-up on the bench VM (16 vCPU EPYC 9554P). Predictions: P1, P2, P3, P5 right; P4 (ONNX Runtime at default threads no slower than torch) wrong, parity at four threads.",
+	);
+
 	// --- Study 41: one tracker ---
 	table(
 		"tbl-onetracker41",
