@@ -3312,6 +3312,28 @@ export function initStemCharts() {
 		"Registered ca362ee (docs/BRIEF-STUDY39.md) before any tracker ran; zero model spend; 51 recordings \u00d7 8 systems. Winterreise: Schubert Winterreise Dataset v2.1, 24 songs in the 2006 and 1933 editions, annotated bars; JAAH: three 1930s jazz 78s with annotated bars. Group medians. Predictions: P1, P3, P4 right; P2 (loosened penalty gains 0.15 of recall) and P5 (editions agree within 0.10 for every system) wrong. S39-D1: no system chartable on 75 percent, no free-tempo tracker adopted.",
 	);
 
+	// --- Study 41: one tracker ---
+	table(
+		"tbl-onetracker41",
+		["song", "declared grid (Studies 34, 35)", "madmom bars (Study 38)", "Beat This small0 bars", "Beat This final0 bars"],
+		[
+			["let it in", "18/21 saved", "18/21 saved", "18/21 saved", "18/21 saved"],
+			["same boat", "15/18 saved", "16/18 saved", "16/18 saved", "16/18 saved"],
+			["gravity (6/8)", "16/26 wrong", "24/26 good", "24/26 good", "24/26 good"],
+			["my favorite regret (6/8)", "26/42 wrong", "40/42 good", "42/42 good (half bar)", "41/42 good (half bar)"],
+			["california lullabye", "49/53 good", "48/53 good", "50/53 good", "48/53 good"],
+			["swansong", "28/30 good", "29/30 good", "29/30 good", "29/30 good"],
+			["afterglow", "15/15 good", "15/15 good", "15/15 good", "15/15 good"],
+			["cherubs", "28/28 good", "28/28 good", "28/28 good", "28/28 good"],
+			["goodbye to spring", "43/43 good", "43/43 good", "43/43 good (half bar)", "43/43 good"],
+			["i'm letting go", "28/33 saved", "33/33 good", "33/33 good", "30/33 good"],
+			["the app's rule: within two roots of madmom on every song, none wrong", "\u2014", "\u2014", "10 of 10, passes", "9 of 10, fails on one"],
+			["holds over the 46 tracker-bar drafts of Study 38: would hold \u00b7 good among them \u00b7 catches of 3 bad", "detected grid: 46 \u00b7 32 \u00b7 3", "drift over 4%: 17 \u00b7 12 \u00b7 1", "under 3 notes a bar: 0 \u00b7 0 \u00b7 0", "\u2014"],
+			["ONNX small0 (Study 10) vs the torch package, ten songs", "downbeat F at 70 ms 0.51 to 0.78", "bar counts off by up to 82", "same spectrogram, 250-frame chunks: logits equal to 0.00", "cause: the export breaks past 300 frames"],
+		],
+		"Registered 2d3dd48 (docs/BRIEF-STUDY41.md) before any draft; Kevin approved the spend. Roots right of bearing against the artist's chart, Study 35 class rule; 20 drafts at $2.01 (the $2.00 fence is a pre-draft check and stood at $1.93 before the last registered draft). Bars are the committed Study 36 readings. Holds are stem-shovel's constants (drift 4 percent, 3 notes a bar). Predictions: P1, P4, P5 right; P2 (the all-ten rule fails) and P6 (ONNX agrees at F 0.95) wrong; P3 unscored.",
+	);
+
 	// --- Study 40: detector sweeps ---
 	table(
 		"tbl-detector40",

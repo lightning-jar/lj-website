@@ -3064,6 +3064,47 @@
 					]
 				}
 			]
+		},
+		{
+			"slug": "41",
+			"letters": "41",
+			"track": "Listening",
+			"title": "Beat This small carries the automatic chart on all ten songs, and the browser-sized export turns out to be the right weights at the wrong window",
+			"eyebrow": "Study 41 · one tracker · 112 cells · $2.01",
+			"published": "2026-11-11",
+			"indexLine": "The app wants to ship one beat tracker for the fully automatic chart and named Beat This small, a 10 MB model with a browser port. The bench redrafted the ten modern songs of Study 38 on its bars as read, and on the big checkpoint's. The small model's drafts are within two roots of madmom's on all ten, seven identical and two better, with none confidently wrong, so the app's rule passes and the chart ships on one tracker. Two of its bars were half bars and cost nothing. The three draft holds were censused against the 46 drafts on a tracker's bars: the detected-grid hold holds everything, the drift hold holds 17 and comes out, the thin-transcription hold fires on nothing and keeps its earlier evidence. The recipe is pinned with hashes, and the 10 MB ONNX export is found to carry the identical weights but to break past 300 frames, so the 5-second chunks it forces make it a different tracker from the 30-second model the census measured.",
+			"sections": [
+				{
+					"id": "sec-stem-study41",
+					"eyebrow": "Listening",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-onetracker41",
+						"summary": "Roots right of bearing on the ten modern songs, four grids; the three draft holds; the ONNX export against the package"
+					},
+					"body": [
+						{
+							"heading": "The Draft on Beat This's Bars",
+							"html": "Study 38 drafted the ten modern songs on madmom's bars. This study ran the same pipeline, Basic Pitch notes, per-bar chord hints, the chart-drafting prompt and the sequence grader against the artist's charts, with the bar lines a Beat This tracker's downbeats as read, its median beat the tempo, its beats per bar the meter. The small checkpoint's drafts are within two roots of madmom's on 10 of 10, identical on seven songs and two roots better on two, with eight graded good and the same two as on every grid just under the quality threshold. The big checkpoint misses the app's rule on one song by three roots, still good, where its bars are the most fragmented of the twenty cells. Two of the small model's ten bars were half bars and the drafts on them scored 42 of 42 and 43 of 43, as Study 37 predicted half bars would."
+						},
+						{
+							"heading": "The Policy With Nothing Typed",
+							"html": "Operationally: every tracker bar is a chart bar, identical neighbours merged afterwards; the tempo is sixty over the median beat interval; the meter is the rounded ratio of median bar to median beat. Nothing is compared when nothing is declared, and the shorter bar is kept when a declared bar exists and the tracker's is half of it. Study 38's label rule had one blind spot, now measured: a modal count of six beats to the bar on a 6/8 song was labelled 4/4 at 143 bpm on a bar that was the true 6/8 bar. The draft did not suffer because the bars were right. The replacement labels from the modal count, six meaning 6/8 at the tempo divided by three, which lands on the declared 48 exactly."
+						},
+						{
+							"heading": "The Holds and the Recipe",
+							"html": "Against the 46 Study 38 drafts on a tracker's bars, the detected-grid hold holds every automatic draft and so filters nothing. The drift hold would hold 17, twelve of them good, and catches one of the three confidently wrong drafts; sixteen of its seventeen sit at a metrical fold of the declared bar, the shorter bar the policy keeps, so it comes out. The thin-transcription hold fires on nothing, the sparsest draft having five notes a bar, so this corpus neither confirms nor refutes it and it keeps its Study 34b evidence. The recipe the bench ran is written down with checkpoint sizes and hashes, the spectrogram parameters, the 30-second chunking, the minimal peak-picking postprocessor and the wall time, about six seconds per minute of audio for the small model on the bench VM."
+						},
+						{
+							"heading": "The ONNX Export",
+							"html": "The bench's own 10 MB ONNX export of the small model, used in Study 10, disagrees with the torch package on the same ten songs, downbeat agreement 0.51 to 0.78 with bar counts off by up to 82. Fed the same spectrogram in 250-frame chunks, its frame logits equal the package's to the second decimal with identical peak counts, so the weights are the same. The export's attention breaks past about 300 frames, which Study 10's runner had recorded and worked around with 5-second chunks, and a tracker with five seconds of context is a different tracker from one with thirty. Study 10's beat numbers were the short-window tracker; Studies 36 to 41 are the long one. The browser port must be an export that runs at the reference window, verified against the package's logits before any census number is trusted. Predictions: three right, two wrong, one unscored; spend overran the two-dollar pre-draft fence by one cent on the last registered draft."
+						}
+					]
+				}
+			]
 		}
 	]
 }
