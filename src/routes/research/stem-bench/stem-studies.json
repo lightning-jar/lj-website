@@ -3351,6 +3351,47 @@
 					]
 				}
 			]
+		},
+		{
+			"slug": "48",
+			"letters": "48",
+			"track": "Parts",
+			"title": "Is a transcribed bass line right often enough to show a bassist? No, and the reason is onsets, not pitch",
+			"eyebrow": "Study 48 · bass lines · 18 cells · $0",
+			"published": "2026-11-12",
+			"indexLine": "The app wants each stem's part written out, starting with the bass as a barmark line on the tracker's beats. Kevin supplied the bass stem and the session's MIDI for six of his own songs, five by MMKK and one by Ghost Ghost, 598 bars and 1,999 notes with exact truth. The study scored three transcriptions note by note, put each on the app's own beats at a sixteenth or a triplet, graded every bar with pitch, octave and slot all required, and wrote the result as barmark. Basic Pitch writes a third of bass notes an octave up, and a bass-range filter removes most of that for free; what remains is onsets, one note in five missed and up to half again as many extra onsets as the part has. Only a steady eighth-note part reaches seventy percent of bars entirely right, and it still has eighteen percent wrong. A monophonic tracker fixes the octave and loses notes. The answer to the app is no, with the next lever named: merging re-triggers and a ghost-note floor.",
+			"sections": [
+				{
+					"id": "sec-stem-study48",
+					"eyebrow": "Parts",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-bass48",
+						"summary": "Three transcriptions of six bass stems against the session MIDI, note by note and bar by bar on the app's beats"
+					},
+					"body": [
+						{
+							"heading": "The Truth",
+							"html": "Each pair, a bass stem and the session's MIDI, went through one committed intake that finds where the stem starts in MIDI time by cross-correlating onsets and then checking pitch class, confirms the offset holds in every thirty seconds, and places the MIDI on the app's mix timeline through the app's own copy of the stem. Every song aligned to a clean bar count. Two defects were found and fixed with the numbers seen disclosed: the MIDI was at written pitch, an octave above where a bass sounds, and the first grader dropped a note played just ahead of a bar line. The stems are Logic's rendering of the MIDI by a sampled bass, so the truth is exact and a miked bass would do worse."
+						},
+						{
+							"heading": "Pitch",
+							"html": "Basic Pitch as the app runs it names the right pitch class on two notes in three and writes 12 to 38 percent of its matched notes an octave up, every error upward and worst in the lowest register on four of six songs. A bass constraint, pitch E1 to C4, one note at a time keeping the lowest, nothing under sixty milliseconds, lifts the octave-exact F from 0.57 to 0.79 up to 0.70 to 0.85. pYIN almost never misses the octave but finds fewer notes and adds more extras, and grades below Basic Pitch on four songs. A second model is not the fix."
+						},
+						{
+							"heading": "Bars",
+							"html": "On the app's stored beats, with the grid chosen per bar from the line's own onsets and a bar right only when every pitch, octave and slot matches with no extra onset: 25 to 39 percent of bars are entirely right on five songs, and 71 percent on Letter Lands, a steady eighth-note part, which still has 18 percent wrong against the registered ten. Quantization is not where the line is lost; on the steady songs 84 to 95 percent of notes land on the right slot. The loss is extra onsets first, re-triggers inside a sustained note and ghost notes, missed onsets second, the grid on the one song whose meter changes, and the octave last."
+						},
+						{
+							"heading": "Decision",
+							"html": "By the registered rule, seventy percent of bars right and at most ten percent wrong on every song, the answer is no for every pipeline. The bench's judgment as a player agrees: a line that is right in two bars of three and wrong in under one in ten would help, and only the steadiest part comes near. The next lever is the onsets, a rule merging same-pitch re-triggers inside a sixteenth and a loudness floor for ghost notes, which the bench can measure against the same truth. Every written line, eighteen transcriptions and six truths, parses in barmark with no error. One of six predictions held; the five that expected more from the register, the constraint, the tracker and the rhythm were wrong."
+						}
+					]
+				}
+			]
 		}
 	]
 }

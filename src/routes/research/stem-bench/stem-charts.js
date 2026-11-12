@@ -3312,6 +3312,21 @@ export function initStemCharts() {
 		"Registered ca362ee (docs/BRIEF-STUDY39.md) before any tracker ran; zero model spend; 51 recordings \u00d7 8 systems. Winterreise: Schubert Winterreise Dataset v2.1, 24 songs in the 2006 and 1933 editions, annotated bars; JAAH: three 1930s jazz 78s with annotated bars. Group medians. Predictions: P1, P3, P4 right; P2 (loosened penalty gains 0.15 of recall) and P5 (editions agree within 0.10 for every system) wrong. S39-D1: no system chartable on 75 percent, no free-tempo tracker adopted.",
 	);
 
+	// --- Study 48: bass lines ---
+	table(
+		"tbl-bass48",
+		["song (bars)", "Basic Pitch: exact F \u00b7 octave errors", "constrained: exact F", "pYIN: exact F", "bars right \u00b7 one error \u00b7 wrong (Basic Pitch)", "notes on the right slot"],
+		[
+			["Peaceful Dreams (109)", "0.572 \u00b7 37 %", "0.730", "0.718", "34 \u00b7 22 \u00b7 44 %", "84 %"],
+			["Interbellum (69)", "0.657 \u00b7 34 %", "0.747", "0.731", "25 \u00b7 22 \u00b7 54 %", "80 %"],
+			["Letter Lands (68)", "0.686 \u00b7 37 %", "0.850", "0.587", "71 \u00b7 12 \u00b7 18 %", "95 %"],
+			["Eat All the Clocks (71)", "0.606 \u00b7 38 %", "0.713", "0.688", "35 \u00b7 21 \u00b7 44 %", "90 %"],
+			["Downline, 5/4 and 3/4 (186)", "0.594 \u00b7 34 %", "0.699", "0.710", "29 \u00b7 26 \u00b7 45 %", "74 %"],
+			["Mop Heart, 3/4 at 224 (95)", "0.788 \u00b7 12 %", "0.853", "0.867", "38 \u00b7 12 \u00b7 51 %", "86 %"],
+		],
+		"Registered, then re-registered twice with the numbers seen disclosed (docs/BRIEF-STUDY48.md: the MIDI at written pitch, 3fbeb94; the early-onset slot, ff3dc83); $0, no model call. Truth: Kevin's session MIDI per bass stem, placed on the app's mix timeline by the committed intake (scripts/ingest-bass-pair.py). Note level: mir_eval, onset within 50 ms, pitch within 50 cents, offsets ignored; octave errors among notes matched on pitch class, all upward. Bars: the app's stored beats (Downline on the bench's Beat This reading of the band's mix), a sixteenth or an eighth-note triplet per beat chosen per bar, notes under 0.4 of a sixteenth dropped, a bar right only with every pitch, octave and slot matched and no extra onset. S48-D1 (70 % right and at most 10 % wrong on every song): no, for every pipeline. Predictions P1 to P5 wrong, P6 right.",
+	);
+
 	// --- Study 47: the hint sentence ---
 	table(
 		"tbl-sentence47",
