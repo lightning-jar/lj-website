@@ -3314,6 +3314,43 @@
 					]
 				}
 			]
+		},
+		{
+			"slug": "47",
+			"letters": "47",
+			"track": "Drafting",
+			"title": "Telling the model what the hint is worth: a sentence that changes nothing",
+			"eyebrow": "Study 47 · hint sentence · 22 cells · $1.46",
+			"published": "2026-11-12",
+			"indexLine": "Study 46 measured the chord model's hint as two things, a root worth trusting and a quality that fails on sevenths and diminished chords. This study put that finding into the one sentence of the prompt that describes the hint and drafted the same twelve guitar takes and ten modern songs again on the same bars, paired against the drafts made under the quality clause. Nineteen of twenty-two drafts kept the same root and quality counts, the half-diminished chord was spelled in the same seven of twelve, and no modern song changed class. Reported without a recommendation. The quality the drafts lose on the dense sheet is not lost by deferring to the hint; what the model lacks there is in the transcribed notes, and the prompt studies have moved what a prompt can move.",
+			"sections": [
+				{
+					"id": "sec-stem-study47",
+					"eyebrow": "Drafting",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-sentence47",
+						"summary": "The advisory hint sentence against the quality clause on the same bars, paired"
+					},
+					"body": [
+						{
+							"heading": "The Sentence",
+							"html": "Production's prompt calls the bracketed guess a hint, not an answer. The variant says instead that the guess's root is reliable and should be kept unless the notes plainly contradict it, and that its quality is advisory: it hears major and minor well, hears a seventh as a plain triad more often than not, and almost never hears a diminished or half-diminished chord, so the quality should be decided from the notes and the key. The two prompts are pinned by test to differ in that sentence alone; the clause about chord quality the app shipped the day before stays in both."
+						},
+						{
+							"heading": "What Moved",
+							"html": "On the twelve guitar takes, qualities rose on two and fell on one, roots fell on none, one saved draft became good, one power chord disappeared, and the half-diminished was spelled in exactly the same seven drafts as before. On the ten modern songs no class changed; one root count rose by two positions and another fell by one. Nineteen of the twenty-two paired drafts kept their counts to the position. Two of five predictions failed, the two that expected the qualities to move."
+						},
+						{
+							"heading": "What It Means",
+							"html": "Study 45 had counted fourteen positions where a draft followed a wrong hint. Told in so many words that the hint cannot hear a half-diminished, the model wrote the same chords, which says the half-diminished it did not write is not in the transcribed notes it was given either. The quality lost on jazz-shaped guitar is not lost by deferring to the hint, so no sentence about the hint recovers it. The recommendation to describe the hint honestly stands on Study 46 as a matter of not overstating it, and should not be expected to change a chart. Spend was $1.46 against a $1.50 fence, twice the estimate, with four cents to spare."
+						}
+					]
+				}
+			]
 		}
 	]
 }

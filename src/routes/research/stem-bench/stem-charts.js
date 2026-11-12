@@ -3312,6 +3312,21 @@ export function initStemCharts() {
 		"Registered ca362ee (docs/BRIEF-STUDY39.md) before any tracker ran; zero model spend; 51 recordings \u00d7 8 systems. Winterreise: Schubert Winterreise Dataset v2.1, 24 songs in the 2006 and 1933 editions, annotated bars; JAAH: three 1930s jazz 78s with annotated bars. Group medians. Predictions: P1, P3, P4 right; P2 (loosened penalty gains 0.15 of recall) and P5 (editions agree within 0.10 for every system) wrong. S39-D1: no system chartable on 75 percent, no free-tempo tracker adopted.",
 	);
 
+	// --- Study 47: the hint sentence ---
+	table(
+		"tbl-sentence47",
+		["measure", "quality clause (Study 45, v0.262.1)", "advisory sentence (Study 47)"],
+		[
+			["guitar, 12 paired takes: qualities up \u00b7 down \u00b7 roots down", "\u2014", "2 \u00b7 1 \u00b7 0"],
+			["guitar: good drafts \u00b7 drafts with a power chord \u00b7 half-diminished spelled", "5 \u00b7 5 \u00b7 7 of 12", "6 \u00b7 4 \u00b7 7 of 12 (the same seven)"],
+			["Woodward, 10 paired songs: qualities up \u00b7 down \u00b7 roots down \u00b7 class lowered", "\u2014", "0 \u00b7 1 \u00b7 1 \u00b7 0"],
+			["drafts with identical root and quality counts", "\u2014", "19 of 22"],
+			["predictions", "\u2014", "P1 (qualities up on 5+) wrong \u00b7 P2 (half-diminished in 10+) wrong \u00b7 P3, P4, P5 right"],
+			["spend", "\u2014", "$1.46 of $1.50"],
+		],
+		"Registered 12f1553 (docs/BRIEF-STUDY47.md) before any draft. Study 45's pipeline on Beat This small0's bars as read, with the production hint sentence replaced by Study 46's finding (src/study47/prompt47.ts, pinned to differ in that sentence only); the twelve GuitarSet SS2 takes and ten Woodward songs paired with Study 45's quality-clause drafts of the same items, same hints. S47-D1 by the registered rule: between, reported without a recommendation. The gateway ignores temperature for this model, so one-position moves on three drafts are within unmeasured draft-to-draft variance.",
+	);
+
 	// --- Study 46: the hint's ceiling ---
 	table(
 		"tbl-hint46",
