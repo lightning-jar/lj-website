@@ -3312,6 +3312,21 @@ export function initStemCharts() {
 		"Registered ca362ee (docs/BRIEF-STUDY39.md) before any tracker ran; zero model spend; 51 recordings \u00d7 8 systems. Winterreise: Schubert Winterreise Dataset v2.1, 24 songs in the 2006 and 1933 editions, annotated bars; JAAH: three 1930s jazz 78s with annotated bars. Group medians. Predictions: P1, P3, P4 right; P2 (loosened penalty gains 0.15 of recall) and P5 (editions agree within 0.10 for every system) wrong. S39-D1: no system chartable on 75 percent, no free-tempo tracker adopted.",
 	);
 
+	// --- Study 49: the wrong onsets ---
+	table(
+		"tbl-onsets49",
+		["song (bars)", "the app's settings", "no inferred onsets, no melodia pass", "sixteenth merge", "amplitude floor 0.6", "shorter minimum note", "onset threshold 0.35"],
+		[
+			["Peaceful Dreams (109)", "34 %", "35 %", "35 %", "33 %", "26 %", "1 %"],
+			["Interbellum (69)", "26 %", "32 %", "25 %", "26 %", "20 %", "9 %"],
+			["Letter Lands (68)", "71 %", "76 %", "59 %", "74 %", "40 %", "18 %"],
+			["Eat All the Clocks (71)", "35 %", "42 %", "45 %", "38 %", "35 %", "10 %"],
+			["Downline, 5/4 and 3/4 (186)", "29 %", "46 %", "28 %", "44 %", "21 %", "19 %"],
+			["Mop Heart, 3/4 at 224 (95)", "39 %", "40 %", "39 %", "40 %", "28 %", "8 %"],
+		],
+		"Bars entirely right, every pitch, octave and slot matched with no extra onset; Study 48's truth, grid and grader, unchanged. Registered at 772a253 (docs/BRIEF-STUDY49.md); $0, no model call. Every column is Basic Pitch under the bass constraint. Columns three to seven change one thing from the app's settings: both onset-free passes off (the selected configuration of 32); a same-pitch note within 0.375 beat of the last joined to it; notes under 0.6 of the stem's median amplitude dropped; a minimum note of 6 frames instead of 11; an onset threshold of 0.35 instead of 0.5. S49-D1 (a setting: mean gain of 10 points, no song down 2, held-out gain on five of six): 6.2 points, not recommended. S49-D2 (a filter within 3 % of real notes lost on every song): none qualifies. Two of eight predictions held.",
+	);
+
 	// --- Study 48: bass lines ---
 	table(
 		"tbl-bass48",

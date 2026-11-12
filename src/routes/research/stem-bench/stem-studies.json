@@ -3359,7 +3359,7 @@
 			"title": "Is a transcribed bass line right often enough to show a bassist? No, and the reason is onsets, not pitch",
 			"eyebrow": "Study 48 · bass lines · 18 cells · $0",
 			"published": "2026-11-12",
-			"indexLine": "The app wants each stem's part written out, starting with the bass as a barmark line on the tracker's beats. Kevin supplied the bass stem and the session's MIDI for six of his own songs, five by MMKK and one by Ghost Ghost, 598 bars and 1,999 notes with exact truth. The study scored three transcriptions note by note, put each on the app's own beats at a sixteenth or a triplet, graded every bar with pitch, octave and slot all required, and wrote the result as barmark. Basic Pitch writes a third of bass notes an octave up, and a bass-range filter removes most of that for free; what remains is onsets, one note in five missed and up to half again as many extra onsets as the part has. Only a steady eighth-note part reaches seventy percent of bars entirely right, and it still has eighteen percent wrong. A monophonic tracker fixes the octave and loses notes. The answer to the app is no, with the next lever named: merging re-triggers and a ghost-note floor.",
+			"indexLine": "The app wants each stem's part written out, starting with the bass as a barmark line on the tracker's beats. Kevin supplied the bass stem and the session's MIDI for six of his own songs, five by MMKK and one by Ghost Ghost, 598 bars and 1,999 notes with exact truth. The study scored three transcriptions note by note, put each on the app's own beats at a sixteenth or a triplet, graded every bar with pitch, octave and slot all required, and wrote the result as barmark. Basic Pitch writes a third of bass notes an octave up, and a bass-range filter removes most of that for free; what remains is onsets, one note in five missed and up to half again as many extra onsets as the part has. Only a steady eighth-note part reaches seventy percent of bars entirely right, and it still has eighteen percent wrong. A monophonic tracker fixes the octave and loses notes. The answer to the app is no. Corrected 2026-11-12: this entry first named merging re-triggers and a ghost-note floor as the next lever; Study 49 tested both and recommends neither.",
 			"sections": [
 				{
 					"id": "sec-stem-study48",
@@ -3383,11 +3383,52 @@
 						},
 						{
 							"heading": "Bars",
-							"html": "On the app's stored beats, with the grid chosen per bar from the line's own onsets and a bar right only when every pitch, octave and slot matches with no extra onset: 25 to 39 percent of bars are entirely right on five songs, and 71 percent on Letter Lands, a steady eighth-note part, which still has 18 percent wrong against the registered ten. Quantization is not where the line is lost; on the steady songs 84 to 95 percent of notes land on the right slot. The loss is extra onsets first, re-triggers inside a sustained note and ghost notes, missed onsets second, the grid on the one song whose meter changes, and the octave last."
+							"html": "On the app's stored beats, with the grid chosen per bar from the line's own onsets and a bar right only when every pitch, octave and slot matches with no extra onset: 25 to 39 percent of bars are entirely right on five songs, and 71 percent on Letter Lands, a steady eighth-note part, which still has 18 percent wrong against the registered ten. Quantization is not where the line is lost; on the steady songs 84 to 95 percent of notes land on the right slot. The loss is extra onsets first, missed onsets second, the grid on the one song whose meter changes, and the octave last. Corrected 2026-11-12: this paragraph first described the extra onsets as re-triggers inside a sustained note and ghost notes, which had not been measured. Study 49 classed them: re-triggers are 30 percent, onsets where nothing is sounding 23 percent, bars on the wrong subdivision 18 percent."
 						},
 						{
 							"heading": "Decision",
-							"html": "By the registered rule, seventy percent of bars right and at most ten percent wrong on every song, the answer is no for every pipeline. The bench's judgment as a player agrees: a line that is right in two bars of three and wrong in under one in ten would help, and only the steadiest part comes near. The next lever is the onsets, a rule merging same-pitch re-triggers inside a sixteenth and a loudness floor for ghost notes, which the bench can measure against the same truth. Every written line, eighteen transcriptions and six truths, parses in barmark with no error. One of six predictions held; the five that expected more from the register, the constraint, the tracker and the rhythm were wrong."
+							"html": "By the registered rule, seventy percent of bars right and at most ten percent wrong on every song, the answer is no for every pipeline. The bench's judgment as a player agrees: a line that is right in two bars of three and wrong in under one in ten would help, and only the steadiest part comes near. Corrected 2026-11-12: this paragraph first offered a rule merging same-pitch re-triggers and a loudness floor for ghost notes as the next lever. Study 49 measured both against the same truth and recommends neither. Every written line, eighteen transcriptions and six truths, parses in barmark with no error. One of six predictions held; the five that expected more from the register, the constraint, the tracker and the rhythm were wrong."
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "49",
+			"letters": "49",
+			"track": "Parts",
+			"title": "What the bass line's wrong onsets are: not mostly re-triggers, and no threshold or filter fixes them",
+			"eyebrow": "Study 49 · bass lines · 372 cells · $0",
+			"published": "2026-11-12",
+			"indexLine": "Study 48 said a transcribed bass line fails on extra onsets and then missed ones, and the bench guessed aloud that the extras were mostly re-triggers and ghost notes. This study classed every wrong onset by a mechanical rule, then tried the fixes: 32 settings of the transcriber's own note-making, and two filters on the notes, a re-trigger merge and an amplitude floor. The guess was wrong. Re-triggers are 30 percent of the extras and the largest class on two songs of six. Loosening any threshold to catch the short notes the transcriber drops adds more false notes than it finds, on every song. Turning off the two passes that make notes without a detected onset helps on all six songs, 39 to 45 percent of bars right on the mean, short of the ten points registered for a recommendation. Each filter helps one song and swallows another's real notes. Nothing is recommended, the line is still not showable, and two of eight predictions held.",
+			"sections": [
+				{
+					"id": "sec-stem-study49",
+					"eyebrow": "Parts",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-onsets49",
+						"summary": "Bars entirely right per song under the app's transcriber settings, the selected settings, and the two filters at their most useful"
+					},
+					"body": [
+						{
+							"heading": "The Wrong Onsets",
+							"html": "Of 582 extra onsets across the six songs, 30 percent start while a note of the same pitch class is already sounding, 23 percent start where the part has nothing sounding, 18 percent sit in bars the beat tracker put on the other subdivision, 13 percent are tails of a note just ended, and 10 percent are a real note one slot off. Of 332 missed onsets, a quarter are in bars on the other subdivision, 30 percent have no transcribed note of their pitch at all, and 17 percent were joined to the note before. The missed notes are the short and the legato ones: on the three songs that have them, a note under 130 milliseconds is missed 48 to 68 percent of the time, a longer one 6 to 25 percent."
+						},
+						{
+							"heading": "The Transcriber's Own Settings",
+							"html": "The app runs Basic Pitch with settings chosen for chords, including a minimum note of about 130 milliseconds, longer than a sixteenth at most of these tempos. From one set of cached model outputs the bench made notes under 32 settings. A lower onset threshold costs 14 to 45 points of bars right on every song. A shorter minimum note finds the short notes and adds more false ones than it finds, worse on every song. A lower frame threshold is worse on every song. The chord settings are right for bass. The only consistent gain is turning off the two passes that make notes without a detected onset: every song improves or holds, by one to seventeen points."
+						},
+						{
+							"heading": "The Filters",
+							"html": "Merging a same-pitch note that starts within a sixteenth of the last lifts one song by ten points and drops another by twelve, because that bassist really does repeat sixteenths. Within an eighth it swallows up to a quarter of a song's notes. An amplitude floor lifts the one song with the most stray notes by fifteen points and costs every other song up to seven percent of its real notes. No setting but no filter at all stays inside the registered bound of three percent of real notes lost on every song."
+						},
+						{
+							"heading": "Decision",
+							"html": "Nothing is recommended. The selected settings gain 6.2 points on the mean against the ten registered, though no song loses and the choice holds up when each song is held out in turn on five of six. No filter survives. The line stays unshown: 32 to 46 percent of bars right on five songs and 76 on the sixth. The bench's own sentence in Study 48, that the extras were mostly re-triggers and ghost notes, was wrong and is corrected there. What is left is not a threshold: it is the grid, and short legato notes the transcriber does not separate. The next studies take those in turn, a grid for the line from the bass's own onsets, then whether the app can tell which bars to trust."
 						}
 					]
 				}
