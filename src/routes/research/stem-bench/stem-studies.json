@@ -3428,7 +3428,48 @@
 						},
 						{
 							"heading": "Decision",
-							"html": "Nothing is recommended. The selected settings gain 6.2 points on the mean against the ten registered, though no song loses and the choice holds up when each song is held out in turn on five of six. No filter survives. The line stays unshown: 32 to 46 percent of bars right on five songs and 76 on the sixth. The bench's own sentence in Study 48, that the extras were mostly re-triggers and ghost notes, was wrong and is corrected there. What is left is not a threshold: it is the choice of subdivision, and short legato notes the transcriber does not separate. The next studies take those in turn, the grid first, then whether the app can tell which bars to trust."
+							"html": "Nothing is recommended. The selected settings gain 6.2 points on the mean against the ten registered, though no song loses and the choice holds up when each song is held out in turn on five of six. No filter survives. The line stays unshown: 32 to 46 percent of bars right on five songs and 76 on the sixth. The bench's own sentence in Study 48, that the extras were mostly re-triggers and ghost notes, was wrong and is corrected there. What is left is not a threshold: it is the choice of subdivision, and short legato notes the transcriber does not separate. The next studies take those in turn, the grid first, then whether the app can tell which bars to trust. Added 2026-11-12: Study 50 then measured the subdivision and the grid. Choosing the subdivision once per song removes every such bar and bars right does not move, and the composer's own grid scores the same as the tracker's. Neither is where the line is lost."
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "50",
+			"letters": "50",
+			"track": "Parts",
+			"title": "It is not the grid: on the composer's own bars and beats the transcribed bass line scores the same",
+			"eyebrow": "Study 50 · bass lines · 72 cells · $0",
+			"published": "2026-11-12",
+			"indexLine": "Twice the bench blamed the beat tracker for bars where the transcribed bass line and the truth landed on different subdivisions, without measuring it. The session MIDI for each song carries the composer's own tempo and time signatures, so this study graded the same transcribed notes three ways: on the tracker's grid, on the tracker's grid with its dropped beats filled in, and on the composer's. The share of notes right is the same on every song, within a hundredth. The tracker's beats are in the right place; it drops some and gets the bar lines of the 5/4 and 3/4 songs wrong, which matters to a chart a player reads and not to whether the notes are right. The false triplet bars were the bench's own per-bar rule, not the tracker. After three studies of settings, filters and the grid, the transcriber itself is what is left. Three of six predictions held.",
+			"sections": [
+				{
+					"id": "sec-stem-study50",
+					"eyebrow": "Parts",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-grid50",
+						"summary": "The tracker's grid against the composer's, and the transcribed bass line graded on each"
+					},
+					"body": [
+						{
+							"heading": "The Composer's Grid",
+							"html": "Each song's MIDI holds a tempo and a time-signature map, the bars and beats as written in the session. Placed on the mix timeline by the same offsets that placed the notes, it is a grid with no tracker in it. The parts are sixteenth-note parts: 95 to 100 percent of the truth's notes start within 35 milliseconds of a composer's sixteenth, and about ten notes of 2,181 sit nearer a triplet. The grid rests on one assumption, disclosed, that the MIDI starts at the session's first bar."
+						},
+						{
+							"heading": "The Tracker Against It",
+							"html": "The tracker's beats are where the composer's are: every one within 50 milliseconds on five songs, 84 percent on the sixth. It drops beats, 6 to 16 percent of the composer's on five songs. Its bar lines match on the two steadiest 4/4 songs, mostly on the other two, and fail on the odd meters: under half on the song that alternates 5/4 and 3/4, under a fifth on the fast waltz."
+						},
+						{
+							"heading": "The Line On Each Grid",
+							"html": "The same notes on the composer's grid score the same. Notes right in slot and pitch are within a hundredth on every song; bars entirely right average 45.3 percent on the tracker's grid and 44.7 on the composer's, moving song by song only with how each grid cuts the bars. Filling the tracker's dropped beats changes nothing on four songs and costs a point on two. Choosing sixteenths or triplets once for the song instead of bar by bar removes every bar where truth and transcription disagreed, and bars right still does not move, because those bars were wrong in other ways too. The bar by bar rule turns out to write triplets the part does not have even on the composer's grid."
+						},
+						{
+							"heading": "Decision",
+							"html": "The grid is not the bottleneck: a perfect one leaves the line where the transcriber put it. By the registered condition the per-song subdivision rule is not recommended either, since it had to raise bars right on five songs and raised it on one, though it never lowered a score. The bench's earlier sentences blaming the tracker are corrected where they stand, along with a disclosure that the tracker read two songs at half tempo, which it does only for stretches. Settings, filters and the grid have each now been tried and none moves the line past about three notes in four. What remains is to show only the bars that can be trusted, or to transcribe bass with something else."
 						}
 					]
 				}

@@ -3312,6 +3312,21 @@ export function initStemCharts() {
 		"Registered ca362ee (docs/BRIEF-STUDY39.md) before any tracker ran; zero model spend; 51 recordings \u00d7 8 systems. Winterreise: Schubert Winterreise Dataset v2.1, 24 songs in the 2006 and 1933 editions, annotated bars; JAAH: three 1930s jazz 78s with annotated bars. Group medians. Predictions: P1, P3, P4 right; P2 (loosened penalty gains 0.15 of recall) and P5 (editions agree within 0.10 for every system) wrong. S39-D1: no system chartable on 75 percent, no free-tempo tracker adopted.",
 	);
 
+	// --- Study 50: the grid ---
+	table(
+		"tbl-grid50",
+		["song", "tracker beats on a composer's beat", "composer's beats dropped", "tracker bar lines on a composer's", "tracker's grid, per bar: bars right \u00b7 notes right", "tracker's grid, per song", "composer's grid, per song"],
+		[
+			["Peaceful Dreams", "100 %", "6 %", "99 %", "35 % of 109 \u00b7 0.74", "35 % of 109 \u00b7 0.75", "35 % of 112 \u00b7 0.76"],
+			["Interbellum", "84 %", "16 %", "76 %", "32 % of 69 \u00b7 0.79", "32 % of 69 \u00b7 0.80", "25 % of 63 \u00b7 0.80"],
+			["Letter Lands", "100 %", "9 %", "100 %", "76 % of 68 \u00b7 0.88", "76 % of 68 \u00b7 0.90", "78 % of 72 \u00b7 0.90"],
+			["Eat All the Clocks", "100 %", "0 %", "92 %", "42 % of 71 \u00b7 0.78", "42 % of 71 \u00b7 0.78", "42 % of 66 \u00b7 0.77"],
+			["Downline, 5/4 and 3/4", "100 %", "11 %", "48 %", "46 % of 186 \u00b7 0.70", "46 % of 186 \u00b7 0.75", "40 % of 156 \u00b7 0.74"],
+			["Mop Heart, 3/4 at 224", "100 %", "9 %", "18 %", "40 % of 95 \u00b7 0.75", "40 % of 95 \u00b7 0.77", "48 % of 128 \u00b7 0.77"],
+		],
+		"Registered at 6911bcc (docs/BRIEF-STUDY50.md); $0, no model call. The notes are Study 49's selected Basic Pitch configuration under the bass constraint; the truth and the bar grade are Study 48's. Bars right is the share of that grid's own bars with every pitch, octave and slot matched and no extra onset; notes right is a slot-level F, truth onsets matched in slot and pitch over transcribed and over truth onsets, which does not move with the bar lines. The composer's grid is the MIDI's tempo and signature map on the mix timeline. Per bar and per song name how sixteenths or triplets are chosen. S50-D2 (the grid is a bottleneck if the composer's gains 10 points of mean bars right): minus 0.5, no. S50-D1 (the per-song rule, if bars right rises on five of six): one, not recommended. Three of six predictions held.",
+	);
+
 	// --- Study 49: the wrong onsets ---
 	table(
 		"tbl-onsets49",
