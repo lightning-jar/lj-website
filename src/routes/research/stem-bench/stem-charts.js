@@ -3312,6 +3312,22 @@ export function initStemCharts() {
 		"Registered ca362ee (docs/BRIEF-STUDY39.md) before any tracker ran; zero model spend; 51 recordings \u00d7 8 systems. Winterreise: Schubert Winterreise Dataset v2.1, 24 songs in the 2006 and 1933 editions, annotated bars; JAAH: three 1930s jazz 78s with annotated bars. Group medians. Predictions: P1, P3, P4 right; P2 (loosened penalty gains 0.15 of recall) and P5 (editions agree within 0.10 for every system) wrong. S39-D1: no system chartable on 75 percent, no free-tempo tracker adopted.",
 	);
 
+	// --- Study 51: trusted bars ---
+	table(
+		"tbl-trust51",
+		["song (bars with notes)", "every bar", "agrees with the app's setting", "survives two loosened settings", "agrees with pYIN", "agrees with all four"],
+		[
+			["Peaceful Dreams (109)", "35 % right \u00b7 44 % wrong", "93 % shown \u00b7 37 % right \u00b7 41 % wrong", "66 % shown \u00b7 44 % right \u00b7 32 % wrong", "30 % shown \u00b7 76 % right \u00b7 3 % wrong", "26 % shown \u00b7 75 % right \u00b7 4 % wrong"],
+			["Interbellum (64)", "27 % right \u00b7 55 % wrong", "84 % shown \u00b7 30 % right \u00b7 52 % wrong", "39 % shown \u00b7 44 % right \u00b7 36 % wrong", "20 % shown \u00b7 46 % right \u00b7 54 % wrong", "11 % shown \u00b7 43 % right \u00b7 57 % wrong"],
+			["Letter Lands (61)", "74 % right \u00b7 18 % wrong", "92 % shown \u00b7 77 % right \u00b7 16 % wrong", "51 % shown \u00b7 74 % right \u00b7 10 % wrong", "13 % shown \u00b7 100 % right \u00b7 0 % wrong", "13 % shown \u00b7 100 % right \u00b7 0 % wrong"],
+			["Eat All the Clocks (61)", "36 % right \u00b7 39 % wrong", "70 % shown \u00b7 44 % right \u00b7 33 % wrong", "70 % shown \u00b7 49 % right \u00b7 21 % wrong", "2 % shown \u00b7 100 % right \u00b7 0 % wrong", "2 % shown \u00b7 100 % right \u00b7 0 % wrong"],
+			["Downline (160)", "41 % right \u00b7 37 % wrong", "60 % shown \u00b7 40 % right \u00b7 39 % wrong", "83 % shown \u00b7 45 % right \u00b7 33 % wrong", "45 % shown \u00b7 56 % right \u00b7 22 % wrong", "24 % shown \u00b7 50 % right \u00b7 29 % wrong"],
+			["Mop Heart (90)", "38 % right \u00b7 50 % wrong", "89 % shown \u00b7 42 % right \u00b7 46 % wrong", "57 % shown \u00b7 45 % right \u00b7 43 % wrong", "14 % shown \u00b7 69 % right \u00b7 31 % wrong", "9 % shown \u00b7 75 % right \u00b7 25 % wrong"],
+			["All six (545)", "41 % right \u00b7 41 % wrong", "79 % shown \u00b7 43 % right \u00b7 39 % wrong", "65 % shown \u00b7 48 % right \u00b7 31 % wrong", "26 % shown \u00b7 64 % right \u00b7 20 % wrong", "17 % shown \u00b7 64 % right \u00b7 20 % wrong"],
+		],
+		"Registered at 95b4089 (docs/BRIEF-STUDY51.md); $0, no model call. The line shown is Study 49's selected Basic Pitch configuration under the bass constraint, on the tracker's grid; a bar is shown under a rule when the named reading writes the same pitches in the same slots. Right and wrong are Study 48's bar grade, as shares of the bars shown; bars the line leaves empty are counted apart. S51-D1 (on every song at least 70 % of shown bars right, at most 10 % wrong, at least a quarter of the bars shown): no rule qualifies. Four of five predictions held.",
+	);
+
 	// --- Study 50: the grid ---
 	table(
 		"tbl-grid50",

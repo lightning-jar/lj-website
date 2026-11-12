@@ -3474,6 +3474,47 @@
 					]
 				}
 			]
+		},
+		{
+			"slug": "51",
+			"letters": "51",
+			"track": "Parts",
+			"title": "Showing only the bars it can trust: agreement with a second transcriber helps, and shows too little",
+			"eyebrow": "Study 51 · bass lines · 30 cells · $0",
+			"published": "2026-11-12",
+			"indexLine": "If a transcribed bass line is right in under half its bars, the app could still show the bars it can trust and leave the rest blank. With no truth to consult, the bench trusted a bar only when another reading of the same stem wrote it identically: the app's own transcriber settings, two loosened settings, and a second transcriber. Agreement among the transcriber's own settings barely filters, because they share one model's output. Agreement with the second transcriber lifts the shown bars from 41 percent entirely right to 64, and on one song it would do. But it shows a quarter of the bars and a sixth of the notes, and on one song the bars both readers agree on are wrong more often than right, because they miss the same notes. No rule is recommended. Trust by agreement is bounded by how good the second reader is. Four of five predictions held.",
+			"sections": [
+				{
+					"id": "sec-stem-study51",
+					"eyebrow": "Parts",
+					"title": "Study Overview",
+					"takeaway": null,
+					"legendId": null,
+					"figure": null,
+					"table": {
+						"id": "tbl-trust51",
+						"summary": "Bars shown under each trust rule and how often the shown bars are right, per song"
+					},
+					"body": [
+						{
+							"heading": "The Idea",
+							"html": "A bar is trusted when two readings of the same stem write the same pitches in the same slots. The line on show is the best transcriber setting from Study 49. The readings to agree with were all already on disk: the app's own setting, the same setting with a lower frame threshold and with a shorter minimum note, and pYIN, a different transcriber from Study 48. Each rule is a yes or no per bar with nothing to tune. The trusted bars were then graded against the truth by Study 48's bar grade. Bars the line leaves empty are counted apart so that rests cannot flatter a rule."
+						},
+						{
+							"heading": "Same Model, Little Evidence",
+							"html": "Agreeing with the app's own setting shows 79 percent of the bars and they are right 43 percent of the time, against 41 for every bar. Surviving two loosened settings shows 65 percent, right 48 percent of the time. These readings come from one run of one model; when it is wrong they tend to be wrong together."
+						},
+						{
+							"heading": "A Second Reader",
+							"html": "Agreement with pYIN is real evidence. The bars it confirms are entirely right 64 percent of the time and wrong 20, against 41 and 41. On Peaceful Dreams it confirms 30 percent of the bars and they are 76 percent right with 3 percent wrong, which would be worth showing. But pYIN's own line is rarely right, so on four songs it confirms between 2 and 20 percent of the bars, and over all six the confirmed bars hold 17 percent of the part's notes. And on Interbellum the thirteen confirmed bars are wrong more often than right: both readers drop the same short notes."
+						},
+						{
+							"heading": "Decision",
+							"html": "The registered bar was Study 48's applied to what is shown, at least 70 percent of shown bars right and at most 10 percent wrong, with at least a quarter of the bars shown, on every song. No rule meets it; three rules each meet it on one song. Nothing is recommended. The principle survives: a bar can be confirmed only by something that also gets it right, and nothing the bench has yet reads these bass lines well enough to confirm more than a quarter of them. That gives the last planned study, a different transcriber for bass, two jobs: a better line, or a second reader good enough to agree with."
+						}
+					]
+				}
+			]
 		}
 	]
 }
