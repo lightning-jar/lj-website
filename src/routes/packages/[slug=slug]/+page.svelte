@@ -56,6 +56,46 @@ let pkg = $derived(data.pkg);
         </p>
       {/if}
 
+      <!-- members of a package family -->
+      {#if pkg.members?.length}
+        <section class="mb-8" aria-labelledby="packages-heading">
+          <h2
+            id="packages-heading"
+            class="text-22px font-serif text-maximumYellow font-700 mb-3"
+          >
+            The Packages
+          </h2>
+          {#each pkg.members as group (group.label)}
+            <h3 class="text-15px uppercase tracking-wide opacity-80 mt-5 mb-2">
+              {group.label}
+            </h3>
+            <ul class="grid grid-cols-1 gap-4 pl-0 ml-0 max-w-prose">
+              {#each group.packages as member (member.npmName)}
+                <li
+                  class="list-none border-l-2 border-maximumYellow/40 pl-4 leading-snug"
+                >
+                  <a
+                    href="https://www.npmjs.com/package/{member.npmName}"
+                    rel="external"
+                    class="font-mono text-15px underline decoration-maximumYellow/40 hover:decoration-maximumYellow underline-offset-4"
+                  >
+                    {member.npmName}
+                  </a>
+                  {#if member.status || member.license}
+                    <span class="ml-2 text-13px italic opacity-80">
+                      {[member.status, member.license]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </span>
+                  {/if}
+                  <p class="opacity-90 mt-1 mb-0">{member.summary}</p>
+                </li>
+              {/each}
+            </ul>
+          {/each}
+        </section>
+      {/if}
+
       <!-- features -->
       {#if pkg.features?.length}
         <section class="mb-8">
