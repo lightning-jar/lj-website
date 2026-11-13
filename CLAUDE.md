@@ -222,6 +222,14 @@ too-new releases are listed in the email, never applied: do those by hand.
 (Bun lets exact pins bypass it, which is why the script checks pins
 itself). Dry run: `bun scripts/deps-update.ts --dry-run [--base <ref>]`.
 
+**Branch protection.** Since 2026-11-10 the `project-production` ruleset
+requires a pull request into `production` with typecheck, vitest, biome and
+Vercel green. The repo admin role can bypass it, and Kevin keeps that bypass
+on purpose for small direct fixes (a Sentry filter, a doc or content tweak,
+a one-line bug fix with check and tests green locally): push those directly,
+as before, and say in the report that the push bypassed the ruleset.
+Anything larger (features, dependency changes, refactors) goes through a PR.
+
 **CI has no secrets.** `.github/workflows/ci.yml` sets `SKIP_VARLOCK=1`,
 which drops the varlock Vite plugin (`vite.config.ts`, the same switch as
 stem-shovel), and runs `svelte-kit sync && svelte-check` rather than
