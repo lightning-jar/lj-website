@@ -26,4 +26,26 @@ export interface LjPackage {
 	techId?: string;
 	logo?: { src: string; alt?: string };
 	link?: Link;
+	/** for a family of packages published together (e.g. barmark and its
+	 * @barmark/* packages): the members, in groups, shown as a table on the
+	 * detail page. One page per family until a member earns its own. */
+	members?: PackageGroup[];
+}
+
+/** One group of a package family, e.g. "Show a chart". */
+export interface PackageGroup {
+	label: string;
+	packages: PackageMember[];
+}
+
+/** A package within a family. */
+export interface PackageMember {
+	/** npm package name; the row links to its npm page */
+	npmName: string;
+	/** one line: what it does */
+	summary: string;
+	/** only when it differs from the family's license */
+	license?: string;
+	/** only when it differs from the family's status, e.g. "Experimental" */
+	status?: string;
 }
