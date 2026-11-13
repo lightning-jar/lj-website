@@ -3396,11 +3396,11 @@ export function initStemCharts() {
 			["guitar, 12 paired takes: qualities up \u00b7 down \u00b7 roots down", "\u2014", "2 \u00b7 1 \u00b7 0"],
 			["guitar: good drafts \u00b7 drafts with a power chord \u00b7 half-diminished spelled", "5 \u00b7 5 \u00b7 7 of 12", "6 \u00b7 4 \u00b7 7 of 12 (the same seven)"],
 			["Woodward, 10 paired songs: qualities up \u00b7 down \u00b7 roots down \u00b7 class lowered", "\u2014", "0 \u00b7 1 \u00b7 1 \u00b7 0"],
-			["drafts with identical root and quality counts", "\u2014", "19 of 22"],
+			["drafts with identical root and quality counts", "\u2014", "17 of 22 (corrected 2026-11-13 from 19)"],
 			["predictions", "\u2014", "P1 (qualities up on 5+) wrong \u00b7 P2 (half-diminished in 10+) wrong \u00b7 P3, P4, P5 right"],
 			["spend", "\u2014", "$1.46 of $1.50"],
 		],
-		"Registered 12f1553 (docs/BRIEF-STUDY47.md) before any draft. Study 45's pipeline on Beat This small0's bars as read, with the production hint sentence replaced by Study 46's finding (src/study47/prompt47.ts, pinned to differ in that sentence only); the twelve GuitarSet SS2 takes and ten Woodward songs paired with Study 45's quality-clause drafts of the same items, same hints. S47-D1 by the registered rule: between, reported without a recommendation. The gateway ignores temperature for this model, so one-position moves on three drafts are within unmeasured draft-to-draft variance.",
+		"Registered 12f1553 (docs/BRIEF-STUDY47.md) before any draft. Study 45's pipeline on Beat This small0's bars as read, with the production hint sentence replaced by Study 46's finding (src/study47/prompt47.ts, pinned to differ in that sentence only); the twelve GuitarSet SS2 takes and ten Woodward songs paired with Study 45's quality-clause drafts of the same items, same hints. S47-D1 by the registered rule: between, reported without a recommendation. The gateway ignores temperature for this model, so the moves on five drafts, four by one position and one by two, are within unmeasured draft-to-draft variance.",
 	);
 
 	// --- Study 46: the hint's ceiling ---
