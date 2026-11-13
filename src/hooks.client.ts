@@ -15,6 +15,13 @@ Sentry.init({
 
 	tracesSampleRate: 1.0,
 
+	// Microsoft's email link scanner (Outlook Safe Links / Defender) opens
+	// links in an automated Chromium and rejects promises with this message
+	// from its own scripting bridge. It is not our code (LJ-WEBSITE-3G: no
+	// stack, and version.json polled every ~1.8s against a 60s interval,
+	// i.e. a harness fast-forwarding timers).
+	ignoreErrors: [/Object Not Found Matching Id:\d+, MethodName:\w+/],
+
 	// (enableLogs is gone in Sentry 11; logs are on by default.)
 
 	// Sentry 11 replaced sendDefaultPii with the dataCollection option, and
