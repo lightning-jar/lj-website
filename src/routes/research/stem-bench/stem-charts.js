@@ -3312,20 +3312,35 @@ export function initStemCharts() {
 		"Registered ca362ee (docs/BRIEF-STUDY39.md) before any tracker ran; zero model spend; 51 recordings \u00d7 8 systems. Winterreise: Schubert Winterreise Dataset v2.1, 24 songs in the 2006 and 1933 editions, annotated bars; JAAH: three 1930s jazz 78s with annotated bars. Group medians. Predictions: P1, P3, P4 right; P2 (loosened penalty gains 0.15 of recall) and P5 (editions agree within 0.10 for every system) wrong. S39-D1: no system chartable on 75 percent, no free-tempo tracker adopted.",
 	);
 
+	// --- Study 52: another reader ---
+	table(
+		"tbl-reader52",
+		["song (bars)", "Basic Pitch at its best: bars right \u00b7 wrong", "the bass model: bars right \u00b7 wrong", "notes, octave-exact F: Basic Pitch to the bass model", "extra onsets: Basic Pitch to the bass model", "bars both write the same"],
+		[
+			["Peaceful Dreams (110)", "36 \u00b7 38 %", "53 \u00b7 25 %", "0.76 to 0.88", "40 to 9", "61 % shown \u00b7 60 % right \u00b7 17 % wrong"],
+			["Interbellum (69)", "32 \u00b7 49 %", "39 \u00b7 54 %", "0.77 to 0.83", "23 to 8", "40 % shown \u00b7 48 % right \u00b7 52 % wrong"],
+			["Letter Lands (68)", "76 \u00b7 13 %", "51 \u00b7 9 %", "0.89 to 0.91", "23 to 38", "36 % shown \u00b7 95 % right \u00b7 5 % wrong"],
+			["Eat All the Clocks (71)", "42 \u00b7 35 %", "82 \u00b7 7 %", "0.72 to 0.95", "40 to 3", "35 % shown \u00b7 95 % right \u00b7 5 % wrong"],
+			["Downline, 5/4 and 3/4 (186)", "63 \u00b7 20 %", "74 \u00b7 8 %", "0.80 to 0.93", "53 to 21", "73 % shown \u00b7 80 % right \u00b7 6 % wrong"],
+			["Mop Heart, 3/4 at 224 (95)", "40 \u00b7 47 %", "87 \u00b7 9 %", "0.85 to 0.99", "82 to 11", "38 % shown \u00b7 94 % right \u00b7 3 % wrong"],
+		],
+		"Registered at 2f6e186 and, after the truth's defect was found and fixed, again at d3561c5 (docs/BRIEF-STUDY52.md, docs/CORRECTION-2026-11-13-bass-truth.md); $0, no gateway call. The bass model is the bass checkpoint of xavriley/hf_midi_transcription, run as shipped; Basic Pitch at its best is Study 49's selected configuration under the bass constraint. Bars right and wrong are Study 48's bar grade on the tracker's grid, every pitch, octave and slot matched with no extra onset. Note scores are mir_eval's, onset within 50 ms, exact pitch. The last column shows the bars where the two readers write the same pitches in the same slots, and how those bars grade. S52-D1 (the line shown: 70 % right and at most 10 % wrong on every song): three songs, no. S52-D2 (a better first reader: 10 points on the mean, no song down more than 2): plus 15.9, one song down 25, no. S52-D3 (trusted bars on every song): four songs, no. Five of six predictions held.",
+	);
+
 	// --- Study 51: trusted bars ---
 	table(
 		"tbl-trust51",
 		["song (bars with notes)", "every bar", "agrees with the app's setting", "survives two loosened settings", "agrees with pYIN", "agrees with all four"],
 		[
-			["Peaceful Dreams (109)", "35 % right \u00b7 44 % wrong", "93 % shown \u00b7 37 % right \u00b7 41 % wrong", "66 % shown \u00b7 44 % right \u00b7 32 % wrong", "30 % shown \u00b7 76 % right \u00b7 3 % wrong", "26 % shown \u00b7 75 % right \u00b7 4 % wrong"],
-			["Interbellum (64)", "27 % right \u00b7 55 % wrong", "84 % shown \u00b7 30 % right \u00b7 52 % wrong", "39 % shown \u00b7 44 % right \u00b7 36 % wrong", "20 % shown \u00b7 46 % right \u00b7 54 % wrong", "11 % shown \u00b7 43 % right \u00b7 57 % wrong"],
-			["Letter Lands (61)", "74 % right \u00b7 18 % wrong", "92 % shown \u00b7 77 % right \u00b7 16 % wrong", "51 % shown \u00b7 74 % right \u00b7 10 % wrong", "13 % shown \u00b7 100 % right \u00b7 0 % wrong", "13 % shown \u00b7 100 % right \u00b7 0 % wrong"],
-			["Eat All the Clocks (61)", "36 % right \u00b7 39 % wrong", "70 % shown \u00b7 44 % right \u00b7 33 % wrong", "70 % shown \u00b7 49 % right \u00b7 21 % wrong", "2 % shown \u00b7 100 % right \u00b7 0 % wrong", "2 % shown \u00b7 100 % right \u00b7 0 % wrong"],
-			["Downline (160)", "41 % right \u00b7 37 % wrong", "60 % shown \u00b7 40 % right \u00b7 39 % wrong", "83 % shown \u00b7 45 % right \u00b7 33 % wrong", "45 % shown \u00b7 56 % right \u00b7 22 % wrong", "24 % shown \u00b7 50 % right \u00b7 29 % wrong"],
+			["Peaceful Dreams (109)", "36 % right \u00b7 39 % wrong", "93 % shown \u00b7 38 % right \u00b7 36 % wrong", "66 % shown \u00b7 46 % right \u00b7 24 % wrong", "30 % shown \u00b7 76 % right \u00b7 0 % wrong", "26 % shown \u00b7 75 % right \u00b7 0 % wrong"],
+			["Interbellum (64)", "27 % right \u00b7 53 % wrong", "84 % shown \u00b7 30 % right \u00b7 50 % wrong", "39 % shown \u00b7 44 % right \u00b7 36 % wrong", "20 % shown \u00b7 46 % right \u00b7 54 % wrong", "11 % shown \u00b7 43 % right \u00b7 57 % wrong"],
+			["Letter Lands (61)", "74 % right \u00b7 15 % wrong", "92 % shown \u00b7 77 % right \u00b7 14 % wrong", "51 % shown \u00b7 74 % right \u00b7 10 % wrong", "13 % shown \u00b7 100 % right \u00b7 0 % wrong", "13 % shown \u00b7 100 % right \u00b7 0 % wrong"],
+			["Eat All the Clocks (61)", "36 % right \u00b7 38 % wrong", "70 % shown \u00b7 44 % right \u00b7 30 % wrong", "70 % shown \u00b7 49 % right \u00b7 19 % wrong", "2 % shown \u00b7 100 % right \u00b7 0 % wrong", "2 % shown \u00b7 100 % right \u00b7 0 % wrong"],
+			["Downline (160)", "62 % right \u00b7 22 % wrong", "60 % shown \u00b7 62 % right \u00b7 22 % wrong", "83 % shown \u00b7 68 % right \u00b7 20 % wrong", "45 % shown \u00b7 81 % right \u00b7 10 % wrong", "24 % shown \u00b7 71 % right \u00b7 16 % wrong"],
 			["Mop Heart (90)", "38 % right \u00b7 50 % wrong", "89 % shown \u00b7 42 % right \u00b7 46 % wrong", "57 % shown \u00b7 45 % right \u00b7 43 % wrong", "14 % shown \u00b7 69 % right \u00b7 31 % wrong", "9 % shown \u00b7 75 % right \u00b7 25 % wrong"],
-			["All six (545)", "41 % right \u00b7 41 % wrong", "79 % shown \u00b7 43 % right \u00b7 39 % wrong", "65 % shown \u00b7 48 % right \u00b7 31 % wrong", "26 % shown \u00b7 64 % right \u00b7 20 % wrong", "17 % shown \u00b7 64 % right \u00b7 20 % wrong"],
+			["All six (545)", "47 % right \u00b7 35 % wrong", "79 % shown \u00b7 49 % right \u00b7 33 % wrong", "65 % shown \u00b7 57 % right \u00b7 24 % wrong", "26 % shown \u00b7 76 % right \u00b7 13 % wrong", "17 % shown \u00b7 73 % right \u00b7 13 % wrong"],
 		],
-		"Registered at 95b4089 (docs/BRIEF-STUDY51.md); $0, no model call. The line shown is Study 49's selected Basic Pitch configuration under the bass constraint, on the tracker's grid; a bar is shown under a rule when the named reading writes the same pitches in the same slots. Right and wrong are Study 48's bar grade, as shares of the bars shown; bars the line leaves empty are counted apart. S51-D1 (on every song at least 70 % of shown bars right, at most 10 % wrong, at least a quarter of the bars shown): no rule qualifies. Four of five predictions held.",
+		"Registered at 95b4089 (docs/BRIEF-STUDY51.md); $0, no model call. The line shown is Study 49's selected Basic Pitch configuration under the bass constraint, on the tracker's grid; a bar is shown under a rule when the named reading writes the same pitches in the same slots. Right and wrong are Study 48's bar grade, as shares of the bars shown; bars the line leaves empty are counted apart. S51-D1 (on every song at least 70 % of shown bars right, at most 10 % wrong, at least a quarter of the bars shown): no rule qualifies. Four of five predictions held. Re-run 2026-11-13 on a corrected truth: the first truth was missing back-to-back notes of one pitch (docs/CORRECTION-2026-11-13-bass-truth.md); the rows are the re-run's. All five predictions held on the re-run.",
 	);
 
 	// --- Study 50: the grid ---
@@ -3333,14 +3348,14 @@ export function initStemCharts() {
 		"tbl-grid50",
 		["song", "tracker beats on a composer's beat", "composer's beats dropped", "tracker bar lines on a composer's", "tracker's grid, per bar: bars right \u00b7 notes right", "tracker's grid, per song", "composer's grid, per song"],
 		[
-			["Peaceful Dreams", "100 %", "6 %", "99 %", "35 % of 109 \u00b7 0.74", "35 % of 109 \u00b7 0.75", "35 % of 112 \u00b7 0.76"],
-			["Interbellum", "84 %", "16 %", "76 %", "32 % of 69 \u00b7 0.79", "32 % of 69 \u00b7 0.80", "25 % of 63 \u00b7 0.80"],
-			["Letter Lands", "100 %", "9 %", "100 %", "76 % of 68 \u00b7 0.88", "76 % of 68 \u00b7 0.90", "78 % of 72 \u00b7 0.90"],
-			["Eat All the Clocks", "100 %", "0 %", "92 %", "42 % of 71 \u00b7 0.78", "42 % of 71 \u00b7 0.78", "42 % of 66 \u00b7 0.77"],
-			["Downline, 5/4 and 3/4", "100 %", "11 %", "48 %", "46 % of 186 \u00b7 0.70", "46 % of 186 \u00b7 0.75", "40 % of 156 \u00b7 0.74"],
+			["Peaceful Dreams", "100 %", "6 %", "99 %", "36 % of 110 \u00b7 0.77", "36 % of 110 \u00b7 0.78", "36 % of 112 \u00b7 0.78"],
+			["Interbellum", "84 %", "16 %", "76 %", "32 % of 69 \u00b7 0.82", "32 % of 69 \u00b7 0.82", "25 % of 63 \u00b7 0.82"],
+			["Letter Lands", "100 %", "9 %", "100 %", "76 % of 68 \u00b7 0.92", "76 % of 68 \u00b7 0.94", "78 % of 72 \u00b7 0.95"],
+			["Eat All the Clocks", "100 %", "0 %", "92 %", "42 % of 71 \u00b7 0.79", "42 % of 71 \u00b7 0.79", "42 % of 66 \u00b7 0.78"],
+			["Downline, 5/4 and 3/4", "100 %", "11 %", "48 %", "63 % of 186 \u00b7 0.81", "64 % of 186 \u00b7 0.85", "60 % of 156 \u00b7 0.85"],
 			["Mop Heart, 3/4 at 224", "100 %", "9 %", "18 %", "40 % of 95 \u00b7 0.75", "40 % of 95 \u00b7 0.77", "48 % of 128 \u00b7 0.77"],
 		],
-		"Registered at 6911bcc (docs/BRIEF-STUDY50.md); $0, no model call. The notes are Study 49's selected Basic Pitch configuration under the bass constraint; the truth and the bar grade are Study 48's. Bars right is the share of that grid's own bars with every pitch, octave and slot matched and no extra onset; notes right is a slot-level F, truth onsets matched in slot and pitch over transcribed and over truth onsets, which does not move with the bar lines. The composer's grid is the MIDI's tempo and signature map on the mix timeline. Per bar and per song name how sixteenths or triplets are chosen. S50-D2 (the grid is a bottleneck if the composer's gains 10 points of mean bars right): minus 0.5, no. S50-D1 (the per-song rule, if bars right rises on five of six): one, not recommended. Three of six predictions held.",
+		"Registered at 6911bcc (docs/BRIEF-STUDY50.md); $0, no model call. The notes are Study 49's selected Basic Pitch configuration under the bass constraint; the truth and the bar grade are Study 48's. Bars right is the share of that grid's own bars with every pitch, octave and slot matched and no extra onset; notes right is a slot-level F, truth onsets matched in slot and pitch over transcribed and over truth onsets, which does not move with the bar lines. The composer's grid is the MIDI's tempo and signature map on the mix timeline. Per bar and per song name how sixteenths or triplets are chosen. S50-D2 (the grid is a bottleneck if the composer's gains 10 points of mean bars right): minus 0.5, no. S50-D1 (the per-song rule, if bars right rises on five of six): one, not recommended. Three of six predictions held. Re-run 2026-11-13 on a corrected truth: the first truth was missing back-to-back notes of one pitch (docs/CORRECTION-2026-11-13-bass-truth.md); the rows are the re-run's. S50-D2 on the re-run: minus 0.4, no.",
 	);
 
 	// --- Study 49: the wrong onsets ---
@@ -3348,14 +3363,14 @@ export function initStemCharts() {
 		"tbl-onsets49",
 		["song (bars)", "the app's settings", "no inferred onsets, no melodia pass", "sixteenth merge", "amplitude floor 0.6", "shorter minimum note", "onset threshold 0.35"],
 		[
-			["Peaceful Dreams (109)", "34 %", "35 %", "35 %", "33 %", "26 %", "1 %"],
+			["Peaceful Dreams (110)", "35 %", "36 %", "36 %", "35 %", "28 %", "2 %"],
 			["Interbellum (69)", "26 %", "32 %", "25 %", "26 %", "20 %", "9 %"],
-			["Letter Lands (68)", "71 %", "76 %", "59 %", "74 %", "40 %", "18 %"],
+			["Letter Lands (68)", "72 %", "76 %", "62 %", "75 %", "41 %", "18 %"],
 			["Eat All the Clocks (71)", "35 %", "42 %", "45 %", "38 %", "35 %", "10 %"],
-			["Downline, 5/4 and 3/4 (186)", "29 %", "46 %", "28 %", "44 %", "21 %", "19 %"],
+			["Downline, 5/4 and 3/4 (186)", "40 %", "63 %", "39 %", "61 %", "30 %", "24 %"],
 			["Mop Heart, 3/4 at 224 (95)", "39 %", "40 %", "39 %", "40 %", "28 %", "8 %"],
 		],
-		"Bars entirely right, every pitch, octave and slot matched with no extra onset; Study 48's truth, grid and grader, unchanged. Registered at 772a253 (docs/BRIEF-STUDY49.md); $0, no model call. Every column is Basic Pitch under the bass constraint. Columns three to seven change one thing from the app's settings: both onset-free passes off (the selected configuration of 32); a same-pitch note within 0.375 beat of the last joined to it; notes under 0.6 of the stem's median amplitude dropped; a minimum note of 6 frames instead of 11; an onset threshold of 0.35 instead of 0.5. S49-D1 (a setting: mean gain of 10 points, no song down 2, held-out gain on five of six): 6.2 points, not recommended. S49-D2 (a filter within 3 % of real notes lost on every song): none qualifies. Two of eight predictions held.",
+		"Bars entirely right, every pitch, octave and slot matched with no extra onset; Study 48's truth, grid and grader, unchanged. Registered at 772a253 (docs/BRIEF-STUDY49.md); $0, no model call. Every column is Basic Pitch under the bass constraint. Columns three to seven change one thing from the app's settings: both onset-free passes off (the selected configuration of 32); a same-pitch note within 0.375 beat of the last joined to it; notes under 0.6 of the stem's median amplitude dropped; a minimum note of 6 frames instead of 11; an onset threshold of 0.35 instead of 0.5. S49-D1 (a setting: mean gain of 10 points, no song down 2, held-out gain on five of six): 6.2 points, not recommended. S49-D2 (a filter within 3 % of real notes lost on every song): none qualifies. Two of eight predictions held. Re-run 2026-11-13 on a corrected truth: the first truth was missing back-to-back notes of one pitch (docs/CORRECTION-2026-11-13-bass-truth.md); the rows are the re-run's. S49-D1 on the re-run: 7.1 points, not recommended. Three of eight predictions held.",
 	);
 
 	// --- Study 48: bass lines ---
@@ -3363,14 +3378,14 @@ export function initStemCharts() {
 		"tbl-bass48",
 		["song (bars)", "Basic Pitch: exact F \u00b7 octave errors", "constrained: exact F", "pYIN: exact F", "bars right \u00b7 one error \u00b7 wrong (Basic Pitch)", "notes on the right slot"],
 		[
-			["Peaceful Dreams (109)", "0.572 \u00b7 37 %", "0.730", "0.718", "34 \u00b7 22 \u00b7 44 %", "84 %"],
-			["Interbellum (69)", "0.657 \u00b7 34 %", "0.747", "0.731", "25 \u00b7 22 \u00b7 54 %", "80 %"],
-			["Letter Lands (68)", "0.686 \u00b7 37 %", "0.850", "0.587", "71 \u00b7 12 \u00b7 18 %", "95 %"],
-			["Eat All the Clocks (71)", "0.606 \u00b7 38 %", "0.713", "0.688", "35 \u00b7 21 \u00b7 44 %", "90 %"],
-			["Downline, 5/4 and 3/4 (186)", "0.594 \u00b7 34 %", "0.699", "0.710", "29 \u00b7 26 \u00b7 45 %", "74 %"],
-			["Mop Heart, 3/4 at 224 (95)", "0.788 \u00b7 12 %", "0.853", "0.867", "38 \u00b7 12 \u00b7 51 %", "86 %"],
+			["Peaceful Dreams (110)", "0.601 \u00b7 37 %", "0.759", "0.755", "35 \u00b7 27 \u00b7 37 %", "82 %"],
+			["Interbellum (69)", "0.682 \u00b7 34 %", "0.768", "0.753", "25 \u00b7 23 \u00b7 52 %", "77 %"],
+			["Letter Lands (68)", "0.725 \u00b7 35 %", "0.892", "0.604", "72 \u00b7 13 \u00b7 15 %", "95 %"],
+			["Eat All the Clocks (71)", "0.614 \u00b7 38 %", "0.716", "0.695", "35 \u00b7 21 \u00b7 44 %", "90 %"],
+			["Downline, 5/4 and 3/4 (186)", "0.689 \u00b7 33 %", "0.801", "0.790", "40 \u00b7 30 \u00b7 30 %", "77 %"],
+			["Mop Heart, 3/4 at 224 (95)", "0.789 \u00b7 13 %", "0.854", "0.865", "38 \u00b7 12 \u00b7 51 %", "86 %"],
 		],
-		"Registered, then re-registered twice with the numbers seen disclosed (docs/BRIEF-STUDY48.md: the MIDI at written pitch, 3fbeb94; the early-onset slot, ff3dc83); $0, no model call. Truth: Kevin's session MIDI per bass stem, placed on the app's mix timeline by the committed intake (scripts/ingest-bass-pair.py). Note level: mir_eval, onset within 50 ms, pitch within 50 cents, offsets ignored; octave errors among notes matched on pitch class, all upward. Bars: the app's stored beats (Downline on the bench's Beat This reading of the band's mix), a sixteenth or an eighth-note triplet per beat chosen per bar, notes under 0.4 of a sixteenth dropped, a bar right only with every pitch, octave and slot matched and no extra onset. S48-D1 (70 % right and at most 10 % wrong on every song): no, for every pipeline. Predictions P1 to P5 wrong, P6 right.",
+		"Registered, then re-registered twice with the numbers seen disclosed (docs/BRIEF-STUDY48.md: the MIDI at written pitch, 3fbeb94; the early-onset slot, ff3dc83); $0, no model call. Truth: Kevin's session MIDI per bass stem, placed on the app's mix timeline by the committed intake (scripts/ingest-bass-pair.py). Note level: mir_eval, onset within 50 ms, pitch within 50 cents, offsets ignored; octave errors among notes matched on pitch class, all upward. Bars: the app's stored beats (Downline on the bench's Beat This reading of the band's mix), a sixteenth or an eighth-note triplet per beat chosen per bar, notes under 0.4 of a sixteenth dropped, a bar right only with every pitch, octave and slot matched and no extra onset. S48-D1 (70 % right and at most 10 % wrong on every song): no, for every pipeline. Predictions P1 to P5 wrong, P6 right. Re-run 2026-11-13 on a corrected truth: the first truth was missing back-to-back notes of one pitch (docs/CORRECTION-2026-11-13-bass-truth.md); the rows are the re-run's.",
 	);
 
 	// --- Study 47: the hint sentence ---
