@@ -20,6 +20,9 @@ const seriesSlugs: string[] = [
 	"the-file-that-needed-no-stems",
 	"the-detector-not-the-drafter",
 	"the-bar-that-was-three-bars-long",
+	"the-chart-nobody-typed",
+	"the-sentence-that-changed-nothing",
+	"the-truth-was-missing-notes",
 ];
 
 function buildSeriesArticles(allBlogArticles: { frontMatter: FrontMatter }[]) {
