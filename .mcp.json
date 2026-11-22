@@ -8,6 +8,10 @@
 			"type": "http",
 			"url": "https://mcp.svelte.dev/mcp"
 		},
+		"varlock-docs-mcp": {
+			"type": "http",
+			"url": "https://docs.mcp.varlock.dev/mcp"
+		},
 		"vercel": {
 			"type": "http",
 			"url": "https://mcp.vercel.com"

@@ -261,7 +261,7 @@ personal Claude Code settings (the rule is in `~/projects/CLAUDE.md`,
 "Agent tooling"):
 
 - `.claude/settings.json`: the plugins this project uses: Playwright (browser checks of pages); and the approval of the servers in `.mcp.json`
-- `.mcp.json`: MCP servers: `replicator` (the blog CMS at replicator.lj.dev); `svelte` (Svelte's documentation and autofixer); `vercel` (where the site is deployed)
+- `.mcp.json`: MCP servers: `replicator` (the blog CMS at replicator.lj.dev); `svelte` (Svelte's documentation and autofixer); `vercel` (where the site is deployed); `varlock-docs-mcp` (Varlock's documentation: read it before changing `.env.schema` or how the environment is loaded)
 
 A plugin named there is enabled for the project but not downloaded: run
 `claude plugin install <name>@<marketplace> --scope project` once per clone
