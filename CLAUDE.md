@@ -253,3 +253,19 @@ Server runtime pinned to `nodejs24.x` via the adapter's `runtime` option in
 `src/hooks.server.ts`: adapters only read `config` from route files, so a
 hooks export is silently ignored and the runtime falls back to whatever Node
 version ran the build.
+
+## Agent tooling
+
+What an agent gets in this repository is declared here, not in anyone's
+personal Claude Code settings (the rule is in `~/projects/CLAUDE.md`,
+"Agent tooling"):
+
+- `.claude/settings.json`: the plugins this project uses: Playwright (browser checks of pages); and the approval of the servers in `.mcp.json`
+- `.mcp.json`: MCP servers: `replicator` (the blog CMS at replicator.lj.dev); `svelte` (Svelte's documentation and autofixer); `vercel` (where the site is deployed)
+
+A plugin named there is enabled for the project but not downloaded: run
+`claude plugin install <name>@<marketplace> --scope project` once per clone
+(it re-indents `.claude/settings.json`: `git checkout -- .claude/settings.json`).
+
+Add or remove a tool by editing these files in a pull request. Never install
+one at user level for this project's sake.
