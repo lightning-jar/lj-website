@@ -1,0 +1,16 @@
+{
+	"mcpServers": {
+		"replicator": {
+			"type": "http",
+			"url": "https://replicator.lj.dev/api/mcp"
+		},
+		"svelte": {
+			"type": "http",
+			"url": "https://mcp.svelte.dev/mcp"
+		},
+		"vercel": {
+			"type": "http",
+			"url": "https://mcp.vercel.com"
+		}
+	}
+}
