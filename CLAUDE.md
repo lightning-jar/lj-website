@@ -17,6 +17,8 @@ bun run test:watch   # Watch mode for tests
 bun run test:coverage  # Tests with v8 coverage
 bun run check        # TypeScript + Svelte type checking
 bun run check:watch  # Watch mode for type checking
+bun run audit        # Fallow on the changed files: dead code, duplication, complexity
+bun run health       # Fallow's complexity and maintainability report, whole tree
 bun run format       # Format with Biome
 bun run lint         # Lint and fix with Biome
 ```
