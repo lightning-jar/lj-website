@@ -2,5 +2,5 @@
 	"enabledPlugins": {
 		"playwright@claude-plugins-official": true
 	},
-	"enabledMcpjsonServers": ["replicator", "svelte", "vercel"]
+	"enabledMcpjsonServers": ["replicator", "svelte", "varlock-docs-mcp", "vercel"]
 }
