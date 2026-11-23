@@ -32,7 +32,6 @@ let { studies = [] }: Props = $props();
     >
       {#each studies as study, index}
         <a
-          aria-labelledby="latest-study-{study.slug}"
           href="/research/{study.projectSlug}/{study.slug}"
           title={study.title}
           class="{index === 5
@@ -45,7 +44,6 @@ let { studies = [] }: Props = $props();
             {study.project} · Study {study.letters}
           </div>
           <h3
-            id="latest-study-{study.slug}"
             class="tile-text line-clamp-4"
           >
             {study.title}

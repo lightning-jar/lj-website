@@ -56,8 +56,11 @@ let ogType = $derived(
   <meta name="version" content={data.version} />
 
   <!-- title -->
+  <!-- every page gets a <title> (WCAG 2.4.2); pages without meta fall back -->
   {#if pageMeta?.title}
     <title>{data.isHome ? pageMeta.title : `${pageMeta.title} - LJ`}</title>
+  {:else}
+    <title>Lightning Jar</title>
   {/if}
 
   <!-- description -->
