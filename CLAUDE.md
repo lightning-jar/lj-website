@@ -15,6 +15,7 @@ bun preview          # Preview production build locally
 bun run test         # Run tests (Vitest) — NOT `bun test`, see Testing
 bun run test:watch   # Watch mode for tests
 bun run test:coverage  # Tests with v8 coverage
+bun run test:a11y    # axe-core WCAG 2.2 AA audit of rendered pages (Playwright; see Testing)
 bun run check        # TypeScript + Svelte type checking
 bun run check:watch  # Watch mode for type checking
 bun run audit        # Fallow on the changed files: dead code, duplication, complexity
@@ -188,6 +189,27 @@ slx-web.
 - `scripts/` still run under Bun via swamp and legitimately use `Bun.spawn`
   and `import.meta.main`; that is why `@types/bun` and the `bun` tsconfig
   type stay.
+
+### Accessibility audit (`bun run test:a11y`)
+
+Playwright + `@axe-core/playwright` (config: `playwright.config.ts`, spec:
+`e2e/a11y.spec.ts`). It loads every static route plus the first detail page
+behind each content index, runs axe with the WCAG 2.0/2.1/2.2 A and AA tags,
+and fails on `serious` or `critical` violations; `minor`/`moderate` ones are
+attached as annotations. Separate from Vitest (`e2e/` is outside its
+`include`) and not a CI gate: CI has no secrets and the pages fetch CMS
+content at request time. Run it locally before a UI change goes up: it
+reuses a dev server on 5193 or starts `bun dev`. To audit a deployment,
+set `A11Y_BASE_URL` (for production, run under varlock so `SMOKETEST_TOKEN`
+is set; the spec sends it to www.lightningjar.com only). Needs Playwright's
+Chromium once per machine: `bunx playwright install chromium`.
+
+- A new route needs adding to `STATIC_ROUTES`; a new `[slug]` template
+  needs its index in `DETAIL_INDEXES`.
+- Card links: don't put `aria-labelledby` on an `<a>` whose visible text is
+  more than the referenced heading (a meta line plus a title). The
+  accessible name must contain the visible text (WCAG 2.5.3, axe
+  `label-content-name-mismatch`); let the name come from the content.
 
 ## Environment Variables
 

@@ -35,3 +35,7 @@ coverage
 
 # Playwright MCP run artifacts (traces, console logs, screenshots)
 .playwright-mcp
+
+# Playwright (a11y audit)
+/test-results
+/playwright-report

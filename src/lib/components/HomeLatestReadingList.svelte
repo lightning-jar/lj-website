@@ -30,7 +30,6 @@ let { entries = [] }: Props = $props();
     >
       {#each entries as entry, index}
         <a
-          aria-labelledby="latest-reading-{index}"
           href="/reading-list/{entry.slug}"
           title={entry.title}
           class="{index === 5
@@ -43,7 +42,6 @@ let { entries = [] }: Props = $props();
             {entry.publication}
           </div>
           <h3
-            id="latest-reading-{index}"
             class="tile-text line-clamp-4"
           >
             {entry.title}

@@ -55,7 +55,6 @@ const featured: FeaturedItem[] = [
   >
     {#each featured as item, index (item.href)}
       <a
-        aria-labelledby="featured-title-{index}"
         href={item.href}
         title={item.title}
         class="{index === 5
@@ -66,7 +65,6 @@ const featured: FeaturedItem[] = [
           {item.kind}
         </div>
         <h3
-          id="featured-title-{index}"
           class="tile-text line-clamp-4"
         >
           {item.title}
