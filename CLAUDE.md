@@ -232,6 +232,8 @@ a one-line bug fix with check and tests green locally): push those directly,
 as before, and say in the report that the push bypassed the ruleset.
 Anything larger (features, dependency changes, refactors) goes through a PR.
 
+**A fourth CI job, `fallow audit`, is advisory.** On a pull request it runs Fallow over the changed files and shows what it finds in the job's log; it never fails the run. The gates are typecheck, biome and vitest.
+
 **CI has no secrets.** `.github/workflows/ci.yml` sets `SKIP_VARLOCK=1`,
 which drops the varlock Vite plugin (`vite.config.ts`, the same switch as
 stem-shovel), and runs `svelte-kit sync && svelte-check` rather than
