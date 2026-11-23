@@ -62,3 +62,29 @@ jobs:
         run: bunx svelte-kit sync
       - name: vitest
         run: bun run test
+
+  # Advisory. Fallow reads the files a pull request changes for dead code,
+  # duplication and complexity; what it finds shows in this job's log. The
+  # step never fails the run, as in the sibling projects: the gates are the
+  # three jobs above.
+  fallow:
+    name: fallow audit
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          # Fallow compares with the branch the pull request targets.
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: svelte-kit sync
+        run: bunx svelte-kit sync
+      - name: fallow audit
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: bunx fallow audit --base "origin/$BASE_REF"
+        continue-on-error: true
