@@ -1,0 +1,31 @@
+{
+	"id": "foldkit",
+	"name": "Foldkit",
+	"shortDescription": "TypeScript front-end framework built on Effect and structured like Elm: one state value, one update function, side effects as data.",
+	"description": [
+		"Foldkit is a TypeScript front-end framework built on Effect that follows The Elm Architecture. The whole state of an app is one value, the Model. Everything that happens is a Message, and one pure function, update, turns the current Model and a Message into the next Model plus any side effects to run, which are returned as values and not performed in place.",
+		"We are evaluating Foldkit, not adopting it. We built OK Tuner, a free browser instrument tuner, in Foldkit to find out how its architecture suits work where an AI coding agent writes most of the code and a person reviews it. What helped: state changes that are tested without a browser, state unions the compiler checks at every use, resources such as a microphone whose lifetime follows the Model, and a conventions file and DevTools server made for agents.",
+		"What it cost: more code than the Svelte component the tuner was ported from, views written as function calls and not markup, a large script for a small app, and two things to learn, of which Effect is the bigger. Foldkit is pre-1.0 and marks its server rendering experimental. SvelteKit remains our default for content sites and for anything that leans on a server."
+	],
+	"license": "Open Source (MIT)",
+	"category": "Frontend Framework",
+	"link": {
+		"href": "https://foldkit.dev"
+	},
+	"relatedReading": [
+		{
+			"href": "/blog/ok-tuner-foldkit",
+			"title": "What an Agent Needs From a Framework: Building OK Tuner in Foldkit"
+		},
+		{
+			"href": "https://github.com/kevinpeckham/ok-tuner-foldkit/blob/main/FINDINGS.md",
+			"title": "OK Tuner FINDINGS.md: what we learned building with Foldkit"
+		}
+	],
+	"useCases": [
+		"Client-side tools with real state: devices, streams and multi-step flows",
+		"Projects where an AI coding agent writes most of the code and behavior has to be checkable in tests",
+		"Learning The Elm Architecture in TypeScript"
+	],
+	"supercategory": "frontend-frameworks"
+}
